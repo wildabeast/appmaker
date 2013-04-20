@@ -1,0 +1,20 @@
+{
+  "name": "nudgepad",
+  "version": "0.1.1",
+  "description": "A tool for prototyping quickly.",
+  "repository": "git://github.com/nudgepad/nudgepad",
+  "main": "nudgepad.js",
+  "dependencies": {
+    "space" : ">=0.1.1",
+    "scraps" : ">=0.1.1"
+  },
+  "keywords": [
+    "scraps",
+    "space",
+    "nudgepad",
+    "template",
+    "html"
+  ],
+  "license": "MIT",
+  "author": "Breck Yunits, Ben Zulauf"
+}
