@@ -6,8 +6,24 @@
   "main": "nudgepad.js",
   "bin" : {"nudgepad" : "system/nudgepad.sh"}
   "dependencies": {
-    "space" : ">=0.1.1",
-    "scraps" : ">=0.1.1"
+    "space": ">=0.1.1",
+    "scraps": ">=0.1.1",
+    "socket.io": ">=0.1.1",
+    "express": ">=0.1.1",
+    "superagent": ">=0.1.1",
+    "imagemagick": ">=0.1.1",
+    "underscore": ">=0.1.1",
+    "cookie": ">=0.1.1",
+    "moment": ">=0.1.1",
+    "nodemailer": ">=0.1.1",
+    "request": ">=0.1.1",
+    "wrench": ">=0.1.1",
+    "async": ">=0.1.1",
+    "marked": ">=0.1.1",
+    "jquery": ">=0.1.1",
+    "utile": ">=0.1.1",
+    "http-proxy": ">=0.1.1",
+    "commander": ">=0.1.1"
   },
   "keywords": [
     "scraps",
@@ -20,11 +36,46 @@
   "contributors": [
       {
         "name": "Breck Yunits",
-        "email": "breck7@gmail.com"
+        "email": "breck@nudgepad.com"
       },
       {
         "name": "Ben Zulauf",
-        "email": "bczulauf@gmail.com"
+        "email": "ben@nudgepad.com"
       }
     ]
 }
+
+
+sudo npm install -g socket.io
+npm install socket.io
+sudo npm install -g express
+npm install express
+sudo npm install -g superagent
+npm install superagent
+sudo npm install -g imagemagick
+npm install imagemagick
+sudo npm install -g underscore
+npm install underscore
+sudo npm install -g cookie
+npm install cookie
+sudo npm install -g moment
+npm install moment
+sudo npm install -g nodemailer
+npm install nodemailer
+sudo npm install -g request
+npm install request
+sudo npm install -g wrench
+npm install wrench
+sudo npm install -g async
+npm install async
+sudo npm install -g marked
+npm install marked
+sudo npm install -g jquery
+npm install jquery
+# required by http-proxy
+sudo npm install -g utile
+npm install utile
+sudo npm install -g http-proxy
+npm install http-proxy
+sudo npm install -g commander
+npm install commander
