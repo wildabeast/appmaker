@@ -1,0 +1,29 @@
+nav
+ style
+  height auto
+  font-family Open Sans
+  font-size 16px
+  width 420px
+  color #222
+  position absolute
+  top 0
+  left 0
+ scraps
+  header
+   style
+    margin-bottom 30px
+    font-size 52px
+   content Born Good
+  subHeader
+   style
+    margin-bottom 30px
+    font-size 18px
+    font-weight bold
+   content About Me
+  nav3
+   style
+    margin-right 40px
+    font-size 16px
+    line-height 140%
+    color #555
+   content When I was a lad I ate four dozen eggs ev'ry morning to help me get large. And now that I'm grown I eat five dozen eggs, so I'm roughly the size of a barge!

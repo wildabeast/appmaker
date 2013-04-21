@@ -1,0 +1,19 @@
+#nudgepadStage {
+  position: relative;
+  width: 100%;
+  height: 637px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  /* this makes the background scroll with the content */
+  background-attachment: local;
+}
+
+#nudgepadStageBody {
+  min-height: 1000px;
+}
+
+#nudgepadStageBottomPadding {
+  height: 60px;
+}
+
+

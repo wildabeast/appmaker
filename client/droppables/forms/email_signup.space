@@ -1,0 +1,55 @@
+head
+ type page
+ title email_signup
+ stylesheets /nudgepad/blocks.css site.css
+ scripts http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js
+ style
+  body
+   width 100%
+block3
+ style
+  background-color #e3543b
+  height 35px
+  width 110px
+  cursor pointer
+  font-size 14px
+  line-height 35px
+  text-align center
+  font-weight bold
+  color #fff
+  border-radius 3px
+  top 66px
+  left 175px
+ content Sign Up
+ hover_style
+  background-color #c94932
+ active_style
+  background-color #a33a27
+ click $.post('/nudgepad.surveys', { note : 'email ' + $('input.email').val() } , function () { $('.submit_button').html('Success!') } )
+ class submit_button
+email_address
+ style
+  height 35px
+  width 168px
+  font-size 14px
+  color #555
+  border 1px solid #ccc
+  -webkit-appearance normal
+  top 66px
+  left -1px
+  padding 0
+  padding-left 5px
+ type email
+ placeholder Email address
+ class email
+block1
+ style
+  height auto
+  width auto
+  white-space nowrap
+  font-size 32px
+  line-height 140%
+  color #333
+  top 0px
+  left 1px
+ content Join our Email List

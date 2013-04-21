@@ -1,0 +1,17 @@
+body {
+  -webkit-user-select: none;
+  -moz-user-select: -moz-none;
+  user-select: none;
+}
+
+.nudgepad {
+  -webkit-user-select: none;
+  -moz-user-select: -moz-none;
+  user-select: none;
+}
+
+textarea.nudgepad, input.nudgepad, #nudgepadEditorConsole {
+  -webkit-user-select: auto;
+  -moz-user-select: text;
+  user-select: text;
+}

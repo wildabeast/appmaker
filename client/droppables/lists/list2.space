@@ -1,0 +1,30 @@
+head
+ type creation
+ title Untitled
+ category content
+ stylesheets /nudgepad/blocks.css
+ scripts http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js
+ style
+  body
+   width 100%
+block1
+ style
+  background-color transparent
+  height auto
+  width auto
+  font-size 14px
+  white-space nowrap
+  color #333
+  top 0
+  left 0
+ type list
+ item
+  style
+   color #333
+   line-height 180%
+  content {{value}}
+ items
+  1 Item 1
+  2 Item 2
+  3 Item 3
+  4 Item 4

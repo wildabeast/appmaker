@@ -1,0 +1,26 @@
+@font-face {
+  font-family: 'ProximaNovaRgRegular';
+  src: url('/nudgepad/fonts/ProximaNova-Reg-webfont.eot');
+  src: url('/nudgepad/fonts/ProximaNova-Reg-webfont.eot?#iefix') format('embedded-opentype'),
+       url('/nudgepad/fonts/ProximaNova-Reg-webfont.woff') format('woff'),
+       url('/nudgepad/fonts/ProximaNova-Reg-webfont.ttf') format('truetype'),
+       url('/nudgepad/fonts/ProximaNova-Reg-webfont.svg#ProximaNovaRgRegular') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'ProximaNovaRgRegular';
+  src: url('/nudgepad/fonts/ProximaNova-Bold-webfont.eot');
+  src: url('/nudgepad/fonts/ProximaNova-Bold-webfont.eot?#iefix') format('embedded-opentype'),
+       url('/nudgepad/fonts/ProximaNova-Bold-webfont.woff') format('woff'),
+       url('/nudgepad/fonts/ProximaNova-Bold-webfont.ttf') format('truetype'),
+       url('/nudgepad/fonts/ProximaNova-Bold-webfont.svg#ProximaNovaRgRegular') format('svg');
+  font-weight: bold;
+  font-style: normal;
+}
+
+body {
+  font-family: ProximaNovaRgRegular;
+}
+

@@ -1,0 +1,6 @@
+    <div id="qunitFrame" style="position: absolute; top: 0; left: 0; z-index: 5000; overflow-y: scroll;height: 100%;">
+      <h1 id="qunit-header">QUnit example</h1>
+      <h2 id="qunit-banner"></h2>
+      <h2 id="qunit-userAgent"></h2>
+      <ol id="qunit-tests">
+    </div>

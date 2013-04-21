@@ -1,0 +1,11 @@
+fullx
+ style
+  background-color #eee
+  height 60px
+  width 100%
+  position absolute
+  font-size 15px
+  font-family Open Sans
+  color #333
+  top 0
+  left 0

@@ -1,0 +1,42 @@
+<div class="nudgepadFullScreenApp" id="nudgepadDevelopApp">
+	<div class="appNav">
+		<div class="appNavContainer">
+  		<div id="menuBack" class="squareButton" onclick="nudgepad.navigation.open('home')">
+		  	Back
+		  </div>
+			<div id="console" class="squareButton" onclick="nudgepad.console()" title="Console">
+		  	<img src="/nudgepad/images/console.png">
+		  </div>
+			<a href="/nudgepad.backup/.zip" id="zip" target="blank" class="nudgepad" title="Download ZIP">
+		  	<img src="/nudgepad/images/zip.png">
+		  </a>
+		  <div id="getUpdates" class="squareButton" onclick="$.get('/nudgepad.restart')" title="Restart Server">
+		  	<img src="/nudgepad/images/update.png">
+		  </div>
+		  <div id="addFile">
+			  Add File
+			</div>
+		<div class="clear"></div>
+		</div>
+	</div>
+  <div class="nudgepadFullScreenAppBody nudgepad">
+	  <div id="devToggle">
+	  	<div class="devToggleOption devSelect">Files</div>
+			<div class="devToggleOption">Logs</div>
+			<div class="devToggleOption">Info</div>
+	    <div class="clear"></div>
+	  </div>
+	  <div id="filesContent" class="devAppContent">
+	  	<div id="explorerPath" class="nudgepad" onclick="nudgepad.apps.develop.home()"></div>
+		  <div id="explorerHolder" class="nudgepad"></div>
+		</div>
+		<div id="logsContent" class="devAppContent">
+	  	<div class="sectionLabel">Logs</div>
+		  <div id="logHolder" readonly="readonly" class="nudgepad"></div>
+		</div>
+		<div id="infoContent" class="devAppContent">
+	  	<div class="sectionLabel">Info</div>
+		  <div id="statusArea" readonly="readonly" class="nudgepad"></div>
+		</div>
+	</div>
+</div>

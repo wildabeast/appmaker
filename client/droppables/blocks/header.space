@@ -1,0 +1,12 @@
+block1
+ style
+  height auto
+  font-family Open Sans
+  width auto
+  font-size 24px
+  font-weight bold
+  position absolute
+  color #333
+  top 0
+  left 0
+ content Title

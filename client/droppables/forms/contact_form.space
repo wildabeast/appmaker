@@ -1,0 +1,87 @@
+head
+ type page
+ title Untitled
+ stylesheets /nudgepad/blocks.css
+ style
+  body
+   width 100%
+block3
+ style
+  background-color #e3543b
+  height 35px
+  width 110px
+  cursor pointer
+  font-size 14px
+  line-height 35px
+  text-align center
+  font-weight bold
+  color #fff
+  border-radius 3px
+  top 315px
+  left 154px
+ content Sign Up
+ hover_style
+  background-color #c94932
+ active_style
+  background-color #a33a27
+ click $.post('/nudgepad.surveys', { note : 'email ' + $('input.email').val() + '\nname ' + $('input.name').val() + '\n comment ' + $('textarea.comment').val() } , function () { $('.submit_button').html('Success!') } )
+ class submit_button
+email_address
+ style
+  height 35px
+  width 168px
+  font-size 14px
+  color #555
+  border 1px solid #ccc
+  -webkit-appearance normal
+  top 110px
+  left 0px
+  padding 0
+  padding-left 5px
+ type email
+ placeholder Email address
+ class email
+ tabindex 2
+block1
+ style
+  height auto
+  width auto
+  white-space nowrap
+  font-size 32px
+  line-height 140%
+  color #333
+  top 0px
+  left 0px
+ content Contact Us
+comment
+ style
+  height 135px
+  width 264px
+  font-size 14px
+  color #555
+  border 1px solid #ccc
+  -webkit-appearance normal
+  top 163px
+  left 0px
+  padding 3px
+  margin 0
+ type textarea
+ placeholder How can we help you?
+ class comment
+ tabindex 3
+name
+ style
+  height 35px
+  width 168px
+  font-size 14px
+  color #555
+  border 1px solid #ccc
+  -webkit-appearance normal
+  top 64px
+  left 0px
+  padding 0
+  padding-left 5px
+ type text
+ placeholder Your name
+ class name
+ tabindex 1

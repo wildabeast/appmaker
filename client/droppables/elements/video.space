@@ -1,0 +1,19 @@
+head
+ type page
+ title Untitled
+ stylesheets /nudgepad/blocks.css
+ style
+  body
+   width 960px
+   height 1000px
+   background-color white
+block2
+ type iframe
+ frameborder 0
+ width 560
+ height 315
+ allowfullscreen allowfullscreen
+ src http://www.youtube.com/embed/cFEarBzelBs?rel=0
+ style
+  top 0
+  left 0
