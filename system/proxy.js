@@ -5,7 +5,7 @@ var httpProxy = require('http-proxy'),
     exec = require('child_process').exec,
     fs = require('fs')
 
-process.title = 'nudgeProxy'
+process.title = 'nudgepadProxy'
 var errorPage = fs.readFileSync(__dirname + '/error.html', 'utf8')
 var starting = {}
 var DATAPATH = __dirname + '/../../../nudgepad/'

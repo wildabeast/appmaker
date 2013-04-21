@@ -29,11 +29,11 @@ startSite () {
   if isMac
     then
       touch $SITESPATH/$DOMAIN/logs/mon.txt
-      mon -d -l $SITESPATH/$DOMAIN/logs/mon.txt -p $SITESPATH/$DOMAIN/temp/sitePid -m $SITESPATH/$DOMAIN/temp/monPid "node nudgepad.js $DOMAIN $PORT"
+      mon -d -l $SITESPATH/$DOMAIN/logs/mon.txt -p $SITESPATH/$DOMAIN/temp/sitePid -m $SITESPATH/$DOMAIN/temp/monPid "node app.js $DOMAIN $PORT"
     else
       # todo: fix this so mon isnt launching 2 processes.
       sudo -u $DOMAIN touch $SITESPATH/$DOMAIN/logs/mon.txt
-      sudo -u $DOMAIN mon -d -l $SITESPATH/$DOMAIN/logs/mon.txt -p $SITESPATH/$DOMAIN/temp/sitePid -m $SITESPATH/$DOMAIN/temp/monPid "node nudge.js $DOMAIN $PORT"
+      sudo -u $DOMAIN mon -d -l $SITESPATH/$DOMAIN/logs/mon.txt -p $SITESPATH/$DOMAIN/temp/sitePid -m $SITESPATH/$DOMAIN/temp/monPid "node app.js $DOMAIN $PORT"
   fi
   return 0
 }
