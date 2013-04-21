@@ -1,0 +1,101 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+	  <title>Nudge</title>
+	  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	  <script src="Domain.js"></script>
+	  <script src="client.js"></script>
+	  <link href='http://fonts.googleapis.com/css?family=Titillium+Web:400,300,600' rel='stylesheet' type='text/css'>
+	  <style type="text/css">
+	   body {
+		margin: 0;
+		padding: 0;
+		font-family: 'Titillium Web';
+		background-color: #eee;
+	}
+	
+	  .clear {
+		clear: both;
+	}
+	   #nudgeIndexContainer {
+		   background-color: #eee;
+		   width: 100%;
+	   }
+	   #nudgeIndexContent {
+		   margin: 0 auto;
+		   width: 80%;
+		  padding: 40px 0px 80px 0px;
+		  max-width: 1000px;
+	   }
+	   #nudgeLogo {
+		   
+		 }
+		#nudgeIndexSlogan {
+			color: #333;
+			font-size: 44px;
+			margin-bottom: 80px;
+		}
+		#nudgeIndexLogo {
+			margin-bottom: 20px;
+		}
+		.nudgeIndexInput {
+			-webkit-appearance: none;
+			border: 1px solid #ccc;
+			height: 50px;
+			width: 37%;
+			padding: 0px;
+			font-size: 18px;
+			font-weight: 400;
+			text-indent: 10px;
+			margin: 0px;
+		}
+
+		#createDomain {
+			height: 50px;
+			text-align: center;
+			width: 20%;
+			line-height: 50px;
+			color: #fff;
+			background-color: #1a86d6;
+			font-weight: 600;
+			font-size: 18px;
+			margin-left: 2%;
+			border: none;
+			margin-top: 0px;
+			padding: 0px;
+			min-width: 120px;
+			cursor: pointer;
+		}
+		
+		#createDomain:hover {
+			background-color: #1472ba;
+		}
+		
+		#createDomain:active {
+			background-color: #0f5a94;
+		}
+		
+		#error {
+		  color: red;
+		  padding: 5px;
+		}
+	 </style>
+	</head>
+	<body>
+		<div id="nudgeIndexContainer">
+			<div id="nudgeIndexContent">
+				<div id="nudgeIndexLogo">
+					<img src="nBlue.png">
+				</div>
+				<div id="nudgeIndexSlogan">
+					Create prototypes you can share
+				</div>
+				<form method="post" action="/create" id="form">
+					<input id="domain" type="text" class="nudgeIndexInput" placeholder="Project name" name="domain" value="">
+					<button type="submit" id="createDomain">Start Now</button>
+				</form>
+				<div id="error"></div>
+			</div>
+		</div>
+	</body>
+</html>
