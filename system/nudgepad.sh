@@ -16,7 +16,7 @@ fi
 # Where to store operational and user data
 dataPath=$homePath/nudgepad
 sitesPath=$dataPath/sites/
-activePath=$dataPath/sites/
+activePath=$dataPath/active/
 portsPath=$dataPath/ports/
 tempPath=$dataPath/temp/
 logsPath=$dataPath/logs/
