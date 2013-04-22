@@ -7,6 +7,9 @@ Domain.validate = function (domain) {
   
   if (domain.match(/[^0-9a-z\-\.]/i))
     return 'Invalid character in domain'
+  
+  if (!domain.match(Domain.tld))
+    return 'Domain must end with ' + Domain.tld
 
   if (domain.length > 32)
     return 'Domain too long'
@@ -15,9 +18,15 @@ Domain.validate = function (domain) {
 }
 
 Domain.format = function (domain) {
-  return domain.toLowerCase().replace(/ /g, '')
+  domain = domain.toLowerCase().replace(/ /g, '')
+  if (!domain.match(Domain.tld))
+    domain += Domain.tld
+  return domain
 }
 
 // If Node.js, export as a module.
-if (typeof exports != 'undefined')
+if (typeof exports !== 'undefined')
   module.exports = Domain;
+// If running on the browser, use current hostname as tld
+else
+  Domain.tld = location.hostname
