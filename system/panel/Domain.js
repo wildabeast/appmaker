@@ -29,4 +29,4 @@ if (typeof exports !== 'undefined')
   module.exports = Domain;
 // If running on the browser, use current hostname as tld
 else
-  Domain.tld = location.hostname
+  Domain.tld = '.' + location.hostname

@@ -16,7 +16,7 @@ var portsPath = dataPath + 'ports/'
 var systemPath = __dirname
 
 var Domain = require(panelPath + '/Domain')
-Domain.tld = hostname
+Domain.tld = '.' + hostname
 
 process.title = 'nudgepadPanel'
 
