@@ -1,5 +1,5 @@
 #!/bin/bash
-cd ~/node_modules/nudgepad/
+cd ~/node_modules/nudgepad/system/
 source isMac.sh
 
 # Set env variables
