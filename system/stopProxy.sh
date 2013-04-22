@@ -1,8 +1,8 @@
 stopProxy ()
 {
-  if sudo mon --pidfile $TEMPPATH/proxyMonPid --status | grep -q "alive"
+  if sudo mon --pidfile $tempPath/proxyMonPid --status | grep -q "alive"
     then
-      PID=$(sudo cat $TEMPPATH/proxyMonPid)
+      PID=$(sudo cat $tempPath/proxyMonPid)
       sudo kill -SIGTERM $PID
       echo Stopped proxy.
       return 0

@@ -1,6 +1,6 @@
 fixPermissions_ubuntu ()
 {
-  cd $DATAPATH
+  cd $dataPath
   
   # allow everyone to execute this directory
   sudo chmod 711 ~
@@ -31,10 +31,10 @@ fixPermissions_ubuntu ()
   # 
   sudo chown ubuntu:sites sites
   sudo chmod 710 sites
-  for DOMAIN in $SITES
+  for domain in $sites
     do
-      sudo chown -R $DOMAIN:$DOMAIN $SITESPATH/$DOMAIN
-      sudo chmod -R 700 $SITESPATH/$DOMAIN/
+      sudo chown -R $domain:$domain $sitesPath/$domain
+      sudo chmod -R 700 $sitesPath/$domain/
   done
 }
 
@@ -48,7 +48,7 @@ fixPermissions_mac ()
 
 fixPermissions ()
 {
-  cd $DATAPATH
+  cd $dataPath
   if isMac
     then
       fixPermissions_mac

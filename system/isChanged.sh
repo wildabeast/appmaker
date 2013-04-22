@@ -1,6 +1,6 @@
 isChanged ()
 {
-  cd $SITESPATH/$1
+  cd $sitesPath/$1
   if sudo -u $1 git status | grep -q "nothing to commit"
      then
        return 1

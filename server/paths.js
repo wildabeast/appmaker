@@ -1,7 +1,7 @@
 nudgepad.paths = {}
 nudgepad.paths.server = __dirname + '/'
 // Where to store site specific files
-nudgepad.paths.site = SITESPATH + nudgepad.domain + '/'
+nudgepad.paths.site = sitesPath + nudgepad.domain + '/'
 // where to store settings
 nudgepad.paths.settings = nudgepad.paths.site + 'settings/'
 // where to store server side includes
@@ -18,5 +18,5 @@ nudgepad.paths.session_logs = nudgepad.paths.logs + 'sessions/'
 nudgepad.paths.temp = nudgepad.paths.site + 'temp/'
 nudgepad.paths.surveys = nudgepad.paths.site + 'surveys/'
 //nudgepad.paths.certificates = nudgepad.paths.site + 'certificates/'
-nudgepad.paths.client = CLIENTPATH
+nudgepad.paths.client = clientPath
 

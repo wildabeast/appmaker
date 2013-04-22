@@ -1,7 +1,7 @@
 isActive ()
 {
-  DOMAIN=$1
-  if [ ! -f $ACTIVEPATH$DOMAIN ]
+  domain=$1
+  if [ ! -f $activePath$domain ]
     then
       return 1
   fi

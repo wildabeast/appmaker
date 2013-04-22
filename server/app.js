@@ -52,11 +52,11 @@ if (!String.prototype.format) {
 
 /*** PATHS ****/
 
-var DATAPATH = __dirname + '/../../../nudgepad/'
-var SITESPATH = DATAPATH + 'sites/'
-var CLIENTPATH = __dirname + '/../client/'
-var ACTIVEPATH = DATAPATH + 'active/'
-var PORTSPATH = DATAPATH + 'ports'
+var dataPath = __dirname + '/../../../nudgepad/'
+var sitesPath = dataPath + 'sites/'
+var clientPath = __dirname + '/../client/'
+var activePath = dataPath + 'active/'
+var portsPath = dataPath + 'ports'
 
 /********* CREATE MAIN NUDGE NAMESPACE SINGLETON OBJECT *********/
 
@@ -71,7 +71,7 @@ nudgepad.default_types = ['pages', 'posts', 'workers', 'timelines']
 // Change the process title for easier debugging & monitoring
 process.title = nudgepad.domain
 
-if (!fs.existsSync(SITESPATH + nudgepad.domain + '/')) {
+if (!fs.existsSync(sitesPath + nudgepad.domain + '/')) {
   console.log('Site does not exist...')
   process.exit()
 }
@@ -93,9 +93,9 @@ nudgepad.site = new Space()
 
 // Load the HTML file and add mtimes as query string so the
 // worker always get the latest version of the nudgepad.js and nudgepad.css
-nudgepad.nudgepad_css_version = fs.statSync(CLIENTPATH + 'min.css').mtime.getTime()
-nudgepad.nudgepad_js_version = fs.statSync(CLIENTPATH + 'nudgepad.min.js').mtime.getTime()
-nudgepad.nudgepad_min_html = fs.readFileSync(CLIENTPATH + 'main.html', 'utf8')
+nudgepad.nudgepad_css_version = fs.statSync(clientPath + 'min.css').mtime.getTime()
+nudgepad.nudgepad_js_version = fs.statSync(clientPath + 'nudgepad.min.js').mtime.getTime()
+nudgepad.nudgepad_min_html = fs.readFileSync(clientPath + 'main.html', 'utf8')
   .replace(/JSV/, nudgepad.nudgepad_js_version)
   .replace(/CSSV/, nudgepad.nudgepad_css_version)
 
@@ -215,7 +215,7 @@ site.use(express.logger({
 
 
 /*********** STATIC FILES **************/
-site.use('/nudgepad/', express.static(CLIENTPATH.replace(/\/$/,''), { maxAge: 31557600000 }))
+site.use('/nudgepad/', express.static(clientPath.replace(/\/$/,''), { maxAge: 31557600000 }))
 
 
 /*********** public ***********/
@@ -246,7 +246,7 @@ site.get(/^\/nudgepad$/, nudgepad.checkId, function(req, res, next) {
   }
   
   // Load each javascript file individually if developing.
-  fs.readFile(CLIENTPATH + 'main.dev.html', 'utf8', function (err, data) {
+  fs.readFile(clientPath + 'main.dev.html', 'utf8', function (err, data) {
     res.send(data)
     return 
   })
@@ -361,13 +361,13 @@ console.log('Starting %s on port %s', nudgepad.domain, nudgepad.port)
 http_server = http.createServer(site).listen(nudgepad.port)
 
 
-fs.writeFileSync(ACTIVEPATH + nudgepad.domain, nudgepad.port, 'utf8')
-fs.writeFileSync(PORTSPATH + nudgepad.port, nudgepad.domain, 'utf8')
+fs.writeFileSync(activePath + nudgepad.domain, nudgepad.port, 'utf8')
+fs.writeFileSync(portsPath + nudgepad.port, nudgepad.domain, 'utf8')
 
 // Write session stats to disk before process closes
 process.on('SIGTERM', function () {
-  fs.unlinkSync(ACTIVEPATH + nudgepad.domain)
-  fs.unlinkSync(PORTSPATH + nudgepad.port)
+  fs.unlinkSync(activePath + nudgepad.domain)
+  fs.unlinkSync(portsPath + nudgepad.port)
   process.exit(0)
 })
 

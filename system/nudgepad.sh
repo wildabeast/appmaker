@@ -3,40 +3,40 @@ cd ~/node_modules/nudgepad/system/
 source isMac.sh
 
 # Set env variables
-HOMEPATH=/home/ubuntu/
+homePath=/home/ubuntu/
 if isMac
   then
     cd ~
-    MACUSER="$(pwd)"
-    MACUSER="$(basename $MACUSER)"
-    HOMEPATH=/Users/$MACUSER
+    macUser="$(pwd)"
+    macUser="$(basename $macUser)"
+    homePath=/Users/$macUser
     cd -
 fi
 
 # Where to store operational and user data
-DATAPATH=$HOMEPATH/nudgepad
-SITESPATH=$DATAPATH/sites/
-ACTIVEPATH=$DATAPATH/sites/
-PORTHSPATH=$DATAPATH/ports/
-TEMPPATH=$DATAPATH/temp/
-LOGSPATH=$DATAPATH/logs/
-BACKUPPATH=$DATAPATH/backup/
+dataPath=$homePath/nudgepad
+sitesPath=$dataPath/sites/
+activePath=$dataPath/sites/
+portsPath=$dataPath/ports/
+tempPath=$dataPath/temp/
+logsPath=$dataPath/logs/
+backupPath=$dataPath/backup/
 
 # Paths to code
-CODEPATH=$HOMEPATH/node_modules/nudgepad
-PROXYPATH=$CODEPATH/system/
-SERVERPATH=$CODEPATH/server/
-CLIENTPATH=$CODEPATH/client/
+codePath=$homePath/node_modules/nudgepad
+systemPath=$codePath/system/
+serverPath=$codePath/server/
+clientPath=$codePath/client/
 
+source install.sh
 
-
-cd $PROXYPATH
-
-# get all sites 1 per line filter out hidden dirs
-SITES="$(ls $SITESPATH)"
+cd $systemPath
 
 # get all sites 1 per line filter out hidden dirs
-ACTIVE="$(ls $ACTIVEPATH)"
+sites="$(ls $sitesPath)"
+
+# get all sites 1 per line filter out hidden dirs
+active="$(ls $activePath)"
 
 # Include our BASH functions
 source fixPermissions.sh
@@ -59,17 +59,17 @@ source createSite.sh
 case "$1" in
 
 'active')
-  echo $ACTIVE
+  echo activeSites
 ;;
 
 'commit')
   commit $2
 ;;
 
-'commit_all')
-  for DOMAIN in $SITES
+'commitAll')
+  for domain in $sites
   do
-    commit $DOMAIN
+    commit $domain
   done
 ;;
 
@@ -96,8 +96,8 @@ case "$1" in
   deleteSite $2
 ;;
 
-'delete_all')
-  for D in $SITES
+'deleteAll')
+  for D in $sites
   do
     deleteSite $D
   done
@@ -107,16 +107,16 @@ case "$1" in
   fixPermissions
 ;;
 
-'git_backup')
-  sudo rsync -a $SITESPATH $BACKUPPATH --exclude=".git/*" --exclude=".git"
-  cd $BACKUPPATH
+'gitBackup')
+  sudo rsync -a $sitesPath $backupPath --exclude=".git/*" --exclude=".git"
+  cd $backupPath
   sudo git add .
   sudo git commit -am "Backup updated"
   sudo git push
 ;;
 
 'host')
-  sudo python $PROXYPATH/hosts.py $2
+  sudo python $systemPath/hosts.py $2
 ;;
 
 'isChanged')
@@ -144,22 +144,22 @@ case "$1" in
 'log')
   if [ -n "$2" ]
     then
-      sudo cat $SITESPATH$2/logs/mon.txt
+      sudo cat $sitesPath$2/logs/mon.txt
     else
       # Proxy log
-      sudo cat $LOGSPATH/proxy_mon.txt
+      sudo cat $logsPath/domain.txt
   fi
 ;;
 
 'logs')
-  sudo cat $SITESPATH$2/logs/mon.txt
+  sudo cat $sitesPath$2/logs/mon.txt
 ;;
 
 'permit')
   # i hate you file permissions
   if isMac
     then
-      sudo chmod -R 777 $SITESPATH
+      sudo chmod -R 777 $sitesPath
   fi
 ;;
 
@@ -176,18 +176,18 @@ case "$1" in
   startSite $2
 ;;
 
-'restart_all')
-  for DOMAIN in $ACTIVE
+'restartAll')
+  for domain in activeSites
   do
-    stopSite $DOMAIN
-    startSite $DOMAIN
+    stopSite $domain
+    startSite $domain
   done
 ;;
 
 'sites')
-  for DOMAIN in $SITES
+  for domain in $sites
   do
-    echo $DOMAIN
+    echo $domain
   done
 ;;
 
@@ -213,9 +213,9 @@ case "$1" in
     else
       stopProxy
       stopPanel
-      for DOMAIN in $ACTIVE
+      for domain in activeSites
       do
-        stopSite $DOMAIN
+        stopSite $domain
       done
   fi
 ;;
@@ -223,17 +223,17 @@ case "$1" in
 'tail')
   if [ -n "$2" ]
     then
-      sudo tail -n 30 -f $SITESPATH/$2/logs/mon.txt
+      sudo tail -n 30 -f $sitesPath/$2/logs/mon.txt
     else
       # Proxy log
-      sudo tail -n 30 -f $LOGSPATH/proxy_mon.txt
+      sudo tail -n 30 -f $logsPath/domain.txt
   fi
 ;;
 
 'traffic')
   if [ -n "$2" ]
     then
-      sudo tail -n 30 -f $SITESPATH/$2/logs/requests.txt
+      sudo tail -n 30 -f $sitesPath/$2/logs/requests.txt
     else
       # Proxy log
       echo No domain provided
@@ -241,7 +241,7 @@ case "$1" in
 ;;
 
 'zip')
-  cd $SITESPATH
+  cd $sitesPath
   zip -r ~/sites.zip .
 ;;
 

@@ -11,29 +11,29 @@ startSite () {
   
   if isNoteSite $1
     then
-      echo $DOMAIN does not exist. Create it first
+      echo $domain does not exist. Create it first
       return 1
   fi
   
   # check if site is already running
   if isActive $1
     then
-      echo $DOMAIN already running
+      echo $domain already running
       return 1
   fi
 
   set_port
 
-  cd $SERVERPATH
+  cd $serverPath
   
   if isMac
     then
-      touch $SITESPATH/$DOMAIN/logs/mon.txt
-      mon -d -l $SITESPATH/$DOMAIN/logs/mon.txt -p $SITESPATH/$DOMAIN/temp/sitePid -m $SITESPATH/$DOMAIN/temp/monPid "node app.js $DOMAIN $PORT"
+      touch $sitesPath/$domain/logs/mon.txt
+      mon -d -l $sitesPath/$domain/logs/mon.txt -p $sitesPath/$domain/temp/sitePid -m $sitesPath/$domain/temp/monPid "node app.js $domain $PORT"
     else
       # todo: fix this so mon isnt launching 2 processes.
-      sudo -u $DOMAIN touch $SITESPATH/$DOMAIN/logs/mon.txt
-      sudo -u $DOMAIN mon -d -l $SITESPATH/$DOMAIN/logs/mon.txt -p $SITESPATH/$DOMAIN/temp/sitePid -m $SITESPATH/$DOMAIN/temp/monPid "node app.js $DOMAIN $PORT"
+      sudo -u $domain touch $sitesPath/$domain/logs/mon.txt
+      sudo -u $domain mon -d -l $sitesPath/$domain/logs/mon.txt -p $sitesPath/$domain/temp/sitePid -m $sitesPath/$domain/temp/monPid "node app.js $domain $PORT"
   fi
   return 0
 }

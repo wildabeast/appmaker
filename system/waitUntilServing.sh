@@ -3,7 +3,7 @@ waitUntilServing ()
   x=1
   while [ $x -le 9 ]
   do
-    if isActive $DOMAIN
+    if isActive $domain
       then
         return 0
     fi

@@ -1,10 +1,11 @@
-cd ~
-mkdir nudgepad
-mkdir nudgepad/sites
-mkdir nudgepad/logs
-mkdir nudgepad/active
-mkdir nudgepad/ports
-mkdir nudgepad/backup
-mkdir nudgepad/panel
-mkdir nudgepad/temp
-
+if [ ! -d "$dataPath" ]
+  then
+    mkdir $dataPath
+    mkdir $activePath
+    mkdir $portsPath
+    mkdir $tempPath
+    mkdir $logsPath
+    mkdir $backupPath
+    mkdir $PANELPATH
+    mkdir $sitesPath
+fi

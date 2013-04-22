@@ -1,8 +1,8 @@
 startPanel ()
 {
-  touch $LOGSPATH/panelMon.txt
+  touch $logsPath/panelMon.txt
 
-  if sudo mon --pidfile $TEMPPATH/panelPid --status | grep -q "alive"
+  if sudo mon --pidfile $tempPath/panelPid --status | grep -q "alive"
     then
       echo Nudgepad Panel already running...
       return 1
@@ -10,17 +10,17 @@ startPanel ()
   
   if isMac
     then
-      PANELDOMAIN=localhost
+      panelDomain=localhost
     else
-      PANELDOMAIN=$HOSTNAME
+      panelDomain=$HOSTNAME
   fi
 
   echo Starting Nudgepad Panel server...
 
   # Clear the log file
-  sudo rm $LOGSPATH/panel.txt
-  touch $LOGSPATH/panel.txt
-  sudo mon -d -l $LOGSPATH/panel.txt -p $TEMPPATH/panelPid -m $TEMPATH/panelPid "node panel.js $PANELDOMAIN"
+  sudo rm $logsPath/panel.txt
+  touch $logsPath/panel.txt
+  sudo mon -d -l $logsPath/panel.txt -p $tempPath/panelPid -m $TEMPATH/panelPid "node panel.js $panelDomain"
   echo Started Site Maker
 }
 

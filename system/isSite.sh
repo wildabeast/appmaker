@@ -1,7 +1,7 @@
 isSite ()
 {
-  DOMAIN=$1
-  if [ -d "$SITESPATH/$DOMAIN" ]
+  domain=$1
+  if [ -d "$sitesPath/$domain" ]
     then
       return 0
     else

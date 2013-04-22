@@ -1,7 +1,7 @@
 isProxyUp ()
 {
   
-  if sudo mon --pidfile $TEMPPATH/proxyMonPid --status | grep -q "alive"
+  if sudo mon --pidfile $tempPath/proxyMonPid --status | grep -q "alive"
     then
       return 0
     else      

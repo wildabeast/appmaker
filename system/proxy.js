@@ -8,11 +8,11 @@ var httpProxy = require('http-proxy'),
 process.title = 'nudgepadProxy'
 var errorPage = fs.readFileSync(__dirname + '/error.html', 'utf8')
 var starting = {}
-var DATAPATH = __dirname + '/../../../nudgepad/'
-var LOGSPATH = DATAPATH + 'logs/'
-var SITESPATH = DATAPATH + 'sites/'
-var ACTIVEPATH = DATAPATH + 'active/'
-var PORTSPATH = DATAPATH + 'ports/'
+var dataPath = __dirname + '/../../../nudgepad/'
+var logsPath = dataPath + 'logs/'
+var sitesPath = dataPath + 'sites/'
+var activePath = dataPath + 'active/'
+var portsPath = dataPath + 'ports/'
 
 var startSite = function (domain) {
   starting[domain] = true
@@ -32,7 +32,7 @@ var notFoundHandler = function (req, res) {
     res.end()
   } else {
     // todo: this may cause some bad edge cases.
-    fs.exists(SITESPATH + domain, function (exists) {
+    fs.exists(sitesPath + domain, function (exists) {
       if (!exists) {
         console.log('unknown_host: %s', domain)
         res.writeHead(404)
@@ -80,12 +80,12 @@ server.listen(80)
 
 var updatePorts = function () {
   var sites = server.proxy.proxyTable.router
-  var files = fs.readdirSync(ACTIVEPATH)
+  var files = fs.readdirSync(activePath)
   for (var i in files) {
     var domain = files[i]
     if (domain.match(/^\./))
       continue
-    var port = fs.readFileSync(ACTIVEPATH + domain, 'utf8')
+    var port = fs.readFileSync(activePath + domain, 'utf8')
     sites[domain] = '127.0.0.1:' + port
     console.log('%s on port %s', domain, port)
   }
@@ -93,15 +93,15 @@ var updatePorts = function () {
 
 updatePorts()
 
-fs.watch(ACTIVEPATH, function (event, domain) {
+fs.watch(activePath, function (event, domain) {
   var sites = server.proxy.proxyTable.router
   // Trigger public changed event
   console.log('event on %s', domain)
   var domain = domain.toLowerCase()
   if (domain.match(/^\./))
     return null
-  if (fs.existsSync(ACTIVEPATH + domain)) {
-    var port = fs.readFileSync(ACTIVEPATH + domain, 'utf8')
+  if (fs.existsSync(activePath + domain)) {
+    var port = fs.readFileSync(activePath + domain, 'utf8')
     sites[domain] = '127.0.0.1:' + port
     console.log('%s on port %s', domain, port)
   } else {

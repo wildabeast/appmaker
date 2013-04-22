@@ -7,13 +7,13 @@ var express = require('express'),
 
 var hostname = process.argv[2]
 
-var DATAPATH = __dirname + '/../../../nudgepad/'
+var dataPath = __dirname + '/../../../nudgepad/'
 var PANELPATH = __dirname + '/panel/'
-var LOGSPATH = DATAPATH + 'logs/'
-var SITESPATH = DATAPATH + 'sites/'
-var ACTIVEPATH = DATAPATH + 'active/'
-var PORTSPATH = DATAPATH + 'ports/'
-var SYSTEMPATH = __dirname
+var logsPath = dataPath + 'logs/'
+var sitesPath = dataPath + 'sites/'
+var activePath = dataPath + 'active/'
+var portsPath = dataPath + 'ports/'
+var systemPath = __dirname
 
 var Domain = require(PANELPATH + '/Domain')
 
@@ -22,7 +22,7 @@ process.title = 'nudgepadPanel'
 var app = express()
 app.use(express.bodyParser())
 
-var logFile = fs.createWriteStream(LOGSPATH + 'panel.txt', {flags: 'a'})
+var logFile = fs.createWriteStream(logsPath + 'panel.txt', {flags: 'a'})
 app.use(express.logger({
   stream : logFile
 }))
@@ -50,7 +50,7 @@ app.validateDomain = function (req, res, next) {
 app.isDomainAvailable = function (req, res, next) {
   
   var domain = req.body.domain
-  fs.exists(SITESPATH + domain, function (exists) {
+  fs.exists(sitesPath + domain, function (exists) {
     if (!exists)
       return next()
 //    res.set('Content-Type', 'text/plain')
@@ -92,7 +92,7 @@ app.post('/create', app.checkId, app.validateDomain, app.isDomainAvailable, func
   console.log('creating site: %s', domain)
   
   clone = (clone ? ' ' + clone : '')
-  exec(SYSTEMPATH + '/nudgepad.sh create ' + domain.toLowerCase() + ' ' + email + clone, function (err, stdout, stderr) {
+  exec(systemPath + '/nudgepad.sh create ' + domain.toLowerCase() + ' ' + email + clone, function (err, stdout, stderr) {
     if (err) {
       console.log('Error creating site %s: err:%s stderr:%s', domain, err, stderr)
       return res.send('Error creating site: ' + err, 400)
@@ -111,13 +111,13 @@ if (process.argv.length <3) {
 
 var port = 3000
 app.listen(port)
-fs.writeFileSync(ACTIVEPATH + hostname, port, 'utf8')
-fs.writeFileSync(PORTSPATH + port, hostname, 'utf8')
+fs.writeFileSync(activePath + hostname, port, 'utf8')
+fs.writeFileSync(portsPath + port, hostname, 'utf8')
 
 // Write session stats to disk before process closes
 process.on('SIGTERM', function () {
-  fs.unlinkSync(ACTIVEPATH + hostname)
-  fs.unlinkSync(PORTSPATH + port)
+  fs.unlinkSync(activePath + hostname)
+  fs.unlinkSync(portsPath + port)
   process.exit(0)
 })
 
