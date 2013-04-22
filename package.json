@@ -13,7 +13,7 @@
     "superagent": ">=0.1.1",
     "imagemagick": ">=0.1.1",
     "underscore": ">=0.1.1",
-    "cookie": ">=0.1.1",
+    "cookie": ">=0.0.1",
     "moment": ">=0.1.1",
     "nodemailer": ">=0.1.1",
     "request": ">=0.1.1",
