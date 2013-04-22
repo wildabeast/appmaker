@@ -13,17 +13,22 @@ if isMac
     cd -
 fi
 
+# Where to store operational and user data
 DATAPATH=$HOMEPATH/nudgepad
 SITESPATH=$DATAPATH/sites/
 ACTIVEPATH=$DATAPATH/sites/
 PORTHSPATH=$DATAPATH/ports/
+TEMPPATH=$DATAPATH/temp/
+LOGSPATH=$DATAPATH/logs/
+BACKUPPATH=$DATAPATH/backup/
+
+# Paths to code
 CODEPATH=$HOMEPATH/node_modules/nudgepad
 PROXYPATH=$CODEPATH/system/
 SERVERPATH=$CODEPATH/server/
 CLIENTPATH=$CODEPATH/client/
-TEMPPATH=$CODEPATH/temp/
-LOGSPATH=$CODEPATH/logs/
-BACKUPPATH=$CODEPATH/backup/
+
+
 
 cd $PROXYPATH
 
