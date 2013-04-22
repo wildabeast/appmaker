@@ -1,4 +1,4 @@
-var stopwatch = require('stopwatch')
+var stopwatch = require('./stopwatch')
 stopwatch('start')
 
 var nudgepad = {},
