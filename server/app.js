@@ -56,7 +56,7 @@ var dataPath = __dirname + '/../../../nudgepad/'
 var sitesPath = dataPath + 'sites/'
 var clientPath = __dirname + '/../client/'
 var activePath = dataPath + 'active/'
-var portsPath = dataPath + 'ports'
+var portsPath = dataPath + 'ports/'
 
 /********* CREATE MAIN NUDGE NAMESPACE SINGLETON OBJECT *********/
 
