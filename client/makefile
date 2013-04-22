@@ -4,9 +4,9 @@ css: min.css
 
 js: nudgepad.min.js
 
-STYLESHEETS=$(shell cat ~/client/build/css.make)
-SCRIPTS=$(shell cat ~/client/build/src.make)
-LIBS=$(shell cat ~/client/build/lib.make)
+STYLESHEETS=$(shell cat build/css.make)
+SCRIPTS=$(shell cat build/src.make)
+LIBS=$(shell cat build/lib.make)
 
 gen:
 	cd build/; node gen.js
