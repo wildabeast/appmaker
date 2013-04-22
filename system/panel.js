@@ -8,14 +8,14 @@ var express = require('express'),
 var hostname = process.argv[2]
 
 var dataPath = __dirname + '/../../../nudgepad/'
-var PANELPATH = __dirname + '/panel/'
+var panelPath = __dirname + '/panel/'
 var logsPath = dataPath + 'logs/'
 var sitesPath = dataPath + 'sites/'
 var activePath = dataPath + 'active/'
 var portsPath = dataPath + 'ports/'
 var systemPath = __dirname
 
-var Domain = require(PANELPATH + '/Domain')
+var Domain = require(panelPath + '/Domain')
 
 process.title = 'nudgepadPanel'
 
@@ -27,7 +27,7 @@ app.use(express.logger({
   stream : logFile
 }))
 
-app.use('/', express.static(PANELPATH, { maxAge: 31557600000 }))
+app.use('/', express.static(panelPath, { maxAge: 31557600000 }))
 
 // http://stackoverflow.com/questions/46155/validate-email-address-in-javascript
 function validateEmail(email) { 

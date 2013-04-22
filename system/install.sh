@@ -6,6 +6,6 @@ if [ ! -d "$dataPath" ]
     mkdir $tempPath
     mkdir $logsPath
     mkdir $backupPath
-    mkdir $PANELPATH
+    mkdir $panelPath
     mkdir $sitesPath
 fi
