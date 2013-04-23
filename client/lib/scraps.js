@@ -193,6 +193,72 @@ Scrap.prototype.clone = function (id) {
   return new Scrap(id, this)
 }
 
+/**
+ * Sets the innerHTML for uls, ols, and list types. Basically, appends the child
+ * elements.
+ *
+ * Example list:
+ * scrap1
+ *  type ul
+ *  loop {{colors}}
+ *  scraps
+ *   {{name}}
+ *    type ul
+ *    content {{value}}
+ *
+ * @param {object} Context to evaluate any variables in.
+ */
+Scrap.prototype.loop = function (context) {
+  
+  // No items. do nothing
+  if (!this.values.loop)
+    return null
+  
+  // No item properties. do nothing
+  if (!this.values.scraps)
+    return null
+  
+  var partial = this.values.scraps.toString()
+  
+  var items = this.values.loop
+  // Eval any pointers
+  if (typeof items === 'string' && items.match(/\{\{/)) {
+    items = Scrap.getPointer(items.replace(/\{|\}/g, ''), context)
+  }
+  // A space separated array
+  if (typeof items === 'string') {
+    items = this.values.loop.split(/ /g)
+  }
+
+  if (!items)
+    return null
+  
+  if (!(items instanceof Space))
+    items = new Space(items)
+  
+  var html = ''
+  items.each(function (key, value) {
+    
+    // replace any variables in item
+    var localContext = {key : key, value : value}
+    var mold = partial.replace(/\{\{([_a-z0-9\.]+)\}\}/gi, function(match, variableName) {
+      var res
+      // Search the local context first
+      if (res = Scrap.getPointer(variableName, localContext))
+        return res
+      // If no matches, search global context
+      return Scrap.getPointer(variableName, context)
+    })
+    
+    var scraps = new Space(mold)
+    scraps.each(function (key, value) {
+      html += new Scrap(key, value).toHtml()
+    })
+    
+  })
+  this.div.append(html)
+}
+
 Scrap.prototype.selector = function () {
   return '#' + this.path.replace(/ /g, ' #')
 }
@@ -203,6 +269,10 @@ Scrap.prototype.selector = function () {
  * @param {object} Context to evaluate any variables in.
  */
 Scrap.prototype.setContent = function (context) {
+  
+  // We loop content if theres a loop
+  if (this.values.loop)
+    return this.loop(context)
   
   // If leaf node
   if (this.values.content)
@@ -215,6 +285,7 @@ Scrap.prototype.setContent = function (context) {
       this.div.html(this.values.scraps.values[id].toHtml(context))
     }
   }
+  return this
 }
 
 /**
@@ -233,40 +304,10 @@ Scrap.prototype.setElementType = function (context) {
   // todo: remove $
   if (type.match(/^(checkbox|color|date|datetime|email|file|month|number|password|radio|range|search|tel|text|time|url|week)$/))
     this.div = new Element('input', {type : type})
-  else if (type === 'ul') {
-    this.div = new Element('ul')
-    this.setList(context)
-  }
   else if (type === 'inputbutton')
     this.div = new Element('input', {type : 'button'})
   else if (type === 'hidden')
     this.div = new Element('input', {type : 'hidden'})
-  else if (type === 'list') {
-    this.div = new Element('div')
-    this.setList(context)
-  }
-  else if (type === 'ol') {
-    this.div = new Element('ol')
-    this.setList(context)
-  }
-  else if (type === 'select') {
-    this.div = new Element('select')
-    this.setOptions(context)
-  }
-  else if (type === 'style') {
-    if (this.values.type === 'style') {
-      var style = ''
-      var styles = this.get('styles')
-      if (styles instanceof Space) {
-        for (var i in styles.keys) {
-          var key = styles.keys[i]
-          style += Scrap.styleToCss(key, styles.values[key].values, context)  
-        }
-      }
-      this.div = new Element('style')
-      return this.div.html(style)
-    }
-  }
   else
     this.div = new Element(type)
 
@@ -278,137 +319,6 @@ Scrap.prototype.setElementType = function (context) {
     this.setProperty(properties[i], context)
   }
   
-}
-
-/**
- * Sets the innerHTML for uls, ols, and list types. Basically, appends the child
- * elements.
- *
- * Example list:
- * scrap1
- *  type list
- *   item
- *    content {{value}}
- *   items
- *    1 Male
- *    2 Female
- * 
- *
- * items can also be a pointer like {{form.states}}
- *
- * todo: make this recursive and make the child elements full fledged scraps.
- *
- * @param {object} Context to evaluate any variables in.
- */
-Scrap.prototype.setList = function (context) {
-  
-  // No items. do nothing
-  if (!this.values.items)
-    return null
-  
-  // No item properties. do nothing
-  if (!this.values.item)
-    return null
-  
-  var partial = this.values.item.toString()
-  
-  var items = this.values.items
-  // Eval any pointers
-  if (typeof items === 'string' && items.match(/\{\{/)) {
-    items = Scrap.getPointer(items.replace(/\{|\}/g, ''), context)
-  }
-  // A space separated array
-  if (typeof items === 'string') {
-    items = this.values.items.split(/ /g)
-  }
-
-  if (!items)
-    return null
-  
-  if (this.values.items instanceof Space)
-    items = this.values.items.values
-  
-  var html = ''
-  for (var name in items) {
-    
-    if (!items.hasOwnProperty(name))
-      continue
-    
-    var item = items[name]
-    
-    // replace any variables in item
-    var localContext = {name : name, value : item}
-    var mold = partial.replace(/\{\{([_a-z0-9\.]+)\}\}/gi, function(match, variableName) {
-      var res
-      // Search the local context first
-      if (res = Scrap.getPointer(variableName, localContext))
-        return res
-      // If no matches, search global context
-      return Scrap.getPointer(variableName, context)
-    })
-    mold = new Space(mold)
-    
-    var attributes = ''
-    if (mold.values.title)
-      attributes += ' title="' + mold.values.title + '"'
-    if (mold.values['class'])
-      attributes += ' class="' + mold.values['class'] + '"'
-    if (mold.values.href)
-      attributes += ' href="' + mold.values.href + '"'
-    if (mold.values.draggable)
-      attributes += ' draggable="' + mold.values.draggable + '"'
-    if (mold.values.target)
-      attributes += ' target="' + mold.values.target + '"'
-    if (mold.values.onclick && !this.noscript)
-      attributes += ' onclick="' + mold.values.onclick + '"'
-    if (mold.values.style)
-      attributes += ' style="' + Scrap.styleToInline(mold.values.style.values) + '"'
-    if (mold.values.value)
-      attributes += ' value="' + mold.values.value + '"'
-    
-    var li = '<' + (mold.values.type ? mold.values.type : 'li') + attributes + '>' + 
-             (mold.values.content ? mold.values.content : '') +
-             '</' + (mold.values.type ? mold.values.type : 'li') + '>'
-
-    html += li
-  }
-  this.div.append(html)
-}
-
-/**
- * Set the option child events for a select element.
- *
- * @param {object} Context to evaluate the variables in.
- */
-Scrap.prototype.setOptions = function (context) {
-  
-  var options = this.values.options 
-  if (typeof options === 'string') {
-    options = Scrap.getPointer(options.replace(/\{|\}/g, ''), context)
-    // Also allow space seperated list
-    if (!options)
-      options = this.values.options.split(/ /g)
-  }
-  
-  if (!options)
-    return false
-  
-  var selectedoption = false
-  if (this.values.selectedoption)
-    selectedoption = Scrap.replace(this.values.selectedoption, context)
-  
-  if (this.values.options instanceof Space)
-    options = this.values.options.values
-  
-  for (var name in options) {
-    if (!options.hasOwnProperty(name))
-      continue
-    
-    // If typeof value is an object, use name as the key
-    var value = (typeof options[name] == 'object' ? name : options[name])
-    var selected = (selectedoption === name ? ' selected="selected"' : '')
-    this.div.append(' <option value="' + name + '"' + selected + '>' + value + '</option>\n')
-  }
 }
 
 /**
