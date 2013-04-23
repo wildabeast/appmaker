@@ -221,7 +221,7 @@ case "$1" in
 ;;
 
 'uninstall')
-  rm -rf /var/nudgepad/
+  sudo rm -rf /var/nudgepad/
   npm uninstall nudgepad
   rm -rf ~/nudgepad/
 ;;
