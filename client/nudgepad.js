@@ -9137,7 +9137,7 @@ nudgepad.apps.account.save = function () {
   if (email === nudgepad.cookie.email)
     return nudgepad.apps.home.open()
   
-  $.post('/nudgepad.update_email', {email : email}, function () {
+  $.post('/nudgepad.updateEmail', {email : email}, function () {
     nudgepad.warnBeforeReload = false
     document.location = '/nudgepad?app=home'
   })
@@ -12291,7 +12291,7 @@ nudgepad.on('main', function () {
     if (!ValidateEmail(email))
       return nudgepad.error('Invalid Email')
     // todo, send back to nudgepad.com
-    $.post('/nudgepad.update_email', {email : email, sendWelcomeEmail: 'true'}, function () {
+    $.post('/nudgepad.updateEmail', {email : email, sendWelcomeEmail: 'true'}, function () {
       nudgepad.warnBeforeReload = false
       document.location = '/nudgepad?app=pages'
     })

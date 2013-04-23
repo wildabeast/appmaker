@@ -13,7 +13,7 @@ nudgepad.apps.account.save = function () {
   if (email === nudgepad.cookie.email)
     return nudgepad.apps.home.open()
   
-  $.post('/nudgepad.update_email', {email : email}, function () {
+  $.post('/nudgepad.updateEmail', {email : email}, function () {
     nudgepad.warnBeforeReload = false
     document.location = '/nudgepad?app=home'
   })

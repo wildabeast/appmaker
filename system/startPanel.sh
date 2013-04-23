@@ -21,6 +21,6 @@ startPanel ()
   sudo rm $logsPath/panel.txt
   touch $logsPath/panel.txt
   sudo mon -d -l $logsPath/panel.txt -p $tempPath/panelPid -m $TEMPATH/panelPid "node panel.js $panelDomain"
-  echo Started Site Maker
+  echo Started Nudgepad Panel
 }
 
