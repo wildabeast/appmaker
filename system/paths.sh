@@ -5,7 +5,7 @@ if isMac
     macUser="$(pwd)"
     macUser="$(basename $macUser)"
     homePath=/Users/$macUser
-    cd -
+    cd $systemPath
 fi
 
 codePath=$systemPath/../

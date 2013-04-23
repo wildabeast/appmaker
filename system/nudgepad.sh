@@ -12,7 +12,6 @@ cd $systemPath
 source isMac.sh
 source paths.sh
 source install.sh
-
 cd $systemPath
 
 # get all sites 1 per line filter out hidden dirs
