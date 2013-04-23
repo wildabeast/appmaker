@@ -1,4 +1,4 @@
-fixPermissions_ubuntu ()
+fixPermissionsUbuntu ()
 {
   cd $dataPath
   
@@ -38,7 +38,7 @@ fixPermissions_ubuntu ()
   done
 }
 
-fixPermissions_mac ()
+fixPermissionsMac ()
 {
   for FOLDER in space spacefix
   do
@@ -51,9 +51,9 @@ fixPermissions ()
   cd $dataPath
   if isMac
     then
-      fixPermissions_mac
+      fixPermissionsMac
     else
-      fixPermissions_ubuntu
+      fixPermissionsUbuntu
   fi  
 }
 

@@ -1,4 +1,4 @@
-clone_url ()
+cloneUrl ()
 {
   # echo creating from CLONE. source is $CLONE
   # http://1.com/blank.nudgepad.com.zip
@@ -14,7 +14,7 @@ clone_url ()
   rm $CLONENAME
 }
 
-createSite_ubuntu ()
+createSiteUbuntu ()
 {
   _start_time=`date +%s%N | cut -b1-13`
   
@@ -34,7 +34,7 @@ createSite_ubuntu ()
   
   if [ -n "$CLONE" ]
     then
-      clone_url
+      cloneUrl
     else
       # echo NO CLONE provided. Creating blank site from blank.
       sudo cp -R blank $sitesPath$domain
@@ -65,7 +65,7 @@ createSite_ubuntu ()
   
 }
 
-createSite_mac ()
+createSiteMac ()
 {
   
   domain=$1
@@ -74,7 +74,7 @@ createSite_mac ()
   
   if [ -n "$CLONE" ]
     then
-      clone_url
+      cloneUrl
     else
       # echo NO CLONE provided. Creating blank site from blank.
       cp -R blank $sitesPath$domain
@@ -115,9 +115,9 @@ createSite ()
   fi
   if isUbuntu
     then
-      createSite_ubuntu $1 $2 $3
+      createSiteUbuntu $1 $2 $3
     else
-      createSite_mac $1 $2 $3
+      createSiteMac $1 $2 $3
   fi
   
   echo "127.0.0.1 $domain" | sudo tee -a /etc/hosts >/dev/null

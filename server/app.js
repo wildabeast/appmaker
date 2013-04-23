@@ -77,8 +77,8 @@ if (!fs.existsSync(sitesPath + nudgepad.domain + '/')) {
 }
 
 // Development always occurs on macs
-nudgepad.is_mac = process.env.HOME.match(/Users/)
-nudgepad.development = !!nudgepad.is_mac
+nudgepad.isMac = process.env.HOME.match(/Users/)
+nudgepad.development = !!nudgepad.isMac
 // hard coded for now
 nudgepad.ip = nudgepad.development ? '127.0.0.1' : '107.21.225.189'
 eval(fs.readFileSync('helpers.js', 'utf8'))
