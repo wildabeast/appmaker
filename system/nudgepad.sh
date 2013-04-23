@@ -1,5 +1,4 @@
 #!/bin/bash
-
 # http://stackoverflow.com/questions/59895/can-a-bash-script-tell-what-directory-its-stored-in
 SOURCE="${BASH_SOURCE[0]}"
 while [ -h "$SOURCE" ]; do # resolve $SOURCE until the file is no longer a symlink
@@ -9,10 +8,9 @@ while [ -h "$SOURCE" ]; do # resolve $SOURCE until the file is no longer a symli
 done
 systemPath="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
 cd $systemPath
-source isMac.sh
 source paths.sh
+source isMac.sh
 source install.sh
-cd $systemPath
 
 # get all sites 1 per line filter out hidden dirs
 sites="$(ls $sitesPath)"

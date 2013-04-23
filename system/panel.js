@@ -7,7 +7,7 @@ var express = require('express'),
 
 var hostname = process.argv[2]
 
-var dataPath = __dirname + '/../../../nudgepadStorage/'
+var dataPath = '/var/nudgepad/'
 var panelPath = __dirname + '/panel/'
 var logsPath = dataPath + 'logs/'
 var sitesPath = dataPath + 'sites/'

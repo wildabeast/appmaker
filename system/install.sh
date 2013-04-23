@@ -1,6 +1,7 @@
 if [ ! -d "$dataPath" ]
   then
-    mkdir $dataPath
+    sudo mkdir $dataPath
+    sudo chown $USER $dataPath
     mkdir $sitesPath
     mkdir $activePath
     mkdir $portsPath
