@@ -4,7 +4,7 @@ clientPath=$codePath/client/
 
 
 # Where to store operational and user data
-dataPath=/var/nudgepad/
+dataPath=/nudgepad/
 sitesPath=$dataPath/sites/
 activePath=$dataPath/active/
 portsPath=$dataPath/ports/
