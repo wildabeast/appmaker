@@ -220,6 +220,12 @@ case "$1" in
   fi
 ;;
 
+'uninstall')
+  rm -rf /var/nudgepad/
+  npm uninstall nudgepad
+  rm -rf ~/nudgepad/
+;;
+
 'zip')
   cd $sitesPath
   zip -r ~/sites.zip .
