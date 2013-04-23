@@ -8,7 +8,10 @@ if [ ! -d "$dataPath" ]
     mkdir $logsPath
     mkdir $backupPath
     mkdir $panelPath
-    chgrp sites ~/nudgepad/sites
-    chgrp sites ~/nudgepad/active
-    chgrp sites ~/nudgepad/ports
+    if isUbuntu
+      then
+        chgrp sites $sitesPath
+        chgrp sites $activePath
+        chgrp sites $portsPath
+    fi
 fi

@@ -1,7 +1,7 @@
 set_port () {
   # Pick a port between 3002 and 8000
   PORT=$(($RANDOM%5000+3002))
-  while [ -f ../ports/$PORT ]
+  while [ -f $portsPath/$PORT ]
   do
     PORT=$(($RANDOM%5000+3002))
   done

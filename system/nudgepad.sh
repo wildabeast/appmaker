@@ -1,34 +1,16 @@
 #!/bin/bash
-cd ~/node_modules/nudgepad/system/
+
+# http://stackoverflow.com/questions/59895/can-a-bash-script-tell-what-directory-its-stored-in
+SOURCE="${BASH_SOURCE[0]}"
+while [ -h "$SOURCE" ]; do # resolve $SOURCE until the file is no longer a symlink
+  DIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
+  SOURCE="$(readlink "$SOURCE")"
+  [[ $SOURCE != /* ]] && SOURCE="$DIR/$SOURCE" # if $SOURCE was a relative symlink, we need to resolve it relative to the path where the symlink file was located
+done
+systemPath="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
+cd $systemPath
 source isMac.sh
-
-# Set env variables
-homePath=/home/ubuntu/
-if isMac
-  then
-    cd ~
-    macUser="$(pwd)"
-    macUser="$(basename $macUser)"
-    homePath=/Users/$macUser
-    cd -
-fi
-
-# Where to store operational and user data
-dataPath=$homePath/nudgepad
-sitesPath=$dataPath/sites/
-activePath=$dataPath/active/
-portsPath=$dataPath/ports/
-tempPath=$dataPath/temp/
-logsPath=$dataPath/logs/
-backupPath=$dataPath/backup/
-panelPath=$dataPath/panel/
-
-# Paths to code
-codePath=$homePath/node_modules/nudgepad
-systemPath=$codePath/system/
-serverPath=$codePath/server/
-clientPath=$codePath/client/
-
+source paths.sh
 source install.sh
 
 cd $systemPath
