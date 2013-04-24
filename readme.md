@@ -48,7 +48,7 @@ If you'd like to contribute to NudgePad development, follow these steps:
     git clone git@github.com:nudgepad/nudgepad.git
     cd nudgepad
     make install
-    np start
+    npd start
     # Go to http://localhost
 
 Uninstalling
@@ -60,6 +60,6 @@ The following will remove the npm version:
 
 To remove the development version (and ALL user data) run:
 
-    np uninstall
+    npd uninstall
 
 
