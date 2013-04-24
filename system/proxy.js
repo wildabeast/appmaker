@@ -94,6 +94,11 @@ var updatePorts = function () {
 updatePorts()
 
 fs.watch(activePath, function (event, domain) {
+  
+  // Mac os x
+  if (!domain)
+    return updatePorts()
+  
   var sites = server.proxy.proxyTable.router
   // Trigger public changed event
   console.log('event on %s', domain)
