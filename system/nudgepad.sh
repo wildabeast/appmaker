@@ -121,6 +121,12 @@ case "$1" in
   fi
 ;;
 
+'kill')
+  # todo: kill all running mon instances and node instances
+  rm -f /nudgepad/ports/*
+  rm -rf /nudgepad/active/*
+;;
+
 'log')
   if [ -n "$2" ]
     then
