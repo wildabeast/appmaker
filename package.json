@@ -1,6 +1,6 @@
 {
   "name": "nudgepad",
-  "version": "0.1.3113",
+  "version": "0.1.3115",
   "description": "A tool for prototyping.",
   "repository": "git://github.com/nudgepad/nudgepad",
   "main": "nudgepad.js",
@@ -26,7 +26,7 @@
     "marked": ">=0.1.1",
     "jquery": ">=0.1.1",
     "utile": ">=0.1.1",
-    "http-proxy": ">=0.1.1",
+    "http-proxy": "=0.10.1",
     "commander": ">=0.1.1"
   },
   "keywords": [
@@ -36,6 +36,7 @@
     "template",
     "html"
   ],
+  "engines" : { "node" : ">=0.8.1 <0.10.0" },
   "license": "MIT",
   "contributors": [
       {
