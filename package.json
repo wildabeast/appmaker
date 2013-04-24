@@ -1,6 +1,6 @@
 {
   "name": "nudgepad",
-  "version": "0.1.3115",
+  "version": "0.1.3116",
   "description": "A tool for prototyping.",
   "repository": "git://github.com/nudgepad/nudgepad",
   "main": "nudgepad.js",
