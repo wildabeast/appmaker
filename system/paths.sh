@@ -1,7 +1,4 @@
-codePath=$systemPath/../
-serverPath=$codePath/server/
-clientPath=$codePath/client/
-
+serverPath=$systemPath/../server/
 
 # Where to store operational and user data
 dataPath=/nudgepad/
