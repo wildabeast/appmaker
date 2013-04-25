@@ -3,6 +3,7 @@
     <script type="text/javascript" src="/nudgepad/src/AccountApp.js"></script>
     <script type="text/javascript" src="/nudgepad/src/AddGoogleAnalytics.js"></script>
     <script type="text/javascript" src="/nudgepad/src/Alert.js"></script>
+    <script type="text/javascript" src="/nudgepad/src/barMenu.js"></script>
     <script type="text/javascript" src="/nudgepad/src/BlogApp.js"></script>
     <script type="text/javascript" src="/nudgepad/src/Console.js"></script>
     <script type="text/javascript" src="/nudgepad/src/ContentEditor.js"></script>
@@ -21,6 +22,9 @@
     <script type="text/javascript" src="/nudgepad/src/Images.js"></script>
     <script type="text/javascript" src="/nudgepad/src/Import.js"></script>
     <script type="text/javascript" src="/nudgepad/src/Invite.js"></script>
+    <script type="text/javascript" src="/nudgepad/src/iOS.js"></script>
+    <script type="text/javascript" src="/nudgepad/src/jquery.owner.js"></script>
+    <script type="text/javascript" src="/nudgepad/src/jquery.scrap.js"></script>
     <script type="text/javascript" src="/nudgepad/src/Mouse.js"></script>
     <script type="text/javascript" src="/nudgepad/src/MoveHandle.js"></script>
     <script type="text/javascript" src="/nudgepad/src/Navigation.js"></script>
@@ -64,7 +68,3 @@
     <script type="text/javascript" src="/nudgepad/src/SurveysApp.js"></script>
     <script type="text/javascript" src="/nudgepad/src/Tabs.js"></script>
     <script type="text/javascript" src="/nudgepad/src/TextPrompt.js"></script>
-    <script type="text/javascript" src="/nudgepad/src/barMenu.js"></script>
-    <script type="text/javascript" src="/nudgepad/src/iOS.js"></script>
-    <script type="text/javascript" src="/nudgepad/src/jquery.owner.js"></script>
-    <script type="text/javascript" src="/nudgepad/src/jquery.scrap.js"></script>

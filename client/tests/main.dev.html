@@ -6,14 +6,13 @@
     <link rel="shortcut icon" href="/nudgepad/images/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="/nudgepad/css/reset.css" type="text/css"/>
     <link rel="stylesheet" href="/nudgepad/css/document.css" type="text/css"/>
-    <link rel="stylesheet" href="/nudgepad/css/Dimensions.css" type="text/css"/>
-    <link rel="stylesheet" href="/nudgepad/css/LoadingScreen.css" type="text/css"/>
     <link rel="stylesheet" href="/nudgepad/css/accountApp.css" type="text/css"/>
     <link rel="stylesheet" href="/nudgepad/css/antiAliasedFix.css" type="text/css"/>
     <link rel="stylesheet" href="/nudgepad/css/blogApp.css" type="text/css"/>
     <link rel="stylesheet" href="/nudgepad/css/connectionStatus.css" type="text/css"/>
     <link rel="stylesheet" href="/nudgepad/css/console.css" type="text/css"/>
     <link rel="stylesheet" href="/nudgepad/css/developApp.css" type="text/css"/>
+    <link rel="stylesheet" href="/nudgepad/css/Dimensions.css" type="text/css"/>
     <link rel="stylesheet" href="/nudgepad/css/editor.css" type="text/css"/>
     <link rel="stylesheet" href="/nudgepad/css/errors.css" type="text/css"/>
     <link rel="stylesheet" href="/nudgepad/css/fonts.css" type="text/css"/>
@@ -21,6 +20,7 @@
     <link rel="stylesheet" href="/nudgepad/css/grid.css" type="text/css"/>
     <link rel="stylesheet" href="/nudgepad/css/handles.css" type="text/css"/>
     <link rel="stylesheet" href="/nudgepad/css/homeApp.css" type="text/css"/>
+    <link rel="stylesheet" href="/nudgepad/css/LoadingScreen.css" type="text/css"/>
     <link rel="stylesheet" href="/nudgepad/css/notify.css" type="text/css"/>
     <link rel="stylesheet" href="/nudgepad/css/outlineFix.css" type="text/css"/>
     <link rel="stylesheet" href="/nudgepad/css/pagesBar.css" type="text/css"/>
@@ -69,6 +69,7 @@
     <script type="text/javascript" src="/nudgepad/src/AccountApp.js"></script>
     <script type="text/javascript" src="/nudgepad/src/AddGoogleAnalytics.js"></script>
     <script type="text/javascript" src="/nudgepad/src/Alert.js"></script>
+    <script type="text/javascript" src="/nudgepad/src/barMenu.js"></script>
     <script type="text/javascript" src="/nudgepad/src/BlogApp.js"></script>
     <script type="text/javascript" src="/nudgepad/src/Console.js"></script>
     <script type="text/javascript" src="/nudgepad/src/ContentEditor.js"></script>
@@ -87,6 +88,9 @@
     <script type="text/javascript" src="/nudgepad/src/Images.js"></script>
     <script type="text/javascript" src="/nudgepad/src/Import.js"></script>
     <script type="text/javascript" src="/nudgepad/src/Invite.js"></script>
+    <script type="text/javascript" src="/nudgepad/src/iOS.js"></script>
+    <script type="text/javascript" src="/nudgepad/src/jquery.owner.js"></script>
+    <script type="text/javascript" src="/nudgepad/src/jquery.scrap.js"></script>
     <script type="text/javascript" src="/nudgepad/src/Mouse.js"></script>
     <script type="text/javascript" src="/nudgepad/src/MoveHandle.js"></script>
     <script type="text/javascript" src="/nudgepad/src/Navigation.js"></script>
@@ -130,10 +134,6 @@
     <script type="text/javascript" src="/nudgepad/src/SurveysApp.js"></script>
     <script type="text/javascript" src="/nudgepad/src/Tabs.js"></script>
     <script type="text/javascript" src="/nudgepad/src/TextPrompt.js"></script>
-    <script type="text/javascript" src="/nudgepad/src/barMenu.js"></script>
-    <script type="text/javascript" src="/nudgepad/src/iOS.js"></script>
-    <script type="text/javascript" src="/nudgepad/src/jquery.owner.js"></script>
-    <script type="text/javascript" src="/nudgepad/src/jquery.scrap.js"></script>
 
     <script type="text/javascript" src="qunit-git.js"></script>
     <script type="text/javascript" src="/nudgepad/tests/unit/Body.js"></script>
@@ -366,10 +366,10 @@
   <div id="nudgepadSignupFormModal" class="nudgepad">
   	<div id="signupContainer">
   		<div id="signupContent">
-  			<div id="nudgepadSignupFormPrototypeLive">Your prototype is now live at</div>
+  			<div id="nudgepadSignupFormPrototypeLive">Your site is now live at</div>
   			<a id="nudgepadSignupFormDomain" target="published"></a>
   			<div class="clear"></div>
-  			<div id="nudgepadSignupFormInstructions">If you want to edit your prototype beyond this session, please type your email address below.</div>
+  			<div id="nudgepadSignupFormInstructions">If you want to edit your site beyond this session, please type your email address below.</div>
   			<input id="nudgepadSignupFormEmail" type="email" placeholder="Email"></input>  
   			<div id="nudgepadSignupFormButton">Submit</div>
   			<div class="clear"></div>

@@ -15,7 +15,7 @@ main.dev.html (for development)
 unit/main.html (for production test)
 unit/main.dev.html (for development)
 */
-var path = process.env.HOME + '/client/'
+var path = __dirname + '/../'
 var srcPath = path + 'src/'
 var cssPath = path + 'css/'
 var unitsPath = path + 'tests/unit/'
