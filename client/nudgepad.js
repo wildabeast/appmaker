@@ -8752,13 +8752,6 @@ App.prototype.close = function (name) {
 /**
  * @return {bool}
  */
-App.prototype.is_closed = function () {
-  return this._open && this.isOpening
-}
-
-/**
- * @return {bool}
- */
 App.prototype.isOpen = function () {
   return this._open
 }
