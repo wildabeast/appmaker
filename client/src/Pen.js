@@ -7,7 +7,7 @@ nudgepad.pen.draw = function (event) {
   if (!nudgepad.pen.on && !nudgepad.mouse.down.metaKey)
     return true
   
-  if (!nudgepad.mouse.is_down)
+  if (!nudgepad.mouse.isDown)
     return true
   
   if ($.isOnScrollbar(nudgepad.mouse.down.clientX, nudgepad.mouse.down.clientY))

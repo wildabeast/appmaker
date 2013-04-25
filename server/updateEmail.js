@@ -34,9 +34,9 @@ site.post('/nudgepad.updateEmail', nudgepad.checkId, function (req, res, next) {
     new File(nudgepad.paths.site + 'workers/' + req.email + '.space').trash()
     if (req.body.sendWelcomeEmail === 'true') {
       
-      var message = 'Thanks for using Nudge to build your prototype!' + '\n\n' +
-                    'View your prototype here: http://' + nudgepad.domain + '\n\n' +
-                    'Edit your prototype here: http://' + nudgepad.domain + '/nudgepad' + '\n\n' +
+      var message = 'Thanks for using Nudge to build your site!' + '\n\n' +
+                    'View your site here: http://' + nudgepad.domain + '\n\n' +
+                    'Edit your site here: http://' + nudgepad.domain + '/nudgepad' + '\n\n' +
                     'If you have any questions, please contact us at support@nudgepad.com' + '\n\n' +
                     'Thanks,' + '\n' +
                     'Ben & Breck\n'

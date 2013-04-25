@@ -6,15 +6,15 @@
 nudgepad.mouse = {}
 
 // Is the mouse down?
-nudgepad.mouse.is_down = false
+nudgepad.mouse.isDown = false
 
 /**
  * When a mousedown starts, we keep track of how far the mouse moves. Helpful for
  * drag and drop and drawing stuff.
  */
-nudgepad.mouse.y_change = 0
-nudgepad.mouse.x_change = 0
-nudgepad.mouse.path_distance = 0
+nudgepad.mouse.yChange = 0
+nudgepad.mouse.xChange = 0
+nudgepad.mouse.pathDistance = 0
 
 /**
  * Update our Mouse object
@@ -24,12 +24,12 @@ nudgepad.mouse.path_distance = 0
  */
 nudgepad.mouse.onmousedown = function (event) {
   //  console.log('mouse down')
-  nudgepad.mouse.is_down = true
+  nudgepad.mouse.isDown = true
   nudgepad.mouse.down = event
   nudgepad.mouse.target = event.srcElement || event.originalTarget || event.target
-  nudgepad.mouse.last_x = event.pageX
-  nudgepad.mouse.last_y = event.pageY
-  nudgepad.mouse.path_distance = 0
+  nudgepad.mouse.lastX = event.pageX
+  nudgepad.mouse.lastY = event.pageY
+  nudgepad.mouse.pathDistance = 0
   return true
 }
 
@@ -42,18 +42,18 @@ nudgepad.mouse.onmousedown = function (event) {
 nudgepad.mouse.onmousemove = function (event) {
   nudgepad.mouse.move = event
 //  console.log('mouse move')
-  if (!nudgepad.mouse.is_down)
+  if (!nudgepad.mouse.isDown)
     return true
   
-  nudgepad.mouse.path_distance += Math.abs(event.pageX - nudgepad.mouse.last_x) + Math.abs(event.pageY - nudgepad.mouse.last_y)
-  nudgepad.mouse.last_x = event.pageX
-  nudgepad.mouse.last_y = event.pageY
-  nudgepad.mouse.x_change = event.pageX - nudgepad.mouse.down.pageX
-  nudgepad.mouse.y_change = event.pageY - nudgepad.mouse.down.pageY
+  nudgepad.mouse.pathDistance += Math.abs(event.pageX - nudgepad.mouse.lastX) + Math.abs(event.pageY - nudgepad.mouse.lastY)
+  nudgepad.mouse.lastX = event.pageX
+  nudgepad.mouse.lastY = event.pageY
+  nudgepad.mouse.xChange = event.pageX - nudgepad.mouse.down.pageX
+  nudgepad.mouse.yChange = event.pageY - nudgepad.mouse.down.pageY
   nudgepad.mouse.distance = // a2 + b2 = c2 solving for c
     Math.pow(
-      Math.pow(nudgepad.mouse.x_change, 2) +
-      Math.pow(nudgepad.mouse.y_change, 2),
+      Math.pow(nudgepad.mouse.xChange, 2) +
+      Math.pow(nudgepad.mouse.yChange, 2),
     .5)
   // todo: rotation
   return true
@@ -66,13 +66,13 @@ nudgepad.mouse.onmousemove = function (event) {
  * @return true. Continue propagation.
  */
 nudgepad.mouse.onmouseup = function (event) {
-  nudgepad.mouse.is_down = false
-  nudgepad.mouse.x_change = event.pageX - nudgepad.mouse.down.pageX
-  nudgepad.mouse.y_change = event.pageY - nudgepad.mouse.down.pageY
+  nudgepad.mouse.isDown = false
+  nudgepad.mouse.xChange = event.pageX - nudgepad.mouse.down.pageX
+  nudgepad.mouse.yChange = event.pageY - nudgepad.mouse.down.pageY
   nudgepad.mouse.distance = // a2 + b2 = c2 solving for c
     Math.pow(
-      Math.pow(nudgepad.mouse.x_change, 2) +
-      Math.pow(nudgepad.mouse.y_change, 2),
+      Math.pow(nudgepad.mouse.xChange, 2) +
+      Math.pow(nudgepad.mouse.yChange, 2),
     .5)
   return true
 }
@@ -84,13 +84,13 @@ nudgepad.mouse.onmouseup = function (event) {
  * @return true. Continue propagation.
  */
 nudgepad.mouse.onTouchEnd = function (event) {
-  nudgepad.mouse.is_down = false
-  nudgepad.mouse.x_change = event.pageX - nudgepad.mouse.down.pageX
-  nudgepad.mouse.y_change = event.pageY - nudgepad.mouse.down.pageY
+  nudgepad.mouse.isDown = false
+  nudgepad.mouse.xChange = event.pageX - nudgepad.mouse.down.pageX
+  nudgepad.mouse.yChange = event.pageY - nudgepad.mouse.down.pageY
   nudgepad.mouse.distance = // a2 + b2 = c2 solving for c
     Math.pow(
-      Math.pow(nudgepad.mouse.x_change, 2) +
-      Math.pow(nudgepad.mouse.y_change, 2),
+      Math.pow(nudgepad.mouse.xChange, 2) +
+      Math.pow(nudgepad.mouse.yChange, 2),
     .5)
   return true
 }
@@ -103,12 +103,12 @@ nudgepad.mouse.onTouchEnd = function (event) {
  */
 nudgepad.mouse.onTouchStart = function (event) {
   //  console.log('mouse down')
-  nudgepad.mouse.is_down = true
+  nudgepad.mouse.isDown = true
   nudgepad.mouse.down = event
   nudgepad.mouse.target = event.srcElement || event.originalTarget || event.target
-  nudgepad.mouse.last_x = event.pageX
-  nudgepad.mouse.last_y = event.pageY
-  nudgepad.mouse.path_distance = 0
+  nudgepad.mouse.lastX = event.pageX
+  nudgepad.mouse.lastY = event.pageY
+  nudgepad.mouse.pathDistance = 0
   return true
 }
 
@@ -121,18 +121,18 @@ nudgepad.mouse.onTouchStart = function (event) {
 nudgepad.mouse.onTouchMove = function (event) {
   nudgepad.mouse.move = event
 //  console.log('mouse move')
-  if (!nudgepad.mouse.is_down)
+  if (!nudgepad.mouse.isDown)
     return true
   
-  nudgepad.mouse.path_distance += Math.abs(event.pageX - nudgepad.mouse.last_x) + Math.abs(event.pageY - nudgepad.mouse.last_y)
-  nudgepad.mouse.last_x = event.pageX
-  nudgepad.mouse.last_y = event.pageY
-  nudgepad.mouse.x_change = event.pageX - nudgepad.mouse.down.pageX
-  nudgepad.mouse.y_change = event.pageY - nudgepad.mouse.down.pageY
+  nudgepad.mouse.pathDistance += Math.abs(event.pageX - nudgepad.mouse.lastX) + Math.abs(event.pageY - nudgepad.mouse.lastY)
+  nudgepad.mouse.lastX = event.pageX
+  nudgepad.mouse.lastY = event.pageY
+  nudgepad.mouse.xChange = event.pageX - nudgepad.mouse.down.pageX
+  nudgepad.mouse.yChange = event.pageY - nudgepad.mouse.down.pageY
   nudgepad.mouse.distance = // a2 + b2 = c2 solving for c
     Math.pow(
-      Math.pow(nudgepad.mouse.x_change, 2) +
-      Math.pow(nudgepad.mouse.y_change, 2),
+      Math.pow(nudgepad.mouse.xChange, 2) +
+      Math.pow(nudgepad.mouse.yChange, 2),
     .5)
   // todo: rotation
   return true

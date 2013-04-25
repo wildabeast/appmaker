@@ -89,13 +89,13 @@ nudgepad.MoveHandle.slide = function (event, mouseEvent) {
 
   if (!mouseEvent.shiftKey) {
     grid_change = nudgepad.grid.getDelta([
-      {x : dimensions.left + nudgepad.mouse.x_change, y : dimensions.top + nudgepad.mouse.y_change + scrollChange},
-      {x : dimensions.right + nudgepad.mouse.x_change, y : dimensions.bottom + nudgepad.mouse.y_change + scrollChange},
-      {x :  dimensions.center + nudgepad.mouse.x_change, y : dimensions.middle + nudgepad.mouse.y_change + scrollChange}
+      {x : dimensions.left + nudgepad.mouse.xChange, y : dimensions.top + nudgepad.mouse.yChange + scrollChange},
+      {x : dimensions.right + nudgepad.mouse.xChange, y : dimensions.bottom + nudgepad.mouse.yChange + scrollChange},
+      {x :  dimensions.center + nudgepad.mouse.xChange, y : dimensions.middle + nudgepad.mouse.yChange + scrollChange}
     ])
   }
-  var y_change = nudgepad.mouse.y_change + scrollChange + grid_change.y
-  var x_change = nudgepad.mouse.x_change + grid_change.x
+  var y_change = nudgepad.mouse.yChange + scrollChange + grid_change.y
+  var x_change = nudgepad.mouse.xChange + grid_change.x
   
 
   $('.selection').each(function (){
