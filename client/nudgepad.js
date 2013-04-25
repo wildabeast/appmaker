@@ -9101,6 +9101,34 @@ nudgepad.alert = function (message) {
   $('body').append(button_container)
   
 }
+nudgepad.on('main', function () {
+  $('.barDroppable').on('click', function () {
+    $('.imageDroppableOptions').hide()
+    if ($(this).hasClass('selectedDroppable')) {
+      $(this).removeClass('selectedDroppable')
+      $('.barDroppable').removeClass('lowlight');
+      $('#nudgepadRibbon').slideUp('fast')
+    }
+    else {
+      $('.barDroppable').removeClass('selectedDroppable')
+      $(this).addClass('selectedDroppable');
+      $(this).removeClass('lowlight')
+      $('.barDroppable').not('.selectedDroppable').addClass('lowlight');
+      $('#nudgepadRibbon').slideDown('fast')
+    }
+  })
+  $('.barDroppable').on('slidestart', function() {
+    var dropBlock = $(this).attr('title').toLowerCase()
+    nudgepad.stage.dragAndDrop(nudgepad.droppables.get('blocks ' + dropBlock))
+  })
+  
+  
+  
+  $('#imageDroppable').on('click', function () {
+    $('.imageDroppableOptions').show()
+  })
+  
+})
 nudgepad.apps.blog = new App('blog')
 
 nudgepad.apps.blog.createPost = function () {
@@ -10245,6 +10273,95 @@ nudgepad.invite.prompt = function () {
   $.post('/nudgepad.invite', {emails : val}, function (result) {
     nudgepad.notify('Invite Sent')
   })
+}
+/**
+ * @return {bool}
+ */
+nudgepad.isIOS = function () {
+  return navigator.userAgent.match(/iPad|iPhone|iPod/i) != null
+}
+
+/**
+ * Some tweaks to make iOS devices behave how he want.
+ */
+nudgepad.iosMain = function () {
+  if (nudgepad.isIOS()) {
+    $(document).on("touchstart", function(event) {
+      if (event.originalEvent.touches.length > 1) {
+        event.stopPropagation()
+      }
+    })
+    // Allow someone to drag
+    $(document).on("touchmove", function(event) {
+      if (event.originalEvent.touches.length == 1) {
+        event.preventDefault()
+      }
+    })
+  }
+}
+$.fn.owner = function () {
+  return nudgepad.pages.stage.get($(this).attr('value')).element()
+}
+$.fn.scrap = function () {
+  return nudgepad.pages.stage.get($(this).attr('path'))
+}
+
+$.fn.deselect = function () {
+  var id = $(this).attr('id')
+  $(this).removeClass('selection')
+  $('.' + id + '_handle').remove()
+  nudgepad.trigger('selection')
+  return $(this)
+}
+
+
+/**
+ * @param {string}
+ * @return {Scrap} this
+ */
+$.fn.selectMe = function () {
+  
+  var scrap = $(this).scrap()
+  
+  if (scrap.get('locked'))
+    return false
+  
+  // Dont double select things
+  if ($(this).hasClass('selection'))
+    return this
+  $(this).addClass('selection')
+  
+  nudgepad.MoveHandle.create(scrap)
+  
+  nudgepad.trigger('selection')
+
+  EditHandle.create(scrap)
+  
+  var style = scrap.get('style')
+  // If no width, return
+  if (!style)
+    return this
+  
+  // Set Fixed proportions or not
+  var fixed = (style.get('background-image') && style.get('background-size') === 'contain')
+  
+  if (fixed) {
+    nudgepad.StretchHandle.create(scrap, "middle", "left", fixed)
+    nudgepad.StretchHandle.create(scrap, "middle", "right", fixed)
+    return this
+  }
+  
+  // Everything can be resized
+  nudgepad.StretchHandle.create(scrap, "top", "left")
+  nudgepad.StretchHandle.create(scrap, "top", "center")
+  nudgepad.StretchHandle.create(scrap, "top", "right")
+  nudgepad.StretchHandle.create(scrap, "middle", "left")
+  nudgepad.StretchHandle.create(scrap, "middle", "right")
+  nudgepad.StretchHandle.create(scrap, "bottom", "left")
+  nudgepad.StretchHandle.create(scrap, "bottom", "center")
+  nudgepad.StretchHandle.create(scrap, "bottom", "right")
+  
+  return $(this)
 }
 /**
  * We provide easy access to querying the mouse position and state.
@@ -13807,120 +13924,4 @@ nudgepad.textPrompt = function (message, default_value, onsubmit, onkeypress, su
   $('body').append(cancel_button)
   $('body').append(button_container)
   text_area.focus()
-}
-nudgepad.on('main', function () {
-  $('.barDroppable').on('click', function () {
-    $('.imageDroppableOptions').hide()
-    if ($(this).hasClass('selectedDroppable')) {
-      $(this).removeClass('selectedDroppable')
-      $('.barDroppable').removeClass('lowlight');
-      $('#nudgepadRibbon').slideUp('fast')
-    }
-    else {
-      $('.barDroppable').removeClass('selectedDroppable')
-      $(this).addClass('selectedDroppable');
-      $(this).removeClass('lowlight')
-      $('.barDroppable').not('.selectedDroppable').addClass('lowlight');
-      $('#nudgepadRibbon').slideDown('fast')
-    }
-  })
-  $('.barDroppable').on('slidestart', function() {
-    var dropBlock = $(this).attr('title').toLowerCase()
-    nudgepad.stage.dragAndDrop(nudgepad.droppables.get('blocks ' + dropBlock))
-  })
-  
-  
-  
-  $('#imageDroppable').on('click', function () {
-    $('.imageDroppableOptions').show()
-  })
-  
-})/**
- * @return {bool}
- */
-nudgepad.isIOS = function () {
-  return navigator.userAgent.match(/iPad|iPhone|iPod/i) != null
-}
-
-/**
- * Some tweaks to make iOS devices behave how he want.
- */
-nudgepad.iosMain = function () {
-  if (nudgepad.isIOS()) {
-    $(document).on("touchstart", function(event) {
-      if (event.originalEvent.touches.length > 1) {
-        event.stopPropagation()
-      }
-    })
-    // Allow someone to drag
-    $(document).on("touchmove", function(event) {
-      if (event.originalEvent.touches.length == 1) {
-        event.preventDefault()
-      }
-    })
-  }
-}
-$.fn.owner = function () {
-  return nudgepad.pages.stage.get($(this).attr('value')).element()
-}
-$.fn.scrap = function () {
-  return nudgepad.pages.stage.get($(this).attr('path'))
-}
-
-$.fn.deselect = function () {
-  var id = $(this).attr('id')
-  $(this).removeClass('selection')
-  $('.' + id + '_handle').remove()
-  nudgepad.trigger('selection')
-  return $(this)
-}
-
-
-/**
- * @param {string}
- * @return {Scrap} this
- */
-$.fn.selectMe = function () {
-  
-  var scrap = $(this).scrap()
-  
-  if (scrap.get('locked'))
-    return false
-  
-  // Dont double select things
-  if ($(this).hasClass('selection'))
-    return this
-  $(this).addClass('selection')
-  
-  nudgepad.MoveHandle.create(scrap)
-  
-  nudgepad.trigger('selection')
-
-  EditHandle.create(scrap)
-  
-  var style = scrap.get('style')
-  // If no width, return
-  if (!style)
-    return this
-  
-  // Set Fixed proportions or not
-  var fixed = (style.get('background-image') && style.get('background-size') === 'contain')
-  
-  if (fixed) {
-    nudgepad.StretchHandle.create(scrap, "middle", "left", fixed)
-    nudgepad.StretchHandle.create(scrap, "middle", "right", fixed)
-    return this
-  }
-  
-  // Everything can be resized
-  nudgepad.StretchHandle.create(scrap, "top", "left")
-  nudgepad.StretchHandle.create(scrap, "top", "center")
-  nudgepad.StretchHandle.create(scrap, "top", "right")
-  nudgepad.StretchHandle.create(scrap, "middle", "left")
-  nudgepad.StretchHandle.create(scrap, "middle", "right")
-  nudgepad.StretchHandle.create(scrap, "bottom", "left")
-  nudgepad.StretchHandle.create(scrap, "bottom", "center")
-  nudgepad.StretchHandle.create(scrap, "bottom", "right")
-  
-  return $(this)
 }
