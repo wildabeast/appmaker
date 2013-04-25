@@ -16,7 +16,7 @@ source install.sh
 sites="$(ls $sitesPath)"
 
 # get all sites 1 per line filter out hidden dirs
-active="$(ls $activePath)"
+activeSites="$(ls $activePath)"
 
 # Include our BASH functions
 source fixPermissions.sh
@@ -39,7 +39,7 @@ source createSite.sh
 case "$1" in
 
 'active')
-  echo activeSites
+  echo $activeSites
 ;;
 
 'commit')
@@ -163,7 +163,7 @@ case "$1" in
 ;;
 
 'restartAll')
-  for domain in activeSites
+  for domain in $activeSites
   do
     stopSite $domain
     startSite $domain
@@ -199,7 +199,7 @@ case "$1" in
     else
       stopProxy
       stopPanel
-      for domain in activeSites
+      for domain in $activeSites
       do
         stopSite $domain
       done
