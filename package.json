@@ -1,6 +1,6 @@
 {
   "name": "nudgepad",
-  "version": "0.1.3120",
+  "version": "0.1.3121",
   "description": "Build websites in your browser.",
   "repository": "git://github.com/nudgepad/nudgepad",
   "main": "nudgepad.js",
