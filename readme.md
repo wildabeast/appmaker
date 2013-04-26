@@ -26,6 +26,13 @@ It also requires mon, which can easily be installed like so:
     cd mon
     sudo make install
 
+Occasionally you'll need to update your environment's PATH variable to make
+sure that the node_modules/.bin folder is included. For example, you may need
+to add this to your .bash_profile or .bashrc:
+
+    PATH=$PATH:~/node_modules/.bin
+
+
 Installing
 ==========
 
