@@ -8,6 +8,7 @@
   background-color: #222;
   z-index: 502;
   min-width: 630px;
+  font-family: 'Titillium Web';
 }
 
 #nudgepadPagesBar .barButton {
@@ -15,7 +16,6 @@
   line-height: 40px;
   width: 44px;
   font-size: 14px;
-  font-family: 'Titillium';
   text-align: center;
   float: left;
   font-weight: 800;

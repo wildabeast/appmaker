@@ -8919,9 +8919,7 @@ nudgepad.main = function (callback) {
 
     nudgepad.socket.on('connect', function (message) {
       console.log('connected to server %s', message)
-      $('#nudgepadConnectionStatus').css('color', 'green').html('Connected!').fadeOut(function () {
-        $('#nudgepadConnectionStatus').css('color', 'red')
-      })
+      $('#nudgepadConnectionStatus').html('Connected!').fadeOut()
       nudgepad.restartCheck()
     })
     
