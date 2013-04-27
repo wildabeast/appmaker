@@ -1,8 +1,8 @@
 NudgePad
 ========
 
-NudgePad is a tool for prototyping. We are actively developing NudgePad
-and are breaking things a little too much. For that we apologize, but
+NudgePad let's you build websites in your browser. We are actively developing
+NudgePad and are breaking things a little too much. For that we apologize, but
 we want to get it right for version 1.0. A release date for version 1.0
 has not yet been finalized, but will be sometime in 2013.
 
