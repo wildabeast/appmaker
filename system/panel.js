@@ -37,6 +37,10 @@ function validateEmail(email) {
 }
 
 app.validateDomain = function (req, res, next) {
+
+  // Warning message if trying to access panel via IP and not hostname
+  if (req.headers.host && req.headers.host.match('127.0.0.1'))
+    return res.send('Try going to <a href="http://' + hostname + ':' + port + '/">http://' + hostname + ':' + port + '</a> instead of ' + req.headers.host, 400)
   
   var error = Domain.validate(req.body.domain)
   
@@ -82,7 +86,8 @@ app.checkId = function (req, res, next) {
 
 // Create a site
 // On success, message is the login link 
-app.post('/create', app.checkId, app.validateDomain, app.isDomainAvailable, function(req, res, next){  
+app.post('/create', app.checkId, app.validateDomain, app.isDomainAvailable, function(req, res, next){
+  
   var domain = req.body.domain
   var email = req.body.email
   var clone = req.body.clone
@@ -106,7 +111,7 @@ app.post('/create', app.checkId, app.validateDomain, app.isDomainAvailable, func
 })
 
 if (process.argv.length <3) {
-  console.log('Enter a hostname to start site maker on')
+  console.log('Enter a hostname to start panel on')
   process.exit(1)
 }
 
