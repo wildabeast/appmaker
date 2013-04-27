@@ -6,7 +6,7 @@ nudgepad.emailPrompt = function () {
     var space = new Space(val)
     
     $.post('/nudgepad.email', space.keys, function (result) {
-      nudgepad.alert(result)
+      alert(result)
     })
   }, false, 'Send')
 }

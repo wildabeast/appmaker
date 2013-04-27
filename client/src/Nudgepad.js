@@ -56,7 +56,7 @@ nudgepad.main = function (callback) {
   
   nudgepad.query = ParseQueryString()
   // Fetch all files in the background.
-  nudgepad.getSite(function () {
+  nudgepad.explorer.getSite(function () {
     
     
     // SLOW?? maybe not anymore
@@ -158,7 +158,7 @@ nudgepad.main = function (callback) {
     
     // fetch other timelines in background for now
     // SLOW
-    nudgepad.downloadTimelines()
+    nudgepad.explorer.downloadTimelines()
     
     nudgepad.trigger('main')
     
