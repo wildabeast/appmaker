@@ -1,8 +1,8 @@
 stopPanel ()
 {
-  if sudo mon --pidfile $tempPath/panelPid --status | grep -q "alive"
+  if sudo mon --pidfile $tempPath/panelMonPid --status | grep -q "alive"
     then
-      PID=$(sudo cat $tempPath/panelPid)
+      PID=$(sudo cat $tempPath/panelMonPid)
       sudo kill -SIGTERM $PID
       echo Stopped Panel.
       return 0

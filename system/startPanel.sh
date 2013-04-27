@@ -1,8 +1,7 @@
 startPanel ()
 {
-  touch $logsPath/panelMon.txt
 
-  if sudo mon --pidfile $tempPath/panelPid --status | grep -q "alive"
+  if sudo mon --pidfile $tempPath/panelMonPid --status | grep -q "alive"
     then
       echo Nudgepad Panel already running...
       return 1
@@ -20,7 +19,7 @@ startPanel ()
   # Clear the log file
   sudo rm $logsPath/panel.txt
   touch $logsPath/panel.txt
-  sudo mon -d -l $logsPath/panel.txt -p $tempPath/panelPid -m $TEMPATH/panelPid "node panel.js $panelDomain"
+  sudo mon -d -l $logsPath/panel.txt -p $tempPath/panelPid -m $tempPath/panelMonPid "node panel.js $panelDomain"
   echo Started Nudgepad Panel
 }
 
