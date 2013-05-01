@@ -8,9 +8,6 @@
   		  <a id="logout" class="squareButton" href="/nudgepad.logout" title="Logout">
   		  	Logout
   		  </a>
-  		  <a href="http://pro.nudgepad.com" id="upgrade" class="secondaryButton">
-  			  Upgrade
-  			</a>
   		<div class="clear"></div>
   		</div>
   	</div>
@@ -24,19 +21,6 @@
   	  <input type="email" id="email" tabindex="2" value="" class="nudgepad"></input>
   	  <div id="updateButton" class="nudgepad" onclick="nudgepad.apps.account.save()">
   		  Update
-  		</div>
-  		<div class="sectionLabel">
-  		  Plan Info
-  		</div>
-  		<div class="plan">
-  			<div class="selectedPlan">
-  				Basic Plan - <span class="planDescription">(Free) Up to 3 nudgepad.com domains</span>
-  			</div>
-  		</div>
-  		<div class="plan">
-  			<a href="http://pro.nudgepad.com">
-  				<div class="unselectedPlan">Pro Plan - <span class="planDescription">($10/month) Add custom domains</span></div>
-  			</a>
   		</div>
   	</div>
   </div>
@@ -124,9 +108,9 @@
   		    <div class="topBlock">Design</div>
   		    <div class="subBlock">Edit the layout and style of your site.</div>
   		  </div>
-  			<div class="appBlock" id="statsBlock" onclick="nudgepad.navigation.open('stats')">
-  		    <div class="topBlock">Stats</div>
-  		    <div class="subBlock">Track your visitors and page views.</div>
+  			<div class="appBlock" id="accountBlock" onclick="nudgepad.navigation.open('account')">
+  		    <div class="topBlock">Account</div>
+  		    <div class="subBlock">Update your email address or logout.</div>
   		  </div>
   		</div>
   		<div class="colStandard marStandard">
@@ -134,19 +118,11 @@
   		    <div class="topBlock">Develop</div>
   		    <div class="subBlock">Write code and maintain the backend.</div>
   		  </div>
-  			<div class="appBlock" id="accountBlock" onclick="nudgepad.navigation.open('account')">
-  		    <div class="topBlock">Account</div>
-  		    <div class="subBlock">Update your email address or logout.</div>
-  		  </div>
   		</div>
       <div class="colStandard">
   	  	<div class="appBlock" id="writeBlock" onclick="nudgepad.navigation.open('blog')">
   		    <div class="topBlock">Write</div>
   		    <div class="subBlock">Write new posts or update existing content.</div>
-  		  </div>
-  		  <div class="appBlock" id="formsBlock" onclick="nudgepad.navigation.open('surveys')">
-  		    <div class="topBlock">Surveys</div>
-  		    <div class="subBlock">View surveys your visitors have submitted.</div>
   		  </div>
   		</div>
   	  <div class="clear"></div>

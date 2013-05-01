@@ -11306,11 +11306,11 @@ nudgepad.on('main', function () {
     switch (menuType) {
 
       case "block":
-        result = ['block', 'rounded', 'fullx'];
+        result = ['block', 'rounded'];
         break;
 
       case "text":
-        result = ['text', 'nav', 'paragraph'];  
+        result = ['text'];  
         break;
 
       case "image":
