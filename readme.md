@@ -38,10 +38,10 @@ What Can I Build with NudgePad?
 Live NudgePad Powered Sites
 ===========================
 
-Blog: http://breckyunits.com/
-Small Business Site: http://octaviachambliss.com/
-Book Site: http://generationatheistbook.com/
-Personal Homepage: http://benzulauf.com/
+- Blog: http://breckyunits.com/
+- Small Business Site: http://octaviachambliss.com/
+- Book Site: http://generationatheistbook.com/
+- Personal Homepage: http://benzulauf.com/
 
 Requirements
 ============
