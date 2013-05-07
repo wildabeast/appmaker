@@ -11,6 +11,38 @@ Try it
 
 Try it now at http://nudgepad.com
 
+
+What Can I Build with NudgePad?
+===============================
+
+- Blogs
+- Single Page Websites
+- Clickable Prototypes
+- Personal Homepages
+- White Boards
+- Small Business Websites
+- Infographics
+- Todo Lists
+- eCards
+- Forms
+- Visualizations
+- Experiments
+- Simple Games
+- Surveys
+- Content Management Systems
+- eCommerce Stores
+- APIs
+- Presentations
+
+
+Live NudgePad Powered Sites
+===========================
+
+Blog: http://breckyunits.com/
+Small Business Site: http://octaviachambliss.com/
+Book Site: http://generationatheistbook.com/
+Personal Homepage: http://benzulauf.com/
+
 Requirements
 ============
 
