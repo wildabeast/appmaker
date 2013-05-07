@@ -39,6 +39,17 @@ What Can I Build with NudgePad?
 - MindMaps
 - Memes
 
+Who is NudgePad for?
+====================
+
+- Creatives who have lots of ideas for websites
+- Designers who want to design in the browser
+- Developers who want to collaborate with designers and users
+- Novices who want to be able to make changes to their sites
+- Students who want to build, share, and learn online
+- Teachers who want an easy tool for creating lessons
+- Organization leaders who want to enable more collaboration and sharing among their members
+- Sys admins who want a better shared hosting tool
 
 Live NudgePad Powered Sites
 ===========================
