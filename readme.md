@@ -25,17 +25,18 @@ What Can I Build with NudgePad?
 - FirefoxOS Apps
 - Infographics
 - Todo Lists
+- APIs
 - eCards
 - Forms
+- Presentations
 - Visualizations
 - Experiments
 - Simple Games
 - Surveys
 - Content Management Systems
 - eCommerce Stores
+- MindMaps
 - Memes
-- APIs
-- Presentations
 
 
 Live NudgePad Powered Sites
