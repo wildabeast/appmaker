@@ -86,10 +86,10 @@ createSiteMac ()
   
   createOwnerFile $domain $OWNEREMAIL
   cd $sitesPath$domain
-  git init >/dev/null
+#  git init >/dev/null
   echo "temp/" > .gitignore
-  git add . >/dev/null
-  git commit -am "Initial commit" >/dev/null
+#  git add . >/dev/null
+#  git commit -am "Initial commit" >/dev/null
 
 }
 

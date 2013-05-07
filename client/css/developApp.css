@@ -118,6 +118,12 @@
    display: none;
 }
 
+.nudgepad.selectable {
+  -webkit-user-select: auto;
+  -moz-user-select: text;
+  user-select: auto;
+}
+
 
 table {
     border-collapse: collapse;
