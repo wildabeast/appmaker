@@ -21,6 +21,8 @@ What Can I Build with NudgePad?
 - Personal Homepages
 - White Boards
 - Small Business Websites
+- Mobile Sites
+- FirefoxOS Apps
 - Infographics
 - Todo Lists
 - eCards
@@ -31,6 +33,7 @@ What Can I Build with NudgePad?
 - Surveys
 - Content Management Systems
 - eCommerce Stores
+- Memes
 - APIs
 - Presentations
 
