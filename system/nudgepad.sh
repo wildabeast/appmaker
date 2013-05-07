@@ -127,6 +127,11 @@ case "$1" in
   rm -rf /nudgepad/active/*
 ;;
 
+# Tool for SysAdmins to get link for someone who hasn't registered site
+'link')
+  node getOwnerLink.js $2
+;;
+
 'log')
   if [ -n "$2" ]
     then

@@ -180,7 +180,7 @@ nudgepad.emit = function (event, space) {
     return null
   
   nudgepad.socket.emit(event, space.toString(), function (data) {
-
+    console.log(data)
   })
 }
 
