@@ -294,6 +294,9 @@ eval(fs.readFileSync('online.js', 'utf8'))
 /*********** watches disk ***********/
 eval(fs.readFileSync('watchers.js', 'utf8'))
 
+/*********** export site ***********/
+eval(fs.readFileSync('export.js', 'utf8'))
+
 /*********** nudgepad.login ***********/
 eval(fs.readFileSync('login.js', 'utf8'))
 

@@ -1,3 +1,4 @@
+    <script type="text/javascript" src="/nudgepad/tests/unit/.DS_Store"></script>
     <script type="text/javascript" src="/nudgepad/tests/unit/Body.js"></script>
     <script type="text/javascript" src="/nudgepad/tests/unit/Commit.js"></script>
     <script type="text/javascript" src="/nudgepad/tests/unit/ContentEditor.js"></script>

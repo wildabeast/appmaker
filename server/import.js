@@ -1,4 +1,4 @@
-// Get file
+// Test of importing traditional HTML files
 site.get(/^\/nudgepad\.import\/(.+)$/, nudgepad.checkId, function(req, res, next) {
   
   var url = req.params[0]
@@ -8,3 +8,15 @@ site.get(/^\/nudgepad\.import\/(.+)$/, nudgepad.checkId, function(req, res, next
     res.send(response.body)
   })
 })
+
+// Import a site
+site.post('/nudgepad.import', nudgepad.checkId, function (req, res, next) {
+  var output = nudgepad.paths.temp + nudgepad.domain + '.space'
+  fs.writeFile(output, req.body.space, function (err, data) {
+    exec('space ' + output + ' ' + nudgepad.paths.site, function () {
+      res.set('Content-Type', 'text/plain')
+      res.send('Okay')
+    })
+  })
+})
+

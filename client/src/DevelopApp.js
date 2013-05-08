@@ -20,6 +20,14 @@ nudgepad.apps.develop.home = function () {
   nudgepad.apps.develop.renderExplorer()
 }
 
+nudgepad.apps.develop.import = function () {
+  nudgepad.textPrompt('Import a Site ', '', function (val) {
+    $.post('/nudgepad.import', {space : val}, function (err) {
+      nudgepad.notify('Imported. Please restart')
+    })
+  })
+}
+
 nudgepad.apps.develop.onopen = function () {
   $('.nudgepad#zip').attr('href', '/nudgepad.backup/' + nudgepad.domain + '.zip')
   if (!nudgepad.apps.develop.log)
