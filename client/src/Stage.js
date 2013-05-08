@@ -34,7 +34,7 @@ nudgepad.stage.commit = function () {
   var commit = new Space()
   commit.set('author', nudgepad.cookie.email)
   if (!diff.empty())
-    commit.set('values', diff.toString())
+    commit.set('values', new Space(diff.toString()))
   if (!diffOrder.empty())
     commit.set('order', diffOrder)
 
