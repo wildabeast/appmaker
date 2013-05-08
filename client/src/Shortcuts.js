@@ -69,8 +69,6 @@ nudgepad.bind_shortcuts = function () {
   Events.shortcut.shortcuts['shift+down'] = function (){nudgepad.stage.selection.move(0, 10)}
   Events.shortcut.shortcuts['shift+right'] = function (){nudgepad.stage.selection.move(10, 0)}
   
-  Events.shortcut.shortcuts['meta+right'] = nudgepad.stage.selection.nest
-  
   Events.shortcut.shortcuts['alt+left'] = nudgepad.stage.back
   Events.shortcut.shortcuts['alt+right'] = nudgepad.stage.forward
   

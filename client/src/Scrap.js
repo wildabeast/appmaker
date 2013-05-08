@@ -211,7 +211,17 @@ Scrap.selectOnTap =  function (event) {
   if (!$(this).is(':focus'))
     $(':focus').blur()
 
-  // If shift key is down, add to selection
+
+  // Hold meta key to nest something
+  if (nudgepad.mouse.down && nudgepad.mouse.down.metaKey) {
+    if (!$(this).hasClass('selection') && $('.selection').length) {
+      nudgepad.stage.selection.nest($(this).attr('path'))
+      return false
+    }
+  }
+  
+
+  // If shift key is not down, clear selection first
   if (!nudgepad.mouse.down || !nudgepad.mouse.down.shiftKey)
     nudgepad.stage.selection.clear()
 

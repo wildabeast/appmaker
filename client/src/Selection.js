@@ -270,11 +270,7 @@ nudgepad.stage.selection.move = function (x, y) {
   nudgepad.stage.commit()
 }
 
-nudgepad.stage.selection.nest = function () {
-  // todo: idea visual prompt
-  var path = prompt('Enter the path to nest under')
-  if (!path)
-    return false
+nudgepad.stage.selection.nest = function (path) {
   var parent = nudgepad.pages.stage.get(path)
   if (!parent)
     return false
