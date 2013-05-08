@@ -335,10 +335,12 @@ position: relative;
 }
 
 
-.nudgepadFullScreenApp #addFile {
-   background-color: #64b81f;
+.nudgepadFullScreenApp .developAppButton {
+   background-color: #333;
    height: 40px;
-   width: 120px;
+   margin-left: 10px;
+   width: 100px;
+   text-decoration: none;
    text-align: center;
    float: right;
    line-height: 40px;
@@ -347,40 +349,8 @@ position: relative;
    cursor: pointer;
 }
 
-.nudgepadFullScreenApp #getUpdates {
-   background-color: #333;
-   height: 40px;
-   margin-left: 10px;
-   width: 40px;
-   text-align: center;
-   float: right;
-   line-height: 40px;
-   color: #fff;
-   font-size: 15px;
-   cursor: pointer;
-}
-
-.nudgepadFullScreenApp #zip {
-   background-color: #333;
-   height: 40px;
-   margin-left: 10px;
-   width: 40px;
-   text-align: center;
-   float: right;
-   line-height: 40px;
-   color: #fff;
-   font-size: 15px;
-   cursor: pointer;
-}
-
-.nudgepadFullScreenApp #console {
-   background-color: #333;
-   float: right;
-   margin-left: 10px;
-}
-
-.nudgepadFullScreenApp #zip img {
-   padding-top: 12px;
+.nudgepadFullScreenApp .developAppButton:hover {
+  background-color: #000;
 }
 
 .nudgepadFullScreenApp #devToggle {
