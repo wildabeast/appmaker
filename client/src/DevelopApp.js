@@ -29,7 +29,7 @@ nudgepad.apps.develop.import = function () {
 }
 
 nudgepad.apps.develop.onopen = function () {
-  $('.nudgepad#zip').attr('href', '/nudgepad.backup/' + nudgepad.domain + '.zip')
+//  $('.nudgepad#zip').attr('href', '/nudgepad.backup/' + nudgepad.domain + '.zip')
   if (!nudgepad.apps.develop.log)
     nudgepad.apps.develop.refresh()
 }
