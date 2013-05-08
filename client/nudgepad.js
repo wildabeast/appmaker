@@ -12358,7 +12358,7 @@ nudgepad.stage.commit = function () {
   if (!diff.empty())
     commit.set('values', new Space(diff.toString()))
   if (!diffOrder.empty())
-    commit.set('order', diffOrder)
+    commit.set('order', new Space(diffOrder.toString()))
 
   nudgepad.stage.timeline.set(timestamp, commit)
   nudgepad.pages.edge = nudgepad.pages.stage.clone()

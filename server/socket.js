@@ -59,7 +59,7 @@ io.sockets.on('connection', function (socket) {
     var pageName = patch.values.timelines.keys[0]
     var page = nudgepad.site.get('pages ' + pageName)
     var commitTime = patch.get('timelines ' + pageName).keys[0]
-    patch = patch.get('timelines ' + pageName + ' ' + commitTime)
+    patch = new Space(patch.get('timelines ' + pageName + ' ' + commitTime).toString())
     if (patch.get('values')) {
       page.patch(patch.get('values'))
       console.log('pathcing values')
