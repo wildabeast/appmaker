@@ -8,7 +8,7 @@ nudgepad.livePreview = function () {
   var text_area = $('#nudgepadStyleEditorCssEditor')
   var scrap = nudgepad.livePreviewScrap
   scrap.set('style', new Space(text_area.val()))
-  scrap.element().css(scrap.get('style').values)
+  scrap.element().attr('style', '').css(scrap.get('style').values)
 }
 
 /**
