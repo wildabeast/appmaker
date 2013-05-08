@@ -12487,8 +12487,12 @@ nudgepad.stage.insert = function (space, drag, xMove, yMove, center) {
   var selectors = []
   patch.each(function (key, value) {
     level.values[key] = new Scrap(key, value)
-    level.values[key].render().element().selectMe()
-    selectors.push(level.values[key].selector())
+    var element = level.values[key].render().element()
+    // Some elemeents arenet seleectable (titles, for example)
+    if (element.length) {
+      element.selectMe()
+      selectors.push(level.values[key].selector())
+    }
   })
   
   if (center) {
