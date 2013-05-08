@@ -9414,7 +9414,7 @@ nudgepad.apps.develop.import = function () {
 }
 
 nudgepad.apps.develop.onopen = function () {
-  $('.nudgepad#zip').attr('href', '/nudgepad.backup/' + nudgepad.domain + '.zip')
+//  $('.nudgepad#zip').attr('href', '/nudgepad.backup/' + nudgepad.domain + '.zip')
   if (!nudgepad.apps.develop.log)
     nudgepad.apps.develop.refresh()
 }
@@ -11553,7 +11553,7 @@ Scrap.prototype.render = function (context) {
 }
 
 Scrap.prototype.selector = function () {
-  return '#nudgepadStageBody #' + this.path.replace(/ /g, ' #')
+  return '#nudgepadStageBody>#' + this.path.replace(/ /g, '>#')
 }
 
 /**
@@ -11611,7 +11611,17 @@ Scrap.selectOnTap =  function (event) {
   if (!$(this).is(':focus'))
     $(':focus').blur()
 
-  // If shift key is down, add to selection
+
+  // Hold meta key to nest something
+  if (nudgepad.mouse.down && nudgepad.mouse.down.metaKey) {
+    if (!$(this).hasClass('selection') && $('.selection').length) {
+      nudgepad.stage.selection.nest($(this).attr('path'))
+      return false
+    }
+  }
+  
+
+  // If shift key is not down, clear selection first
   if (!nudgepad.mouse.down || !nudgepad.mouse.down.shiftKey)
     nudgepad.stage.selection.clear()
 
@@ -12039,11 +12049,7 @@ nudgepad.stage.selection.move = function (x, y) {
   nudgepad.stage.commit()
 }
 
-nudgepad.stage.selection.nest = function () {
-  // todo: idea visual prompt
-  var path = prompt('Enter the path to nest under')
-  if (!path)
-    return false
+nudgepad.stage.selection.nest = function (path) {
   var parent = nudgepad.pages.stage.get(path)
   if (!parent)
     return false
@@ -12252,8 +12258,6 @@ nudgepad.bind_shortcuts = function () {
   Events.shortcut.shortcuts['shift+left'] = function (){nudgepad.stage.selection.move(-10, 0)}
   Events.shortcut.shortcuts['shift+down'] = function (){nudgepad.stage.selection.move(0, 10)}
   Events.shortcut.shortcuts['shift+right'] = function (){nudgepad.stage.selection.move(10, 0)}
-  
-  Events.shortcut.shortcuts['meta+right'] = nudgepad.stage.selection.nest
   
   Events.shortcut.shortcuts['alt+left'] = nudgepad.stage.back
   Events.shortcut.shortcuts['alt+right'] = nudgepad.stage.forward
