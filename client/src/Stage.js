@@ -389,6 +389,11 @@ nudgepad.stage.setTimeline = function (name) {
   
 }
 
+nudgepad.stage.toggleView = function () {
+  $('#nudgepadStage').toggleClass('nudgepadStageEdgeView')
+  $('#nudgepadStageBody').toggleClass('nudgepadStageBodyEdgeView')
+}
+
 nudgepad.stage.undo = function () {
   nudgepad.stage.goto(nudgepad.stage.version - 1)
 }

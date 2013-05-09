@@ -15,18 +15,17 @@
 #nudgepadStageBottomPadding {
   height: 60px;
 }
-/*
 
-#nudgepadStage {
+
+.nudgepadStageEdgeView {
   background-color: rgb(233, 233, 233);
   padding: 10px;
 }
 
-#nudgepadStageBody {
+.nudgepadStageBodyEdgeView {
   margin: 0 auto;
   background: white;
   box-shadow: 1px 1px 5px black;
   width: 80%;
 }
 
-*/
