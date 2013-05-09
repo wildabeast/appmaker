@@ -206,7 +206,7 @@
   		  <div id="publishButton" class="nudgepad" onclick="nudgepad.apps.blog.savePost()">Publish</div>
   	    <div id="deleteButton" class="nudgepad" onclick="nudgepad.apps.blog.deletePost()">Delete</div>
   	    <div class="clear"></div>
-  	    <div id="permalink" class="nudgepad" onclick="window.open($(this).val(), 'published')"></div>
+  	    <div id="permalink" class="nudgepad" onclick="window.open($(this).attr('value'), 'published')"></div>
   	  </div>
     </div>
   </div>

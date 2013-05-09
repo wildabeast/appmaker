@@ -23,10 +23,9 @@ site.get('*', function (req, res, next) {
   // This should be fast and not resource intensive as we are just creating
   // pointers by reference. We could speed it up if its a bottleneck.
   var context = {}
-  context.nudgepad = {}
-  context.nudgepad.site = nudgepad.site
-  context.nudgepad.request = req
-  context.nudgepad.post = post.values
+  context.site = nudgepad.site
+  context.request = req
+  context.post = post.values
   
   return res.send(view.toHtml(context))
   

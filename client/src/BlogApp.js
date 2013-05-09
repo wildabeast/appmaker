@@ -1,11 +1,10 @@
 nudgepad.apps.blog = new App('blog')
 
 // Default theme
-/*
 nudgepad.apps.blog.blankTheme = new Space({
  "title": {
   "type": "title",
-  "content": "{{request.post.title Post Title}}"
+  "content": "{{post.title Post Title}}"
  },
  "stylesheet": {
   "type": "link",
@@ -31,7 +30,7 @@ nudgepad.apps.blog.blankTheme = new Space({
      "text-decoration": "none",
      "font-style": "normal"
     },
-    "content": "{{request.post.title Post Title}}"
+    "content": "{{post.title Post Title}}"
    },
    "block14": {
     "style": {
@@ -45,16 +44,15 @@ nudgepad.apps.blog.blankTheme = new Space({
      "font-style": "normal",
      "margin-top": "10px"
     },
-    "content": "{{request.post.content Lorem ipsum foobar }}"
+    "content": "{{post.content Lorem ipsum foobar }}"
    }
   }
  }
 })
-*/
 
 nudgepad.apps.blog.createPost = function () {
   $('.nudgepad#content,.nudgepad#title').val('')
-  $('.nudgepad#advanced').val('timestamp ' + new Date().getTime() + '\ntemplate blog_theme')
+  $('.nudgepad#advanced').val('timestamp ' + new Date().getTime() + '\ntemplate blog')
   $('.nudgepad#permalink').attr('value', '')
   $('.nudgepad#title').focus()
   nudgepad.apps.blog.activePost = null
@@ -96,9 +94,23 @@ nudgepad.apps.blog.editPost = function (name) {
   
 }
 
+// Ensures site has a blog theme before posting
+nudgepad.apps.blog.initialize = function () {
+  
+  if (nudgepad.site.get('pages blog'))
+    return true
+  var patch = new Space()
+  patch.set('pages blog', nudgepad.apps.blog.blankTheme)
+  nudgepad.emit('patch', patch.toString())
+  nudgepad.site.set('pages blog', nudgepad.apps.blog.blankTheme)
+  
+  nudgepad.pages.updateTabs()// todo: delete this
+}
+
 nudgepad.apps.blog.activePost = null
 
 nudgepad.apps.blog.onopen = function () {
+  nudgepad.apps.blog.initialize()
   $('.nudgepad#posts').html('')
   if (!nudgepad.site.get('posts'))
     return true
