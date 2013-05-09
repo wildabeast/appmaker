@@ -9074,6 +9074,58 @@ nudgepad.on('main', function () {
 })
 nudgepad.apps.blog = new App('blog')
 
+// Default theme
+/*
+nudgepad.apps.blog.blankTheme = new Space({
+ "title": {
+  "type": "title",
+  "content": "{{request.post.title Post Title}}"
+ },
+ "stylesheet": {
+  "type": "link",
+  "rel": "stylesheet",
+  "href": "site.css"
+ },
+ "container": {
+  "style": {
+   "width": "90%",
+   "max-width": "800px",
+   "height": "100%",
+   "margin": "0 auto"
+  },
+  "scraps": {
+   "block1": {
+    "style": {
+     "height": "auto",
+     "font-family": "Open Sans",
+     "width": "auto",
+     "font-size": "48px",
+     "font-weight": "normal",
+     "color": "#333",
+     "text-decoration": "none",
+     "font-style": "normal"
+    },
+    "content": "{{request.post.title Post Title}}"
+   },
+   "block14": {
+    "style": {
+     "height": "auto",
+     "font-family": "Open Sans",
+     "width": "auto",
+     "font-size": "18px",
+     "font-weight": "normal",
+     "color": "#333",
+     "text-decoration": "none",
+     "font-style": "normal",
+     "margin-top": "10px"
+    },
+    "content": "{{request.post.content Lorem ipsum foobar }}"
+   }
+  }
+ }
+})
+*/
+
 nudgepad.apps.blog.createPost = function () {
   $('.nudgepad#content,.nudgepad#title').val('')
   $('.nudgepad#advanced').val('timestamp ' + new Date().getTime() + '\ntemplate blog_theme')
@@ -9810,8 +9862,8 @@ function Grid (obj) {
 Grid.prototype.addDynamicPoints = function () {
 
   var grid = this
-  // Cap grid at 20 elements for now
-  if ($('#nudgepadStageBody').children('.scrap:not(.selection)').length > 20)
+  // Cap grid at 200 elements for now
+  if ($('#nudgepadStageBody').children('.scrap:not(.selection)').length > 200)
     return true
   $('#nudgepadStageBody').children('.scrap:not(.selection)').each(function(){
     grid.addPoints($(this).scrap().selector())

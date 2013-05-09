@@ -44,8 +44,8 @@ function Grid (obj) {
 Grid.prototype.addDynamicPoints = function () {
 
   var grid = this
-  // Cap grid at 20 elements for now
-  if ($('#nudgepadStageBody').children('.scrap:not(.selection)').length > 20)
+  // Cap grid at 200 elements for now
+  if ($('#nudgepadStageBody').children('.scrap:not(.selection)').length > 200)
     return true
   $('#nudgepadStageBody').children('.scrap:not(.selection)').each(function(){
     grid.addPoints($(this).scrap().selector())
