@@ -50,6 +50,17 @@ nudgepad.bind_shortcuts = function () {
   Events.shortcut.shortcuts['ctrl+i'] = contextMenuToggle
   Events.shortcut.shortcuts['meta+i'] = contextMenuToggle
   
+
+  Events.shortcut.shortcuts['shift+space'] = function () {
+    var command = prompt('Enter a command')
+    if (!command)
+      return false
+    if (command.match(/^(w|width) (.*)/)) {
+      var match = command.match(/^(w|width) (.*)/)
+      nudgepad.stage.selection.css('width ' + match[2])
+    }
+  }
+  
   Events.shortcut.shortcuts['meta+shift+m'] = function () {nudgepad.explorer.edit('/public/manifest.webapp')}
   
   Events.shortcut.shortcuts['meta+backspace'] = nudgepad.pages.trash
