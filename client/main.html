@@ -193,6 +193,19 @@
     <div id="nudgepadTabs"><span>Index</span></div>
     
   </div>
+  <div id="pagesContextMenu">
+    <a onclick="$('#pagesContextMenu').hide()">Close</a>
+    <div class="contextMenuSeparator">&nbsp</div>
+    <a onclick="$('.nudgepadTimeline').toggle()">Toggle Timeline</a>
+    <a onclick="nudgepad.stage.toggleView()">Toggle Edge View</a>
+    <div class="contextMenuSeparator">&nbsp</div>
+    <a onclick="nudgepad.stage.editSource()">Edit Page Source</a>
+    <div class="contextMenuSeparator">&nbsp</div>
+    <a onclick="nudgepad.stage.selection.renameScraps()">Rename Selected</a>
+    <div class="contextMenuSeparator">&nbsp</div>
+    <a onclick="nudgepad.importPrompt()">Import Url</a>
+  </div>
+  
   <div id="nudgepadRibbon" class="nudgepad">
   	<div id="ribbonUploadButton" class="imageDroppableOptions"><span>Upload</span><iframe src="/nudgepad.images.upload" allowtransparency="true" frameborder="0px" width="100%" height="100%" scrolling="no" style="position: absolute; bottom: 0px; left: 0px;" class="image_upload_iframe"></iframe></div>
     <div id="droppablesList"></div>

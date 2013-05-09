@@ -29,18 +29,26 @@ nudgepad.bind_shortcuts = function () {
   
   Events.shortcut.shortcuts['meta+shift+s'] = nudgepad.edit_settings
   
-  Events.shortcut.shortcuts['delete'] = function () { nudgepad.stage.selection.remove(); nudgepad.stage.commit() }
-  Events.shortcut.shortcuts['backspace'] = function () { nudgepad.stage.selection.remove(); nudgepad.stage.commit() }
+  var deleteMethod = function () { nudgepad.stage.selection.remove(); nudgepad.stage.commit() }
+  Events.shortcut.shortcuts['delete'] = deleteMethod
+  Events.shortcut.shortcuts['backspace'] = deleteMethod
+  
   Events.shortcut.shortcuts['ctrl+d'] = nudgepad.stage.selection.duplicate
   Events.shortcut.shortcuts['meta+d'] = nudgepad.stage.selection.duplicate
-  Events.shortcut.shortcuts['ctrl+u'] = nudgepad.pages.editSource
-  Events.shortcut.shortcuts['meta+u'] = nudgepad.pages.editSource
-  Events.shortcut.shortcuts['meta+e'] = nudgepad.pages.editProperty
   
-  Events.shortcut.shortcuts['meta+i'] = nudgepad.stage.selection.renameScraps
+  var editSourceToggle = function () { ($('.selection').length ? nudgepad.stage.selection.editSource() : nudgepad.stage.editSource())}
+  Events.shortcut.shortcuts['ctrl+u'] = editSourceToggle
+  Events.shortcut.shortcuts['meta+u'] = editSourceToggle
+  
+  Events.shortcut.shortcuts['meta+e'] = nudgepad.stage.selection.editProperty
+  
+  
+  
   Events.shortcut.shortcuts['meta+l'] = nudgepad.stage.selection.editLoop
   
-  Events.shortcut.shortcuts['ctrl+i'] = nudgepad.importPrompt
+  var contextMenuToggle = function () {$('#pagesContextMenu').toggle()}
+  Events.shortcut.shortcuts['ctrl+i'] = contextMenuToggle
+  Events.shortcut.shortcuts['meta+i'] = contextMenuToggle
   
   Events.shortcut.shortcuts['meta+shift+m'] = function () {nudgepad.explorer.edit('/public/manifest.webapp')}
   
@@ -60,9 +68,7 @@ nudgepad.bind_shortcuts = function () {
   Events.shortcut.shortcuts['down'] = function (){nudgepad.stage.selection.move(0, 1)}
   Events.shortcut.shortcuts['right'] = function (){nudgepad.stage.selection.move(1, 0)}
   
-  Events.shortcut.shortcuts['shift+t'] = function (){
-    $('.nudgepadTimeline').toggle()
-  }
+  Events.shortcut.shortcuts['shift+t'] = function (){ $('.nudgepadTimeline').toggle()}
   
   Events.shortcut.shortcuts['shift+up'] = function (){nudgepad.stage.selection.move(0, -10)}
   Events.shortcut.shortcuts['shift+left'] = function (){nudgepad.stage.selection.move(-10, 0)}

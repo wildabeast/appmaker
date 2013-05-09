@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="/nudgepad/css/notify.css" type="text/css"/>
     <link rel="stylesheet" href="/nudgepad/css/outlineFix.css" type="text/css"/>
     <link rel="stylesheet" href="/nudgepad/css/pagesBar.css" type="text/css"/>
+    <link rel="stylesheet" href="/nudgepad/css/pagesContextMenu.css" type="text/css"/>
     <link rel="stylesheet" href="/nudgepad/css/range.css" type="text/css"/>
     <link rel="stylesheet" href="/nudgepad/css/ribbonFrame.css" type="text/css"/>
     <link rel="stylesheet" href="/nudgepad/css/scrap.css" type="text/css"/>

@@ -900,6 +900,33 @@ td {
    opacity: .2;
 }
 
+#pagesContextMenu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 4000;
+  display: none;
+  cursor: pointer;
+  background-color: #333;
+  font-size: 14px;
+  color: #ccc;
+  box-shadow: 0px 1px 3px rgba(0,0,0,.6);
+}
+
+#pagesContextMenu a {
+  padding: 6px;
+  border-bottom: 1px solid #333;
+  display: block;
+}
+
+.contextMenuSeparator {
+  height: 10px;
+  border-bottom: 1px solid #aaa;
+}
+
+#pagesContextMenu a:hover {
+  background-color: #2a2a2a;
+}
 .nudgepadRange {
   -webkit-appearance:none;
   height: 13px;
@@ -1624,21 +1651,20 @@ License: MIT
 #nudgepadStageBottomPadding {
   height: 60px;
 }
-/*
 
-#nudgepadStage {
+
+.nudgepadStageEdgeView {
   background-color: rgb(233, 233, 233);
   padding: 10px;
 }
 
-#nudgepadStageBody {
+.nudgepadStageBodyEdgeView {
   margin: 0 auto;
   background: white;
   box-shadow: 1px 1px 5px black;
   width: 80%;
 }
 
-*/
 
 #nudgepadStyleEditor {
   position: fixed;

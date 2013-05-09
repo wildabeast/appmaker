@@ -220,6 +220,22 @@ nudgepad.stage.selection.editLoop = function () {
   nudgepad.stage.commit()
 }
 
+nudgepad.stage.selection.editProperty = function () {
+  
+  var scrap = $('.selection').scrap()
+  
+  var prop = prompt('What property do you want to edit?', '')
+  if (!prop)
+    return false
+  
+  var value = scrap.get(prop)
+  nudgepad.textPrompt('Enter new value...', value.toString(), function (val) {
+      scrap.set(prop, val)
+      nudgepad.stage.commit()
+      nudgepad.stage.open(nudgepad.stage.activePage)
+  })
+}
+
 /**
  * Advances position_index, advanced position.
  */
@@ -335,7 +351,7 @@ nudgepad.stage.selection.renameScraps = function () {
     var newId = prompt('Renaming block ' + (index + 1) + '/' + todo + '. Enter a new ID', scrap.id)
     
     // If they didnt change name continue
-    if (newId == id) {
+    if (newId == scrap.id) {
       $(this).removeClass('nudgepadHighlightedScrap')
       return true
     }

@@ -92,6 +92,17 @@ nudgepad.stage.dragAndDrop = function (scrap) {
 }
 
 /**
+ * Advances position_index, advanced position.
+ */
+nudgepad.stage.editSource = function () {
+  nudgepad.textPrompt('Enter code...', nudgepad.pages.stage.toString(), function (val) {
+    nudgepad.pages.stage = new Space(val)
+    nudgepad.stage.commit()
+    nudgepad.stage.open(nudgepad.stage.activePage)
+  })
+}
+
+/**
  * Deletes all scraps from the page and DOM.
  */
 nudgepad.stage.erase = function () {

@@ -8,7 +8,6 @@
     <script type="text/javascript" src="/nudgepad/src/DevelopApp.js"></script>
     <script type="text/javascript" src="/nudgepad/src/Droppables.js"></script>
     <script type="text/javascript" src="/nudgepad/src/EditHandle.js"></script>
-    <script type="text/javascript" src="/nudgepad/src/EditSource.js"></script>
     <script type="text/javascript" src="/nudgepad/src/EmailPrompt.js"></script>
     <script type="text/javascript" src="/nudgepad/src/Explorer.js"></script>
     <script type="text/javascript" src="/nudgepad/src/Feedback.js"></script>

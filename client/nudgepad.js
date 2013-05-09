@@ -9608,45 +9608,6 @@ EditHandle.update = function () {
   })
 }
 
-/**
- * Advances position_index, advanced position.
- */
-nudgepad.pages.editPageSource = function () {
-  nudgepad.textPrompt('Enter code...', nudgepad.pages.stage.toString(), function (val) {
-    nudgepad.pages.stage = new Space(val)
-    nudgepad.stage.commit()
-    nudgepad.stage.open(nudgepad.stage.activePage)
-  })
-}
-
-/**
- * Advances position_index, advanced position.
- */
-nudgepad.pages.editProperty = function () {
-  
-  var scrap = $('.selection').scrap()
-  
-  var prop = prompt('What property do you want to edit?', '')
-  if (!prop)
-    return false
-  
-  var value = scrap.get(prop)
-  nudgepad.textPrompt('Enter new value...', value.toString(), function (val) {
-      scrap.set(prop, val)
-      nudgepad.stage.commit()
-      nudgepad.stage.open(nudgepad.stage.activePage)
-  })
-}
-
-/**
- * Advances position_index, advanced position.
- */
-nudgepad.pages.editSource = function () {
-  if ($('.selection').length)
-    nudgepad.stage.selection.editSource()
-  else
-    nudgepad.pages.editPageSource()
-}
 nudgepad.emailPrompt = function () {
   
   var message = new Space('to \nsubject \nmessage \n')
@@ -12063,6 +12024,22 @@ nudgepad.stage.selection.editLoop = function () {
   nudgepad.stage.commit()
 }
 
+nudgepad.stage.selection.editProperty = function () {
+  
+  var scrap = $('.selection').scrap()
+  
+  var prop = prompt('What property do you want to edit?', '')
+  if (!prop)
+    return false
+  
+  var value = scrap.get(prop)
+  nudgepad.textPrompt('Enter new value...', value.toString(), function (val) {
+      scrap.set(prop, val)
+      nudgepad.stage.commit()
+      nudgepad.stage.open(nudgepad.stage.activePage)
+  })
+}
+
 /**
  * Advances position_index, advanced position.
  */
@@ -12178,7 +12155,7 @@ nudgepad.stage.selection.renameScraps = function () {
     var newId = prompt('Renaming block ' + (index + 1) + '/' + todo + '. Enter a new ID', scrap.id)
     
     // If they didnt change name continue
-    if (newId == id) {
+    if (newId == scrap.id) {
       $(this).removeClass('nudgepadHighlightedScrap')
       return true
     }
@@ -12283,18 +12260,26 @@ nudgepad.bind_shortcuts = function () {
   
   Events.shortcut.shortcuts['meta+shift+s'] = nudgepad.edit_settings
   
-  Events.shortcut.shortcuts['delete'] = function () { nudgepad.stage.selection.remove(); nudgepad.stage.commit() }
-  Events.shortcut.shortcuts['backspace'] = function () { nudgepad.stage.selection.remove(); nudgepad.stage.commit() }
+  var deleteMethod = function () { nudgepad.stage.selection.remove(); nudgepad.stage.commit() }
+  Events.shortcut.shortcuts['delete'] = deleteMethod
+  Events.shortcut.shortcuts['backspace'] = deleteMethod
+  
   Events.shortcut.shortcuts['ctrl+d'] = nudgepad.stage.selection.duplicate
   Events.shortcut.shortcuts['meta+d'] = nudgepad.stage.selection.duplicate
-  Events.shortcut.shortcuts['ctrl+u'] = nudgepad.pages.editSource
-  Events.shortcut.shortcuts['meta+u'] = nudgepad.pages.editSource
-  Events.shortcut.shortcuts['meta+e'] = nudgepad.pages.editProperty
   
-  Events.shortcut.shortcuts['meta+i'] = nudgepad.stage.selection.renameScraps
+  var editSourceToggle = function () { ($('.selection').length ? nudgepad.stage.selection.editSource() : nudgepad.stage.editSource())}
+  Events.shortcut.shortcuts['ctrl+u'] = editSourceToggle
+  Events.shortcut.shortcuts['meta+u'] = editSourceToggle
+  
+  Events.shortcut.shortcuts['meta+e'] = nudgepad.stage.selection.editProperty
+  
+  
+  
   Events.shortcut.shortcuts['meta+l'] = nudgepad.stage.selection.editLoop
   
-  Events.shortcut.shortcuts['ctrl+i'] = nudgepad.importPrompt
+  var contextMenuToggle = function () {$('#pagesContextMenu').toggle()}
+  Events.shortcut.shortcuts['ctrl+i'] = contextMenuToggle
+  Events.shortcut.shortcuts['meta+i'] = contextMenuToggle
   
   Events.shortcut.shortcuts['meta+shift+m'] = function () {nudgepad.explorer.edit('/public/manifest.webapp')}
   
@@ -12314,9 +12299,7 @@ nudgepad.bind_shortcuts = function () {
   Events.shortcut.shortcuts['down'] = function (){nudgepad.stage.selection.move(0, 1)}
   Events.shortcut.shortcuts['right'] = function (){nudgepad.stage.selection.move(1, 0)}
   
-  Events.shortcut.shortcuts['shift+t'] = function (){
-    $('.nudgepadTimeline').toggle()
-  }
+  Events.shortcut.shortcuts['shift+t'] = function (){ $('.nudgepadTimeline').toggle()}
   
   Events.shortcut.shortcuts['shift+up'] = function (){nudgepad.stage.selection.move(0, -10)}
   Events.shortcut.shortcuts['shift+left'] = function (){nudgepad.stage.selection.move(-10, 0)}
@@ -12475,6 +12458,17 @@ nudgepad.stage.dragAndDrop = function (scrap) {
   var y = nudgepad.mouse.move.pageY - halfHeight + bodyScroll
 
   nudgepad.stage.insert(scrap, true, left, y)
+}
+
+/**
+ * Advances position_index, advanced position.
+ */
+nudgepad.stage.editSource = function () {
+  nudgepad.textPrompt('Enter code...', nudgepad.pages.stage.toString(), function (val) {
+    nudgepad.pages.stage = new Space(val)
+    nudgepad.stage.commit()
+    nudgepad.stage.open(nudgepad.stage.activePage)
+  })
 }
 
 /**
@@ -12773,6 +12767,11 @@ nudgepad.stage.setTimeline = function (name) {
   
   nudgepad.stage.timeline = nudgepad.site.get('timelines ' + name)
   
+}
+
+nudgepad.stage.toggleView = function () {
+  $('#nudgepadStage').toggleClass('nudgepadStageEdgeView')
+  $('#nudgepadStageBody').toggleClass('nudgepadStageBodyEdgeView')
 }
 
 nudgepad.stage.undo = function () {
