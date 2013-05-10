@@ -24,12 +24,13 @@ nudgepad.pages.selectBox.clear = function () {
   
   // select every visible block thats entirely within the rectangle
   var offsetLeft = $('#nudgepadStageBody').offset().left
+  var offsetTop = $('#nudgepadStageBody').offset().top
   $('#nudgepadStageBody .scrap:visible').each(function () {
     
     var l_left = $(this).left() + offsetLeft,
-        l_top = $(this).top(),
+        l_top = $(this).top() + offsetTop,
         l_right = $(this).right() + offsetLeft,
-        l_bottom = $(this).bottom()
+        l_bottom = $(this).bottom() + offsetTop
     if ( left <= l_left && right >= l_right && _top <= l_top && bottom >= l_bottom) {
       $(this).selectMe()
     }

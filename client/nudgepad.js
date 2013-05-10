@@ -9916,7 +9916,7 @@ Grid.prototype.create = function () {
   if (this.snap_to_container) {
     // We create these in specific order so that the bigger scraps override the little ones.
     // body 0,0
-    this.addPoint(0, 0, '#nudgepadStageBody')
+    this.addPoint(0, $('#nudgepadStageBody').top(), '#nudgepadStageBody')
     this.addPoint($('#nudgepadStageBody').left(), 0, '#nudgepadStageBody')
     this.addPoint($('#nudgepadStageBody').center(), 0, '#nudgepadStageBody')
     this.addPoint($('#nudgepadStageBody').right(), 0, '#nudgepadStageBody')
@@ -10586,7 +10586,8 @@ nudgepad.MoveHandle.selectTopScrap = function () {
 
   // get element at point
   var offsetLeft = $('#nudgepadStageBody').offset().left
-  var element = $.topDiv('.scrap:visible', nudgepad.mouse.down.pageX - offsetLeft, nudgepad.mouse.down.pageY + nudgepad.stage.scrollTop())
+  var offsetTop = $('#nudgepadStageBody').offset().top
+  var element = $.topDiv('.scrap:visible', nudgepad.mouse.down.pageX - offsetLeft, nudgepad.mouse.down.pageY - offsetTop + nudgepad.stage.scrollTop())
   // if a narrow div and no element underneath, return
   if (!element)
     return true
@@ -11234,9 +11235,11 @@ nudgepad.pen.draw = function (event) {
   if ($.isOnScrollbar(nudgepad.mouse.down.clientX, nudgepad.mouse.down.clientY))
     return true
   
-  var offsetLeft = 0 // Math.round($('#container').offset().left)
+  var offsetLeft = $('#nudgepadStageBody').offset().left
+  var offsetTop = $('#nudgepadStageBody').offset().top
   var x = nudgepad.mouse.down.pageX - offsetLeft
-  var scraps = new Space().set('container', new Space("style\n position absolute\n left " + x + "px\n top " + nudgepad.mouse.down.pageY + "px\n width 1px\n height 1px\n"))
+  var y = nudgepad.mouse.down.pageY - offsetTop
+  var scraps = new Space().set('container', new Space("style\n position absolute\n left " + x + "px\n top " + y + "px\n width 1px\n height 1px\n"))
   var selector = nudgepad.stage.insert(scraps)[0]
   var id = $(selector).scrap().id
   console.log(id)
@@ -11735,12 +11738,13 @@ nudgepad.pages.selectBox.clear = function () {
   
   // select every visible block thats entirely within the rectangle
   var offsetLeft = $('#nudgepadStageBody').offset().left
+  var offsetTop = $('#nudgepadStageBody').offset().top
   $('#nudgepadStageBody .scrap:visible').each(function () {
     
     var l_left = $(this).left() + offsetLeft,
-        l_top = $(this).top(),
+        l_top = $(this).top() + offsetTop,
         l_right = $(this).right() + offsetLeft,
-        l_bottom = $(this).bottom()
+        l_bottom = $(this).bottom() + offsetTop
     if ( left <= l_left && right >= l_right && _top <= l_top && bottom >= l_bottom) {
       $(this).selectMe()
     }
@@ -12280,6 +12284,17 @@ nudgepad.bind_shortcuts = function () {
   var contextMenuToggle = function () {$('#pagesContextMenu').toggle()}
   Events.shortcut.shortcuts['ctrl+i'] = contextMenuToggle
   Events.shortcut.shortcuts['meta+i'] = contextMenuToggle
+  
+
+  Events.shortcut.shortcuts['shift+space'] = function () {
+    var command = prompt('Enter a command')
+    if (!command)
+      return false
+    if (command.match(/^(w|width) (.*)/)) {
+      var match = command.match(/^(w|width) (.*)/)
+      nudgepad.stage.selection.css('width ' + match[2])
+    }
+  }
   
   Events.shortcut.shortcuts['meta+shift+m'] = function () {nudgepad.explorer.edit('/public/manifest.webapp')}
   

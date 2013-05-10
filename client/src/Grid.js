@@ -125,7 +125,7 @@ Grid.prototype.create = function () {
   if (this.snap_to_container) {
     // We create these in specific order so that the bigger scraps override the little ones.
     // body 0,0
-    this.addPoint(0, 0, '#nudgepadStageBody')
+    this.addPoint(0, $('#nudgepadStageBody').top(), '#nudgepadStageBody')
     this.addPoint($('#nudgepadStageBody').left(), 0, '#nudgepadStageBody')
     this.addPoint($('#nudgepadStageBody').center(), 0, '#nudgepadStageBody')
     this.addPoint($('#nudgepadStageBody').right(), 0, '#nudgepadStageBody')

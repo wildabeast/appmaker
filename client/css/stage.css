@@ -1,6 +1,5 @@
 #nudgepadStage {
   position: relative;
-  width: 100%;
   height: 637px;
   overflow-y: scroll;
   overflow-x: hidden;
@@ -8,8 +7,13 @@
   background-attachment: local;
 }
 
+#nudgepadStageFullView {
+  width: 100%;
+}
+
 #nudgepadStageBody {
   min-height: 1000px;
+  position: relative;
 }
 
 #nudgepadStageBottomPadding {
@@ -19,13 +23,13 @@
 
 .nudgepadStageEdgeView {
   background-color: rgb(233, 233, 233);
-  padding: 10px;
+  padding: 5%;
+  width: 90%;
 }
 
 .nudgepadStageBodyEdgeView {
   margin: 0 auto;
   background: white;
   box-shadow: 1px 1px 5px black;
-  width: 80%;
 }
 

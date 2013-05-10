@@ -13,9 +13,11 @@ nudgepad.pen.draw = function (event) {
   if ($.isOnScrollbar(nudgepad.mouse.down.clientX, nudgepad.mouse.down.clientY))
     return true
   
-  var offsetLeft = 0 // Math.round($('#container').offset().left)
+  var offsetLeft = $('#nudgepadStageBody').offset().left
+  var offsetTop = $('#nudgepadStageBody').offset().top
   var x = nudgepad.mouse.down.pageX - offsetLeft
-  var scraps = new Space().set('container', new Space("style\n position absolute\n left " + x + "px\n top " + nudgepad.mouse.down.pageY + "px\n width 1px\n height 1px\n"))
+  var y = nudgepad.mouse.down.pageY - offsetTop
+  var scraps = new Space().set('container', new Space("style\n position absolute\n left " + x + "px\n top " + y + "px\n width 1px\n height 1px\n"))
   var selector = nudgepad.stage.insert(scraps)[0]
   var id = $(selector).scrap().id
   console.log(id)

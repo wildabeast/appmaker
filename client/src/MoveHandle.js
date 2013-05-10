@@ -58,7 +58,8 @@ nudgepad.MoveHandle.selectTopScrap = function () {
 
   // get element at point
   var offsetLeft = $('#nudgepadStageBody').offset().left
-  var element = $.topDiv('.scrap:visible', nudgepad.mouse.down.pageX - offsetLeft, nudgepad.mouse.down.pageY + nudgepad.stage.scrollTop())
+  var offsetTop = $('#nudgepadStageBody').offset().top
+  var element = $.topDiv('.scrap:visible', nudgepad.mouse.down.pageX - offsetLeft, nudgepad.mouse.down.pageY - offsetTop + nudgepad.stage.scrollTop())
   // if a narrow div and no element underneath, return
   if (!element)
     return true
