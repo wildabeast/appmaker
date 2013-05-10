@@ -12868,6 +12868,7 @@ nudgepad.StretchHandle.create = function (scrap, row, column, fixed) {
   div.on("slideend", nudgepad.StretchHandle.slideend)
   div.on("tap", nudgepad.StretchHandle.tap)
   div.on("update", nudgepad.StretchHandle.update)
+  div.on("dblclick", nudgepad.StretchHandle.dblclick)
   div.trigger("update")
 }
 
@@ -12992,6 +12993,31 @@ nudgepad.StretchHandle.slidestart = function (event) {
     }).html(position).show()
   
   return false
+}
+
+
+nudgepad.StretchHandle.dblclick = function () {
+  
+  var owner = $(this).owner(),
+      row = $(this).data().row,
+      column = $(this).data().column
+  
+  // Get the scrap we are stretching
+  var scrap = owner.scrap()
+  
+  if (column === 'right')
+    scrap.set('style width', '100%')
+  if (column === 'left')
+    scrap.set('style left', '0')
+  if (row === 'top')
+    scrap.set('style top', '0')
+  if (row === 'bottom')
+    scrap.set('style height', '100%')
+
+  // Apply the style to the dom element
+  owner.css(scrap.values.style.values)
+  $('.' + scrap.id + '_handle').trigger('update').show()
+  nudgepad.stage.commit()
 }
 
 /**
