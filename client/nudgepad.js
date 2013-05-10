@@ -12520,9 +12520,9 @@ nudgepad.stage.goto = function (version) {
     var patch = nudgepad.stage.timeline.values[timestamp].values.values
     var orderPatch = nudgepad.stage.timeline.values[timestamp].values.order
     if (patch)
-      nudgepad.pages.stage.patch(patch)
+      nudgepad.pages.stage.patch(patch.toString())
     if (orderPatch)
-      nudgepad.pages.stage.patchOrder(orderPatch)
+      nudgepad.pages.stage.patchOrder(orderPatch.toString())
     nudgepad.stage.version++
   }
   nudgepad.stage.updateTimeline()
