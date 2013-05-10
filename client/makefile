@@ -37,10 +37,6 @@ scraps:
 	cp ~/scraps/scraps.min.js lib/scraps.min.js
 	cp ~/scraps/compiler_workaround.js lib/compiler_workaround.js
 
-sides:
-	cp ~/sides/sides.js lib/sides.js
-
-
 test:
 	open http://$(USER)/nudgepad/tests/main.dev.html
 

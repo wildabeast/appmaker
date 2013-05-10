@@ -13,27 +13,32 @@ nudgepad.pages.selectBox.clear = function () {
   if ($('#nudgepadSelectBox').length ==0)
     return
   
-  nudgepad.feedback.record('used select box')
+  var selectBoxDiv = $('#nudgepadSelectBox')
+  var box = {}
+  box.left = selectBoxDiv.offset().left,
+  box.right = selectBoxDiv.offset().left + selectBoxDiv.outerWidth(),
+  box.top = selectBoxDiv.offset().top,
+  box.bottom = selectBoxDiv.offset().top + selectBoxDiv.outerHeight()
   
-  var s = $('#nudgepadSelectBox'),
-      left = s.left(),
-      right = s.right(),
-      _top = s.top() + nudgepad.stage.scrollTop(),
-      bottom = s.bottom() + nudgepad.stage.scrollTop()
   nudgepad.stage.selection.clear()
   
   // select every visible block thats entirely within the rectangle
-  var offsetLeft = $('#nudgepadStageBody').offset().left
-  var offsetTop = $('#nudgepadStageBody').offset().top
   $('#nudgepadStageBody .scrap:visible').each(function () {
+    var el = $(this)
+    if (el.offset().left < box.left)
+      return true
     
-    var l_left = $(this).left() + offsetLeft,
-        l_top = $(this).top() + offsetTop,
-        l_right = $(this).right() + offsetLeft,
-        l_bottom = $(this).bottom() + offsetTop
-    if ( left <= l_left && right >= l_right && _top <= l_top && bottom >= l_bottom) {
-      $(this).selectMe()
-    }
+    if ((el.offset().left + el.outerWidth()) > box.right)
+      return true
+    
+    if (el.offset().top < box.top)
+      return true
+    
+    if ((el.offset().top + el.outerHeight()) > box.bottom)
+      return true
+    
+    // Yay! The select box completely surrounds me.
+    $(this).selectMe()
   })
   $('#nudgepadSelectBox').remove()
   // For now, to prevent bugs, we prevent scrolling while select is happening.
