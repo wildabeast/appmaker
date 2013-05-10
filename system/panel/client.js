@@ -24,6 +24,17 @@ $(document).on('ready', function () {
   if (query.taken)
     $('#error').html('Domain already exists. Try another.')
   $('#domain').focus()
+  if (localStorage && localStorage.getItem("email"))
+    $('#email').attr('value', localStorage.getItem("email"))
+  $('#nudgepadIndexLogo').on('dblclick', function () {
+    var email = prompt('Enter your email to save your preference')
+    if (!email)
+      return false
+    if (!localStorage)
+      return false
+    localStorage.setItem('email', email)
+    $('#email').attr('value', localStorage.getItem("email"))
+  })
   $('#form').on('submit', function () {
     if (mutex)
       return false
