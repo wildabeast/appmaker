@@ -81,6 +81,8 @@ nudgepad.bind_shortcuts = function () {
   
   Events.shortcut.shortcuts['shift+t'] = function (){ $('.nudgepadTimeline').toggle()}
   
+  Events.shortcut.shortcuts['shift+v'] = nudgepad.stage.toggleView
+  
   Events.shortcut.shortcuts['shift+up'] = function (){nudgepad.stage.selection.move(0, -10)}
   Events.shortcut.shortcuts['shift+left'] = function (){nudgepad.stage.selection.move(-10, 0)}
   Events.shortcut.shortcuts['shift+down'] = function (){nudgepad.stage.selection.move(0, 10)}

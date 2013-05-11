@@ -182,7 +182,7 @@
     <a onclick="$('#pagesContextMenu').hide()">Close</a>
     <div class="contextMenuSeparator">&nbsp</div>
     <a onclick="$('.nudgepadTimeline').toggle()">Toggle Timeline</a>
-    <a onclick="nudgepad.stage.toggleView()">Toggle Edge View</a>
+    <a onclick="nudgepad.stage.toggleView()">Toggle View</a>
     <div class="contextMenuSeparator">&nbsp</div>
     <a onclick="nudgepad.stage.editSource()">Edit Page Source</a>
     <div class="contextMenuSeparator">&nbsp</div>
