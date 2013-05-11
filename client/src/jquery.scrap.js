@@ -27,7 +27,9 @@ $.fn.selectMe = function () {
     return this
   $(this).addClass('selection')
   
-  nudgepad.MoveHandle.create(scrap)
+  var position = $(this).css('position')
+  if (position === 'absolute' || position === 'fixed')
+    nudgepad.MoveHandle.create(scrap)
   
   nudgepad.trigger('selection')
 

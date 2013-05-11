@@ -39,7 +39,7 @@ nudgepad.stage.commit = function () {
     commit.set('order', new Space(diffOrder.toString()))
 
   nudgepad.stage.timeline.set(timestamp, commit)
-  nudgepad.pages.edge = nudgepad.pages.stage.clone()
+  nudgepad.pages.edge = new Space(nudgepad.pages.stage.toString())
   
   // A commit always advances the position index to the edge.
   nudgepad.stage.version = nudgepad.stage.timeline.keys.length
@@ -51,7 +51,7 @@ nudgepad.stage.commit = function () {
   // Send Commit to Server
   var patch = new Space()
   patch.set('timelines ' + nudgepad.stage.activePage + ' ' + timestamp, commit)
-  site.set('pages ' + nudgepad.stage.activePage, nudgepad.pages.stage.clone())
+  site.set('pages ' + nudgepad.stage.activePage, new Space(nudgepad.pages.stage.toString()))
 
 //  nudgepad.notify('Saved')
   nudgepad.emit('commit', patch.toString())
