@@ -116,9 +116,11 @@ Scrap.prototype.moveUp = function () {
   $(this.selector()).css("z-index", this.get('style z-index'))
 }
 
+Scrap.prototype.parentSelector = function () {
+  return this.selector().replace(/\>[^\>]+$/, '') // chop last
+}
+
 /**
- * Removes the scrap from the DOM.
- *
  * @return this
  */
 Scrap.prototype.render = function (context) {
@@ -148,7 +150,7 @@ Scrap.prototype.render = function (context) {
   }
   
   // Remove the style, the html, and the script
-  $('#nudgepadStageBody').append(this.toHtml(context))
+  $(this.parentSelector()).append(this.toHtml(context))
   return this
 }
 

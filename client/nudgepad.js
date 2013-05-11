@@ -11544,9 +11544,11 @@ Scrap.prototype.moveUp = function () {
   $(this.selector()).css("z-index", this.get('style z-index'))
 }
 
+Scrap.prototype.parentSelector = function () {
+  return this.selector().replace(/\>[^\>]+$/, '') // chop last
+}
+
 /**
- * Removes the scrap from the DOM.
- *
  * @return this
  */
 Scrap.prototype.render = function (context) {
@@ -11576,7 +11578,7 @@ Scrap.prototype.render = function (context) {
   }
   
   // Remove the style, the html, and the script
-  $('#nudgepadStageBody').append(this.toHtml(context))
+  $(this.parentSelector()).append(this.toHtml(context))
   return this
 }
 
@@ -12120,13 +12122,14 @@ nudgepad.stage.selection.nest = function (path) {
  */
 nudgepad.stage.selection.patch = function (space) {
 
-  if (typeof Space === 'string')
+  if (typeof space === 'string')
     space = new Space(space)
 
   $('.selection').each(function () {
     var scrap = $(this).scrap()
-    $(this).deselect().remove()
-    scrap.patch(space).render()
+    $(this).deselect()
+    scrap.patch(space)
+    $(this).replaceWith(scrap.toHtml())
     scrap.element().selectMe()
   })
   nudgepad.stage.commit()

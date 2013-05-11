@@ -307,13 +307,14 @@ nudgepad.stage.selection.nest = function (path) {
  */
 nudgepad.stage.selection.patch = function (space) {
 
-  if (typeof Space === 'string')
+  if (typeof space === 'string')
     space = new Space(space)
 
   $('.selection').each(function () {
     var scrap = $(this).scrap()
-    $(this).deselect().remove()
-    scrap.patch(space).render()
+    $(this).deselect()
+    scrap.patch(space)
+    $(this).replaceWith(scrap.toHtml())
     scrap.element().selectMe()
   })
   nudgepad.stage.commit()
