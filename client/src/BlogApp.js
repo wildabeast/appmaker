@@ -64,10 +64,10 @@ nudgepad.apps.blog.deletePost = function () {
   if (!name)
     return nudgepad.error('No post to delete')
   
-  if (!nudgepad.site.get('posts ' + name))
+  if (!site.get('posts ' + name))
     return nudgepad.error('Post does not exist')
 
-  nudgepad.site.delete('posts ' + name)
+  site.delete('posts ' + name)
   
   // Send Commit to Server
   var patch = new Space()
@@ -78,7 +78,7 @@ nudgepad.apps.blog.deletePost = function () {
 
 nudgepad.apps.blog.editPost = function (name) {
   nudgepad.apps.blog.activePost = name
-  var post = nudgepad.site.get('posts ' + name)
+  var post = site.get('posts ' + name)
   $('.nudgepad#content').val(post.get('content'))
   $('.nudgepad#title').val(post.get('title'))
   var postSettings = new Space(post.toString())
@@ -97,12 +97,12 @@ nudgepad.apps.blog.editPost = function (name) {
 // Ensures site has a blog theme before posting
 nudgepad.apps.blog.initialize = function () {
   
-  if (nudgepad.site.get('pages blog'))
+  if (site.get('pages blog'))
     return true
   var patch = new Space()
   patch.set('pages blog', nudgepad.apps.blog.blankTheme)
   nudgepad.emit('patch', patch.toString())
-  nudgepad.site.set('pages blog', nudgepad.apps.blog.blankTheme)
+  site.set('pages blog', nudgepad.apps.blog.blankTheme)
   
   nudgepad.pages.updateTabs()// todo: delete this
 }
@@ -112,11 +112,11 @@ nudgepad.apps.blog.activePost = null
 nudgepad.apps.blog.onopen = function () {
   nudgepad.apps.blog.initialize()
   $('.nudgepad#posts').html('')
-  if (!nudgepad.site.get('posts'))
+  if (!site.get('posts'))
     return true
-  _.each(nudgepad.site.get('posts').keys, function (name) {
+  _.each(site.get('posts').keys, function (name) {
     console.log(name)
-    var value = nudgepad.site.get('posts').get(name)
+    var value = site.get('posts').get(name)
     var div = $('<div >' + value.get('title') + '</div>')
       .css({
       'color' : '#777',
@@ -149,7 +149,7 @@ nudgepad.apps.blog.savePost = function () {
   if (!name)
     return nudgepad.error('Title cannot be blank')
   
-  var post = nudgepad.site.get('posts ' + name)
+  var post = site.get('posts ' + name)
   if (!post)
     post = new Space()
 
@@ -157,7 +157,7 @@ nudgepad.apps.blog.savePost = function () {
   post.set('title', $('.nudgepad#title').val())
   post.patch($('.nudgepad#advanced').val())
   
-  nudgepad.site.set('posts ' + name, post)
+  site.set('posts ' + name, post)
   
   // Send Commit to Server
   var patch = new Space()
@@ -167,7 +167,7 @@ nudgepad.apps.blog.savePost = function () {
   // make sure to delete old post
   if (nudgepad.apps.blog.activePost && nudgepad.apps.blog.activePost !== name) {
     patch.set('posts ' + nudgepad.apps.blog.activePost, '')
-    nudgepad.site.delete('posts ' + nudgepad.apps.blog.activePost)
+    site.delete('posts ' + nudgepad.apps.blog.activePost)
   }
   
   nudgepad.emit('patch', patch.toString())

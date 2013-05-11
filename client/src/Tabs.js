@@ -2,7 +2,7 @@ nudgepad.openPages = {}
 
 nudgepad.pages.updateTabs = function () {
   $('#nudgepadTabs').html('')
-  var keys = nudgepad.site.get('pages').keys
+  var keys = site.get('pages').keys
   _.each(keys, function (name) {
     var div = $('<span>' + name + '</span>')
     if (name === nudgepad.stage.activePage)

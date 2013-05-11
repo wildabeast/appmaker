@@ -18,7 +18,7 @@ nudgepad.patch.receive = function (patch) {
   if (patch.get('pages ' + nudgepad.stage.activePage) === '')
     nudgepad.stage.back()
   
-  nudgepad.site.patch(patch)
+  site.patch(patch)
   nudgepad.pages.updateTabs()
   
   // If the active page isnt touched, we are all done

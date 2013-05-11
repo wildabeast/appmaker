@@ -8929,7 +8929,7 @@ nudgepad.main = function (callback) {
     
     var activePage = store.get('activePage') || 'home'
     
-    if (!nudgepad.site.get('pages ' + activePage))
+    if (!site.get('pages ' + activePage))
       activePage = 'home'
     
     nudgepad.stage.open(activePage)
@@ -9138,10 +9138,10 @@ nudgepad.apps.blog.deletePost = function () {
   if (!name)
     return nudgepad.error('No post to delete')
   
-  if (!nudgepad.site.get('posts ' + name))
+  if (!site.get('posts ' + name))
     return nudgepad.error('Post does not exist')
 
-  nudgepad.site.delete('posts ' + name)
+  site.delete('posts ' + name)
   
   // Send Commit to Server
   var patch = new Space()
@@ -9152,7 +9152,7 @@ nudgepad.apps.blog.deletePost = function () {
 
 nudgepad.apps.blog.editPost = function (name) {
   nudgepad.apps.blog.activePost = name
-  var post = nudgepad.site.get('posts ' + name)
+  var post = site.get('posts ' + name)
   $('.nudgepad#content').val(post.get('content'))
   $('.nudgepad#title').val(post.get('title'))
   var postSettings = new Space(post.toString())
@@ -9171,12 +9171,12 @@ nudgepad.apps.blog.editPost = function (name) {
 // Ensures site has a blog theme before posting
 nudgepad.apps.blog.initialize = function () {
   
-  if (nudgepad.site.get('pages blog'))
+  if (site.get('pages blog'))
     return true
   var patch = new Space()
   patch.set('pages blog', nudgepad.apps.blog.blankTheme)
   nudgepad.emit('patch', patch.toString())
-  nudgepad.site.set('pages blog', nudgepad.apps.blog.blankTheme)
+  site.set('pages blog', nudgepad.apps.blog.blankTheme)
   
   nudgepad.pages.updateTabs()// todo: delete this
 }
@@ -9186,11 +9186,11 @@ nudgepad.apps.blog.activePost = null
 nudgepad.apps.blog.onopen = function () {
   nudgepad.apps.blog.initialize()
   $('.nudgepad#posts').html('')
-  if (!nudgepad.site.get('posts'))
+  if (!site.get('posts'))
     return true
-  _.each(nudgepad.site.get('posts').keys, function (name) {
+  _.each(site.get('posts').keys, function (name) {
     console.log(name)
-    var value = nudgepad.site.get('posts').get(name)
+    var value = site.get('posts').get(name)
     var div = $('<div >' + value.get('title') + '</div>')
       .css({
       'color' : '#777',
@@ -9223,7 +9223,7 @@ nudgepad.apps.blog.savePost = function () {
   if (!name)
     return nudgepad.error('Title cannot be blank')
   
-  var post = nudgepad.site.get('posts ' + name)
+  var post = site.get('posts ' + name)
   if (!post)
     post = new Space()
 
@@ -9231,7 +9231,7 @@ nudgepad.apps.blog.savePost = function () {
   post.set('title', $('.nudgepad#title').val())
   post.patch($('.nudgepad#advanced').val())
   
-  nudgepad.site.set('posts ' + name, post)
+  site.set('posts ' + name, post)
   
   // Send Commit to Server
   var patch = new Space()
@@ -9241,7 +9241,7 @@ nudgepad.apps.blog.savePost = function () {
   // make sure to delete old post
   if (nudgepad.apps.blog.activePost && nudgepad.apps.blog.activePost !== name) {
     patch.set('posts ' + nudgepad.apps.blog.activePost, '')
-    nudgepad.site.delete('posts ' + nudgepad.apps.blog.activePost)
+    site.delete('posts ' + nudgepad.apps.blog.activePost)
   }
   
   nudgepad.emit('patch', patch.toString())
@@ -9638,25 +9638,25 @@ nudgepad.explorer.downloadTimelines = function () {
   $.get('/nudgepad.site.timelines', {}, function (data) {
     var space = new Space(data)
     space.delete(nudgepad.stage.activePage) // We already have the open page
-    nudgepad.site.get('timelines').patch(space)
+    site.get('timelines').patch(space)
   })
 }
 
 /**
- * Sync the clients nudgepad.site with the server.
+ * Sync the clients site with the server.
  *
  * @param {function}
  */
 nudgepad.explorer.getSite = function (callback) {
   var activePage = store.get('activePage') || 'home'
   $.get('/nudgepad.site', { activePage : activePage }, function (space) {
-    nudgepad.site = new Space(space)
+    site = new Space(space)
     callback()
   })
 }
 
 nudgepad.explorer.quickEdit = function () {
-  nudgepad.explorer.edit(prompt('Enter path to file you want to edit', 'public/site.css'))
+  nudgepad.explorer.edit(prompt('Enter path to file you want to edit', 'public/nudgepad.site.css'))
 }
 
 nudgepad.explorer.remove = function (path, callback) {
@@ -11012,7 +11012,7 @@ nudgepad.pages.create = function (name, template) {
   name = (name ? Permalink(name) : nudgepad.pages.nextName())
   
   // page already exists
-  if (nudgepad.site.get('pages ' + name))
+  if (site.get('pages ' + name))
     return nudgepad.error('A page named ' + name + ' already exists.')
   
   var page = new Space()
@@ -11025,8 +11025,8 @@ nudgepad.pages.create = function (name, template) {
     timeline.set(new Date().getTime(), commit)
   }
   
-  nudgepad.site.set('pages ' + name, page)
-  nudgepad.site.set('timelines ' + name, timeline)
+  site.set('pages ' + name, page)
+  site.set('timelines ' + name, timeline)
   
   var patch = new Space()
   patch.set('pages ' + name, page)
@@ -11059,12 +11059,12 @@ nudgepad.pages.duplicate = function (source, destination, skipPrompt) {
       return false
   }
   
-  if (!nudgepad.site.get('pages').get(source))
+  if (!site.get('pages').get(source))
     return nudgepad.error('Page ' + source + ' not found')
   
   // If we are duplicating a page thats not open, easy peasy
   if (source !== nudgepad.stage.activePage)
-    return nudgepad.pages.create(destination, nudgepad.site.get('pages').get(source))
+    return nudgepad.pages.create(destination, site.get('pages').get(source))
   
   return nudgepad.pages.create(destination, nudgepad.pages.stage)
 }
@@ -11077,10 +11077,10 @@ nudgepad.pages.duplicate = function (source, destination, skipPrompt) {
  */
 nudgepad.pages.nextName = function (prefix) {
   var prefix = prefix || 'untitled'
-  if (!(prefix in nudgepad.site.values.pages.values))
+  if (!(prefix in site.values.pages.values))
     return prefix
   for (var i = 1; i < 1000; i++) {
-    if (!(prefix + i in nudgepad.site.values.pages.values))
+    if (!(prefix + i in site.values.pages.values))
       return prefix + i
   }
 }
@@ -11110,13 +11110,13 @@ nudgepad.pages.rename = function (new_name) {
     return nudgepad.error('You cannot rename the home page.')
   
   // page already exists
-  if (nudgepad.site.get('pages ' + new_name))
+  if (site.get('pages ' + new_name))
     return nudgepad.error('A page named ' + new_name + ' already exists.')  
 
-  nudgepad.site.set('pages ' + new_name, nudgepad.site.get('pages ' + old_name))
-  nudgepad.site.set('timelines ' + new_name, nudgepad.site.get('timelines ' + old_name))
-  nudgepad.site.delete('pages ' + old_name)
-  nudgepad.site.delete('timelines ' + old_name)
+  site.set('pages ' + new_name, site.get('pages ' + old_name))
+  site.set('timelines ' + new_name, site.get('timelines ' + old_name))
+  site.delete('pages ' + old_name)
+  site.delete('timelines ' + old_name)
   
   nudgepad.pages.updateTabs()
   
@@ -11124,8 +11124,8 @@ nudgepad.pages.rename = function (new_name) {
   var patch = new Space()
   patch.set('pages ' + old_name, '')
   patch.set('timeline ' + old_name, '')
-  patch.set('pages ' + new_name, nudgepad.site.get('pages ' + new_name))
-  patch.set('timelines ' + new_name, nudgepad.site.get('timelines ' + new_name))
+  patch.set('pages ' + new_name, site.get('pages ' + new_name))
+  patch.set('timelines ' + new_name, site.get('timelines ' + new_name))
 
   nudgepad.emit('patch', patch.toString())
   
@@ -11160,8 +11160,8 @@ nudgepad.pages.trash = function (name) {
   patch.set('timelines ' + name, '')
   nudgepad.emit('patch', patch.toString())
 
-  nudgepad.site.get('pages').delete(name)
-  nudgepad.site.get('timelines').delete(name)
+  site.get('pages').delete(name)
+  site.get('timelines').delete(name)
   
   // Delete page from open pages
   nudgepad.pages.updateTabs()
@@ -11204,7 +11204,7 @@ nudgepad.patch.receive = function (patch) {
   if (patch.get('pages ' + nudgepad.stage.activePage) === '')
     nudgepad.stage.back()
   
-  nudgepad.site.patch(patch)
+  site.patch(patch)
   nudgepad.pages.updateTabs()
   
   // If the active page isnt touched, we are all done
@@ -11314,7 +11314,7 @@ nudgepad.reloadMessage = function () {
 }
 nudgepad.restartCheck = function () {
   $.get('/nudgepad.started', {}, function (data) {
-    if (data !== nudgepad.site.get('started')) {
+    if (data !== site.get('started')) {
       nudgepad.reloadMessageOneTime = 'Your site restarted. Please refresh the page.'
       location.reload()
     }
@@ -12400,7 +12400,7 @@ nudgepad.stage.percentElapsed = 100
  * Open the previous page
  */
 nudgepad.stage.back = function () {
-  nudgepad.stage.open(nudgepad.site.get('pages').prev(nudgepad.stage.activePage))
+  nudgepad.stage.open(site.get('pages').prev(nudgepad.stage.activePage))
 }
 
 /**
@@ -12440,7 +12440,7 @@ nudgepad.stage.commit = function () {
   // Send Commit to Server
   var patch = new Space()
   patch.set('timelines ' + nudgepad.stage.activePage + ' ' + timestamp, commit)
-  nudgepad.site.set('pages ' + nudgepad.stage.activePage, nudgepad.pages.stage.clone())
+  site.set('pages ' + nudgepad.stage.activePage, nudgepad.pages.stage.clone())
 
 //  nudgepad.notify('Saved')
   nudgepad.emit('commit', patch.toString())
@@ -12504,7 +12504,7 @@ nudgepad.stage.erase = function () {
  * Open the next page
  */
 nudgepad.stage.forward = function () {
-  nudgepad.stage.open(nudgepad.site.get('pages').next(nudgepad.stage.activePage))
+  nudgepad.stage.open(site.get('pages').next(nudgepad.stage.activePage))
 }
 
 nudgepad.stage.goto = function (version) {
@@ -12663,7 +12663,7 @@ nudgepad.stage.nextScrapId = function (prefix) {
  */
 nudgepad.stage.open = function (name) {
   
-  var page = nudgepad.site.get('pages ' + name)
+  var page = site.get('pages ' + name)
   if (!page)
     return nudgepad.error('Page ' + name + ' not found')
 
@@ -12702,7 +12702,7 @@ nudgepad.stage.render = function () {
 
 nudgepad.stage.reload = function () {
   var name = nudgepad.stage.activePage
-  var page = nudgepad.site.get('pages ' + name)
+  var page = site.get('pages ' + name)
   nudgepad.pages.edge = page
   nudgepad.pages.stage = new Page(page.toString())
   
@@ -12748,8 +12748,8 @@ nudgepad.stage.selectAll = function () {
  */
 nudgepad.stage.setTimeline = function (name) {
   
-  if (nudgepad.site.get('timelines ' + name)) {
-    nudgepad.stage.timeline = nudgepad.site.get('timelines ' + name)
+  if (site.get('timelines ' + name)) {
+    nudgepad.stage.timeline = site.get('timelines ' + name)
     return true
   }
   
@@ -12760,12 +12760,12 @@ nudgepad.stage.setTimeline = function (name) {
   })
   
   request.done(function (msg) {
-    nudgepad.site.set('timelines ' + name, new Space(msg))
+    site.set('timelines ' + name, new Space(msg))
   })
   
   request.fail(function () {
     
-    var edge = nudgepad.site.get('pages ' + name)
+    var edge = site.get('pages ' + name)
     var timeline = new Space()
     // If no timeline, but yes edge, make the edge the first commit
     if (edge && !edge.empty()) {
@@ -12776,7 +12776,7 @@ nudgepad.stage.setTimeline = function (name) {
     }
     
 
-    nudgepad.site.set('timelines ' + name, timeline  )
+    site.set('timelines ' + name, timeline  )
     var patch = new Space()
     patch.set('timelines ' + name, timeline)
     nudgepad.emit('patch', patch.toString())
@@ -12785,7 +12785,7 @@ nudgepad.stage.setTimeline = function (name) {
     
   })
   
-  nudgepad.stage.timeline = nudgepad.site.get('timelines ' + name)
+  nudgepad.stage.timeline = site.get('timelines ' + name)
   
 }
 
@@ -12796,7 +12796,8 @@ var stageViews = new Space({
       padding : 0
     })
     $('#nudgepadStageBody').css({
-      'height' : '1000px'
+      'height' : '100%',
+      'min-height' : '1000px'
     })
   },
   'edge' : function (){
@@ -12805,7 +12806,8 @@ var stageViews = new Space({
       padding : '5%'
     })
     $('#nudgepadStageBody').css({
-      'height' : '1000px'
+      'height' : '100%',
+      'min-height' : '1000px'
     })
   },
   'ios' : function (){
@@ -13291,7 +13293,7 @@ nudgepad.styleEditor = function (scrap) {
    linkOptions.append(noLink)
    
    // Create a link to existing page
-   _.each(nudgepad.site.values.pages.values, function (value, name) {
+   _.each(site.values.pages.values, function (value, name) {
      var link = $('<option value="' + name + '">' + ToProperCase(name) + '</option>')
      link.on('click', function () {
        nudgepad.stage.selection.patch('type a\nhref ' + $(this).attr('value'))
@@ -13977,7 +13979,7 @@ nudgepad.openPages = {}
 
 nudgepad.pages.updateTabs = function () {
   $('#nudgepadTabs').html('')
-  var keys = nudgepad.site.get('pages').keys
+  var keys = site.get('pages').keys
   _.each(keys, function (name) {
     var div = $('<span>' + name + '</span>')
     if (name === nudgepad.stage.activePage)

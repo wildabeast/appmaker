@@ -53,7 +53,7 @@ nudgepad.pages.create = function (name, template) {
   name = (name ? Permalink(name) : nudgepad.pages.nextName())
   
   // page already exists
-  if (nudgepad.site.get('pages ' + name))
+  if (site.get('pages ' + name))
     return nudgepad.error('A page named ' + name + ' already exists.')
   
   var page = new Space()
@@ -66,8 +66,8 @@ nudgepad.pages.create = function (name, template) {
     timeline.set(new Date().getTime(), commit)
   }
   
-  nudgepad.site.set('pages ' + name, page)
-  nudgepad.site.set('timelines ' + name, timeline)
+  site.set('pages ' + name, page)
+  site.set('timelines ' + name, timeline)
   
   var patch = new Space()
   patch.set('pages ' + name, page)
@@ -100,12 +100,12 @@ nudgepad.pages.duplicate = function (source, destination, skipPrompt) {
       return false
   }
   
-  if (!nudgepad.site.get('pages').get(source))
+  if (!site.get('pages').get(source))
     return nudgepad.error('Page ' + source + ' not found')
   
   // If we are duplicating a page thats not open, easy peasy
   if (source !== nudgepad.stage.activePage)
-    return nudgepad.pages.create(destination, nudgepad.site.get('pages').get(source))
+    return nudgepad.pages.create(destination, site.get('pages').get(source))
   
   return nudgepad.pages.create(destination, nudgepad.pages.stage)
 }
@@ -118,10 +118,10 @@ nudgepad.pages.duplicate = function (source, destination, skipPrompt) {
  */
 nudgepad.pages.nextName = function (prefix) {
   var prefix = prefix || 'untitled'
-  if (!(prefix in nudgepad.site.values.pages.values))
+  if (!(prefix in site.values.pages.values))
     return prefix
   for (var i = 1; i < 1000; i++) {
-    if (!(prefix + i in nudgepad.site.values.pages.values))
+    if (!(prefix + i in site.values.pages.values))
       return prefix + i
   }
 }
@@ -151,13 +151,13 @@ nudgepad.pages.rename = function (new_name) {
     return nudgepad.error('You cannot rename the home page.')
   
   // page already exists
-  if (nudgepad.site.get('pages ' + new_name))
+  if (site.get('pages ' + new_name))
     return nudgepad.error('A page named ' + new_name + ' already exists.')  
 
-  nudgepad.site.set('pages ' + new_name, nudgepad.site.get('pages ' + old_name))
-  nudgepad.site.set('timelines ' + new_name, nudgepad.site.get('timelines ' + old_name))
-  nudgepad.site.delete('pages ' + old_name)
-  nudgepad.site.delete('timelines ' + old_name)
+  site.set('pages ' + new_name, site.get('pages ' + old_name))
+  site.set('timelines ' + new_name, site.get('timelines ' + old_name))
+  site.delete('pages ' + old_name)
+  site.delete('timelines ' + old_name)
   
   nudgepad.pages.updateTabs()
   
@@ -165,8 +165,8 @@ nudgepad.pages.rename = function (new_name) {
   var patch = new Space()
   patch.set('pages ' + old_name, '')
   patch.set('timeline ' + old_name, '')
-  patch.set('pages ' + new_name, nudgepad.site.get('pages ' + new_name))
-  patch.set('timelines ' + new_name, nudgepad.site.get('timelines ' + new_name))
+  patch.set('pages ' + new_name, site.get('pages ' + new_name))
+  patch.set('timelines ' + new_name, site.get('timelines ' + new_name))
 
   nudgepad.emit('patch', patch.toString())
   
@@ -201,8 +201,8 @@ nudgepad.pages.trash = function (name) {
   patch.set('timelines ' + name, '')
   nudgepad.emit('patch', patch.toString())
 
-  nudgepad.site.get('pages').delete(name)
-  nudgepad.site.get('timelines').delete(name)
+  site.get('pages').delete(name)
+  site.get('timelines').delete(name)
   
   // Delete page from open pages
   nudgepad.pages.updateTabs()

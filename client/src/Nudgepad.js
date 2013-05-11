@@ -129,7 +129,7 @@ nudgepad.main = function (callback) {
     
     var activePage = store.get('activePage') || 'home'
     
-    if (!nudgepad.site.get('pages ' + activePage))
+    if (!site.get('pages ' + activePage))
       activePage = 'home'
     
     nudgepad.stage.open(activePage)

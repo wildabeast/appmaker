@@ -16,25 +16,25 @@ nudgepad.explorer.downloadTimelines = function () {
   $.get('/nudgepad.site.timelines', {}, function (data) {
     var space = new Space(data)
     space.delete(nudgepad.stage.activePage) // We already have the open page
-    nudgepad.site.get('timelines').patch(space)
+    site.get('timelines').patch(space)
   })
 }
 
 /**
- * Sync the clients nudgepad.site with the server.
+ * Sync the clients site with the server.
  *
  * @param {function}
  */
 nudgepad.explorer.getSite = function (callback) {
   var activePage = store.get('activePage') || 'home'
   $.get('/nudgepad.site', { activePage : activePage }, function (space) {
-    nudgepad.site = new Space(space)
+    site = new Space(space)
     callback()
   })
 }
 
 nudgepad.explorer.quickEdit = function () {
-  nudgepad.explorer.edit(prompt('Enter path to file you want to edit', 'public/site.css'))
+  nudgepad.explorer.edit(prompt('Enter path to file you want to edit', 'public/nudgepad.site.css'))
 }
 
 nudgepad.explorer.remove = function (path, callback) {

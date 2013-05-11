@@ -11,7 +11,7 @@ nudgepad.stage.percentElapsed = 100
  * Open the previous page
  */
 nudgepad.stage.back = function () {
-  nudgepad.stage.open(nudgepad.site.get('pages').prev(nudgepad.stage.activePage))
+  nudgepad.stage.open(site.get('pages').prev(nudgepad.stage.activePage))
 }
 
 /**
@@ -51,7 +51,7 @@ nudgepad.stage.commit = function () {
   // Send Commit to Server
   var patch = new Space()
   patch.set('timelines ' + nudgepad.stage.activePage + ' ' + timestamp, commit)
-  nudgepad.site.set('pages ' + nudgepad.stage.activePage, nudgepad.pages.stage.clone())
+  site.set('pages ' + nudgepad.stage.activePage, nudgepad.pages.stage.clone())
 
 //  nudgepad.notify('Saved')
   nudgepad.emit('commit', patch.toString())
@@ -115,7 +115,7 @@ nudgepad.stage.erase = function () {
  * Open the next page
  */
 nudgepad.stage.forward = function () {
-  nudgepad.stage.open(nudgepad.site.get('pages').next(nudgepad.stage.activePage))
+  nudgepad.stage.open(site.get('pages').next(nudgepad.stage.activePage))
 }
 
 nudgepad.stage.goto = function (version) {
@@ -274,7 +274,7 @@ nudgepad.stage.nextScrapId = function (prefix) {
  */
 nudgepad.stage.open = function (name) {
   
-  var page = nudgepad.site.get('pages ' + name)
+  var page = site.get('pages ' + name)
   if (!page)
     return nudgepad.error('Page ' + name + ' not found')
 
@@ -313,7 +313,7 @@ nudgepad.stage.render = function () {
 
 nudgepad.stage.reload = function () {
   var name = nudgepad.stage.activePage
-  var page = nudgepad.site.get('pages ' + name)
+  var page = site.get('pages ' + name)
   nudgepad.pages.edge = page
   nudgepad.pages.stage = new Page(page.toString())
   
@@ -359,8 +359,8 @@ nudgepad.stage.selectAll = function () {
  */
 nudgepad.stage.setTimeline = function (name) {
   
-  if (nudgepad.site.get('timelines ' + name)) {
-    nudgepad.stage.timeline = nudgepad.site.get('timelines ' + name)
+  if (site.get('timelines ' + name)) {
+    nudgepad.stage.timeline = site.get('timelines ' + name)
     return true
   }
   
@@ -371,12 +371,12 @@ nudgepad.stage.setTimeline = function (name) {
   })
   
   request.done(function (msg) {
-    nudgepad.site.set('timelines ' + name, new Space(msg))
+    site.set('timelines ' + name, new Space(msg))
   })
   
   request.fail(function () {
     
-    var edge = nudgepad.site.get('pages ' + name)
+    var edge = site.get('pages ' + name)
     var timeline = new Space()
     // If no timeline, but yes edge, make the edge the first commit
     if (edge && !edge.empty()) {
@@ -387,7 +387,7 @@ nudgepad.stage.setTimeline = function (name) {
     }
     
 
-    nudgepad.site.set('timelines ' + name, timeline  )
+    site.set('timelines ' + name, timeline  )
     var patch = new Space()
     patch.set('timelines ' + name, timeline)
     nudgepad.emit('patch', patch.toString())
@@ -396,7 +396,7 @@ nudgepad.stage.setTimeline = function (name) {
     
   })
   
-  nudgepad.stage.timeline = nudgepad.site.get('timelines ' + name)
+  nudgepad.stage.timeline = site.get('timelines ' + name)
   
 }
 
