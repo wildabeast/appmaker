@@ -72,6 +72,8 @@ nudgepad.bind_shortcuts = function () {
   Events.shortcut.shortcuts['ctrl+n'] = nudgepad.pages.blank
   Events.shortcut.shortcuts['meta+n'] = nudgepad.pages.blank
   
+  Events.shortcut.shortcuts['esc'] = nudgepad.stage.selection.clear
+  
   Events.shortcut.shortcuts['shift+n'] = nudgepad.pages.duplicate
   
   Events.shortcut.shortcuts['up'] = function (){nudgepad.stage.selection.move(0, -1)}
