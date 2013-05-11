@@ -295,6 +295,14 @@ nudgepad.stage.selection.nest = function (path) {
   parent = parent.get('scraps')
   var patch = nudgepad.stage.selection.toSpace()
   nudgepad.stage.selection.remove()
+  
+  // update the patch so there is no overwriting
+  patch.each(function (key, value) {
+    if (parent.get(key)) {
+      this.rename(key, parent.autokey(key))
+    }
+  })
+  
   parent.patch(patch)
   nudgepad.stage.commit()
   nudgepad.stage.open(nudgepad.stage.activePage)

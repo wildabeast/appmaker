@@ -12113,6 +12113,14 @@ nudgepad.stage.selection.nest = function (path) {
   parent = parent.get('scraps')
   var patch = nudgepad.stage.selection.toSpace()
   nudgepad.stage.selection.remove()
+  
+  // update the patch so there is no overwriting
+  patch.each(function (key, value) {
+    if (parent.get(key)) {
+      this.rename(key, parent.autokey(key))
+    }
+  })
+  
   parent.patch(patch)
   nudgepad.stage.commit()
   nudgepad.stage.open(nudgepad.stage.activePage)
@@ -12388,7 +12396,19 @@ nudgepad.on('main', function () {
   $('#nudgepadSignupFormEmail').focus()
   
   
-})/**
+})
+Space.prototype.autokey = function (prefix) {
+  prefix = prefix || ''
+  if (!this.get(prefix))
+    return prefix
+  
+  var i = 2
+  while (this.get(prefix + i.toString())) {
+    i++
+  }
+  return prefix + i.toString()
+}
+/**
  * Launches the spotlight page picker
  */
 nudgepad.pages.spotlight = function () {
@@ -12403,7 +12423,6 @@ nudgepad.pages.spotlight = function () {
  * Its not actually a frame though, just a div with scroll.
  */
 nudgepad.stage.version = 0 // how many steps in we are
-nudgepad.stage.breadcrumb = ''
 nudgepad.stage.percentElapsed = 100
 
 /**
@@ -12564,26 +12583,22 @@ nudgepad.stage.insert = function (space, drag, xMove, yMove, center) {
   var patch = new Space(space.toString())
   nudgepad.stage.selection.clear()
   
-  level = nudgepad.pages.stage
-  if (nudgepad.stage.breadcrumb)
-    level = nudgepad.pages.stage.get(nudgepad.stage.breadcrumb)
-  
   // update the patch so there is no overwriting
   patch.each(function (key, value) {
-    if (level.get(key)) {
-      this.rename(key, nudgepad.stage.nextScrapId(key))
+    if (nudgepad.pages.stage.get(key)) {
+      this.rename(key, nudgepad.pages.stage.autokey(key))
     }
   })
   // now merge stage
-  level.patch(patch)
+  nudgepad.pages.stage.patch(patch)
   var selectors = []
   patch.each(function (key, value) {
-    level.values[key] = new Scrap(key, value)
-    var element = level.values[key].render().element()
+    nudgepad.pages.stage.values[key] = new Scrap(key, value)
+    var element = nudgepad.pages.stage.values[key].render().element()
     // Some elemeents arenet seleectable (titles, for example)
     if (element.length) {
       element.selectMe()
-      selectors.push(level.values[key].selector())
+      selectors.push(nudgepad.pages.stage.values[key].selector())
     }
   })
   
@@ -12655,21 +12670,6 @@ nudgepad.stage.insert = function (space, drag, xMove, yMove, center) {
  */
 nudgepad.stage.isBehind = function () {
   return (nudgepad.stage.version < nudgepad.stage.timeline.keys.length)
-}
-
-/**
- * @return {string}
- */
-nudgepad.stage.nextScrapId = function (prefix) {
-  prefix = prefix || 'scrap'
-  var level = nudgepad.pages.stage
-  if (nudgepad.stage.breadcrumb)
-    level = nudgepad.pages.stage.get(nudgepad.stage.breadcrumb)
-  var i = level.length() + 1
-  while (level.get(prefix + i)) {
-    i++
-  }
-  return prefix + i
 }
 
 /**
