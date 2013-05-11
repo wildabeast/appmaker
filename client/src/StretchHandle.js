@@ -248,24 +248,24 @@ nudgepad.StretchHandle.update = function () {
   
   switch (row) {
     case "top":
-      _top = element.top() - 4
+      _top = element.position().top - 4
     break;
     case "middle":
-      _top = element.middle() - 4
+      _top = element.position().top + Math.round(element.outerHeight()/2) - 4
     break;
     case "bottom":
-      _top = element.bottom() - 4
+      _top = element.position().top + element.outerHeight() - 4
     break;
   }
   switch (column) {
     case "left":
-      left = element.left() - 4
+      left = element.position().left - 4
     break;
     case "center":
-      left = element.center() - 4
+      left = element.position().left + Math.round(element.outerWidth()/2) - 4
     break;
     case "right":
-      left = element.right() - 4
+      left = element.position().left + element.outerWidth() - 4
     break;
   }
 
