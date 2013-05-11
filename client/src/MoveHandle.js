@@ -7,7 +7,7 @@ nudgepad.MoveHandle = function () {
 nudgepad.MoveHandle.create = function (scrap) {
   
   var element = scrap.element()
-  
+
   var position = (element.css('position') == 'fixed' ? 'fixed' : 'absolute')
   
   var div = $('<div></div>')
