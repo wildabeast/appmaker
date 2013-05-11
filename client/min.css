@@ -1661,7 +1661,7 @@ License: MIT
 
 
 #nudgepadStyleEditor {
-  position: fixed;
+  position: absolute;
   width: auto;
   height: auto;
   top: 0px;

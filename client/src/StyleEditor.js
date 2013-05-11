@@ -30,35 +30,14 @@ nudgepad.styleEditor = function (scrap) {
   
   var element = scrap.element()
   
-  
   // Create styleEditor div
   // width 295px
   // height 320px
   var styleEditor = $('<div id="nudgepadStyleEditor" class="nudgepad"></div>')
-  var _top = element.bottom() + 9
-  var leftPosition = 0
-  var left = element.left() + leftPosition + $('#nudgepadStageBody').offset().left
-  var editorHeight = 235
-  var editorWidth = 295
-  var bottom = _top + editorHeight
-  var right = left + editorWidth
-  var windowHeight = $(window).height()
-  var windowWidth = $(window).width()
-  
-  // try above
-  var ribbonHeight = ($('#nudgepadRibbon').is(':visible') ? 82 : 0) 
-  if (bottom > windowHeight - (40 + ribbonHeight))
-    _top = _top - editorHeight - element.height() - 20
-  
-  if (_top < 10)
-    _top = 10
-  
-  if (right > windowWidth)
-    left = left - right + windowWidth - 10
   
   styleEditor.css({
-    'top' : _top,
-    'left' : left
+    "left" : element.offset().left + 2 + "px",
+    "top" : element.offset().top + element.outerHeight() + 4 + "px"
   })
   
   // Insert top bar
@@ -794,4 +773,15 @@ nudgepad.styleEditor = function (scrap) {
   
   // Focus CSS editor
  // text_area.focus()
+ // scroll to reveal the styleEditor
+  var difference = styleEditor.position().top + styleEditor.outerHeight() - nudgepad.stage.height()
+  if (difference > 0) {
+    $('#nudgepadStage').scrollTop($('#nudgepadStage').scrollTop() + difference)
+    styleEditor.css('top', parseFloat(styleEditor.css('top')) - difference)
+  }
+  var difference = styleEditor.position().left + styleEditor.outerWidth() - $(window).width()
+  if (difference > 0) {
+    $('#nudgepadStage').scrollLeft($('#nudgepadStage').scrollLeft() + difference)
+    styleEditor.css('left', parseFloat(styleEditor.css('left')) - difference)
+  }
 }

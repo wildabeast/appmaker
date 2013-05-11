@@ -146,6 +146,10 @@ nudgepad.stage.goto = function (version) {
   nudgepad.stage.selection.restore()
 }
 
+nudgepad.stage.height = function () {
+  return $(window).height() - $('#nudgepadPagesBar').outerHeight()
+}
+
 /**
  * Creates new scraps, commits them and adds them to DOM.
  *
