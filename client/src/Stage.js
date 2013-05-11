@@ -407,7 +407,8 @@ var stageViews = new Space({
       padding : 0
     })
     $('#nudgepadStageBody').css({
-      'height' : '1000px'
+      'height' : '100%',
+      'min-height' : '1000px'
     })
   },
   'edge' : function (){
@@ -416,7 +417,8 @@ var stageViews = new Space({
       padding : '5%'
     })
     $('#nudgepadStageBody').css({
-      'height' : '1000px'
+      'height' : '100%',
+      'min-height' : '1000px'
     })
   },
   'ios' : function (){
