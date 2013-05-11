@@ -28,7 +28,8 @@ nudgepad.apps.blog.blankTheme = new Space({
      "font-weight": "normal",
      "color": "#333",
      "text-decoration": "none",
-     "font-style": "normal"
+     "font-style": "normal",
+     "padding" : "10px"
     },
     "content": "{{post.title Post Title}}"
    },
@@ -42,7 +43,7 @@ nudgepad.apps.blog.blankTheme = new Space({
      "color": "#333",
      "text-decoration": "none",
      "font-style": "normal",
-     "margin-top": "10px"
+     "padding": "10px"
     },
     "content": "{{post.content Lorem ipsum foobar }}"
    }
@@ -100,7 +101,7 @@ nudgepad.apps.blog.initialize = function () {
   if (site.get('pages blog'))
     return true
   var patch = new Space()
-  patch.set('pages blog', nudgepad.apps.blog.blankTheme)
+  patch.set('pages blog', nudgepad.apps.blog.blankTheme.clone())
   nudgepad.emit('patch', patch.toString())
   site.set('pages blog', nudgepad.apps.blog.blankTheme)
   
