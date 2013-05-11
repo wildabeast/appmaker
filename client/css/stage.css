@@ -5,31 +5,21 @@
   overflow-x: hidden;
   /* this makes the background scroll with the content */
   background-attachment: local;
-}
-
-#nudgepadStageFullView {
+  background-color: rgb(233, 233, 233);
   width: 100%;
 }
 
 #nudgepadStageBody {
-  min-height: 1000px;
+  height: 1000px;
   position: relative;
+  background-color: white;
+  box-shadow: 1px 1px 5px black;
+  margin: 0 auto;
+  width: 100%;
 }
 
 #nudgepadStageBottomPadding {
   height: 60px;
 }
 
-
-.nudgepadStageEdgeView {
-  background-color: rgb(233, 233, 233);
-  padding: 5%;
-  width: 90%;
-}
-
-.nudgepadStageBodyEdgeView {
-  margin: 0 auto;
-  background: white;
-  box-shadow: 1px 1px 5px black;
-}
 

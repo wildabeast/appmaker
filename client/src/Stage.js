@@ -400,9 +400,45 @@ nudgepad.stage.setTimeline = function (name) {
   
 }
 
+var stageViews = new Space({
+  'full' : function () {
+    $('#nudgepadStage').css({
+      width : '100%',
+      padding : 0
+    })
+    $('#nudgepadStageBody').css({
+      'height' : '1000px'
+    })
+  },
+  'edge' : function (){
+    $('#nudgepadStage').css({
+      width : '90%',
+      padding : '5%'
+    })
+    $('#nudgepadStageBody').css({
+      'height' : '1000px'
+    })
+  },
+  'ios' : function (){
+    var padding = Math.round(($(window).width() - 320)/2) + 'px'
+    $('#nudgepadStage').css({
+      padding : '20px ' + padding + ' 20px ' + padding,
+      width: '320px'
+    })
+    $('#nudgepadStageBody').css({
+      'height' : '356px'
+    })
+  }
+})
+
+nudgepad.stage.currentView = 'full'
+
 nudgepad.stage.toggleView = function () {
-  $('#nudgepadStage').toggleClass('nudgepadStageEdgeView')
-  $('#nudgepadStageBody').toggleClass('nudgepadStageBodyEdgeView')
+  
+  nudgepad.stage.currentView = stageViews.next(nudgepad.stage.currentView)
+  stageViews.get(nudgepad.stage.currentView)()
+  console.log(nudgepad.stage.currentView)
+  $('#nudgepadStageBody').width()
 }
 
 nudgepad.stage.undo = function () {
