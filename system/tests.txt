@@ -1,0 +1,18 @@
+/nudgepad/ exists
+/nudgepad/ cannot be traversed by others
+/nudgepad/ can be traversed by group
+/nudgepad/active exists
+/nudgepad/active cannot be examined by others
+/nudgepad/ports exists
+/nudgepad/ports cannot be examined by others
+/nudgepad/sites exists
+/nudgepad/sites cannot be examined by others
+/nudgepad/temp exists
+/nudgepad/logs exists
+/nudgepad/logs can be read by owner
+/nudgepad/logs can be written by owner
+/nudgepad/logs cannot be examined by others
+/nudgepad/logs cannot be read by others
+/nudgepad/backup exists
+/nudgepad/backup cannot be examined by others
+/nudgepad/panel exists
