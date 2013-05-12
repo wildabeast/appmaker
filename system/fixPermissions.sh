@@ -1,22 +1,22 @@
 fixPermissions ()
 {
-  chmod 710 /nudgepad/
-  chmod 710 /nudgepad/active
-  chmod 710 /nudgepad/ports
-  chmod 710 /nudgepad/sites
-  chmod 700 /nudgepad/logs
-  chmod 700 /nudgepad/temp
-  chmod 700 /nudgepad/panel
-  chmod 700 /nudgepad/backup
+  chmod 710 $dataPath
+  chmod 730 $activePath
+  chmod 730 $portsPath
+  chmod 710 $sitesPath
+  chmod 700 $logsPath
+  chmod 700 $tempPath
+  chmod 700 $panelPath
+  chmod 700 $backupPath
   
   if isMac
     then
       echo Nothing to do on Mac
     else
-      sudo chown $USER:sites /nudgepad/
-      sudo chown $USER:sites /nudgepad/active
-      sudo chown $USER:sites /nudgepad/ports
-      sudo chown $USER:sites /nudgepad/sites
+      sudo chown $USER:sites $dataPath
+      sudo chown $USER:sites $activePath
+      sudo chown $USER:sites $portsPath
+      sudo chown $USER:sites $sitesPath
   fi  
 }
 

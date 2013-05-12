@@ -9,10 +9,5 @@ if [ ! -d "$dataPath" ]
     mkdir $logsPath
     mkdir $backupPath
     mkdir $panelPath
-    if isUbuntu
-      then
-        chgrp sites $sitesPath
-        chgrp sites $activePath
-        chgrp sites $portsPath
-    fi
+    fixPermissions
 fi

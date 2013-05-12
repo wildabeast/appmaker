@@ -27,7 +27,8 @@
     "jquery": ">=0.1.1",
     "utile": ">=0.1.1",
     "http-proxy": "=0.10.1",
-    "commander": ">=0.1.1"
+    "commander": ">=0.1.1",
+    "mode-to-permissions" : ">=0.0.1"
   },
   "keywords": [
     "scraps",

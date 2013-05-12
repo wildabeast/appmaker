@@ -10,6 +10,7 @@ systemPath="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
 cd $systemPath
 source paths.sh
 source isMac.sh
+source fixPermissions.sh
 source install.sh
 
 # get all sites 1 per line filter out hidden dirs
