@@ -365,7 +365,9 @@ http_server = http.createServer(site).listen(nudgepad.port)
 
 
 fs.writeFileSync(activePath + nudgepad.domain, nudgepad.port, 'utf8')
+fs.chmodSync(activePath + nudgepad.domain, '600')
 fs.writeFileSync(portsPath + nudgepad.port, nudgepad.domain, 'utf8')
+fs.chmodSync(portsPath + nudgepad.port, '600')
 
 // Write session stats to disk before process closes
 process.on('SIGTERM', function () {

@@ -18,6 +18,7 @@ sites="$(ls $sitesPath)"
 
 # get all sites 1 per line filter out hidden dirs
 activeSites="$(ls $activePath)"
+activePorts="$(ls $portsPath)"
 
 # Include our BASH functions
 source fixPermissions.sh
@@ -41,6 +42,17 @@ case "$1" in
 
 'active')
   echo $activeSites
+;;
+
+'clear')
+  for d in $activeSites
+  do
+    sudo rm -f $activePath/$d
+  done
+  for d in $activePorts
+  do
+    sudo rm -f $portsPath/$d
+  done
 ;;
 
 'commit')
