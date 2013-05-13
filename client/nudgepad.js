@@ -10382,9 +10382,8 @@ $.fn.selectMe = function () {
     return this
   $(this).addClass('selection')
   
-  var position = $(this).css('position')
-  if (position === 'absolute' || position === 'fixed')
-    nudgepad.MoveHandle.create(scrap)
+
+  nudgepad.MoveHandle.create(scrap)
   
   nudgepad.trigger('selection')
 
@@ -10577,24 +10576,27 @@ nudgepad.MoveHandle = function () {
 nudgepad.MoveHandle.create = function (scrap) {
   
   var element = scrap.element()
-
-  var position = (element.css('position') == 'fixed' ? 'fixed' : 'absolute')
+  
   
   var div = $('<div></div>')
   div.attr('value', scrap.getPath())
   div.addClass('handle ' + scrap.id + '_handle move_handle')
   div.attr('id', 'move_handle_' + scrap.id)
   div.attr('title', scrap.id)
+  
+  var position = element.css('position')
+  if (position === 'fixed' || position === 'absolute') {
+    div.on("mousedown", nudgepad.MoveHandle.mousedown)
+    div.on("slide", nudgepad.MoveHandle.slide)
+    div.on("slidestart", nudgepad.MoveHandle.slidestart)
+    div.on("slideend", nudgepad.MoveHandle.slideend)
+    div.css('cursor', 'move')
+  }
   div.css({
-    "cursor" : "move",
-    "position" : position,
+    "position" : (position === 'fixed' ? 'fixed' : 'absolute'),
     "z-index" : "50"
   })
   element.parent().append(div)
-  div.on("mousedown", nudgepad.MoveHandle.mousedown)
-  div.on("slide", nudgepad.MoveHandle.slide)
-  div.on("slidestart", nudgepad.MoveHandle.slidestart)
-  div.on("slideend", nudgepad.MoveHandle.slideend)
   div.on("tap", nudgepad.MoveHandle.tap)
   div.on("update", nudgepad.MoveHandle.update)
   div.on("dblclick", function () {
@@ -11421,7 +11423,7 @@ nudgepad.on('main', function () {
         break;
 
       case "text":
-        result = ['text', 'nav'];  
+        result = ['text', 'nav', 'paragraph'];  
         break;
 
       case "image":
