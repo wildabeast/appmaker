@@ -2,10 +2,10 @@
  author support@nudgepad.com
  values
   title
-   type title
+   tag title
    content Coming Soon
   stylesheet
-   type link
+   tag link
    rel stylesheet
    href site.css
   block1

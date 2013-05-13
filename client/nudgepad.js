@@ -11592,7 +11592,7 @@ Scrap.prototype.render = function (context, index) {
   
   // Throw style tags into a div that we can easily empty
   if (this.values.tag && this.values.tag.match(/style|link/)) {
-    this.setElementType(context)
+    this.setElementTag(context)
     this.setContent(context)
     $('#nudgepadStageStyles').append(this.div.toHtml())
     return this
@@ -11600,7 +11600,7 @@ Scrap.prototype.render = function (context, index) {
   
   // Turn body tags into divs during the render stage
   if (this.values.tag && this.values.tag === 'body') {    
-    this.setElementType(context)
+    this.setElementTag(context)
     this.setContent(context)
     this.setStyle(context)
     this.div.addClass('scrap')
@@ -11630,7 +11630,7 @@ Scrap.prototype.selector = function () {
  * @return {string}
  */
 Scrap.prototype.toHtml = function (context) {
-  this.setElementType(context)
+  this.setElementTag(context)
   this.setContent(context)
   this.setStyle(context)
   this.div.addClass('scrap')
