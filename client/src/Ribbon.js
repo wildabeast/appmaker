@@ -78,11 +78,11 @@ nudgepad.on('main', function () {
   $(document).on('tap', '.imageThumbDrop img', function() {
     var imageY = ($('#nudgepadStage').height() / 2) - 130
     var imageX = 100
-    nudgepad.stage.insert('images\n style\n  position absolute\n  top ' + imageY +'\n  left ' + imageX + '\n type img\n src ' + $(this).attr('src'))
+    nudgepad.stage.insert('images\n style\n  position absolute\n  top ' + imageY +'\n  left ' + imageX + '\n tag img\n src ' + $(this).attr('src'))
   })
   
   $('#nudgepadRibbon').on('slidestart', '.imageThumbDrop img', function() {
-    nudgepad.stage.dragAndDrop('images\n style\n  position absolute\n  top 0px\n  left 0px\n type img\n src ' + $(this).attr('src'))
+    nudgepad.stage.dragAndDrop('images\n style\n  position absolute\n  top 0px\n  left 0px\n tag img\n src ' + $(this).attr('src'))
   })
 
 

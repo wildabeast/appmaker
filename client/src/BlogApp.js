@@ -3,11 +3,11 @@ nudgepad.apps.blog = new App('blog')
 // Default theme
 nudgepad.apps.blog.blankTheme = new Space({
  "title": {
-  "type": "title",
+  "tag": "title",
   "content": "{{post.title Post Title}}"
  },
  "stylesheet": {
-  "type": "link",
+  "tag": "link",
   "rel": "stylesheet",
   "href": "site.css"
  },

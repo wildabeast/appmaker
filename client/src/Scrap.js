@@ -33,7 +33,7 @@ Scrap.prototype.isContentEditable = function () {
     return false
   if (this.values.content && this.values.content.match(/\{\{.*\}\}/))
     return false
-  if (this.values.type && this.values.type.match(/^(textarea|input|password|label|button|list|ul|ol)$/))
+  if (this.values.tag && this.values.tag.match(/^(textarea|input|password|label|button|list|ul|ol)$/))
     return false
   return true
 }
@@ -125,11 +125,11 @@ Scrap.prototype.parentSelector = function () {
  */
 Scrap.prototype.render = function (context, index) {
   // dont render invisibles
-  if (this.values.type && this.values.type.match(/title|script|meta|head/))
+  if (this.values.tag && this.values.tag.match(/title|script|meta|head/))
     return this
   
   // Throw style tags into a div that we can easily empty
-  if (this.values.type && this.values.type.match(/style|link/)) {
+  if (this.values.tag && this.values.tag.match(/style|link/)) {
     this.setElementType(context)
     this.setContent(context)
     $('#nudgepadStageStyles').append(this.div.toHtml())
@@ -137,14 +137,14 @@ Scrap.prototype.render = function (context, index) {
   }
   
   // Turn body tags into divs during the render stage
-  if (this.values.type && this.values.type === 'body') {    
+  if (this.values.tag && this.values.tag === 'body') {    
     this.setElementType(context)
     this.setContent(context)
     this.setStyle(context)
     this.div.addClass('scrap')
     this.div.attr('path', this.getPath())
     this.div.attr('selector', this.selector())
-    this.div.type = 'div'
+    this.div.tag = 'div'
     $('#nudgepadStageBody').append(this.div.toHtml())
     return this
   }

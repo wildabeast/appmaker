@@ -4,7 +4,7 @@ nudgepad.pages.edge = new Space()
 
 nudgepad.pages.blank = function () {
 
-  var page = new Space('title\n type title\n content Untitled')
+  var page = new Space('title\n tag title\n content Untitled')
   var pageName = prompt('Name your page', nudgepad.pages.nextName())
   if (!pageName)
     return null

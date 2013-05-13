@@ -38,16 +38,16 @@ nudgepad.contentEditor.focus = function (selector, selectAll) {
   if (!scrap.isContentEditable()) {
     
     var attr = 'content'
-    var type = scrap.values.type
+    var tag = scrap.values.tag
     
-    if (type && type.match(/^(list)$/)) {
+    if (tag && tag.match(/^(list)$/)) {
       nudgepad.stage.selection.clear()
       element.selectMe()
       nudgepad.stage.selection.editSource()
       return false
     }
     
-    if (type && type.match(/^(textarea|input|password)$/))
+    if (tag && tag.match(/^(textarea|input|password)$/))
       attr = 'placeholder'
     
     nudgepad.textPrompt('Editing content for this block', scrap.values[attr], function (val) {

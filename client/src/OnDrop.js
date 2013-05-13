@@ -7,7 +7,7 @@ nudgepad.ondrop = function(e) {
   var reader = new FileReader()
   reader.onload = function(evt) {
     var space = new Space(
-      "type img\n" +
+      "tag img\n" +
       "src " + evt.target.result +
       "\nstyle" +
       "\n width auto" +

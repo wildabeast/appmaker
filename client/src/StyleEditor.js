@@ -128,7 +128,7 @@ nudgepad.styleEditor = function (scrap) {
    _.each(site.values.pages.values, function (value, name) {
      var link = $('<option value="' + name + '">' + ToProperCase(name) + '</option>')
      link.on('click', function () {
-       nudgepad.stage.selection.patch('type a\nhref ' + $(this).attr('value'))
+       nudgepad.stage.selection.patch('tag a\nhref ' + $(this).attr('value'))
      })
      linkOptions.append(link)
    })
@@ -139,7 +139,7 @@ nudgepad.styleEditor = function (scrap) {
      var linkUrl = prompt('Enter the name of your new page', nudgepad.pages.nextName(nudgepad.stage.activePage))
      if (linkUrl) {
        linkUrl = Permalink(linkUrl)
-       nudgepad.stage.selection.patch('type a\nhref ' + linkUrl)
+       nudgepad.stage.selection.patch('tag a\nhref ' + linkUrl)
        save_button.trigger('click')
        var currentPage = nudgepad.stage.activePage
        nudgepad.pages.duplicate(null, linkUrl, true)
@@ -153,7 +153,7 @@ nudgepad.styleEditor = function (scrap) {
    externalLink.on('click', function () {
      var linkUrl = prompt('Enter the url to link to', 'http://')
      if (linkUrl)
-       nudgepad.stage.selection.patch('type a\nhref ' + linkUrl)
+       nudgepad.stage.selection.patch('tag a\nhref ' + linkUrl)
    })
    linkOptions.append(externalLink)
    
