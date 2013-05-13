@@ -1,5 +1,5 @@
 head
- type page
+ tag page
  title email_signup
  stylesheets /nudgepad/blocks.css site.css
  scripts http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js
@@ -39,7 +39,7 @@ email_address
   left -1px
   padding 0
   padding-left 5px
- type email
+ tag email
  placeholder Email address
  class email
 block1

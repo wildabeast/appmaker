@@ -1,5 +1,5 @@
 head
- type page
+ tag page
  title Untitled
  stylesheets /nudgepad/blocks.css
  style
@@ -47,7 +47,7 @@ block1
   text-align center
  content The Nudgepad Times
 block17
- type img
+ tag img
  src /nudgepad/images/pic.jpg
  style
   left 259px

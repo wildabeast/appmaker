@@ -1,5 +1,5 @@
 head
- type page
+ tag page
  title Untitled
  stylesheets /nudgepad/blocks.css
  style
@@ -8,7 +8,7 @@ head
    height 1000px
    background-color white
 block2
- type iframe
+ tag iframe
  src http://nudgepad.com/iframe
  style
   height 245px

@@ -11,5 +11,5 @@ block1
   -webkit-appearance normal
   top 0
   left 0
- type input
+ tag input
  placeholder Type Here

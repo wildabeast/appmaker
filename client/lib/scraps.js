@@ -6,8 +6,8 @@ if (typeof exports != 'undefined') {
 }
 // Use of certain client side functions depends on jQuery inclusion.
 
-function Element (type, attrs) {
-  this.type = type
+function Element (tag, attrs) {
+  this.tag = tag
   this.attrs = attrs || {}
   this.content = ''
   return this
@@ -33,7 +33,7 @@ Element.prototype.html = function (string) {
 }
 
 Element.prototype.toHtml = function () {
-  var string = '<' + this.type
+  var string = '<' + this.tag
   
   for (var i in this.attrs) {
     if (!this.attrs.hasOwnProperty(i))
@@ -42,7 +42,7 @@ Element.prototype.toHtml = function () {
   }
   string += '>' + this.content
   
-  string += '</' + this.type + '>'
+  string += '</' + this.tag + '>'
   return string
 }
 
@@ -78,12 +78,12 @@ function Scrap (path, space) {
  * @param {string} Options: nl2br|text|html|markdown
  * @return {string}
  */
-Scrap.format = function (string, type) {
-  if (type === 'nl2br')
+Scrap.format = function (string, format) {
+  if (format === 'nl2br')
     return string.replace(/\n/g, '<br>')
   
   // todo
-  else if (type === 'markdown')
+  else if (format === 'markdown')
     return marked(string)
   return string
 }
@@ -194,16 +194,16 @@ Scrap.prototype.clone = function (id) {
 }
 
 /**
- * Sets the innerHTML for uls, ols, and list types. Basically, appends the child
+ * Sets the innerHTML for uls, ols, and list tags. Basically, appends the child
  * elements.
  *
  * Example list:
  * scrap1
- *  type ul
+ *  tag ul
  *  loop {{colors}}
  *  scraps
  *   {{name}}
- *    type ul
+ *    tag ul
  *    content {{value}}
  *
  * @param {object} Context to evaluate any variables in.
@@ -289,32 +289,22 @@ Scrap.prototype.setContent = function (context) {
 }
 
 /**
- * Creates this.div. Sets the type and HTML attrs of the dom element.
+ * Creates this.div. Sets the tag and HTML attrs of the dom element.
  *
  * @param {object} Context to evaluate any variables in.
  */
-Scrap.prototype.setElementType = function (context) {
-  
-  // todo: change type property to element or "kind"
+Scrap.prototype.setElementTag = function (context) {
   
   // Create the div and all static properties
 
-  type = (this.values.type ? this.values.type : 'div')
+  tag = (this.values.tag ? this.values.tag : 'div')
   
-  // todo: remove $
-  if (type.match(/^(checkbox|color|date|datetime|email|file|month|number|password|radio|range|search|tel|text|time|url|week)$/))
-    this.div = new Element('input', {type : type})
-  else if (type === 'inputbutton')
-    this.div = new Element('input', {type : 'button'})
-  else if (type === 'hidden')
-    this.div = new Element('input', {type : 'hidden'})
-  else
-    this.div = new Element(type)
+  this.div = new Element(tag)
 
   // Add the id
   this.div.attr('id', this.id)
   
-  var properties = 'checked class disabled draggable dropzone end for height href max maxlength min name origin pattern placeholder readonly rel required selected spellcheck src tabindex target title width value'.split(/ /)
+  var properties = 'checked class disabled draggable dropzone end for height href max maxlength min name origin pattern placeholder readonly rel required selected spellcheck src tabindex target title type width value'.split(/ /)
   for (var i in properties) {
     this.setProperty(properties[i], context)
   }
@@ -370,7 +360,7 @@ Scrap.prototype.setStyle = function (context) {
  * @return {string}
  */
 Scrap.prototype.toHtml = function (context) {
-  this.setElementType(context)
+  this.setElementTag(context)
   this.setContent(context)
   this.setStyle(context)
   this.setScript(context)

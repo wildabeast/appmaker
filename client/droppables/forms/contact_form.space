@@ -1,5 +1,5 @@
 head
- type page
+ tag page
  title Untitled
  stylesheets /nudgepad/blocks.css
  style
@@ -38,7 +38,7 @@ email_address
   left 0px
   padding 0
   padding-left 5px
- type email
+ tag email
  placeholder Email address
  class email
  tabindex 2
@@ -65,7 +65,7 @@ comment
   left 0px
   padding 3px
   margin 0
- type textarea
+ tag textarea
  placeholder How can we help you?
  class comment
  tabindex 3
@@ -81,7 +81,7 @@ name
   left 0px
   padding 0
   padding-left 5px
- type text
+ tag text
  placeholder Your name
  class name
  tabindex 1

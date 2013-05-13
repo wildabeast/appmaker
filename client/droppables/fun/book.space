@@ -1,5 +1,5 @@
 head
- type page
+ tag page
  title Untitled
  stylesheets /nudgepad/blocks.css
  style
@@ -124,7 +124,7 @@ block2
   border-top 1px solid #e1e4ed
   z-index 2
 block17
- type img
+ tag img
  src /nudgepad/images/obama.jpg
  style
   left 290px
@@ -132,7 +132,7 @@ block17
   width 321.5px
   height auto
 block18
- type img
+ tag img
  src /nudgepad/images/obama_small.jpg
  style
   left 222px

@@ -1,5 +1,5 @@
 head
- type page
+ tag page
  title {{nudgepad.post.title}}
  style
   body

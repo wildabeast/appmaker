@@ -1,5 +1,5 @@
 head
- type creation
+ tag creation
  title Untitled
  category content
  stylesheets /nudgepad/blocks.css
@@ -17,7 +17,7 @@ block1
   color #333
   top 0
   left 0
- type list
+ tag list
  item
   style
    color #333
