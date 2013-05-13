@@ -45,7 +45,7 @@ case "$1" in
 ;;
 
 'backup')
-  source cron/gitBackup.sh
+  source cron/backup.sh
 ;;
 
 'clear')
