@@ -7,4 +7,4 @@ space.every(function (key, value) {
   if (key === 'type')
     this.rename('type', 'tag')
 })
-fs.writeFileSync(space.toString(), 'utf8')
+fs.writeFileSync(file, space.toString(), 'utf8')
