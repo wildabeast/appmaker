@@ -57,7 +57,7 @@ nudgepad.on('main', function () {
         break;
 
       case "text":
-        result = ['text', 'nav'];  
+        result = ['text', 'nav', 'paragraph'];  
         break;
 
       case "image":
