@@ -10311,13 +10311,21 @@ nudgepad.iosMain = function () {
     })
   }
 }
+// http://stackoverflow.com/questions/3562493/jquery-insert-div-as-certain-index
+$.fn.insertAt = function(index, element) {
+  var lastIndex = this.children().size()
+  if (index < 0) {
+    index = Math.max(0, lastIndex + 1 + index)
+  }
+  this.append(element)
+  if (index < lastIndex) {
+    this.children().eq(index).before(this.children().last())
+  }
+  return this
+}
 $.fn.owner = function () {
   return nudgepad.pages.stage.get($(this).attr('value')).element()
 }
-$.fn.scrap = function () {
-  return nudgepad.pages.stage.get($(this).attr('path'))
-}
-
 $.fn.deselect = function () {
   var id = $(this).attr('id')
   $(this).removeClass('selection')
@@ -10326,6 +10334,37 @@ $.fn.deselect = function () {
   return $(this)
 }
 
+$.fn.duplicate = function () {
+  
+  var scrap = $(this).scrap()
+  var id = $(this).attr('id')
+  var parent = nudgepad.pages.stage
+  var path = $(this).parentPath()
+  if (path) {
+    parent = nudgepad.pages.stage.get(path)
+    path = path.replace(/ scraps/g,'') + ' '
+  }
+  var key = parent.autokey(id)
+  var newScrap = new Scrap(path + key, scrap.toString())
+  var index = parent.keys.indexOf(id) + 1
+  parent.set(key, newScrap, index)
+  $(this).deselect()
+  var element = newScrap.render(null, index).element()
+  if (element.css('position') === 'absolute')
+    newScrap.move(10,10)
+  element.selectMe()
+}
+
+$.fn.parentPath = function () {
+  var path = $(this).attr('path')
+  if (!path.match(/ /))
+    return ''
+  return path.replace(/ [^ ]+$/,'')
+}
+
+$.fn.scrap = function () {
+  return nudgepad.pages.stage.get($(this).attr('path'))
+}
 
 /**
  * @param {string}
@@ -11554,7 +11593,7 @@ Scrap.prototype.parentSelector = function () {
 /**
  * @return this
  */
-Scrap.prototype.render = function (context) {
+Scrap.prototype.render = function (context, index) {
   // dont render invisibles
   if (this.values.type && this.values.type.match(/title|script|meta|head/))
     return this
@@ -11581,7 +11620,10 @@ Scrap.prototype.render = function (context) {
   }
   
   // Remove the style, the html, and the script
-  $(this.parentSelector()).append(this.toHtml(context))
+  if (index)
+    $(this.parentSelector()).insertAt(index, this.toHtml(context))
+  else
+    $(this.parentSelector()).append(this.toHtml(context))
   return this
 }
 
@@ -11999,7 +12041,11 @@ nudgepad.stage.selection.distributeHorizontal = function () {
  * Duplicate the selected blocks. Offset them to the right.
  */
 nudgepad.stage.selection.duplicate = function () {
-  return nudgepad.stage.insert(nudgepad.stage.selection.toSpace(), false, 10, 10, false)
+  $('.selection').each(function () {
+    $(this).duplicate()
+  })
+  nudgepad.stage.commit()
+//  return nudgepad.stage.insert(nudgepad.stage.selection.toSpace(), false, 10, 10, false)
 }
 
 nudgepad.stage.selection.editLoop = function () {

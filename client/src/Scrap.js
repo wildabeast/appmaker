@@ -123,7 +123,7 @@ Scrap.prototype.parentSelector = function () {
 /**
  * @return this
  */
-Scrap.prototype.render = function (context) {
+Scrap.prototype.render = function (context, index) {
   // dont render invisibles
   if (this.values.type && this.values.type.match(/title|script|meta|head/))
     return this
@@ -150,7 +150,10 @@ Scrap.prototype.render = function (context) {
   }
   
   // Remove the style, the html, and the script
-  $(this.parentSelector()).append(this.toHtml(context))
+  if (index)
+    $(this.parentSelector()).insertAt(index, this.toHtml(context))
+  else
+    $(this.parentSelector()).append(this.toHtml(context))
   return this
 }
 

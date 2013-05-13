@@ -181,7 +181,11 @@ nudgepad.stage.selection.distributeHorizontal = function () {
  * Duplicate the selected blocks. Offset them to the right.
  */
 nudgepad.stage.selection.duplicate = function () {
-  return nudgepad.stage.insert(nudgepad.stage.selection.toSpace(), false, 10, 10, false)
+  $('.selection').each(function () {
+    $(this).duplicate()
+  })
+  nudgepad.stage.commit()
+//  return nudgepad.stage.insert(nudgepad.stage.selection.toSpace(), false, 10, 10, false)
 }
 
 nudgepad.stage.selection.editLoop = function () {
