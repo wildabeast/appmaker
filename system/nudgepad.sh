@@ -44,6 +44,10 @@ case "$1" in
   echo $activeSites
 ;;
 
+'backup')
+  source cron/gitBackup.sh
+;;
+
 'clear')
   for d in $activeSites
   do
@@ -98,14 +102,6 @@ case "$1" in
 
 'fixPermissions')
   fixPermissions
-;;
-
-'gitBackup')
-  sudo rsync -a $sitesPath $backupPath --exclude=".git/*" --exclude=".git"
-  cd $backupPath
-  sudo git add .
-  sudo git commit -am "Backup updated"
-  sudo git push
 ;;
 
 'host')

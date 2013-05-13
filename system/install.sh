@@ -9,5 +9,6 @@ if [ ! -d "$dataPath" ]
     mkdir $logsPath
     mkdir $backupPath
     mkdir $panelPath
+    mkdir $privatePath
     fixPermissions
 fi

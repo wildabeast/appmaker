@@ -8,6 +8,7 @@ fixPermissions ()
   chmod 700 $tempPath
   chmod 700 $panelPath
   chmod 700 $backupPath
+  chmod 700 $privatePath
   
   if isMac
     then

@@ -9,5 +9,6 @@ tempPath=$dataPath/temp/
 logsPath=$dataPath/logs/
 backupPath=$dataPath/backup/
 panelPath=$dataPath/panel/
+privatePath=$dataPath/private/
 
 
