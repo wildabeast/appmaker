@@ -396,14 +396,14 @@ var stageViews = new Space({
     })
   },
   'ipad' : function (){
-    var padding = Math.round(($(window).width() - 768)/2) + 'px'
+    var padding = Math.round(($(window).width() - 1024)/2) + 'px'
     $('#nudgepadStage').css({
-      width : '768px',
+      width : '1024px',
       padding : '20px ' + padding + ' 20px ' + padding,
     })
     $('#nudgepadStageBody').css({
       'height' : '100%',
-      'min-height' : '1024px'
+      'min-height' : '768px'
     })
   },
   'ios' : function (){
