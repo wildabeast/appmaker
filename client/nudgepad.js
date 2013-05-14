@@ -10415,6 +10415,42 @@ $.fn.selectMe = function () {
   
   return $(this)
 }
+
+$.fn.togglePosition = function () {
+  var scrap = $(this).scrap()
+  var position = 'absolute'
+  if ($(this).css('position') === 'absolute') {
+    position = 'relative'
+    scrap.set('style left', '')
+    scrap.set('style top', '')
+  } else {
+    scrap.set('style left', '0px')
+    scrap.set('style top', '0px')
+  }
+  scrap.set('style position', position)
+  $(this).attr('style', '')
+  $(this).css(scrap.get('style').values)
+}
+
+$.fn.toggleSize = function () {
+  var scrap = $(this).scrap()
+  
+  var width = $(this).width() + 'px'
+  if (!scrap.get('style width') || !scrap.get('style width').match(/\%/))
+    width = Math.round(100*$(this).width()/$(this).parent().width()) + '%'
+  scrap.set('style width', width)
+  
+  var height = $(this).height() + 'px'
+  if (!scrap.get('style height') || !scrap.get('style height').match(/\%/))
+    height = Math.round(100*$(this).height()/$(this).parent().height()) + '%'
+  scrap.set('style height', height)
+  
+  $(this).css({
+    width : width,
+    height : height
+  })
+}
+
 /**
  * We provide easy access to querying the mouse position and state.
  *
@@ -10599,8 +10635,13 @@ nudgepad.MoveHandle.create = function (scrap) {
   element.parent().append(div)
   div.on("tap", nudgepad.MoveHandle.tap)
   div.on("update", nudgepad.MoveHandle.update)
-  div.on("dblclick", function () {
-    scrap.edit(true)
+  div.on("dblclick", function (event) {
+    if (event.metaKey) {
+      element.togglePosition()
+      nudgepad.stage.commit()
+      element.deselect().selectMe()
+    } else
+      scrap.edit(true)
   })
   
   div.trigger("update")

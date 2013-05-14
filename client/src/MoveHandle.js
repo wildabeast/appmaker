@@ -30,8 +30,13 @@ nudgepad.MoveHandle.create = function (scrap) {
   element.parent().append(div)
   div.on("tap", nudgepad.MoveHandle.tap)
   div.on("update", nudgepad.MoveHandle.update)
-  div.on("dblclick", function () {
-    scrap.edit(true)
+  div.on("dblclick", function (event) {
+    if (event.metaKey) {
+      element.togglePosition()
+      nudgepad.stage.commit()
+      element.deselect().selectMe()
+    } else
+      scrap.edit(true)
   })
   
   div.trigger("update")
