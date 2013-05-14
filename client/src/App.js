@@ -62,6 +62,8 @@ App.prototype.open = function () {
   if (this.onready)
     this.onready()
 
+  mixpanel.track('I opened the ' + this.name + ' app')
+
 }
 
 /**

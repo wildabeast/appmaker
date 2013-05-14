@@ -149,7 +149,8 @@ nudgepad.apps.blog.savePost = function () {
   
   if (!name)
     return nudgepad.error('Title cannot be blank')
-  
+
+  mixpanel.track('I saved a blog post')
   var post = site.get('posts ' + name)
   if (!post)
     post = new Space()

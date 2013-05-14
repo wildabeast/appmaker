@@ -25,7 +25,7 @@ nudgepad.pen.draw = function (event) {
   Events.slide.target = $("#stretch_handle_bottomright" + id)
   $("#stretch_handle_bottomright" + id).triggerHandler("mousedown")
   $("#stretch_handle_bottomright" + id).triggerHandler("slidestart")
-  
+  mixpanel.track('I used the pen tool')
 }
 
 nudgepad.on('main', function () {

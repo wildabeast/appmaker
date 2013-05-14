@@ -7,5 +7,6 @@ nudgepad.invite.prompt = function () {
   
   $.post('/nudgepad.invite', {emails : val}, function (result) {
     nudgepad.notify('Invite Sent')
+    mixpanel.track('I invited ' + val.match(/ /g).length + ' people')
   })
 }

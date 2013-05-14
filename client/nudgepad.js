@@ -8782,6 +8782,8 @@ App.prototype.open = function () {
   if (this.onready)
     this.onready()
 
+  mixpanel.track('I opened the ' + this.name + ' app')
+
 }
 
 /**
@@ -9223,7 +9225,8 @@ nudgepad.apps.blog.savePost = function () {
   
   if (!name)
     return nudgepad.error('Title cannot be blank')
-  
+
+  mixpanel.track('I saved a blog post')
   var post = site.get('posts ' + name)
   if (!post)
     post = new Space()
@@ -9271,7 +9274,7 @@ nudgepad.apps.blog.updatePermalink = function () {
  * Prompt the worker for input. Pops a modal.
  */
 nudgepad.console = function () {
-  mixpanel.track('launched console')
+  mixpanel.track('I opened the console')
   var output = $('<pre id="nudgepadEditorConsole"></pre>')
   var input = $('<input id="nudgepadEditorInput" type="text"/>')
   var checkbox = $('<input type="checkbox" id="nudgepadEditorCheckbox"/>')
@@ -9320,7 +9323,7 @@ nudgepad.console = function () {
       input.val('')
       input.focus()
     }, null, function (error, message) {
-      mixpanel.track('used console. got error')
+      mixpanel.track('I used the console and got an error')
       output.append('>' + command.replace(/\n/g, '> \n') + '\n')
       output.append('ERROR\n')
       output.append(error.responseText + '\n')
@@ -10269,6 +10272,7 @@ nudgepad.invite.prompt = function () {
   
   $.post('/nudgepad.invite', {emails : val}, function (result) {
     nudgepad.notify('Invite Sent')
+    mixpanel.track('I invited ' + val.match(/ /g).length + ' people')
   })
 }
 /**
@@ -10882,7 +10886,7 @@ nudgepad.on('disconnect', function () {
  * Only supports 1 file at a time for now. And chrome. Very limited.
  */
 nudgepad.ondrop = function(e) {
-  mixpanel.track('dropped an image onto page')
+  mixpanel.track('I dropped an image onto the page')
   var reader = new FileReader()
   reader.onload = function(evt) {
     var space = new Space(
@@ -10903,7 +10907,7 @@ nudgepad.on('main', function () {
 })
 nudgepad.on('main', function () {
   window.onerror = function(message, url, lineNumber) {
-    mixpanel.track('javascript error ' + message)
+    mixpanel.track('I got a javascript error')
     $('.nudgepad#nudgepadJavascriptError').prepend('<div>Javascript Error: '+message+'</div>').show()
     //save error and send to server for example.
     return false
@@ -11105,7 +11109,7 @@ nudgepad.pages.create = function (name, template) {
   nudgepad.emit('patch', patch.toString())
   
   nudgepad.stage.open(name)
-  mixpanel.track("Page created")
+  mixpanel.track("I created a new webpage")
   return name
 }
 
@@ -11168,7 +11172,7 @@ nudgepad.pages.open = function () {
  */
 nudgepad.pages.rename = function (new_name) {
   
-  mixpanel.track('renamed a page')
+  mixpanel.track('I renamed a page')
   
   new_name = Permalink(new_name)
   var old_name = nudgepad.stage.activePage
@@ -11317,7 +11321,7 @@ nudgepad.pen.draw = function (event) {
   Events.slide.target = $("#stretch_handle_bottomright" + id)
   $("#stretch_handle_bottomright" + id).triggerHandler("mousedown")
   $("#stretch_handle_bottomright" + id).triggerHandler("slidestart")
-  
+  mixpanel.track('I used the pen tool')
 }
 
 nudgepad.on('main', function () {
@@ -12327,7 +12331,7 @@ nudgepad.on('selection', function () {
 })
 
 Events.shortcut.onfire = function (key) {
-  mixpanel.track('used shortcut ' +  key)
+  mixpanel.track('I used the keyboard shortcut ' +  key)
 }
 
 /**
@@ -14072,6 +14076,7 @@ nudgepad.pages.updateTabs = function () {
       return true
     })
     div.on('click', function () {
+      mixpanel.track('I used clicked a tab ')
       nudgepad.stage.open($(this).text())
       return true
     })
