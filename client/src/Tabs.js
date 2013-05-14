@@ -16,7 +16,7 @@ nudgepad.pages.updateTabs = function () {
       return true
     })
     div.on('click', function () {
-      mixpanel.track('I used clicked a tab ')
+      mixpanel.track('I clicked a page tab')
       nudgepad.stage.open($(this).text())
       return true
     })
