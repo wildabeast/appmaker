@@ -3,7 +3,7 @@
  * Only supports 1 file at a time for now. And chrome. Very limited.
  */
 nudgepad.ondrop = function(e) {
-  nudgepad.feedback.record('dropped an image onto page')
+  mixpanel.track('dropped an image onto page')
   var reader = new FileReader()
   reader.onload = function(evt) {
     var space = new Space(

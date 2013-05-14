@@ -4,7 +4,7 @@
  * Prompt the worker for input. Pops a modal.
  */
 nudgepad.console = function () {
-  nudgepad.feedback.record('launched console')
+  mixpanel.track('launched console')
   var output = $('<pre id="nudgepadEditorConsole"></pre>')
   var input = $('<input id="nudgepadEditorInput" type="text"/>')
   var checkbox = $('<input type="checkbox" id="nudgepadEditorCheckbox"/>')
@@ -53,7 +53,7 @@ nudgepad.console = function () {
       input.val('')
       input.focus()
     }, null, function (error, message) {
-      nudgepad.feedback.record('used console. got error')
+      mixpanel.track('used console. got error')
       output.append('>' + command.replace(/\n/g, '> \n') + '\n')
       output.append('ERROR\n')
       output.append(error.responseText + '\n')

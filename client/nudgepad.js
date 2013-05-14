@@ -9271,7 +9271,7 @@ nudgepad.apps.blog.updatePermalink = function () {
  * Prompt the worker for input. Pops a modal.
  */
 nudgepad.console = function () {
-  nudgepad.feedback.record('launched console')
+  mixpanel.track('launched console')
   var output = $('<pre id="nudgepadEditorConsole"></pre>')
   var input = $('<input id="nudgepadEditorInput" type="text"/>')
   var checkbox = $('<input type="checkbox" id="nudgepadEditorCheckbox"/>')
@@ -9320,7 +9320,7 @@ nudgepad.console = function () {
       input.val('')
       input.focus()
     }, null, function (error, message) {
-      nudgepad.feedback.record('used console. got error')
+      mixpanel.track('used console. got error')
       output.append('>' + command.replace(/\n/g, '> \n') + '\n')
       output.append('ERROR\n')
       output.append(error.responseText + '\n')
@@ -9708,7 +9708,7 @@ nudgepad.feedback.session = {}
 nudgepad.feedback.session.user_agent = navigator.userAgent
 nudgepad.feedback.session.id = moment().format('MM.DD.YYYY_hh.mm.ssa')
 nudgepad.feedback.session.start = new Date().getTime()
-nudgepad.feedback.record = function (message) {
+mixpanel.track = function (message) {
   var key = Permalink(message)
   nudgepad.feedback.session[key] = (nudgepad.feedback.session[key] ? parseFloat(nudgepad.feedback.session[key]) + 1 : 1)
   // todo: add GA
@@ -10124,7 +10124,7 @@ Grid.prototype.getDelta = function (scrap_points) {
   if (!y_snapped) change.y = 0
   
   if (change.x || change.y)
-    nudgepad.feedback.record('snap happened')
+    mixpanel.track('snap happened')
   
   // The scrap points may have shifted in 2 directions, so make sure
   // we are drawing the *new* scrap points when we draw the snapline.
@@ -10897,7 +10897,7 @@ nudgepad.on('disconnect', function () {
  * Only supports 1 file at a time for now. And chrome. Very limited.
  */
 nudgepad.ondrop = function(e) {
-  nudgepad.feedback.record('dropped an image onto page')
+  mixpanel.track('dropped an image onto page')
   var reader = new FileReader()
   reader.onload = function(evt) {
     var space = new Space(
@@ -10918,7 +10918,7 @@ nudgepad.on('main', function () {
 })
 nudgepad.on('main', function () {
   window.onerror = function(message, url, lineNumber) {
-    nudgepad.feedback.record('javascript error ' + message)
+    mixpanel.track('javascript error ' + message)
     $('.nudgepad#nudgepadJavascriptError').prepend('<div>Javascript Error: '+message+'</div>').show()
     //save error and send to server for example.
     return false
@@ -11183,7 +11183,7 @@ nudgepad.pages.open = function () {
  */
 nudgepad.pages.rename = function (new_name) {
   
-  nudgepad.feedback.record('renamed a page')
+  mixpanel.track('renamed a page')
   
   new_name = Permalink(new_name)
   var old_name = nudgepad.stage.activePage
@@ -12342,7 +12342,7 @@ nudgepad.on('selection', function () {
 })
 
 Events.shortcut.onfire = function (key) {
-  nudgepad.feedback.record('used shortcut ' +  key)
+  mixpanel.track('used shortcut ' +  key)
 }
 
 /**

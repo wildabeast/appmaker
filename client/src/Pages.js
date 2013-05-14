@@ -76,7 +76,7 @@ nudgepad.pages.create = function (name, template) {
   nudgepad.emit('patch', patch.toString())
   
   nudgepad.stage.open(name)
-  
+  mixpanel.track("Page created")
   return name
 }
 
@@ -139,7 +139,7 @@ nudgepad.pages.open = function () {
  */
 nudgepad.pages.rename = function (new_name) {
   
-  nudgepad.feedback.record('renamed a page')
+  mixpanel.track('renamed a page')
   
   new_name = Permalink(new_name)
   var old_name = nudgepad.stage.activePage

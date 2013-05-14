@@ -1,5 +1,5 @@
 Events.shortcut.onfire = function (key) {
-  nudgepad.feedback.record('used shortcut ' +  key)
+  mixpanel.track('used shortcut ' +  key)
 }
 
 /**

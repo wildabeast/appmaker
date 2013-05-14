@@ -10,7 +10,6 @@
     <script type="text/javascript" src="/nudgepad/src/EditHandle.js"></script>
     <script type="text/javascript" src="/nudgepad/src/EmailPrompt.js"></script>
     <script type="text/javascript" src="/nudgepad/src/Explorer.js"></script>
-    <script type="text/javascript" src="/nudgepad/src/Feedback.js"></script>
     <script type="text/javascript" src="/nudgepad/src/GetPageDimensions.js"></script>
     <script type="text/javascript" src="/nudgepad/src/GitApp.js"></script>
     <script type="text/javascript" src="/nudgepad/src/Grid.js"></script>
