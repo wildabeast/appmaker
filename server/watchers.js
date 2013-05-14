@@ -1,6 +1,9 @@
 fs.watch(nudgepad.paths.public, function (event, filename) {
   
   // Trigger public changed event
+  // mac on old node wont emit filename
+  if (!filename)
+    filename = ''
   nudgepad.emit('public', filename)
   
 })
