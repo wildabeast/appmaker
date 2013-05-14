@@ -10,7 +10,6 @@
    },
   "dependencies": {
     "space": ">=0.1.4",
-    "spacefs": ">=0.1.1",
     "scraps": ">=0.2.1",
     "socket.io": ">=0.1.1",
     "express": ">=0.1.1",

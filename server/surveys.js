@@ -1,10 +1,11 @@
 site.get('/nudgepad.surveys', nudgepad.checkId, function (req, res, next) {
-  spacefs.folderToSpace(nudgepad.paths.surveys, function (err, space) {
-    if (err)
-      return res.send('Error', 500)
-    res.set('Content-Type', 'text/plain')  
-    return res.send(space.toString())  
+  
+  var output = nudgepad.paths.temp + 'surveys.space'
+  exec('space ' + nudgepad.paths.surveys + ' ' + output, function () {
+    res.set('Content-Type', 'text/plain')
+    res.sendfile(output)
   })
+  
 })
 
 site.post('/nudgepad.surveys', function (req, res, next) {

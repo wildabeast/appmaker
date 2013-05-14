@@ -21,8 +21,8 @@ var fs = require('fs'),
     parseCookie = require('cookie').parse,
     moment = require('moment'),
     os = require('os'),
+    async = require('async'),
     Space = require('space'),
-    spacefs = require('spacefs'),
     File = require('./File'),
     Page = require('scraps')
 
