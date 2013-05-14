@@ -55,6 +55,29 @@
 			text-indent: 10px;
 			margin: 0px;
 		}
+		
+		#nudgepadIndexFooter {
+			font-weight: 600;
+			font-size: 14px;
+			position: fixed;
+			bottom: 0;
+		}
+		
+		.nudgepadIndexFooterLink {
+			float: left;
+			padding: 5px 0px 20px 0px;
+		}
+		
+		.nudgepadIndexFooterLink a {
+		  border-top: 3px solid #ccc;
+		  padding-top: 3px;
+			text-decoration:none;
+			color: #777;
+		}
+		
+		#nudgepadIndexFooter a:hover {
+		  border-color: #1a86d6;
+		}
 
 		#createDomain {
 			height: 50px;
@@ -102,6 +125,12 @@
 					<button type="submit" id="createDomain">Create</button>
 				</form>
 				<div id="error"></div>
+				<div id="nudgepadIndexFooter">
+					<div class="nudgepadIndexFooterLink">
+						<a href="http://about.nudgepad.com">About</a>
+					</div>
+					<div class="clear"></div>
+				</div>
 			</div>
 		</div>
 	</body>
