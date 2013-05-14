@@ -10111,9 +10111,6 @@ Grid.prototype.getDelta = function (scrap_points) {
   if (!x_snapped) change.x = 0
   if (!y_snapped) change.y = 0
   
-  if (change.x || change.y)
-    mixpanel.track('snap happened')
-  
   // The scrap points may have shifted in 2 directions, so make sure
   // we are drawing the *new* scrap points when we draw the snapline.
   if (x_snapped) {
