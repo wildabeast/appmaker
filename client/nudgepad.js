@@ -9701,18 +9701,6 @@ nudgepad.explorer.edit = function (path) {
 
 
 
-nudgepad.feedback = {}
-
-nudgepad.feedback.opted_in = false
-nudgepad.feedback.session = {}
-nudgepad.feedback.session.user_agent = navigator.userAgent
-nudgepad.feedback.session.id = moment().format('MM.DD.YYYY_hh.mm.ssa')
-nudgepad.feedback.session.start = new Date().getTime()
-mixpanel.track = function (message) {
-  var key = Permalink(message)
-  nudgepad.feedback.session[key] = (nudgepad.feedback.session[key] ? parseFloat(nudgepad.feedback.session[key]) + 1 : 1)
-  // todo: add GA
-}
 nudgepad.getPageDimensions = function (page) {
   page = new Page(page)
   page._static = true
@@ -11120,7 +11108,7 @@ nudgepad.pages.create = function (name, template) {
   nudgepad.emit('patch', patch.toString())
   
   nudgepad.stage.open(name)
-  
+  mixpanel.track("Page created")
   return name
 }
 
