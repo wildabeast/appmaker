@@ -10242,6 +10242,9 @@ nudgepad.images.updateList = function () {
 
 // When an image is uploaded
 nudgepad.on('uploadComplete', nudgepad.images.updateList)
+nudgepad.on('uploadComplete', function () {
+  mixpanel.track('I uploaded something')
+})
 nudgepad.on('public', nudgepad.images.updateList)
 nudgepad.on('main', nudgepad.images.updateList)
 nudgepad.importPrompt = function () {
@@ -10805,6 +10808,7 @@ nudgepad.on('arrive', function (name) {
   if (name == nudgepad.name)
     return true
   nudgepad.notify(name + ' arrived')
+  mixpanel.track('I collaborated in realtime')
   nudgepad.updateRoom()
 })
 
@@ -10832,6 +10836,7 @@ nudgepad.oncopy = function(e) {
     var setStatus = window.clipboardData.setData(
       'Text', nudgepad.stage.selection.toSpace().toString())
   }
+  mixpanel.track('I copied something')
 }
 
 nudgepad.on('main', function () {
@@ -10865,6 +10870,7 @@ nudgepad.oncut = function(e) {
   }
   nudgepad.stage.selection.remove()
   nudgepad.stage.commit()
+  mixpanel.track('I cut something')
 }
 
 nudgepad.on('main', function () {
@@ -10973,6 +10979,7 @@ nudgepad.onpaste = function(e) {
     nudgepad.stage.open(nudgepad.stage.activePage)
     nudgepad.stage.selection.restore()
   }
+  mixpanel.track('I pasted something')
 }
 
 nudgepad.on('main', function () {
@@ -11136,6 +11143,8 @@ nudgepad.pages.duplicate = function (source, destination, skipPrompt) {
   if (!site.get('pages').get(source))
     return nudgepad.error('Page ' + source + ' not found')
   
+  mixpanel.track('I duplicated a page')
+  
   // If we are duplicating a page thats not open, easy peasy
   if (source !== nudgepad.stage.activePage)
     return nudgepad.pages.create(destination, site.get('pages').get(source))
@@ -11205,6 +11214,8 @@ nudgepad.pages.rename = function (new_name) {
   
   nudgepad.stage.open(new_name)
   
+  mixpanel.track('I renamed a page')
+  
   return ''
 
 }
@@ -11240,6 +11251,7 @@ nudgepad.pages.trash = function (name) {
   // Delete page from open pages
   nudgepad.pages.updateTabs()
   nudgepad.notify('Deleted ' + name, 1000)
+  mixpanel.track('I deleted a page')
   return ''
 }
 
@@ -11409,12 +11421,14 @@ nudgepad.on('main', function () {
       $('#droppablesList div img').on('slidestart', function() {
         var dropBlock = $(this).attr('title')
         nudgepad.stage.dragAndDrop(nudgepad.droppables.get('blocks ' + dropBlock))
+        mixpanel.track('I dropped a droppable')
       })
 
       $('.droppablesList div img').on('tap', function() {
         
         var dropBlock = $(this).attr('title')
         nudgepad.stage.insert(nudgepad.droppables.get('blocks ' + dropBlock), false, 0, 0, true)
+        mixpanel.track('I tapped a droppable')
       })
   }
   
@@ -11479,6 +11493,7 @@ nudgepad.on('main', function () {
   
   $('#nudgepadRibbon').on('slidestart', '.imageThumbDrop img', function() {
     nudgepad.stage.dragAndDrop('images\n style\n  position absolute\n  top 0px\n  left 0px\n tag img\n src ' + $(this).attr('src'))
+    mixpanel.track('I dropped a ribbon droppable')
   })
 
 
@@ -12464,6 +12479,7 @@ nudgepad.on('main', function () {
     if (!ValidateEmail(email))
       return nudgepad.error('Invalid Email')
     // todo, send back to nudgepad.com
+    mixpanel.track('I added my email')
     $.post('/nudgepad.updateEmail', {email : email, sendWelcomeEmail: 'true'}, function () {
       nudgepad.warnBeforeReload = false
       document.location = '/nudgepad?app=pages'
