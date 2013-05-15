@@ -26,6 +26,7 @@ nudgepad.oncut = function(e) {
   }
   nudgepad.stage.selection.remove()
   nudgepad.stage.commit()
+  mixpanel.track('I cut something')
 }
 
 nudgepad.on('main', function () {

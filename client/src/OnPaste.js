@@ -23,6 +23,7 @@ nudgepad.onpaste = function(e) {
     nudgepad.stage.open(nudgepad.stage.activePage)
     nudgepad.stage.selection.restore()
   }
+  mixpanel.track('I pasted something')
 }
 
 nudgepad.on('main', function () {

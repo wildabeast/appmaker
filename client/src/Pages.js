@@ -103,6 +103,8 @@ nudgepad.pages.duplicate = function (source, destination, skipPrompt) {
   if (!site.get('pages').get(source))
     return nudgepad.error('Page ' + source + ' not found')
   
+  mixpanel.track('I duplicated a page')
+  
   // If we are duplicating a page thats not open, easy peasy
   if (source !== nudgepad.stage.activePage)
     return nudgepad.pages.create(destination, site.get('pages').get(source))
@@ -172,6 +174,8 @@ nudgepad.pages.rename = function (new_name) {
   
   nudgepad.stage.open(new_name)
   
+  mixpanel.track('I renamed a page')
+  
   return ''
 
 }
@@ -207,6 +211,7 @@ nudgepad.pages.trash = function (name) {
   // Delete page from open pages
   nudgepad.pages.updateTabs()
   nudgepad.notify('Deleted ' + name, 1000)
+  mixpanel.track('I deleted a page')
   return ''
 }
 

@@ -90,5 +90,8 @@ nudgepad.images.updateList = function () {
 
 // When an image is uploaded
 nudgepad.on('uploadComplete', nudgepad.images.updateList)
+nudgepad.on('uploadComplete', function () {
+  mixpanel.track('I uploaded something')
+})
 nudgepad.on('public', nudgepad.images.updateList)
 nudgepad.on('main', nudgepad.images.updateList)

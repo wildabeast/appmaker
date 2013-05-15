@@ -29,6 +29,7 @@ nudgepad.on('main', function () {
     if (!ValidateEmail(email))
       return nudgepad.error('Invalid Email')
     // todo, send back to nudgepad.com
+    mixpanel.track('I added my email')
     $.post('/nudgepad.updateEmail', {email : email, sendWelcomeEmail: 'true'}, function () {
       nudgepad.warnBeforeReload = false
       document.location = '/nudgepad?app=pages'

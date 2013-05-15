@@ -197,7 +197,7 @@
   </div>
   <div id="nudgepadPagesBar" class="nudgepad">
   
-    <div title="menu" id="menuButton" onclick="nudgepad.popup.open('#nudgepadPageMenu')"></div>
+    <div title="menu" id="menuButton" onclick="nudgepad.popup.open('#nudgepadPageMenu'); mixpanel.track('I opened the designer menu');"></div>
   
     <div title="Block" id="blockDroppable" class="barDroppable"><img src="/nudgepad/images/block.png"></div>
   

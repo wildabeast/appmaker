@@ -13,12 +13,14 @@ nudgepad.on('main', function () {
       $('#droppablesList div img').on('slidestart', function() {
         var dropBlock = $(this).attr('title')
         nudgepad.stage.dragAndDrop(nudgepad.droppables.get('blocks ' + dropBlock))
+        mixpanel.track('I dropped a droppable')
       })
 
       $('.droppablesList div img').on('tap', function() {
         
         var dropBlock = $(this).attr('title')
         nudgepad.stage.insert(nudgepad.droppables.get('blocks ' + dropBlock), false, 0, 0, true)
+        mixpanel.track('I tapped a droppable')
       })
   }
   
@@ -83,6 +85,7 @@ nudgepad.on('main', function () {
   
   $('#nudgepadRibbon').on('slidestart', '.imageThumbDrop img', function() {
     nudgepad.stage.dragAndDrop('images\n style\n  position absolute\n  top 0px\n  left 0px\n tag img\n src ' + $(this).attr('src'))
+    mixpanel.track('I dropped a ribbon droppable')
   })
 
 

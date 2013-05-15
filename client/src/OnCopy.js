@@ -22,6 +22,7 @@ nudgepad.oncopy = function(e) {
     var setStatus = window.clipboardData.setData(
       'Text', nudgepad.stage.selection.toSpace().toString())
   }
+  mixpanel.track('I copied something')
 }
 
 nudgepad.on('main', function () {
