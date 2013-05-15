@@ -3,6 +3,7 @@
     <link rel="stylesheet" href="/nudgepad/css/accountApp.css" type="text/css"/>
     <link rel="stylesheet" href="/nudgepad/css/antiAliasedFix.css" type="text/css"/>
     <link rel="stylesheet" href="/nudgepad/css/blogApp.css" type="text/css"/>
+    <link rel="stylesheet" href="/nudgepad/css/codePanel.css" type="text/css"/>
     <link rel="stylesheet" href="/nudgepad/css/connectionStatus.css" type="text/css"/>
     <link rel="stylesheet" href="/nudgepad/css/console.css" type="text/css"/>
     <link rel="stylesheet" href="/nudgepad/css/developApp.css" type="text/css"/>

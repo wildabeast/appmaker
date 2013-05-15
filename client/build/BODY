@@ -71,6 +71,7 @@
   	  </div>
     </div>
   </div>
+  <textarea id="nudgepadCodePanel"></textarea>
   <div id="nudgepadConnectionStatus" class="nudgepad">Connecting to server...</div>
   <div class="nudgepadFullScreenApp" id="nudgepadDevelopApp">
   	<div class="appNav">

@@ -3,6 +3,7 @@
     <script type="text/javascript" src="/nudgepad/src/AccountApp.js"></script>
     <script type="text/javascript" src="/nudgepad/src/barMenu.js"></script>
     <script type="text/javascript" src="/nudgepad/src/BlogApp.js"></script>
+    <script type="text/javascript" src="/nudgepad/src/CodePanel.js"></script>
     <script type="text/javascript" src="/nudgepad/src/Console.js"></script>
     <script type="text/javascript" src="/nudgepad/src/ContentEditor.js"></script>
     <script type="text/javascript" src="/nudgepad/src/DevelopApp.js"></script>

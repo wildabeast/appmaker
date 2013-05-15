@@ -40,6 +40,8 @@ nudgepad.bind_shortcuts = function () {
   Events.shortcut.shortcuts['ctrl+u'] = editSourceToggle
   Events.shortcut.shortcuts['meta+u'] = editSourceToggle
   
+  Events.shortcut.shortcuts['meta+shift+u'] = nudgepad.codePanel.toggle
+  
   Events.shortcut.shortcuts['meta+e'] = nudgepad.stage.selection.editProperty
   
   
