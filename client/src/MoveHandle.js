@@ -113,8 +113,8 @@ nudgepad.MoveHandle.slide = function (event, mouseEvent) {
   
   var position = 'X ' + parseFloat(owner.css('left')) + '<br>Y ' + parseFloat(owner.css('top'))
   $('#nudgepadDimensions').css({
-    left : 10 + owner.right(),
-    top : -10 + owner.middle()
+    left : 10 + owner.offset().left + owner.outerWidth(),
+    top : -10 + owner.offset().top + Math.round(owner.outerHeight()/2)
     }).html(position)
   
   nudgepad.MoveHandle.last_x_change = x_change
@@ -128,7 +128,7 @@ nudgepad.MoveHandle.slideend = function () {
   
   $('.handle').trigger('update').show()
   nudgepad.grid.removeSnaplines()
-  $('#nudgepadDimensions').remove()
+  $('#nudgepadDimensions').hide()
   nudgepad.stage.commit()
 }
 
@@ -137,10 +137,9 @@ nudgepad.MoveHandle.slidestart = function () {
   $('.handle').not(this).hide()
   var owner = $(this).owner()
   var position = 'X ' + parseFloat(owner.css('left')) + '<br>Y ' + parseFloat(owner.css('top'))
-  owner.parent().append($('<div id="nudgepadDimensions" class="nudgepad_popup"></div>'))
   $('#nudgepadDimensions').css({
-    left : 10 + owner.right(),
-    top : -10 + owner.middle()
+    left : 10 + owner.offset().left + owner.outerWidth(),
+    top : -10 + owner.offset().top + Math.round(owner.outerHeight()/2)
     }).html(position).show()
   return false
 }

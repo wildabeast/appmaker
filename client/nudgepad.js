@@ -10776,8 +10776,8 @@ nudgepad.MoveHandle.slide = function (event, mouseEvent) {
   
   var position = 'X ' + parseFloat(owner.css('left')) + '<br>Y ' + parseFloat(owner.css('top'))
   $('#nudgepadDimensions').css({
-    left : 10 + owner.right(),
-    top : -10 + owner.middle()
+    left : 10 + owner.offset().left + owner.outerWidth(),
+    top : -10 + owner.offset().top + Math.round(owner.outerHeight()/2)
     }).html(position)
   
   nudgepad.MoveHandle.last_x_change = x_change
@@ -10791,7 +10791,7 @@ nudgepad.MoveHandle.slideend = function () {
   
   $('.handle').trigger('update').show()
   nudgepad.grid.removeSnaplines()
-  $('#nudgepadDimensions').remove()
+  $('#nudgepadDimensions').hide()
   nudgepad.stage.commit()
 }
 
@@ -10800,10 +10800,9 @@ nudgepad.MoveHandle.slidestart = function () {
   $('.handle').not(this).hide()
   var owner = $(this).owner()
   var position = 'X ' + parseFloat(owner.css('left')) + '<br>Y ' + parseFloat(owner.css('top'))
-  owner.parent().append($('<div id="nudgepadDimensions" class="nudgepad_popup"></div>'))
   $('#nudgepadDimensions').css({
-    left : 10 + owner.right(),
-    top : -10 + owner.middle()
+    left : 10 + owner.offset().left + owner.outerWidth(),
+    top : -10 + owner.offset().top + Math.round(owner.outerHeight()/2)
     }).html(position).show()
   return false
 }
@@ -11323,6 +11322,18 @@ nudgepad.pages.trash = function (name) {
 
 nudgepad.on('main', function () {
   
+  $('#nudgepadPagesBar #menuButton').on('mousedown', function (event) {
+    if ($('#nudgepadPageMenu:visible').length > 0) {
+      nudgepad.popup.hide(event)
+      return true
+    }
+    nudgepad.popup.open('#nudgepadPageMenu')
+    mixpanel.track('I opened the designer menu')
+  })
+  $('#nudgepadPagesBar #menuButton').on('mouseup', function (event) {
+    event.stopPropagation()
+    return false
+  })
 
   // We do this on live, so that it wont interfere with events bound
   // to items inside the ribbon, but it will prevent events from
@@ -11410,50 +11421,33 @@ nudgepad.on('main', function () {
 
 
 nudgepad.popup = {}
-nudgepad.popup.openPopup = false
 
 /**
  * @param {object} mouseup event
  */
 nudgepad.popup.hide = function (event) {
 
-  if (event.which != 1)
+  if (event.which !== 1)
     return true
-
-  $('.nudgepad_popup').hide()
-  
-  if (!nudgepad.popup.openPopup) {
-    nudgepad.popup.closedPopup = false
-    return true
-  }
-    
-  $(nudgepad.popup.openPopup).hide()
-  nudgepad.popup.closedPopup = nudgepad.popup.openPopup
-  nudgepad.popup.openPopup = false
-  
+  console.log('hide')
+  $('.nudgepadPopup').hide()
+  console.log(event)
+  $('body').off('mouseup touchend', nudgepad.popup.hide)
+  nudgepad.popup.isOpen = false
   return true
 }
 
+nudgepad.popup.isOpen = false
+
 nudgepad.popup.open = function (element) {
-  if (nudgepad.popup.closedPopup == element) {
-    nudgepad.popup.closedPopup = false
-    return true
+  $(element).addClass('nudgepadPopup').show()
+  if (!nudgepad.popup.isOpen) {
+    $('body').on('mouseup touchend', nudgepad.popup.hide)
+    nudgepad.popup.isOpen = true
   }
-  nudgepad.popup.openPopup = element
-  $(element).show()
   
+  return true
 }
-
-nudgepad.on('main', function () {
-  // Bind the listeners
-  // add event listener to capture phase
-  if (navigator.userAgent.match(/iPad|iPhone|iPod/i) === null)
-    document.body.addEventListener('mouseup', nudgepad.popup.hide, true)
-  else
-    document.body.addEventListener('touchend', nudgepad.popup.hide, true)
-})
-
-
 
 nudgepad.reloadMessageOneTime = ''
 nudgepad.reloadMessage = function () {
@@ -12260,11 +12254,11 @@ nudgepad.stage.selection.move = function (x, y) {
   // Show dimensions
   var el = $($('.selection')[0])
   var position = 'X ' + parseFloat(el.css('left')) + '<br>Y ' + parseFloat(el.css('top'))
-  el.parent().append($('<div id="nudgepadDimensions" class="nudgepad_popup"></div>'))
   $('#nudgepadDimensions').css({
-    left : 10 + el.right(),
-    top : -10 + el.middle()
-    }).html(position).show()
+    left : 10 + el.offset().left + el.outerWidth(),
+    top : -10 + el.offset().top + Math.round(el.outerHeight()/2)
+    }).html(position)
+  nudgepad.popup.open('#nudgepadDimensions')
   
   $('.handle').trigger("update")
   nudgepad.stage.commit()
@@ -12411,6 +12405,8 @@ nudgepad.on('selection', function () {
     selection += first + '.scrap#' + $(this).attr('id')
     first = ','
   })
+  
+//  $('#nudgepadDimensions').hide()
   
   selection += '{box-shadow: 0 0 2px red;cursor: not-allowed;}'
   nudgepad.emit('workerSelection', selection)
@@ -13195,8 +13191,8 @@ nudgepad.StretchHandle.slide = function () {
   // Draw the dimensions.
   var position = 'W ' + parseFloat(owner.css('width')) + '<br> H ' + parseFloat(owner.css('height'))
   $('#nudgepadDimensions').css({
-    left : 10 + owner.right(),
-    top : -10 + owner.middle()
+    left : 10 + owner.offset().left + owner.outerWidth(),
+    top : -10 + owner.offset().top + Math.round(owner.outerHeight()/2)
     }).html(position)
   
   // Reposition stretch handles
@@ -13209,16 +13205,15 @@ nudgepad.StretchHandle.slide = function () {
  * Hide all other handles on this scrap on slidestart.
  */
 nudgepad.StretchHandle.slidestart = function (event) {
-  var element = $(this).owner()
-  var scrap = element.scrap()
+  var owner = $(this).owner()
+  var scrap = owner.scrap()
   $('.' + scrap.id + '_handle').not('.stretch_handle_' + scrap.id).hide()
   
 
-  var position = 'W ' + parseFloat(element.css('width')) + '<br> H ' + parseFloat(element.css('height'))
-  element.parent().append($('<div id="nudgepadDimensions" class="nudgepad_popup"></div>'))
+  var position = 'W ' + parseFloat(owner.css('width')) + '<br> H ' + parseFloat(owner.css('height'))
   $('#nudgepadDimensions').css({
-    left : 10 + element.right(),
-    top : -10 + element.middle()
+    left : 10 + owner.offset().left + owner.outerWidth(),
+    top : -10 + owner.offset().top + Math.round(owner.outerHeight()/2)
     }).html(position).show()
   
   return false
@@ -13257,7 +13252,7 @@ nudgepad.StretchHandle.slideend = function () {
   var scrap = element.scrap()
   $('.' + scrap.id + '_handle').trigger('update').show()
   nudgepad.grid.removeSnaplines()
-  $('#nudgepadDimensions').remove()
+  $('#nudgepadDimensions').hide()
   nudgepad.stage.commit()
 }
 

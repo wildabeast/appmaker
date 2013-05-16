@@ -287,11 +287,11 @@ nudgepad.stage.selection.move = function (x, y) {
   // Show dimensions
   var el = $($('.selection')[0])
   var position = 'X ' + parseFloat(el.css('left')) + '<br>Y ' + parseFloat(el.css('top'))
-  el.parent().append($('<div id="nudgepadDimensions" class="nudgepad_popup"></div>'))
   $('#nudgepadDimensions').css({
-    left : 10 + el.right(),
-    top : -10 + el.middle()
-    }).html(position).show()
+    left : 10 + el.offset().left + el.outerWidth(),
+    top : -10 + el.offset().top + Math.round(el.outerHeight()/2)
+    }).html(position)
+  nudgepad.popup.open('#nudgepadDimensions')
   
   $('.handle').trigger("update")
   nudgepad.stage.commit()
@@ -438,6 +438,8 @@ nudgepad.on('selection', function () {
     selection += first + '.scrap#' + $(this).attr('id')
     first = ','
   })
+  
+//  $('#nudgepadDimensions').hide()
   
   selection += '{box-shadow: 0 0 2px red;cursor: not-allowed;}'
   nudgepad.emit('workerSelection', selection)

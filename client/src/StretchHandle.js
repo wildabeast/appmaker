@@ -138,8 +138,8 @@ nudgepad.StretchHandle.slide = function () {
   // Draw the dimensions.
   var position = 'W ' + parseFloat(owner.css('width')) + '<br> H ' + parseFloat(owner.css('height'))
   $('#nudgepadDimensions').css({
-    left : 10 + owner.right(),
-    top : -10 + owner.middle()
+    left : 10 + owner.offset().left + owner.outerWidth(),
+    top : -10 + owner.offset().top + Math.round(owner.outerHeight()/2)
     }).html(position)
   
   // Reposition stretch handles
@@ -152,16 +152,15 @@ nudgepad.StretchHandle.slide = function () {
  * Hide all other handles on this scrap on slidestart.
  */
 nudgepad.StretchHandle.slidestart = function (event) {
-  var element = $(this).owner()
-  var scrap = element.scrap()
+  var owner = $(this).owner()
+  var scrap = owner.scrap()
   $('.' + scrap.id + '_handle').not('.stretch_handle_' + scrap.id).hide()
   
 
-  var position = 'W ' + parseFloat(element.css('width')) + '<br> H ' + parseFloat(element.css('height'))
-  element.parent().append($('<div id="nudgepadDimensions" class="nudgepad_popup"></div>'))
+  var position = 'W ' + parseFloat(owner.css('width')) + '<br> H ' + parseFloat(owner.css('height'))
   $('#nudgepadDimensions').css({
-    left : 10 + element.right(),
-    top : -10 + element.middle()
+    left : 10 + owner.offset().left + owner.outerWidth(),
+    top : -10 + owner.offset().top + Math.round(owner.outerHeight()/2)
     }).html(position).show()
   
   return false
@@ -200,7 +199,7 @@ nudgepad.StretchHandle.slideend = function () {
   var scrap = element.scrap()
   $('.' + scrap.id + '_handle').trigger('update').show()
   nudgepad.grid.removeSnaplines()
-  $('#nudgepadDimensions').remove()
+  $('#nudgepadDimensions').hide()
   nudgepad.stage.commit()
 }
 
