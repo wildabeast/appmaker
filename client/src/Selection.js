@@ -59,6 +59,11 @@ nudgepad.stage.selection.boxShadow = function (blur) {
   })
 }
 
+nudgepad.stage.selection.capture = function () {
+  nudgepad.stage.selection.captured = nudgepad.stage.selection.toSpace()
+}
+
+
 /**
  * Deselect all blocks
  */
@@ -244,15 +249,9 @@ nudgepad.stage.selection.editProperty = function () {
  * Advances position_index, advanced position.
  */
 nudgepad.stage.selection.editSource = function () {
-  var current = nudgepad.stage.selection.toSpace()
+  nudgepad.stage.selection.capture()
   nudgepad.stage.selection.save()
-  nudgepad.textPrompt('Enter code...', current.toString(), function (val) {
-    var space = new Space(val)
-    nudgepad.pages.stage.patch(current.diff(space))
-    nudgepad.stage.commit()
-    nudgepad.stage.open(nudgepad.stage.activePage)
-    nudgepad.stage.selection.restore()
-  })
+  nudgepad.textPrompt('Enter code...', nudgepad.stage.selection.captured.toString(), nudgepad.stage.selection.modify)
 }
 
 /**
@@ -260,6 +259,14 @@ nudgepad.stage.selection.editSource = function () {
  */
 nudgepad.stage.selection.exists = function () {
   return $('.selection').length
+}
+
+nudgepad.stage.selection.modify = function (val) {
+  var space = new Space(val)
+  nudgepad.pages.stage.patch(nudgepad.stage.selection.captured.diff(space))
+  nudgepad.stage.commit()
+  nudgepad.stage.open(nudgepad.stage.activePage)
+  nudgepad.stage.selection.restore()
 }
 
 /**

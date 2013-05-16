@@ -140,9 +140,11 @@ nudgepad.stage.goto = function (version) {
       nudgepad.pages.stage.patchOrder(orderPatch.toString())
     nudgepad.stage.version++
   }
+  // Todo: fire an event and have timeline subscribe to that event.
   nudgepad.stage.updateTimeline()
   nudgepad.stage.render()
   nudgepad.stage.selection.restore()
+  nudgepad.trigger('stage')
 }
 
 nudgepad.stage.height = function () {

@@ -9,42 +9,56 @@ nudgepad.codePanel.livePreviewStart = function () {
 nudgepad.codePanel.livePreview = function () {
   var space = new Space($('#nudgepadCodePanel').val())
   if (nudgepad.stage.selection.exists()) {
-   
-  } else {
+    nudgepad.stage.selection.clear()
+  }
+//    nudgepad.pages.stage.patch(nudgepad.stage.selection.captured.diff(space))
+//    nudgepad.stage.render()
+//  } else {
     nudgepad.pages.stage = new Page(space)
     nudgepad.stage.render()
-  }
+//  }
 }
 
 nudgepad.codePanel.close = function () {
   $('#nudgepadCodePanel').hide()
-  $('#nudgepadStage').css({
-   'width' : '100%',
-   'left' : ''
-  })
+  $('#nudgepadStage').css('padding-left', nudgepad.codePanel.currentPadding)
+  nudgepad.off('selection', nudgepad.codePanel.load)
+  nudgepad.off('stage', nudgepad.codePanel.load)
+}
+
+nudgepad.codePanel.isOpen = function () {
+  return $('#nudgepadCodePanel:visible').length > 0
+}
+
+nudgepad.codePanel.load = function () {
+  var textarea = $('#nudgepadCodePanel')
+  // todo: allow for just showing of selection
+//  if (nudgepad.stage.selection.exists()) {
+//    nudgepad.stage.selection.clear()
+//    nudgepad.stage.selection.capture()
+//    nudgepad.stage.selection.save()
+//    textarea.val(nudgepad.stage.selection.toSpace().toString())
+//  } else
+  textarea.val(nudgepad.pages.stage.toString())
 }
 
 nudgepad.codePanel.open = function () {
   var textarea = $('#nudgepadCodePanel')
   textarea.show()
-  $('#nudgepadStage').css({
-   'width' : '100%',
-   'left' : '40%'
-  })
-  if (nudgepad.stage.selection.exists())
-    textarea.val(nudgepad.stage.selection.toSpace().toString())
-  else
-    textarea.val(nudgepad.pages.stage.toString())
+  nudgepad.codePanel.currentPadding = $('#nudgepadStage').css('padding-left')
+  $('#nudgepadStage').css('padding-left', '40%')
+  nudgepad.codePanel.load()
   textarea.on('keyup', nudgepad.codePanel.livePreviewStart)
   textarea.on('blur', nudgepad.stage.commit)
   textarea.on('tap mousedown click slide slidestart slideend mouseup', function (event) {
     event.stopPropagation()
   })
+  nudgepad.on('selection', nudgepad.codePanel.load)
+  nudgepad.on('stage', nudgepad.codePanel.load)
 }
 
-
 nudgepad.codePanel.toggle = function () {
-  if ($('#nudgepadCodePanel:visible').length > 0)
+  if (nudgepad.codePanel.isOpen())
     nudgepad.codePanel.close()
   else
     nudgepad.codePanel.open()

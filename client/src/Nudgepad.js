@@ -16,6 +16,7 @@ nudgepad.isTesting = false
 // Nudgepad Events
 nudgepad.event_handlers = {
   'selection' : [],
+  'stage' : [],
   'page' : [],
   'workerSelection' : [],
   'disconnect' : [],

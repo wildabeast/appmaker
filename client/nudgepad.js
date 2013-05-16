@@ -8818,6 +8818,7 @@ nudgepad.isTesting = false
 // Nudgepad Events
 nudgepad.event_handlers = {
   'selection' : [],
+  'stage' : [],
   'page' : [],
   'workerSelection' : [],
   'disconnect' : [],
@@ -9279,42 +9280,56 @@ nudgepad.codePanel.livePreviewStart = function () {
 nudgepad.codePanel.livePreview = function () {
   var space = new Space($('#nudgepadCodePanel').val())
   if (nudgepad.stage.selection.exists()) {
-   
-  } else {
+    nudgepad.stage.selection.clear()
+  }
+//    nudgepad.pages.stage.patch(nudgepad.stage.selection.captured.diff(space))
+//    nudgepad.stage.render()
+//  } else {
     nudgepad.pages.stage = new Page(space)
     nudgepad.stage.render()
-  }
+//  }
 }
 
 nudgepad.codePanel.close = function () {
   $('#nudgepadCodePanel').hide()
-  $('#nudgepadStage').css({
-   'width' : '100%',
-   'left' : ''
-  })
+  $('#nudgepadStage').css('padding-left', nudgepad.codePanel.currentPadding)
+  nudgepad.off('selection', nudgepad.codePanel.load)
+  nudgepad.off('stage', nudgepad.codePanel.load)
+}
+
+nudgepad.codePanel.isOpen = function () {
+  return $('#nudgepadCodePanel:visible').length > 0
+}
+
+nudgepad.codePanel.load = function () {
+  var textarea = $('#nudgepadCodePanel')
+  // todo: allow for just showing of selection
+//  if (nudgepad.stage.selection.exists()) {
+//    nudgepad.stage.selection.clear()
+//    nudgepad.stage.selection.capture()
+//    nudgepad.stage.selection.save()
+//    textarea.val(nudgepad.stage.selection.toSpace().toString())
+//  } else
+  textarea.val(nudgepad.pages.stage.toString())
 }
 
 nudgepad.codePanel.open = function () {
   var textarea = $('#nudgepadCodePanel')
   textarea.show()
-  $('#nudgepadStage').css({
-   'width' : '100%',
-   'left' : '40%'
-  })
-  if (nudgepad.stage.selection.exists())
-    textarea.val(nudgepad.stage.selection.toSpace().toString())
-  else
-    textarea.val(nudgepad.pages.stage.toString())
+  nudgepad.codePanel.currentPadding = $('#nudgepadStage').css('padding-left')
+  $('#nudgepadStage').css('padding-left', '40%')
+  nudgepad.codePanel.load()
   textarea.on('keyup', nudgepad.codePanel.livePreviewStart)
   textarea.on('blur', nudgepad.stage.commit)
   textarea.on('tap mousedown click slide slidestart slideend mouseup', function (event) {
     event.stopPropagation()
   })
+  nudgepad.on('selection', nudgepad.codePanel.load)
+  nudgepad.on('stage', nudgepad.codePanel.load)
 }
 
-
 nudgepad.codePanel.toggle = function () {
-  if ($('#nudgepadCodePanel:visible').length > 0)
+  if (nudgepad.codePanel.isOpen())
     nudgepad.codePanel.close()
   else
     nudgepad.codePanel.open()
@@ -12017,6 +12032,11 @@ nudgepad.stage.selection.boxShadow = function (blur) {
   })
 }
 
+nudgepad.stage.selection.capture = function () {
+  nudgepad.stage.selection.captured = nudgepad.stage.selection.toSpace()
+}
+
+
 /**
  * Deselect all blocks
  */
@@ -12202,15 +12222,9 @@ nudgepad.stage.selection.editProperty = function () {
  * Advances position_index, advanced position.
  */
 nudgepad.stage.selection.editSource = function () {
-  var current = nudgepad.stage.selection.toSpace()
+  nudgepad.stage.selection.capture()
   nudgepad.stage.selection.save()
-  nudgepad.textPrompt('Enter code...', current.toString(), function (val) {
-    var space = new Space(val)
-    nudgepad.pages.stage.patch(current.diff(space))
-    nudgepad.stage.commit()
-    nudgepad.stage.open(nudgepad.stage.activePage)
-    nudgepad.stage.selection.restore()
-  })
+  nudgepad.textPrompt('Enter code...', nudgepad.stage.selection.captured.toString(), nudgepad.stage.selection.modify)
 }
 
 /**
@@ -12218,6 +12232,14 @@ nudgepad.stage.selection.editSource = function () {
  */
 nudgepad.stage.selection.exists = function () {
   return $('.selection').length
+}
+
+nudgepad.stage.selection.modify = function (val) {
+  var space = new Space(val)
+  nudgepad.pages.stage.patch(nudgepad.stage.selection.captured.diff(space))
+  nudgepad.stage.commit()
+  nudgepad.stage.open(nudgepad.stage.activePage)
+  nudgepad.stage.selection.restore()
 }
 
 /**
@@ -12706,9 +12728,11 @@ nudgepad.stage.goto = function (version) {
       nudgepad.pages.stage.patchOrder(orderPatch.toString())
     nudgepad.stage.version++
   }
+  // Todo: fire an event and have timeline subscribe to that event.
   nudgepad.stage.updateTimeline()
   nudgepad.stage.render()
   nudgepad.stage.selection.restore()
+  nudgepad.trigger('stage')
 }
 
 nudgepad.stage.height = function () {
