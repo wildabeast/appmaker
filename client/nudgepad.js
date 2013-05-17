@@ -8398,6 +8398,14 @@ Scrap.prototype.setContent = function (context) {
   if (this.values.content)
     this.div.html(Scrap.format(Scrap.replace(this.values.content, context), this.values.content_format))
   
+  // If styles node
+  if (this.values.styles && this.values.styles instanceof Space) {
+    var div = this.div
+    this.values.styles.each(function (key, value) {
+      div.html(Scrap.styleToCss(key, value.values, context))
+    })
+  }
+  
   // If recursive
   if (this.values.scraps) {
     for (var i in this.values.scraps.keys) {

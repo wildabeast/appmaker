@@ -10,7 +10,8 @@
    },
   "dependencies": {
     "space": ">=0.1.4",
-    "scraps": ">=0.2.1",
+    "scraps": ">=0.2.3",
+    "speedcoach": ">=0.1.1",
     "socket.io": ">=0.1.1",
     "express": ">=0.1.1",
     "superagent": ">=0.1.1",

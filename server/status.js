@@ -12,7 +12,7 @@ nudgepad.status = function(req, res, next) {
   space.set('os_release', os.release())
   space.set('platform', os.platform())
   space.set('hostname', os.hostname())
-  space.set('stopwatch', stopwatch.times())
+  space.set('speedcoach', speedcoach.times())
   space.set('title', process.title)
   space.set('pid', process.pid)
   space.set('node_version', process.version)

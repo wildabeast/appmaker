@@ -1,5 +1,5 @@
-var stopwatch = require('./stopwatch')
-stopwatch('start')
+var speedcoach = require('speedcoach')
+speedcoach('start')
 
 var nudgepad = {},
     http_server,
@@ -158,14 +158,14 @@ else
 
 
 var site = express()
-stopwatch('express instance created')
+speedcoach('express instance created')
 
 /*********** nudgepad.emit ***********/
 eval(fs.readFileSync('emit.js', 'utf8'))
 
 
 nudgepad.load_site()
-stopwatch('spaces loaded into memory')
+speedcoach('spaces loaded into memory')
 
 site.use(express.bodyParser())
 site.use(express.cookieParser())
@@ -377,12 +377,12 @@ process.on('SIGTERM', function () {
 })
 
 
-stopwatch('server started')
+speedcoach('server started')
 
 /********* SOCKET IO STUFF **********/ 
 eval(fs.readFileSync('socket.js', 'utf8'))
 
-stopwatch('socket evaled')
+speedcoach('socket evaled')
 
 console.log('Server started...')
-stopwatch('end of nudgepad.js')
+speedcoach('end of nudgepad.js')
