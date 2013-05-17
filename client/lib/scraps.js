@@ -2,6 +2,7 @@
 if (typeof exports != 'undefined') {
   var Space = require('space'),
       fs = require('fs'),
+      beautifyHtml = require('js-beautify').html,
       marked = require('marked')
 }
 // Use of certain client side functions depends on jQuery inclusion.
@@ -290,6 +291,9 @@ Scrap.prototype.setContent = function (context) {
   if (this.values.scraps) {
     for (var i in this.values.scraps.keys) {
       var id = this.values.scraps.keys[i]
+      // If a div has property draft true, dont render it
+      if (this.values.scraps.values[id].values.draft === 'true')
+        continue
       this.div.html(this.values.scraps.values[id].toHtml(context))
     }
   }
@@ -440,15 +444,19 @@ Page.prototype.request = function (context) {
  * @param {object} Context to evaluate variables in.
  * @return {string}
  */
-Page.prototype.toHtml = function (context) {
+Page.prototype.toHtml = function (context, options) {
   if (!context)
     context = {}
+  
+  options = options || {}
   
   this.request(context)
 
   // todo: seperate css option
   // todo: separate javascript option
-  var html = '<!doctype html>\n'
+  var html = ''
+  html += '<!doctype html>\n'
+  html += '<html>'
   
   // Get all the html for every scrap
   // Todo: support after property
@@ -460,6 +468,9 @@ Page.prototype.toHtml = function (context) {
       continue
     html += '\n  ' + this.values[id].toHtml(context)
   }
+  html += '\n</html>'
+  if (options.beautify)
+    return beautifyHtml(html)
   return html
 }
 
