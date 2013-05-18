@@ -8122,6 +8122,7 @@ if (typeof exports != 'undefined')
 if (typeof exports != 'undefined') {
   var Space = require('space'),
       fs = require('fs'),
+      beautifyHtml = require('js-beautify').html,
       marked = require('marked')
 }
 // Use of certain client side functions depends on jQuery inclusion.
@@ -8388,7 +8389,10 @@ Scrap.prototype.selector = function () {
  *
  * @param {object} Context to evaluate any variables in.
  */
-Scrap.prototype.setContent = function (context) {
+Scrap.prototype.setContent = function (context, options) {
+  
+  if (!options)
+    options = {}
   
   // We loop content if theres a loop
   if (this.values.loop)
@@ -8410,6 +8414,9 @@ Scrap.prototype.setContent = function (context) {
   if (this.values.scraps) {
     for (var i in this.values.scraps.keys) {
       var id = this.values.scraps.keys[i]
+      // If a div has property draft true, dont render it
+      if (!options.draft && this.values.scraps.values[id].values.draft === 'true')
+        continue
       this.div.html(this.values.scraps.values[id].toHtml(context))
     }
   }
@@ -8487,9 +8494,9 @@ Scrap.prototype.setStyle = function (context) {
  * @param {object} Context to evaluate any variables in.
  * @return {string}
  */
-Scrap.prototype.toHtml = function (context) {
+Scrap.prototype.toHtml = function (context, options) {
   this.setElementTag(context)
-  this.setContent(context)
+  this.setContent(context, options)
   this.setStyle(context)
   this.setScript(context)
   return this.div.toHtml()
@@ -8560,15 +8567,21 @@ Page.prototype.request = function (context) {
  * @param {object} Context to evaluate variables in.
  * @return {string}
  */
-Page.prototype.toHtml = function (context) {
+Page.prototype.toHtml = function (context, options) {
+  
   if (!context)
     context = {}
   
-  this.request(context)
+  if (!options)
+    options = {}
+  
+  this.request(options)
 
   // todo: seperate css option
   // todo: separate javascript option
-  var html = '<!doctype html>\n'
+  var html = ''
+  html += '<!doctype html>\n'
+  html += '<html>'
   
   // Get all the html for every scrap
   // Todo: support after property
@@ -8576,10 +8589,13 @@ Page.prototype.toHtml = function (context) {
     var id = this.keys[i]
     
     // If a div has property draft true, dont render it
-    if (this.values[id].values.draft === 'true')
+    if (!options.draft && this.values[id].values.draft === 'true')
       continue
-    html += '\n  ' + this.values[id].toHtml(context)
+    html += '\n  ' + this.values[id].toHtml(context, options)
   }
+  html += '\n</html>'
+  if (options.beautify)
+    return beautifyHtml(html)
   return html
 }
 
@@ -8972,6 +8988,14 @@ nudgepad.main = function (callback) {
     nudgepad.explorer.downloadTimelines()
     
     nudgepad.trigger('main')
+    
+    mixpanel.track('I opened NudgePad')
+    
+    if (nudgepad.query.newSite && !store.get('opens')) {
+      store.set('opens', 1)
+      mixpanel.track('I created a new website')
+    }
+      
     
     nudgepad.updateRoom()
     if (callback)
@@ -11713,10 +11737,12 @@ Scrap.prototype.render = function (context, index) {
   if (this.values.tag && this.values.tag.match(/title|script|meta|head/))
     return this
   
+  var options = {draft : true}
+  
   // Throw style tags into a div that we can easily empty
   if (this.values.tag && this.values.tag.match(/style|link/)) {
     this.setElementTag(context)
-    this.setContent(context)
+    this.setContent(context, options)
     $('#nudgepadStageStyles').append(this.div.toHtml())
     return this
   }
@@ -11724,7 +11750,7 @@ Scrap.prototype.render = function (context, index) {
   // Turn body tags into divs during the render stage
   if (this.values.tag && this.values.tag === 'body') {    
     this.setElementTag(context)
-    this.setContent(context)
+    this.setContent(context, options)
     this.setStyle(context)
     this.div.addClass('scrap')
     this.div.attr('path', this.getPath())
@@ -11753,8 +11779,9 @@ Scrap.prototype.selector = function () {
  * @return {string}
  */
 Scrap.prototype.toHtml = function (context) {
+  var options = {draft : true}
   this.setElementTag(context)
-  this.setContent(context)
+  this.setContent(context, options)
   this.setStyle(context)
   this.div.addClass('scrap')
   this.div.attr('path', this.getPath())

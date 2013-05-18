@@ -269,7 +269,10 @@ Scrap.prototype.selector = function () {
  *
  * @param {object} Context to evaluate any variables in.
  */
-Scrap.prototype.setContent = function (context) {
+Scrap.prototype.setContent = function (context, options) {
+  
+  if (!options)
+    options = {}
   
   // We loop content if theres a loop
   if (this.values.loop)
@@ -292,7 +295,7 @@ Scrap.prototype.setContent = function (context) {
     for (var i in this.values.scraps.keys) {
       var id = this.values.scraps.keys[i]
       // If a div has property draft true, dont render it
-      if (this.values.scraps.values[id].values.draft === 'true')
+      if (!options.draft && this.values.scraps.values[id].values.draft === 'true')
         continue
       this.div.html(this.values.scraps.values[id].toHtml(context))
     }
@@ -371,9 +374,9 @@ Scrap.prototype.setStyle = function (context) {
  * @param {object} Context to evaluate any variables in.
  * @return {string}
  */
-Scrap.prototype.toHtml = function (context) {
+Scrap.prototype.toHtml = function (context, options) {
   this.setElementTag(context)
-  this.setContent(context)
+  this.setContent(context, options)
   this.setStyle(context)
   this.setScript(context)
   return this.div.toHtml()
@@ -445,12 +448,14 @@ Page.prototype.request = function (context) {
  * @return {string}
  */
 Page.prototype.toHtml = function (context, options) {
+  
   if (!context)
     context = {}
   
-  options = options || {}
+  if (!options)
+    options = {}
   
-  this.request(context)
+  this.request(options)
 
   // todo: seperate css option
   // todo: separate javascript option
@@ -464,9 +469,9 @@ Page.prototype.toHtml = function (context, options) {
     var id = this.keys[i]
     
     // If a div has property draft true, dont render it
-    if (this.values[id].values.draft === 'true')
+    if (!options.draft && this.values[id].values.draft === 'true')
       continue
-    html += '\n  ' + this.values[id].toHtml(context)
+    html += '\n  ' + this.values[id].toHtml(context, options)
   }
   html += '\n</html>'
   if (options.beautify)
