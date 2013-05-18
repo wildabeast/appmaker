@@ -23,7 +23,7 @@ process.title = 'nudgepadPanel'
 var app = express()
 app.use(express.bodyParser())
 
-var logFile = fs.createWriteStream(logsPath + 'panel.txt', {flags: 'a'})
+var logFile = fs.createWriteStream(logsPath + 'panelRequests.txt', {flags: 'a'})
 app.use(express.logger({
   stream : logFile
 }))
@@ -106,7 +106,7 @@ app.post('/create', app.checkId, app.validateDomain, app.isDomainAvailable, func
     if (req.body.ajax)
       res.send(stdout)
     else
-      res.redirect(stdout + '&app=pages')
+      res.redirect(stdout + '&app=pages&newSite=true')
   })
 })
 

@@ -17,9 +17,9 @@ startPanel ()
   echo Starting Nudgepad Panel server...
 
   # Clear the log file
-  sudo rm $logsPath/panel.txt
-  touch $logsPath/panel.txt
-  sudo mon -d -l $logsPath/panel.txt -p $tempPath/panelPid -m $tempPath/panelMonPid "node panel.js $panelDomain"
+  sudo rm $logsPath/panelRequests.txt
+  touch $logsPath/panelRequests.txt
+  sudo mon -d -l $logsPath/panelMon.txt -p $tempPath/panelPid -m $tempPath/panelMonPid "node panel.js $panelDomain"
   echo Started Nudgepad Panel
 }
 

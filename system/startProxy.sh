@@ -1,6 +1,6 @@
 startProxy ()
 {
-  touch $logsPath/domain.txt
+  touch $logsPath/proxy.txt
   if isProxyUp
     then
       echo Nudge proxy already running...
@@ -10,9 +10,9 @@ startProxy ()
   echo Starting Nudge proxy server...
 
   # Clear the log file
-  sudo rm $logsPath/domain.txt
-  touch $logsPath/domain.txt
-  sudo mon -d -l $logsPath/domain.txt -p $tempPath/proxyPid -m $tempPath/proxyMonPid "node proxy.js"
+  sudo rm $logsPath/proxy.txt
+  touch $logsPath/proxy.txt
+  sudo mon -d -l $logsPath/proxy.txt -p $tempPath/proxyPid -m $tempPath/proxyMonPid "node proxy.js"
   echo Started proxy
 }
 

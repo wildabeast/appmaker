@@ -20,6 +20,8 @@ site.get('/nudgepad.login', function(req, res, next) {
     var appString = ''
     if (req.query.app)
       appString = '?app=' + req.query.app
+    if (req.query.newSite)
+      appString += '&newSite=' + req.query.newSite
     
     return res.redirect('/nudgepad' + appString)
   }

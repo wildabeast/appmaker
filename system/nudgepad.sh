@@ -147,7 +147,7 @@ case "$1" in
       sudo cat $sitesPath$2/logs/mon.txt
     else
       # Proxy log
-      sudo cat $logsPath/domain.txt
+      sudo cat $logsPath/proxy.txt
   fi
 ;;
 
@@ -226,7 +226,7 @@ case "$1" in
       sudo tail -n 30 -f $sitesPath/$2/logs/mon.txt
     else
       # Proxy log
-      sudo tail -n 30 -f $logsPath/domain.txt
+      sudo tail -n 30 -f $logsPath/proxy.txt
   fi
 ;;
 

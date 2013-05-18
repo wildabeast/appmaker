@@ -163,6 +163,14 @@ nudgepad.main = function (callback) {
     
     nudgepad.trigger('main')
     
+    mixpanel.track('I opened NudgePad')
+    
+    if (nudgepad.query.newSite && !store.get('opens')) {
+      store.set('opens', 1)
+      mixpanel.track('I created a new website')
+    }
+      
+    
     nudgepad.updateRoom()
     if (callback)
       callback()
