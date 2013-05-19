@@ -10546,11 +10546,9 @@ nudgepad.contentEditor.blur = function () {
   // remove the ability to edit & select text.
   $(this).removeAttr('contenteditable')
 
-  var id = $(this).attr('id')
-  $('.' + id + '_handle').remove()
-
   // record the changes for undo/redo
   nudgepad.stage.commit()
+  nudgepad.broadcastSelection()
 }
 
 /**
@@ -10561,6 +10559,9 @@ nudgepad.contentEditor.blur = function () {
  */
 nudgepad.contentEditor.focus = function (selector, selectAll) {
   
+  
+  // When focused, it's as if you have nothing selected. We're really going to do 
+  // a patch instead
   nudgepad.stage.selection.clear()
   
   var element = $(selector)
@@ -10591,8 +10592,8 @@ nudgepad.contentEditor.focus = function (selector, selectAll) {
     })
     return
   }
-
-  nudgepad.broadcastSelection()
+  
+  nudgepad.broadcastSelection(scrap.selector())
 
   // set element to editable
   element.attr('contenteditable', 'true')
@@ -13468,10 +13469,10 @@ nudgepad.stage.selection.toSpace = function () {
   return space
 }
 
-nudgepad.broadcastSelection = function () {
+nudgepad.broadcastSelection = function (extra) {
   nudgepad.setColor()
-  var selection = ''
-  var first = ' '
+  var selection = extra || ''
+  var first = ''
   $('.selection').each(function () {
     selection += first + $(this).scrap().selector()
     first = ','
