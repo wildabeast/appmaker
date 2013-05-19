@@ -430,10 +430,10 @@ nudgepad.stage.selection.toSpace = function () {
   return space
 }
 
-nudgepad.broadcastSelection = function () {
+nudgepad.broadcastSelection = function (extra) {
   nudgepad.setColor()
-  var selection = ''
-  var first = ' '
+  var selection = extra || ''
+  var first = ''
   $('.selection').each(function () {
     selection += first + $(this).scrap().selector()
     first = ','
