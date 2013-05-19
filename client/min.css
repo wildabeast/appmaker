@@ -879,7 +879,7 @@ td {
 }
 
 #nudgepadTabs span.openPage {
-  font-style: italic;
+  text-decoration: underline;
 }
 
 .nudgepadTimeline {

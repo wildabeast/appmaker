@@ -1,20 +1,25 @@
-nudgepad.openPages = {}
-
 nudgepad.pages.updateTabs = function () {
   $('#nudgepadTabs').html('')
   var keys = site.get('pages').keys
   _.each(keys, function (name) {
     var div = $('<span>' + name + '</span>')
+    
+    // Make active page white
     if (name === nudgepad.stage.activePage)
       div.css('color', 'white')
-    _.each(nudgepad.openPages, function (openPage) {
-      if (name === openPage)
+      
+    var title = ''
+    
+    site.values.collage.each(function (key, value) {
+      if (value.get('page') !== name)
+        return true
+      title += value.get('name') + '(' + value.get('device') + ')' + ' '
+      if (key != nudgepad.id)
         div.addClass('openPage')
     })
-    div.on('hold', function () {
-      window.open($(this).text(), 'published')
-      return true
-    })
+    
+    div.attr('title', title)
+    
     div.on('click', function () {
       mixpanel.track('I clicked a page tab')
       nudgepad.stage.open($(this).text())
@@ -26,4 +31,7 @@ nudgepad.pages.updateTabs = function () {
   })
   
 }
+
+nudgepad.on('collage.update', nudgepad.pages.updateTabs)
+
 

@@ -26,10 +26,8 @@
     <script type="text/javascript" src="/nudgepad/src/MoveHandle.js"></script>
     <script type="text/javascript" src="/nudgepad/src/Navigation.js"></script>
     <script type="text/javascript" src="/nudgepad/src/Notify.js"></script>
-    <script type="text/javascript" src="/nudgepad/src/OnArrive.js"></script>
     <script type="text/javascript" src="/nudgepad/src/OnCopy.js"></script>
     <script type="text/javascript" src="/nudgepad/src/OnCut.js"></script>
-    <script type="text/javascript" src="/nudgepad/src/OnDepart.js"></script>
     <script type="text/javascript" src="/nudgepad/src/OnDisconnect.js"></script>
     <script type="text/javascript" src="/nudgepad/src/OnDrop.js"></script>
     <script type="text/javascript" src="/nudgepad/src/OnError.js"></script>
@@ -50,7 +48,6 @@
     <script type="text/javascript" src="/nudgepad/src/ReloadMessage.js"></script>
     <script type="text/javascript" src="/nudgepad/src/RestartCheck.js"></script>
     <script type="text/javascript" src="/nudgepad/src/Ribbon.js"></script>
-    <script type="text/javascript" src="/nudgepad/src/Room.js"></script>
     <script type="text/javascript" src="/nudgepad/src/Scrap.js"></script>
     <script type="text/javascript" src="/nudgepad/src/ScrollMinimal.js"></script>
     <script type="text/javascript" src="/nudgepad/src/SelectBox.js"></script>

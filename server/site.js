@@ -27,6 +27,8 @@ site.get(/^\/nudgepad\.site\.([a-z0-9_]+)$/, nudgepad.checkId, function(req, res
 site.get('/nudgepad\.site', nudgepad.checkId, function (req, res, next) {
   
   var activePage = req.query.activePage || "home"
+  var id = req.query.id
+  
   if (!nudgepad.site.get('timelines ' + activePage))
     activePage = "home"
   
@@ -35,6 +37,7 @@ site.get('/nudgepad\.site', nudgepad.checkId, function (req, res, next) {
   copy.set('posts', nudgepad.site.get('posts'))
   copy.set('timelines ' + activePage, nudgepad.site.get('timelines ' + activePage))
   copy.set('started', nudgepad.started)
+  copy.set('collage', nudgepad.site.get('collage'))
   res.set('Content-Type', 'text/plain')
   res.send(copy.toString())
 })

@@ -20,9 +20,6 @@ io.set('authorization', function (data, accept) {
     return accept('Invalid key transmitted.', false)
   
   data.cookie = cookie
-  
-  nudgepad.online.set(cookie.email, new Date().getTime())
-
     
   // todo: broadcast worker
   return accept(null, true)  
@@ -30,16 +27,27 @@ io.set('authorization', function (data, accept) {
 })
 
 io.sockets.on('connection', function (socket) {
-  // Add them to list of online workers
-  nudgepad.online.set(socket.handshake.cookie.email, new Date().getTime())
+  
+  socket.on('collage.update', function (patch) {
+    patch = new Space(patch)
+    var id = patch.get('id')
+    var fullPatch = new Space().set(id, patch)
+    // new tab
+    if (!nudgepad.site.get('collage ' + id)) {
+      nudgepad.emit('collage.create', fullPatch, socket)
+      socket.handshake.tabId = id
+    }
+    else
+      nudgepad.emit('collage.update', fullPatch, socket)
+    
+    nudgepad.site.get('collage').patch(fullPatch)
+  })
   
   socket.on('disconnect', function () {
-    
-    // Delete them from online workers
-    nudgepad.online.delete(socket.handshake.cookie.email)
-    
-    // Push online worker list to all workers
-    nudgepad.emit('depart', parseName(socket.handshake.cookie.email))
+    if (socket.handshake.tabId) {
+      nudgepad.site.values.collage.delete(socket.handshake.tabId)
+      nudgepad.emit('collage.delete', socket.handshake.tabId, socket)
+    }
   })
   
   socket.on('patch', function (space, fn) {
@@ -77,12 +85,5 @@ io.sockets.on('connection', function (socket) {
   socket.on('workerSelection', function (ids) {
     nudgepad.emit('workerSelection', ids, socket)
   })
-  
-  socket.on('pageChange', function (pageName) {
-    nudgepad.emit('pageChange', pageName, socket)
-  })
-  
-  // Push online worker list to all workers
-  nudgepad.emit('arrive', parseName(socket.handshake.cookie.email))
 
 })

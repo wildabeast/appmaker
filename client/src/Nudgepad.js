@@ -11,21 +11,30 @@ nudgepad = {}
 nudgepad.apps = {}
 nudgepad.pages = {}
 nudgepad.stage = {}
+nudgepad.id = new Date().getTime()
+nudgepad.tab = new Space('id ' + nudgepad.id)
+nudgepad.tab.set('device', platform.name + (platform.product ? '/' + platform.product : ''))
+
+nudgepad.tab.on('patch', function () {
+  site.set('collage ' + nudgepad.id, this)
+  nudgepad.emit('collage.update', this)
+})
+
+
 nudgepad.isTesting = false
 
 // Nudgepad Events
-nudgepad.event_handlers = {
+nudgepad.events = {
   'selection' : [],
   'stage' : [],
   'page' : [],
   'workerSelection' : [],
   'disconnect' : [],
+  'collage.update' : [],
   'ping' : [],
   'main' : [],
   'patch' : [],
   'ready' : [],
-  'arrive' : [],
-  'depart' : [],
   'public' : [],
   'uploadComplete' : []
 }
@@ -41,6 +50,9 @@ nudgepad.main = function (callback) {
   nudgepad.grid = new Grid()
   nudgepad.cookie = parseCookie(document.cookie)
   nudgepad.name = ParseName(nudgepad.cookie.email)
+  nudgepad.tab.set('email', nudgepad.cookie.email)
+  nudgepad.tab.set('name', nudgepad.name)
+  
   
   // In case we open multiple tabs
   window.name = 'nudgepad'
@@ -72,21 +84,6 @@ nudgepad.main = function (callback) {
       nudgepad.trigger('public', space)
     })
 
-    nudgepad.socket.on('arrive', function (name) {
-      nudgepad.trigger('arrive', name)
-    })
-
-    nudgepad.socket.on('depart', function (name) {
-      nudgepad.trigger('depart', name)
-    })
-
-    nudgepad.socket.on('pageChange', function (name) {
-      var parts = name.split(/ /)
-      var name = ParseName(parts[0])
-      nudgepad.openPages[name] = parts[1]
-      nudgepad.pages.updateTabs()
-    })
-
     nudgepad.socket.on('uploadComplete', function (file) {
       nudgepad.trigger('uploadComplete', file)
     })
@@ -112,6 +109,24 @@ nudgepad.main = function (callback) {
 
     nudgepad.socket.on('disconnect', function (message) {
       nudgepad.trigger('disconnect', message)
+    })
+    
+    nudgepad.socket.on('collage.update', function (patch) {
+      site.values.collage.patch(patch)
+      nudgepad.trigger('collage.update')
+    })
+    
+    nudgepad.socket.on('collage.delete', function (id) {
+      var tabName = site.get('collage ' + id)
+      nudgepad.notify(tabName.get('name') + ' closed a tab')
+      site.values.collage.delete(id)
+    })
+    
+    nudgepad.socket.on('collage.create', function (patch) {
+      patch = new Space(patch)
+      site.values.collage.patch(patch)
+      var id = patch.keys[0]
+      nudgepad.notify(patch.get(id + ' name') + ' opened a tab')
     })
 
     nudgepad.socket.on('ack', function (message) {
@@ -170,8 +185,6 @@ nudgepad.main = function (callback) {
       mixpanel.track('I created a new website')
     }
       
-    
-    nudgepad.updateRoom()
     if (callback)
       callback()
     
@@ -204,13 +217,11 @@ nudgepad.off = function (event, fn) {
 }
 
 /**
- * Bind a fn to a nudgepad event such as "selectionChange, pageChange"
- *
  * @param {string} Name of the event. Need to make some docs for these
  * @param {function}
  */
-nudgepad.on = function (event_name, fn) {
-  nudgepad.event_handlers[event_name].push(fn)
+nudgepad.on = function (eventName, fn) {
+  nudgepad.events[eventName].push(fn)
 }
 
 /**
@@ -227,8 +238,8 @@ nudgepad.quit = function () {
  * @param {string} Name of the event.
  * @param {space} Object
  */
-nudgepad.trigger = function (event_name, space) {
-  for (var i in nudgepad.event_handlers[event_name]) {
-    nudgepad.event_handlers[event_name][i](space)
+nudgepad.trigger = function (eventName, space) {
+  for (var i in nudgepad.events[eventName]) {
+    nudgepad.events[eventName][i](space)
   }
 }

@@ -26,15 +26,15 @@ nudgepad.stage.commit = function () {
   var diff = nudgepad.pages.edge.diff(nudgepad.pages.stage)
   var diffOrder = nudgepad.pages.edge.diffOrder(nudgepad.pages.stage)
 
-  if (diff.empty() && diffOrder.empty()) {
+  if (diff.isEmpty() && diffOrder.isEmpty()) {
     console.log('no change')
     return false
   }
   var commit = new Space()
   commit.set('author', nudgepad.cookie.email)
-  if (!diff.empty())
+  if (!diff.isEmpty())
     commit.set('values', new Space(diff.toString()))
-  if (!diffOrder.empty())
+  if (!diffOrder.isEmpty())
     commit.set('order', new Space(diffOrder.toString()))
 
   nudgepad.stage.timeline.set(timestamp, commit)
@@ -269,7 +269,7 @@ nudgepad.stage.open = function (name) {
   // Page change stuff
   nudgepad.stage.activePage = name
   store.set('activePage', nudgepad.stage.activePage)
-  nudgepad.emit('pageChange', nudgepad.cookie.email + ' ' + nudgepad.stage.activePage)
+  nudgepad.tab.patch('page ' + nudgepad.stage.activePage)
   nudgepad.pages.updateTabs()
   
   nudgepad.stage.reload()
@@ -365,7 +365,7 @@ nudgepad.stage.setTimeline = function (name) {
     var edge = site.get('pages ' + name)
     var timeline = new Space()
     // If no timeline, but yes edge, make the edge the first commit
-    if (edge && !edge.empty()) {
+    if (edge && !edge.isEmpty()) {
       
       var commit = new Space()
       commit.set('author', nudgepad.cookie.email)

@@ -27,7 +27,7 @@ nudgepad.explorer.downloadTimelines = function () {
  */
 nudgepad.explorer.getSite = function (callback) {
   var activePage = store.get('activePage') || 'home'
-  $.get('/nudgepad.site', { activePage : activePage }, function (space) {
+  $.get('/nudgepad.site', { activePage : activePage, id : nudgepad.id }, function (space) {
     site = new Space(space)
     callback()
   })

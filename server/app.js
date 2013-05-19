@@ -88,8 +88,8 @@ eval(fs.readFileSync('paths.js', 'utf8'))
 /*********** Install if not installed ************/
 eval(fs.readFileSync('install.js', 'utf8'))
 
-nudgepad.online = new Space()
 nudgepad.site = new Space()
+nudgepad.site.set('collage', new Space())
 
 // Load the HTML file and add mtimes as query string so the
 // worker always get the latest version of the nudgepad.js and nudgepad.css
@@ -287,9 +287,6 @@ eval(fs.readFileSync('started.js', 'utf8'))
 
 /*********** nudgepad.console ***********/
 eval(fs.readFileSync('console.js', 'utf8'))
-
-/*********** nudgepad.online ***********/
-eval(fs.readFileSync('online.js', 'utf8'))
 
 /*********** watches disk ***********/
 eval(fs.readFileSync('watchers.js', 'utf8'))
