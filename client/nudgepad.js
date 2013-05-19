@@ -10532,10 +10532,15 @@ nudgepad.console = function () {
 }
 nudgepad.contentEditor = {}
 
+nudgepad.contentEditor.blur = function () {
+  if (nudgepad.contentEditor.element)
+    nudgepad.contentEditor.element.trigger('blur')
+}
+
 /**
  * Fires when a block being edited a blur occurs.
  */
-nudgepad.contentEditor.blur = function () {
+nudgepad.contentEditor.onblur = function () {
   
   var scrap = $(this).scrap()
   scrap.set('content', $(this).html())
@@ -10549,6 +10554,7 @@ nudgepad.contentEditor.blur = function () {
   // record the changes for undo/redo
   nudgepad.stage.commit()
   nudgepad.broadcastSelection()
+  nudgepad.contentEditor.element = false
 }
 
 /**
@@ -10602,13 +10608,15 @@ nudgepad.contentEditor.focus = function (selector, selectAll) {
   element.on('tap slide slidestart hold slideend', nudgepad.contentEditor.killEvent)
   
   // on blur, remove all this stuff.
-  element.on('blur', nudgepad.contentEditor.blur)
+  element.on('blur', nudgepad.contentEditor.onblur)
   
   // focus the element
   element.focus()
   
   // move the cursor to the end of the element
   MoveCursorToEnd(element[0])
+  
+  nudgepad.contentEditor.element = element
 
   // Select all
   if (selectAll)
@@ -12454,6 +12462,7 @@ nudgepad.patch.receive = function (patch) {
     return nudgepad.stage.updateTimeline()
 
   // Todo: this breaks if you are in content editable
+  nudgepad.contentEditor.blur()
   nudgepad.stage.redo()
   nudgepad.notify('Change received', 1000)
 }
