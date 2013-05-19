@@ -291,10 +291,12 @@ nudgepad.stage.redo = function () {
  */
 nudgepad.stage.render = function () {
   $('#nudgepadStageStyles').html('')
+  $('#nudgepadRemoteSelections').html('')
   $(".scrap").remove()
   nudgepad.pages.stage.loadScraps()
   nudgepad.pages.stage.render()
   nudgepad.grid.create()
+  nudgepad.updateSelections()
 }
 
 nudgepad.stage.reload = function () {

@@ -430,18 +430,16 @@ nudgepad.stage.selection.toSpace = function () {
   return space
 }
 
-var selectionColors = ['red', 'orange', 'yellow', 'green', 'blue', 'indigo', 'violet']
-
 nudgepad.broadcastSelection = function () {
+  nudgepad.setColor()
   var selection = ''
   var first = ' '
   $('.selection').each(function () {
     selection += first + $(this).scrap().selector()
     first = ','
   })
-  
-  var color = selectionColors[site.get('collage').keys.indexOf(nudgepad.id + '')]
-  selection += '{box-shadow: 0 0 4px ' + color + ';cursor: not-allowed;}'
+
+  selection += '{box-shadow: 0 0 4px ' + nudgepad.tab.get('color') + ';cursor: not-allowed;}'
   nudgepad.tab.patch('selection ' + selection)
   
 }

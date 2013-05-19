@@ -15,6 +15,21 @@ nudgepad.id = new Date().getTime()
 nudgepad.tab = new Space('id ' + nudgepad.id)
 nudgepad.tab.set('device', platform.name + (platform.product ? '/' + platform.product : ''))
 
+nudgepad.setColor = function () {
+  if (nudgepad.tab.get('color'))
+    return true
+  var colors = ['red', 'green', 'violet', 'yellow', 'blue', 'orange', 'indigo']
+  var used = []
+  site.values.collage.each(function (key, value) {
+    if (value.get('color'))
+      used.push(value.get('color'))
+  })
+  var freeColors = _.difference(colors, used)
+  if (freeColors.length < 1)
+    freeColors.push('black')
+  nudgepad.tab.set('color', freeColors[0])
+}
+
 nudgepad.tab.on('patch', function () {
   site.set('collage ' + nudgepad.id, this)
   nudgepad.emit('collage.update', this)
@@ -116,6 +131,7 @@ nudgepad.main = function (callback) {
       var tabName = site.get('collage ' + id)
       nudgepad.notify(tabName.get('name') + ' closed a tab')
       site.values.collage.delete(id)
+      nudgepad.trigger('collage.update')
     })
     
     nudgepad.socket.on('collage.create', function (patch) {

@@ -28,6 +28,7 @@ nudgepad.patch.receive = function (patch) {
   if (behind)
     return nudgepad.stage.updateTimeline()
 
+  // Todo: this breaks if you are in content editable
   nudgepad.stage.redo()
   nudgepad.notify('Change received', 1000)
 }
