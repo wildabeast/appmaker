@@ -81,9 +81,5 @@ io.sockets.on('connection', function (socket) {
     // Broadcast to everyone else
     nudgepad.emit('patch', space, socket)
   })
-  
-  socket.on('workerSelection', function (ids) {
-    nudgepad.emit('workerSelection', ids, socket)
-  })
 
 })

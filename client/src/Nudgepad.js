@@ -28,7 +28,6 @@ nudgepad.events = {
   'selection' : [],
   'stage' : [],
   'page' : [],
-  'workerSelection' : [],
   'disconnect' : [],
   'collage.update' : [],
   'ping' : [],
@@ -98,10 +97,6 @@ nudgepad.main = function (callback) {
       $('#nudgepadConnectionStatus').html('Connection to server failed...').show()
     })
 
-    nudgepad.socket.on('workerSelection', function (selection) {
-      nudgepad.trigger('workerSelection', selection)
-    })
-
     nudgepad.socket.on('error', function (error) {
       console.log(error)
       $('#nudgepadConnectionStatus').html('Connecting to server...').show()
@@ -114,6 +109,7 @@ nudgepad.main = function (callback) {
     nudgepad.socket.on('collage.update', function (patch) {
       site.values.collage.patch(patch)
       nudgepad.trigger('collage.update')
+      
     })
     
     nudgepad.socket.on('collage.delete', function (id) {

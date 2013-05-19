@@ -9915,7 +9915,6 @@ nudgepad.events = {
   'selection' : [],
   'stage' : [],
   'page' : [],
-  'workerSelection' : [],
   'disconnect' : [],
   'collage.update' : [],
   'ping' : [],
@@ -9985,10 +9984,6 @@ nudgepad.main = function (callback) {
       $('#nudgepadConnectionStatus').html('Connection to server failed...').show()
     })
 
-    nudgepad.socket.on('workerSelection', function (selection) {
-      nudgepad.trigger('workerSelection', selection)
-    })
-
     nudgepad.socket.on('error', function (error) {
       console.log(error)
       $('#nudgepadConnectionStatus').html('Connecting to server...').show()
@@ -10001,6 +9996,7 @@ nudgepad.main = function (callback) {
     nudgepad.socket.on('collage.update', function (patch) {
       site.values.collage.patch(patch)
       nudgepad.trigger('collage.update')
+      
     })
     
     nudgepad.socket.on('collage.delete', function (id) {
@@ -10580,10 +10576,7 @@ nudgepad.contentEditor.focus = function (selector, selectAll) {
     return
   }
 
-  // Emit a workerSelection event
-  nudgepad.emit('workerSelection', nudgepad.stage.activePage.concat(
-    ' ', nudgepad.cookie.email, selector, '{box-shadow: 0 0 2px red;cursor: not-allowed;}'
-  ))
+  nudgepad.broadcastSelection()
 
   // set element to editable
   element.attr('contenteditable', 'true')
@@ -12156,27 +12149,6 @@ nudgepad.error = function (message) {
   return false
 }
 
-/*
-Pain: when multiple workers are editing same page, it hurts not to know what other workers
-have selected
-*/
-
-nudgepad.on('workerSelection', function (selector) {
-  var parts = selector.split(/ /)
-  var page = parts.shift()
-  var email = parts.shift()
-  // If im not on the same page, i dont care.
-  if (page != nudgepad.stage.activePage) return false
-  $('#nudgepadWorkerSelectionStyles').html(parts.join(' '))
-  // Add CSS that adds outline to that users selected scraps
-  /*
-  *
-  * .scrap#scrap1,.scrap#scrap2 { box-shadow: 0 0 1px blue; }
-  *
-  *
-  *
-  */
-})
 /**
  * Appends scraps to DOM.
  *
@@ -13479,22 +13451,39 @@ nudgepad.stage.selection.toSpace = function () {
   return space
 }
 
-nudgepad.on('selection', function () {
-  
-  var selection = nudgepad.stage.activePage + ' ' + nudgepad.cookie.email
+var selectionColors = ['red', 'orange', 'yellow', 'green', 'blue', 'indigo', 'violet']
+
+nudgepad.broadcastSelection = function () {
+  var selection = ''
   var first = ' '
   $('.selection').each(function () {
-    selection += first + '.scrap#' + $(this).attr('id')
+    selection += first + $(this).scrap().selector()
     first = ','
   })
   
-//  $('#nudgepadDimensions').hide()
+  var color = selectionColors[site.get('collage').keys.indexOf(nudgepad.id + '')]
+  selection += '{box-shadow: 0 0 4px ' + color + ';cursor: not-allowed;}'
+  nudgepad.tab.patch('selection ' + selection)
   
-  selection += '{box-shadow: 0 0 2px red;cursor: not-allowed;}'
-  nudgepad.emit('workerSelection', selection)
+}
 
-  
-})
+nudgepad.updateSelections = function () {
+  $('#nudgepadRemoteSelections').html('')
+  site.values.collage.each(function (key, value) {
+    if (key == nudgepad.id)
+      return true
+    if (value.get('page') !== nudgepad.stage.activePage)
+      return true
+    var style = value.get('selection')
+    if (style)
+      $('#nudgepadRemoteSelections').append(style)
+  })
+}
+
+nudgepad.on('selection', nudgepad.broadcastSelection)
+
+nudgepad.on('collage.update', nudgepad.updateSelections)
+
 
 Events.shortcut.onfire = function (key) {
   mixpanel.track('I used the keyboard shortcut ' +  key)

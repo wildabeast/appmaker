@@ -60,10 +60,7 @@ nudgepad.contentEditor.focus = function (selector, selectAll) {
     return
   }
 
-  // Emit a workerSelection event
-  nudgepad.emit('workerSelection', nudgepad.stage.activePage.concat(
-    ' ', nudgepad.cookie.email, selector, '{box-shadow: 0 0 2px red;cursor: not-allowed;}'
-  ))
+  nudgepad.broadcastSelection()
 
   // set element to editable
   element.attr('contenteditable', 'true')

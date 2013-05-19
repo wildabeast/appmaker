@@ -430,20 +430,37 @@ nudgepad.stage.selection.toSpace = function () {
   return space
 }
 
-nudgepad.on('selection', function () {
-  
-  var selection = nudgepad.stage.activePage + ' ' + nudgepad.cookie.email
+var selectionColors = ['red', 'orange', 'yellow', 'green', 'blue', 'indigo', 'violet']
+
+nudgepad.broadcastSelection = function () {
+  var selection = ''
   var first = ' '
   $('.selection').each(function () {
-    selection += first + '.scrap#' + $(this).attr('id')
+    selection += first + $(this).scrap().selector()
     first = ','
   })
   
-//  $('#nudgepadDimensions').hide()
+  var color = selectionColors[site.get('collage').keys.indexOf(nudgepad.id + '')]
+  selection += '{box-shadow: 0 0 4px ' + color + ';cursor: not-allowed;}'
+  nudgepad.tab.patch('selection ' + selection)
   
-  selection += '{box-shadow: 0 0 2px red;cursor: not-allowed;}'
-  nudgepad.emit('workerSelection', selection)
+}
 
-  
-})
+nudgepad.updateSelections = function () {
+  $('#nudgepadRemoteSelections').html('')
+  site.values.collage.each(function (key, value) {
+    if (key == nudgepad.id)
+      return true
+    if (value.get('page') !== nudgepad.stage.activePage)
+      return true
+    var style = value.get('selection')
+    if (style)
+      $('#nudgepadRemoteSelections').append(style)
+  })
+}
+
+nudgepad.on('selection', nudgepad.broadcastSelection)
+
+nudgepad.on('collage.update', nudgepad.updateSelections)
+
 
