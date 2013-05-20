@@ -22,6 +22,14 @@
   outline: 1px solid #5555ff;
 }
 
+.contentEditable:focus {
+  -webkit-user-select: auto;
+  -moz-user-select: text;
+  user-select: auto;
+  -ms-user-select: text;
+  outline: 1px solid #5555ff;
+}
+
 .selection.nudgepadHighlightedScrap {
   outline: 2px solid blue;
   box-shadow: 1px 1px 8px 8px blue;
