@@ -127,4 +127,7 @@ To remove the development version (and ALL user data) run:
 
     npd uninstall
 
+Build Status
+============
 
+[![Build Status](https://travis-ci.org/nudgepad/nudgepad.png?branch=master)](https://travis-ci.org/nudgepad/nudgepad)
