@@ -10545,7 +10545,6 @@ nudgepad.contentEditor.onblur = function () {
 
   // remove the ability to edit & select text.
   $(this).removeAttr('contenteditable')
-  $(this).addClass('scrap')
 
   // record the changes for undo/redo
   nudgepad.stage.commit()
@@ -10598,8 +10597,6 @@ nudgepad.contentEditor.focus = function (selector, selectAll) {
 
   // set element to editable
   element.attr('contenteditable', 'true')
-  // we take it out of the flow in case folks are editing in background
-  element.addClass('contentEditable').removeClass('scrap')
   
   // stop propagation (todo: perhaps we could use these to make some sweet events!)
   element.on('tap slide slidestart hold slideend', nudgepad.contentEditor.killEvent)
