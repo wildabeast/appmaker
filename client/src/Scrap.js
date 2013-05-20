@@ -169,7 +169,10 @@ Scrap.prototype.render = function (context, index) {
 }
 
 Scrap.prototype.selector = function () {
-  return '#nudgepadStageBody>#' + this.path.replace(/ /g, '>#')
+  var selector = this.path.replace(/[^a-z0-9\-\.\_]/gi, '').replace(/ /g, '>#')
+  if (!selector)
+    return ''
+  return '#nudgepadStageBody>#' + selector
 }
 
 /**

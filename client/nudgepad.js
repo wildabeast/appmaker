@@ -10970,7 +10970,10 @@ Grid.prototype.addDynamicPoints = function () {
   if ($('#nudgepadStageBody').children('.scrap:not(.selection)').length > 200)
     return true
   $('#nudgepadStageBody').children('.scrap:not(.selection)').each(function(){
-    grid.addPoints($(this).scrap().selector())
+    // Make sure no problem fetching scrap
+    var scrap = $(this).scrap()
+    if (scrap)
+      grid.addPoints(scrap.selector())
   })
 }
 
@@ -12792,7 +12795,10 @@ Scrap.prototype.render = function (context, index) {
 }
 
 Scrap.prototype.selector = function () {
-  return '#nudgepadStageBody>#' + this.path.replace(/ /g, '>#')
+  var selector = this.path.replace(/[^a-z0-9\-\.\_]/gi, '').replace(/ /g, '>#')
+  if (!selector)
+    return ''
+  return '#nudgepadStageBody>#' + selector
 }
 
 /**

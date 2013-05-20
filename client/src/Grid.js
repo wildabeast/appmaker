@@ -48,7 +48,10 @@ Grid.prototype.addDynamicPoints = function () {
   if ($('#nudgepadStageBody').children('.scrap:not(.selection)').length > 200)
     return true
   $('#nudgepadStageBody').children('.scrap:not(.selection)').each(function(){
-    grid.addPoints($(this).scrap().selector())
+    // Make sure no problem fetching scrap
+    var scrap = $(this).scrap()
+    if (scrap)
+      grid.addPoints(scrap.selector())
   })
 }
 
