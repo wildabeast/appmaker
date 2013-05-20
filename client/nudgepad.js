@@ -8219,7 +8219,7 @@ function Scrap (path, space) {
  */
 Scrap.format = function (string, format) {
   if (format === 'nl2br')
-    return string.replace(/\n/g, '<br>')
+    return string.toString().replace(/\n/g, '<br>')
   
   // todo
   else if (format === 'markdown')
@@ -8274,7 +8274,7 @@ Scrap.getPointer = function (string, context) {
  * @return {string}
  */
 Scrap.replace = function (string, context) {
-  return string.replace(/\{\{([_a-zA-Z0-9\.]+)( [^\}]+)?\}\}/g, function(match, name, placeholder) {
+  return string.toString().replace(/\{\{([_a-zA-Z0-9\.]+)( [^\}]+)?\}\}/g, function(match, name, placeholder) {
     var variable = Scrap.getPointer(name, context)
     return variable || (placeholder ? placeholder.substr(1) : '')
   })
@@ -11893,6 +11893,8 @@ nudgepad.MoveHandle.tap = function () {
 
 nudgepad.MoveHandle.update = function () {
   var owner = $(this).owner()
+  if (!owner.position())
+    debugger
   // make it easy to move narrow divs
   var top_padding  = Math.min(10, owner.outerHeight(true) - 20)
   var left_padding = Math.min(10, owner.outerWidth() - 20)
