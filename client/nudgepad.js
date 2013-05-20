@@ -10532,11 +10532,6 @@ nudgepad.console = function () {
 }
 nudgepad.contentEditor = {}
 
-nudgepad.contentEditor.blur = function () {
-  if (nudgepad.contentEditor.element)
-    nudgepad.contentEditor.element.trigger('blur')
-}
-
 /**
  * Fires when a block being edited a blur occurs.
  */
@@ -10550,11 +10545,11 @@ nudgepad.contentEditor.onblur = function () {
 
   // remove the ability to edit & select text.
   $(this).removeAttr('contenteditable')
+  $(this).addClass('scrap')
 
   // record the changes for undo/redo
   nudgepad.stage.commit()
   nudgepad.broadcastSelection()
-  nudgepad.contentEditor.element = false
 }
 
 /**
@@ -10603,6 +10598,8 @@ nudgepad.contentEditor.focus = function (selector, selectAll) {
 
   // set element to editable
   element.attr('contenteditable', 'true')
+  // we take it out of the flow in case folks are editing in background
+  element.addClass('contentEditable').removeClass('scrap')
   
   // stop propagation (todo: perhaps we could use these to make some sweet events!)
   element.on('tap slide slidestart hold slideend', nudgepad.contentEditor.killEvent)
@@ -10615,8 +10612,6 @@ nudgepad.contentEditor.focus = function (selector, selectAll) {
   
   // move the cursor to the end of the element
   MoveCursorToEnd(element[0])
-  
-  nudgepad.contentEditor.element = element
 
   // Select all
   if (selectAll)
@@ -12462,7 +12457,6 @@ nudgepad.patch.receive = function (patch) {
     return nudgepad.stage.updateTimeline()
 
   // Todo: this breaks if you are in content editable
-  nudgepad.contentEditor.blur()
   nudgepad.stage.redo()
   nudgepad.notify('Change received', 1000)
 }
