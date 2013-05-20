@@ -10800,10 +10800,10 @@ EditHandle.create = function (scrap) {
 }
 
 EditHandle.update = function () {
-  var element = $(this).owner()
+  var owner = $(this).owner()
   $(this).css({
-  "left" : element.left() + 2 + "px",
-  "top" : element.bottom() + 4 + "px"
+  "left" : owner.position().left + 2 + "px",
+  "top" : owner.position().top + owner.outerHeight(true) + 4 + "px"
   })
 }
 
@@ -11906,7 +11906,7 @@ nudgepad.MoveHandle.slide = function (event, mouseEvent) {
   var position = 'X ' + parseFloat(owner.css('left')) + '<br>Y ' + parseFloat(owner.css('top'))
   $('#nudgepadDimensions').css({
     left : 10 + owner.offset().left + owner.outerWidth(),
-    top : -10 + owner.offset().top + Math.round(owner.outerHeight()/2)
+    top : -10 + owner.offset().top + Math.round(owner.outerHeight(true)/2)
     }).html(position)
   
   nudgepad.MoveHandle.last_x_change = x_change
@@ -11931,7 +11931,7 @@ nudgepad.MoveHandle.slidestart = function () {
   var position = 'X ' + parseFloat(owner.css('left')) + '<br>Y ' + parseFloat(owner.css('top'))
   $('#nudgepadDimensions').css({
     left : 10 + owner.offset().left + owner.outerWidth(),
-    top : -10 + owner.offset().top + Math.round(owner.outerHeight()/2)
+    top : -10 + owner.offset().top + Math.round(owner.outerHeight(true)/2)
     }).html(position).show()
   return false
 }
@@ -11947,12 +11947,12 @@ nudgepad.MoveHandle.tap = function () {
 nudgepad.MoveHandle.update = function () {
   var owner = $(this).owner()
   // make it easy to move narrow divs
-  var top_padding  = Math.min(10, owner.outerHeight() - 20)
+  var top_padding  = Math.min(10, owner.outerHeight(true) - 20)
   var left_padding = Math.min(10, owner.outerWidth() - 20)
   var style = {
     "left" : owner.left() + left_padding  + 'px',
     "top" : (owner.top() + top_padding) + 'px',
-    "height" : (owner.outerHeight() - top_padding * 2) + 'px',
+    "height" : (owner.outerHeight(true) - top_padding * 2) + 'px',
     "width" : (owner.outerWidth() - left_padding * 2)  + 'px'}
   $(this).css(style)
 }
@@ -14286,7 +14286,7 @@ nudgepad.StretchHandle.slide = function () {
     } else {
       scrap.set('style top', length.y + y0 +  'px')
     }
-    var extra_height = owner.outerHeight() - owner.height()
+    var extra_height = owner.outerHeight(true) - owner.height()
     scrap.set('style height', Math.abs(length.y) - extra_height + "px")
   }
   
@@ -14299,7 +14299,7 @@ nudgepad.StretchHandle.slide = function () {
   var position = 'W ' + parseFloat(owner.css('width')) + '<br> H ' + parseFloat(owner.css('height'))
   $('#nudgepadDimensions').css({
     left : 10 + owner.offset().left + owner.outerWidth(),
-    top : -10 + owner.offset().top + Math.round(owner.outerHeight()/2)
+    top : -10 + owner.offset().top + Math.round(owner.outerHeight(true)/2)
     }).html(position)
   
   // Reposition stretch handles
@@ -14320,7 +14320,7 @@ nudgepad.StretchHandle.slidestart = function (event) {
   var position = 'W ' + parseFloat(owner.css('width')) + '<br> H ' + parseFloat(owner.css('height'))
   $('#nudgepadDimensions').css({
     left : 10 + owner.offset().left + owner.outerWidth(),
-    top : -10 + owner.offset().top + Math.round(owner.outerHeight()/2)
+    top : -10 + owner.offset().top + Math.round(owner.outerHeight(true)/2)
     }).html(position).show()
   
   return false
@@ -14410,10 +14410,10 @@ nudgepad.StretchHandle.update = function () {
       _top = element.position().top - 4
     break;
     case "middle":
-      _top = element.position().top + Math.round(element.outerHeight()/2) - 4
+      _top = element.position().top + Math.round(element.outerHeight(true)/2) - 4
     break;
     case "bottom":
-      _top = element.position().top + element.outerHeight() - 4
+      _top = element.position().top + element.outerHeight(true) - 4
     break;
   }
   switch (column) {

@@ -23,10 +23,10 @@ EditHandle.create = function (scrap) {
 }
 
 EditHandle.update = function () {
-  var element = $(this).owner()
+  var owner = $(this).owner()
   $(this).css({
-  "left" : element.left() + 2 + "px",
-  "top" : element.bottom() + 4 + "px"
+  "left" : owner.position().left + 2 + "px",
+  "top" : owner.position().top + owner.outerHeight(true) + 4 + "px"
   })
 }
 

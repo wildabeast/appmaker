@@ -114,7 +114,7 @@ nudgepad.MoveHandle.slide = function (event, mouseEvent) {
   var position = 'X ' + parseFloat(owner.css('left')) + '<br>Y ' + parseFloat(owner.css('top'))
   $('#nudgepadDimensions').css({
     left : 10 + owner.offset().left + owner.outerWidth(),
-    top : -10 + owner.offset().top + Math.round(owner.outerHeight()/2)
+    top : -10 + owner.offset().top + Math.round(owner.outerHeight(true)/2)
     }).html(position)
   
   nudgepad.MoveHandle.last_x_change = x_change
@@ -139,7 +139,7 @@ nudgepad.MoveHandle.slidestart = function () {
   var position = 'X ' + parseFloat(owner.css('left')) + '<br>Y ' + parseFloat(owner.css('top'))
   $('#nudgepadDimensions').css({
     left : 10 + owner.offset().left + owner.outerWidth(),
-    top : -10 + owner.offset().top + Math.round(owner.outerHeight()/2)
+    top : -10 + owner.offset().top + Math.round(owner.outerHeight(true)/2)
     }).html(position).show()
   return false
 }
@@ -155,12 +155,12 @@ nudgepad.MoveHandle.tap = function () {
 nudgepad.MoveHandle.update = function () {
   var owner = $(this).owner()
   // make it easy to move narrow divs
-  var top_padding  = Math.min(10, owner.outerHeight() - 20)
+  var top_padding  = Math.min(10, owner.outerHeight(true) - 20)
   var left_padding = Math.min(10, owner.outerWidth() - 20)
   var style = {
     "left" : owner.left() + left_padding  + 'px',
     "top" : (owner.top() + top_padding) + 'px',
-    "height" : (owner.outerHeight() - top_padding * 2) + 'px',
+    "height" : (owner.outerHeight(true) - top_padding * 2) + 'px',
     "width" : (owner.outerWidth() - left_padding * 2)  + 'px'}
   $(this).css(style)
 }

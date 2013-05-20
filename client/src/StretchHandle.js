@@ -126,7 +126,7 @@ nudgepad.StretchHandle.slide = function () {
     } else {
       scrap.set('style top', length.y + y0 +  'px')
     }
-    var extra_height = owner.outerHeight() - owner.height()
+    var extra_height = owner.outerHeight(true) - owner.height()
     scrap.set('style height', Math.abs(length.y) - extra_height + "px")
   }
   
@@ -139,7 +139,7 @@ nudgepad.StretchHandle.slide = function () {
   var position = 'W ' + parseFloat(owner.css('width')) + '<br> H ' + parseFloat(owner.css('height'))
   $('#nudgepadDimensions').css({
     left : 10 + owner.offset().left + owner.outerWidth(),
-    top : -10 + owner.offset().top + Math.round(owner.outerHeight()/2)
+    top : -10 + owner.offset().top + Math.round(owner.outerHeight(true)/2)
     }).html(position)
   
   // Reposition stretch handles
@@ -160,7 +160,7 @@ nudgepad.StretchHandle.slidestart = function (event) {
   var position = 'W ' + parseFloat(owner.css('width')) + '<br> H ' + parseFloat(owner.css('height'))
   $('#nudgepadDimensions').css({
     left : 10 + owner.offset().left + owner.outerWidth(),
-    top : -10 + owner.offset().top + Math.round(owner.outerHeight()/2)
+    top : -10 + owner.offset().top + Math.round(owner.outerHeight(true)/2)
     }).html(position).show()
   
   return false
@@ -250,10 +250,10 @@ nudgepad.StretchHandle.update = function () {
       _top = element.position().top - 4
     break;
     case "middle":
-      _top = element.position().top + Math.round(element.outerHeight()/2) - 4
+      _top = element.position().top + Math.round(element.outerHeight(true)/2) - 4
     break;
     case "bottom":
-      _top = element.position().top + element.outerHeight() - 4
+      _top = element.position().top + element.outerHeight(true) - 4
     break;
   }
   switch (column) {
