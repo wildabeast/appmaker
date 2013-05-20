@@ -385,10 +385,25 @@ Events.shortcut = {}
 
 /**
  * Prefix to the selector that triggers that tap. Change this to make shortcuts
- * fire only on blocks matching a certain class (Nudgepad uses it to make shortcuts only
+ * fire only on blocks matching a certain class (Nudge uses it to make shortcuts only
  * fire on blocks with a class of tool)
  */
 Events.shortcut.context = ''
+
+/**
+ * Check if user is editing text.
+ */
+Events.shortcut.isEditingText = function () {
+  // Return true if user is editing an input
+  if ($('input:focus,div:focus,textarea:focus,a:focus,[contenteditable=true]:focus').length)
+    return true
+  
+  // Fix for firefox contenteditable
+  if ($('div[contenteditable]').get(0) == document.activeElement)
+    return true
+  return false
+}
+
 
 // Turn to false to disable shortcuts
 Events.shortcut.on = true
@@ -413,12 +428,7 @@ Events.shortcut.fire = function(event) {
   if (!Events.shortcut.on)
     return true
   
-  // Return true if user is editing an input
-  if ($('input:focus, div:focus, textarea:focus, a:focus').length)
-    return true
-  
-  // Fix for firefox contenteditable
-  if ($('div[contenteditable]').get(0) == document.activeElement)
+  if (Events.shortcut.isEditingText())
     return true
   
   // non ctrl key shortcuts

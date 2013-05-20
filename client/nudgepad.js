@@ -3478,10 +3478,25 @@ Events.shortcut = {}
 
 /**
  * Prefix to the selector that triggers that tap. Change this to make shortcuts
- * fire only on blocks matching a certain class (Nudgepad uses it to make shortcuts only
+ * fire only on blocks matching a certain class (Nudge uses it to make shortcuts only
  * fire on blocks with a class of tool)
  */
 Events.shortcut.context = ''
+
+/**
+ * Check if user is editing text.
+ */
+Events.shortcut.isEditingText = function () {
+  // Return true if user is editing an input
+  if ($('input:focus,div:focus,textarea:focus,a:focus,[contenteditable=true]:focus').length)
+    return true
+  
+  // Fix for firefox contenteditable
+  if ($('div[contenteditable]').get(0) == document.activeElement)
+    return true
+  return false
+}
+
 
 // Turn to false to disable shortcuts
 Events.shortcut.on = true
@@ -3506,12 +3521,7 @@ Events.shortcut.fire = function(event) {
   if (!Events.shortcut.on)
     return true
   
-  // Return true if user is editing an input
-  if ($('input:focus, div:focus, textarea:focus, a:focus').length)
-    return true
-  
-  // Fix for firefox contenteditable
-  if ($('div[contenteditable]').get(0) == document.activeElement)
+  if (Events.shortcut.isEditingText())
     return true
   
   // non ctrl key shortcuts
@@ -8183,7 +8193,7 @@ if (typeof exports != 'undefined')
 
 ;
 // If Node.js, import dependencies.
-if (typeof exports != 'undefined') {
+if (typeof exports !== 'undefined') {
   var Space = require('space'),
       fs = require('fs'),
       beautifyHtml = require('js-beautify').html,
@@ -8503,7 +8513,7 @@ Scrap.prototype.setElementTag = function (context) {
   // Add the id
   this.div.attr('id', this.id)
   
-  var properties = 'checked class disabled draggable dropzone end for height href max maxlength min name origin pattern placeholder readonly rel required selected spellcheck src tabindex target title type width value'.split(/ /)
+  var properties = 'checked class contenteditable disabled draggable dropzone end for height href max maxlength min name origin pattern placeholder readonly rel required selected spellcheck src tabindex target title type width value'.split(/ /)
   for (var i in properties) {
     this.setProperty(properties[i], context)
   }
@@ -8559,10 +8569,15 @@ Scrap.prototype.setStyle = function (context) {
  * @return {string}
  */
 Scrap.prototype.toHtml = function (context, options) {
+  if (!options)
+    options = {}
   this.setElementTag(context)
   this.setContent(context, options)
   this.setStyle(context)
-  this.setScript(context)
+  if (options.noscript)
+    null
+  else
+    this.setScript(context)
   return this.div.toHtml()
 }
 
@@ -8651,11 +8666,11 @@ Page.prototype.toHtml = function (context, options) {
   // Todo: support after property
   for (var i in this.keys) {
     var id = this.keys[i]
-    
-    // If a div has property draft true, dont render it
-    if (!options.draft && this.values[id].values.draft === 'true')
+    var scrap = this.values[id]
+    // If a div has property draft true, and draft isnt set to true, skip it
+    if (scrap.get('draft') === 'true' && !options.draft)
       continue
-    html += '\n  ' + this.values[id].toHtml(context, options)
+    html += '\n  ' + scrap.toHtml(context, options)
   }
   html += '\n</html>'
   if (options.beautify)
@@ -8664,7 +8679,7 @@ Page.prototype.toHtml = function (context, options) {
 }
 
 // If Node.js, export as a module.
-if (typeof exports != 'undefined')
+if (typeof exports !== 'undefined')
   module.exports = Page;
 
 ;
@@ -12783,7 +12798,7 @@ Scrap.prototype.render = function (context, index) {
   if (this.values.tag && this.values.tag.match(/style|link/)) {
     this.setElementTag(context)
     this.setContent(context, options)
-    $('#nudgepadStageStyles').append(this.div.toHtml())
+    $('#nudgepadStageHead').append(this.div.toHtml())
     return this
   }
   
@@ -13964,7 +13979,7 @@ nudgepad.stage.redo = function () {
  * Refresh the stage.
  */
 nudgepad.stage.render = function () {
-  $('#nudgepadStageStyles').html('')
+  $('#nudgepadStageHead').html('')
   $('#nudgepadRemoteSelections').html('')
   $(".scrap").remove()
   nudgepad.pages.stage.loadScraps()

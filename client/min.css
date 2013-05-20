@@ -1666,6 +1666,13 @@ License: MIT
   width: 100%;
 }
 
+#nudgepadStageHead {
+  height: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
 #nudgepadStageBody {
   height: 1000px;
   position: relative;

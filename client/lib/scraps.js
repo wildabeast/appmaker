@@ -1,5 +1,5 @@
 // If Node.js, import dependencies.
-if (typeof exports != 'undefined') {
+if (typeof exports !== 'undefined') {
   var Space = require('space'),
       fs = require('fs'),
       beautifyHtml = require('js-beautify').html,
@@ -319,7 +319,7 @@ Scrap.prototype.setElementTag = function (context) {
   // Add the id
   this.div.attr('id', this.id)
   
-  var properties = 'checked class disabled draggable dropzone end for height href max maxlength min name origin pattern placeholder readonly rel required selected spellcheck src tabindex target title type width value'.split(/ /)
+  var properties = 'checked class contenteditable disabled draggable dropzone end for height href max maxlength min name origin pattern placeholder readonly rel required selected spellcheck src tabindex target title type width value'.split(/ /)
   for (var i in properties) {
     this.setProperty(properties[i], context)
   }
@@ -375,10 +375,15 @@ Scrap.prototype.setStyle = function (context) {
  * @return {string}
  */
 Scrap.prototype.toHtml = function (context, options) {
+  if (!options)
+    options = {}
   this.setElementTag(context)
   this.setContent(context, options)
   this.setStyle(context)
-  this.setScript(context)
+  if (options.noscript)
+    null
+  else
+    this.setScript(context)
   return this.div.toHtml()
 }
 
@@ -467,11 +472,11 @@ Page.prototype.toHtml = function (context, options) {
   // Todo: support after property
   for (var i in this.keys) {
     var id = this.keys[i]
-    
-    // If a div has property draft true, dont render it
-    if (!options.draft && this.values[id].values.draft === 'true')
+    var scrap = this.values[id]
+    // If a div has property draft true, and draft isnt set to true, skip it
+    if (scrap.get('draft') === 'true' && !options.draft)
       continue
-    html += '\n  ' + this.values[id].toHtml(context, options)
+    html += '\n  ' + scrap.toHtml(context, options)
   }
   html += '\n</html>'
   if (options.beautify)
@@ -480,6 +485,6 @@ Page.prototype.toHtml = function (context, options) {
 }
 
 // If Node.js, export as a module.
-if (typeof exports != 'undefined')
+if (typeof exports !== 'undefined')
   module.exports = Page;
 

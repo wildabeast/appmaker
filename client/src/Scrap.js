@@ -134,7 +134,7 @@ Scrap.prototype.render = function (context, index) {
   if (this.values.tag && this.values.tag.match(/style|link/)) {
     this.setElementTag(context)
     this.setContent(context, options)
-    $('#nudgepadStageStyles').append(this.div.toHtml())
+    $('#nudgepadStageHead').append(this.div.toHtml())
     return this
   }
   

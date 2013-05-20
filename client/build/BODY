@@ -213,10 +213,10 @@
   	</div>
   </div>
   <div id="nudgepadStage" class="nudgepad">
+    <div id="nudgepadStageHead"></div>
     <div id="nudgepadStageBody"></div>
     <div id="nudgepadStageBottomPadding"></div>
     <style type="text/css" id="nudgepadRemoteSelections"></style>
-    <div id="nudgepadStageStyles"></div>
   </div>
   <div class="nudgepadFullScreenApp" id="nudgepadStatsApp">
   	<div class="appNav">

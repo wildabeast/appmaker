@@ -290,7 +290,7 @@ nudgepad.stage.redo = function () {
  * Refresh the stage.
  */
 nudgepad.stage.render = function () {
-  $('#nudgepadStageStyles').html('')
+  $('#nudgepadStageHead').html('')
   $('#nudgepadRemoteSelections').html('')
   $(".scrap").remove()
   nudgepad.pages.stage.loadScraps()
