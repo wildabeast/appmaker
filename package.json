@@ -8,27 +8,30 @@
     "nudgepad" : "system/nudgepad.sh",
     "np" : "system/nudgepad.sh"
    },
+   "scripts": {
+     "test": "make test"
+   },
   "dependencies": {
     "space": ">=0.1.6",
     "scraps": ">=0.2.3",
     "speedcoach": ">=0.1.1",
-    "socket.io": ">=0.1.1",
-    "express": ">=0.1.1",
-    "superagent": ">=0.1.1",
-    "imagemagick": ">=0.1.1",
-    "underscore": ">=0.1.1",
-    "cookie": ">=0.0.1",
-    "moment": ">=0.1.1",
-    "nodemailer": ">=0.1.1",
-    "request": ">=0.1.1",
-    "wrench": ">=0.1.1",
-    "async": ">=0.1.1",
-    "marked": ">=0.1.1",
-    "jquery": ">=0.1.1",
-    "utile": ">=0.1.1",
+    "socket.io": "*",
+    "express": "*",
+    "superagent": "*",
+    "imagemagick": "*",
+    "underscore": "*",
+    "cookie": "*",
+    "moment": "*",
+    "nodemailer": "*",
+    "request": "*",
+    "wrench": "*",
+    "async": "*",
+    "marked": "*",
+    "jquery": "*",
+    "utile": "*",
     "http-proxy": "=0.10.1",
-    "commander": ">=0.1.1",
-    "mode-to-permissions" : ">=0.0.1"
+    "commander": "*",
+    "mode-to-permissions" : "*"
   },
   "keywords": [
     "scraps",
@@ -37,6 +40,12 @@
     "template",
     "html"
   ],
+  "devDependencies": {
+    "mocha": "*",
+    "should": "*",
+    "qunit": "~0.5.1",
+    "supertest": "0.6.0"
+  },
   "engines" : { "node" : ">=0.8.1 <0.10.0" },
   "license": "MIT",
   "contributors": [

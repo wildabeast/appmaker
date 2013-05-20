@@ -154,6 +154,8 @@ nudgepad.MoveHandle.tap = function () {
 
 nudgepad.MoveHandle.update = function () {
   var owner = $(this).owner()
+  if (!owner.position())
+    debugger
   // make it easy to move narrow divs
   var top_padding  = Math.min(10, owner.outerHeight(true) - 20)
   var left_padding = Math.min(10, owner.outerWidth() - 20)

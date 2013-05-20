@@ -4,7 +4,7 @@ var assert = require('assert'),
     modeToPermissions = require('mode-to-permissions');
 
 function runTest(line) {
-  console.log(line)
+  // console.log(line)
   if (!line)
     return false
   var path = line.split(/ /)[0]
@@ -28,5 +28,5 @@ function runTest(line) {
 
 }
 
-fs.readFileSync('tests.txt', 'utf8').split(/\n/g).forEach(runTest)
+fs.readFileSync(__dirname + '/tests.txt', 'utf8').split(/\n/g).forEach(runTest)
 
