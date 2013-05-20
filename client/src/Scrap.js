@@ -1,11 +1,3 @@
-Scrap.prototype.element = function () {
-  return $(this.selector())
-}
-
-Scrap.prototype.getPath = function () {
-  return this.path.replace(/ /g, ' scraps ')
-}
-
 /**
  * Launches the default block editor.
  *
@@ -23,6 +15,14 @@ Scrap.prototype.edit = function (selectAll) {
     nudgepad.contentEditor.focus(this.selector(), selectAll)
 
   return this
+}
+
+Scrap.prototype.element = function () {
+  return $(this.selector())
+}
+
+Scrap.prototype.getPath = function () {
+  return this.path.replace(/ /g, ' scraps ')
 }
 
 /**
@@ -169,7 +169,7 @@ Scrap.prototype.render = function (context, index) {
 }
 
 Scrap.prototype.selector = function () {
-  var selector = this.path.replace(/[^a-z0-9\-\.\_]/gi, '').replace(/ /g, '>#')
+  var selector = this.path.replace(/[^a-z0-9\-\.\_ ]/gi, '').replace(/ /g, '>#')
   if (!selector)
     return ''
   return '#nudgepadStageBody>#' + selector
