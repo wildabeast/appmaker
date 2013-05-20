@@ -12789,8 +12789,17 @@ Scrap.prototype.parentSelector = function () {
  */
 Scrap.prototype.render = function (context, index) {
   // dont render invisibles
-  if (this.values.tag && this.values.tag.match(/title|script|meta|head/))
+  if (this.values.tag && this.values.tag.match(/title|script|meta/))
     return this
+  
+  if (this.values.tag === 'head') {
+    if (this.values.scraps) {
+      this.values.scraps.each(function (key, value) {
+        value.render(context)
+      })
+    }
+    return this
+  }
   
   var options = {draft : true}
   

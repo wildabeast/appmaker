@@ -112,7 +112,7 @@ If you'd like to contribute to NudgePad development, follow these steps:
     cd ~
     git clone git@github.com:nudgepad/nudgepad.git
     cd nudgepad
-    make dev
+    ./install.sh
     npd start
     # Go to http://localhost
 
