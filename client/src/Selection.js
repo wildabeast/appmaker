@@ -7,8 +7,8 @@ nudgepad.stage.selection.saved = []
 nudgepad.stage.selection.alignLeft = function () {
   var edge
   $('.selection').each(function () {
-    if (!edge || $(this).left() < edge)
-      edge = $(this).left()
+    if (!edge || $(this).position().left < edge)
+      edge = $(this).position().left
   })
   nudgepad.stage.selection.css('left ' + edge + 'px')
 }
@@ -16,8 +16,8 @@ nudgepad.stage.selection.alignLeft = function () {
 nudgepad.stage.selection.alignRight = function () {
   var edge
   $('.selection').each(function () {
-    if (!edge || $(this).left() > edge)
-      edge = $(this).left()
+    if (!edge || $(this).position().left > edge)
+      edge = $(this).position().left
   })
   nudgepad.stage.selection.css('left ' + edge + 'px')
 }
@@ -25,8 +25,8 @@ nudgepad.stage.selection.alignRight = function () {
 nudgepad.stage.selection.alignTop = function () {
   var edge
   $('.selection').each(function () {
-    if (!edge || $(this).top() < edge)
-      edge = $(this).top()
+    if (!edge || $(this).position().top < edge)
+      edge = $(this).position().top
   })
   nudgepad.stage.selection.css('top ' + edge + 'px')
 }
@@ -34,8 +34,8 @@ nudgepad.stage.selection.alignTop = function () {
 nudgepad.stage.selection.alignBottom = function () {
   var edge
   $('.selection').each(function () {
-    if (!edge || $(this).top() > edge)
-      edge = $(this).top()
+    if (!edge || $(this).position().top > edge)
+      edge = $(this).position().top
   })
   nudgepad.stage.selection.css('top ' + edge + 'px')
 }
@@ -119,7 +119,7 @@ nudgepad.stage.selection.cssPrompt = function () {
 
 nudgepad.stage.selection.distributeVertical = function () {
   
-  var elements = _.sortBy($('.selection'), function(element){ return $(element).top() })
+  var elements = _.sortBy($('.selection'), function(element){ return $(element).position().top })
   
   // calculate total whitespace.
   var whitespace = 0
@@ -130,7 +130,7 @@ nudgepad.stage.selection.distributeVertical = function () {
     var last = list[index - 1]
     var id = $(element).attr('id')
     // The space betweein
-    whitespace += $(element).top() - $(last).bottom()
+    whitespace += $(element).position().top - ($(last).position().top + $(last).outerHeight())
     count++
   })
   var theSpaceBetween = Math.floor(whitespace/count)
@@ -141,7 +141,7 @@ nudgepad.stage.selection.distributeVertical = function () {
       return true
     var last = list[index - 1]
     var scrap = $(element).scrap()
-    scrap.set('style top', ($(last).bottom() + theSpaceBetween) + 'px')
+    scrap.set('style top', (($(last).position().top + $(last).outerHeight()) + theSpaceBetween) + 'px')
     $(element).css('top', scrap.get('style top'))
   })
   $('.handle').trigger('update')
@@ -152,7 +152,7 @@ nudgepad.stage.selection.distributeHorizontal = function () {
   // this function is currently 3N ish. But that should be fine. But we
   // could clearly make it faster if it feels slow.
   
-  var elements = _.sortBy($('.selection'), function(element){ return $(element).left() })
+  var elements = _.sortBy($('.selection'), function(element){ return $(element).position().left })
   
   // calculate total whitespace.
   var whitespace = 0
@@ -163,7 +163,7 @@ nudgepad.stage.selection.distributeHorizontal = function () {
     var last = list[index - 1]
     var id = $(element).attr('id')
     // The space betweein
-    whitespace += $(element).left() - $(last).right()
+    whitespace += $(element).position().left - ($(last).position().left + $(last).outerWidth())
     count++
   })
   var theSpaceBetween = Math.floor(whitespace/count)
@@ -174,7 +174,7 @@ nudgepad.stage.selection.distributeHorizontal = function () {
       return true
     var last = list[index - 1]
     var scrap = $(element).scrap()
-    scrap.set('style left', ($(last).right() + theSpaceBetween) + 'px')
+    scrap.set('style left', ($(last).position().left + $(last).outerWidth() + theSpaceBetween) + 'px')
     $(element).css('left', scrap.get('style left'))
   })
   $('.handle').trigger('update')

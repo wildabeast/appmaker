@@ -63,9 +63,9 @@ test("duplicate", function() {
   var source = nudgepad.stage.insert()[0]
   nudgepad.stage.selectAll()
   nudgepad.stage.selection.duplicate()
-  var left = $(source).left()
+  var left = $(source).offset().left
   equal(nudgepad.pages.stage.keys.length, 2)
-  ok($('.selection').left() > left, 'duplicated block should be to the right')
+  ok($('.selection').offset().left > left, 'duplicated block should be to the right')
   equal($('.selection').length, 1, 'duplicated block should be selected')
   
 
@@ -76,12 +76,12 @@ test("move", function() {
   var selector = nudgepad.stage.insert('scrap\n style\n  top 10px\n  left 10px\n  position absolute')[0]
   ok(selector, 'Scrap created')
   
-  var top_edge = $(selector).top()
+  var top_edge = $(selector).position().top
   
-  equal($('.selection').top(), top_edge)
+  equal($('.selection').position().top, top_edge)
   nudgepad.stage.selection.move(0, 1)
   
-  equal($('.selection').top(), top_edge + 1, 'should be moved down one')
+  equal($('.selection').position().top, top_edge + 1, 'should be moved down one')
 })
 
 test("patch", function() {

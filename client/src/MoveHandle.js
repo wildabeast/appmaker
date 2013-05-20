@@ -158,8 +158,8 @@ nudgepad.MoveHandle.update = function () {
   var top_padding  = Math.min(10, owner.outerHeight(true) - 20)
   var left_padding = Math.min(10, owner.outerWidth() - 20)
   var style = {
-    "left" : owner.left() + left_padding  + 'px',
-    "top" : (owner.top() + top_padding) + 'px',
+    "left" : owner.position().left + left_padding  + 'px',
+    "top" : (owner.position().top + top_padding) + 'px',
     "height" : (owner.outerHeight(true) - top_padding * 2) + 'px',
     "width" : (owner.outerWidth() - left_padding * 2)  + 'px'}
   $(this).css(style)

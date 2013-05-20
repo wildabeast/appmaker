@@ -59,15 +59,15 @@ Grid.prototype.addFixedPoints = function () {
 
 
   // verticals
-  var start = $('#nudgepadStageBody').left()
-  var end = $('#nudgepadStageBody').right()
+  var start = $('#nudgepadStageBody').position().left
+  var end = $('#nudgepadStageBody').position().left + $('#nudgepadStageBody').outerWidth()
   this.horizontal_spacing = parseFloat(this.horizontal_spacing)
   for (var i = start; i <= end; i = i + this.horizontal_spacing) {
     this.addPoint(i, 0, '#nudgepadStageBody')  
   }
   
-  start = $('#nudgepadStageBody').top()
-  end = $('#nudgepadStageBody').bottom()
+  start = $('#nudgepadStageBody').position().top
+  end = $('#nudgepadStageBody').position().top + $('#nudgepadStageBody').outerHeight()
   this.vertical_spacing = parseFloat(this.vertical_spacing)
   for (var i = start; i <= end; i = i + this.vertical_spacing) {
     this.addPoint(0, i, '#nudgepadStageBody')  
@@ -99,9 +99,11 @@ Grid.prototype.addPoints = function (selector) {
   var element = $(selector)
   if (!element.length)
     return console.log('not found %s', selector)
-  this.addPoint(element.left(), element.top(), selector)
-  this.addPoint(element.center(), element.middle(), selector)
-  this.addPoint(element.right(), element.bottom(), selector)  
+  this.addPoint(element.position().left, element.position().top, selector)
+  var middle = Math.round(element.position().top + Math.round(element.outerHeight()/2))
+  var center = Math.round(element.position().left + Math.round(element.outerWidth()/2))
+  this.addPoint(center, middle, selector)
+  this.addPoint(element.position().left + element.outerWidth(), element.position().top + element.outerHeight(), selector)  
 }
 
 /**
@@ -125,10 +127,11 @@ Grid.prototype.create = function () {
   if (this.snap_to_container) {
     // We create these in specific order so that the bigger scraps override the little ones.
     // body 0,0
-    this.addPoint(0, $('#nudgepadStageBody').top(), '#nudgepadStageBody')
-    this.addPoint($('#nudgepadStageBody').left(), 0, '#nudgepadStageBody')
-    this.addPoint($('#nudgepadStageBody').center(), 0, '#nudgepadStageBody')
-    this.addPoint($('#nudgepadStageBody').right(), 0, '#nudgepadStageBody')
+    this.addPoint(0, $('#nudgepadStageBody').position().top, '#nudgepadStageBody')
+    this.addPoint($('#nudgepadStageBody').position().left, 0, '#nudgepadStageBody')
+    var center = Math.round($('#nudgepadStageBody').position().left + Math.round($('#nudgepadStageBody').outerWidth()/2))
+    this.addPoint(center, 0, '#nudgepadStageBody')
+    this.addPoint($('#nudgepadStageBody').position().left + $('#nudgepadStageBody').outerWidth(), 0, '#nudgepadStageBody')
     this.addPoint(0, $('#nudgepadStageBody').height(), '#nudgepadStageBody')
   }
   

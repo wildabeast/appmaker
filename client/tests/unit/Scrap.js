@@ -56,18 +56,18 @@ test("move", function() {
   ok(name, 'Scrap created')
   
   // Create it in the center of page
-  var left_edge = $(name).left()
-  var top_edge = $(name).top()
+  var left_edge = $(name).position().left
+  var top_edge = $(name).position().top
   var scrap = $(name).scrap()
   
-  equal($('.selection').left(), left_edge, 'left should be in center')
-  equal($('.selection').top(), top_edge, 'top should be in center')
+  equal($('.selection').position().left, left_edge, 'left should be in center')
+  equal($('.selection').position().top, top_edge, 'top should be in center')
   ok(scrap.move(3, 12), 'move should be ok')
-  equal($('.selection').left(), left_edge + 3, 'should be moved by 3')
-  equal($('.selection').top(), top_edge + 12, 'should be moved by 12')
+  equal($('.selection').position().left, left_edge + 3, 'should be moved by 3')
+  equal($('.selection').position().top, top_edge + 12, 'should be moved by 12')
   ok(scrap.move(1, 120), 'move shuold be ok')
-  equal($('.selection').left(), left_edge + 4, 'should be moved by 4')
-  equal($('.selection').top(), top_edge + 132, 'top should be moved')
+  equal($('.selection').position().left, left_edge + 4, 'should be moved by 4')
+  equal($('.selection').position().top, top_edge + 132, 'top should be moved')
   
 
 })

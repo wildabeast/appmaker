@@ -19,10 +19,7 @@ test("create", function() {
   var top_edge = parseFloat(Math.round(($(window).height() / 2) - 50) )
   
   /*
-  equal($('#stretch_handle_topleft' + name).left(), left_edge - 4)
-  equal($('#stretch_handle_topright' + name).right(), left_edge + 105)
-  equal($('#stretch_handle_bottomright' + name).right(), left_edge + 105)
-  equal($('#stretch_handle_bottomcenter' + name).right(), left_edge + 55)
+  equal($('#stretch_handle_topleft' + name).position().left, left_edge - 4)
 
   */
 })

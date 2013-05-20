@@ -17,15 +17,18 @@ $.topDiv = function (selector, x, y) {
   var match = null
   $(selector).each(function() {
     var div = $(this)
-    
     // Return if the block is
-    if (div.left() > x)
+    var left = div.position().left
+    if (left > x)
       return true
-    if (div.right() < x)
+    var right = div.position().left + div.outerWidth()
+    if (right < x)
       return true
-    if (div.top() > y)
+    var _top = div.position().top
+    if (_top > y)
       return true
-    if (div.bottom() < y)
+    var bottom = _top + div.outerHeight()
+    if (bottom < y)
       return true
     
     // If we dont have a block yet, set it

@@ -8,8 +8,10 @@ test("Grid", function() {
   ok(grid.points instanceof Object, 'object instance')
   grid.addPoints('body')
   var p1 = '0.0'
-  var p2 = $('body').center() + '.' + $('body').middle()
-  var p3 = $('body').right() + '.' + $('body').bottom()
+  var middle = Math.round($('body').position().top + Math.round($('body').outerHeight()/2))
+  var center = Math.round($('body').position().left + Math.round($('body').outerWidth()/2))
+  var p2 = center + '.' + middle
+  var p3 = $('body').position().left + $('body').outerWidth() + '.' + $('body').position().top + $('body').outerHeight()
   ok(grid.points[p1], 'top left point okay')
   ok(grid.points[p2], 'middle center point okay')
   ok(grid.points[p3], 'bottom right point okay')
