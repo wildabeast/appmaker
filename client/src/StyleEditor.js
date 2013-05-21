@@ -184,7 +184,9 @@ nudgepad.styleEditor = function (scrap) {
    // Moveup tool
    var moveUp = $('<div class="editorButton"><img src="/nudgepad/images/up_lt.png" title="Order Up"></div>')
    moveUp.on('tap', function () {
-     scrap.moveUp()
+     $('.selection').each(function () {
+        $(this).scrap().moveUp()  
+      })
      text_area.val(scrap.get('style'))
      return false
    })
@@ -193,7 +195,10 @@ nudgepad.styleEditor = function (scrap) {
    // Movedown tool
    var moveDown = $('<div class="editorButton"><img src="/nudgepad/images/down_lt.png" title="Order Down"></div>')
    moveDown.on('tap', function () {
-     scrap.moveDown()
+     $('.selection').each(function () {
+       $(this).scrap().moveDown()  
+     })
+     
      text_area.val(scrap.get('style'))
      return false
    })
