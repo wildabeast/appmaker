@@ -40,6 +40,12 @@ nudgepad.pages.selectBox.clear = function () {
     // Yay! The select box completely surrounds me.
     $(this).selectMe()
   })
+  // deselect any selected child elements
+  $('.selection').each(function () {
+    $(this).find('.selection').each(function () {
+      $(this).deselect()
+    })
+  })
   $('#nudgepadSelectBox').remove()
   // For now, to prevent bugs, we prevent scrolling while select is happening.
 //  $('#nudgepadStage,#nudgepadStageBody').css('overflow', 'auto')
