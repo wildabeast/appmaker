@@ -422,14 +422,14 @@ var stageViews = new Space({
   }
 })
 
-nudgepad.stage.currentView = 'full'
+nudgepad.stage.currentView = 'ipad'
 
 nudgepad.stage.toggleView = function () {
   
   nudgepad.stage.currentView = stageViews.next(nudgepad.stage.currentView)
   stageViews.get(nudgepad.stage.currentView)()
-  console.log(nudgepad.stage.currentView)
   $('#nudgepadStageBody').width()
+  nudgepad.notify(nudgepad.stage.currentView + ' view')
 }
 
 nudgepad.stage.undo = function () {
@@ -445,6 +445,12 @@ nudgepad.stage.updateTimeline = function () {
 
 nudgepad.on('main', function () {
   
+  stageViews.get('ipad')()
+  $('#nudgepadStageBody').width()
+  
+  
+  
+  
   /*
   $("#nudgepadStage").on('rendered', function (event, id) {
     if (nudgepad.pages.stage[id].locked)
@@ -458,6 +464,8 @@ nudgepad.on('main', function () {
   })
 
   $(window).on('resize', function () {
+    stageViews.get(nudgepad.stage.currentView)()
+    $('#nudgepadStageBody').width()
     if ($('#nudgepadRibbon:visible').length)
       $('#nudgepadStage').height($(window).height() - 122)
     else 
