@@ -29,6 +29,10 @@ nudgepad.explorer.getSite = function (callback) {
   var activePage = store.get('activePage') || 'home'
   $.get('/nudgepad.site', { activePage : activePage, id : nudgepad.id }, function (space) {
     site = new Space(space)
+    var online = site.get('collage').keys.length + 1
+    var title = nudgepad.domain + '. ' + online + ' user' + (online > 1 ? 's' : '') + ' online.'
+    blinker.default = title
+    document.title = title
     callback()
   })
 }
