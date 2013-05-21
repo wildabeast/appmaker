@@ -403,7 +403,7 @@ var stageViews = new Space({
     var padding = Math.round(($(window).width() - 1024)/2) + 'px'
     $('#nudgepadStage').css({
       width : '1024px',
-      padding : '20px ' + padding + ' 20px ' + padding,
+      padding : '20px ' + padding + ' 1000px ' + padding,
     })
     $('#nudgepadStageBody').css({
       'height' : '100%',

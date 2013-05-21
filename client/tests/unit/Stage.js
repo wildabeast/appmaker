@@ -4,8 +4,6 @@ test('Stage', function() {
   
   ok($('#nudgepadStage').length, 'nudgepad Stage exists')
   
-  ok($('#nudgepadStageBottomPadding').length, 'nudgepad Stage exists')
-  
   
 })
 

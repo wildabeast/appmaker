@@ -10794,6 +10794,10 @@ nudgepad.explorer.getSite = function (callback) {
   var activePage = store.get('activePage') || 'home'
   $.get('/nudgepad.site', { activePage : activePage, id : nudgepad.id }, function (space) {
     site = new Space(space)
+    var online = site.get('collage').keys.length + 1
+    var title = nudgepad.domain + '. ' + online + ' user' + (online > 1 ? 's' : '') + ' online.'
+    blinker.default = title
+    document.title = title
     callback()
   })
 }
@@ -12972,6 +12976,12 @@ nudgepad.pages.selectBox.clear = function () {
     // Yay! The select box completely surrounds me.
     $(this).selectMe()
   })
+  // deselect any selected child elements
+  $('.selection').each(function () {
+    $(this).find('.selection').each(function () {
+      $(this).deselect()
+    })
+  })
   $('#nudgepadSelectBox').remove()
   // For now, to prevent bugs, we prevent scrolling while select is happening.
 //  $('#nudgepadStage,#nudgepadStageBody').css('overflow', 'auto')
@@ -14066,7 +14076,7 @@ var stageViews = new Space({
     var padding = Math.round(($(window).width() - 1024)/2) + 'px'
     $('#nudgepadStage').css({
       width : '1024px',
-      padding : '20px ' + padding + ' 20px ' + padding,
+      padding : '20px ' + padding + ' 1000px ' + padding,
     })
     $('#nudgepadStageBody').css({
       'height' : '100%',
@@ -14085,14 +14095,14 @@ var stageViews = new Space({
   }
 })
 
-nudgepad.stage.currentView = 'full'
+nudgepad.stage.currentView = 'ipad'
 
 nudgepad.stage.toggleView = function () {
   
   nudgepad.stage.currentView = stageViews.next(nudgepad.stage.currentView)
   stageViews.get(nudgepad.stage.currentView)()
-  console.log(nudgepad.stage.currentView)
   $('#nudgepadStageBody').width()
+  nudgepad.notify(nudgepad.stage.currentView + ' view')
 }
 
 nudgepad.stage.undo = function () {
@@ -14108,6 +14118,12 @@ nudgepad.stage.updateTimeline = function () {
 
 nudgepad.on('main', function () {
   
+  stageViews.get('ipad')()
+  $('#nudgepadStageBody').width()
+  
+  
+  
+  
   /*
   $("#nudgepadStage").on('rendered', function (event, id) {
     if (nudgepad.pages.stage[id].locked)
@@ -14121,6 +14137,8 @@ nudgepad.on('main', function () {
   })
 
   $(window).on('resize', function () {
+    stageViews.get(nudgepad.stage.currentView)()
+    $('#nudgepadStageBody').width()
     if ($('#nudgepadRibbon:visible').length)
       $('#nudgepadStage').height($(window).height() - 122)
     else 
@@ -14591,18 +14609,22 @@ nudgepad.styleEditor = function (scrap) {
    styleEditorContainer.append(link)
    
    // Moveup tool
-   var moveUp = $('<div class="editorButton"><img src="/nudgepad/images/up_lt.png" title="Order Up"></div>')
+   var moveUp = $('<div class="editorButton"><img src="/nudgepad/images/up_lt.png" title="Increase z-index"></div>')
    moveUp.on('tap', function () {
-     scrap.moveUp()
+     $('.selection').each(function () {
+        $(this).scrap().moveUp()  
+      })
      text_area.val(scrap.get('style'))
      return false
    })
    styleEditorContainer.append(moveUp)
    
    // Movedown tool
-   var moveDown = $('<div class="editorButton"><img src="/nudgepad/images/down_lt.png" title="Order Down"></div>')
+   var moveDown = $('<div class="editorButton"><img src="/nudgepad/images/down_lt.png" title="Decrease z-index"></div>')
    moveDown.on('tap', function () {
-     scrap.moveDown()
+     $('.selection').each(function () {
+       $(this).scrap().moveDown()  
+     })
      text_area.val(scrap.get('style'))
      return false
    })

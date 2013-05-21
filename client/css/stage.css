@@ -25,8 +25,11 @@
   width: 100%;
 }
 
+/**
+ * We add this as kind of a hack, because adding bottom padding to nudgepadStage has no effect.
+ */
 #nudgepadStageBottomPadding {
-  height: 60px;
+  height: 200px;
 }
 
 
