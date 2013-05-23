@@ -12793,9 +12793,9 @@ Scrap.prototype.render = function (context, index) {
     this.setElementTag(context)
     this.setContent(context, options)
     this.setStyle(context)
-    this.div.addClass('scrap')
-    this.div.attr('path', this.getPath())
-    this.div.attr('selector', this.selector())
+//    this.div.addClass('scrap')
+//    this.div.attr('path', this.getPath())
+//    this.div.attr('selector', this.selector())
     this.div.tag = 'div'
     $('#nudgepadStageBody').append(this.div.toHtml())
     return this
@@ -13487,8 +13487,10 @@ nudgepad.broadcastSelection = function (extra) {
   var selection = extra || ''
   var first = ''
   $('.selection').each(function () {
-    selection += first + $(this).scrap().selector()
-    first = ','
+    if ($(this).scrap()) {
+      selection += first + $(this).scrap().selector()
+      first = ','
+    }
   })
 
   selection += '{box-shadow: 0 0 4px ' + nudgepad.tab.get('color') + ';cursor: not-allowed;}'
@@ -13991,7 +13993,7 @@ nudgepad.stage.redo = function () {
 nudgepad.stage.render = function () {
   $('#nudgepadStageHead').html('')
   $('#nudgepadRemoteSelections').html('')
-  $(".scrap").remove()
+  $(".scrap,#body").remove()
   nudgepad.pages.stage.loadScraps()
   nudgepad.pages.stage.render()
   nudgepad.grid.create()
@@ -14037,8 +14039,6 @@ nudgepad.stage.scrollTop = function () {
  */
 nudgepad.stage.selectAll = function () {
   $('.scrap').each(function () {
-    if ($(this).attr('id') === 'body')
-      return true
     $(this).selectMe()
   })
 }
