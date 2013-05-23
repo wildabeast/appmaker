@@ -151,6 +151,17 @@ nudgepad.stage.height = function () {
   return $(window).height() - $('#nudgepadPagesBar').outerHeight()
 }
 
+nudgepad.stage.insertBody = function () {
+  if (!nudgepad.pages.stage.get('body')) {
+    nudgepad.pages.stage.set('body', new Scrap('body', 'tag body\nscraps\n'))
+    nudgepad.pages.stage.get('body').render()
+  }
+  if (!nudgepad.pages.stage.get('body scraps'))
+    nudgepad.pages.stage.set('body scraps', new Space())
+//    nudgepad.pages.stage.set('body scraps', new Space())
+//    level = nudgepad.pages.stage.get('body scraps')
+}
+
 /**
  * Creates new scraps, commits them and adds them to DOM.
  *
@@ -166,22 +177,26 @@ nudgepad.stage.insert = function (space, drag, xMove, yMove, center) {
   var patch = new Space(space.toString())
   nudgepad.stage.selection.clear()
   
+  nudgepad.stage.insertBody()
+  var level = nudgepad.pages.stage.get('body scraps')
+  
+  
   // update the patch so there is no overwriting
   patch.each(function (key, value) {
-    if (nudgepad.pages.stage.get(key)) {
-      this.rename(key, nudgepad.pages.stage.autokey(key))
+    if (level.get(key)) {
+      this.rename(key, level.autokey(key))
     }
   })
   // now merge stage
-  nudgepad.pages.stage.patch(patch)
+  level.patch(patch)
   var selectors = []
   patch.each(function (key, value) {
-    nudgepad.pages.stage.values[key] = new Scrap(key, value)
-    var element = nudgepad.pages.stage.values[key].render().element()
+    level.values[key] = new Scrap('body ' + key, value)
+    var element = level.values[key].render().element()
     // Some elemeents arenet seleectable (titles, for example)
     if (element.length) {
       element.selectMe()
-      selectors.push(nudgepad.pages.stage.values[key].selector())
+      selectors.push(level.values[key].selector())
     }
   })
   
