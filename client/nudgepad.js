@@ -10971,9 +10971,9 @@ Grid.prototype.addDynamicPoints = function () {
 
   var grid = this
   // Cap grid at 200 elements for now
-  if ($('#nudgepadStageBody').children('.scrap:not(.selection)').length > 200)
+  if ($('#nudgepadStageBody #body').children('.scrap:not(.selection)').length > 200)
     return true
-  $('#nudgepadStageBody').children('.scrap:not(.selection)').each(function(){
+  $('#nudgepadStageBody #body').children('.scrap:not(.selection)').each(function(){
     // Make sure no problem fetching scrap
     var scrap = $(this).scrap()
     if (scrap)
@@ -11055,13 +11055,19 @@ Grid.prototype.create = function () {
   
   if (this.snap_to_container) {
     // We create these in specific order so that the bigger scraps override the little ones.
-    // body 0,0
-    this.addPoint(0, $('#nudgepadStageBody').position().top, '#nudgepadStageBody')
-    this.addPoint($('#nudgepadStageBody').position().left, 0, '#nudgepadStageBody')
-    var center = Math.round($('#nudgepadStageBody').position().left + Math.round($('#nudgepadStageBody').outerWidth()/2))
-    this.addPoint(center, 0, '#nudgepadStageBody')
-    this.addPoint($('#nudgepadStageBody').position().left + $('#nudgepadStageBody').outerWidth(), 0, '#nudgepadStageBody')
+    // left
+//    this.addPoint(0, $('#nudgepadStageBody').position().top, '#nudgepadStageBody')
+    // right
+    this.addPoint($('#nudgepadStageBody').outerWidth(), 0, '#nudgepadStageBody')
+    // center
+    this.addPoint(Math.round($('#nudgepadStageBody').outerWidth()/2), 0, '#nudgepadStageBody')
+    // top
+    this.addPoint(0, 0, '#nudgepadStageBody')
+    // bottom
     this.addPoint(0, $('#nudgepadStageBody').height(), '#nudgepadStageBody')
+    // middle
+    this.addPoint(0, Math.round($(window).height()/2), '#nudgepadStageBody')
+    
   }
   
   if (this.visible)
@@ -11158,6 +11164,8 @@ Grid.prototype.drawSnapline = function (point1, point2) {
   this.snapline_context.arc(point2.x, point2.y, 2, 0, Math.PI*2, true)
   this.snapline_context.closePath()
   this.snapline_context.fill()
+  
+//  console.log(point2.selector)
   
   // Dont draw lines based on objects
   if (point2.selector !== '#nudgepadStageBody')
@@ -12166,7 +12174,10 @@ nudgepad.pages.blank = function () {
   stylesheet\n\
    tag link\n\
    href site.css\n\
-   rel stylesheet')
+   rel stylesheet\n\
+body\n\
+ tag body\n\
+ scraps\n')
   var pageName = prompt('Name your page', nudgepad.pages.nextName())
   if (!pageName)
     return null
@@ -13824,6 +13835,17 @@ nudgepad.stage.height = function () {
   return $(window).height() - $('#nudgepadPagesBar').outerHeight()
 }
 
+nudgepad.stage.insertBody = function () {
+  if (!nudgepad.pages.stage.get('body')) {
+    nudgepad.pages.stage.set('body', new Scrap('body', 'tag body\nscraps\n'))
+    nudgepad.pages.stage.get('body').render()
+  }
+  if (!nudgepad.pages.stage.get('body scraps'))
+    nudgepad.pages.stage.set('body scraps', new Space())
+//    nudgepad.pages.stage.set('body scraps', new Space())
+//    level = nudgepad.pages.stage.get('body scraps')
+}
+
 /**
  * Creates new scraps, commits them and adds them to DOM.
  *
@@ -13839,22 +13861,26 @@ nudgepad.stage.insert = function (space, drag, xMove, yMove, center) {
   var patch = new Space(space.toString())
   nudgepad.stage.selection.clear()
   
+  nudgepad.stage.insertBody()
+  var level = nudgepad.pages.stage.get('body scraps')
+  
+  
   // update the patch so there is no overwriting
   patch.each(function (key, value) {
-    if (nudgepad.pages.stage.get(key)) {
-      this.rename(key, nudgepad.pages.stage.autokey(key))
+    if (level.get(key)) {
+      this.rename(key, level.autokey(key))
     }
   })
   // now merge stage
-  nudgepad.pages.stage.patch(patch)
+  level.patch(patch)
   var selectors = []
   patch.each(function (key, value) {
-    nudgepad.pages.stage.values[key] = new Scrap(key, value)
-    var element = nudgepad.pages.stage.values[key].render().element()
+    level.values[key] = new Scrap('body ' + key, value)
+    var element = level.values[key].render().element()
     // Some elemeents arenet seleectable (titles, for example)
     if (element.length) {
       element.selectMe()
-      selectors.push(nudgepad.pages.stage.values[key].selector())
+      selectors.push(level.values[key].selector())
     }
   })
   
@@ -14011,6 +14037,8 @@ nudgepad.stage.scrollTop = function () {
  */
 nudgepad.stage.selectAll = function () {
   $('.scrap').each(function () {
+    if ($(this).attr('id') === 'body')
+      return true
     $(this).selectMe()
   })
 }
