@@ -435,8 +435,10 @@ nudgepad.broadcastSelection = function (extra) {
   var selection = extra || ''
   var first = ''
   $('.selection').each(function () {
-    selection += first + $(this).scrap().selector()
-    first = ','
+    if ($(this).scrap()) {
+      selection += first + $(this).scrap().selector()
+      first = ','
+    }
   })
 
   selection += '{box-shadow: 0 0 4px ' + nudgepad.tab.get('color') + ';cursor: not-allowed;}'

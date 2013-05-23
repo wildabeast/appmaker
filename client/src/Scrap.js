@@ -152,9 +152,9 @@ Scrap.prototype.render = function (context, index) {
     this.setElementTag(context)
     this.setContent(context, options)
     this.setStyle(context)
-    this.div.addClass('scrap')
-    this.div.attr('path', this.getPath())
-    this.div.attr('selector', this.selector())
+//    this.div.addClass('scrap')
+//    this.div.attr('path', this.getPath())
+//    this.div.attr('selector', this.selector())
     this.div.tag = 'div'
     $('#nudgepadStageBody').append(this.div.toHtml())
     return this

@@ -307,7 +307,7 @@ nudgepad.stage.redo = function () {
 nudgepad.stage.render = function () {
   $('#nudgepadStageHead').html('')
   $('#nudgepadRemoteSelections').html('')
-  $(".scrap").remove()
+  $(".scrap,#body").remove()
   nudgepad.pages.stage.loadScraps()
   nudgepad.pages.stage.render()
   nudgepad.grid.create()
@@ -353,8 +353,6 @@ nudgepad.stage.scrollTop = function () {
  */
 nudgepad.stage.selectAll = function () {
   $('.scrap').each(function () {
-    if ($(this).attr('id') === 'body')
-      return true
     $(this).selectMe()
   })
 }
