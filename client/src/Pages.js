@@ -14,7 +14,10 @@ nudgepad.pages.blank = function () {
   stylesheet\n\
    tag link\n\
    href site.css\n\
-   rel stylesheet')
+   rel stylesheet\n\
+body\n\
+ tag body\n\
+ scraps\n')
   var pageName = prompt('Name your page', nudgepad.pages.nextName())
   if (!pageName)
     return null
