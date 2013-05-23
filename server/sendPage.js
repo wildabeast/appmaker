@@ -5,7 +5,9 @@ function sendPage(req, res, name) {
   var context = {}
   context.site = nudgepad.site
   context.request = req
-
-  return res.send(page.toHtml(context))
+  var options = {
+    beautify : true
+  }
+  return res.send(page.toHtml(context, options))
 }
 
