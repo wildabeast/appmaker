@@ -338,6 +338,8 @@ nudgepad.stage.scrollTop = function () {
  */
 nudgepad.stage.selectAll = function () {
   $('.scrap').each(function () {
+    if ($(this).attr('id') === 'body')
+      return true
     $(this).selectMe()
   })
 }
