@@ -45,9 +45,9 @@ Grid.prototype.addDynamicPoints = function () {
 
   var grid = this
   // Cap grid at 200 elements for now
-  if ($('#nudgepadStageBody').children('.scrap:not(.selection)').length > 200)
+  if ($('#nudgepadStageBody #body').children('.scrap:not(.selection)').length > 200)
     return true
-  $('#nudgepadStageBody').children('.scrap:not(.selection)').each(function(){
+  $('#nudgepadStageBody #body').children('.scrap:not(.selection)').each(function(){
     // Make sure no problem fetching scrap
     var scrap = $(this).scrap()
     if (scrap)
@@ -129,13 +129,19 @@ Grid.prototype.create = function () {
   
   if (this.snap_to_container) {
     // We create these in specific order so that the bigger scraps override the little ones.
-    // body 0,0
-    this.addPoint(0, $('#nudgepadStageBody').position().top, '#nudgepadStageBody')
-    this.addPoint($('#nudgepadStageBody').position().left, 0, '#nudgepadStageBody')
-    var center = Math.round($('#nudgepadStageBody').position().left + Math.round($('#nudgepadStageBody').outerWidth()/2))
-    this.addPoint(center, 0, '#nudgepadStageBody')
-    this.addPoint($('#nudgepadStageBody').position().left + $('#nudgepadStageBody').outerWidth(), 0, '#nudgepadStageBody')
+    // left
+//    this.addPoint(0, $('#nudgepadStageBody').position().top, '#nudgepadStageBody')
+    // right
+    this.addPoint($('#nudgepadStageBody').outerWidth(), 0, '#nudgepadStageBody')
+    // center
+    this.addPoint(Math.round($('#nudgepadStageBody').outerWidth()/2), 0, '#nudgepadStageBody')
+    // top
+    this.addPoint(0, 0, '#nudgepadStageBody')
+    // bottom
     this.addPoint(0, $('#nudgepadStageBody').height(), '#nudgepadStageBody')
+    // middle
+    this.addPoint(0, Math.round($(window).height()/2), '#nudgepadStageBody')
+    
   }
   
   if (this.visible)
@@ -232,6 +238,8 @@ Grid.prototype.drawSnapline = function (point1, point2) {
   this.snapline_context.arc(point2.x, point2.y, 2, 0, Math.PI*2, true)
   this.snapline_context.closePath()
   this.snapline_context.fill()
+  
+//  console.log(point2.selector)
   
   // Dont draw lines based on objects
   if (point2.selector !== '#nudgepadStageBody')
