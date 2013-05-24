@@ -39,6 +39,129 @@ $.fn.dimensions = function () {
 }
 
 ;
+// Todo: Allow option to fire lasso event during the slide
+// Todo: Allow option to fire lasso event on elements that only have a partial match
+var Lasso = {
+  id : "Lasso",
+  container : 'body',
+  selector : 'div',
+  style : {
+    'z-index': 100,
+    border: '1px solid #0c79cc',
+    position: 'absolute'
+  },
+  scrollTop : 0
+}
+
+Lasso.append = function () {
+
+  if ($('#' + Lasso.id).length > 0)
+    return null
+  
+  var lasso = $('<div></div>')
+//  lasso.append('<style>html { -webkit-user-select: none;-moz-user-select: -moz-none;user-select: none;}</style>')
+  lasso.attr('id', Lasso.id)
+  lasso.css(Lasso.style)
+  lasso.css({
+    top : Lasso.mousedown.pageY,
+    left : Lasso.mousedown.pageX,
+  })
+  $(Lasso.container).append(lasso)
+  
+}
+
+Lasso.disable = function () {
+  $(document).off("mousedown", Lasso.onmousedown)
+  $(document).off("slide", Lasso.slide)
+  $(document).off("slideend", Lasso.release)
+}
+
+Lasso.enable = function () {
+  $(document).on("mousedown", Lasso.onmousedown)
+  $(document).on("slide", Lasso.slide)
+  $(document).on("slideend", Lasso.release)
+}
+
+Lasso.onmousedown = function (event) {
+  Lasso.mousedown = event
+  Lasso.scrollTop = $(Lasso.container).scrollTop()
+  return true
+}
+
+Lasso.release = function (event, mouseUpEvent) {
+
+  var lasso = $('#' + Lasso.id)
+  if (lasso.length === 0)
+    return null
+  
+  var box = {}
+  box.left = lasso.offset().left,
+  box.right = lasso.offset().left + lasso.outerWidth(),
+  box.top = lasso.offset().top,
+  box.bottom = lasso.offset().top + lasso.outerHeight()
+  
+  // select every visible block thats entirely within the rectangle
+  var results = $()
+  $(Lasso.selector).each(function () {
+    var el = $(this)
+    if (el.offset().left < box.left)
+      return true
+    
+    if ((el.offset().left + el.outerWidth()) > box.right)
+      return true
+    
+    if (el.offset().top < box.top)
+      return true
+    
+    if ((el.offset().top + el.outerHeight()) > box.bottom)
+      return true
+    
+    // Yay! The lasso box completely surrounds me.
+    $(this).addClass('Lasso')
+  })
+  // We only want to trigger Lasso event on outermost parent elements
+  // Todo: clean this up
+  $('.Lasso').each(function () {
+    $(this).find('.Lasso').each(function () {
+      $(this).removeClass('Lasso')
+    })
+  })
+  $('.Lasso').each(function () {
+    $(this).removeClass('Lasso')
+    $(this).trigger('lasso')
+  })
+  lasso.remove()
+}
+
+Lasso.slide = function (slideEvent, mouseMoveEvent) {
+
+  Lasso.append()
+  var lasso = $('#' + Lasso.id)
+  var scrollChange = $(Lasso.container).scrollTop() - Lasso.scrollTop
+  var y = Lasso.mousedown.pageY - scrollChange
+  var directions = {"vertical" : y, "horizontal" : Lasso.mousedown.pageX}
+  for (var i in directions) {
+    
+    var direction = i,
+        origin = directions[i],
+        new_value = (direction == "horizontal" ? mouseMoveEvent.pageX : mouseMoveEvent.pageY),
+        size = (direction == "horizontal" ? "width" : "height"),
+        position = (direction == "horizontal" ? "left" : "top"),
+        d = (direction == "horizontal" ? "verticals" : "horizontals"),
+        change = new_value - origin
+    // if positive change, increase size, keep position
+    if (change >= 0)
+      lasso.css(size, change).css(position, origin)
+    // if negative change, decrease position, increase size.
+    else
+      lasso.css(position, new_value).css(size, -change)
+  }
+}
+
+
+
+
+;
 // http://stackoverflow.com/questions/46155/validate-email-address-in-javascript
 var ValidateEmail = function (email) { 
   var re = /\S+@\S+\.\S+/
@@ -10042,6 +10165,13 @@ nudgepad.main = function (callback) {
       store.set('opens', 1)
       mixpanel.track('I created a new website')
     }
+    
+    Lasso.selector = '#nudgepadStageBody .scrap:visible'
+    $(document).on('lasso', '.scrap', function () {
+      $(this).selectMe()
+      return false
+    })
+    Lasso.enable()
       
     if (callback)
       callback()
@@ -12944,111 +13074,6 @@ $.fn.scrollMinimal = function(smooth) {
     }
   }
 };
-
-/**
- * For selecting multiple blocks at once.
- */
-nudgepad.pages.selectBox = {
-  on : true
-}
-
-/**
- * Fires on mouseup
- */
-nudgepad.pages.selectBox.clear = function () {
-
-  if ($('#nudgepadSelectBox').length ==0)
-    return
-  
-  var selectBoxDiv = $('#nudgepadSelectBox')
-  var box = {}
-  box.left = selectBoxDiv.offset().left,
-  box.right = selectBoxDiv.offset().left + selectBoxDiv.outerWidth(),
-  box.top = selectBoxDiv.offset().top,
-  box.bottom = selectBoxDiv.offset().top + selectBoxDiv.outerHeight()
-  
-  nudgepad.stage.selection.clear()
-  
-  // select every visible block thats entirely within the rectangle
-  $('#nudgepadStageBody .scrap:visible').each(function () {
-    var el = $(this)
-    if (el.offset().left < box.left)
-      return true
-    
-    if ((el.offset().left + el.outerWidth()) > box.right)
-      return true
-    
-    if (el.offset().top < box.top)
-      return true
-    
-    if ((el.offset().top + el.outerHeight()) > box.bottom)
-      return true
-    
-    // Yay! The select box completely surrounds me.
-    $(this).selectMe()
-  })
-  // deselect any selected child elements
-  $('.selection').each(function () {
-    $(this).find('.selection').each(function () {
-      $(this).deselect()
-    })
-  })
-  $('#nudgepadSelectBox').remove()
-  // For now, to prevent bugs, we prevent scrolling while select is happening.
-//  $('#nudgepadStage,#nudgepadStageBody').css('overflow', 'auto')
-}
-
-
-
-/**
- * Draws the blue box that is the workers selection.
- *
- * @param {object} Mouse move event
- */
-nudgepad.pages.selectBox.update = function (event) {
-
-  if (!nudgepad.pages.selectBox.on) {
-    // Even if off, you can override by holding shift key
-    if (!nudgepad.mouse.is_mouse_down || !nudgepad.mouse.down.shiftKey)
-      return true
-  }
-  
-  if ($('#nudgepadSelectBox').length == 0) {
-    $('#nudgepadStage').append('<div id="nudgepadSelectBox" style="top: ' + nudgepad.mouse.down.pageY + ';left: ' + nudgepad.mouse.down.pageX + ';"></div>')
-    nudgepad.pages.selectBox.scrollTop = nudgepad.stage.scrollTop()
-    // For now, to prevent bugs, we prevent scrolling while select is happening.
-//    $('#nudgepadStage,#nudgepadStageBody').css('overflow', 'hidden')
-  }
-  var element = $('#nudgepadSelectBox')
-  var directions = {"vertical" : nudgepad.mouse.down.pageY + nudgepad.pages.selectBox.scrollTop, "horizontal" : nudgepad.mouse.down.pageX}
-  for (var i in directions) {
-    
-    var direction = i,
-        origin = directions[i],
-        new_value = (direction == "horizontal" ? nudgepad.mouse.move.pageX : nudgepad.mouse.move.pageY + nudgepad.stage.scrollTop()),
-        size = (direction == "horizontal" ? "width" : "height"),
-        position = (direction == "horizontal" ? "left" : "top"),
-        d = (direction == "horizontal" ? "verticals" : "horizontals"),
-        change = new_value - origin
-    // if positive change, increase size, keep position
-    if (change >= 0)
-      element.css(size, change).css(position, origin)
-    
-    // if negative change, decrease position, increase size.
-    else
-      element.css(position, new_value).css(size, -change)
-  }
-  // Prevent default page scrolling
-  event.preventDefault()
-}
-
-nudgepad.on('main', function () {
-  $(document).on("slide", nudgepad.pages.selectBox.update)
-  $(document).on("slideend", nudgepad.pages.selectBox.clear)
-})
-
-
-
 
 /**
  * @special Singleton
