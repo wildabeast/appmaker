@@ -1,5 +1,6 @@
     <script type="text/javascript" src="/nudgepad/lib/jquery-1.9.1.min.js"></script>
     <script type="text/javascript" src="/nudgepad/lib/jquery.dimensions.js"></script>
+    <script type="text/javascript" src="/nudgepad/lib/Lasso.js"></script>
     <script type="text/javascript" src="/nudgepad/lib/validateEmail.js"></script>
     <script type="text/javascript" src="/nudgepad/lib/ParseQueryString.js"></script>
     <script type="text/javascript" src="/nudgepad/lib/Permalink.js"></script>

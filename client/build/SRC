@@ -49,7 +49,6 @@
     <script type="text/javascript" src="/nudgepad/src/Ribbon.js"></script>
     <script type="text/javascript" src="/nudgepad/src/Scrap.js"></script>
     <script type="text/javascript" src="/nudgepad/src/ScrollMinimal.js"></script>
-    <script type="text/javascript" src="/nudgepad/src/SelectBox.js"></script>
     <script type="text/javascript" src="/nudgepad/src/Selection.js"></script>
     <script type="text/javascript" src="/nudgepad/src/Shortcuts.js"></script>
     <script type="text/javascript" src="/nudgepad/src/SignUpForm.js"></script>

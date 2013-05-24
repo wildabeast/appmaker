@@ -73,7 +73,7 @@ _.each(html_includes, function (value) {
 fs.writeFileSync(buildPath + 'BODY', HTML, 'utf8')
 
 /*** LIB FILES ***/
-var libs = 'lib/jquery-1.9.1.min.js lib/jquery.dimensions.js lib/validateEmail.js lib/ParseQueryString.js lib/Permalink.js lib/jquery.scrollbar.js lib/ToProperCase.js lib/ParseName.js lib/jquery.topdiv.js lib/blinker.js lib/Spectrum.js lib/underscore.js lib/marked.js lib/natural_sort.js lib/store.js lib/goog.js lib/events.js lib/parseCookie.js lib/MoveCursorToEnd.js lib/socket.io.js lib/moment.min.js lib/jquery.sha256.min.js lib/space.js lib/scraps.js lib/thumbs.js lib/platform.js'
+var libs = 'lib/jquery-1.9.1.min.js lib/jquery.dimensions.js lib/Lasso.js lib/validateEmail.js lib/ParseQueryString.js lib/Permalink.js lib/jquery.scrollbar.js lib/ToProperCase.js lib/ParseName.js lib/jquery.topdiv.js lib/blinker.js lib/Spectrum.js lib/underscore.js lib/marked.js lib/natural_sort.js lib/store.js lib/goog.js lib/events.js lib/parseCookie.js lib/MoveCursorToEnd.js lib/socket.io.js lib/moment.min.js lib/jquery.sha256.min.js lib/space.js lib/scraps.js lib/thumbs.js lib/platform.js'
 var lib_includes = libs.split(/ /)
 var LIB = ''
 _.each(lib_includes, function (value) {

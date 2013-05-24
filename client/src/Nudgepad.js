@@ -196,6 +196,13 @@ nudgepad.main = function (callback) {
       store.set('opens', 1)
       mixpanel.track('I created a new website')
     }
+    
+    Lasso.selector = '#nudgepadStageBody .scrap:visible'
+    $(document).on('lasso', '.scrap', function () {
+      $(this).selectMe()
+      return false
+    })
+    Lasso.enable()
       
     if (callback)
       callback()
