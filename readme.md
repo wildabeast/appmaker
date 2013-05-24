@@ -15,26 +15,26 @@ Try it now at http://nudgepad.com
 What Can I Build with NudgePad?
 ===============================
 
-- Blogs
-- Single Page Websites
 - Clickable Prototypes
+- Blogs
+- CMS Sites
+- Single Page Websites
 - Personal Homepages
 - White Boards
 - Small Business Websites
 - Mobile Sites
 - FirefoxOS Apps
+- Presentations
 - Infographics
 - Todo Lists
-- AB Testing
+- AB Tests
 - APIs
 - eCards
 - Forms
-- Presentations
 - Visualizations
 - Experiments
 - Simple Games
 - Surveys
-- Content Management Systems
 - eCommerce Stores
 - MindMaps
 - Memes
@@ -126,6 +126,69 @@ The following will remove the npm version:
 To remove the development version (and ALL user data) run:
 
     npd uninstall
+
+Contributing
+============
+
+We encourage you to use NudgePad, create issues for bugs or ideas, contribute templates, and
+of course contribute code!
+
+NudgePad is moving to a completely modular architecture consisting of many high quality
+open source modules and packages elegantly and reliably integrated together.
+
+The three main components of NudgePad:
+
+client
+------
+
+The frontend to NudgePad. This code does pretty much one thing: creates the /nudgepad single
+page app which contains the whole interface of NudgePad. We have a lot of cleanup to do here.
+
+We use libraries here such as jQuery, underscore, scraps, and Space, and a whole lot of
+specific packages for UI and other components. If you think we could benefit from using
+an open source package you wrote or know of, please let us know so we can add it (and
+even better delete something from our codebase!).
+
+To create something new for client from scratch, your code should:
+
+- Be its own standalone repo
+- Be usable outside of NudgePad
+- Have a live website (a NudgePad site works great) where someone can play with it
+- Have unit tests
+- Be 1 JS file
+- Be CamelCased
+- Be Concise
+- Be MIT licensed
+- Expose 1 global object that begins with a Capital Letter.
+
+server
+------
+
+Each NudgePad site is a Node.js process powered by Express. We are in the process
+of cleaning up our files here to be more modular and offer a more consistent
+API.
+
+To create something new for client from scratch, your code should:
+
+- Be its own standalone repo
+- Be usable outside of NudgePad
+- Have a live website (a NudgePad site works great) where someone can play with it
+- Have unit tests
+- Be 1 JS file
+- Be CamelCased
+- Be Concise
+- Be MIT licensed
+- Extend the NudgePad site in a conventional way
+
+system
+------
+
+The code in system is responsible for creating new sites on the machine, load
+balancing, proxying requests to sites, and offering tools to sysadmins for
+managing a NudgePad server.
+
+It's currently written mostly in BASH, but node scripts are welcome as well.
+
 
 Build Status
 ============
