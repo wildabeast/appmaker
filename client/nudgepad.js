@@ -10163,7 +10163,12 @@ nudgepad.main = function (callback) {
     
     if (nudgepad.query.newSite && !store.get('opens')) {
       store.set('opens', 1)
-      mixpanel.track('I created a new website')
+      var howLongItTookToCreateThisSite = new Date().getTime() - nudgepad.query.timestamp
+      mixpanel.track('I created a new website', {
+        'time' : howLongItTookToCreateThisSite
+      })
+      console.log('It took %sms to create this site', howLongItTookToCreateThisSite)
+      
     }
     
     Lasso.selector = '#nudgepadStageBody .scrap:visible'
