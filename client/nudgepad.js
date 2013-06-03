@@ -12469,7 +12469,7 @@ nudgepad.pages.rename = function (new_name) {
   // Todo, push this to server side?
   var patch = new Space()
   patch.set('pages ' + old_name, '')
-  patch.set('timeline ' + old_name, '')
+  patch.set('timelines ' + old_name, '')
   patch.set('pages ' + new_name, site.get('pages ' + new_name))
   patch.set('timelines ' + new_name, site.get('timelines ' + new_name))
 
