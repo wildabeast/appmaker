@@ -91,6 +91,7 @@ app.post('/create', app.checkId, app.validateDomain, app.isDomainAvailable, func
   var domain = req.body.domain
   var email = req.body.email
   var clone = req.body.clone
+  var timestamp = req.body.timestamp
   
   if (!email)
     email = 'owner@' + domain
@@ -106,7 +107,7 @@ app.post('/create', app.checkId, app.validateDomain, app.isDomainAvailable, func
     if (req.body.ajax)
       res.send(stdout)
     else
-      res.redirect(stdout + '&newSite=true')
+      res.redirect(stdout + '&newSite=true&timestamp=' + timestamp)
   })
 })
 

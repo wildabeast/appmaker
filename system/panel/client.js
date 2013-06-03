@@ -39,6 +39,7 @@ $(document).on('ready', function () {
     if (mutex)
       return false
     $('#domain').val(Domain.format($('#domain').val()))
+    $('#timestamp').val(new Date().getTime())
     $('#error').html('')
     var error = Domain.validate($('#domain').val())
     if (!error) {

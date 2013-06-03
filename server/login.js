@@ -22,6 +22,8 @@ site.get('/nudgepad.login', function(req, res, next) {
       appString += '&app=' + req.query.app
     if (req.query.newSite)
       appString += '&newSite=' + req.query.newSite
+    if (req.query.timestamp)
+      appString += '&timestamp=' + req.query.timestamp
     
     return res.redirect('/nudgepad' + appString)
   }
