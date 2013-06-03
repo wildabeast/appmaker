@@ -106,7 +106,7 @@ app.post('/create', app.checkId, app.validateDomain, app.isDomainAvailable, func
     if (req.body.ajax)
       res.send(stdout)
     else
-      res.redirect(stdout + '&app=pages&newSite=true')
+      res.redirect(stdout + '&newSite=true')
   })
 })
 

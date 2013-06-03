@@ -17,9 +17,9 @@ site.get('/nudgepad.login', function(req, res, next) {
     res.cookie('name', worker.name, { expires: new Date(Date.now() + 5184000000)})
     
     // temp fix
-    var appString = ''
+    var appString = '?login=true'
     if (req.query.app)
-      appString = '?app=' + req.query.app
+      appString += '&app=' + req.query.app
     if (req.query.newSite)
       appString += '&newSite=' + req.query.newSite
     
