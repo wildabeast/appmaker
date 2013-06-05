@@ -13,6 +13,7 @@ var logsPath = dataPath + 'logs/'
 var sitesPath = dataPath + 'sites/'
 var activePath = dataPath + 'active/'
 var portsPath = dataPath + 'ports/'
+var tempPath = dataPath + 'temp/'
 var systemPath = __dirname
 
 var Domain = require(panelPath + '/Domain')
@@ -91,24 +92,45 @@ app.post('/create', app.checkId, app.validateDomain, app.isDomainAvailable, func
   var domain = req.body.domain
   var email = req.body.email
   var clone = req.body.clone
-  var timestamp = req.body.timestamp
+  var timestamp = req.body.timestamp || new Date().getTime()
   
   if (!email)
     email = 'owner@' + domain
   
   console.log('creating site: %s', domain)
   
-  clone = (clone ? ' ' + clone : '')
-  exec(systemPath + '/nudgepad.sh create ' + domain.toLowerCase() + ' ' + email + clone, function (err, stdout, stderr) {
-    if (err) {
-      console.log('Error creating site %s: err:%s stderr:%s', domain, err, stderr)
-      return res.send('Error creating site: ' + err, 400)
-    }
-    if (req.body.ajax)
-      res.send(stdout)
-    else
-      res.redirect(stdout + '&newSite=true&timestamp=' + timestamp)
-  })
+  // Save clone to file before calling command line
+  // Todo: cleanup
+  if (clone) {
+    var clonePath = tempPath + domain + '.space'
+    fs.writeFile(clonePath, clone, 'utf8', function (err) {
+      
+      exec(systemPath + '/nudgepad.sh create ' + domain.toLowerCase() + ' ' + email + ' ' + clonePath, function (err, stdout, stderr) {
+        if (err) {
+          console.log('Error creating site %s: err:%s stderr:%s', domain, err, stderr)
+          return res.send('Error creating site: ' + err, 400)
+        }
+        if (req.body.ajax)
+          res.send(stdout)
+        else
+          res.redirect(stdout + '&newSite=true&timestamp=' + timestamp)
+      })
+      
+    })
+  } else {
+    exec(systemPath + '/nudgepad.sh create ' + domain.toLowerCase() + ' ' + email, function (err, stdout, stderr) {
+      if (err) {
+        console.log('Error creating site %s: err:%s stderr:%s', domain, err, stderr)
+        return res.send('Error creating site: ' + err, 400)
+      }
+      if (req.body.ajax)
+        res.send(stdout)
+      else
+        res.redirect(stdout + '&newSite=true&timestamp=' + timestamp)
+    })
+  }
+  
+  
 })
 
 if (process.argv.length <3) {

@@ -1,26 +1,10 @@
-cloneUrl ()
-{
-  # echo creating from CLONE. source is $CLONE
-  # http://1.com/blank.nudgepad.com.zip
-  mkdir $sitesPath$domain
-  CLONENAME=$(basename $CLONE)
-  curl --silent $CLONE -o $CLONENAME
-  if [ ! -f "$CLONENAME" ]
-    then
-      echo $CLONENAME does not exist
-      exit 1
-  fi
-  unzip -qq $CLONENAME -d $sitesPath$domain
-  rm $CLONENAME
-}
-
 createSiteUbuntu ()
 {
   _start_time=`date +%s%N | cut -b1-13`
   
   domain=$1
-  OWNEREMAIL=$2
-  CLONE=$3
+  ownerEmail=$2
+  cloneFile=$3
   PW=`echo $RANDOM$RANDOM`
   sudo useradd -m -p "$PW" $domain
   sudo usermod -a -G sites $domain
@@ -32,11 +16,11 @@ createSiteUbuntu ()
 #  echo $_processing_time
   
   
-  if [ -n "$CLONE" ]
+  if [ -n "$cloneFile" ]
     then
-      cloneUrl
+      space $cloneFile $sitesPath$domain
     else
-      # echo NO CLONE provided. Creating blank site from blank.
+      # echo NO cloneFile provided. Creating blank site from blank.
       sudo cp -R blank $sitesPath$domain
       sudo chown -R $domain:$domain $sitesPath$domain
       sudo -u $domain mkdir $sitesPath$domain/settings
@@ -44,7 +28,7 @@ createSiteUbuntu ()
       sudo -u $domain mkdir $sitesPath$domain/logs
       sudo -u $domain mkdir $sitesPath$domain/temp
   fi
-  createOwnerFile $domain $OWNEREMAIL
+  createOwnerFile $domain $ownerEmail
   sudo chown -R $domain:$domain $sitesPath$domain
   sudo -u $domain chmod -R 770 $sitesPath$domain/
   
@@ -69,14 +53,14 @@ createSiteMac ()
 {
   
   domain=$1
-  OWNEREMAIL=$2
-  CLONE=$3
+  ownerEmail=$2
+  cloneFile=$3
   
-  if [ -n "$CLONE" ]
+  if [ -n "$cloneFile" ]
     then
-      cloneUrl
+      space $cloneFile $sitesPath$domain
     else
-      # echo NO CLONE provided. Creating blank site from blank.
+      # echo NO cloneFile provided. Creating blank site from blank.
       cp -R blank $sitesPath$domain
       mkdir $sitesPath$domain/settings
       mkdir $sitesPath$domain/workers
@@ -84,7 +68,7 @@ createSiteMac ()
       mkdir $sitesPath$domain/temp
   fi
   
-  createOwnerFile $domain $OWNEREMAIL
+  createOwnerFile $domain $ownerEmail
   cd $sitesPath$domain
 #  git init >/dev/null
   echo "temp/" > .gitignore
@@ -96,14 +80,14 @@ createSiteMac ()
 createSite ()
 {
   domain=$1
-  OWNEREMAIL=$2
-  CLONE=$3
+  ownerEmail=$2
+  cloneFile=$3
   if [ -z $domain ]
     then
       echo ERROR. No domain entered. What site do you want to create?
       return 1
   fi
-  if [ -z $OWNEREMAIL ]
+  if [ -z $ownerEmail ]
     then
       echo ERROR. No email entered. Who owns this new site?
       return 1

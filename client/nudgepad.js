@@ -10733,6 +10733,42 @@ nudgepad.apps.develop.path = ''
 nudgepad.apps.develop.pathPretty = ''
 nudgepad.apps.develop.status = ''
 
+nudgepad.apps.develop.clone = function () {
+  var domain = prompt('Enter a domain name', 'copyof' + nudgepad.domain)
+  var source = 'http://' + nudgepad.domain + '/' + nudgepad.domain + '.zip'
+  $.get('/nudgepad.export', {}, function (data) {
+    
+    
+    var newForm = $('<form>', {
+        'action': 'http://localhost/create',
+//        'target': '_blank',
+        'method' : 'post'
+    })
+    .append($('<input>', {
+        'name': 'domain',
+        'value': domain,
+        'type': 'hidden'
+    }))
+    .append($('<input>', {
+        'name': 'email',
+        'value': nudgepad.cookie.email,
+        'type': 'hidden'
+    }))
+    .append($('<input>', {
+        'name': 'timestamp',
+        'value': new Date().getTime(),
+        'type': 'hidden'
+    }))
+    .append($('<input>', {
+        'name': 'clone',
+        'value': data,
+        'type': 'hidden'
+    }))
+    newForm.submit()
+    
+  })
+  
+}
 
 nudgepad.apps.develop.createFile = function () {
   var name = prompt('Name your file')
