@@ -1,3 +1,7 @@
+var pageOptions = {
+  beautify : true
+}
+
 function sendPage(req, res, name) {
   
   var scraps = nudgepad.site.get('pages ' + name)
@@ -5,9 +9,6 @@ function sendPage(req, res, name) {
   var context = {}
   context.site = nudgepad.site
   context.request = req
-  var options = {
-    beautify : true
-  }
-  return res.send(page.toHtml(context, options))
+  return res.send(page.toHtml(context, pageOptions))
 }
 
