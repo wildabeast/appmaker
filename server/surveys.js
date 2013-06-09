@@ -14,13 +14,14 @@ site.post('/nudgepad.surveys', function (req, res, next) {
   var timestamp = new Date().getTime()
   var filename = timestamp + '.space'
   var space = new Space(req.body)
-  fs.writeFile(nudgepad.paths.surveys + timestamp + '.space', space.toString(), 'utf8', function (error) {
+  fs.writeFile(nudgepad.paths.surveys + filename, space.toString(), 'utf8', function (error) {
     if (error)
       return res.send('Save Error: ' + error, 500)
-    // email form
     
-    if (nudgepad.site.get('settings catchall'))
-      nudgepad.sendEmail('surveys', nudgepad.site.get('settings catchall'), nudgepad.domain + ': New Message', space.toString())
+    // The following will send the submission to an email address on file for the site
+    // if one exists.
+    if (nudgepad.site.get('settings email'))
+      nudgepad.sendEmail('surveys', nudgepad.site.get('settings email'), nudgepad.domain + ': New Message', space.toString())
     
     res.send('')
   })
