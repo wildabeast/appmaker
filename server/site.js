@@ -1,4 +1,5 @@
-var Space = require('space')
+var Space = require('space'),
+    os = require("os")
 
 var Site = function (app, nudgepad) {
   
@@ -41,6 +42,10 @@ var Site = function (app, nudgepad) {
     copy.set('posts', nudgepad.site.get('posts'))
     copy.set('timelines ' + activePage, nudgepad.site.get('timelines ' + activePage))
     copy.set('started', nudgepad.started)
+    var hostname = os.hostname()
+    if (nudgepad.development)
+      hostname = 'localhost'
+    copy.set('hostname', hostname)
     copy.set('collage', nudgepad.site.get('collage'))
     res.set('Content-Type', 'text/plain')
     res.send(copy.toString())

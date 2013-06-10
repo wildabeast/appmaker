@@ -23,7 +23,7 @@ nudgepad.apps.develop.clone = function () {
   // chop common domain part
   tld = tld.replace(/^[^\.]*\./, '')
   // Panel is the domain running the nudgepad panel server
-  var panel = tld
+  var panel = site.get('hostname')
   
   $.get('/nudgepad.export', {}, function (data) {
     
