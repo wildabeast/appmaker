@@ -4,7 +4,7 @@ NudgePad
 NudgePad let's you make websites, apps and webpages in your browser.
 
 NudgePad is currently in BETA and still changing rapidly. We welcome you to use it
-but the API is still largely undocumented and in flux.
+but documentation is very limited and the code is still largely in flux.
 
 A stable version 1.0 will be released at some point in late 2013.
 
