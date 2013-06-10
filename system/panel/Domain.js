@@ -1,6 +1,6 @@
 var Domain = {}
 
-Domain.validate = function (domain) {
+Domain.validate = function (domain, relaxed) {
   
   if (!domain)
     return 'No domain provided'
@@ -8,7 +8,7 @@ Domain.validate = function (domain) {
   if (domain.match(/[^0-9a-z\-\.]/i))
     return 'Invalid character in domain'
   
-  if (!domain.match(Domain.tld))
+  if (!domain.match(Domain.tld) && !relaxed)
     return 'Domain must end with ' + Domain.tld
 
   if (domain.length > 32)

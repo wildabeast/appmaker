@@ -43,7 +43,7 @@ app.validateDomain = function (req, res, next) {
   if (req.headers.host && req.headers.host.match('127.0.0.1'))
     return res.send('Try going to <a href="http://' + hostname + ':' + port + '/">http://' + hostname + ':' + port + '</a> instead of ' + req.headers.host, 400)
   
-  var error = Domain.validate(req.body.domain)
+  var error = Domain.validate(req.body.domain, req.body.relaxed)
   
   if (error) {
     res.set('Content-Type', 'text/plain')

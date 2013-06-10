@@ -49,6 +49,11 @@ nudgepad.apps.develop.clone = function () {
         'type': 'hidden'
     }))
     .append($('<input>', {
+        'name': 'relaxed',
+        'value': 'true',
+        'type': 'hidden'
+    }))
+    .append($('<input>', {
         'name': 'clone',
         'value': data,
         'type': 'hidden'
