@@ -1,7 +1,7 @@
 NudgePad
 ========
 
-NudgePad let's you build websites and apps in your browser.
+NudgePad let's you make websites, apps and webpages in your browser.
 
 NudgePad is currently in BETA and still changing rapidly. We welcome you to use it
 but the API is still largely undocumented and in flux.
@@ -18,14 +18,14 @@ Who is NudgePad for?
 
 Anyone who wants to make things on the web!
 
-What Can I Make with NudgePad?
+What can I make with NudgePad?
 ===============================
 
-A lot of things! NudgePad gives you a whole operating system of tools for building right
+A lot of things! NudgePad gives you a whole operating system of tools for making right
 in your browser. Not only do you have full control of the frontend, but each NudgePad site is a Node.js
 Express App on the backend, so you can add any server side code you'd like.
 
-Early users are building clickable prototypes, mobile apps, FirefoxOS apps, websites, blogs, CMS sites, single pagers,
+Early users are making clickable prototypes, mobile apps, FirefoxOS apps, websites, blogs, CMS sites, single pagers,
 personal homepages, forms, surveys, small business sites, mobile sites, presentations, infographics, landing pages, ab tests
 mindmaps, memes, ecards, ecommerce stores and more.
 
@@ -39,10 +39,19 @@ Here are some of the first sites powered by NudgePad. Want to add yours to the l
 - Book Site: http://generationatheistbook.com/
 - Personal Homepage: http://benzulauf.com/
 
-Building a Site with NudgePad
-=============================
+Making a Site with NudgePad
+===========================
 
-Documentation for how to build your site using NudgePad is coming soon.
+Documentation for how to make your site using NudgePad is coming soon.
+
+
+Self Hosting NudgePad (for advanced users)
+==========================================
+
+All the information below is for advanced users and developers.
+
+If you just want to make something, head over to http://nudgepad.com.
+
 
 Requirements
 ============
