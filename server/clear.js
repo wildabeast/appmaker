@@ -1,4 +1,4 @@
-site.get('/nudgepad.clear', nudgepad.checkId, function(req, res, next) {
+app.get('/nudgepad.clear', app.checkId, function(req, res, next) {
   
   res.set('Content-Type', 'text/plain')
   // We clear timelines

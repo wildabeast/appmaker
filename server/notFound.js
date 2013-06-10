@@ -1,4 +1,4 @@
-site.use('/', function (req, res, next) {
+app.use('/', function (req, res, next) {
   
 
   var page = nudgepad.site.get('pages').get('notFound')

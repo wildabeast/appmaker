@@ -5,7 +5,7 @@
  * @param {object}
  * @param {object}
  */
-nudgepad.checkId = function(req, res, next) {
+app.checkId = function(req, res, next) {
   
   var email = req.cookies.email || req.body.email || req.query.email
   var key = req.cookies.key || req.body.key || req.query.key
@@ -50,8 +50,8 @@ nudgepad.checkId = function(req, res, next) {
   next()
 }
 
-nudgepad.privateCheck = function (req, res, next) {
+app.privateCheck = function (req, res, next) {
   if (nudgepad.site.get('settings is_private') !== 'true')
     return next()
-  nudgepad.checkId(req, res, next)
+  app.checkId(req, res, next)
 }

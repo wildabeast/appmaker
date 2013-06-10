@@ -1,8 +1,17 @@
+var ParseName = require('./parseName.js'),
+    RandomString = require('./RandomString.js')
+
+// http://stackoverflow.com/questions/46155/validate-email-address-in-javascript
+var ValidateEmail = function (email) { 
+  var re = /\S+@\S+\.\S+/
+  return re.test(email)
+}
+
 // Update account
-site.post('/nudgepad.updateEmail', nudgepad.checkId, function (req, res, next) {
+app.post('/nudgepad.updateEmail', app.checkId, function (req, res, next) {
   
   var email = req.body.email
-  if (!validateEmail(email))
+  if (!ValidateEmail(email))
     return res.send('Invalid email', 400)
   
   // Same email
@@ -14,9 +23,9 @@ site.post('/nudgepad.updateEmail', nudgepad.checkId, function (req, res, next) {
   var role = nudgepad.site.get('workers').get(req.email + ' role')  
   // Generate new password
   var worker = new File(nudgepad.paths.site + 'workers/' + email + '.space')
-  worker.set('name', parseName(email))
+  worker.set('name', ParseName(email))
   worker.set('role', role)
-  worker.set('key', hashString(email + generateSalt(8)))
+  worker.set('key', app.hashString(email + RandomString(8)))
   worker.create(function (error) {
     if (error) {
       console.log(error)

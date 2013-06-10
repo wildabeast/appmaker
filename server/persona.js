@@ -1,5 +1,5 @@
 // Persona Login
-site.post('/nudgepad.persona', function(req, res, next) {
+app.post('/nudgepad.persona', function(req, res, next) {
   
   var assertion = req.body.assertion
   

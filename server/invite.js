@@ -1,8 +1,11 @@
+var ParseName = require('./parseName.js'),
+    RandomString = require('./RandomString.js')
+
 var createUser = function (email) {
   var worker = new File(nudgepad.paths.site + 'workers/' + email + '.space')
-  worker.set('name', parseName(email))
+  worker.set('name', ParseName(email))
   worker.set('role', 'worker')
-  worker.set('key', hashString(email + generateSalt(8)))
+  worker.set('key', app.hashString(email + RandomString(8)))
   worker.create(function (error) {
     if (error)
       return console.log(error)
@@ -23,7 +26,7 @@ var createUser = function (email) {
   })
 }
 
-site.post('/nudgepad.invite', nudgepad.checkId, function (req, res, next) {
+app.post('/nudgepad.invite', app.checkId, function (req, res, next) {
   var username = 'nudgepad'
   var newUsers = req.body.emails.split(/ /)
   _.each(newUsers, createUser)  

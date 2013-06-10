@@ -1,5 +1,5 @@
 // Send the home page
-site.get(/^\/$/, nudgepad.privateCheck, function (req, res, next) {
+app.get(/^\/$/, app.privateCheck, function (req, res, next) {
   sendPage(req, res, 'home')
 })
 

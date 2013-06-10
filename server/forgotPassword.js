@@ -1,5 +1,5 @@
 // Login Post
-site.post('/nudgepad.forgotPassword', function(req, res, next) {
+app.post('/nudgepad.forgotPassword', function(req, res, next) {
   // Invalid email address
   var email = req.body.email
   var worker = nudgepad.site.get('workers ' + email)

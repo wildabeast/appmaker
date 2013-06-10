@@ -4,5 +4,5 @@ nudgepad.whoami = function(req, res, next) {
 }
 
 // Logged in worker
-site.get('/nudgepad.whoami', nudgepad.checkId, nudgepad.whoami)
+app.get('/nudgepad.whoami', app.checkId, nudgepad.whoami)
 

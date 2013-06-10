@@ -28,7 +28,7 @@ var zipAndSend = function (path, res) {
   })
 }
 // http://stackoverflow.com/questions/5754153/zip-archives-in-node-js
-site.get('/nudgepad.backup/' + nudgepad.domain + '.zip', nudgepad.checkId, function(req, res) {
+app.get('/nudgepad.backup/' + nudgepad.domain + '.zip', app.checkId, function(req, res) {
   zipAndSend(nudgepad.paths.site, res)
   
 })

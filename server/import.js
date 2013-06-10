@@ -1,5 +1,5 @@
 // Test of importing traditional HTML files
-site.get(/^\/nudgepad\.import\/(.+)$/, nudgepad.checkId, function(req, res, next) {
+app.get(/^\/nudgepad\.import\/(.+)$/, app.checkId, function(req, res, next) {
   
   var url = req.params[0]
   var output = nudgepad.paths.temp + url.toLowerCase().replace(/[^a-z0-9- _\.]/gi, '').replace(/ /g, '_')
@@ -12,7 +12,7 @@ site.get(/^\/nudgepad\.import\/(.+)$/, nudgepad.checkId, function(req, res, next
 })
 
 // Import a site
-site.post('/nudgepad.import', nudgepad.checkId, function (req, res, next) {
+app.post('/nudgepad.import', app.checkId, function (req, res, next) {
   var output = nudgepad.paths.temp + nudgepad.domain + '.space'
   fs.writeFile(output, req.body.space, function (err, data) {
     exec('space ' + output + ' ' + nudgepad.paths.site, function () {

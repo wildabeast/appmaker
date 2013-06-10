@@ -50,6 +50,8 @@ if (!String.prototype.format) {
   };
 }
 
+var app = express()
+
 /*** PATHS ****/
 
 var dataPath = '/nudgepad/'
@@ -79,26 +81,29 @@ if (!fs.existsSync(sitesPath + nudgepad.domain + '/')) {
 // Development always occurs on macs
 nudgepad.isMac = process.env.HOME.match(/Users/)
 nudgepad.development = !!nudgepad.isMac
-// hard coded for now
-nudgepad.ip = nudgepad.development ? '127.0.0.1' : '107.21.225.189'
-eval(fs.readFileSync('helpers.js', 'utf8'))
-eval(fs.readFileSync('error.js', 'utf8'))
-eval(fs.readFileSync('paths.js', 'utf8'))
+// Set IP Address.
+nudgepad.ip = process.env.IPADDRESS
 
-/*********** Install if not installed ************/
-eval(fs.readFileSync('install.js', 'utf8'))
+// Add paths to nudgepad object
+require('./paths.js')(nudgepad, sitesPath, clientPath, nudgepad.domain)
+
+// Run install script in case its not installed
+require('./install.js')(nudgepad)
 
 nudgepad.site = new Space()
 nudgepad.site.set('collage', new Space())
 
 // Load the HTML file and add mtimes as query string so the
 // worker always get the latest version of the nudgepad.js and nudgepad.css
+// todo: remove this?
 nudgepad.nudgepad_css_version = fs.statSync(clientPath + 'min.css').mtime.getTime()
 nudgepad.nudgepad_js_version = fs.statSync(clientPath + 'nudgepad.min.js').mtime.getTime()
 nudgepad.nudgepad_min_html = fs.readFileSync(clientPath + 'main.html', 'utf8')
   .replace(/JSV/, nudgepad.nudgepad_js_version)
   .replace(/CSSV/, nudgepad.nudgepad_css_version)
 
+
+// todo: remove this?
 nudgepad.version = '2000'
 nudgepad.started = new Date().getTime()
 
@@ -121,7 +126,7 @@ nudgepad.loadFolder = function (folder) {
 /**
  * Load all Spaces into memory.
  */
-nudgepad.load_site = function () {
+nudgepad.loadSite = function () {
   
   // Load settings
   nudgepad.site.set('settings', new Space())
@@ -146,6 +151,14 @@ nudgepad.load_site = function () {
   
 }
 
+/**
+ * @param {string}
+ * @return {string}
+ */
+app.hashString = function (string) {
+  return crypto.createHash('sha256').update(string).digest("hex")
+}
+
 eval(fs.readFileSync('checkId.js', 'utf8'))
 
 //********************** INITIALIZE THE SERVER OBJECT ******************************
@@ -156,20 +169,16 @@ if (nudgepad.development)
 else
   console.log('Production mode started...')
 
-
-var site = express()
-speedcoach('express instance created')
-
 /*********** nudgepad.emit ***********/
 eval(fs.readFileSync('emit.js', 'utf8'))
 
 
-nudgepad.load_site()
+nudgepad.loadSite()
 speedcoach('spaces loaded into memory')
 
-site.use(express.bodyParser())
-site.use(express.cookieParser())
-site.use(express.compress())
+app.use(express.bodyParser())
+app.use(express.cookieParser())
+app.use(express.compress())
 // server.use(express.staticCache())
 
 // http://www.dmuth.org/node/1401/logging-non-proxy-ip-addresses-heroku-and-express-nodejs
@@ -207,7 +216,7 @@ express.logger.token("ip", function(request) {
 });
 
 var logFile = fs.createWriteStream(nudgepad.paths.requests_log, {flags: 'a'})
-site.use(express.logger({
+app.use(express.logger({
   stream : logFile,
   format : ':ip :url :method :status :response-time :res[content-length] ":date" :remote-addr ":referrer" ":user-agent"'
 }))
@@ -215,17 +224,17 @@ site.use(express.logger({
 
 
 /*********** STATIC FILES **************/
-site.use('/nudgepad/', express.static(clientPath.replace(/\/$/,''), { maxAge: 31557600000 }))
+app.use('/nudgepad/', express.static(clientPath.replace(/\/$/,''), { maxAge: 31557600000 }))
 
 
 /*********** public ***********/
-site.use('/', express.static(nudgepad.paths.public, { maxAge: 31557600000 }))
+app.use('/', express.static(nudgepad.paths.public, { maxAge: 31557600000 }))
 
 /********** blog *************/
-eval(fs.readFileSync('blog.js', 'utf8'))
+require('./blog.js')(app, nudgepad)
 
 /********** surveys *************/
-eval(fs.readFileSync('surveys.js', 'utf8'))
+require('./surveys.js')(app, nudgepad)
 
 /********** email *************/
 eval(fs.readFileSync('email.js', 'utf8'))
@@ -237,7 +246,7 @@ eval(fs.readFileSync('invite.js', 'utf8'))
 eval(fs.readFileSync('images.js', 'utf8'))
 
 /*********** nudgepad ***********/
-site.get(/^\/nudgepad$/, nudgepad.checkId, function(req, res, next) {
+app.get(/^\/nudgepad$/, app.checkId, function(req, res, next) {
 
   // If production, send minified Nudge.
   if (!nudgepad.development) {
@@ -256,7 +265,7 @@ site.get(/^\/nudgepad$/, nudgepad.checkId, function(req, res, next) {
 /*********** sendPage method ************/
 eval(fs.readFileSync('sendPage.js', 'utf8'))
 
-/*********** nudgepad.site.patch ************/
+/*********** patch methods ************/
 eval(fs.readFileSync('patch.js', 'utf8'))
 
 /*********** nudgepad.site ************/
@@ -358,7 +367,7 @@ eval(fs.readFileSync('notFound.js', 'utf8'))
 
 // Start Listening
 console.log('Starting %s on port %s', nudgepad.domain, nudgepad.port)
-http_server = http.createServer(site).listen(nudgepad.port)
+http_server = http.createServer(app).listen(nudgepad.port)
 
 
 fs.writeFileSync(activePath + nudgepad.domain, nudgepad.port, 'utf8')

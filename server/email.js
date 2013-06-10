@@ -45,7 +45,7 @@ nudgepad.sendEmail = function (username, to, subject, message, htmlMessage, call
   
 }
 
-site.post('/nudgepad.email', nudgepad.checkId, function (req, res, next) {
+app.post('/nudgepad.email', app.checkId, function (req, res, next) {
   var username = 'nudgepad'
   var to = req.body.to
   var subject = req.body.subject

@@ -67,7 +67,7 @@ nudgepad.images.save = function (filepath, filename, callback) {
 }
 
 // Uploads
-site.get('/nudgepad.images.upload', nudgepad.checkId, function(req, res, next) {
+app.get('/nudgepad.images.upload', app.checkId, function(req, res, next) {
   // todo: top.editor.uploads.add(this.private); (to show the progress bar)
   return res.send('<style>body, form, div, input { margin: 0;padding: 0; cursor: pointer;}</style>'+
   '<script type="text/javascript">top.focus();</script>'+
@@ -79,7 +79,7 @@ site.get('/nudgepad.images.upload', nudgepad.checkId, function(req, res, next) {
 
 
 // Receive any uploads
-site.post('/nudgepad.images.upload', nudgepad.checkId, function(req, res, next) {    
+app.post('/nudgepad.images.upload', app.checkId, function(req, res, next) {    
 
   console.log('Receiving image upload...')
 

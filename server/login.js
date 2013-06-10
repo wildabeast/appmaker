@@ -1,5 +1,5 @@
 // Login Page
-site.get('/nudgepad.login', function(req, res, next) {
+app.get('/nudgepad.login', function(req, res, next) {
   
   if (req.query.email && req.query.key) {
     var worker = nudgepad.site.get('workers ' + req.query.email)
@@ -32,7 +32,7 @@ site.get('/nudgepad.login', function(req, res, next) {
 })
 
 // Login Post
-site.post('/nudgepad.login', function(req, res, next) {
+app.post('/nudgepad.login', function(req, res, next) {
   // Invalid email addresss
   if (!nudgepad.site.get('workers ' + req.body.email))
     return res.redirect('/nudgepad/login.html?error=User_not_found')

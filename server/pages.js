@@ -1,4 +1,4 @@
-site.get('*', nudgepad.privateCheck, function (req, res, next) {
+app.get('*', app.privateCheck, function (req, res, next) {
   
   var name = req.params[0].substr(1)
   

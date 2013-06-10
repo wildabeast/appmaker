@@ -40,7 +40,7 @@ nudgepad.parseStats = function (callback) {
   })
 }
 
-site.get('/nudgepad.stats', nudgepad.checkId, function(req, res, next) {
+app.get('/nudgepad.stats', app.checkId, function(req, res, next) {
   res.set('Content-Type', 'text/plain')
   nudgepad.parseStats(function (days) {
     return res.send(new Space(days).toString())  

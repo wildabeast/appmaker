@@ -54,7 +54,7 @@ function folderStats (path, callback) {
  * Get a file API.
  * path
  */
-site.get('/nudgepad.explorer.list', nudgepad.checkId, function(req, res, next) {
+app.get('/nudgepad.explorer.list', app.checkId, function(req, res, next) {
   folderStats(nudgepad.paths.site, function (err, space) {
     res.set('Content-Type', 'text/plain')
     return res.send(space.toString())    
@@ -65,7 +65,7 @@ site.get('/nudgepad.explorer.list', nudgepad.checkId, function(req, res, next) {
  * Get a file API.
  * path
  */
-site.get('/nudgepad.explorer.public', nudgepad.checkId, function(req, res, next) {
+app.get('/nudgepad.explorer.public', app.checkId, function(req, res, next) {
   folderStats(nudgepad.paths.public, function (err, space) {
     res.set('Content-Type', 'text/plain')
     return res.send(space.toString())    
@@ -76,7 +76,7 @@ site.get('/nudgepad.explorer.public', nudgepad.checkId, function(req, res, next)
  * Get a file API.
  * path
  */
-site.post('/nudgepad.explorer.get', nudgepad.checkId, function(req, res, next) {
+app.post('/nudgepad.explorer.get', app.checkId, function(req, res, next) {
   fs.readFile(nudgepad.paths.site + req.body.path, 'utf8', function (err, contents) {
     res.send(contents)
   })
@@ -86,7 +86,7 @@ site.post('/nudgepad.explorer.get', nudgepad.checkId, function(req, res, next) {
  * Remove a file API.
  * path
  */
-site.post('/nudgepad.explorer.remove', nudgepad.checkId, function(req, res, next) {
+app.post('/nudgepad.explorer.remove', app.checkId, function(req, res, next) {
   
   fs.unlink(nudgepad.paths.site + req.body.path, function (err) {
     if (err) return res.send(err)
@@ -99,7 +99,7 @@ site.post('/nudgepad.explorer.remove', nudgepad.checkId, function(req, res, next
  * Rename a file API.
  * path
  */
-site.post('/nudgepad.explorer.rename', nudgepad.checkId, function(req, res, next) {
+app.post('/nudgepad.explorer.rename', app.checkId, function(req, res, next) {
   
   fs.rename(nudgepad.paths.site + req.body.oldPath, nudgepad.paths.site + req.body.newPath, function (err) {
     if (err) return res.send(err)
@@ -114,7 +114,7 @@ site.post('/nudgepad.explorer.rename', nudgepad.checkId, function(req, res, next
  * path
  * content
  */
-site.post('/nudgepad.explorer.save', nudgepad.checkId, function(req, res, next) {
+app.post('/nudgepad.explorer.save', app.checkId, function(req, res, next) {
   
   fs.writeFile(nudgepad.paths.site + req.body.path, req.body.content, 'utf8', function (err) {
     if (err) return res.send(err)

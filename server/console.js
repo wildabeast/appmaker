@@ -1,9 +1,9 @@
-site.post('/nudgepad\.console', nudgepad.checkId, function (req, res, next) {
+app.post('/nudgepad\.console', app.checkId, function (req, res, next) {
   res.set('Content-Type', 'text/plain')
   res.send(eval(req.body.command) + '')
 })
 
-site.post('/nudgepad\.exec', nudgepad.checkId, function (req, res, next) {
+app.post('/nudgepad\.exec', app.checkId, function (req, res, next) {
 
   exec(req.body.command, {cwd : nudgepad.paths.site},
     function (error, stdout, stderr) {

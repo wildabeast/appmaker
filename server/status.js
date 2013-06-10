@@ -30,4 +30,4 @@ nudgepad.status = function(req, res, next) {
   return res.send(space.toString())
 }
 
-site.get('/nudgepad.status', nudgepad.checkId, nudgepad.status)
+app.get('/nudgepad.status', app.checkId, nudgepad.status)

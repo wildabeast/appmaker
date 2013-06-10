@@ -24,8 +24,10 @@ nudgepad.patchFile = function (path, patch, email) {
      console.log('creating %s', path)
      file = new File(filepath, patchFile)
      file.create(function (error) {
-       if (error)
-         return nudgepad.error(error)
+       if (error) {
+         console.log('Error: %s', error)
+         return error
+       }
      })
      nudgepad.site.set(path, file)
    }
@@ -34,8 +36,10 @@ nudgepad.patchFile = function (path, patch, email) {
    else if (typeof file !== 'undefined' && patchFile.toString() === '') {
      console.log('deleting %s', path)
      file.trash(function (error) {
-       if (error)
-         return nudgepad.error(error)
+       if (error) {
+         console.log('Error: %s', error)
+         return error
+       }
      })
      nudgepad.site.delete(path)
    }
@@ -44,8 +48,10 @@ nudgepad.patchFile = function (path, patch, email) {
    else {
      console.log('updating %s', path)
      file.patch(patchFile).save(function (error) {
-       if (error)
-         return nudgepad.error(error)
+       if (error) {
+         console.log('Error: %s', error)
+         return error
+       }
      })
 
    }
@@ -69,7 +75,7 @@ nudgepad.patchSite = function (patch, email) {
 }
 
 // Patch
-site.post(/^\/nudgepad\.site\.patch$/, nudgepad.checkId, nudgepad.parseSpace, function(req, res, next) {
+app.post(/^\/nudgepad\.site\.patch$/, app.checkId, nudgepad.parseSpace, function(req, res, next) {
   
   nudgepad.patchSite(req.space, req.email)
   nudgepad.emit('patch', req.space)

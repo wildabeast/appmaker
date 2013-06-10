@@ -1,5 +1,5 @@
 // Get file
-site.get(/^\/nudgepad\.site\.([a-z0-9_]+)\.([a-z0-9_]+)$/, nudgepad.checkId, function(req, res, next) {
+app.get(/^\/nudgepad\.site\.([a-z0-9_]+)\.([a-z0-9_]+)$/, app.checkId, function(req, res, next) {
 
   var folder = req.params[0],
       file = req.params[1]
@@ -12,7 +12,7 @@ site.get(/^\/nudgepad\.site\.([a-z0-9_]+)\.([a-z0-9_]+)$/, nudgepad.checkId, fun
 })
 
 // Get folder
-site.get(/^\/nudgepad\.site\.([a-z0-9_]+)$/, nudgepad.checkId, function(req, res, next) {
+app.get(/^\/nudgepad\.site\.([a-z0-9_]+)$/, app.checkId, function(req, res, next) {
   
   var folder = req.params[0]
   
@@ -24,7 +24,7 @@ site.get(/^\/nudgepad\.site\.([a-z0-9_]+)$/, nudgepad.checkId, function(req, res
 })
 
 // Download all site for editing
-site.get('/nudgepad\.site', nudgepad.checkId, function (req, res, next) {
+app.get('/nudgepad\.site', app.checkId, function (req, res, next) {
   
   var activePage = req.query.activePage || "home"
   var id = req.query.id
