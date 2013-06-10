@@ -1,4 +1,4 @@
-var ParseName = require('./parseName.js'),
+var ParseName = require('./ParseName.js'),
     RandomString = require('./RandomString.js')
 
 // http://stackoverflow.com/questions/46155/validate-email-address-in-javascript

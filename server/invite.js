@@ -1,4 +1,4 @@
-var ParseName = require('./parseName.js'),
+var ParseName = require('./ParseName.js'),
     RandomString = require('./RandomString.js')
 
 var createUser = function (email) {
