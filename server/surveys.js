@@ -1,6 +1,7 @@
 var exec = require('child_process').exec,
     fs = require('fs'),
-    Space = require('space')
+    Space = require('space'),
+    Email = require('./email.js')
 
 var Survey = function (app, nudgepad) {
   
@@ -27,7 +28,7 @@ var Survey = function (app, nudgepad) {
       // The following will send the submission to an email address on file for the site
       // if one exists.
       if (nudgepad.site.get('settings email'))
-        nudgepad.sendEmail('surveys', nudgepad.site.get('settings email'), nudgepad.domain + ': New Message', space.toString())
+        Email.send(nudgepad.site.get('settings email'), 'surveys@' + nudgepad.domain, nudgepad.domain + ': New Message', space.toString())
 
       res.send('')
     })

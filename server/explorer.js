@@ -1,3 +1,8 @@
+var fs = require('fs'),
+    Space = require('space'),
+    async = require('async')
+    _ = require('underscore')
+
 function fileStats (path, callback) {
   
   fs.stat(path, function (err, stat) {
@@ -50,75 +55,82 @@ function folderStats (path, callback) {
  
 }
 
-/**
- * Get a file API.
- * path
- */
-app.get('/nudgepad.explorer.list', app.checkId, function(req, res, next) {
-  folderStats(nudgepad.paths.site, function (err, space) {
-    res.set('Content-Type', 'text/plain')
-    return res.send(space.toString())    
-  })
-})
-
-/**
- * Get a file API.
- * path
- */
-app.get('/nudgepad.explorer.public', app.checkId, function(req, res, next) {
-  folderStats(nudgepad.paths.public, function (err, space) {
-    res.set('Content-Type', 'text/plain')
-    return res.send(space.toString())    
-  })
-})
-
-/**
- * Get a file API.
- * path
- */
-app.post('/nudgepad.explorer.get', app.checkId, function(req, res, next) {
-  fs.readFile(nudgepad.paths.site + req.body.path, 'utf8', function (err, contents) {
-    res.send(contents)
-  })
-})
-
-/**
- * Remove a file API.
- * path
- */
-app.post('/nudgepad.explorer.remove', app.checkId, function(req, res, next) {
+var Explorer = function (app, nudgepad) {
   
-  fs.unlink(nudgepad.paths.site + req.body.path, function (err) {
-    if (err) return res.send(err)
-    res.send('')
+  
+  /**
+   * Get a file API.
+   * path
+   */
+  app.get('/nudgepad.explorer.list', app.checkId, function(req, res, next) {
+    folderStats(nudgepad.paths.site, function (err, space) {
+      res.set('Content-Type', 'text/plain')
+      return res.send(space.toString())    
+    })
+  })
+
+  /**
+   * Get a file API.
+   * path
+   */
+  app.get('/nudgepad.explorer.public', app.checkId, function(req, res, next) {
+    folderStats(nudgepad.paths.public, function (err, space) {
+      res.set('Content-Type', 'text/plain')
+      return res.send(space.toString())    
+    })
+  })
+
+  /**
+   * Get a file API.
+   * path
+   */
+  app.post('/nudgepad.explorer.get', app.checkId, function(req, res, next) {
+    fs.readFile(nudgepad.paths.site + req.body.path, 'utf8', function (err, contents) {
+      res.send(contents)
+    })
+  })
+
+  /**
+   * Remove a file API.
+   * path
+   */
+  app.post('/nudgepad.explorer.remove', app.checkId, function(req, res, next) {
+
+    fs.unlink(nudgepad.paths.site + req.body.path, function (err) {
+      if (err) return res.send(err)
+      res.send('')
+    })
+
+  })
+
+  /**
+   * Rename a file API.
+   * path
+   */
+  app.post('/nudgepad.explorer.rename', app.checkId, function(req, res, next) {
+
+    fs.rename(nudgepad.paths.site + req.body.oldPath, nudgepad.paths.site + req.body.newPath, function (err) {
+      if (err) return res.send(err)
+      res.send('')
+    })
+
+  })
+
+
+  /**
+   * Save a file API.
+   * path
+   * content
+   */
+  app.post('/nudgepad.explorer.save', app.checkId, function(req, res, next) {
+
+    fs.writeFile(nudgepad.paths.site + req.body.path, req.body.content, 'utf8', function (err) {
+      if (err) return res.send(err)
+      res.send('')
+    })
+
   })
   
-})
+}
 
-/**
- * Rename a file API.
- * path
- */
-app.post('/nudgepad.explorer.rename', app.checkId, function(req, res, next) {
-  
-  fs.rename(nudgepad.paths.site + req.body.oldPath, nudgepad.paths.site + req.body.newPath, function (err) {
-    if (err) return res.send(err)
-    res.send('')
-  })
-  
-})
-
-
-/**
- * Save a file API.
- * path
- * content
- */
-app.post('/nudgepad.explorer.save', app.checkId, function(req, res, next) {
-  
-  fs.writeFile(nudgepad.paths.site + req.body.path, req.body.content, 'utf8', function (err) {
-    if (err) return res.send(err)
-    res.send('')
-  })
-  
-})
+module.exports = Explorer

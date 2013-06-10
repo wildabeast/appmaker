@@ -1,6 +1,7 @@
-nudgepad.sendEmail = function (username, to, subject, message, htmlMessage, callback) {
+var Email = {}
+
+Email.send = function (to, from, subject, message, htmlMessage, callback) {
   
-  var from = username + '@' + nudgepad.domain
   var nodemailer = require("nodemailer")
   
   // We use the sendmail binary to send mail.
@@ -45,18 +46,6 @@ nudgepad.sendEmail = function (username, to, subject, message, htmlMessage, call
   
 }
 
-app.post('/nudgepad.email', app.checkId, function (req, res, next) {
-  var username = 'nudgepad'
-  var to = req.body.to
-  var subject = req.body.subject
-  var message = req.body.message
-  
-  nudgepad.sendEmail(username, to, subject, message, null, function (error) {
-    if (error)
-      res.send(error, 500)
-    else
-      res.send('Sent')
-  })  
+module.exports = Email
 
-})
 

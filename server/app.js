@@ -11,20 +11,16 @@ var fs = require('fs'),
     https = require('https'),
     http = require('http'),
     request = require('request'),
-    superagent = require('superagent'),
     socketio = require('socket.io'),
     crypto = require('crypto'),
     exec = require('child_process').exec,
-    imagemagick = require('imagemagick'),
-    spawn = require('child_process').spawn,
     _ = require('underscore'),
     parseCookie = require('cookie').parse,
-    moment = require('moment'),
-    os = require('os'),
     async = require('async'),
     Space = require('space'),
     File = require('./File'),
-    Page = require('scraps')
+    Page = require('scraps'),
+    Email = require('./email.js')
 
 if (process.argv.length < 3) {
   console.log('Specify a domain when starting')
@@ -159,7 +155,7 @@ app.hashString = function (string) {
   return crypto.createHash('sha256').update(string).digest("hex")
 }
 
-eval(fs.readFileSync('checkId.js', 'utf8'))
+require('./checkId.js')(app, nudgepad)
 
 //********************** INITIALIZE THE SERVER OBJECT ******************************
 
@@ -169,12 +165,81 @@ if (nudgepad.development)
 else
   console.log('Production mode started...')
 
-/*********** nudgepad.emit ***********/
-eval(fs.readFileSync('emit.js', 'utf8'))
-
+/**
+ * Emits an event to all open tabs.
+ */
+nudgepad.emit = function (event, string, socket) {
+  
+  // To emit it to all except the sending client
+  if (socket)
+    socket.broadcast.emit(event, string.toString())
+  else
+    io.sockets.emit(event, string.toString())
+}
 
 nudgepad.loadSite()
 speedcoach('spaces loaded into memory')
+
+
+nudgepad.patchFile = function (path, patch, email) {
+  var filepath = nudgepad.paths.site + path.replace(/ /g, '/') + '.space'
+  var file = nudgepad.site.get(path)
+  var patchFile = patch.get(path)
+  
+   // Create File
+   if (typeof file === 'undefined') {
+     console.log('creating %s', path)
+     file = new File(filepath, patchFile)
+     file.create(function (error) {
+       if (error) {
+         console.log('Error: %s', error)
+         return error
+       }
+     })
+     nudgepad.site.set(path, file)
+   }
+
+   // Delete File
+   else if (typeof file !== 'undefined' && patchFile.toString() === '') {
+     console.log('deleting %s', path)
+     file.trash(function (error) {
+       if (error) {
+         console.log('Error: %s', error)
+         return error
+       }
+     })
+     nudgepad.site.delete(path)
+   }
+
+   // Update File
+   else {
+     console.log('updating %s', path)
+     file.patch(patchFile).save(function (error) {
+       if (error) {
+         console.log('Error: %s', error)
+         return error
+       }
+     })
+
+   }
+  
+}
+
+nudgepad.patchSite = function (patch, email) {
+  
+  console.log('receiving patch')
+  
+  // now, modify file system.
+   for (var i in patch.keys) {
+     var folder = patch.keys[i]
+     // For every file in folder
+     for (var j in patch.values[folder].keys) {
+       var name =  patch.values[folder].keys[j]
+       nudgepad.patchFile(folder + ' ' + name, patch, email)
+     }
+   }
+}
+
 
 app.use(express.bodyParser())
 app.use(express.cookieParser())
@@ -237,13 +302,28 @@ require('./blog.js')(app, nudgepad)
 require('./surveys.js')(app, nudgepad)
 
 /********** email *************/
-eval(fs.readFileSync('email.js', 'utf8'))
+app.post('/nudgepad.email', app.checkId, function (req, res, next) {
+
+  var to = req.body.to
+  var subject = req.body.subject
+  var message = req.body.message
+  var from = 'nudgepad@' + nudgepad.domain
+  
+  Email.send(to, from, subject, message, null, function (error) {
+    if (error)
+      res.send(error, 500)
+    else
+      res.send('Sent')
+  })  
+
+})
+
 
 /********** invite *************/
-eval(fs.readFileSync('invite.js', 'utf8'))
+require('./invite.js')(app, nudgepad)
 
 /********** images *************/
-eval(fs.readFileSync('images.js', 'utf8'))
+require('./images.js')(app, nudgepad)
 
 /*********** nudgepad ***********/
 app.get(/^\/nudgepad$/, app.checkId, function(req, res, next) {
@@ -263,82 +343,117 @@ app.get(/^\/nudgepad$/, app.checkId, function(req, res, next) {
 })
 
 /*********** sendPage method ************/
-eval(fs.readFileSync('sendPage.js', 'utf8'))
+var pageOptions = {
+  beautify : true
+}
+
+app.sendPage = function(req, res, name) {
+  
+  var scraps = nudgepad.site.get('pages ' + name)
+  var page = new Page(scraps)
+  var context = {}
+  context.site = nudgepad.site
+  context.request = req
+  return res.send(page.toHtml(context, pageOptions))
+}
 
 /*********** patch methods ************/
-eval(fs.readFileSync('patch.js', 'utf8'))
+require('./patch.js')(app, nudgepad)
 
 /*********** nudgepad.site ************/
-eval(fs.readFileSync('site.js', 'utf8'))
+require('./site.js')(app, nudgepad)
 
 
 /*********** nudgepad.backup ***********/
-eval(fs.readFileSync('backup.js', 'utf8'))
-
+require('./backup.js')(app, nudgepad)
 
 /*********** nudgepad.explorer ***********/
-eval(fs.readFileSync('explorer.js', 'utf8'))
+require('./explorer.js')(app, nudgepad)
 
 /*********** nudgepad.restart ***********/
-eval(fs.readFileSync('restart.js', 'utf8'))
+require('./restart.js')(app, nudgepad)
 
 /*********** nudgepad.domain ***********/
-eval(fs.readFileSync('domain.js', 'utf8'))
+// We use this to communicate with proxy.js so it knows what
+// domain this process serves
+app.get('/nudgepad.domain', function(req, res, next) {
+  res.set('Content-Type', 'text/plain')
+  return res.send(nudgepad.domain)
+})
 
 /*********** nudgepad.status ***********/
-eval(fs.readFileSync('status.js', 'utf8'))
+require('./status.js')(app, nudgepad, speedcoach)
 
 /*********** nudgepad.whoami ***********/
-eval(fs.readFileSync('whoami.js', 'utf8'))
+require('./whoami.js')(app)
 
 /*********** serverSession ***********/
-eval(fs.readFileSync('started.js', 'utf8'))
+// We use this so we can tell if the server has been
+// restarted since the clients session started
+app.get('/nudgepad.started', app.checkId, function (req, res, next) {
+  res.set('Content-Type', 'text/plain')
+  return res.send(nudgepad.started + '')
+})
 
 /*********** nudgepad.console ***********/
-eval(fs.readFileSync('console.js', 'utf8'))
+require('./console.js')(app, nudgepad)
 
 /*********** watches disk ***********/
-eval(fs.readFileSync('watchers.js', 'utf8'))
+fs.watch(nudgepad.paths.public, function (event, filename) {
+  
+  // Trigger public changed event
+  // mac on old node wont emit filename
+  if (!filename)
+    filename = ''
+  nudgepad.emit('public', filename)
+  
+})
+
+/*
+todo: experiment with watching this folder for all updates.
+fs.watch(nudgepad.paths.site + 'pages/', function (event, filename) {
+  
+  // Trigger public changed event
+  nudgepad.loadFolder('pages')
+})
+*/
 
 /*********** export site ***********/
-eval(fs.readFileSync('export.js', 'utf8'))
+require('./export.js')(app, nudgepad)
 
 /*********** nudgepad.login ***********/
-eval(fs.readFileSync('login.js', 'utf8'))
+require('./login.js')(app, nudgepad)
 
 /*********** nudgepad.persona ***********/
-eval(fs.readFileSync('persona.js', 'utf8'))
+require('./persona.js')(app, nudgepad)
 
 /*********** nudgepad.forgotPassword ***********/
-eval(fs.readFileSync('forgotPassword.js', 'utf8'))
+require('./forgotPassword.js')(app, nudgepad)
 
 /*********** nudgepad.worker.### ************/
-eval(fs.readFileSync('updateEmail.js', 'utf8'))
-
+require('./updateEmail.js')(app, nudgepad)
 
 /*********** nudgepad.logout ***********/
-eval(fs.readFileSync('logout.js', 'utf8'))
-
+require('./logout.js')(app, nudgepad)
 
 /*********** nudgepad.logs ***********/
-eval(fs.readFileSync('logs.js', 'utf8'))
+require('./logs.js')(app, nudgepad)
 
 /*********** nudgepad.clear ***********/
-eval(fs.readFileSync('clear.js', 'utf8'))
-
+require('./clear.js')(app, nudgepad)
 
 /*********** / ***********/
-eval(fs.readFileSync('home.js', 'utf8'))
+require('./home.js')(app)
 
 /*********** stats ***********/
-eval(fs.readFileSync('stats.js', 'utf8'))
+require('./stats.js')(app, nudgepad)
 
-/*********** proxy ***********/
-eval(fs.readFileSync('import.js', 'utf8'))
+/*********** import ***********/
+require('./import.js')(app, nudgepad)
 
 
 /*********** {page_name} ***********/
-eval(fs.readFileSync('pages.js', 'utf8'))
+require('./pages.js')(app, nudgepad)
 
 
 /*********** Eval any custom code ***********/
@@ -359,7 +474,19 @@ try {
 
 
 /*********** ! ***********/
-eval(fs.readFileSync('notFound.js', 'utf8'))
+app.use('/', function (req, res, next) {
+  
+
+  var page = nudgepad.site.get('pages').get('notFound')
+  if (!page)
+    return res.send('Not found', 404)
+  
+  page = new Page(page.values)
+  return res.send(page.toHtml(), 404)
+  
+  
+})
+
 
 
 
@@ -386,9 +513,94 @@ process.on('SIGTERM', function () {
 speedcoach('server started')
 
 /********* SOCKET IO STUFF **********/ 
-eval(fs.readFileSync('socket.js', 'utf8'))
+io = socketio.listen(http_server)
 
-speedcoach('socket evaled')
+io.set('log level', 3)
+
+/********* SOCKET EVENTS **********/ 
+
+io.set('authorization', function (data, accept) {
+
+  if (!data.headers.cookie)
+    return accept('No cookie transmitted.', false)
+  
+  var cookie = parseCookie(data.headers.cookie)
+
+  var worker = nudgepad.site.get('workers ' + cookie.email)
+  if (!worker)
+    return accept('Invalid worker "' + cookie.email + '" transmitted. Headers:' + data.headers.cookie, false)
+
+  // Wrong key
+  if (worker.get('key') !== cookie.key)
+    return accept('Invalid key transmitted.', false)
+  
+  data.cookie = cookie
+    
+  // todo: broadcast worker
+  return accept(null, true)  
+  
+})
+
+io.sockets.on('connection', function (socket) {
+  
+  socket.on('collage.update', function (patch) {
+    patch = new Space(patch)
+    var id = patch.get('id')
+    var fullPatch = new Space().set(id, patch)
+    // new tab
+    if (!nudgepad.site.get('collage ' + id)) {
+      nudgepad.emit('collage.create', fullPatch, socket)
+      socket.handshake.tabId = id
+    }
+    else
+      nudgepad.emit('collage.update', fullPatch, socket)
+    
+    nudgepad.site.get('collage').patch(fullPatch)
+  })
+  
+  socket.on('disconnect', function () {
+    if (socket.handshake.tabId) {
+      nudgepad.site.values.collage.delete(socket.handshake.tabId)
+      nudgepad.emit('collage.delete', socket.handshake.tabId, socket)
+    }
+  })
+  
+  socket.on('patch', function (space, fn) {
+    var patch = new Space(space)
+    nudgepad.patchSite(patch, socket.handshake.cookie.email)
+    
+    fn('patch received')
+    
+    // Broadcast to everyone else
+    nudgepad.emit('patch', space, socket)
+  })
+  
+  socket.on('commit', function (space, fn) {
+    var patch = new Space(space)
+    nudgepad.patchSite(patch, socket.handshake.cookie.email)
+    // Also patch the page
+    var pageName = patch.values.timelines.keys[0]
+    var page = nudgepad.site.get('pages ' + pageName)
+    var commitTime = patch.get('timelines ' + pageName).keys[0]
+    patch = new Space(patch.get('timelines ' + pageName + ' ' + commitTime).toString())
+    if (patch.get('values')) {
+      page.patch(patch.get('values'))
+      console.log('pathcing values')
+    }
+    if (patch.get('order')) {
+      page.patchOrder(patch.get('order'))
+      console.log('pathcing order')
+    }
+    fn('commit received')
+    page.save()
+    // Broadcast to everyone else
+    nudgepad.emit('patch', space, socket)
+  })
+
+})
+
+
+speedcoach('socket loaded')
 
 console.log('Server started...')
 speedcoach('end of nudgepad.js')
