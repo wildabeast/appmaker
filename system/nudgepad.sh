@@ -241,9 +241,15 @@ case "$1" in
 ;;
 
 'uninstall')
-  sudo rm -rf /nudgepad/
-  npm uninstall nudgepad
-  rm -rf ~/nudgepad/
+  # http://stackoverflow.com/questions/1885525/how-do-i-prompt-a-user-for-confirmation-in-bash-script
+  read -p "This will delete all user data. Are you sure? " -n 1 -r
+  if [[ $REPLY =~ ^[Yy]$ ]]
+    then
+      # do dangerous stuff
+      sudo rm -rf /nudgepad/
+      npm uninstall nudgepad
+      rm -rf ~/nudgepad/
+  fi
 ;;
 
 'zip')
