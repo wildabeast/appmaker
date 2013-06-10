@@ -10,7 +10,6 @@ nudgepad.apps.develop.clone = function () {
   var domain = prompt('Enter a domain name', 'copyof' + nudgepad.domain)
   if (!domain)
     return false
-  var source = 'http://' + nudgepad.domain + '/' + nudgepad.domain + '.zip'
   // TODO: make tld come from server and dont compute it here, which
   // is incorrect
   // tld equals the part that domain and nudgepad.domain have in common
@@ -23,12 +22,14 @@ nudgepad.apps.develop.clone = function () {
   }
   // chop common domain part
   tld = tld.replace(/^[^\.]*\./, '')
+  // Panel is the domain running the nudgepad panel server
+  var panel = tld
   
   $.get('/nudgepad.export', {}, function (data) {
     
     
     var newForm = $('<form>', {
-        'action': 'http://' + tld + '/create',
+        'action': 'http://' + panel + '/create',
 //        'target': '_blank',
         'method' : 'post'
     })

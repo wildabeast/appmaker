@@ -387,6 +387,9 @@ require('./status.js')(app, nudgepad, speedcoach)
 /*********** nudgepad.whoami ***********/
 require('./whoami.js')(app)
 
+/*********** nudgepad.whoami ***********/
+require('./hostname.js')(app)
+
 /*********** serverSession ***********/
 // We use this so we can tell if the server has been
 // restarted since the clients session started
