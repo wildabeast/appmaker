@@ -1,0 +1,15 @@
+{
+  "version": "0.1",
+  "name": "My App",
+  "description": "My rad mobile app.",
+  "launch_path": "/",
+  "icons": {
+    "128": "/mortar-128.png"
+  },
+  "developer": {
+    "name": "Your Name",
+    "url": "http://nudgepad.com"
+  },
+  "installs_allowed_from": ["*"],
+  "default_locale": "en"
+}
