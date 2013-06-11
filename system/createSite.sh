@@ -1,6 +1,6 @@
 createSiteUbuntu ()
 {
-  _start_time=`date +%s%N | cut -b1-13`
+  speedcoach "start of createSiteUbuntu"
   
   domain=$1
   ownerEmail=$2
@@ -10,10 +10,7 @@ createSiteUbuntu ()
   sudo usermod -a -G sites $domain
   sudo usermod -a -G $domain ubuntu
   
-  _end_time=`date +%s%N | cut -b1-13`
-  _processing_time=$((_end_time-_start_time))
-#  echo Time to user created:
-#  echo $_processing_time
+  speedcoach "user created"
   
   
   if [ -n "$cloneFile" ]
@@ -32,20 +29,13 @@ createSiteUbuntu ()
   sudo chown -R $domain:$domain $sitesPath$domain
   sudo -u $domain chmod -R 770 $sitesPath$domain/
   
-  _end_time=`date +%s%N | cut -b1-13`
-  _processing_time=$((_end_time-_start_time))
-#  echo Time to pre git:
-#  echo $_processing_time
+  speedcoach "end of createSiteUbuntu"
   
 #  cd $sitesPath$domain/
 #  sudo -u $domain git init >/dev/null
 #  sudo -u $domain git add . >/dev/null
 #  sudo -u $domain git commit -am "Initial commit" >/dev/null
   
-  _end_time=`date +%s%N | cut -b1-13`
-  _processing_time=$((_end_time-_start_time))
-#  echo Time to done git:
-#  echo $_processing_time
   
 }
 
@@ -104,7 +94,9 @@ createSite ()
       createSiteMac $1 $2 $3
   fi
   
+  speedcoach "before tee"
   echo "127.0.0.1 $domain" | sudo tee -a /etc/hosts >/dev/null
+  speedcoach "end of tee"
   return 0
 }
 

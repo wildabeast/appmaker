@@ -21,6 +21,7 @@ activeSites="$(ls $activePath)"
 activePorts="$(ls $portsPath)"
 
 # Include our BASH functions
+source speedcoach.sh
 source fixPermissions.sh
 source isSite.sh
 source isActive.sh
@@ -71,14 +72,18 @@ case "$1" in
 ;;
 
 'create')
+  speedcoach "start of create"
   if createSite $2 $3 $4
     then
+      speedcoach "before start site"
       if startSite $2
         then
+          speedcoach "wait until serving"
           # Get owner link
           waitUntilServing $2
           echo $OWNERLINK
           # exit 0
+          speedcoach "link sent"
       else
         echo Failed starting $2
         exit 1

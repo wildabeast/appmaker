@@ -111,6 +111,7 @@ app.post('/create', app.checkId, app.validateDomain, app.isDomainAvailable, func
           console.log('Error creating site %s: err:%s stderr:%s', domain, err, stderr)
           return res.send('Error creating site: ' + err, 400)
         }
+        console.log(stderr)
         console.log('time to create %s: %sms', domain, new Date().getTime() - requestTime)
         if (req.body.ajax)
           res.send(stdout)
@@ -125,6 +126,7 @@ app.post('/create', app.checkId, app.validateDomain, app.isDomainAvailable, func
         console.log('Error creating site %s: err:%s stderr:%s', domain, err, stderr)
         return res.send('Error creating site: ' + err, 400)
       }
+      console.log(stderr)
       console.log('time to create %s: %sms', domain, new Date().getTime() - requestTime)
       if (req.body.ajax)
         res.send(stdout)
