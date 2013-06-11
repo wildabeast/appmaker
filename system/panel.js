@@ -93,6 +93,7 @@ app.post('/create', app.checkId, app.validateDomain, app.isDomainAvailable, func
   var email = req.body.email
   var clone = req.body.clone
   var timestamp = req.body.timestamp || new Date().getTime()
+  var requestTime = new Date().getTime()
   
   if (!email)
     email = 'owner@' + domain
@@ -110,6 +111,7 @@ app.post('/create', app.checkId, app.validateDomain, app.isDomainAvailable, func
           console.log('Error creating site %s: err:%s stderr:%s', domain, err, stderr)
           return res.send('Error creating site: ' + err, 400)
         }
+        console.log('time to create %s: %sms', domain, new Date().getTime() - requestTime)
         if (req.body.ajax)
           res.send(stdout)
         else
@@ -123,6 +125,7 @@ app.post('/create', app.checkId, app.validateDomain, app.isDomainAvailable, func
         console.log('Error creating site %s: err:%s stderr:%s', domain, err, stderr)
         return res.send('Error creating site: ' + err, 400)
       }
+      console.log('time to create %s: %sms', domain, new Date().getTime() - requestTime)
       if (req.body.ajax)
         res.send(stdout)
       else

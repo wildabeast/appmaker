@@ -230,6 +230,10 @@ case "$1" in
   fi
 ;;
 
+'tailPanel')
+  sudo tail -n 30 -f $logsPath/panelMon.txt
+;;
+
 'traffic')
   if [ -n "$2" ]
     then
