@@ -17,5 +17,5 @@ speedcoach ()
   #  echo Time to user created:
   echo $_processing_time seconds from $markStart to $1 1>&2
   _start_time=$_end_time
-  
+  markStart=$1
 }
