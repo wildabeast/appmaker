@@ -25,6 +25,7 @@ createSiteUbuntu ()
       sudo -u $domain mkdir $sitesPath$domain/logs
       sudo -u $domain mkdir $sitesPath$domain/temp
   fi
+  speedcoach "before createOwnerFile"
   createOwnerFile $domain $ownerEmail
   sudo chown -R $domain:$domain $sitesPath$domain
   sudo -u $domain chmod -R 770 $sitesPath$domain/
