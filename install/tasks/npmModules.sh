@@ -1,7 +1,12 @@
 cd ~
 # Install npm modules
-sudo npm install http-proxy@0.10.1
-for module in http-proxy@0.10.1 space scraps socket.io express superagent imagemagick underscore cookie moment nodemailer request wrench async marked jquery utile commander mode-to-permissions speedcoach
+for module in http-proxy@0.10.1 marked express speedcoach
+  do
+    sudo npm install $module
+    sudo npm install -g $module
+done
+# sudo chown -R $USER ~/.npm
+for module in space scraps socket.io superagent imagemagick underscore cookie moment nodemailer request wrench async jquery utile commander mode-to-permissions
   do
     npm install $module
 done
