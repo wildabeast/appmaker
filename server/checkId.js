@@ -17,7 +17,7 @@ function CheckID (app, nudgepad) {
       // Store the url they were attempting to visit. We will
       // redirect them to that url after login.
       res.cookie('redirect', req.url)
-      return res.redirect('/nudgepad/login.html')
+      return res.redirect('/nudgepad/public/login.html')
     }
 
     // Invalid email addresss

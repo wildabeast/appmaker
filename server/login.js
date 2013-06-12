@@ -7,7 +7,7 @@ var Login = function (app, nudgepad) {
       var worker = nudgepad.site.get('workers ' + req.query.email)
 
       if (!worker)
-        return res.redirect('/nudgepad/login.html')
+        return res.redirect('/nudgepad/public/login.html')
 
       // Wrong key
       if (worker.get('key') !== req.query.key)
@@ -30,20 +30,20 @@ var Login = function (app, nudgepad) {
       return res.redirect('/nudgepad' + appString)
     }
 
-    return res.redirect('/nudgepad/login.html')
+    return res.redirect('/nudgepad/public/login.html')
   })
 
   // Login Post
   app.post('/nudgepad.login', function(req, res, next) {
     // Invalid email addresss
     if (!nudgepad.site.get('workers ' + req.body.email))
-      return res.redirect('/nudgepad/login.html?error=User_not_found')
+      return res.redirect('/nudgepad/public/login.html?error=User_not_found')
 
     var worker = nudgepad.site.get('workers ' + req.body.email)
 
     // Wrong key
     if (worker.get('key') != req.body.key)
-        return res.redirect('/nudgepad/login.html?error=Wrong_key')
+        return res.redirect('/nudgepad/public/login.html?error=Wrong_key')
 
     // Login successful!
     res.cookie('email', req.body.email, { expires: new Date(Date.now() + 5184000000)})

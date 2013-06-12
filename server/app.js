@@ -92,11 +92,11 @@ nudgepad.site.set('collage', new Space())
 // Load the HTML file and add mtimes as query string so the
 // worker always get the latest version of the nudgepad.js and nudgepad.css
 // todo: remove this?
-nudgepad.nudgepad_css_version = fs.statSync(clientPath + 'min.css').mtime.getTime()
-nudgepad.nudgepad_js_version = fs.statSync(clientPath + 'nudgepad.min.js').mtime.getTime()
-nudgepad.nudgepad_min_html = fs.readFileSync(clientPath + 'main.html', 'utf8')
-  .replace(/JSV/, nudgepad.nudgepad_js_version)
-  .replace(/CSSV/, nudgepad.nudgepad_css_version)
+nudgepad.nudgepadCssVersion = fs.statSync(clientPath + 'public/nudgepad.min.css').mtime.getTime()
+nudgepad.nudgepadJsVersion = fs.statSync(clientPath + 'public/nudgepad.min.js').mtime.getTime()
+nudgepad.nudgepadHtmlVersion = fs.readFileSync(clientPath + 'public/nudgepad.min.html', 'utf8')
+  .replace(/JSV/, nudgepad.nudgepadJsVersion)
+  .replace(/CSSV/, nudgepad.nudgepadCssVersion)
 
 
 // todo: remove this?
@@ -328,14 +328,14 @@ require('./images.js')(app, nudgepad)
 /*********** nudgepad ***********/
 app.get(/^\/nudgepad$/, app.checkId, function(req, res, next) {
 
-  // If production, send minified Nudge.
+  // If production, send html that pulls minified NudgePad
   if (!nudgepad.development) {
-    res.send(nudgepad.nudgepad_min_html)
+    res.send(nudgepad.nudgepadHtmlVersion)
     return
   }
   
-  // Load each javascript file individually if developing.
-  fs.readFile(clientPath + 'main.dev.html', 'utf8', function (err, data) {
+  // If development, send html that pulls verbose NudgePad
+  fs.readFile(clientPath + 'public/nudgepad.dev.html', 'utf8', function (err, data) {
     res.send(data)
     return 
   })

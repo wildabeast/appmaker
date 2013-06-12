@@ -1,0 +1,150 @@
+head
+ tag page
+ title Untitled
+ stylesheets /nudgepad/blocks.css
+ style
+  body
+   width 960px
+   height 1000px
+block3
+ style
+  left 191px
+  top 77px
+  height 20px
+  width 520px
+  background-color #8b9dc1
+  z-index 2
+block4
+ style
+  left 0px
+  top 0px
+  height 40px
+  width 960px
+  padding-left 10px
+  -webkit-box-shadow 0 2px 2px -2px rgba(0, 0, 0, .52)
+  border-bottom 1px solid #133783
+  background-color #3b5a9b
+  font-size 30px
+  color #FFFFFF
+  font-family Arial
+  font-weight bold
+  line-height 40px
+ content book
+block1
+ style
+  left 0px
+  top 77px
+  height 256px
+  width 174.5px
+  background-color #f8f8f8
+ content <br>
+block6
+ style
+  left 191px
+  top 87px
+  height 517px
+  width 520px
+  background-color #f8f8f8
+ content <br>
+block7
+ content John Doe
+ style
+  left 881px
+  top 13px
+  height 15px
+  width 78.5px
+  color #e1e4ed
+  z-index 2
+block11
+ style
+  left 0px
+  top 368px
+  height 236px
+  width 174.5px
+  background-color #f8f8f8
+ content <br>
+block8
+ style
+  left 724.5px
+  top 348px
+  height 20px
+  width 245.5px
+  background-color #e1e4ed
+ content <br>
+block12
+ style
+  left 725px
+  top 368px
+  height 236px
+  width 245px
+  background-color #f8f8f8
+ content <br>
+block13
+ style
+  left 724.5px
+  top 77px
+  height 20px
+  width 245.5px
+  background-color #e1e4ed
+ content <br>
+block14
+ style
+  left 725px
+  top 97px
+  height 171px
+  width 245px
+  background-color #f8f8f8
+ content <br>
+block15
+ style
+  left 0px
+  top 77px
+  height 20px
+  width 175px
+  background-color #e1e4ed
+ content <br>
+block16
+ style
+  left 0px
+  top 368px
+  height 20px
+  width 175px
+  background-color #e1e4ed
+ content <br>
+block2
+ content This is a demo page.
+ style
+  left 0px
+  top 681px
+  height auto
+  padding-top 3px
+  font-size 12px
+  color gray
+  width 970px
+  border-top 1px solid #e1e4ed
+  z-index 2
+block17
+ tag img
+ src /nudgepad/public/images/obama.jpg
+ style
+  left 290px
+  top 154px
+  width 321.5px
+  height auto
+block18
+ tag img
+ src /nudgepad/public/images/obama_small.jpg
+ style
+  left 222px
+  top 132px
+  width auto
+  height auto
+block19
+ content Barack Obama went on a nice stroll with his wife.
+ style
+  left 290px
+  top 132px
+  height 15px
+  width 405.5px
+  color gray
+  z-index 2

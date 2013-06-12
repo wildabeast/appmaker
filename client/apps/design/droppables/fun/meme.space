@@ -1,0 +1,45 @@
+head
+ tag page
+ title Untitled
+ stylesheets /nudgepad/blocks.css
+ style
+  body
+   width 960px
+   background-color white
+   height 1000px
+block17
+ tag img
+ src /nudgepad/public/images/firstworld.jpg
+ style
+  left 0px
+  top 0px
+  width auto
+  height auto
+block2
+ style
+  left 0px
+  top 0px
+  background transparent
+  height auto
+  font-weight bold
+  width 552px
+  color #FFFFFF
+  font-size 36px
+  line-height 140%
+  text-shadow 1px 1px 1px black
+  text-align center
+ content There's nothing to drink....
+block3
+ style
+  left 0px
+  top 267px
+  background transparent
+  height auto
+  font-weight bold
+  width 552px
+  color #FFFFFF
+  font-size 36px
+  line-height 140%
+  text-shadow 1px 1px 1px black
+  text-align center
+ content Except for a virtually unlimited supply of clean water.
