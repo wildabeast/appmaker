@@ -22,7 +22,7 @@ var HTMLCOMPONENTS = ''
 var externalLibs = 'jquery-1.9.1.min.js jquery.dimensions.js Lasso.js validateEmail.js ParseQueryString.js Permalink.js jquery.scrollbar.js ToProperCase.js ParseName.js jquery.topdiv.js blinker.js Spectrum.js underscore.js marked.js natural_sort.js store.js goog.js events.js parseCookie.js MoveCursorToEnd.js socket.io.js moment.min.js jquery.sha256.min.js space.js scraps.js thumbs.js platform.js'.split(/ /)
 _.each(externalLibs, function (filename) {
   JSINCLUDES += '    <script type="text/javascript" src="/nudgepad/public/js/' + filename + '"></script>\n'
-  JSMIN += fs.readFileSync(publicPath + 'js/' + filename, 'utf8')
+  JSMIN += fs.readFileSync(publicPath + 'js/' + filename, 'utf8') + ';'
 })
 
 
