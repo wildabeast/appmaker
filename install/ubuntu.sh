@@ -41,11 +41,11 @@ echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo s
 sudo npm install http-proxy@0.10.1
 for module in http-proxy@0.10.1 space scraps socket.io express superagent imagemagick underscore cookie moment nodemailer request wrench async marked jquery utile commander mode-to-permissions speedcoach
   do
-    npm install $module
+    sudo npm install -g $module
 done
 
 # Download nudgepad
-git clone git@github.com:nudgepad/nudgepad.git
+git clone https://github.com/nudgepad/nudgepad.git
 
 # Install npd shortcut
 echo "alias npd='~/nudgepad/system/nudgepad.sh'" >> ~/.bash_profile

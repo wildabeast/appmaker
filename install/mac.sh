@@ -23,7 +23,7 @@ sudo make install
 
 
 # Download nudgepad
-git clone git@github.com:nudgepad/nudgepad.git
+git clone https://github.com/nudgepad/nudgepad.git
 
 # Install npd shortcut
 echo "alias npd='~/nudgepad/system/nudgepad.sh'" >> ~/.bash_profile

@@ -75,7 +75,7 @@ Installing Development Version
 If you'd like to contribute to NudgePad development, follow these steps:
 
     cd ~
-    git clone git@github.com:nudgepad/nudgepad.git
+    git clone https://github.com/nudgepad/nudgepad.git
     cd nudgepad/install
     # Run the install script for your platform, eg:
     # ./mac.sh
