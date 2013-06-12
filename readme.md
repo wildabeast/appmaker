@@ -58,21 +58,62 @@ Requirements
 
 NudgePad currently works (with some difficulty) on Mac OS X and Ubuntu.
 
-NudgePad requires node v0.8.23 (does NOT currently work reliably with
+NudgePad requires node v0.8.* (does NOT currently work reliably with
 node v0.10.x due to some proxy/websocket issues).
 
-It also requires mon, which can easily be installed like so:
+NudgePad also requires a few apps: git, imagemagick, sendmail, and mon.
+
+Installing Production Version
+=============================
+
+The NPM version of NudgePad is not stable yet, please install the development
+version from this git repo.
+
+Installing Development Version
+==============================
+
+If you'd like to contribute to NudgePad development, follow these steps:
 
     cd ~
-    git clone https://github.com/visionmedia/mon.git
-    cd mon
-    sudo make install
+    git clone git@github.com:nudgepad/nudgepad.git
+    cd nudgepad/install
+    # Run the install script for your platform, eg:
+    # ./mac.sh
+    # Now reload your bash_profile to get the npm command
+    source ~/.bash_profile
+    npd start
+    # Go to http://localhost
+
 
 Occasionally you'll need to update your environment's PATH variable to make
 sure that the node_modules/.bin folder is included. For example, you may need
 to add this to your .bash_profile or .bashrc:
 
     PATH=$PATH:~/node_modules/.bin
+
+Uninstalling
+============
+
+To remove the development version (and ALL user data) run:
+
+    # Warning: this deletes ALL user data!
+    npd uninstall
+
+To delete just the code but keep user data, run:
+
+    npd stop
+    rm -rf ~/nudgepad
+
+Contributing
+============
+
+Want to get involved? Email breck@nudgepad.com
+
+We encourage you to use NudgePad, create issues for bugs or ideas, contribute templates, and
+of course contribute code!
+
+Architecture Overview
+=====================
 
 NudgePad consists of a control panel Express app running on port 3000, user
 sites which run on ports 3001 - 8000, and an http-proxy app which sits in front
@@ -84,53 +125,6 @@ production server. If you are not running on localhost, be sure to update the
 hostname of your machine to match the machine's DNS name, and you'll want
 to create a CNAME or A Record in your DNS to point *.YOURHOSTNAME to the
 machine's IP or DNS.
-
-Installing
-==========
-
-If you'd like to host Nudgepad on your owner server or development machine,
-follow the steps below.
-
-    npm install nudgepad
-    np start
-    # Go to http://YOUR_MACHINE_HOSTNAME
-
-All the code for Nudgepad will be stored in the node_modules/nudgepad folder.
-All user, temp, and log data will be written to /nudgepad/.
-
-Installing Development Version
-==============================
-
-If you'd like to contribute to NudgePad development, follow these steps:
-
-    cd ~
-    git clone git@github.com:nudgepad/nudgepad.git
-    cd nudgepad
-    ./install.sh
-    # Now reload your bash_profile to get the npm command
-    source ~/.bash_profile
-    npd start
-    # Go to http://localhost
-
-Uninstalling
-============
-
-The following will remove the npm version:
-
-    npm uninstall nudgepad
-
-To remove the development version (and ALL user data) run:
-
-    # Warning: this deletes ALL user data!
-    npd uninstall
-
-Contributing
-============
-
-Want to get involved? Email breck@nudgepad.com
-
-We encourage you to use NudgePad, create issues for bugs or ideas, contribute templates, and
-of course contribute code!
 
 Writing Code for NudgePad
 =========================
@@ -176,6 +170,8 @@ The frontend to NudgePad. This code does pretty much one thing: creates the /nud
 page app which contains the whole user interface of NudgePad.
 
 (Note: We have a lot of cleanup to do here!)
+(Note: We are switching this to an app model! There is a branch under development with the
+switch)
 
 We use libraries here such as jQuery, underscore, scraps, and Space, and a whole lot of
 specific packages for UI and other components. If you think we could benefit from using
