@@ -195,15 +195,15 @@
 }
 
 #nudgepadStyleEditor #alignmentOne{
-  background-image : url(/nudgepad/images/left_lt.png);
+  background-image : url(/nudgepad/public/images/left_lt.png);
 }
 
 #nudgepadStyleEditor #alignmentTwo{
-  background-image : url(/nudgepad/images/center_lt.png);
+  background-image : url(/nudgepad/public/images/center_lt.png);
 }
 
 #nudgepadStyleEditor #alignmentThree{
-  background-image : url(/nudgepad/images/right_lt.png);
+  background-image : url(/nudgepad/public/images/right_lt.png);
 }
 
 #nudgepadStyleEditor #fontFamily {
@@ -218,7 +218,7 @@
   border-radius: 3px;
   margin-right: 10px;
   border: none;
-  background-image: url(/nudgepad/images/drop_trans.png);
+  background-image: url(/nudgepad/public/images/drop_trans.png);
   background-position: 120px center;
 }
 
@@ -274,7 +274,7 @@
 }
 
 #nudgepadStyleEditor .transparentButton{
-  background-image : url(/nudgepad/images/invisible.png);
+  background-image : url(/nudgepad/public/images/invisible.png);
   background-position: center;
   background-repeat: no-repeat;
 }

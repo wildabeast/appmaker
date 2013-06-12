@@ -111,7 +111,7 @@
   width: 50px;
   background-color: #1a86d6;
   float: left;
-  background-image: url(/nudgepad/images/menuSquare.png);
+  background-image: url(/nudgepad/public/images/menuSquare.png);
   background-repeat: no-repeat;
   background-position: center;
   cursor: pointer;
@@ -127,7 +127,7 @@
 
 #nudgepadPagesBar #pageOptions {
   float: right;
-  background-image: url(/nudgepad/images/page-option.png);
+  background-image: url(/nudgepad/public/images/page-option.png);
   background-repeat: no-repeat;
   background-position: center;
 }

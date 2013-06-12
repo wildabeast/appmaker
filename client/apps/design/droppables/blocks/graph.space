@@ -1,6 +1,6 @@
 block1
  style
-  background-image url(/nudgepad/images/graphPlace.png)
+  background-image url(/nudgepad/public/images/graphPlace.png)
   background-repeat no-repeat
   background-color transparent
   background-size contain

@@ -290,7 +290,7 @@ http://davidwalsh.name/translate3d
 }
 
 .nudgepadEditStyleHandle, .nudgepadLinkHandle {
-  background-image : url(/nudgepad/images/pencil_lt.png);
+  background-image : url(/nudgepad/public/images/pencil_lt.png);
   background-size: 14px;
   background-position : center;
   background-repeat : no-repeat;
@@ -421,7 +421,7 @@ http://davidwalsh.name/translate3d
   width: 50px;
   background-color: #1a86d6;
   float: left;
-  background-image: url(/nudgepad/images/menuSquare.png);
+  background-image: url(/nudgepad/public/images/menuSquare.png);
   background-repeat: no-repeat;
   background-position: center;
   cursor: pointer;
@@ -437,7 +437,7 @@ http://davidwalsh.name/translate3d
 
 #nudgepadPagesBar #pageOptions {
   float: right;
-  background-image: url(/nudgepad/images/page-option.png);
+  background-image: url(/nudgepad/public/images/page-option.png);
   background-repeat: no-repeat;
   background-position: center;
 }
@@ -1312,15 +1312,15 @@ License: MIT
 }
 
 #nudgepadStyleEditor #alignmentOne{
-  background-image : url(/nudgepad/images/left_lt.png);
+  background-image : url(/nudgepad/public/images/left_lt.png);
 }
 
 #nudgepadStyleEditor #alignmentTwo{
-  background-image : url(/nudgepad/images/center_lt.png);
+  background-image : url(/nudgepad/public/images/center_lt.png);
 }
 
 #nudgepadStyleEditor #alignmentThree{
-  background-image : url(/nudgepad/images/right_lt.png);
+  background-image : url(/nudgepad/public/images/right_lt.png);
 }
 
 #nudgepadStyleEditor #fontFamily {
@@ -1335,7 +1335,7 @@ License: MIT
   border-radius: 3px;
   margin-right: 10px;
   border: none;
-  background-image: url(/nudgepad/images/drop_trans.png);
+  background-image: url(/nudgepad/public/images/drop_trans.png);
   background-position: 120px center;
 }
 
@@ -1391,7 +1391,7 @@ License: MIT
 }
 
 #nudgepadStyleEditor .transparentButton{
-  background-image : url(/nudgepad/images/invisible.png);
+  background-image : url(/nudgepad/public/images/invisible.png);
   background-position: center;
   background-repeat: no-repeat;
 }
@@ -1568,7 +1568,7 @@ textarea.nudgepad, input.nudgepad, #nudgepadEditorConsole {
   color: #555;
   height: 40px;
   line-height: 40px;
-  background-image: url(/nudgepad/images/document.png);
+  background-image: url(/nudgepad/public/images/document.png);
   text-indent: 25px;
   background-position: left center;
   background-repeat: no-repeat;
@@ -1578,7 +1578,7 @@ textarea.nudgepad, input.nudgepad, #nudgepadEditorConsole {
   height: 40px;
   line-height: 40px;
   color: #1a86d6;
-  background-image: url(/nudgepad/images/folder2.png);
+  background-image: url(/nudgepad/public/images/folder2.png);
   text-indent: 25px;
   background-position: left center;
   background-repeat: no-repeat;
@@ -1839,13 +1839,13 @@ td {
 }
 
 .nudgepadFullScreenAppBody .selectedPlan {
-   background-image: url(/nudgepad/images/checkbox.png);
+   background-image: url(/nudgepad/public/images/checkbox.png);
    background-repeat: no-repeat;
    text-indent: 30px;
 }
 
 .nudgepadFullScreenAppBody .unselectedPlan {
-   background-image: url(/nudgepad/images/unchecked.png);
+   background-image: url(/nudgepad/public/images/unchecked.png);
    background-repeat: no-repeat;
    text-indent: 30px;
    text-decoration: none;

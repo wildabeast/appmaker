@@ -99,14 +99,14 @@ nudgepad.styleEditor = function (scrap) {
    styleEditorContainer.append(colorPicker)
    
    // Duplicate
-   var duplicate = $('<div class="editorButton"><img src="/nudgepad/images/dup_lt.png"></div>')
+   var duplicate = $('<div class="editorButton"><img src="/nudgepad/public/images/dup_lt.png"></div>')
    duplicate.on("click", function(){
      nudgepad.stage.selection.duplicate();
    })
    styleEditorContainer.append(duplicate)
    
    // Lock tool
-   var lock = $('<div class="editorButton"><img src="/nudgepad/images/lock_lt.png"></div>')
+   var lock = $('<div class="editorButton"><img src="/nudgepad/public/images/lock_lt.png"></div>')
    lock.on('tap', function () {
      nudgepad.stage.selection.patch('locked true')
      save_button.trigger('click')
@@ -170,7 +170,7 @@ nudgepad.styleEditor = function (scrap) {
    styleEditorContainer.append(linkOptions)
 
    // Link tool
-   var link = $('<div class="editorButton"><img src="/nudgepad/images/link_lt.png"></div>')
+   var link = $('<div class="editorButton"><img src="/nudgepad/public/images/link_lt.png"></div>')
    link.on('tap', function () {
      linkOptions.css({
        'left' : $(this).position().left,
@@ -182,7 +182,7 @@ nudgepad.styleEditor = function (scrap) {
    styleEditorContainer.append(link)
    
    // Moveup tool
-   var moveUp = $('<div class="editorButton"><img src="/nudgepad/images/up_lt.png" title="Increase z-index"></div>')
+   var moveUp = $('<div class="editorButton"><img src="/nudgepad/public/images/up_lt.png" title="Increase z-index"></div>')
    moveUp.on('tap', function () {
      $('.selection').each(function () {
         $(this).scrap().moveUp()  
@@ -193,7 +193,7 @@ nudgepad.styleEditor = function (scrap) {
    styleEditorContainer.append(moveUp)
    
    // Movedown tool
-   var moveDown = $('<div class="editorButton"><img src="/nudgepad/images/down_lt.png" title="Decrease z-index"></div>')
+   var moveDown = $('<div class="editorButton"><img src="/nudgepad/public/images/down_lt.png" title="Decrease z-index"></div>')
    moveDown.on('tap', function () {
      $('.selection').each(function () {
        $(this).scrap().moveDown()  
@@ -456,7 +456,7 @@ nudgepad.styleEditor = function (scrap) {
   textEditorContainer.append(buttonFontSize)
   
   // Button - Auto Resize
-  var buttonResize = $('<div id="resize" class="toolButton" title="Auto Resize"><img src="/nudgepad/images/contract.png"></div>')
+  var buttonResize = $('<div id="resize" class="toolButton" title="Auto Resize"><img src="/nudgepad/public/images/contract.png"></div>')
   buttonResize.on('click', function () {
     nudgepad.stage.selection.cssPreview({
     "width" : "auto",
@@ -481,7 +481,7 @@ nudgepad.styleEditor = function (scrap) {
   columnLeftText.append(headerAlignment)
   
   // Button - Alignment
-  var buttonAlignment1 = $('<div class="toolButton toolButtonOne"><img src="/nudgepad/images/left_lt.png"></div>')
+  var buttonAlignment1 = $('<div class="toolButton toolButtonOne"><img src="/nudgepad/public/images/left_lt.png"></div>')
   buttonAlignment1.on('click', function () {
     nudgepad.stage.selection.cssPreview('text-align left')
     nudgepad.stage.commit()
@@ -491,7 +491,7 @@ nudgepad.styleEditor = function (scrap) {
   columnLeftText.append(buttonAlignment1)
   
   // Button - Alignment
-  var buttonAlignment2 = $('<div class="toolButton toolButtonTwo"><img src="/nudgepad/images/center_lt.png"></div>')
+  var buttonAlignment2 = $('<div class="toolButton toolButtonTwo"><img src="/nudgepad/public/images/center_lt.png"></div>')
   buttonAlignment2.on('click', function () {
     nudgepad.stage.selection.cssPreview('text-align center')
     nudgepad.stage.commit()
@@ -501,7 +501,7 @@ nudgepad.styleEditor = function (scrap) {
   columnLeftText.append(buttonAlignment2)
   
   // Button - Alignment
-  var buttonAlignment3 = $('<div class="toolButton toolButtonTwo"><img src="/nudgepad/images/right_lt.png"></div>')
+  var buttonAlignment3 = $('<div class="toolButton toolButtonTwo"><img src="/nudgepad/public/images/right_lt.png"></div>')
   buttonAlignment3.on('click', function () {
     nudgepad.stage.selection.cssPreview('text-align right')
     nudgepad.stage.commit()
@@ -511,7 +511,7 @@ nudgepad.styleEditor = function (scrap) {
   columnLeftText.append(buttonAlignment3)
   
   // Button - Alignment
-  var buttonAlignment4 = $('<div class="toolButton toolButtonThree"><img src="/nudgepad/images/justify_lt.png"></div>')
+  var buttonAlignment4 = $('<div class="toolButton toolButtonThree"><img src="/nudgepad/public/images/justify_lt.png"></div>')
   buttonAlignment4.on('click', function () {
     nudgepad.stage.selection.cssPreview('text-align justify')
     nudgepad.stage.commit()
@@ -767,7 +767,7 @@ nudgepad.styleEditor = function (scrap) {
   });
   $('.colorFont .sp-replacer').addClass('fontColorButton')
   $('.colorFont .sp-preview').addClass('fontColorLine')
-  $('.colorFont .sp-replacer').append('<img src="/nudgepad/images/letter.png">')
+  $('.colorFont .sp-replacer').append('<img src="/nudgepad/public/images/letter.png">')
   $('.colorBorder .sp-replacer').addClass('borderColorButton')
   $('.colorBorder .sp-preview').addClass('borderColorLine')
   $('.colorBackground .sp-replacer').addClass('backgroundColorButton')

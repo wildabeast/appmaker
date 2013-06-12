@@ -9,7 +9,7 @@ head
    height 1000px
 block17
  tag img
- src /nudgepad/images/firstworld.jpg
+ src /nudgepad/public/images/firstworld.jpg
  style
   left 0px
   top 0px

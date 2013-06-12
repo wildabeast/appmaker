@@ -3,7 +3,7 @@ nudgepad.on('main', function () {
   var insertDroppables = function (droppables) {
     var droppablesInsert = ''
       for (var i in droppables) {
-        droppablesInsert += '<div class="droppableImg"><img src="/nudgepad/images/droppables/'+ droppables[i] +'.png" title="'+ droppables[i] +'"></div>'
+        droppablesInsert += '<div class="droppableImg"><img src="/nudgepad/public/images/droppables/'+ droppables[i] +'.png" title="'+ droppables[i] +'"></div>'
       }
 
       var droppablesListItems = $('<div class="droppablesList">'+ droppablesInsert +'</div>')

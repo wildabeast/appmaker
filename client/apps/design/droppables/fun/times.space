@@ -9,7 +9,7 @@ head
  old_style 
   @font-face {
     font-family: 'OldLondon';
-    src: url('/nudgepad/fonts/OldLondon.ttf');
+    src: url('/nudgepad/public/fonts/OldLondon.ttf');
     font-weight: normal;
     font-style: normal;
   }
@@ -48,7 +48,7 @@ block1
  content The Nudgepad Times
 block17
  tag img
- src /nudgepad/images/pic.jpg
+ src /nudgepad/public/images/pic.jpg
  style
   left 259px
   top 202px

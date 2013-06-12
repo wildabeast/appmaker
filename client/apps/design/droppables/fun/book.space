@@ -125,7 +125,7 @@ block2
   z-index 2
 block17
  tag img
- src /nudgepad/images/obama.jpg
+ src /nudgepad/public/images/obama.jpg
  style
   left 290px
   top 154px
@@ -133,7 +133,7 @@ block17
   height auto
 block18
  tag img
- src /nudgepad/images/obama_small.jpg
+ src /nudgepad/public/images/obama_small.jpg
  style
   left 222px
   top 132px

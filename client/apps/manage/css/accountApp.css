@@ -114,13 +114,13 @@
 }
 
 .nudgepadFullScreenAppBody .selectedPlan {
-   background-image: url(/nudgepad/images/checkbox.png);
+   background-image: url(/nudgepad/public/images/checkbox.png);
    background-repeat: no-repeat;
    text-indent: 30px;
 }
 
 .nudgepadFullScreenAppBody .unselectedPlan {
-   background-image: url(/nudgepad/images/unchecked.png);
+   background-image: url(/nudgepad/public/images/unchecked.png);
    background-repeat: no-repeat;
    text-indent: 30px;
    text-decoration: none;
