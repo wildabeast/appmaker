@@ -11,7 +11,7 @@ cd $systemPath
 source paths.sh
 source isMac.sh
 source fixPermissions.sh
-source install.sh
+source createFolders.sh
 
 # get all sites 1 per line filter out hidden dirs
 sites="$(ls $sitesPath)"
