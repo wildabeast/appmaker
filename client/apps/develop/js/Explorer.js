@@ -31,7 +31,7 @@ nudgepad.explorer.getSite = function (callback) {
     site = new Space(space)
     var online = site.get('collage').keys.length + 1
     var title = nudgepad.domain + '. ' + online + ' user' + (online > 1 ? 's' : '') + ' online.'
-    blinker.default = title
+    Blinker.default = title
     document.title = title
     callback()
   })

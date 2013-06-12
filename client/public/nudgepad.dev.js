@@ -308,29 +308,29 @@ $.topDiv = function (selector, x, y) {
   })
   return match
 }
-var blinker = {}
-blinker.default = 'Nudgepad'
-blinker.blinking = blinker.default
-blinker.interval = null
-blinker.change = function (title) {
-  blinker.blinking = title
+var Blinker = {}
+Blinker['default'] = 'Nudgepad'
+Blinker.blinking = Blinker.default
+Blinker.interval = null
+Blinker.change = function (title) {
+  Blinker.blinking = title
 }
-blinker.blink = function () {
+Blinker.blink = function () {
   if (document.hasFocus())
-    return blinker.stop()
-  document.title = (document.title == blinker.default ? blinker.blinking : blinker.default)
+    return Blinker.stop()
+  document.title = (document.title == Blinker.default ? Blinker.blinking : Blinker.default)
 }
-blinker.start = function () {
-  clearInterval(blinker.interval)
-  blinker.blinking = blinker.default
-  blinker.interval = setInterval(blinker.blink, 2000)
+Blinker.start = function () {
+  clearInterval(Blinker.interval)
+  Blinker.blinking = Blinker.default
+  Blinker.interval = setInterval(Blinker.blink, 2000)
 }
-blinker.stop = function () {
-  clearInterval(blinker.interval)
-  document.title = blinker.blinking = blinker.default
+Blinker.stop = function () {
+  clearInterval(Blinker.interval)
+  document.title = Blinker.blinking = Blinker.default
 }
-$(window).on('blur', blinker.start)
-$(window).on('focus', blinker.stop)
+$(window).on('blur', Blinker.start)
+$(window).on('focus', Blinker.stop)
 
 // Spectrum Colorpicker v1.0.9
 // https://github.com/bgrins/spectrum
@@ -10236,7 +10236,7 @@ nudgepad.iosMain = function () {
 }
 ;nudgepad.notifyTimeout = false
 nudgepad.notify = function (message, time) {
-  blinker.change(message)
+  Blinker.change(message)
   clearTimeout(nudgepad.notifyTimeout)
   $('#nudgepadNotify').html(message)
   nudgepad.popup.open('#nudgepadNotify')
@@ -15035,7 +15035,7 @@ nudgepad.explorer.getSite = function (callback) {
     site = new Space(space)
     var online = site.get('collage').keys.length + 1
     var title = nudgepad.domain + '. ' + online + ' user' + (online > 1 ? 's' : '') + ' online.'
-    blinker.default = title
+    Blinker.default = title
     document.title = title
     callback()
   })

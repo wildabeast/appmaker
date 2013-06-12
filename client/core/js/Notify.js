@@ -1,6 +1,6 @@
 nudgepad.notifyTimeout = false
 nudgepad.notify = function (message, time) {
-  blinker.change(message)
+  Blinker.change(message)
   clearTimeout(nudgepad.notifyTimeout)
   $('#nudgepadNotify').html(message)
   nudgepad.popup.open('#nudgepadNotify')
