@@ -1,5 +1,5 @@
-build:
-	node core/bash/build.js
+all:
+	node core/build.js
 
 min:
 	java -jar ~/compiler.jar --js=public/nudgepad.dev.js --js_output_file=public/nudgepad.min.js --language_in=ECMASCRIPT5
@@ -20,4 +20,4 @@ scraps:
 	cp ~/scraps/compiler_workaround.js public/js/compiler_workaround.js
 
 
-.PHONY: build
+.PHONY: min

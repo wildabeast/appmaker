@@ -21,6 +21,8 @@ table, , tbody, tfoot, thead, tr, th, td {
 :focus {
   outline: 0;
 }
+
+
 html {
   height: 100%;
   width: 100%;
@@ -36,487 +38,33 @@ body {
   height: 100%;
 }
 
-.nudgepadFullScreenApp .appNav {
-   width: 100%;
-   background-color: #222;
+@font-face {
+  font-family: 'Titillium Web';
+  font-style: normal;
+  font-weight: 300;
+  src: local('Titillium WebLight'), local('TitilliumWeb-Light'), url(http://themes.googleusercontent.com/static/fonts/titilliumweb/v1/anMUvcNT0H1YN4FII8wpr1uKlGE8-OjkUKWan_M3D6s.woff) format('woff');
+}
+@font-face {
+  font-family: 'Titillium Web';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Titillium Web'), local('TitilliumWeb-Regular'), url(http://themes.googleusercontent.com/static/fonts/titilliumweb/v1/7XUFZ5tgS-tD6QamInJTcZ_o9VAbKgK36i-4snuAuCM.woff) format('woff');
+}
+@font-face {
+  font-family: 'Titillium Web';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Titillium WebBold'), local('TitilliumWeb-Bold'), url(http://themes.googleusercontent.com/static/fonts/titilliumweb/v1/anMUvcNT0H1YN4FII8wpr_5rZpfU3XI-FvUPGDRT0xY.woff) format('woff');
 }
 
-.nudgepadFullScreenApp .appNavContainer {
-   padding: 10px;
-}
-
-.nudgepadFullScreenApp .squareButton { 
-   width: 40px;
-   height: 40px;
-   text-align: center;
-   cursor: pointer;
-   background-color: #444;
-}
-
-.nudgepadFullScreenApp .squareButton:hover { 
-  background-color: #333;
-}
-
-.nudgepadFullScreenApp .squareButton:active { 
-  background-color: #2a2a2a;
-}
-
-.nudgepadFullScreenApp #logout {
-   line-height: 40px;
-   color: #fff;
-   text-decoration: none;
-   width: 100px;
-   float: right;
-   margin-left: 10px;
-}
-
-.nudgepadFullScreenApp .squareButton img {
-   padding-top: 12px;
-}
-
-.nudgepadFullScreenApp #menuBack {
-   font-size: 15px;
-   float: left;
-   background-repeat: no-repeat;
-   background-position: 10px center;
-   width: 70px;
-   line-height: 40px;
-   color: #fff;
-}
-
-.nudgepadFullScreenApp .secondaryButton {
-   background-color: #64b81f;
-   height: 40px;
-   width: 100px;
-   text-align: center;
-   float: right;
-   line-height: 40px;
-   color: #fff;
-   font-size: 15px;
-   cursor: pointer;
-   text-decoration: none;
-}
-
-.nudgepadFullScreenApp .secondaryButton:hover { 
-  background-color: #529919;
-}
-
-.nudgepadFullScreenApp .secondaryButton:active { 
-  background-color: #427a14;
-}
-
-.nudgepadFullScreenAppBody .sectionLabel {
-   font-size: 36px;
-   margin-top: 60px;
-   border-bottom: 3px solid #ccc;
-   padding-bottom: 5px;
-   margin-bottom: 20px;
-}
-
-.nudgepadFullScreenAppBody .formLabel {
-   font-size: 18px;
-   margin-top: 20px;
-}
-
-.nudgepadFullScreenAppBody #email {
-  width: 300px;
-  font-size: 15px;
-  padding: 10px;
-  margin-top: 10px;
-  border: 1px solid #ccc;
-}
-
-.nudgepadFullScreenAppBody #updateButton {
-  background-color: #1a86d6;
-  height: 40px;
-  width: 100px;
-  color: #fff;
-  font-size : 15px;
-  margin-top: 10px;
-  text-align: center;
-  cursor : pointer;
-  line-height: 40px;
-}
-
-.nudgepadFullScreenAppBody .plan {
-   margin-top: 20px;
-   font-size: 18px;
-}
-
-.nudgepadFullScreenAppBody .plan a {
-   text-decoration: none;
-}
-
-.nudgepadFullScreenAppBody .planDescription {
-   color: #666;
-}
-
-.nudgepadFullScreenAppBody .selectedPlan {
-   background-image: url(/nudgepad/images/checkbox.png);
-   background-repeat: no-repeat;
-   text-indent: 30px;
-}
-
-.nudgepadFullScreenAppBody .unselectedPlan {
-   background-image: url(/nudgepad/images/unchecked.png);
-   background-repeat: no-repeat;
-   text-indent: 30px;
-   text-decoration: none;
-}/* we do this purely to force hardware acceleration to get around the flicker
-http://davidwalsh.name/translate3d
 .nudgepad {
-  -webkit-font-smoothing: antialiased;
-}
-#nudgepadPublishButton {
-  -webkit-transform: translate3d(0, 0, 0);
-}
-
-*/
-#postsColumn {
-   float: left;
-   width: 25%;
-}
-
-#composeColumn {
-   float: left;
-   width: 75%;
-}
-
-#postsContent {
-   padding: 40px 0px;
-}
-
-#postsTitle {
-   margin-bottom: 20px;
-   font-size: 18px;
-}
-
-#nudgepadBlogApp div #posts {
-  cursor : pointer;
-  text-align : left;
-}
-#nudgepadBlogApp #title {
-  width : 100%;
-  text-indent : 10px;
-  padding : 0px;
-  height : 50px ;
-  line-height : 20px;
-  font-size : 20px;
-  border : 0px;
-  border-bottom : 1px solid #ccc;
-  margin-top: 40px;
-}
-#nudgepadBlogApp div #permalink {
-  left : 0px;
-  top : 629px;
-  font-size : 13px;
-  height : 1px;
-  line-height : 30px;
-  cursor : pointer;
-  color : #3D86D1;
-  width : 1px;
-  text-overflow : ellipsis;
-}
-
-#nudgepadBlogApp #content {
-  width : 100%;
-  font-size : 16px;
-  resize : none;
-  height : 400px;
-  border : none;
-  padding : 20px 10px;
-}
-#nudgepadBlogApp #advancedToggle {
-float: right;
-margin-left: 10px;
-position: relative;
-}
-#nudgepadBlogApp div #advanced {
-  display : none;
-  right : 0px;
-  top : 40px;
-  width : 260px;
-  font-size : 16px;
-  background-color: #444;
-  z-index: 4;
-  color: #ccc;
-  resize : none;
-  border : none;
-  padding : 20px 10px;
-  position : absolute;
-}
-
-#nudgepadBlogApp #deleteButton {
-   background-color: #555;
-   height: 40px;
-   width: 100px;
-   color: #fff;
-   font-size : 15px;
-   margin-top: 10px;
-   float: right;
-   text-align: center;
-   cursor : pointer;
-   line-height: 40px;
+  font-family: 'Titillium Web';
 }
 
 
-#nudgepadBlogApp #publishButton {
-   background-color: #1a86d6;
-   height: 40px;
-   width: 100px;
-   color: #fff;
-   font-size : 15px;
-   margin-top: 10px;
-   margin-left: 10px;
-   float: right;
-   text-align: center;
-   cursor : pointer;
-   line-height: 40px;
-}
-#nudgepadCodePanel {
-  position: fixed;
-  z-index: 5000;
-  left: 0;
-  top: 0;
-  padding : 3px;
-  font-family : monospace;
-  font-size : 14px;
-  outline : 0;
-  width: 40%;
-  bottom: 49px;
-  margin: 0;
-  background-color : #1e1e1e;
-  color: #b1b1b1;
-  border: 0;
-  display: none;
-  -webkit-user-select: auto;
-  -moz-user-select: text;
-  user-select: auto;
-}
-
-#nudgepadConnectionStatus {
-  right: 10px;
-  top: 10px;
-  max-width: 500px;
-  width: 100%;
-  height: 20px;
-  font-size: 16px;
-  color: #888888;
-  position: fixed;
-  z-index: 4001;
-  text-align: right;
-}
-#nudgepadEditorConsole {
-  padding : 3px;
-  font-family : monospace;
-  font-size : 16px;
-  outline : 0;
-  top : 50px;
-  bottom : 150px;
-  position : fixed;
-  left : 50px;
-  right : 50px;
-  z-index : 1010;
-  background-color : rgba(255,255,255,0.9);
-  box-shadow : 0px 1px 3px rgba(0,0,0,.5);
-}
-
-#nudgepadEditorConsole {
-  overflow-y: scroll;
-}
-
-#nudgepadEditorCheckbox {
-  left : 675px;
-  bottom : 101px;
-  position : fixed;
-  z-index : 1010;
-  line-height: 40px;
-}
-
-#nudgepadEditorLabel {
-  left : 700px;
-  height : 40px;
-  bottom : 90px;
-  line-height : 40px;
-  font-size : 20px;
-  position : fixed;
-  z-index : 1010;
-}
-
-#nudgepadEditorInput {
-  width : 560px;
-  height : 40px;
-  bottom : 90px;
-  left : 90px;
-  line-height : 40px;
-  font-size : 20px;
-  position : fixed;
-  border: 1px solid #ddd;
-  z-index : 1010;
-}
 
 
-.nudgepadFullScreenApp .developAppButton {
-   background-color: #333;
-   height: 40px;
-   margin-left: 10px;
-   width: 100px;
-   text-decoration: none;
-   text-align: center;
-   float: right;
-   line-height: 40px;
-   color: #fff;
-   font-size: 15px;
-   cursor: pointer;
-}
 
-.nudgepadFullScreenApp .developAppButton:hover {
-  background-color: #000;
-}
-
-.nudgepadFullScreenApp #devToggle {
-   margin-top: 40px;
-}
-
-.nudgepadFullScreenApp .devToggleOption {
-   float: left;
-   width: 80px;
-   text-align: center;
-   background-color: #f8f8f8;
-   height: 40px;
-   line-height: 40px;
-}
-
-.nudgepadFullScreenApp .devSelect {
-   background-color: #555;
-   color: #fff;
-}
-
-.nudgepadFullScreenApp #explorerHolder {
-   cursor: pointer;
-}
-
-.nudgepadFullScreenApp #explorerPath {
-  font-size : 15px;
-  color : #333;
-  text-align : left;
-  margin-top: 40px;
-  margin-bottom: 20px;
-  cursor: pointer;
-}
-
-.nudgepadFullScreenApp .explorerHeader {
-  font-size : 24px;
-}
-
-.explorerEdit {
-  color: #555;
-  height: 40px;
-  line-height: 40px;
-  background-image: url(/nudgepad/images/document.png);
-  text-indent: 25px;
-  background-position: left center;
-  background-repeat: no-repeat;
-}
-
-.explorerFolderName {
-  height: 40px;
-  line-height: 40px;
-  color: #1a86d6;
-  background-image: url(/nudgepad/images/folder2.png);
-  text-indent: 25px;
-  background-position: left center;
-  background-repeat: no-repeat;
-}
-
-.devToggleOption {
-   cursor: pointer;
-}
-
-#logHolder {
-   border: none;
-   font-size: 15px;
-}
-
-#infoContent {
-   display: none;
-}
-
-#logsContent {
-   display: none;
-}
-
-.nudgepad.selectable {
-  -webkit-user-select: auto;
-  -moz-user-select: text;
-  user-select: auto;
-}
-
-
-table {
-    border-collapse: collapse;
-}
-
-td {
-   width: 300px;
-   
-.explorerFolderName {
-      width: 300px;
-}
-
-}
-
-#nudgepadExplorer .file {
-  
-}
-
-.explorerRename, .explorerRemove {
-  color: #eee;
-}
-
-#nudgepadExplorer tr td.explorerEdit:hover,
-#nudgepadExplorer tr td.explorerFolderName:hover,
-#nudgepadExplorer tr td.explorerRename:hover,
-#nudgepadExplorer tr td.explorerRemove:hover,
-#nudgepadExplorer tr td.explorerCreate:hover {
-  text-decoration: underline;
-  cursor: pointer;
-  color: #1a86d6;
-}
-
-#nudgepadExplorer tr:hover td.explorerRename, #nudgepadExplorer tr:hover td.explorerRemove {
-  color: #1a86d6;
-}
-
-#nudgepadExplorer tr th {
-  color: #888888;
-}
-
-#nudgepadExplorer tr.explorerHeader {
-  border-bottom: 3px solid #555;
-}
-
-#nudgepadExplorer tr.explorerFolder {
-  border-bottom: 1px solid #ccc;
-}
-
-#nudgepadExplorer tr.explorerFile {
-  border-bottom: 1px solid #ccc;
-}#nudgepadDimensions {
-  display: none;
-  position: absolute;
-  top: 0;
-  left: 0;
-  text-align: left;
-  line-height: 130%;
-  font-size: 12px;
-  color: white;
-  background-color: rgb(0, 0, 0);
-  background-color: rgba(0, 0, 0, 0.6);
-  border-radius: 2px;
-  padding: 6px 10px 6px 10px;
-  z-index: 200;
-}
 /******* Text Prompt ******/
 
 #nudgepadEditorTextarea {
@@ -597,8 +145,6 @@ td {
 }
 
 
-
-
 #nudgepadError, #nudgepadJavascriptError, #nudgepadWorkerError  {
   left: 0;
   top: 0;
@@ -624,30 +170,22 @@ td {
 #nudgepadWorkerError {
   z-index: 2000;
 }
-@font-face {
-  font-family: 'Titillium Web';
-  font-style: normal;
-  font-weight: 300;
-  src: local('Titillium WebLight'), local('TitilliumWeb-Light'), url(http://themes.googleusercontent.com/static/fonts/titilliumweb/v1/anMUvcNT0H1YN4FII8wpr1uKlGE8-OjkUKWan_M3D6s.woff) format('woff');
-}
-@font-face {
-  font-family: 'Titillium Web';
-  font-style: normal;
-  font-weight: 400;
-  src: local('Titillium Web'), local('TitilliumWeb-Regular'), url(http://themes.googleusercontent.com/static/fonts/titilliumweb/v1/7XUFZ5tgS-tD6QamInJTcZ_o9VAbKgK36i-4snuAuCM.woff) format('woff');
-}
-@font-face {
-  font-family: 'Titillium Web';
-  font-style: normal;
-  font-weight: 700;
-  src: local('Titillium WebBold'), local('TitilliumWeb-Bold'), url(http://themes.googleusercontent.com/static/fonts/titilliumweb/v1/anMUvcNT0H1YN4FII8wpr_5rZpfU3XI-FvUPGDRT0xY.woff) format('woff');
-}
-
-.nudgepad {
-  font-family: 'Titillium Web';
-}
 
 
+
+
+#nudgepadConnectionStatus {
+  right: 10px;
+  top: 10px;
+  max-width: 500px;
+  width: 100%;
+  height: 20px;
+  font-size: 16px;
+  color: #888888;
+  position: fixed;
+  z-index: 4001;
+  text-align: right;
+}
 
 .nudgepadFullScreenApp {
   position: absolute;
@@ -661,6 +199,84 @@ td {
   overflow-y: scroll;
   overflow-x: hidden;
   font-family: 'Titillium Web';
+}
+
+#nudgepadLoadingScreen {
+  position: fixed;  
+  width: 100%;
+  top: 0;
+  left: 0;
+  padding-top: 20%;
+  height: 100%;
+  text-align: center;
+  font-size: 18px;
+  color: #888;
+  background-color: white;
+  z-index: 2000;
+}
+
+#nudgepadNotify {
+  background: #11a4ed;
+  color: white;
+  top: -2;
+  z-index: 4000;
+  width: auto;
+  position: fixed;
+  padding: 8px;
+  box-shadow: 0px 1px 3px rgba(0,0,0,.6);
+  border-radius: 2px;
+  display: none;
+  left: 45%;
+}
+
+#nudgepadSurveysApp #entriesCount {
+  color: #777;
+}
+/* we do this purely to force hardware acceleration to get around the flicker
+http://davidwalsh.name/translate3d
+.nudgepad {
+  -webkit-font-smoothing: antialiased;
+}
+#nudgepadPublishButton {
+  -webkit-transform: translate3d(0, 0, 0);
+}
+
+*/
+#nudgepadCodePanel {
+  position: fixed;
+  z-index: 5000;
+  left: 0;
+  top: 0;
+  padding : 3px;
+  font-family : monospace;
+  font-size : 14px;
+  outline : 0;
+  width: 40%;
+  bottom: 49px;
+  margin: 0;
+  background-color : #1e1e1e;
+  color: #b1b1b1;
+  border: 0;
+  display: none;
+  -webkit-user-select: auto;
+  -moz-user-select: text;
+  user-select: auto;
+}
+
+#nudgepadDimensions {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  text-align: left;
+  line-height: 130%;
+  font-size: 12px;
+  color: white;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.6);
+  border-radius: 2px;
+  padding: 6px 10px 6px 10px;
+  z-index: 200;
 }
 /** The scrap that is being snapped to*/
 .nudgepadSnapOrigin {
@@ -688,98 +304,7 @@ td {
 
 
 
-.clear {
-  clear: both;
-}
-
-.nudgepadFullScreenAppBody {
-  width : 94%;
-  max-width: 1000px;
-  position : relative;
-  margin : 0 auto;  
-}
-
-.colStandard {
-   width: 32%;
-   float: left;
-}
-
-.marStandard {
-   margin-right: 2%;
-}
-
-.appBlock {
-  cursor : pointer;
-  font-weight : 300;
-  margin-top: 20px;
-  color: #fff;
-}
-
-.lastApp{
-   margin-right: 0px;
-}
-
-.topBlock {
-  padding: 80px 20px;
-   font-size: 3.375em;
-}
-
-.subBlock {
-  font-size: 0.875em;
-  background: rgba(0,0,0,.2);
-  padding: 20px;
-  font-weight: 400;
-}
-
-#accountBlock {
-  background-color : #ABC1C7;
-}
-
-#designBlock {
-  background-color : #1a86d6;
-}
-
-#developBlock {
-  background-color : #244170;
-}
-
-#formsBlock {
-  background-color : #472936;
-}
-
-#writeBlock {
-  background-color : #edc811;
-}
-
-#statsBlock {
-  background-color : #ed2a11;
-}
-#nudgepadLoadingScreen {
-  position: fixed;  
-  width: 100%;
-  top: 0;
-  left: 0;
-  padding-top: 20%;
-  height: 100%;
-  text-align: center;
-  font-size: 18px;
-  color: #888;
-  background-color: white;
-  z-index: 2000;
-}
-#nudgepadNotify {
-  background: #11a4ed;
-  color: white;
-  top: -2;
-  z-index: 4000;
-  width: auto;
-  position: fixed;
-  padding: 8px;
-  box-shadow: 0px 1px 3px rgba(0,0,0,.6);
-  border-radius: 2px;
-  display: none;
-  left: 45%;
-}/* remember to define focus styles! */
+/* remember to define focus styles! */
 :focus {
 	outline: 0;
 }
@@ -1086,106 +611,6 @@ td {
 }
 ::-webkit-scrollbar { 
     display: none; 
-}
-#nudgepadSelectBox {
-  z-index: 100;
-  border: 1px solid #0c79cc;
-  position: absolute; 
-}
-#nudgepadSignupFormModal {
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-  margin: 0 auto;
-  position: fixed;
-  z-index: 10000;
-  background: rgba(0,0,0,0.7);
-  display: none;
-  font-family : 'Titillium Web';
-}
-
-#signupContainer {
-   margin: 100px auto 0px auto;
-   width: 640px;
-   background-color: #eee;
-}
-
-#signupContent {
-   padding: 40px;
-}
-
-#nudgepadSignupFormPrototypeLive {
-  font-size : 24px;
-  line-height : 140%;
-  color : #222;
-  float: left;
-}
-
-#nudgepadSignupFormDomain {
-  width : 250px;
-  font-size : 24px;
-  line-height : 140%;
-  color : #1a86d6;
-  text-decoration: none;
-  float: left;
-  margin-left: 10px;
-}
-
-#nudgepadSignupFormEmail {
-  height : 50px;
-  width : 424px;
-  padding : 0px;
-  font-size : 14px;
-  text-indent : 10px;
-  color : #555;
-  border : 1px solid #ccc;
-  -webkit-appearance : normal;
-  float: left;
-  margin-top: 20px;
-}
-#nudgepadSignupFormButton {
-  background-color : #1a86d6;
-  height : 50px;
-  width : 80px;
-  cursor : pointer;
-  font-size : 18px;
-  line-height : 50px;
-  text-align : center;
-  padding : 0px 15px;
-  color : #fff;
-  float: left;
-  margin-top: 20px;
-  margin-left: 10px;
-}
-#nudgepadSignupFormButton:hover {
-  background-color : #3575b5;
-}
-#nudgepadSignupFormButton:active {
-  background-color : #2c659e;
-}
-#nudgepadSignupFormInstructions {
-  font-size : 18px;
-  line-height : 140%;
-  color : rgb(119, 119, 119);
-  margin-top: 20px;
-}
-#nudgepadSignupFormSkip {
-  font-size : 14px;
-  line-height : 140%;
-  color : #1a86d6;
-  cursor: pointer;
-  margin-top: 20px;
-  text-decoration: none;
-  font-weight: 400;
-}
-
-#nudgepadSignupFormSkip:hover {
-     text-decoration: underline;
-}
-
-#nudgepadSignupFormDomain:hover {
-  text-decoration: underline;
 }
 /***
 Spectrum Colorpicker v1.0.9
@@ -1690,7 +1115,6 @@ License: MIT
 }
 
 
-
 #nudgepadStyleEditor {
   position: absolute;
   width: auto;
@@ -2020,16 +1444,7 @@ License: MIT
 
 #nudgepadStyleEditorMoveUp:active, #nudgepadStyleEditorMoveDown:active, #nudgepadStyleEditorLock:active, #nudgepadStyleEditorLink:active{
   opacity: 1;
-}#nudgepadSurveysApp #entriesCount {
-  color: #777;
-}
-.nudgepad_texture img {
-  width: 60px;
-  height: 60px;
-  border-radius: 4px;
-  box-shadow: 0px 1px 3px rgba(0,0,0,.6);
-}
-body {
+}body {
   -webkit-user-select: none;
   -moz-user-select: -moz-none;
   user-select: none;
@@ -2045,4 +1460,588 @@ textarea.nudgepad, input.nudgepad, #nudgepadEditorConsole {
   -webkit-user-select: auto;
   -moz-user-select: text;
   user-select: text;
+}
+#nudgepadEditorConsole {
+  padding : 3px;
+  font-family : monospace;
+  font-size : 16px;
+  outline : 0;
+  top : 50px;
+  bottom : 150px;
+  position : fixed;
+  left : 50px;
+  right : 50px;
+  z-index : 1010;
+  background-color : rgba(255,255,255,0.9);
+  box-shadow : 0px 1px 3px rgba(0,0,0,.5);
+}
+
+#nudgepadEditorConsole {
+  overflow-y: scroll;
+}
+
+#nudgepadEditorCheckbox {
+  left : 675px;
+  bottom : 101px;
+  position : fixed;
+  z-index : 1010;
+  line-height: 40px;
+}
+
+#nudgepadEditorLabel {
+  left : 700px;
+  height : 40px;
+  bottom : 90px;
+  line-height : 40px;
+  font-size : 20px;
+  position : fixed;
+  z-index : 1010;
+}
+
+#nudgepadEditorInput {
+  width : 560px;
+  height : 40px;
+  bottom : 90px;
+  left : 90px;
+  line-height : 40px;
+  font-size : 20px;
+  position : fixed;
+  border: 1px solid #ddd;
+  z-index : 1010;
+}
+
+
+.nudgepadFullScreenApp .developAppButton {
+   background-color: #333;
+   height: 40px;
+   margin-left: 10px;
+   width: 100px;
+   text-decoration: none;
+   text-align: center;
+   float: right;
+   line-height: 40px;
+   color: #fff;
+   font-size: 15px;
+   cursor: pointer;
+}
+
+.nudgepadFullScreenApp .developAppButton:hover {
+  background-color: #000;
+}
+
+.nudgepadFullScreenApp #devToggle {
+   margin-top: 40px;
+}
+
+.nudgepadFullScreenApp .devToggleOption {
+   float: left;
+   width: 80px;
+   text-align: center;
+   background-color: #f8f8f8;
+   height: 40px;
+   line-height: 40px;
+}
+
+.nudgepadFullScreenApp .devSelect {
+   background-color: #555;
+   color: #fff;
+}
+
+.nudgepadFullScreenApp #explorerHolder {
+   cursor: pointer;
+}
+
+.nudgepadFullScreenApp #explorerPath {
+  font-size : 15px;
+  color : #333;
+  text-align : left;
+  margin-top: 40px;
+  margin-bottom: 20px;
+  cursor: pointer;
+}
+
+.nudgepadFullScreenApp .explorerHeader {
+  font-size : 24px;
+}
+
+.explorerEdit {
+  color: #555;
+  height: 40px;
+  line-height: 40px;
+  background-image: url(/nudgepad/images/document.png);
+  text-indent: 25px;
+  background-position: left center;
+  background-repeat: no-repeat;
+}
+
+.explorerFolderName {
+  height: 40px;
+  line-height: 40px;
+  color: #1a86d6;
+  background-image: url(/nudgepad/images/folder2.png);
+  text-indent: 25px;
+  background-position: left center;
+  background-repeat: no-repeat;
+}
+
+.devToggleOption {
+   cursor: pointer;
+}
+
+#logHolder {
+   border: none;
+   font-size: 15px;
+}
+
+#infoContent {
+   display: none;
+}
+
+#logsContent {
+   display: none;
+}
+
+.nudgepad.selectable {
+  -webkit-user-select: auto;
+  -moz-user-select: text;
+  user-select: auto;
+}
+
+
+table {
+    border-collapse: collapse;
+}
+
+td {
+   width: 300px;
+   
+.explorerFolderName {
+      width: 300px;
+}
+
+}
+
+#nudgepadExplorer .file {
+  
+}
+
+.explorerRename, .explorerRemove {
+  color: #eee;
+}
+
+#nudgepadExplorer tr td.explorerEdit:hover,
+#nudgepadExplorer tr td.explorerFolderName:hover,
+#nudgepadExplorer tr td.explorerRename:hover,
+#nudgepadExplorer tr td.explorerRemove:hover,
+#nudgepadExplorer tr td.explorerCreate:hover {
+  text-decoration: underline;
+  cursor: pointer;
+  color: #1a86d6;
+}
+
+#nudgepadExplorer tr:hover td.explorerRename, #nudgepadExplorer tr:hover td.explorerRemove {
+  color: #1a86d6;
+}
+
+#nudgepadExplorer tr th {
+  color: #888888;
+}
+
+#nudgepadExplorer tr.explorerHeader {
+  border-bottom: 3px solid #555;
+}
+
+#nudgepadExplorer tr.explorerFolder {
+  border-bottom: 1px solid #ccc;
+}
+
+#nudgepadExplorer tr.explorerFile {
+  border-bottom: 1px solid #ccc;
+}.clear {
+  clear: both;
+}
+
+.nudgepadFullScreenAppBody {
+  width : 94%;
+  max-width: 1000px;
+  position : relative;
+  margin : 0 auto;  
+}
+
+.colStandard {
+   width: 32%;
+   float: left;
+}
+
+.marStandard {
+   margin-right: 2%;
+}
+
+.appBlock {
+  cursor : pointer;
+  font-weight : 300;
+  margin-top: 20px;
+  color: #fff;
+}
+
+.lastApp{
+   margin-right: 0px;
+}
+
+.topBlock {
+  padding: 80px 20px;
+   font-size: 3.375em;
+}
+
+.subBlock {
+  font-size: 0.875em;
+  background: rgba(0,0,0,.2);
+  padding: 20px;
+  font-weight: 400;
+}
+
+#accountBlock {
+  background-color : #ABC1C7;
+}
+
+#designBlock {
+  background-color : #1a86d6;
+}
+
+#developBlock {
+  background-color : #244170;
+}
+
+#formsBlock {
+  background-color : #472936;
+}
+
+#writeBlock {
+  background-color : #edc811;
+}
+
+#statsBlock {
+  background-color : #ed2a11;
+}
+.nudgepadFullScreenApp .appNav {
+   width: 100%;
+   background-color: #222;
+}
+
+.nudgepadFullScreenApp .appNavContainer {
+   padding: 10px;
+}
+
+.nudgepadFullScreenApp .squareButton { 
+   width: 40px;
+   height: 40px;
+   text-align: center;
+   cursor: pointer;
+   background-color: #444;
+}
+
+.nudgepadFullScreenApp .squareButton:hover { 
+  background-color: #333;
+}
+
+.nudgepadFullScreenApp .squareButton:active { 
+  background-color: #2a2a2a;
+}
+
+.nudgepadFullScreenApp #logout {
+   line-height: 40px;
+   color: #fff;
+   text-decoration: none;
+   width: 100px;
+   float: right;
+   margin-left: 10px;
+}
+
+.nudgepadFullScreenApp .squareButton img {
+   padding-top: 12px;
+}
+
+.nudgepadFullScreenApp #menuBack {
+   font-size: 15px;
+   float: left;
+   background-repeat: no-repeat;
+   background-position: 10px center;
+   width: 70px;
+   line-height: 40px;
+   color: #fff;
+}
+
+.nudgepadFullScreenApp .secondaryButton {
+   background-color: #64b81f;
+   height: 40px;
+   width: 100px;
+   text-align: center;
+   float: right;
+   line-height: 40px;
+   color: #fff;
+   font-size: 15px;
+   cursor: pointer;
+   text-decoration: none;
+}
+
+.nudgepadFullScreenApp .secondaryButton:hover { 
+  background-color: #529919;
+}
+
+.nudgepadFullScreenApp .secondaryButton:active { 
+  background-color: #427a14;
+}
+
+.nudgepadFullScreenAppBody .sectionLabel {
+   font-size: 36px;
+   margin-top: 60px;
+   border-bottom: 3px solid #ccc;
+   padding-bottom: 5px;
+   margin-bottom: 20px;
+}
+
+.nudgepadFullScreenAppBody .formLabel {
+   font-size: 18px;
+   margin-top: 20px;
+}
+
+.nudgepadFullScreenAppBody #email {
+  width: 300px;
+  font-size: 15px;
+  padding: 10px;
+  margin-top: 10px;
+  border: 1px solid #ccc;
+}
+
+.nudgepadFullScreenAppBody #updateButton {
+  background-color: #1a86d6;
+  height: 40px;
+  width: 100px;
+  color: #fff;
+  font-size : 15px;
+  margin-top: 10px;
+  text-align: center;
+  cursor : pointer;
+  line-height: 40px;
+}
+
+.nudgepadFullScreenAppBody .plan {
+   margin-top: 20px;
+   font-size: 18px;
+}
+
+.nudgepadFullScreenAppBody .plan a {
+   text-decoration: none;
+}
+
+.nudgepadFullScreenAppBody .planDescription {
+   color: #666;
+}
+
+.nudgepadFullScreenAppBody .selectedPlan {
+   background-image: url(/nudgepad/images/checkbox.png);
+   background-repeat: no-repeat;
+   text-indent: 30px;
+}
+
+.nudgepadFullScreenAppBody .unselectedPlan {
+   background-image: url(/nudgepad/images/unchecked.png);
+   background-repeat: no-repeat;
+   text-indent: 30px;
+   text-decoration: none;
+}#nudgepadSignupFormModal {
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  margin: 0 auto;
+  position: fixed;
+  z-index: 10000;
+  background: rgba(0,0,0,0.7);
+  display: none;
+  font-family : 'Titillium Web';
+}
+
+#signupContainer {
+   margin: 100px auto 0px auto;
+   width: 640px;
+   background-color: #eee;
+}
+
+#signupContent {
+   padding: 40px;
+}
+
+#nudgepadSignupFormPrototypeLive {
+  font-size : 24px;
+  line-height : 140%;
+  color : #222;
+  float: left;
+}
+
+#nudgepadSignupFormDomain {
+  width : 250px;
+  font-size : 24px;
+  line-height : 140%;
+  color : #1a86d6;
+  text-decoration: none;
+  float: left;
+  margin-left: 10px;
+}
+
+#nudgepadSignupFormEmail {
+  height : 50px;
+  width : 424px;
+  padding : 0px;
+  font-size : 14px;
+  text-indent : 10px;
+  color : #555;
+  border : 1px solid #ccc;
+  -webkit-appearance : normal;
+  float: left;
+  margin-top: 20px;
+}
+#nudgepadSignupFormButton {
+  background-color : #1a86d6;
+  height : 50px;
+  width : 80px;
+  cursor : pointer;
+  font-size : 18px;
+  line-height : 50px;
+  text-align : center;
+  padding : 0px 15px;
+  color : #fff;
+  float: left;
+  margin-top: 20px;
+  margin-left: 10px;
+}
+#nudgepadSignupFormButton:hover {
+  background-color : #3575b5;
+}
+#nudgepadSignupFormButton:active {
+  background-color : #2c659e;
+}
+#nudgepadSignupFormInstructions {
+  font-size : 18px;
+  line-height : 140%;
+  color : rgb(119, 119, 119);
+  margin-top: 20px;
+}
+#nudgepadSignupFormSkip {
+  font-size : 14px;
+  line-height : 140%;
+  color : #1a86d6;
+  cursor: pointer;
+  margin-top: 20px;
+  text-decoration: none;
+  font-weight: 400;
+}
+
+#nudgepadSignupFormSkip:hover {
+     text-decoration: underline;
+}
+
+#nudgepadSignupFormDomain:hover {
+  text-decoration: underline;
+}
+#postsColumn {
+   float: left;
+   width: 25%;
+}
+
+#composeColumn {
+   float: left;
+   width: 75%;
+}
+
+#postsContent {
+   padding: 40px 0px;
+}
+
+#postsTitle {
+   margin-bottom: 20px;
+   font-size: 18px;
+}
+
+#nudgepadBlogApp div #posts {
+  cursor : pointer;
+  text-align : left;
+}
+#nudgepadBlogApp #title {
+  width : 100%;
+  text-indent : 10px;
+  padding : 0px;
+  height : 50px ;
+  line-height : 20px;
+  font-size : 20px;
+  border : 0px;
+  border-bottom : 1px solid #ccc;
+  margin-top: 40px;
+}
+#nudgepadBlogApp div #permalink {
+  left : 0px;
+  top : 629px;
+  font-size : 13px;
+  height : 1px;
+  line-height : 30px;
+  cursor : pointer;
+  color : #3D86D1;
+  width : 1px;
+  text-overflow : ellipsis;
+}
+
+#nudgepadBlogApp #content {
+  width : 100%;
+  font-size : 16px;
+  resize : none;
+  height : 400px;
+  border : none;
+  padding : 20px 10px;
+}
+#nudgepadBlogApp #advancedToggle {
+float: right;
+margin-left: 10px;
+position: relative;
+}
+#nudgepadBlogApp div #advanced {
+  display : none;
+  right : 0px;
+  top : 40px;
+  width : 260px;
+  font-size : 16px;
+  background-color: #444;
+  z-index: 4;
+  color: #ccc;
+  resize : none;
+  border : none;
+  padding : 20px 10px;
+  position : absolute;
+}
+
+#nudgepadBlogApp #deleteButton {
+   background-color: #555;
+   height: 40px;
+   width: 100px;
+   color: #fff;
+   font-size : 15px;
+   margin-top: 10px;
+   float: right;
+   text-align: center;
+   cursor : pointer;
+   line-height: 40px;
+}
+
+
+#nudgepadBlogApp #publishButton {
+   background-color: #1a86d6;
+   height: 40px;
+   width: 100px;
+   color: #fff;
+   font-size : 15px;
+   margin-top: 10px;
+   margin-left: 10px;
+   float: right;
+   text-align: center;
+   cursor : pointer;
+   line-height: 40px;
 }
