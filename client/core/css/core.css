@@ -1,0 +1,230 @@
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, font, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+input, textarea,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, , tbody, tfoot, thead, tr, th, td {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+	font-weight: inherit;
+	font-style: inherit;
+	font-size: 100%;
+	font-family: inherit;
+	vertical-align: baseline;
+}
+
+:focus {
+  outline: 0;
+}
+
+
+html {
+  height: 100%;
+  width: 100%;
+  position: relative;
+}
+
+body {
+  margin: 0;
+  line-height: 1;
+  overflow: hidden;
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+@font-face {
+  font-family: 'Titillium Web';
+  font-style: normal;
+  font-weight: 300;
+  src: local('Titillium WebLight'), local('TitilliumWeb-Light'), url(http://themes.googleusercontent.com/static/fonts/titilliumweb/v1/anMUvcNT0H1YN4FII8wpr1uKlGE8-OjkUKWan_M3D6s.woff) format('woff');
+}
+@font-face {
+  font-family: 'Titillium Web';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Titillium Web'), local('TitilliumWeb-Regular'), url(http://themes.googleusercontent.com/static/fonts/titilliumweb/v1/7XUFZ5tgS-tD6QamInJTcZ_o9VAbKgK36i-4snuAuCM.woff) format('woff');
+}
+@font-face {
+  font-family: 'Titillium Web';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Titillium WebBold'), local('TitilliumWeb-Bold'), url(http://themes.googleusercontent.com/static/fonts/titilliumweb/v1/anMUvcNT0H1YN4FII8wpr_5rZpfU3XI-FvUPGDRT0xY.woff) format('woff');
+}
+
+.nudgepad {
+  font-family: 'Titillium Web';
+}
+
+
+
+
+
+/******* Text Prompt ******/
+
+#nudgepadEditorTextarea {
+  padding : 3px;
+  font-family : monospace;
+  font-size : 16px;
+  outline : 0;
+  top : 50px;
+  bottom : 150px;
+  position : fixed;
+  left : 50px;
+  right : 50px;
+  z-index : 1010;
+  background-color : rgba(255,255,255,0.9);
+  box-shadow : 0px 1px 3px rgba(0,0,0,.5);
+  -webkit-user-select: auto;
+  -moz-user-select: text;
+  user-select: auto;
+}
+
+#nudgepadEditorModalScreen {
+  width : 100%;
+  height : 100%;
+  top : 0;
+  position : fixed;
+  left : 0;
+  z-index : 1009;
+  background : rgba(0,0,0,.3);
+}
+
+#nudgepadEditorCancelButton, #nudgepadEditorSaveButton {
+  width : 90px;
+  height : 40px;
+  bottom : 90px;
+  right : 180px;
+  line-height : 40px;
+  border-radius : 4px;
+  font-weight : bold;
+  color: #FFF;
+  text-align : center;
+  font-size : 20px;
+  position : fixed;
+  z-index : 1010;
+  background : #4a4a4a;
+  cursor: pointer;
+}
+
+#nudgepadEditorSaveButton {
+  right : 70px;
+  background : #3d86d1;
+}
+
+#nudgepadEditorSaveButton:hover{
+  background-color: #3579bd;
+}
+
+#nudgepadEditorSaveButton:active{
+    background-color: #2c66a1;
+}
+
+#nudgepadEditorCancelButton:hover{
+    background-color: #444;
+}
+
+#nudgepadEditorCancelButton:active{
+     background-color: #222;
+}
+
+#nudgepadEditorButtonContainer {
+  height : 80px;
+  bottom : 70px;
+  right : 50px;
+  left : 50px;
+  position : fixed;
+  z-index : 1009;
+  background : #ECECEB;
+  box-shadow : 0px 1px 3px rgba(0,0,0,.5);
+}
+
+
+#nudgepadError, #nudgepadJavascriptError, #nudgepadWorkerError  {
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 30px;
+  font-size: 20px;
+  line-height: 30px;
+  padding: 10px;
+  background-color: #e79602;
+  color: white;
+  position: fixed;
+  overflow: hidden;
+  display: none;
+  z-index: 4001;
+}
+
+#nudgepadJavascriptError {
+  z-index: 4099;
+  overflow-y: scroll;
+  font-size: 12px;
+}
+
+#nudgepadWorkerError {
+  z-index: 2000;
+}
+
+
+
+
+#nudgepadConnectionStatus {
+  right: 10px;
+  top: 10px;
+  max-width: 500px;
+  width: 100%;
+  height: 20px;
+  font-size: 16px;
+  color: #888888;
+  position: fixed;
+  z-index: 4001;
+  text-align: right;
+}
+
+.nudgepadFullScreenApp {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  display: none;
+  width: 100%;
+  height: 100%;
+  background-color: #eaeaeb;
+  z-index: 1000;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  font-family: 'Titillium Web';
+}
+
+#nudgepadLoadingScreen {
+  position: fixed;  
+  width: 100%;
+  top: 0;
+  left: 0;
+  padding-top: 20%;
+  height: 100%;
+  text-align: center;
+  font-size: 18px;
+  color: #888;
+  background-color: white;
+  z-index: 2000;
+}
+
+#nudgepadNotify {
+  background: #11a4ed;
+  color: white;
+  top: -2;
+  z-index: 4000;
+  width: auto;
+  position: fixed;
+  padding: 8px;
+  box-shadow: 0px 1px 3px rgba(0,0,0,.6);
+  border-radius: 2px;
+  display: none;
+  left: 45%;
+}

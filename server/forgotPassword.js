@@ -8,7 +8,7 @@ var ForgotPassword = function (app, nudgepad) {
     var email = req.body.email
     var worker = nudgepad.site.get('workers ' + email)
     if (!worker)
-      return res.redirect('/nudgepad/error.html?error=EmailNotFound')
+      return res.redirect('/nudgepad/public/error.html?error=EmailNotFound')
 
     Email.send(
       email,
@@ -18,9 +18,9 @@ var ForgotPassword = function (app, nudgepad) {
       null,
       function (error) {
         if (error)
-          return res.redirect('/nudgepad/error.html?error=UnknownError')
+          return res.redirect('/nudgepad/public/error.html?error=UnknownError')
         else
-          return res.redirect('/nudgepad/link_sent.html')
+          return res.redirect('/nudgepad/public/linkSent.html')
       })
 
   })
