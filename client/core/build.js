@@ -59,13 +59,13 @@ _.each(apps, function (appName) {
   var cssFiles = _.without(fs.readdirSync(appDir + 'css'), '.DS_Store')
   _.each(cssFiles, function (filename) {
     CSSMIN += fs.readFileSync(appDir + 'css/' + filename, 'utf8')
-    CSSINCLUDES += '    <link rel="stylesheet" href="/nudgepad/apps/' + appName + '/' + filename + '" type="text/css"/>\n'
+    CSSINCLUDES += '    <link rel="stylesheet" href="/nudgepad/apps/' + appName + '/css/' + filename + '" type="text/css"/>\n'
   })
   
   var jsFiles = _.without(fs.readdirSync(appDir + 'js'), '.DS_Store')
   _.each(jsFiles, function (filename) {
     JSMIN += fs.readFileSync(appDir + 'js/' + filename, 'utf8')
-    JSINCLUDES += '    <script type="text/javascript" src="/nudgepad/apps/' + appName + '/' + filename + '"></script>\n'
+    JSINCLUDES += '    <script type="text/javascript" src="/nudgepad/apps/' + appName + '/js/' + filename + '"></script>\n'
   })
   
   var htmlFiles = _.without(fs.readdirSync(appDir + 'html'), '.DS_Store')

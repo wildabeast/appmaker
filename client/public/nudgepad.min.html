@@ -132,7 +132,7 @@
   		<div id="menuBack" class="squareButton developAppButton" onclick="nudgepad.navigation.open('home')">
 		  	Back
 		  </div>
-			<a id="console" class="squareButton developAppButton" onclick="nudgepad.console()" title="Console">
+			<a id="console" class="nudgepad developAppButton" onclick="nudgepad.console()" title="Console">
 		  	Console
 		  </a>
 			<a href="/nudgepad.export" target="blank" class="nudgepad developAppButton">
@@ -144,7 +144,7 @@
 		  <a onclick="nudgepad.apps.develop.clone()" class="nudgepad developAppButton">
 		  	Clone
 		  </a>
-		  <a id="restart" class="squareButton developAppButton" onclick="$.get('/nudgepad.restart')">
+		  <a id="restart" class="nudgepad developAppButton" onclick="$.get('/nudgepad.restart')">
 		  	Restart
 		  </a>
 		<div class="clear"></div>
@@ -244,7 +244,7 @@
 		  	Back
 		  </div>
 			<div id="advancedToggle" class="squareButton" onclick="$('.nudgepad#advanced').toggle()">
-				<img src="nudgepad/images/bulb.png">
+				<img src="nudgepad/public/images/bulb.png">
 			</div>
 			<textarea id="advanced" placeholder="Advanced" tabindex="3" class="nudgepad"></textarea>
 		  <div id="addPageButton" class="secondaryButton" onclick="nudgepad.apps.blog.createPost()">
