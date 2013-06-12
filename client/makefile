@@ -1,43 +1,23 @@
-all: min.css nudgepad.min.js
+build:
+	node core/bash/build.js
 
-css: min.css
-
-js: nudgepad.min.js
-
-STYLESHEETS=$(shell cat build/css.make)
-SCRIPTS=$(shell cat build/src.make)
-LIBS=$(shell cat build/lib.make)
-
-gen:
-	cd build/; node gen.js
-
-min.css: $(STYLESHEETS)
-	cat $(STYLESHEETS) > min.css
-
-nudgepad.min.js: nudgepad.js
-	java -jar ~/compiler.jar --js=nudgepad.js --js_output_file=nudgepad.min.js --language_in=ECMASCRIPT5
+min:
+	java -jar ~/compiler.jar --js=public/nudgepad.dev.js --js_output_file=public/nudgepad.min.js --language_in=ECMASCRIPT5
 	# Google Closure compiler breaks our eval so we need to append it after.
-	cat lib/compiler_workaround.js >> nudgepad.min.js
-
-nudgepad.js: $(SCRIPTS) $(LIBS)
-	cat $(LIBS) > nudgepad.js
-	echo ";" >> nudgepad.js
-	cat $(SCRIPTS) >> nudgepad.js
+	cat public/js/compiler_workaround.js >> public/nudgepad.min.js
 
 events.js:
-	cp ~/events/events.js lib/events.js
-	cp ~/events/events.min.js lib/events.min.js
+	cp ~/events/events.js public/js/events.js
+	cp ~/events/events.min.js public/js/events.min.js
 
 space:
-	cp ~/space/space.js lib/space.js
-	cp ~/space/space.min.js lib/space.min.js
+	cp ~/space/space.js public/js/space.js
+	cp ~/space/space.min.js public/js/space.min.js
 
 scraps:
-	cp ~/scraps/scraps.js lib/scraps.js
-	cp ~/scraps/scraps.min.js lib/scraps.min.js
-	cp ~/scraps/compiler_workaround.js lib/compiler_workaround.js
+	cp ~/scraps/scraps.js public/js/scraps.js
+	cp ~/scraps/scraps.min.js public/js/scraps.min.js
+	cp ~/scraps/compiler_workaround.js public/js/compiler_workaround.js
 
-test:
-	open http://$(USER)/nudgepad/tests/main.dev.html
 
-.PHONY: test sides gen
+.PHONY: build
