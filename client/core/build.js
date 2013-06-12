@@ -35,7 +35,7 @@ jsFiles.unshift('Nudgepad.js')
 jsFiles.unshift('App.js')
 _.each(jsFiles, function (filename) {
   JSINCLUDES += '    <script type="text/javascript" src="/nudgepad/core/js/' + filename + '"></script>\n'
-  JSMIN += fs.readFileSync(corePath + 'js/' + filename, 'utf8')
+  JSMIN += fs.readFileSync(corePath + 'js/' + filename, 'utf8') + ';'
 })
 
 var cssFiles = _.without(fs.readdirSync(corePath + 'css'), '.DS_Store')
@@ -64,7 +64,7 @@ _.each(apps, function (appName) {
   
   var jsFiles = _.without(fs.readdirSync(appDir + 'js'), '.DS_Store')
   _.each(jsFiles, function (filename) {
-    JSMIN += fs.readFileSync(appDir + 'js/' + filename, 'utf8')
+    JSMIN += fs.readFileSync(appDir + 'js/' + filename, 'utf8') + ';'
     JSINCLUDES += '    <script type="text/javascript" src="/nudgepad/apps/' + appName + '/js/' + filename + '"></script>\n'
   })
   
