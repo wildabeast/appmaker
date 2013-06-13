@@ -1,4 +1,7 @@
-var Login = function (app, nudgepad) {
+var Login = function (app) {
+  
+  
+  var nudgepad = app.nudgepad
   
   // Login Page
   app.get('/nudgepad.login', function(req, res, next) {

@@ -15,7 +15,9 @@ parseSpace = function(req, res, next) {
   next()
 }
 
-var Patch = function (app, nudgepad) {
+var Patch = function (app) {
+  
+  var nudgepad = app.nudgepad
   
   // Patch
   app.post(/^\/nudgepad\.site\.patch$/, app.checkId, parseSpace, function(req, res, next) {

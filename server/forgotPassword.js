@@ -1,6 +1,8 @@
 var Email = require('./email.js')
 
-var ForgotPassword = function (app, nudgepad) {
+var ForgotPassword = function (app) {
+  
+  var nudgepad = app.nudgepad
   
   // Login Post
   app.post('/nudgepad.forgotPassword', function(req, res, next) {

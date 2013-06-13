@@ -1,6 +1,8 @@
 var spawn = require('child_process').spawn
 
-var Backup = function (app, nudgepad) {
+var Backup = function (app) {
+  
+  var nudgepad = app.nudgepad
   
   
   // http://stackoverflow.com/questions/5754153/zip-archives-in-node-js

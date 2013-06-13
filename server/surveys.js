@@ -3,7 +3,9 @@ var exec = require('child_process').exec,
     Space = require('space'),
     Email = require('./email.js')
 
-var Survey = function (app, nudgepad) {
+var Survey = function (app) {
+  
+  var nudgepad = app.nudgepad
   
   app.get('/nudgepad.surveys', app.checkId, function (req, res, next) {
 

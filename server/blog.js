@@ -1,6 +1,8 @@
 var Page = require('scraps')
 
-var Blog = function (app, nudgepad) {
+var Blog = function (app) {
+  
+  var nudgepad = app.nudgepad
   
   app.get('/feed.space', function (req, res, next) {
     res.set('Content-Type', 'text/plain')

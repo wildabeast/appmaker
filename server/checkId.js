@@ -1,4 +1,6 @@
-function CheckID (app, nudgepad) {
+function CheckID (app) {
+  
+  var nudgepad = app.nudgepad
   
   /**
    * Checks the worker is authorized and loads the worker info.

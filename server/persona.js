@@ -1,6 +1,8 @@
 var superagent = require('superagent')
 
-var Persona = function (app, nudgepad) {
+var Persona = function (app) {
+  
+  var nudgepad = app.nudgepad
   
   // Persona Login
   app.post('/nudgepad.persona', function(req, res, next) {

@@ -1,6 +1,8 @@
 var fs = require('fs')
 
-function Install (nudgepad) {
+function Install (app) {
+  
+  var nudgepad = app.nudgepad
 
   console.log('Installing necessary files and objects...')
   
@@ -19,9 +21,9 @@ function Install (nudgepad) {
   if (!fs.existsSync(nudgepad.paths.settings))
     fs.mkdirSync(nudgepad.paths.settings)
   
-  // Create the includes folder for storing server side includes.
-  if (!fs.existsSync(nudgepad.paths.includes))
-    fs.mkdirSync(nudgepad.paths.includes)
+  // Create the packages folder for storing server side packages.
+  if (!fs.existsSync(nudgepad.paths.packages))
+    fs.mkdirSync(nudgepad.paths.packages)
   
   // Create the logs folder for storing log data, other ops data.
   if (!fs.existsSync(nudgepad.paths.logs))
@@ -59,8 +61,14 @@ function Install (nudgepad) {
     fs.writeFileSync(nudgepad.paths.settings + 'is_private.txt', 'false', 'utf8')
   
   // Create the example.js file
-  if (!fs.existsSync(nudgepad.paths.includes + 'example.js'))
-    fs.writeFileSync(nudgepad.paths.includes + 'example.js', "/**\napp.get('/my_route', function(req, res, next) {\n  res.send('Hello world!')\n})\n*/", 'utf8')
+  if (!fs.existsSync(nudgepad.paths.packages + 'example.js')) {
+    fs.writeFileSync(nudgepad.paths.packages + 'example.js', "var Example = function (app) {\n\
+  app.get('/say_hello', function(req, res, next) {\n\
+    res.send('Hello world!')\n\
+  })\n\
+}\n\
+module.exports = Example\n", 'utf8')
+  }
   
   // Create default home page
   if (!fs.existsSync(nudgepad.paths.site + 'pages/home.space'))

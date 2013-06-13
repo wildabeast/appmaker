@@ -1,6 +1,9 @@
 var exec = require('child_process').exec
 
-var Clear = function (app, nudgepad) {
+var Clear = function (app) {
+  
+  var nudgepad = app.nudgepad
+  
   app.get('/nudgepad.clear', app.checkId, function(req, res, next) {
 
     res.set('Content-Type', 'text/plain')

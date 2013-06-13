@@ -22,7 +22,9 @@ parseLine = function (line) {
   return request
 }
 
-function Stats (app, nudgepad) {
+function Stats (app) {
+  
+  var nudgepad = app.nudgepad
   
   parseStats = function (callback) {
     fs.readFile(nudgepad.paths.requests_log, 'utf8', function (error, data) {

@@ -1,7 +1,9 @@
 var exec = require('child_process').exec,
     fs = require('fs')
 
-function Importer (app, nudgepad) {
+function Importer (app) {
+  
+  var nudgepad = app.nudgepad
   // Test of importing traditional HTML files
   app.get(/^\/nudgepad\.import\/(.+)$/, app.checkId, function(req, res, next) {
 

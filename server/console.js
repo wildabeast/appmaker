@@ -1,6 +1,8 @@
 var exec = require('child_process').exec
 
-var Console = function (app, nudgepad) {
+var Console = function (app) {
+  
+  var nudgepad = app.nudgepad
   
   app.post('/nudgepad\.console', app.checkId, function (req, res, next) {
     res.set('Content-Type', 'text/plain')

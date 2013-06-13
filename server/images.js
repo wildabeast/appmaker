@@ -41,7 +41,9 @@ resizeImage = function (name, filename, callback) {
 
 }
 
-var Images = function (app, nudgepad) {
+var Images = function (app) {
+  
+  var nudgepad = app.nudgepad
     
   /**
    * Saves a file and then resizes it

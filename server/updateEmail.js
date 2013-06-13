@@ -10,7 +10,9 @@ var ValidateEmail = function (email) {
   return re.test(email)
 }
 
-var UpdateEmail = function (app, nudgepad) {
+var UpdateEmail = function (app) {
+  
+  var nudgepad = app.nudgepad
   
   // Update account
   app.post('/nudgepad.updateEmail', app.checkId, function (req, res, next) {

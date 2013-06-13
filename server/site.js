@@ -1,7 +1,9 @@
 var Space = require('space'),
     os = require("os")
 
-var Site = function (app, nudgepad) {
+var Site = function (app) {
+  
+  var nudgepad = app.nudgepad
   
   // Get file
   app.get(/^\/nudgepad\.site\.([a-z0-9_]+)\.([a-z0-9_]+)$/, app.checkId, function(req, res, next) {

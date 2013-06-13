@@ -1,13 +1,15 @@
 // Extends an object by adding a paths property containing all paths
-function Paths (obj, sitesPath, clientPath, domain) {
+function Paths (app, sitesPath, clientPath) {
+  var obj = app.nudgepad
+  domain = obj.domain
   var paths = {}
   paths.server = __dirname + '/'
   // Where to store site specific files
   paths.site = sitesPath + domain + '/'
   // where to store settings
   paths.settings = paths.site + 'settings/'
-  // where to store server side includes
-  paths.includes = paths.site + 'includes/'
+  // where to store server side packages
+  paths.packages = paths.site + 'packages/'
   // where to store uploads
   paths.public = paths.site + 'public/'
   // where to store logs

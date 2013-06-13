@@ -257,7 +257,7 @@ The folders in /nudgepad are:
 
 The data for a site "foo.com" is stored in /nudgepad/sites/foo.com/ and looks like this:
 
-includes/ - Contains Node.js code to include onstart. Currently done via eval, but we'll probably change this to a module system.
+packages/ - Contains Node.js packages to include onstart. Each package extends the app object. So your package should export one function which takes an express app object as a param and extends it.
 logs/ - Contains site log files.
 pages/ - Contains the pages that are edited by the pages app. Encoded in Space/Scraps
 posts/ - Contains blog posts for blog module. Encoded in Space.

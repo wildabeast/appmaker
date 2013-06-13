@@ -5,7 +5,9 @@ var ParseName = require('./ParseName.js'),
     File = require('./File.js'),
     Space = require('space')
 
-var Invite = function (app, nudgepad) {
+var Invite = function (app) {
+  
+  var nudgepad = app.nudgepad
   
   var createUser = function (email) {
     var worker = new File(nudgepad.paths.site + 'workers/' + email + '.space')

@@ -55,7 +55,9 @@ function folderStats (path, callback) {
  
 }
 
-var Explorer = function (app, nudgepad) {
+var Explorer = function (app) {
+  
+  var nudgepad = app.nudgepad
   
   
   /**

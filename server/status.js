@@ -1,7 +1,10 @@
 var Space = require('space'),
     os = require('os')
 
-var Status = function (app, nudgepad, speedcoach) {
+var Status = function (app, speedcoach) {
+  
+  var nudgepad = app.nudgepad
+  
   app.get('/nudgepad.status', app.checkId, function(req, res, next) {
 
     var mem = process.memoryUsage()

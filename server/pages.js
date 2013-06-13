@@ -1,4 +1,7 @@
-var Pages = function (app, nudgepad) {
+var Pages = function (app) {
+  
+  var nudgepad = app.nudgepad
+  
   app.get('*', app.privateCheck, function (req, res, next) {
 
     var name = req.params[0].substr(1)
