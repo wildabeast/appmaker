@@ -343,7 +343,7 @@ app.get(/^\/nudgepad$/, app.checkId, function(req, res, next) {
 })
 
 /*********** sendPage method ************/
-var pageOptions = {
+app.pageOptions = {
   beautify : true
 }
 
@@ -354,7 +354,7 @@ app.sendPage = function(req, res, name) {
   var context = {}
   context.site = app.nudgepad.site
   context.request = req
-  return res.send(page.toHtml(context, pageOptions))
+  return res.send(page.toHtml(context, app.pageOptions))
 }
 
 /*********** patch methods ************/
