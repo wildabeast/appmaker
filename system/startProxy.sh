@@ -12,7 +12,7 @@ startProxy ()
   # Clear the log file
   sudo rm $logsPath/proxy.txt
   touch $logsPath/proxy.txt
-  sudo mon -d -l $logsPath/proxy.txt -p $tempPath/proxyPid -m $tempPath/proxyMonPid "node proxy.js"
+  sudo mon -d -l $logsPath/proxy.txt -p $tempPath/proxyPid -m $tempPath/proxyMonPid "node proxy.js $proxyPort"
   echo Started proxy
 }
 

@@ -1,13 +1,10 @@
-portMin=3002
-portMax=8000
-
 set_port () {
   # Pick a port between 3002 and 8000
-  portRange=$portMax - $portMin
-  PORT=$(($RANDOM%$portRange+$portMin))
+  portRange=$(($maxSitePort-$minSitePort))
+  PORT=$(($RANDOM%$portRange+$minSitePort))
   while [ -f $portsPath/$PORT ]
   do
-    PORT=$(($RANDOM%$portRange+$portMin))
+    PORT=$(($RANDOM%$portRange+$minSitePort))
   done
 }
 

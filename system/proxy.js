@@ -13,6 +13,7 @@ var logsPath = dataPath + 'logs/'
 var sitesPath = dataPath + 'sites/'
 var activePath = dataPath + 'active/'
 var portsPath = dataPath + 'ports/'
+var port = process.argv[2] || 80
 
 var startSite = function (domain) {
   starting[domain] = true
@@ -75,7 +76,7 @@ var server = httpProxy.createServer({
 server.proxy.on('notFound', notFoundHandler)
 server.proxy.on('proxyError', errorHandler)
 
-server.listen(80)
+server.listen(port)
 
 
 var updatePorts = function () {

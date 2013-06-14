@@ -13,6 +13,15 @@ source isMac.sh
 source fixPermissions.sh
 source createFolders.sh
 
+# Set default ports and then load $tempPath/settings.sh to override those
+source config.sh
+if [ -f $tempPath/config.sh ]
+  then
+    source $tempPath/config.sh
+  else
+    cp $systemPath/config.sh $tempPath/config.sh
+fi
+
 # get all sites 1 per line filter out hidden dirs
 sites="$(ls $sitesPath)"
 

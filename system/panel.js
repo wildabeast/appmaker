@@ -5,6 +5,11 @@ var express = require('express'),
     exec = require('child_process').exec,
     fs = require('fs')
 
+if (process.argv.length <3) {
+  console.log('Enter a hostname to start panel on')
+  process.exit(1)
+}
+
 var hostname = process.argv[2]
 
 var dataPath = '/nudgepad/'
@@ -15,6 +20,7 @@ var activePath = dataPath + 'active/'
 var portsPath = dataPath + 'ports/'
 var tempPath = dataPath + 'temp/'
 var systemPath = __dirname
+var port = process.argv[3] || 3000
 
 var Domain = require(panelPath + '/Domain')
 Domain.tld = '.' + hostname
@@ -138,12 +144,6 @@ app.post('/create', app.checkId, app.validateDomain, app.isDomainAvailable, func
   
 })
 
-if (process.argv.length <3) {
-  console.log('Enter a hostname to start panel on')
-  process.exit(1)
-}
-
-var port = 3000
 app.listen(port)
 fs.writeFileSync(activePath + hostname, port, 'utf8')
 fs.writeFileSync(portsPath + port, hostname, 'utf8')
