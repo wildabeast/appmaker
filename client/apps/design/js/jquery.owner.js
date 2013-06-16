@@ -1,3 +1,3 @@
 $.fn.owner = function () {
-  return nudgepad.pages.stage.get($(this).attr('value')).element()
+  return Design.page.get($(this).attr('value')).element()
 }

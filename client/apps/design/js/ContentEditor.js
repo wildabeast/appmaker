@@ -1,22 +1,22 @@
-nudgepad.contentEditor = {}
+Design.contentEditor = {}
 
 /**
  * Fires when a block being edited a blur occurs.
  */
-nudgepad.contentEditor.onblur = function () {
+Design.contentEditor.onblur = function () {
   
   var scrap = $(this).scrap()
   scrap.set('content', $(this).html())
 
   // rebind the blocks
-  $(this).off('tap mousedown slide slidestart hold slideend', nudgepad.contentEditor.killEvent)
+  $(this).off('tap mousedown slide slidestart hold slideend', Design.contentEditor.killEvent)
 
   // remove the ability to edit & select text.
   $(this).removeAttr('contenteditable')
 
   // record the changes for undo/redo
-  nudgepad.stage.commit()
-  nudgepad.broadcastSelection()
+  Design.stage.commit()
+  Design.broadcastSelection()
 }
 
 /**
@@ -25,12 +25,12 @@ nudgepad.contentEditor.onblur = function () {
  * @param {string} Scrap id
  * @param {bool} Whether to select all on focus
  */
-nudgepad.contentEditor.focus = function (selector, selectAll) {
+Design.contentEditor.focus = function (selector, selectAll) {
   
   
   // When focused, it's as if you have nothing selected. We're really going to do 
   // a patch instead
-  nudgepad.stage.selection.clear()
+  Design.stage.selection.clear()
   
   var element = $(selector)
   var scrap = element.scrap()  
@@ -42,35 +42,35 @@ nudgepad.contentEditor.focus = function (selector, selectAll) {
     var tag = scrap.values.tag
     
     if (tag && tag.match(/^(list)$/)) {
-      nudgepad.stage.selection.clear()
+      Design.stage.selection.clear()
       element.selectMe()
-      nudgepad.stage.selection.editSource()
+      Design.stage.selection.editSource()
       return false
     }
     
     if (tag && tag.match(/^(textarea|input|password)$/))
       attr = 'placeholder'
     
-    nudgepad.textPrompt('Editing content for this block', scrap.values[attr], function (val) {
+    TextPrompt('Editing content for this block', scrap.values[attr], function (val) {
       scrap.values[attr] = val
-      nudgepad.stage.commit()
+      Design.stage.commit()
       element.remove()
-      $('#nudgepadStageBody').append(scrap.toHtml(null, true))
+      $('#DesignStageBody').append(scrap.toHtml(null, true))
       element.selectMe()
     })
     return
   }
   
-  nudgepad.broadcastSelection(scrap.selector())
+  Design.broadcastSelection(scrap.selector())
 
   // set element to editable
   element.attr('contenteditable', 'true')
   
   // stop propagation (todo: perhaps we could use these to make some sweet events!)
-  element.on('tap slide slidestart hold slideend', nudgepad.contentEditor.killEvent)
+  element.on('tap slide slidestart hold slideend', Design.contentEditor.killEvent)
   
   // on blur, remove all this stuff.
-  element.on('blur', nudgepad.contentEditor.onblur)
+  element.on('blur', Design.contentEditor.onblur)
   
   // focus the element
   element.focus()
@@ -92,9 +92,9 @@ nudgepad.contentEditor.focus = function (selector, selectAll) {
  * @param {object} event
  * @return false.
  */
-nudgepad.contentEditor.killEvent = function (event) {
+Design.contentEditor.killEvent = function (event) {
   // 
-  nudgepad.mouse.down.stopPropagation()
+  Mouse.down.stopPropagation()
   return false
 }
 

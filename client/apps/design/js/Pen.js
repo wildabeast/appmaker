@@ -1,24 +1,24 @@
-nudgepad.pen = {
+Design.pen = {
   on : false
 }
 
-nudgepad.pen.draw = function (event) {
+Design.pen.draw = function (event) {
   
-  if (!nudgepad.pen.on && !nudgepad.mouse.down.metaKey)
+  if (!Design.pen.on && !Mouse.down.metaKey)
     return true
   
-  if (!nudgepad.mouse.isDown)
+  if (!Mouse.isDown)
     return true
   
-  if ($.isOnScrollbar(nudgepad.mouse.down.clientX, nudgepad.mouse.down.clientY))
+  if ($.isOnScrollbar(Mouse.down.clientX, Mouse.down.clientY))
     return true
   
-  var offsetLeft = $('#nudgepadStageBody').offset().left
-  var offsetTop = $('#nudgepadStageBody').offset().top
-  var x = nudgepad.mouse.down.pageX - offsetLeft
-  var y = nudgepad.mouse.down.pageY - offsetTop
+  var offsetLeft = $('#DesignStageBody').offset().left
+  var offsetTop = $('#DesignStageBody').offset().top
+  var x = Mouse.down.pageX - offsetLeft
+  var y = Mouse.down.pageY - offsetTop
   var scraps = new Space().set('container', new Space("style\n position absolute\n left " + x + "px\n top " + y + "px\n width 1px\n height 1px\n"))
-  var selector = nudgepad.stage.insert(scraps)[0]
+  var selector = Design.stage.insert(scraps)[0]
   var id = $(selector).scrap().id
   console.log(id)
   // Pretend the mousedown was on the stretch handle
@@ -27,11 +27,4 @@ nudgepad.pen.draw = function (event) {
   $("#stretch_handle_bottomright" + id).triggerHandler("slidestart")
   mixpanel.track('I used the pen tool')
 }
-
-nudgepad.on('main', function () {
-  // Bind
-  $(document).on("slidestart", nudgepad.pen.draw)
-})
-
-
 

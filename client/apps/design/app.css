@@ -1,0 +1,351 @@
+#DesignDimensions {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  text-align: left;
+  line-height: 130%;
+  font-size: 12px;
+  color: white;
+  background-color: rgb(0, 0, 0);
+  background-color: rgba(0, 0, 0, 0.6);
+  border-radius: 2px;
+  padding: 6px 10px 6px 10px;
+  z-index: 200;
+}
+
+#DesignCodePanel {
+  position: fixed;
+  z-index: 5000;
+  left: 0;
+  top: 0;
+  padding : 3px;
+  font-family : monospace;
+  font-size : 14px;
+  outline : 0;
+  width: 40%;
+  bottom: 49px;
+  margin: 0;
+  background-color : #1e1e1e;
+  color: #b1b1b1;
+  border: 0;
+  display: none;
+  -webkit-user-select: auto;
+  -moz-user-select: text;
+  user-select: auto;
+}
+
+
+/** The scrap that is being snapped to*/
+.GridSnapOrigin {
+  outline: 1px solid #5555ff;
+}
+
+.DesignEditHandle {
+  height: 16px;
+  position: absolute;
+  z-index: 200;
+}
+
+.DesignEditStyleHandle, .DesignLinkHandle {
+  background-image : url(/nudgepad/public/images/pencil_lt.png);
+  background-size: 14px;
+  background-position : center;
+  background-repeat : no-repeat;
+  background-color: #000;
+  height : 30px;
+  width : 30px;
+  position: relative;
+  cursor: pointer;
+  float: left;
+}
+
+::-webkit-scrollbar { 
+    display: none; 
+}
+
+
+#DesignStage {
+  position: relative;
+  height: 637px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  /* this makes the background scroll with the content */
+  background-attachment: local;
+  background-color: rgb(233, 233, 233);
+  width: 100%;
+}
+
+#DesignStageHead {
+  height: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+#DesignStageBody {
+  height: 1000px;
+  position: relative;
+  background-color: white;
+  box-shadow: 1px 1px 5px black;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/**
+ * We add this as kind of a hack, because adding bottom padding to DesignStage has no effect.
+ */
+#DesignStageBottomPadding {
+  height: 200px;
+}
+
+#DesignContextMenu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 4000;
+  display: none;
+  cursor: pointer;
+  background-color: #333;
+  font-size: 14px;
+  color: #ccc;
+  box-shadow: 0px 1px 3px rgba(0,0,0,.6);
+}
+
+#DesignContextMenu a {
+  padding: 6px;
+  border-bottom: 1px solid #333;
+  display: block;
+}
+
+.DesignContextMenuSeparator {
+  height: 10px;
+  border-bottom: 1px solid #aaa;
+}
+
+#DesignContextMenu a:hover {
+  background-color: #2a2a2a;
+}
+
+/*----------------App Bar-------------------*/
+
+#DesignBar {
+  position: fixed;
+  bottom: 0px;
+  height: 50px;
+  width: 100%;
+  background-color: #222;
+  z-index: 502;
+  min-width: 630px;
+  font-family: 'Titillium Web';
+}
+
+.DesignBarDroppable {
+  float: left;
+  margin-left: 10px;
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+.DesignBarButton img {
+  padding-top: 12px;
+  opacity: .4;
+}
+
+.DesignBarButton:hover img{
+  opacity: .7;
+}
+
+.DesignBarButton:active img{
+  opacity: 1;
+}
+
+#DesignTabs {
+  float: right;
+  max-width: 600px;
+  overflow: hidden;
+  font-size: 14px;
+  height: 50px;
+  line-height: 50px;
+  color: #777;
+}
+
+#DesignMenu {
+  background-color: #333;
+  border-radius: 3px 0px 0px 0px;
+  width: 200px;
+  padding: 30px 0px;
+  color: #ccc;
+  font-size: 24px;
+  display: none;
+  position: fixed;
+  z-index: 1200;
+  left: 0;
+  bottom: 50;
+}
+
+#DesignMenu div{
+  padding: 6px 30px;
+  cursor: pointer;
+}
+
+#DesignMenu div:hover {
+  background-color: #2a2a2a;
+}
+
+#DesignMenu div:active {
+  background-color: #1a1a1a;
+}
+
+#DesignTabs span {
+  margin-right: 20px;
+}
+
+#DesignTabs span {
+  cursor: pointer;
+}
+
+#DesignTabs span.DesignOpenPage {
+  text-decoration: underline;
+}
+
+.DesignTimeline {
+  line-height: 40px;
+  display: none;
+}
+
+#DesignTimelinePosition, #DesignTimelineClear {
+  color: grey;
+}
+
+#DesignBarMenuButton {
+  height: 50px;
+  width: 50px;
+  background-color: #1a86d6;
+  float: left;
+  background-image: url(/nudgepad/public/images/menuSquare.png);
+  background-repeat: no-repeat;
+  background-position: center;
+  cursor: pointer;
+}
+
+#DesignBarMenuButton:hover {
+  background-color: #3575b5;
+}
+
+#DesignBarMenuButton:active {
+  background-color: #2c659e;
+}
+
+.DesignLowlight {
+   opacity: .2;
+}
+
+#DesignRibbon {
+  position: fixed;
+  left: 0px;
+  width: 100%;
+  height: 80px;
+  background-color: #333;
+  bottom: 50px;
+  z-index: 501;
+  display: none;
+}
+
+#DesignDroppablesList {
+  float: left;
+}
+
+.DesignDroppableImg {
+  float: left;
+  margin-left: 10px;
+  margin-top: 10px;
+}
+
+.DesignImageDroppableOptions {
+  display: none;
+}
+
+#DesignRibbonUploadButton {
+  float: left;
+  width: 70px;
+  background-color: #555;
+  font-size: 14px;
+  height: 40px;
+  line-height: 40px;
+  color: #fff;
+  margin-left: 10px;
+  margin-top: 20px;
+  text-align: center;
+  cursor: pointer;
+  font-weight: 400;
+  overflow: hidden;
+  position: relative;
+}
+
+#DesignRibbonUploadButton:hover {
+  background-color: #444;
+}
+
+#DesignRibbonUploadButton:active {
+  background-color: #3a3a3a;
+}
+
+#DesignImageDroppablesList {
+  float: left;
+}
+
+.DesignImageThumbDrop {
+  float: left;
+  height: 60px;
+  width: 60px;
+  margin-left: 10px;
+  text-align: center;
+  background-color: #2a2a2a;
+  margin-top: 10px;
+  display: inline-block;
+  line-height: 60px;
+  padding: 0;
+}
+
+.DesignImageThumbDrop img {
+  padding: 0;
+  max-height: 50px;
+  max-width: 50px;
+  vertical-align: middle;
+  line-height: 60px;
+}
+
+/** Todo: put these under #DesignStage namespace? **/
+.scrap {
+  z-index: 1;
+  word-wrap: break-word;
+}
+
+
+.scrap:hover:not(.lockedScrap), .selection {
+  box-shadow: 0 0 1px #777;
+}
+
+.lockedScrap {
+  cursor: not-allowed;
+}
+
+.scrap:focus {
+  -webkit-user-select: auto;
+  -moz-user-select: text;
+  user-select: auto;
+  -ms-user-select: text;
+  outline: 1px solid #5555ff;
+}
+
+.selection.DesignHighlightedScrap {
+  outline: 2px solid blue;
+  box-shadow: 1px 1px 8px 8px blue;
+  z-index: 100;
+}
+
+
+
+
+

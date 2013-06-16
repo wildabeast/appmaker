@@ -1,7 +1,7 @@
 /**
  * @special Singleton
  */
-nudgepad.images = {}
+Design.images = {}
 
 /**
  * given url(http://foobar.com/foob.png) returns foob.png
@@ -9,8 +9,8 @@ nudgepad.images = {}
  * @param {string} 
  * @return {string} 
  */
-nudgepad.images.getFilename = function (url) {
-  var file = nudgepad.images.parseBackgroundUrl(url).split(/\//)
+Design.images.getFilename = function (url) {
+  var file = Design.images.parseBackgroundUrl(url).split(/\//)
   return file[file.length-1]
   
 }
@@ -20,16 +20,16 @@ nudgepad.images.getFilename = function (url) {
  * @param {bool} Whether to insert it via drag and drop.
  * @return {string} Scrap id
  */
-nudgepad.images.insertImageScrap = function (filename, drag) {
+Design.images.insertImageScrap = function (filename, drag) {
 
   if (filename.match(/^url\(/))
-    filename = nudgepad.images.parseBackgroundUrl(filename)
+    filename = Design.images.parseBackgroundUrl(filename)
   
   // Easter Egg: allow swapping of images
   if (!drag && $('.selection').length > 0) {
-    nudgepad.stage.selection.css('background-image url(' + filename + ')')
-    nudgepad.stage.selection.css('background-repeat no-repeat')
-    nudgepad.stage.selection.css('background-position center')
+    Design.stage.selection.css('background-image url(' + filename + ')')
+    Design.stage.selection.css('background-repeat no-repeat')
+    Design.stage.selection.css('background-position center')
     return false
   }
 
@@ -45,7 +45,7 @@ nudgepad.images.insertImageScrap = function (filename, drag) {
       "\n width " + this.width + 'px' +
       "\n height " + this.height + 'px')
     var scraps = new Space().set('scrap', space)
-    return nudgepad.stage.insert(scraps, drag)
+    return Design.stage.insert(scraps, drag)
   })
 }
 
@@ -55,7 +55,7 @@ nudgepad.images.insertImageScrap = function (filename, drag) {
  * @param {string}
  * @return {bool}
  */
-nudgepad.images.isImage = function (filename) {
+Design.images.isImage = function (filename) {
   return filename.match(/\.(png|jpg|jpeg|gif)$/i)
 }
 
@@ -65,7 +65,7 @@ nudgepad.images.isImage = function (filename) {
  * @param {string} 
  * @return {string} 
  */
-nudgepad.images.parseBackgroundUrl = function (url) {
+Design.images.parseBackgroundUrl = function (url) {
   return url.split(/(\(|\))/).slice(2)[0]
 }
 
@@ -73,25 +73,25 @@ nudgepad.images.parseBackgroundUrl = function (url) {
  * Downloads the latest list of images from server and stores
  * it in a property which is used to render the droppables.
  */
-nudgepad.images.images = new Space()
-nudgepad.images.updateList = function () {
+Design.images.images = new Space()
+Design.images.updateList = function () {
   $.get('/nudgepad.explorer.public', {}, function (space) {
     var dropImageDiv = ''
-    nudgepad.images.images = new Space(space)
-    nudgepad.images.images.each(function (key, value) {
-      if (nudgepad.images.isImage(key))
-        dropImageDiv += '<div class="imageThumbDrop">&nbsp;<img src="/'+ key +'">&nbsp;</div>'
+    Design.images.images = new Space(space)
+    Design.images.images.each(function (key, value) {
+      if (Design.images.isImage(key))
+        dropImageDiv += '<div class="DesignImageThumbDrop">&nbsp;<img src="/'+ key +'">&nbsp;</div>'
     })
 
-    $('#imageDroppablesList').html(dropImageDiv)
+    $('#DesignImageDroppablesList').html(dropImageDiv)
     
   })
 }
 
 // When an image is uploaded
-nudgepad.on('uploadComplete', nudgepad.images.updateList)
+nudgepad.on('uploadComplete', Design.images.updateList)
 nudgepad.on('uploadComplete', function () {
   mixpanel.track('I uploaded something')
 })
-nudgepad.on('public', nudgepad.images.updateList)
-nudgepad.on('main', nudgepad.images.updateList)
+nudgepad.on('public', Design.images.updateList)
+nudgepad.on('main', Design.images.updateList)

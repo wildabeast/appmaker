@@ -8,7 +8,10 @@
 function App(name) {
   this.name = name
   this._open = false
+  App.apps.push(name)
 }
+
+App.apps = []
 
 App.openApp = null
 
@@ -19,13 +22,36 @@ App.prototype.close = function (name) {
     return false
     
   
+  if (this.oncopy)
+    window.removeEventListener('copy', this.oncopy, false)
+    
+  if (this.oncut)
+    window.removeEventListener('cut', this.oncut, false)
+  
+  if (this.onpaste)
+    window.removeEventListener('paste', this.onpaste, false)
+
+  if (this.ondrop)
+    window.removeEventListener('drop', this.ondrop, false)
+
+  if (this.onresize)
+    window.removeEventListener('resize', this.onresize, false)
+
+  if (this.onkeydown)
+    $("body").off("keydown", this.onkeydown)
+
+  Events.shortcut.shortcuts = {}
+  
+  if (this.onclose)
+    this.onclose()
+
   this._open = false
   App.openApp = false
   
-  $('.nudgepadFullScreenApp').hide()
+  $('.App').hide()
   
   if (name)
-    nudgepad.apps[name].open()
+    window[name].open()
   
 }
 
@@ -50,7 +76,7 @@ App.prototype.open = function () {
   if (this.onopen)
     this.onopen()
   
-  $('#nudgepad' + ToProperCase(this.name) + 'App').show()
+  $('.App#' + this.name).show()
   
   App.openApp = this
   this._open = true
@@ -58,6 +84,28 @@ App.prototype.open = function () {
   // todo: i think we can remove selection
   nudgepad.trigger('selection')
   
+  if (this.oncopy)
+    window.addEventListener('copy', this.oncopy, false)
+  
+  if (this.oncut)
+    window.addEventListener('cut', this.oncut, false)
+
+  if (this.onpaste)
+    window.addEventListener('paste', this.onpaste, false)
+
+  if (this.ondrop)
+    window.addEventListener('drop', this.ondrop, false)
+
+  if (this.onresize)
+    window.addEventListener('resize', this.onresize, false)
+    
+  if (this.onkeydown)
+    $("body").on("keydown", this.onkeydown)  
+  
+  if (this.shortcuts)
+    Events.shortcut.shortcuts = this.shortcuts
+  
+
   // On ready event
   if (this.onready)
     this.onready()

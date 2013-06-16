@@ -1,16 +1,17 @@
+
 /**
  * The Stage holds the current open page.
  * We do a frame so the ribbon doesnt overlap the work area.
  * Its not actually a frame though, just a div with scroll.
  */
-nudgepad.stage.version = 0 // how many steps in we are
-nudgepad.stage.percentElapsed = 100
+Design.stage.version = 0 // how many steps in we are
+Design.stage.percentElapsed = 100
 
 /**
  * Open the previous page
  */
-nudgepad.stage.back = function () {
-  nudgepad.stage.open(site.get('pages').prev(nudgepad.stage.activePage))
+Design.stage.back = function () {
+  Design.stage.open(site.get('pages').prev(Design.stage.activePage))
 }
 
 /**
@@ -18,13 +19,13 @@ nudgepad.stage.back = function () {
  *
  * @return {string} todo: why return a string?
  */
-nudgepad.stage.commit = function () {
+Design.stage.commit = function () {
   
   var timestamp = new Date().getTime()
   
   // You are always committing against the edge.
-  var diff = nudgepad.pages.edge.diff(nudgepad.pages.stage)
-  var diffOrder = nudgepad.pages.edge.diffOrder(nudgepad.pages.stage)
+  var diff = Design.edge.diff(Design.page)
+  var diffOrder = Design.edge.diffOrder(Design.page)
 
   if (diff.isEmpty() && diffOrder.isEmpty()) {
     console.log('no change')
@@ -37,27 +38,27 @@ nudgepad.stage.commit = function () {
   if (!diffOrder.isEmpty())
     commit.set('order', new Space(diffOrder.toString()))
 
-  nudgepad.stage.timeline.set(timestamp, commit)
-  nudgepad.pages.edge = new Space(nudgepad.pages.stage.toString())
+  Design.stage.timeline.set(timestamp, commit)
+  Design.edge = new Space(Design.page.toString())
   
   // A commit always advances the position index to the edge.
-  nudgepad.stage.version = nudgepad.stage.timeline.keys.length
+  Design.stage.version = Design.stage.timeline.keys.length
   
-  nudgepad.stage.updateTimeline()
+  Design.stage.updateTimeline()
   
   nudgepad.trigger('selection')
   
   // Send Commit to Server
   var patch = new Space()
-  patch.set('timelines ' + nudgepad.stage.activePage + ' ' + timestamp, commit)
-  site.set('pages ' + nudgepad.stage.activePage, new Space(nudgepad.pages.stage.toString()))
+  patch.set('timelines ' + Design.stage.activePage + ' ' + timestamp, commit)
+  site.set('pages ' + Design.stage.activePage, new Space(Design.page.toString()))
 
-//  nudgepad.notify('Saved')
+//  Flasher.flash('Saved')
   nudgepad.emit('commit', patch.toString())
   return diff
 }
 
-nudgepad.stage.dragAndDrop = function (scrap) {
+Design.stage.dragAndDrop = function (scrap) {
   
   if (typeof scrap === 'string')
     scrap = new Space(scrap)
@@ -67,7 +68,7 @@ nudgepad.stage.dragAndDrop = function (scrap) {
   var height = scrap.get('head style html height')
   var width = scrap.get('head style html height')
   if (!height || !width) {
-    var dimensions = nudgepad.getPageDimensions(scrap)
+    var dimensions = Design.getPageDimensions(scrap)
     // temp fix for sticky
     if (isNaN(dimensions.width)) {
       dimensions.width = 140
@@ -81,85 +82,85 @@ nudgepad.stage.dragAndDrop = function (scrap) {
   var halfWidth = Math.round(width/2)
   var halfHeight = Math.round(height/2)
 
-  var pageLeft = $('#nudgepadStageBody').offset().left
-  var bodyScroll = $('#nudgepadStage').scrollTop()
+  var pageLeft = $('#DesignStageBody').offset().left
+  var bodyScroll = $('#DesignStage').scrollTop()
   
-  var left = nudgepad.mouse.move.pageX - pageLeft - halfWidth
-  var y = nudgepad.mouse.move.pageY - halfHeight + bodyScroll
+  var left = Mouse.move.pageX - pageLeft - halfWidth
+  var y = Mouse.move.pageY - halfHeight + bodyScroll
 
-  nudgepad.stage.insert(scrap, true, left, y)
+  Design.stage.insert(scrap, true, left, y)
 }
 
 /**
  * Advances position_index, advanced position.
  */
-nudgepad.stage.editSource = function () {
-  nudgepad.textPrompt('Enter code...', nudgepad.pages.stage.toString(), function (val) {
-    nudgepad.pages.stage = new Space(val)
-    nudgepad.stage.commit()
-    nudgepad.stage.open(nudgepad.stage.activePage)
+Design.stage.editSource = function () {
+  TextPrompt('Enter code...', Design.page.toString(), function (val) {
+    Design.page = new Space(val)
+    Design.stage.commit()
+    Design.stage.open(Design.stage.activePage)
   })
 }
 
 /**
  * Deletes all scraps from the page and DOM.
  */
-nudgepad.stage.erase = function () {
-  nudgepad.stage.selectAll()
-  nudgepad.stage.selection.remove()
-  nudgepad.stage.commit()
+Design.stage.erase = function () {
+  Design.stage.selectAll()
+  Design.stage.selection.remove()
+  Design.stage.commit()
 }
 
 /**
  * Open the next page
  */
-nudgepad.stage.forward = function () {
-  nudgepad.stage.open(site.get('pages').next(nudgepad.stage.activePage))
+Design.stage.forward = function () {
+  Design.stage.open(site.get('pages').next(Design.stage.activePage))
 }
 
-nudgepad.stage.goto = function (version) {
-  nudgepad.stage.selection.save()
-  nudgepad.stage.selection.clear()
+Design.stage.goto = function (version) {
+  Design.stage.selection.save()
+  Design.stage.selection.clear()
   if (version < 0)
     return false
-  if (version > nudgepad.stage.timeline.keys.length)
+  if (version > Design.stage.timeline.keys.length)
     return false
   
   // If we are going back in time, start from 0
-  if (nudgepad.stage.version > version) {
-    nudgepad.pages.stage = new Page()
-    nudgepad.stage.version = 0
+  if (Design.stage.version > version) {
+    Design.page = new Page()
+    Design.stage.version = 0
   }
-  for (var i = nudgepad.stage.version; i < version; i++) {
-    var timestamp = nudgepad.stage.timeline.keys[i]
-    var patch = nudgepad.stage.timeline.values[timestamp].values.values
-    var orderPatch = nudgepad.stage.timeline.values[timestamp].values.order
+  for (var i = Design.stage.version; i < version; i++) {
+    var timestamp = Design.stage.timeline.keys[i]
+    var patch = Design.stage.timeline.values[timestamp].values.values
+    var orderPatch = Design.stage.timeline.values[timestamp].values.order
     if (patch)
-      nudgepad.pages.stage.patch(patch.toString())
+      Design.page.patch(patch.toString())
     if (orderPatch)
-      nudgepad.pages.stage.patchOrder(orderPatch.toString())
-    nudgepad.stage.version++
+      Design.page.patchOrder(orderPatch.toString())
+    Design.stage.version++
   }
   // Todo: fire an event and have timeline subscribe to that event.
-  nudgepad.stage.updateTimeline()
-  nudgepad.stage.render()
-  nudgepad.stage.selection.restore()
+  Design.stage.updateTimeline()
+  Design.stage.render()
+  Design.stage.selection.restore()
   nudgepad.trigger('stage')
 }
 
-nudgepad.stage.height = function () {
-  return $(window).height() - $('#nudgepadPagesBar').outerHeight()
+Design.stage.height = function () {
+  return $(window).height() - $('#DesignBar').outerHeight()
 }
 
-nudgepad.stage.insertBody = function () {
-  if (!nudgepad.pages.stage.get('body')) {
-    nudgepad.pages.stage.set('body', new Scrap('body', 'tag body\nscraps\n'))
-    nudgepad.pages.stage.get('body').render()
+Design.stage.insertBody = function () {
+  if (!Design.page.get('body')) {
+    Design.page.set('body', new Scrap('body', 'tag body\nscraps\n'))
+    Design.page.get('body').render()
   }
-  if (!nudgepad.pages.stage.get('body scraps'))
-    nudgepad.pages.stage.set('body scraps', new Space())
-//    nudgepad.pages.stage.set('body scraps', new Space())
-//    level = nudgepad.pages.stage.get('body scraps')
+  if (!Design.page.get('body scraps'))
+    Design.page.set('body scraps', new Space())
+//    Design.page.set('body scraps', new Space())
+//    level = Design.page.get('body scraps')
 }
 
 /**
@@ -168,17 +169,17 @@ nudgepad.stage.insertBody = function () {
  * @param {Space}  An optional space to initialize the scrap with.
  * @return {string} IDs of the new scraps
  */
-nudgepad.stage.insert = function (space, drag, xMove, yMove, center) {
+Design.stage.insert = function (space, drag, xMove, yMove, center) {
   
   if (!space)
     space = 'scrap\n content Hello world\n style\n  position absolute\n  top 10px\n  left 10px'
     
   // temporary fix for the revised scraps
   var patch = new Space(space.toString())
-  nudgepad.stage.selection.clear()
+  Design.stage.selection.clear()
   
-  nudgepad.stage.insertBody()
-  var level = nudgepad.pages.stage.get('body scraps')
+  Design.stage.insertBody()
+  var level = Design.page.get('body scraps')
   
   
   // update the patch so there is no overwriting
@@ -202,8 +203,8 @@ nudgepad.stage.insert = function (space, drag, xMove, yMove, center) {
   
   if (center) {
     var selection_dimensions = $('.selection').dimensions()
-    xMove = Math.round(($('#nudgepadStageBody').width() / 2) - selection_dimensions.width/2)
-    yMove = Math.round(nudgepad.stage.scrollTop() + ($(window).height() / 2) - selection_dimensions.height/2)
+    xMove = Math.round(($('#DesignStageBody').width() / 2) - selection_dimensions.width/2)
+    yMove = Math.round(Design.stage.scrollTop() + ($(window).height() / 2) - selection_dimensions.height/2)
   }
   
   if (xMove || yMove) {
@@ -231,7 +232,7 @@ nudgepad.stage.insert = function (space, drag, xMove, yMove, center) {
       ghost.attr('id', 'nudgepad_move_ghost').removeClass('scrap selection')
       ghost.on('mousedown', function () {subject.remove()})
       // space.style
-      ghost.css('font-family', $('#nudgepadStageBody').css('font-family'))
+      ghost.css('font-family', $('#DesignStageBody').css('font-family'))
       if (scrap.values.style)
         ghost.css(scrap.values.style.values)
       ghost.css({
@@ -256,7 +257,7 @@ nudgepad.stage.insert = function (space, drag, xMove, yMove, center) {
     
     
   } else {
-    nudgepad.stage.commit()  
+    Design.stage.commit()  
   }
   
   return selectors
@@ -266,30 +267,30 @@ nudgepad.stage.insert = function (space, drag, xMove, yMove, center) {
  * Is the head behind edge?
  * @returns {bool}
  */
-nudgepad.stage.isBehind = function () {
-  return (nudgepad.stage.version < nudgepad.stage.timeline.keys.length)
+Design.stage.isBehind = function () {
+  return (Design.stage.version < Design.stage.timeline.keys.length)
 }
 
 /**
  * @param {string} Name of page
  */
-nudgepad.stage.open = function (name) {
+Design.stage.open = function (name) {
   
   var page = site.get('pages ' + name)
   if (!page)
     return nudgepad.error('Page ' + name + ' not found')
 
-  nudgepad.stage.selection.clear()
+  Design.stage.selection.clear()
   
   // Page change stuff
-  nudgepad.stage.activePage = name
-  store.set('activePage', nudgepad.stage.activePage)
-  nudgepad.tab.patch('page ' + nudgepad.stage.activePage)
-  nudgepad.pages.updateTabs()
+  Design.stage.activePage = name
+  store.set('activePage', Design.stage.activePage)
+  Tab.patch('page ' + Design.stage.activePage)
+  Design.updateTabs()
   
-  nudgepad.stage.reload()
-  nudgepad.stage.render()
-  nudgepad.stage.updateTimeline()
+  Design.stage.reload()
+  Design.stage.render()
+  Design.stage.updateTimeline()
   
   nudgepad.trigger('selection')
   
@@ -297,61 +298,61 @@ nudgepad.stage.open = function (name) {
   
 }
 
-nudgepad.stage.redo = function () {
-  nudgepad.stage.goto(nudgepad.stage.version + 1)
+Design.stage.redo = function () {
+  Design.stage.goto(Design.stage.version + 1)
 }
 
 /**
  * Refresh the stage.
  */
-nudgepad.stage.render = function () {
-  $('#nudgepadStageHead').html('')
-  $('#nudgepadRemoteSelections').html('')
+Design.stage.render = function () {
+  $('#DesignStageHead').html('')
+  $('#DesignRemoteSelections').html('')
   $(".scrap,#body").remove()
-  nudgepad.pages.stage.loadScraps()
-  nudgepad.pages.stage.render()
-  nudgepad.grid.create()
-  nudgepad.updateSelections()
+  Design.page.loadScraps()
+  Design.page.render()
+  Design.grid.create()
+  Design.updateSelections()
 }
 
-nudgepad.stage.reload = function () {
-  var name = nudgepad.stage.activePage
+Design.stage.reload = function () {
+  var name = Design.stage.activePage
   var page = site.get('pages ' + name)
-  nudgepad.pages.edge = page
-  nudgepad.pages.stage = new Page(page.toString())
+  Design.edge = page
+  Design.page = new Page(page.toString())
   
   // if no timeline, create a blank one
   // todo: think harder about what the hell this will do
   // If no timeline, but yes edge, make the edge the first commit
   // i dont like this
-  nudgepad.stage.setTimeline(name)
-  nudgepad.stage.version = nudgepad.stage.timeline.keys.length
+  Design.stage.setTimeline(name)
+  Design.stage.version = Design.stage.timeline.keys.length
   
 }
 
-nudgepad.stage.reset = function () {
-  $('#nudgepadStage').height($(window).height() - 40)
+Design.stage.reset = function () {
+  $('#DesignStage').height($(window).height() - 40)
 }
 
-nudgepad.stage.ribbonClose = function () {
-  $('#nudgepadStage').height($(window).height() - 40)
+Design.stage.ribbonClose = function () {
+  $('#DesignStage').height($(window).height() - 40)
 }
 
-nudgepad.stage.ribbonOpen = function () {
-  $('#nudgepadStage').height($(window).height() - 122)
+Design.stage.ribbonOpen = function () {
+  $('#DesignStage').height($(window).height() - 122)
 }
 
 /**
  * Returns scroll top of the frame.
  */
-nudgepad.stage.scrollTop = function () {
-  return $('#nudgepadStage').scrollTop()
+Design.stage.scrollTop = function () {
+  return $('#DesignStage').scrollTop()
 }
 
 /**
  * Selects all blocks
  */
-nudgepad.stage.selectAll = function () {
+Design.stage.selectAll = function () {
   $('.scrap').each(function () {
     $(this).selectMe()
   })
@@ -360,10 +361,10 @@ nudgepad.stage.selectAll = function () {
 /**
  * @return {object} Pointer to timeline object
  */
-nudgepad.stage.setTimeline = function (name) {
+Design.stage.setTimeline = function (name) {
   
   if (site.get('timelines ' + name)) {
-    nudgepad.stage.timeline = site.get('timelines ' + name)
+    Design.stage.timeline = site.get('timelines ' + name)
     return true
   }
   
@@ -394,100 +395,100 @@ nudgepad.stage.setTimeline = function (name) {
     var patch = new Space()
     patch.set('timelines ' + name, timeline)
     nudgepad.emit('patch', patch.toString())
-    nudgepad.notify('Timeline created')
+    Flasher.flash('Timeline created')
     
     
   })
   
-  nudgepad.stage.timeline = site.get('timelines ' + name)
+  Design.stage.timeline = site.get('timelines ' + name)
   
 }
 
 var stageViews = new Space({
   'full' : function () {
-    $('#nudgepadStage').css({
+    $('#DesignStage').css({
       width : '100%',
       padding : 0
     })
-    $('#nudgepadStageBody').css({
+    $('#DesignStageBody').css({
       'height' : '100%',
       'min-height' : '1000px'
     })
   },
   'ipad' : function (){
     var padding = Math.round(($(window).width() - 1024)/2) + 'px'
-    $('#nudgepadStage').css({
+    $('#DesignStage').css({
       width : '1024px',
       padding : '20px ' + padding + ' 1000px ' + padding,
     })
-    $('#nudgepadStageBody').css({
+    $('#DesignStageBody').css({
       'height' : '100%',
       'min-height' : '768px'
     })
   },
   'ios' : function (){
     var padding = Math.round(($(window).width() - 320)/2) + 'px'
-    $('#nudgepadStage').css({
+    $('#DesignStage').css({
       padding : '20px ' + padding + ' 20px ' + padding,
       width: '320px'
     })
-    $('#nudgepadStageBody').css({
+    $('#DesignStageBody').css({
       'height' : '356px'
     })
   }
 })
 
-nudgepad.stage.currentView = 'ipad'
+Design.stage.currentView = 'ipad'
 
-nudgepad.stage.toggleView = function () {
+Design.stage.toggleView = function () {
   
-  nudgepad.stage.currentView = stageViews.next(nudgepad.stage.currentView)
-  stageViews.get(nudgepad.stage.currentView)()
-  $('#nudgepadStageBody').width()
-  nudgepad.notify(nudgepad.stage.currentView + ' view')
+  Design.stage.currentView = stageViews.next(Design.stage.currentView)
+  stageViews.get(Design.stage.currentView)()
+  $('#DesignStageBody').width()
+  Flasher.flash(Design.stage.currentView + ' view')
 }
 
-nudgepad.stage.undo = function () {
-  nudgepad.stage.goto(nudgepad.stage.version - 1)
+Design.stage.undo = function () {
+  Design.stage.goto(Design.stage.version - 1)
 }
 
-nudgepad.stage.updateTimeline = function () {
+Design.stage.updateTimeline = function () {
   // Set the history slider to the wherever the worker last had it (usally 100 if no history or havent edited it yet)
-  nudgepad.stage.percentElapsed = (nudgepad.stage.timeline.keys.length ? Math.round(100 * nudgepad.stage.version/nudgepad.stage.timeline.keys.length) : 100)
-  $('#nudgepadTimeline').attr('max', nudgepad.stage.timeline.keys.length).val(nudgepad.stage.version)
-  $('#nudgepadTimelinePosition').text(nudgepad.stage.version + '/' + nudgepad.stage.timeline.keys.length)
+  Design.stage.percentElapsed = (Design.stage.timeline.keys.length ? Math.round(100 * Design.stage.version/Design.stage.timeline.keys.length) : 100)
+  $('#DesignTimeline').attr('max', Design.stage.timeline.keys.length).val(Design.stage.version)
+  $('#DesignTimelinePosition').text(Design.stage.version + '/' + Design.stage.timeline.keys.length)
 }
 
 nudgepad.on('main', function () {
   
   stageViews.get('ipad')()
-  $('#nudgepadStageBody').width()
+  $('#DesignStageBody').width()
   
   
   
   
   /*
-  $("#nudgepadStage").on('rendered', function (event, id) {
-    if (nudgepad.pages.stage[id].locked)
+  $("#DesignStage").on('rendered', function (event, id) {
+    if (Design.page[id].locked)
       $('.scrap#' + id).addClass('lockedScrap')
   })
   */
 
-  $("#nudgepadStage").on("tap", function (event) {
-    nudgepad.stage.selection.clear()
+  $("#DesignStage").on("tap", function (event) {
+    Design.stage.selection.clear()
     return true
   })
 
   $(window).on('resize', function () {
-    stageViews.get(nudgepad.stage.currentView)()
-    $('#nudgepadStageBody').width()
-    if ($('#nudgepadRibbon:visible').length)
-      $('#nudgepadStage').height($(window).height() - 122)
+    stageViews.get(Design.stage.currentView)()
+    $('#DesignStageBody').width()
+    if ($('#DesignRibbon:visible').length)
+      $('#DesignStage').height($(window).height() - 122)
     else 
-      $('#nudgepadStage').height($(window).height() - 40)
+      $('#DesignStage').height($(window).height() - 40)
   })
 
-  nudgepad.stage.reset()
+  Design.stage.reset()
 
 })
 

@@ -7,12 +7,12 @@
 Scrap.prototype.onedit = '' // String, name of app to open.
 Scrap.prototype.edit = function (selectAll) {
   
-  if (this.values.onedit && nudgepad.apps[this.values.onedit])
-    nudgepad.apps[this.values.onedit].open()
+  if (this.values.onedit && window[this.values.onedit])
+    window[this.values.onedit].open()
   
   // Default block editor
   else
-    nudgepad.contentEditor.focus(this.selector(), selectAll)
+    Design.contentEditor.focus(this.selector(), selectAll)
 
   return this
 }
@@ -143,7 +143,7 @@ Scrap.prototype.render = function (context, index) {
   if (this.values.tag && this.values.tag.match(/style|link/)) {
     this.setElementTag(context)
     this.setContent(context, options)
-    $('#nudgepadStageHead').append(this.div.toHtml())
+    $('#DesignStageHead').append(this.div.toHtml())
     return this
   }
   
@@ -156,7 +156,7 @@ Scrap.prototype.render = function (context, index) {
 //    this.div.attr('path', this.getPath())
 //    this.div.attr('selector', this.selector())
     this.div.tag = 'div'
-    $('#nudgepadStageBody').append(this.div.toHtml())
+    $('#DesignStageBody').append(this.div.toHtml())
     return this
   }
   
@@ -172,7 +172,7 @@ Scrap.prototype.selector = function () {
   var selector = this.path.replace(/[^a-z0-9\-\.\_ ]/gi, '').replace(/ /g, '>#')
   if (!selector)
     return ''
-  return '#nudgepadStageBody>#' + selector
+  return '#DesignStageBody>#' + selector
 }
 
 /**
@@ -188,7 +188,7 @@ Scrap.prototype.toHtml = function (context) {
   this.setStyle(context)
   this.div.addClass('scrap')
   this.div.attr('path', this.getPath())
-//  this.div.attr('page', nudgepad.stage.activePage)
+//  this.div.attr('page', Design.stage.activePage)
   this.div.attr('selector', this.selector())
   return this.div.toHtml()
 }
@@ -233,17 +233,17 @@ Scrap.selectOnTap =  function (event) {
 
 
   // Hold meta key to nest something
-  if (nudgepad.mouse.down && nudgepad.mouse.down.metaKey) {
+  if (Mouse.down && Mouse.down.metaKey) {
     if (!$(this).hasClass('selection') && $('.selection').length) {
-      nudgepad.stage.selection.nest($(this).attr('path'))
+      Design.stage.selection.nest($(this).attr('path'))
       return false
     }
   }
   
 
   // If shift key is not down, clear selection first
-  if (!nudgepad.mouse.down || !nudgepad.mouse.down.shiftKey)
-    nudgepad.stage.selection.clear()
+  if (!Mouse.down || !Mouse.down.shiftKey)
+    Design.stage.selection.clear()
 
   $(this).selectMe()
 
@@ -258,7 +258,7 @@ Scrap.unlock = function () {
   // Unlock block on hold
   if (scrap.get('locked')) {
     scrap.unlock()
-    nudgepad.stage.commit()
+    Design.stage.commit()
   }
   
   $(this).selectMe()
@@ -268,7 +268,7 @@ Scrap.unlock = function () {
 
 nudgepad.on('main', function () {
   $(document).on('click', 'a.scrap, .scrap a, .scrap div', Scrap.disableLinks)
-  $('#nudgepadStage').on("tap", ".scrap", Scrap.selectOnTap)
+  $('#DesignStage').on("tap", ".scrap", Scrap.selectOnTap)
   
   $('body').on("hold", ".scrap", Scrap.unlock)
   

@@ -7,35 +7,8 @@ if (!window.console)
  *
  * @special Singleton
  */
-nudgepad = {}
-nudgepad.apps = {}
-nudgepad.pages = {}
-nudgepad.stage = {}
+var nudgepad = {}
 nudgepad.id = new Date().getTime()
-nudgepad.tab = new Space('id ' + nudgepad.id)
-nudgepad.tab.set('device', platform.name + (platform.product ? '/' + platform.product : ''))
-
-nudgepad.setColor = function () {
-  if (nudgepad.tab.get('color'))
-    return true
-  var colors = ['red', 'green', 'violet', 'yellow', 'blue', 'orange', 'indigo']
-  var used = []
-  site.values.collage.each(function (key, value) {
-    if (value.get('color'))
-      used.push(value.get('color'))
-  })
-  var freeColors = _.difference(colors, used)
-  if (freeColors.length < 1)
-    freeColors.push('black')
-  nudgepad.tab.set('color', freeColors[0])
-}
-
-nudgepad.tab.on('patch', function () {
-  site.set('collage ' + nudgepad.id, this)
-  nudgepad.emit('collage.update', this)
-})
-
-
 nudgepad.isTesting = false
 
 // Nudgepad Events
@@ -61,35 +34,28 @@ nudgepad.main = function (callback) {
   nudgepad.domain = document.location.host
   
   // Load plugins
-  nudgepad.grid = new Grid()
   nudgepad.cookie = parseCookie(document.cookie)
   nudgepad.name = ParseName(nudgepad.cookie.email)
-  nudgepad.tab.set('email', nudgepad.cookie.email)
-  nudgepad.tab.set('name', nudgepad.name)
+  Tab.set('email', nudgepad.cookie.email)
+  Tab.set('name', nudgepad.name)
   
   
   // In case we open multiple tabs
   window.name = 'nudgepad'
   
-  // Can blocks be selected on click
-  nudgepad.select = true
-  
-  // Only allow shortcuts on tools
-  Events.shortcut.context = '.nudgepad'
-  
   // TODO: on capture phase, capture block clicks, check if shiftkey is held,
   // if shiftkey is not held, prevent any events from firing on click?
   // document.body.addEventListener('mouseup', PopupHider.hide, true)
   
+  Events.shortcut.onfire = function (key) {
+    mixpanel.track('I used the keyboard shortcut ' +  key)
+  }
+  
+  
   nudgepad.query = ParseQueryString()
   // Fetch all files in the background.
-  nudgepad.explorer.getSite(function () {
+  Explorer.getSite(function () {
     
-    
-    // SLOW?? maybe not anymore
-    // Render icons
-    
-    nudgepad.bind_shortcuts()
     
     // Open socket
     nudgepad.socket = io.connect('/')
@@ -109,12 +75,12 @@ nudgepad.main = function (callback) {
     nudgepad.socket.on('connect_failed', function (error) {
       console.log('Connect failed')
       console.log(error)
-      $('#nudgepadConnectionStatus').html('Connection to server failed...').show()
+      $('#ConnectionStatus').html('Connection to server failed...').show()
     })
 
     nudgepad.socket.on('error', function (error) {
       console.log(error)
-      $('#nudgepadConnectionStatus').html('Connecting to server...').show()
+      $('#ConnectionStatus').html('Connecting to server...').show()
     })
 
     nudgepad.socket.on('disconnect', function (message) {
@@ -129,7 +95,7 @@ nudgepad.main = function (callback) {
     
     nudgepad.socket.on('collage.delete', function (id) {
       var tabName = site.get('collage ' + id)
-      nudgepad.notify(tabName.get('name') + ' closed a tab')
+      Flasher.flash(tabName.get('name') + ' closed a tab')
       site.values.collage.delete(id)
       nudgepad.trigger('collage.update')
     })
@@ -138,7 +104,7 @@ nudgepad.main = function (callback) {
       patch = new Space(patch)
       site.values.collage.patch(patch)
       var id = patch.keys[0]
-      nudgepad.notify(patch.get(id + ' name') + ' opened a tab')
+      Flasher.flash(patch.get(id + ' name') + ' opened a tab')
     })
 
     nudgepad.socket.on('ack', function (message) {
@@ -147,24 +113,8 @@ nudgepad.main = function (callback) {
 
     nudgepad.socket.on('connect', function (message) {
       console.log('connected to server %s', message)
-      $('#nudgepadConnectionStatus').html('Connected!').fadeOut()
+      $('#ConnectionStatus').html('Connected!').fadeOut()
       nudgepad.restartCheck()
-    })
-    
-
-    // Do some special stuff for ios
-    nudgepad.iosMain()
-    
-    var activePage = store.get('activePage') || 'home'
-    
-    if (!site.get('pages ' + activePage))
-      activePage = 'home'
-    
-    nudgepad.stage.open(activePage)
-    
-    // Update all handles on resize
-    $(window).on('resize', function () {
-      $('.handle').trigger('update')
     })
     
     nudgepad.warnBeforeReload = true
@@ -177,16 +127,13 @@ nudgepad.main = function (callback) {
     $('body').scrollTop(0)
     $('body').scrollLeft(0)
 
-    nudgepad.navigation.openAppFromQueryString()
+    Launcher.openAppFromQueryString()
     
-    $('#nudgepadLoadingScreen').hide()
-    
-    // Prevent Images from dragging on Firefox
-    $(document).on('dragstart', 'img', function(event) { event.preventDefault()})
+    $('#LoadingScreen').hide()
     
     // fetch other timelines in background for now
     // SLOW
-    nudgepad.explorer.downloadTimelines()
+    Explorer.downloadTimelines()
     
     nudgepad.trigger('main')
     
@@ -201,13 +148,6 @@ nudgepad.main = function (callback) {
       console.log('It took %sms to create this site', howLongItTookToCreateThisSite)
       
     }
-    
-    Lasso.selector = '#nudgepadStageBody .scrap:visible'
-    $(document).on('lasso', '.scrap', function () {
-      $(this).selectMe()
-      return false
-    })
-    Lasso.enable()
       
     if (callback)
       callback()
@@ -236,8 +176,13 @@ nudgepad.emit = function (event, space) {
  * @param {string} Name of the event.
  * @param {function} fn to unbind
  */
-nudgepad.off = function (event, fn) {
-  
+nudgepad.off = function (eventName, fn) {
+  if (!nudgepad.events[eventName])
+    return true
+  for (var i in nudgepad.events[eventName]) {
+    if (nudgepad.events[eventName][i] === fn)
+      nudgepad.events[eventName].splice(i, 1)
+  }
 }
 
 /**
@@ -255,6 +200,24 @@ nudgepad.quit = function () {
   $('.scrap,.nudgepad').remove()
 }
 
+nudgepad.reloadMessageOneTime = ''
+nudgepad.reloadMessage = function () {
+  var message
+  if (message = nudgepad.reloadMessageOneTime) {
+    nudgepad.reloadMessageOneTime = ''
+    return message
+  }
+  return 'Are you sure you want to leave Nudgepad?'
+}
+
+nudgepad.restartCheck = function () {
+  $.get('/nudgepad.started', {}, function (data) {
+    if (data !== site.get('started')) {
+      nudgepad.reloadMessageOneTime = 'Your site restarted. Please refresh the page.'
+      location.reload()
+    }
+  })
+}
 
 /**
  * Fire a Nudgepad event.

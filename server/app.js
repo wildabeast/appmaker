@@ -92,9 +92,9 @@ app.nudgepad.site.set('collage', new Space())
 // Load the HTML file and add mtimes as query string so the
 // worker always get the latest version of the nudgepad.js and nudgepad.css
 // todo: remove this?
-app.nudgepad.nudgepadCssVersion = fs.statSync(clientPath + 'public/nudgepad.min.css').mtime.getTime()
-app.nudgepad.nudgepadJsVersion = fs.statSync(clientPath + 'public/nudgepad.min.js').mtime.getTime()
-app.nudgepad.nudgepadHtmlVersion = fs.readFileSync(clientPath + 'public/nudgepad.min.html', 'utf8')
+app.nudgepad.nudgepadCssVersion = fs.statSync(clientPath + 'production/nudgepad.min.css').mtime.getTime()
+app.nudgepad.nudgepadJsVersion = fs.statSync(clientPath + 'production/nudgepad.min.js').mtime.getTime()
+app.nudgepad.nudgepadHtmlVersion = fs.readFileSync(clientPath + 'production/nudgepad.min.html', 'utf8')
   .replace(/JSV/, app.nudgepad.nudgepadJsVersion)
   .replace(/CSSV/, app.nudgepad.nudgepadCssVersion)
 
@@ -335,12 +335,39 @@ app.get(/^\/nudgepad$/, app.checkId, function(req, res, next) {
   }
   
   // If development, send html that pulls verbose NudgePad
-  fs.readFile(clientPath + 'public/nudgepad.dev.html', 'utf8', function (err, data) {
+  fs.readFile(clientPath + 'production/nudgepad.dev.html', 'utf8', function (err, data) {
     res.send(data)
     return 
   })
 
 })
+
+// If development, watch client folder and trigger rebuilds.
+// NudgePad app developer should never have to manually run build.js
+// Watch core and apps folder recursively.
+app.rebuild = function () {
+  exec('node ' + clientPath + 'build.js')
+  console.log('Rebuilding...')
+}
+
+app.watchDir = function (dir) {
+  console.log('watching %s', dir)
+  fs.watch(dir, app.rebuild)
+  var files = fs.readdirSync(dir)
+  _.each(files, function (file) {
+    var path = dir + '/' + file
+    var stat = fs.statSync(path)
+    if (stat.isDirectory())
+      app.watchDir(path)
+    else
+      fs.watch(path, app.rebuild)
+  })
+}
+
+if (app.nudgepad.development) {
+  app.watchDir(clientPath + 'apps')
+  app.watchDir(clientPath + 'core')
+}
 
 /*********** sendPage method ************/
 app.pageOptions = {
@@ -515,7 +542,7 @@ speedcoach('server started')
 /********* SOCKET IO STUFF **********/ 
 io = socketio.listen(http_server)
 
-io.set('log level', 3)
+//io.set('log level', 3)
 
 /********* SOCKET EVENTS **********/ 
 

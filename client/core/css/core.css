@@ -36,6 +36,7 @@ body {
   position: relative;
   width: 100%;
   height: 100%;
+  font-family: 'Titillium Web';
 }
 
 @font-face {
@@ -57,17 +58,17 @@ body {
   src: local('Titillium WebBold'), local('TitilliumWeb-Bold'), url(http://themes.googleusercontent.com/static/fonts/titilliumweb/v1/anMUvcNT0H1YN4FII8wpr_5rZpfU3XI-FvUPGDRT0xY.woff) format('woff');
 }
 
-.nudgepad {
-  font-family: 'Titillium Web';
-}
 
+.clear {
+  clear: both;
+}
 
 
 
 
 /******* Text Prompt ******/
 
-#nudgepadEditorTextarea {
+#TextPrompt {
   padding : 3px;
   font-family : monospace;
   font-size : 16px;
@@ -85,7 +86,7 @@ body {
   user-select: auto;
 }
 
-#nudgepadEditorModalScreen {
+#ModalScreen {
   width : 100%;
   height : 100%;
   top : 0;
@@ -95,7 +96,7 @@ body {
   background : rgba(0,0,0,.3);
 }
 
-#nudgepadEditorCancelButton, #nudgepadEditorSaveButton {
+#CancelButton, #SaveButton {
   width : 90px;
   height : 40px;
   bottom : 90px;
@@ -112,28 +113,28 @@ body {
   cursor: pointer;
 }
 
-#nudgepadEditorSaveButton {
+#SaveButton {
   right : 70px;
   background : #3d86d1;
 }
 
-#nudgepadEditorSaveButton:hover{
+#SaveButton:hover{
   background-color: #3579bd;
 }
 
-#nudgepadEditorSaveButton:active{
+#SaveButton:active{
     background-color: #2c66a1;
 }
 
-#nudgepadEditorCancelButton:hover{
+#CancelButton:hover{
     background-color: #444;
 }
 
-#nudgepadEditorCancelButton:active{
+#CancelButton:active{
      background-color: #222;
 }
 
-#nudgepadEditorButtonContainer {
+#ButtonContainer {
   height : 80px;
   bottom : 70px;
   right : 50px;
@@ -145,7 +146,7 @@ body {
 }
 
 
-#nudgepadError, #nudgepadJavascriptError, #nudgepadWorkerError  {
+#nudgepadError, #JavascriptError, #WorkerError  {
   left: 0;
   top: 0;
   width: 100%;
@@ -161,20 +162,20 @@ body {
   z-index: 4001;
 }
 
-#nudgepadJavascriptError {
+#JavascriptError {
   z-index: 4099;
   overflow-y: scroll;
   font-size: 12px;
 }
 
-#nudgepadWorkerError {
+#WorkerError {
   z-index: 2000;
 }
 
 
 
 
-#nudgepadConnectionStatus {
+#ConnectionStatus {
   right: 10px;
   top: 10px;
   max-width: 500px;
@@ -187,21 +188,7 @@ body {
   text-align: right;
 }
 
-.nudgepadFullScreenApp {
-  position: absolute;
-  left: 0px;
-  top: 0px;
-  display: none;
-  width: 100%;
-  height: 100%;
-  background-color: #eaeaeb;
-  z-index: 1000;
-  overflow-y: scroll;
-  overflow-x: hidden;
-  font-family: 'Titillium Web';
-}
-
-#nudgepadLoadingScreen {
+#LoadingScreen {
   position: fixed;  
   width: 100%;
   top: 0;
@@ -215,7 +202,7 @@ body {
   z-index: 2000;
 }
 
-#nudgepadNotify {
+#Flasher {
   background: #11a4ed;
   color: white;
   top: -2;

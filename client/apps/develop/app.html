@@ -1,0 +1,45 @@
+<div class="App" id="Develop">
+	<div class="AppNav">
+		<div class="AppNavContainer">
+  		<div class="AppSquareButton AppBackButton" onclick="Launcher.open('Launch')">
+		  	Back
+		  </div>
+			<a class="DevelopButton" onclick="Develop.console()" title="Console">
+		  	Console
+		  </a>
+			<a href="/nudgepad.export" target="blank" class="DevelopButton">
+		  	Export
+		  </a>
+		  <a onclick="Develop.import()" class="DevelopButton">
+		  	Import
+		  </a>
+		  <a onclick="Develop.clone()" class="DevelopButton">
+		  	Clone
+		  </a>
+		  <a id="DevelopRestart" class="DevelopButton" onclick="$.get('/nudgepad.restart')">
+		  	Restart
+		  </a>
+		<div class="clear"></div>
+		</div>
+	</div>
+  <div class="AppContainer">
+	  <div id="DevelopToggle">
+	  	<div class="DevelopToggleOption DevelopSelect" value="DevelopFilesContent">Files</div>
+			<div class="DevelopToggleOption" value="DevelopLogsContent">Logs</div>
+			<div class="DevelopToggleOption" value="DevelopInfoContent">Info</div>
+	    <div class="clear"></div>
+	  </div>
+	  <div id="DevelopFilesContent" class="DevelopContent">
+	  	<div id="DevelopExplorerPath" onclick="Develop.home()"></div>
+		  <div id="DevelopExplorerHolder"></div>
+		</div>
+		<div id="DevelopLogsContent" class="DevelopContent">
+	  	<div class="DevelopSectionLabel">Logs</div>
+		  <pre id="DevelopLogHolder" readonly="readonly" class="DevelopSelectable"></pre>
+		</div>
+		<div id="DevelopInfoContent" class="DevelopContent">
+	  	<div class="DevelopSectionLabel">Info</div>
+		  <pre id="DevelopStatusArea" readonly="readonly" class="DevelopSelectable"></pre>
+		</div>
+	</div>
+</div>

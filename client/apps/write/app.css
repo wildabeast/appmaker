@@ -1,0 +1,126 @@
+#WritePostColumn {
+  float: left;
+  width: 25%;
+}
+
+#WriteComposeColumn {
+  float: left;
+  width: 75%;
+}
+
+#WritePostContent {
+  padding: 40px 0px;
+}
+
+#WritePostTitle {
+  margin-bottom: 20px;
+  font-size: 18px;
+}
+
+#WritePosts {
+  cursor : pointer;
+  text-align : left;
+}
+
+#WriteTitle {
+  width : 100%;
+  text-indent : 10px;
+  padding : 0px;
+  height : 50px ;
+  line-height : 20px;
+  font-size : 20px;
+  border : 0px;
+  border-bottom : 1px solid #ccc;
+  margin-top: 40px;
+}
+
+#WritePermalink {
+  left : 0px;
+  top : 629px;
+  font-size : 13px;
+  height : 1px;
+  line-height : 30px;
+  cursor : pointer;
+  color : #3D86D1;
+  width : 1px;
+  text-overflow : ellipsis;
+}
+
+#WriteContent {
+  width : 100%;
+  font-size : 16px;
+  resize : none;
+  height : 400px;
+  border : none;
+  padding : 20px 10px;
+}
+
+#WriteAdvancedToggle {
+  float: right;
+  margin-left: 10px;
+  position: relative;
+}
+
+#WriteAdvanced {
+  display : none;
+  right : 0px;
+  top : 40px;
+  width : 260px;
+  font-size : 16px;
+  background-color: #444;
+  z-index: 4;
+  color: #ccc;
+  resize : none;
+  border : none;
+  padding : 20px 10px;
+  position : absolute;
+}
+
+#WriteDeleteButton {
+  background-color: #555;
+  height: 40px;
+  width: 100px;
+  color: #fff;
+  font-size : 15px;
+  margin-top: 10px;
+  float: right;
+  text-align: center;
+  cursor : pointer;
+  line-height: 40px;
+}
+
+#WritePublishButton {
+  background-color: #1a86d6;
+  height: 40px;
+  width: 100px;
+  color: #fff;
+  font-size : 15px;
+  margin-top: 10px;
+  margin-left: 10px;
+  float: right;
+  text-align: center;
+  cursor : pointer;
+  line-height: 40px;
+}
+
+#WriteNewPostButton {
+  background-color: #64b81f;
+  height: 40px;
+  width: 100px;
+  text-align: center;
+  float: right;
+  line-height: 40px;
+  color: #fff;
+  font-size: 15px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+#WriteNewPostButton:hover { 
+  background-color: #529919;
+}
+
+#WriteNewPostButton:active { 
+  background-color: #427a14;
+}
+
