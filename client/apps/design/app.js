@@ -214,35 +214,6 @@ Design.nextName = function (prefix) {
 
 /**
  */
-Design.oncopy = function(e) {
-  
-  console.log('copyyed')
-  
-  // Return true if worker is editing an input
-  if ($('input:focus, div:focus, textarea:focus, a:focus').length)
-    return true
-  
-  if (!Design.stage.selection.exists())
-    return true
-  
-  if (e.clipboardData) {
-    e.preventDefault()
-    e.clipboardData.setData(
-        'text/xcustom', Design.stage.selection.toSpace().toString())
-
-    var setStatus = e.clipboardData.setData(
-        'text/plain', Design.stage.selection.toSpace().toString())
-  }
-  if (window.clipboardData) {
-    e.returnValue = false
-    var setStatus = window.clipboardData.setData(
-      'Text', Design.stage.selection.toSpace().toString())
-  }
-  mixpanel.track('I copied something')
-}
-
-/**
- */
 Design.oncut = function(e) {
   
   // Return true if worker is editing an input
@@ -388,33 +359,6 @@ Design.onready = function () {
 Design.onresize = function () {
   // Update all handles on resize
   $('.handle').trigger('update')
-}
-
-/**
- */
-Design.onpaste = function(e) {
-
-  console.log('pasted')
-
-  // Return true if worker is editing an input
-  if ($('input:focus, div:focus, textarea:focus, a:focus').length)
-    return true
-  
-  var pastedText = undefined
-  if (window.clipboardData && window.clipboardData.getData) // IE
-    pastedText = window.clipboardData.getData('Text')
-  else if (e.clipboardData && e.clipboardData.getData)
-    pastedText = e.clipboardData.getData('text/plain')
-  
-  // Todo: check for what format this is
-  if (pastedText.match(/\n/)) {
-    
-    Design.stage.insert(pastedText)
-    Design.stage.selection.save()
-    Design.stage.open(Design.stage.activePage)
-    Design.stage.selection.restore()
-  }
-  mixpanel.track('I pasted something')
 }
 
 /**

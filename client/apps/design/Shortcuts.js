@@ -95,4 +95,5 @@ Design.shortcuts['meta+z'] = Design.stage.undo
 Design.shortcuts['meta+shift+z'] = Design.stage.redo
 Design.shortcuts['meta+y'] = Design.stage.redo
 Design.shortcuts['ctrl+y'] = Design.stage.redo
-Design.shortcuts['meta+shift+c'] = Design.stage.selection.cssPrompt
+Design.shortcuts['meta+shift+s'] = Design.stage.selection.cssPrompt
+
