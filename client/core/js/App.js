@@ -8,6 +8,7 @@
 function App(name) {
   this.name = name
   this._open = false
+  this.events = {}
   App.apps.push(name)
 }
 
@@ -114,8 +115,21 @@ App.prototype.open = function () {
 
 }
 
-/**
- */
+App.prototype.off = function (eventName, fn) {
+  if (!this.events[eventName])
+    return true
+  for (var i in this.events[eventName]) {
+    if (this.events[eventName][i] === fn)
+      this.events[eventName].splice(i, 1)
+  }
+}
+
+App.prototype.on = function (eventName, fn) {
+  if (!this.events[eventName])
+    this.events[eventName] = []
+  this.events[eventName].push(fn)
+}
+
 App.prototype.restart = function () {
   this.close()
   this.open()
@@ -128,3 +142,8 @@ App.prototype.toggle = function () {
     this.open()
 }
 
+App.prototype.trigger = function (eventName, space) {
+  for (var i in this.events[eventName]) {
+    this.events[eventName][i](space)
+  }
+}
