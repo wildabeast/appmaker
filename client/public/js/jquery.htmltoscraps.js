@@ -1,4 +1,4 @@
-var htmlProperties = 'checked class disabled draggable dropzone end for height href max maxlength min name origin pattern placeholder readonly rel required selected spellcheck src tabindex target title width value'.split(/ /)
+var htmlProperties = 'checked class disabled draggable dropzone end for height href max maxlength min name onblur onchange onclick oncontextmenu onenterkey onfocus onhold onkeydown onkeypress onkeyup onmousedown onmouseout onmouseover onmouseup onorientationchange onsubmit ontouchend ontouchmove ontouchstart origin pattern placeholder readonly rel required selected spellcheck src tabindex target title width value'.split(/ /)
 
 $.fn.toSpace = function () {
   var space = new Space()
