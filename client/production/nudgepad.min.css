@@ -98,16 +98,6 @@ html {
   position: relative;
 }
 
-body {
-  margin: 0;
-  line-height: 1;
-  overflow: hidden;
-  position: relative;
-  width: 100%;
-  height: 100%;
-  font-family: 'Titillium Web';
-}
-
 @font-face {
   font-family: 'Titillium Web';
   font-style: normal;
