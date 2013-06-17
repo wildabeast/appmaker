@@ -130,7 +130,6 @@ nudgepad.MoveHandle.slideend = function () {
   Design.grid.removeSnaplines()
   $('#DesignDimensions').hide()
   Design.stage.commit()
-  Design.stage.expand()
 }
 
 nudgepad.MoveHandle.slidestart = function () {

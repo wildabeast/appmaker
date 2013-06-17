@@ -53,6 +53,7 @@ Design.stage.commit = function () {
   Design.stage.updateTimeline()
   
   nudgepad.trigger('selection')
+  nudgepad.trigger('commit')
   
   // Send Commit to Server
   var patch = new Space()
@@ -133,6 +134,10 @@ Design.stage.expand = function () {
   })
 
 }
+// We should bind this method to any event that could potentially
+// change the bottom edge of the page on the stage
+nudgepad.on('commit', Design.stage.expand)
+Design.on('ready', Design.stage.expand)
 
 /**
  * Open the next page
@@ -316,7 +321,7 @@ Design.stage.open = function (name) {
   Design.stage.updateTimeline()
   
   nudgepad.trigger('selection')
-  Design.stage.expand()
+  Design.trigger('ready')
   return ''
   
 }
@@ -465,7 +470,6 @@ Design.stage.toggleView = function () {
   stageViews.get(Design.stage.currentView)()
   $('#DesignStageBody').width()
   Flasher.flash(Design.stage.currentView + ' view')
-  Design.stage.expand()
 }
 
 Design.stage.undo = function () {

@@ -201,7 +201,6 @@ nudgepad.StretchHandle.slideend = function () {
   Design.grid.removeSnaplines()
   $('#DesignDimensions').hide()
   Design.stage.commit()
-  Design.stage.expand()
 }
 
 /**

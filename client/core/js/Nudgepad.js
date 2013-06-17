@@ -15,6 +15,7 @@ nudgepad.isTesting = false
 nudgepad.events = {
   'selection' : [],
   'stage' : [],
+  'commit' : [],
   'page' : [],
   'disconnect' : [],
   'collage.update' : [],
