@@ -270,6 +270,8 @@ Design.onclose = function () {
   
   nudgepad.off('selection', Design.broadcastSelection)
   nudgepad.off('collage.update', Design.updateSelections)
+  
+  Design.stage.close()
 
   if (!navigator.userAgent.match(/iPad|iPhone|iPod/i))
     return null

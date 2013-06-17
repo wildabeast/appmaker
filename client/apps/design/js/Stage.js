@@ -14,6 +14,12 @@ Design.stage.back = function () {
   Design.stage.open(site.get('pages').prev(Design.stage.activePage))
 }
 
+Design.stage.close = function () {
+  $('#DesignStageHead').html('')
+  $('#DesignRemoteSelections').html('')
+  $(".scrap,#body").remove()
+}
+
 /**
  * Generates a Space of the change and posts it to the server.
  *
@@ -306,9 +312,7 @@ Design.stage.redo = function () {
  * Refresh the stage.
  */
 Design.stage.render = function () {
-  $('#DesignStageHead').html('')
-  $('#DesignRemoteSelections').html('')
-  $(".scrap,#body").remove()
+  Design.stage.close()
   Design.page.loadScraps()
   Design.page.render()
   Design.grid.create()
