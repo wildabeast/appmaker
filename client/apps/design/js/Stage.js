@@ -117,6 +117,23 @@ Design.stage.erase = function () {
   Design.stage.commit()
 }
 
+Design.stage.expand = function () {
+  // Absolute positioned elements won't expand the container(it seems
+  // that way anyway, maybe theres a better way to do it via css), so we need
+  // to do it manually.
+  var max = 700
+  $('.scrap').each(function () {
+    var bottom = $(this).position().top + $(this).outerHeight()
+    if (bottom > max)
+      max = bottom
+  })
+  console.log(max)
+  $('#DesignStageBody').css({
+    'height' : max + 'px'
+  })
+
+}
+
 /**
  * Open the next page
  */
@@ -299,7 +316,7 @@ Design.stage.open = function (name) {
   Design.stage.updateTimeline()
   
   nudgepad.trigger('selection')
-  
+  Design.stage.expand()
   return ''
   
 }
@@ -415,7 +432,6 @@ var stageViews = new Space({
       padding : 0
     })
     $('#DesignStageBody').css({
-      'height' : '100%',
       'min-height' : '1000px'
     })
   },
@@ -426,7 +442,6 @@ var stageViews = new Space({
       padding : '20px ' + padding + ' 1000px ' + padding,
     })
     $('#DesignStageBody').css({
-      'height' : '100%',
       'min-height' : '768px'
     })
   },
@@ -437,7 +452,7 @@ var stageViews = new Space({
       width: '320px'
     })
     $('#DesignStageBody').css({
-      'height' : '356px'
+      'min-height' : '356px'
     })
   }
 })
@@ -450,6 +465,7 @@ Design.stage.toggleView = function () {
   stageViews.get(Design.stage.currentView)()
   $('#DesignStageBody').width()
   Flasher.flash(Design.stage.currentView + ' view')
+  Design.stage.expand()
 }
 
 Design.stage.undo = function () {
