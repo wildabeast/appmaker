@@ -2,6 +2,21 @@ Design.pen = {
   on : false
 }
 
+Design.pen.insertTextBlock = function (event) {
+  
+  if (!event.metaKey)
+    return true
+  
+  var offsetLeft = $('#DesignStageBody').offset().left
+  var offsetTop = $('#DesignStageBody').offset().top
+  var x = Mouse.down.pageX - offsetLeft
+  var y = Mouse.down.pageY - offsetTop
+  var scraps = new Space().set('text', new Space("tag h2\nstyle\n position absolute\n left " + x + "px\n top " + y + "px\n"))
+  var selector = Design.stage.insert(scraps)[0]
+  $(selector).scrap().edit()
+  
+}
+
 Design.pen.draw = function (event) {
   
   if (!Design.pen.on && !Mouse.down.metaKey)

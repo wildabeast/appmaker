@@ -233,7 +233,7 @@ Scrap.selectOnTap =  function (event) {
 
 
   // Hold meta key to nest something
-  if (Mouse.down && Mouse.down.metaKey) {
+  if (Mouse.down && Mouse.down.altKey) {
     if (!$(this).hasClass('selection') && $('.selection').length) {
       Design.stage.selection.nest($(this).attr('path'))
       return false

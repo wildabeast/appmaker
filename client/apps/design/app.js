@@ -270,6 +270,7 @@ Design.onclose = function () {
   
   nudgepad.off('selection', Design.broadcastSelection)
   nudgepad.off('collage.update', Design.updateSelections)
+  $('#DesignStage').off('click', Design.pen.insertTextBlock)
   
   Design.stage.close()
 
@@ -336,6 +337,8 @@ Design.onopen = function () {
   Lasso.enable()
   
   $(document).on("slidestart", Design.pen.draw)
+  
+  $('#DesignStage').on('click', Design.pen.insertTextBlock)
 
   // Prevent Images from dragging on Firefox
   $(document).on('dragstart', 'img', function(event) { event.preventDefault()})
