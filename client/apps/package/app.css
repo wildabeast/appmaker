@@ -1,0 +1,12 @@
+#PackageManifestUrl {
+  user-select: auto;
+  -webkit-user-select: auto;
+  -moz-user-select: text;
+}
+#PackageManifestUrl a{
+  cursor: pointer;
+  color: blue;
+}
+#PackageManifestUrl a:hover {
+  text-decoration: underline;
+}

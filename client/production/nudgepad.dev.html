@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="/nudgepad/apps/develop/app.css" type="text/css"/>
     <link rel="stylesheet" href="/nudgepad/apps/launch/app.css" type="text/css"/>
     <link rel="stylesheet" href="/nudgepad/apps/manage/app.css" type="text/css"/>
+    <link rel="stylesheet" href="/nudgepad/apps/package/app.css" type="text/css"/>
     <link rel="stylesheet" href="/nudgepad/apps/write/app.css" type="text/css"/>
 
     <link rel="shortcut icon" href="/nudgepad/public/images/favicon.ico" type="image/x-icon">
@@ -92,6 +93,7 @@
     <script type="text/javascript" src="/nudgepad/apps/develop/app.js"></script>
     <script type="text/javascript" src="/nudgepad/apps/launch/app.js"></script>
     <script type="text/javascript" src="/nudgepad/apps/manage/app.js"></script>
+    <script type="text/javascript" src="/nudgepad/apps/package/app.js"></script>
     <script type="text/javascript" src="/nudgepad/apps/write/app.js"></script>
 
     <script type="text/javascript">
@@ -263,6 +265,11 @@
 		    <div class="LaunchSubBlock">Write code and maintain the backend.</div>
 		  </div>
 		  
+		  <div class="LaunchSquare" style="background-color : rgba(71, 41, 54, 1);" onclick="Launcher.open('Package')">
+		    <div class="LaunchTopBlock">Package</div>
+		    <div class="LaunchSubBlock">Turn your site into a mobile app.</div>
+		  </div>
+		  
 		  
 		</div>
 		
@@ -304,6 +311,22 @@
 	  <div id="ManageUpdateButton" onclick="Manage.save()">
 		  Update
 		</div>
+	</div>
+</div>
+<div class="App" id="Package">
+	<div class="AppNav">
+		<div class="AppNavContainer">
+  		<div class="AppSquareButton AppBackButton" onclick="Launcher.open('Launch')">
+		  	Back
+		  </div>
+		<div class="clear"></div>
+		</div>
+	</div>
+  <div class="AppContainer">
+	  <div class="AppSectionLabel">
+		  Manifest Url
+		</div>
+	  <div id="PackageManifestUrl"><span id="PackageManifestUrlLink" onclick="Package.selectText('PackageManifestUrlLink')">http://</span>&nbsp;&nbsp;&nbsp;<a onclick="Explorer.edit('public/manifest.webapp');">Edit File</a></div>
 	</div>
 </div>
 <div class="App" id="Write">
