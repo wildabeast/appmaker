@@ -77,9 +77,6 @@ To install for development on Mac OS X:
 
     $ cd ~
     $ git clone https://YOURFORK
-    $ cd nudgepad/install
-    $ ./mac.sh
-    $ source ~/.bash_profile
     $ npd start
     $ # Go to http://localhost
 
