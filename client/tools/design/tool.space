@@ -1,6 +1,4 @@
 name Design
-description Design pages in NudgePad.
 html tool.html
 js tool.js js Shortcuts.js
 css tool.css css
-color rgba(26, 134, 214, 1)

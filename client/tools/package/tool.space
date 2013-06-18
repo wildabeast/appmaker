@@ -1,6 +1,4 @@
 name Package
-description Turn your project into a mobile app.
 html tool.html
 js tool.js
 css tool.css
-color rgba(237, 200, 17, 1)

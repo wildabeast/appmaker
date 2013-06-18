@@ -1,4 +1,6 @@
 var Write = new Tool('Write')
+Write.color = 'rgba(237, 200, 17, 1)'
+Write.description = 'Write and edit blog posts.'
 
 // Default theme
 Write.blankTheme = new Space({

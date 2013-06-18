@@ -1,4 +1,6 @@
 var Package = new Tool('Package')
+Package.color = 'rgba(71, 41, 54, 1)'
+Package.description = 'Turn your project into a mobile app.'
 
 Package.onopen = function () {
   $('#PackageManifestUrlLink').html('http://' + nudgepad.domain + '/manifest.webapp')

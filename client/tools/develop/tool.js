@@ -1,4 +1,6 @@
 var Develop = new Tool('Develop')
+Develop.color = 'rgba(36, 65, 112, 1)'
+Develop.description = 'Edit the backend and files of your project.'
 
 Develop.files = ''
 Develop.log = ''

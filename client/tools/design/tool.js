@@ -1,4 +1,6 @@
 var Design = new Tool('Design')
+Design.color = 'rgba(26, 134, 214, 1)'
+Design.description = 'Design pages in NudgePad.'
 
 // What spot the worker is on the timeline for the current page
 Design.page = new Page()
