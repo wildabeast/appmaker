@@ -1,5 +1,5 @@
 /**
- * Creates new sites.
+ * Creates new projects.
  */
 var express = require('express'),
     exec = require('child_process').exec,
@@ -104,7 +104,7 @@ app.post('/create', app.checkId, app.validateDomain, app.isDomainAvailable, func
   if (!email)
     email = 'owner@' + domain
   
-  console.log('creating site: %s', domain)
+  console.log('creating project: %s', domain)
   
   // Save clone to file before calling command line
   // Todo: cleanup
@@ -114,8 +114,8 @@ app.post('/create', app.checkId, app.validateDomain, app.isDomainAvailable, func
       
       exec(systemPath + '/nudgepad.sh create ' + domain.toLowerCase() + ' ' + email + ' ' + clonePath, function (err, stdout, stderr) {
         if (err) {
-          console.log('Error creating site %s: err:%s stderr:%s', domain, err, stderr)
-          return res.send('Error creating site: ' + err, 400)
+          console.log('Error creating project %s: err:%s stderr:%s', domain, err, stderr)
+          return res.send('Error creating project: ' + err, 400)
         }
         console.log(stderr)
         console.log('time to create %s: %sms', domain, new Date().getTime() - requestTime)
@@ -129,8 +129,8 @@ app.post('/create', app.checkId, app.validateDomain, app.isDomainAvailable, func
   } else {
     exec(systemPath + '/nudgepad.sh create ' + domain.toLowerCase() + ' ' + email, function (err, stdout, stderr) {
       if (err) {
-        console.log('Error creating site %s: err:%s stderr:%s', domain, err, stderr)
-        return res.send('Error creating site: ' + err, 400)
+        console.log('Error creating project %s: err:%s stderr:%s', domain, err, stderr)
+        return res.send('Error creating project: ' + err, 400)
       }
       console.log(stderr)
       console.log('time to create %s: %sms', domain, new Date().getTime() - requestTime)

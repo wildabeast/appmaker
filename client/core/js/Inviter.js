@@ -1,7 +1,7 @@
 var Inviter = {}
 
 Inviter.prompt = function () {
-  var val = prompt('Invite people to edit this site. Add one or more emails, separated by spaces', '')
+  var val = prompt('Invite people to edit this project. Add one or more emails, separated by spaces', '')
   if (!val)
     return false
   

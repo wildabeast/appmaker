@@ -56,9 +56,9 @@
     <script type="text/javascript" src="/nudgepad/core/js/OnError.js"></script>
     <script type="text/javascript" src="/nudgepad/core/js/OnPatch.js"></script>
     <script type="text/javascript" src="/nudgepad/core/js/OnPing.js"></script>
+    <script type="text/javascript" src="/nudgepad/core/js/OnProjectDeleted.js"></script>
     <script type="text/javascript" src="/nudgepad/core/js/OnReadOnly.js"></script>
     <script type="text/javascript" src="/nudgepad/core/js/OnRestart.js"></script>
-    <script type="text/javascript" src="/nudgepad/core/js/OnSiteDeleted.js"></script>
     <script type="text/javascript" src="/nudgepad/core/js/OnWorkerError.js"></script>
     <script type="text/javascript" src="/nudgepad/core/js/Popup.js"></script>
     <script type="text/javascript" src="/nudgepad/core/js/RegisterForm.js"></script>
@@ -116,10 +116,10 @@
 <div id="RegisterFormModal">
 	<div id="RegisterContainer">
 		<div id="RegisterContent">
-			<div id="RegisterFormPrototypeLive">Your site is now live at</div>
+			<div id="RegisterFormPrototypeLive">Your project is now live at</div>
 			<a id="RegisterFormDomain" target="published"></a>
 			<div class="clear"></div>
-			<div id="RegisterFormInstructions">If you want to edit your site beyond this session, please type your email address below.</div>
+			<div id="RegisterFormInstructions">If you want to edit your project beyond this session, please type your email address below.</div>
 			<input id="RegisterFormEmail" type="email" placeholder="Email"></input>  
 			<div id="RegisterFormButton">Submit</div>
 			<div class="clear"></div>
@@ -246,7 +246,7 @@
 	    
     	<div class="LaunchSquare" style="background-color : #1a86d6;" onclick="Launcher.open('Design')">
 		    <div class="LaunchTopBlock">Design</div>
-		    <div class="LaunchSubBlock">Edit the layout and style of your site.</div>
+		    <div class="LaunchSubBlock">Visually design and build pages.</div>
 		  </div>
 		  
 			<div class="LaunchSquare" style="background-color : #ABC1C7;" onclick="Launcher.open('Manage')">
@@ -267,7 +267,7 @@
 		  
 		  <div class="LaunchSquare" style="background-color : rgba(71, 41, 54, 1);" onclick="Launcher.open('Package')">
 		    <div class="LaunchTopBlock">Package</div>
-		    <div class="LaunchSubBlock">Turn your site into a mobile app.</div>
+		    <div class="LaunchSubBlock">Turn your project into a mobile app.</div>
 		  </div>
 		  
 		  

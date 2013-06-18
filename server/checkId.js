@@ -23,7 +23,7 @@ function CheckID (app) {
     }
 
     // Invalid email addresss
-    if (!nudgepad.site.get('workers ' + email)) {
+    if (!nudgepad.project.get('workers ' + email)) {
       // If use has invalid cookies set, clear them.
       if (req.cookies.email)
         res.clearCookie('email')
@@ -33,8 +33,8 @@ function CheckID (app) {
     }
 
     // Invalid key
-    if (nudgepad.site.get('workers ' + email + ' key') !== key) {
-      console.log(nudgepad.site.get('workers ' + email + ' key'))
+    if (nudgepad.project.get('workers ' + email + ' key') !== key) {
+      console.log(nudgepad.project.get('workers ' + email + ' key'))
       // If use has invalid cookies set, clear them.
       if (req.cookies.email)
         res.clearCookie('email')
@@ -44,7 +44,7 @@ function CheckID (app) {
     }
 
     // Invalid role
-    var role = nudgepad.site.get('workers ' + email + ' role')
+    var role = nudgepad.project.get('workers ' + email + ' role')
     if (role !== 'owner' && role !== 'worker')
       return res.send('Not authorized')
 
@@ -55,7 +55,7 @@ function CheckID (app) {
   }
 
   app.privateCheck = function (req, res, next) {
-    if (nudgepad.site.get('settings is_private') !== 'true')
+    if (nudgepad.project.get('settings is_private') !== 'true')
       return next()
     app.checkId(req, res, next)
   }

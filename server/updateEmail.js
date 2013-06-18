@@ -25,9 +25,9 @@ var UpdateEmail = function (app) {
     if (email == req.email)
       return res.send('Same email', 400)
 
-    var role = nudgepad.site.get('workers').get(req.email + ' role')  
+    var role = nudgepad.project.get('workers').get(req.email + ' role')  
     // Generate new password
-    var worker = new File(nudgepad.paths.site + 'workers/' + email + '.space')
+    var worker = new File(nudgepad.paths.project + 'workers/' + email + '.space')
     worker.set('name', ParseName(email))
     worker.set('role', role)
     worker.set('key', app.hashString(email + RandomString(8)))
@@ -41,16 +41,16 @@ var UpdateEmail = function (app) {
       res.cookie('email', email, { expires: new Date(Date.now() + 5184000000)})
       res.cookie('key', worker.get('key'), { expires: new Date(Date.now() + 5184000000)})
       res.cookie('name', worker.get('name'), { expires: new Date(Date.now() + 5184000000)})
-      nudgepad.site.set('workers ' + email, new Space(worker))
+      nudgepad.project.set('workers ' + email, new Space(worker))
 
       // Delete old account
-      nudgepad.site.delete('workers ' + req.email)
-      new File(nudgepad.paths.site + 'workers/' + req.email + '.space').trash()
+      nudgepad.project.delete('workers ' + req.email)
+      new File(nudgepad.paths.project + 'workers/' + req.email + '.space').trash()
       if (req.body.sendWelcomeEmail === 'true') {
 
-        var message = 'Thanks for using Nudge to build your site!' + '\n\n' +
-                      'View your site here: http://' + nudgepad.domain + '\n\n' +
-                      'Edit your site here: http://' + nudgepad.domain + '/nudgepad' + '\n\n' +
+        var message = 'Thanks for using NudgePad to build your project!' + '\n\n' +
+                      'View your project here: http://' + nudgepad.domain + '\n\n' +
+                      'Edit your project here: http://' + nudgepad.domain + '/nudgepad' + '\n\n' +
                       'If you have any questions, please contact us at support@nudgepad.com' + '\n\n' +
                       'Thanks,' + '\n' +
                       'Ben & Breck\n'

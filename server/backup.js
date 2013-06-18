@@ -7,9 +7,9 @@ var Backup = function (app) {
   
   // http://stackoverflow.com/questions/5754153/zip-archives-in-node-js
   app.get('/nudgepad.backup/' + nudgepad.domain + '.zip', app.checkId, function(req, res) {
-    var path = nudgepad.paths.site
+    var path = nudgepad.paths.project
     
-    //find ' + nudgepad.paths.site + ' -name '*.DS_Store' -type f -delete
+    //find ' + nudgepad.paths.project + ' -name '*.DS_Store' -type f -delete
 
     // Options -r recursive - redirect to stdout
     var zip = spawn('zip', ['-r', '-', '.'], {cwd : path})

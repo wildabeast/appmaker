@@ -7,6 +7,7 @@ if (!window.console)
  *
  * @special Singleton
  */
+var Project = new Space()
 var nudgepad = {}
 nudgepad.id = new Date().getTime()
 nudgepad.isTesting = false
@@ -55,7 +56,7 @@ nudgepad.main = function (callback) {
   
   nudgepad.query = ParseQueryString()
   // Fetch all files in the background.
-  Explorer.getSite(function () {
+  Explorer.getProject(function () {
     
     
     // Open socket
@@ -89,21 +90,21 @@ nudgepad.main = function (callback) {
     })
     
     nudgepad.socket.on('collage.update', function (patch) {
-      site.values.collage.patch(patch)
+      Project.values.collage.patch(patch)
       nudgepad.trigger('collage.update')
       
     })
     
     nudgepad.socket.on('collage.delete', function (id) {
-      var tabName = site.get('collage ' + id)
+      var tabName = Project.get('collage ' + id)
       Flasher.flash(tabName.get('name') + ' closed a tab')
-      site.values.collage.delete(id)
+      Project.values.collage.delete(id)
       nudgepad.trigger('collage.update')
     })
     
     nudgepad.socket.on('collage.create', function (patch) {
       patch = new Space(patch)
-      site.values.collage.patch(patch)
+      Project.values.collage.patch(patch)
       var id = patch.keys[0]
       Flasher.flash(patch.get(id + ' name') + ' opened a tab')
     })
@@ -140,13 +141,13 @@ nudgepad.main = function (callback) {
     
     mixpanel.track('I opened NudgePad')
     
-    if (nudgepad.query.newSite && !store.get('opens')) {
+    if (nudgepad.query.newProject && !store.get('opens')) {
       store.set('opens', 1)
-      var howLongItTookToCreateThisSite = new Date().getTime() - nudgepad.query.timestamp
-      mixpanel.track('I created a new website', {
-        'time' : howLongItTookToCreateThisSite
+      var howLongItTookToCreateThisProject = new Date().getTime() - nudgepad.query.timestamp
+      mixpanel.track('I created a new project', {
+        'time' : howLongItTookToCreateThisProject
       })
-      console.log('It took %sms to create this site', howLongItTookToCreateThisSite)
+      console.log('It took %sms to create this project', howLongItTookToCreateThisProject)
       
     }
       
@@ -213,7 +214,7 @@ nudgepad.reloadMessage = function () {
 
 nudgepad.restartCheck = function () {
   $.get('/nudgepad.started', {}, function (data) {
-    if (data !== site.get('started')) {
+    if (data !== Project.get('started')) {
       nudgepad.reloadMessageOneTime = 'Your site restarted. Please refresh the page.'
       location.reload()
     }

@@ -1,6 +1,6 @@
 Design.updateTabs = function () {
   $('#DesignTabs').html('')
-  var keys = site.get('pages').keys
+  var keys = Project.get('pages').keys
   _.each(keys, function (name) {
     var div = $('<span>' + name + '</span>')
     
@@ -10,7 +10,7 @@ Design.updateTabs = function () {
       
     var title = ''
     
-    site.values.collage.each(function (key, value) {
+    Project.values.collage.each(function (key, value) {
       if (value.get('page') !== name)
         return true
       title += value.get('name') + '(' + value.get('device') + ')' + ' '

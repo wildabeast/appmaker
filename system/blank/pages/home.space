@@ -7,7 +7,7 @@ head
   stylesheet
    tag link
    rel stylesheet
-   href site.css
+   href project.css
 body
  tag body
  scraps

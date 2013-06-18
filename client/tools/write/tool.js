@@ -9,7 +9,7 @@ Write.blankTheme = new Space({
  "stylesheet": {
   "tag": "link",
   "rel": "stylesheet",
-  "href": "site.css"
+  "href": "project.css"
  },
  "container": {
   "style": {
@@ -65,10 +65,10 @@ Write.deletePost = function () {
   if (!name)
     return nudgepad.error('No post to delete')
   
-  if (!site.get('posts ' + name))
+  if (!Project.get('posts ' + name))
     return nudgepad.error('Post does not exist')
 
-  site.delete('posts ' + name)
+  Project.delete('posts ' + name)
   
   // Send Commit to Server
   var patch = new Space()
@@ -79,7 +79,7 @@ Write.deletePost = function () {
 
 Write.editPost = function (name) {
   Write.activePost = name
-  var post = site.get('posts ' + name)
+  var post = Project.get('posts ' + name)
   $('#WriteContent').val(post.get('content'))
   $('#WriteTitle').val(post.get('title'))
   var postSettings = new Space(post.toString())
@@ -98,12 +98,12 @@ Write.editPost = function (name) {
 // Ensures site has a blog theme before posting
 Write.initialize = function () {
   
-  if (site.get('pages blog'))
+  if (Project.get('pages blog'))
     return true
   var patch = new Space()
   patch.set('pages blog', Write.blankTheme.clone())
   nudgepad.emit('patch', patch.toString())
-  site.set('pages blog', Write.blankTheme)
+  Project.set('pages blog', Write.blankTheme)
   
   Design.updateTabs()// todo: delete this
 }
@@ -113,11 +113,11 @@ Write.activePost = null
 Write.onopen = function () {
   Write.initialize()
   $('#WritePosts').html('')
-  if (!site.get('posts'))
+  if (!Project.get('posts'))
     return true
-  _.each(site.get('posts').keys, function (name) {
+  _.each(Project.get('posts').keys, function (name) {
     console.log(name)
-    var value = site.get('posts').get(name)
+    var value = Project.get('posts').get(name)
     var div = $('<div >' + value.get('title') + '</div>')
       .css({
       'color' : '#777',
@@ -151,7 +151,7 @@ Write.savePost = function () {
     return nudgepad.error('Title cannot be blank')
 
   mixpanel.track('I saved a blog post')
-  var post = site.get('posts ' + name)
+  var post = Project.get('posts ' + name)
   if (!post)
     post = new Space()
 
@@ -159,7 +159,7 @@ Write.savePost = function () {
   post.set('title', $('#WriteTitle').val())
   post.patch($('#WriteAdvanced').val())
   
-  site.set('posts ' + name, post)
+  Project.set('posts ' + name, post)
   
   // Send Commit to Server
   var patch = new Space()
@@ -169,7 +169,7 @@ Write.savePost = function () {
   // make sure to delete old post
   if (Write.activePost && Write.activePost !== name) {
     patch.set('posts ' + Write.activePost, '')
-    site.delete('posts ' + Write.activePost)
+    Project.delete('posts ' + Write.activePost)
   }
   
   nudgepad.emit('patch', patch.toString())

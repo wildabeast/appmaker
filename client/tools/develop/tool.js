@@ -23,7 +23,7 @@ Develop.clone = function () {
   // chop common domain part
   tld = tld.replace(/^[^\.]*\./, '')
   // Panel is the domain running the nudgepad panel server
-  var panel = site.get('hostname')
+  var panel = Project.get('hostname')
   
   $.get('/nudgepad.export', {}, function (data) {
     
@@ -78,7 +78,7 @@ Develop.home = function () {
 }
 
 Develop.import = function () {
-  TextPrompt('Import a Site ', '', function (val) {
+  TextPrompt('Import a Project ', '', function (val) {
     $.post('/nudgepad.import', {space : val}, function (err) {
       Flasher.flash('Imported files.')
       Develop.refresh()

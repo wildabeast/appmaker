@@ -1,5 +1,5 @@
 /**
- * Handles incoming patches to site
+ * Handles incoming patches to project
  *
  * @param {Space}
  */
@@ -12,7 +12,7 @@ nudgepad.on('patch', function (patch) {
   if (patch.get('pages ' + Design.stage.activePage) === '')
     Design.stage.back()
   
-  site.patch(patch)
+  Project.patch(patch)
   Design.updateTabs()
   
   // If the active page isnt touched, we are all done

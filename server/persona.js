@@ -19,7 +19,7 @@ var Persona = function (app) {
 
         var email = result.body.email
 
-        var worker = nudgepad.site.get('workers ' + email)
+        var worker = nudgepad.project.get('workers ' + email)
 
         if (!worker)
           return res.send('No user with email ' + email)

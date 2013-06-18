@@ -7,7 +7,7 @@ nudgepad.setTabColor = function () {
     return true
   var colors = ['red', 'green', 'violet', 'yellow', 'blue', 'orange', 'indigo']
   var used = []
-  site.values.collage.each(function (key, value) {
+  Project.values.collage.each(function (key, value) {
     if (value.get('color'))
       used.push(value.get('color'))
   })
@@ -18,7 +18,7 @@ nudgepad.setTabColor = function () {
 }
 
 Tab.on('patch', function () {
-  site.set('collage ' + nudgepad.id, this)
+  Project.set('collage ' + nudgepad.id, this)
   nudgepad.emit('collage.update', this)
 })
 

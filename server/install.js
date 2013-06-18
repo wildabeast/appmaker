@@ -6,12 +6,12 @@ function Install (app) {
 
   console.log('Installing necessary files and objects...')
   
-  // Main site path
-  // Create the site folder. All worker data and apps go here.
+  // Main project path
+  // Create the project folder. All worker data and apps go here.
   // It is a good idea to make this folder a git repo to version all
-  // a workers site data.
-  if (!fs.existsSync(nudgepad.paths.site))
-    fs.mkdirSync(nudgepad.paths.site)
+  // a workers project data.
+  if (!fs.existsSync(nudgepad.paths.project))
+    fs.mkdirSync(nudgepad.paths.project)
     
   // Create the public folder for storing uploads and other static assets.
   if (!fs.existsSync(nudgepad.paths.public))
@@ -50,8 +50,8 @@ function Install (app) {
     fs.mkdirSync(nudgepad.paths.surveys)
   
   for (var i in nudgepad.default_types) {
-    if (!fs.existsSync(nudgepad.paths.site + nudgepad.default_types[i]))
-      fs.mkdirSync(nudgepad.paths.site + nudgepad.default_types[i])
+    if (!fs.existsSync(nudgepad.paths.project + nudgepad.default_types[i]))
+      fs.mkdirSync(nudgepad.paths.project + nudgepad.default_types[i])
   }
   
   if (!fs.existsSync(nudgepad.paths.settings + 'is_open_source.txt'))
@@ -71,20 +71,13 @@ module.exports = Example\n", 'utf8')
   }
   
   // Create default home page
-  if (!fs.existsSync(nudgepad.paths.site + 'pages/home.space'))
-    fs.writeFileSync(nudgepad.paths.site + 'pages/home.space', '', 'utf8')
+  if (!fs.existsSync(nudgepad.paths.project + 'pages/home.space'))
+    fs.writeFileSync(nudgepad.paths.project + 'pages/home.space', '', 'utf8')
   
   // Create default home timeline
-  if (!fs.existsSync(nudgepad.paths.site + 'timelines/home.space'))
-    fs.writeFileSync(nudgepad.paths.site + 'timelines/home.space', '', 'utf8')
+  if (!fs.existsSync(nudgepad.paths.project + 'timelines/home.space'))
+    fs.writeFileSync(nudgepad.paths.project + 'timelines/home.space', '', 'utf8')
   
-  // Create default site wide stylesheet
-  if (!fs.existsSync(nudgepad.paths.public + 'site.css'))
-    fs.writeFileSync(nudgepad.paths.public + 'site.css', '', 'utf8')
-  
-  // Create default site wide js file
-  if (!fs.existsSync(nudgepad.paths.public + 'site.js'))
-    fs.writeFileSync(nudgepad.paths.public + 'site.js', '', 'utf8')
 
 }
 

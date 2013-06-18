@@ -17,7 +17,7 @@ createSiteUbuntu ()
     then
       space $cloneFile $sitesPath$domain
     else
-      # echo NO cloneFile provided. Creating blank site from blank.
+      # echo NO cloneFile provided. Creating blank project from blank.
       sudo cp -R blank $sitesPath$domain
       sudo chown -R $domain:$domain $sitesPath$domain
       sudo -u $domain mkdir $sitesPath$domain/settings
@@ -51,7 +51,7 @@ createSiteMac ()
     then
       space $cloneFile $sitesPath$domain
     else
-      # echo NO cloneFile provided. Creating blank site from blank.
+      # echo NO cloneFile provided. Creating blank project from blank.
       cp -R blank $sitesPath$domain
       mkdir $sitesPath$domain/settings
       mkdir $sitesPath$domain/workers
@@ -75,12 +75,12 @@ createSite ()
   cloneFile=$3
   if [ -z $domain ]
     then
-      echo ERROR. No domain entered. What site do you want to create?
+      echo ERROR. No domain entered. What project do you want to create?
       return 1
   fi
   if [ -z $ownerEmail ]
     then
-      echo ERROR. No email entered. Who owns this new site?
+      echo ERROR. No email entered. Who owns this new project?
       return 1
   fi
   if isSite $domain

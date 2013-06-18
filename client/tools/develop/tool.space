@@ -1,5 +1,5 @@
 name Develop
-description Edit the backend and files of your site.
+description Edit the backend and files of your project.
 html tool.html
 js tool.js
 css tool.css

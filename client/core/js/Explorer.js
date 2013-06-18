@@ -13,23 +13,23 @@ Explorer.create = function (path, callback) {
 }
 
 Explorer.downloadTimelines = function () {
-  $.get('/nudgepad.site.timelines', {}, function (data) {
+  $.get('/nudgepad.project.timelines', {}, function (data) {
     var space = new Space(data)
     space.delete(Design.stage.activePage) // We already have the open page
-    site.get('timelines').patch(space)
+    Project.get('timelines').patch(space)
   })
 }
 
 /**
- * Sync the clients site with the server.
+ * Sync the clients project with the server.
  *
  * @param {function}
  */
-Explorer.getSite = function (callback) {
+Explorer.getProject = function (callback) {
   var activePage = store.get('activePage') || 'home'
-  $.get('/nudgepad.site', { activePage : activePage, id : nudgepad.id }, function (space) {
-    site = new Space(space)
-    var online = site.get('collage').keys.length + 1
+  $.get('/nudgepad.project', { activePage : activePage, id : nudgepad.id }, function (space) {
+    Project = new Space(space)
+    var online = Project.get('collage').keys.length + 1
     var title = nudgepad.domain + '. ' + online + ' user' + (online > 1 ? 's' : '') + ' online.'
     Blinker.default = title
     document.title = title
@@ -38,7 +38,7 @@ Explorer.getSite = function (callback) {
 }
 
 Explorer.quickEdit = function () {
-  Explorer.edit(prompt('Enter path to file you want to edit', 'public/site.css'))
+  Explorer.edit(prompt('Enter path to file you want to edit', 'public/project.css'))
 }
 
 Explorer.remove = function (path, callback) {

@@ -65,7 +65,7 @@ var Explorer = function (app) {
    * path
    */
   app.get('/nudgepad.explorer.list', app.checkId, function(req, res, next) {
-    folderStats(nudgepad.paths.site, function (err, space) {
+    folderStats(nudgepad.paths.project, function (err, space) {
       res.set('Content-Type', 'text/plain')
       return res.send(space.toString())    
     })
@@ -87,7 +87,7 @@ var Explorer = function (app) {
    * path
    */
   app.post('/nudgepad.explorer.get', app.checkId, function(req, res, next) {
-    fs.readFile(nudgepad.paths.site + req.body.path, 'utf8', function (err, contents) {
+    fs.readFile(nudgepad.paths.project + req.body.path, 'utf8', function (err, contents) {
       res.send(contents)
     })
   })
@@ -98,7 +98,7 @@ var Explorer = function (app) {
    */
   app.post('/nudgepad.explorer.remove', app.checkId, function(req, res, next) {
 
-    fs.unlink(nudgepad.paths.site + req.body.path, function (err) {
+    fs.unlink(nudgepad.paths.project + req.body.path, function (err) {
       if (err) return res.send(err)
       res.send('')
     })
@@ -111,7 +111,7 @@ var Explorer = function (app) {
    */
   app.post('/nudgepad.explorer.rename', app.checkId, function(req, res, next) {
 
-    fs.rename(nudgepad.paths.site + req.body.oldPath, nudgepad.paths.site + req.body.newPath, function (err) {
+    fs.rename(nudgepad.paths.project + req.body.oldPath, nudgepad.paths.project + req.body.newPath, function (err) {
       if (err) return res.send(err)
       res.send('')
     })
@@ -126,7 +126,7 @@ var Explorer = function (app) {
    */
   app.post('/nudgepad.explorer.save', app.checkId, function(req, res, next) {
 
-    fs.writeFile(nudgepad.paths.site + req.body.path, req.body.content, 'utf8', function (err) {
+    fs.writeFile(nudgepad.paths.project + req.body.path, req.body.content, 'utf8', function (err) {
       if (err) return res.send(err)
       res.send('')
     })

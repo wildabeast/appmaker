@@ -1,7 +1,7 @@
 head
  tag page
  title email_signup
- stylesheets /nudgepad/blocks.css site.css
+ stylesheets /nudgepad/blocks.css project.css
  scripts http://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js
  style
   body

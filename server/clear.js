@@ -8,7 +8,7 @@ var Clear = function (app) {
 
     res.set('Content-Type', 'text/plain')
     // We clear timelines
-    exec('rm -f ' + nudgepad.paths.site + 'timelines/*.space',
+    exec('rm -f ' + nudgepad.paths.project + 'timelines/*.space',
       function (error, stdout, stderr) {
 
         if (stderr)

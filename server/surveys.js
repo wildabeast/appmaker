@@ -27,10 +27,10 @@ var Survey = function (app) {
       if (error)
         return res.send('Save Error: ' + error, 500)
 
-      // The following will send the submission to an email address on file for the site
+      // The following will send the submission to an email address on file for the project
       // if one exists.
-      if (nudgepad.site.get('settings email'))
-        Email.send(nudgepad.site.get('settings email'), 'surveys@' + nudgepad.domain, nudgepad.domain + ': New Message', space.toString())
+      if (nudgepad.project.get('settings email'))
+        Email.send(nudgepad.project.get('settings email'), 'surveys@' + nudgepad.domain, nudgepad.domain + ': New Message', space.toString())
 
       res.send('')
     })

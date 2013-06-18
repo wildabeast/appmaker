@@ -17,11 +17,11 @@ function Importer (app) {
     })
   })
 
-  // Import a site
+  // Import a project
   app.post('/nudgepad.import', app.checkId, function (req, res, next) {
     var output = nudgepad.paths.temp + nudgepad.domain + '.space'
     fs.writeFile(output, req.body.space, function (err, data) {
-      exec('space ' + output + ' ' + nudgepad.paths.site, function () {
+      exec('space ' + output + ' ' + nudgepad.paths.project, function () {
         res.set('Content-Type', 'text/plain')
         res.send('Okay')
       })

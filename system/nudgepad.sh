@@ -284,7 +284,7 @@ case "$1" in
 
 echo "*** Nudgepad Commands ***"
 echo "nudgepad start - Start proxy and panel"
-echo "nudgepad create domain email@domain.com http://clone - Creates a new site"
+echo "nudgepad create domain email@domain.com template.space - Creates a new project"
 echo "nudgepad stop - Stop all"
 ;;
 esac

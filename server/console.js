@@ -11,7 +11,7 @@ var Console = function (app) {
 
   app.post('/nudgepad\.exec', app.checkId, function (req, res, next) {
 
-    exec(req.body.command, {cwd : nudgepad.paths.site},
+    exec(req.body.command, {cwd : nudgepad.paths.project},
       function (error, stdout, stderr) {
         res.set('Content-Type', 'text/plain')
         if (stderr)

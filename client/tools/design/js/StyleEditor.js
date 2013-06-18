@@ -125,7 +125,7 @@ nudgepad.styleEditor = function (scrap) {
    linkOptions.append(noLink)
    
    // Create a link to existing page
-   _.each(site.values.pages.values, function (value, name) {
+   _.each(Project.values.pages.values, function (value, name) {
      var link = $('<option value="' + name + '">' + ToProperCase(name) + '</option>')
      link.on('click', function () {
        Design.stage.selection.patch('tag a\nhref ' + $(this).attr('value'))

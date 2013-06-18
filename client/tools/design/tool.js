@@ -19,7 +19,7 @@ Design.blank = function () {
    content Untitled\n\
   stylesheet\n\
    tag link\n\
-   href site.css\n\
+   href project.css\n\
    rel stylesheet\n\
 body\n\
  tag body\n\
@@ -72,7 +72,7 @@ Design.create = function (name, template) {
   name = (name ? Permalink(name) : Design.nextName())
   
   // page already exists
-  if (site.get('pages ' + name))
+  if (Project.get('pages ' + name))
     return nudgepad.error('A page named ' + name + ' already exists.')
   
   var page = new Space()
@@ -85,8 +85,8 @@ Design.create = function (name, template) {
     timeline.set(new Date().getTime(), commit)
   }
   
-  site.set('pages ' + name, page)
-  site.set('timelines ' + name, timeline)
+  Project.set('pages ' + name, page)
+  Project.set('timelines ' + name, timeline)
   
   var patch = new Space()
   patch.set('pages ' + name, page)
@@ -119,14 +119,14 @@ Design.duplicate = function (source, destination, skipPrompt) {
       return false
   }
   
-  if (!site.get('pages').get(source))
+  if (!Project.get('pages').get(source))
     return nudgepad.error('Page ' + source + ' not found')
   
   mixpanel.track('I duplicated a page')
   
   // If we are duplicating a page thats not open, easy peasy
   if (source !== Design.stage.activePage)
-    return Design.create(destination, site.get('pages').get(source))
+    return Design.create(destination, Project.get('pages').get(source))
   
   return Design.create(destination, Design.page)
 }
@@ -204,10 +204,10 @@ Design.importPrompt = function () {
  */
 Design.nextName = function (prefix) {
   var prefix = prefix || 'untitled'
-  if (!(prefix in site.values.pages.values))
+  if (!(prefix in Project.values.pages.values))
     return prefix
   for (var i = 1; i < 1000; i++) {
-    if (!(prefix + i in site.values.pages.values))
+    if (!(prefix + i in Project.values.pages.values))
       return prefix + i
   }
 }
@@ -344,7 +344,7 @@ Design.onopen = function () {
   $(document).on('dragstart', 'img', function(event) { event.preventDefault()})
   
   var page = store.get('activePage') || 'home'
-  if (!site.get('pages ' + page))
+  if (!Project.get('pages ' + page))
     page = 'home'
   Design.stage.open(page)
   
@@ -386,13 +386,13 @@ Design.rename = function (new_name) {
     return nudgepad.error('You cannot rename the home page.')
   
   // page already exists
-  if (site.get('pages ' + new_name))
+  if (Project.get('pages ' + new_name))
     return nudgepad.error('A page named ' + new_name + ' already exists.')  
 
-  site.set('pages ' + new_name, site.get('pages ' + old_name))
-  site.set('timelines ' + new_name, site.get('timelines ' + old_name))
-  site.delete('pages ' + old_name)
-  site.delete('timelines ' + old_name)
+  Project.set('pages ' + new_name, Project.get('pages ' + old_name))
+  Project.set('timelines ' + new_name, Project.get('timelines ' + old_name))
+  Project.delete('pages ' + old_name)
+  Project.delete('timelines ' + old_name)
   
   Design.updateTabs()
   
@@ -400,8 +400,8 @@ Design.rename = function (new_name) {
   var patch = new Space()
   patch.set('pages ' + old_name, '')
   patch.set('timelines ' + old_name, '')
-  patch.set('pages ' + new_name, site.get('pages ' + new_name))
-  patch.set('timelines ' + new_name, site.get('timelines ' + new_name))
+  patch.set('pages ' + new_name, Project.get('pages ' + new_name))
+  patch.set('timelines ' + new_name, Project.get('timelines ' + new_name))
 
   nudgepad.emit('patch', patch.toString())
   
@@ -449,8 +449,8 @@ Design.trash = function (name) {
   patch.set('timelines ' + name, '')
   nudgepad.emit('patch', patch.toString())
 
-  site.get('pages').delete(name)
-  site.get('timelines').delete(name)
+  Project.get('pages').delete(name)
+  Project.get('timelines').delete(name)
   
   // Delete page from open pages
   Design.updateTabs()

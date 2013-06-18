@@ -8,7 +8,7 @@ var ForgotPassword = function (app) {
   app.post('/nudgepad.forgotPassword', function(req, res, next) {
     // Invalid email address
     var email = req.body.email
-    var worker = nudgepad.site.get('workers ' + email)
+    var worker = nudgepad.project.get('workers ' + email)
     if (!worker)
       return res.redirect('/nudgepad/public/error.html?error=EmailNotFound')
 

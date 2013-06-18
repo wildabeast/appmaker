@@ -448,7 +448,7 @@ Design.broadcastSelection = function (extra) {
 
 Design.updateSelections = function () {
   $('#DesignRemoteSelections').html('')
-  site.values.collage.each(function (key, value) {
+  Project.values.collage.each(function (key, value) {
     if (key == nudgepad.id)
       return true
     if (value.get('page') !== Design.stage.activePage)

@@ -10,7 +10,7 @@ var Invite = function (app) {
   var nudgepad = app.nudgepad
   
   var createUser = function (email) {
-    var worker = new File(nudgepad.paths.site + 'workers/' + email + '.space')
+    var worker = new File(nudgepad.paths.project + 'workers/' + email + '.space')
     worker.set('name', ParseName(email))
     worker.set('role', 'worker')
     worker.set('key', app.hashString(email + RandomString(8)))
@@ -18,7 +18,7 @@ var Invite = function (app) {
       if (error)
         return console.log(error)
 
-      nudgepad.site.set('workers ' + email, new Space(worker))
+      nudgepad.project.set('workers ' + email, new Space(worker))
 
       Email.send(
         email,

@@ -11,7 +11,7 @@ Design.stage.percentElapsed = 100
  * Open the previous page
  */
 Design.stage.back = function () {
-  Design.stage.open(site.get('pages').prev(Design.stage.activePage))
+  Design.stage.open(Project.get('pages').prev(Design.stage.activePage))
 }
 
 Design.stage.close = function () {
@@ -58,7 +58,7 @@ Design.stage.commit = function () {
   // Send Commit to Server
   var patch = new Space()
   patch.set('timelines ' + Design.stage.activePage + ' ' + timestamp, commit)
-  site.set('pages ' + Design.stage.activePage, new Space(Design.page.toString()))
+  Project.set('pages ' + Design.stage.activePage, new Space(Design.page.toString()))
 
 //  Flasher.flash('Saved')
   nudgepad.emit('commit', patch.toString())
@@ -143,7 +143,7 @@ Design.on('ready', Design.stage.expand)
  * Open the next page
  */
 Design.stage.forward = function () {
-  Design.stage.open(site.get('pages').next(Design.stage.activePage))
+  Design.stage.open(Project.get('pages').next(Design.stage.activePage))
 }
 
 Design.stage.goto = function (version) {
@@ -304,7 +304,7 @@ Design.stage.isBehind = function () {
  */
 Design.stage.open = function (name) {
   
-  var page = site.get('pages ' + name)
+  var page = Project.get('pages ' + name)
   if (!page)
     return nudgepad.error('Page ' + name + ' not found')
 
@@ -343,7 +343,7 @@ Design.stage.render = function () {
 
 Design.stage.reload = function () {
   var name = Design.stage.activePage
-  var page = site.get('pages ' + name)
+  var page = Project.get('pages ' + name)
   Design.edge = page
   Design.page = new Page(page.toString())
   
@@ -389,24 +389,24 @@ Design.stage.selectAll = function () {
  */
 Design.stage.setTimeline = function (name) {
   
-  if (site.get('timelines ' + name)) {
-    Design.stage.timeline = site.get('timelines ' + name)
+  if (Project.get('timelines ' + name)) {
+    Design.stage.timeline = Project.get('timelines ' + name)
     return true
   }
   
   var request = $.ajax({
     type: "GET",
-    url: '/nudgepad.site.timelines.' + name,
+    url: '/nudgepad.project.timelines.' + name,
     async: false,
   })
   
   request.done(function (msg) {
-    site.set('timelines ' + name, new Space(msg))
+    Project.set('timelines ' + name, new Space(msg))
   })
   
   request.fail(function () {
     
-    var edge = site.get('pages ' + name)
+    var edge = Project.get('pages ' + name)
     var timeline = new Space()
     // If no timeline, but yes edge, make the edge the first commit
     if (edge && !edge.isEmpty()) {
@@ -417,7 +417,7 @@ Design.stage.setTimeline = function (name) {
     }
     
 
-    site.set('timelines ' + name, timeline  )
+    Project.set('timelines ' + name, timeline  )
     var patch = new Space()
     patch.set('timelines ' + name, timeline)
     nudgepad.emit('patch', patch.toString())
@@ -426,7 +426,7 @@ Design.stage.setTimeline = function (name) {
     
   })
   
-  Design.stage.timeline = site.get('timelines ' + name)
+  Design.stage.timeline = Project.get('timelines ' + name)
   
 }
 

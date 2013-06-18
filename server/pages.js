@@ -9,7 +9,7 @@ var Pages = function (app) {
     if (name === 'home')
       return res.redirect('/')
 
-    if (!nudgepad.site.get('pages ' + name))
+    if (!nudgepad.project.get('pages ' + name))
       return next()
 
     app.sendPage(req, res, name)

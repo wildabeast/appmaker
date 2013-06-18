@@ -1,5 +1,5 @@
 name Package
-description Turn your site into a mobile app.
+description Turn your project into a mobile app.
 html tool.html
 js tool.js
 css tool.css

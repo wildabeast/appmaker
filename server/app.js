@@ -51,7 +51,7 @@ if (!String.prototype.format) {
 /*** PATHS ****/
 
 var dataPath = '/nudgepad/'
-var sitesPath = dataPath + 'sites/'
+var projectsPath = dataPath + 'sites/'
 var clientPath = __dirname + '/../client/'
 var activePath = dataPath + 'active/'
 var portsPath = dataPath + 'ports/'
@@ -69,7 +69,7 @@ app.nudgepad.default_types = ['pages', 'posts', 'workers', 'timelines']
 // Change the process title for easier debugging & monitoring
 process.title = app.nudgepad.domain
 
-if (!fs.existsSync(sitesPath + app.nudgepad.domain + '/')) {
+if (!fs.existsSync(projectsPath + app.nudgepad.domain + '/')) {
   console.log('Site does not exist...')
   process.exit()
 }
@@ -81,13 +81,13 @@ app.nudgepad.development = !!app.nudgepad.isMac
 app.nudgepad.ip = process.env.IPADDRESS
 
 // Add paths to app.nudgepad object
-require('./paths.js')(app, sitesPath, clientPath)
+require('./paths.js')(app, projectsPath, clientPath)
 
 // Run install script in case its not installed
 require('./install.js')(app)
 
-app.nudgepad.site = new Space()
-app.nudgepad.site.set('collage', new Space())
+app.nudgepad.project = new Space()
+app.nudgepad.project.set('collage', new Space())
 
 // Load the HTML file and add mtimes as query string so the
 // worker always get the latest version of the nudgepad.js and nudgepad.css
@@ -106,16 +106,16 @@ app.nudgepad.started = new Date().getTime()
 
 app.nudgepad.loadFolder = function (folder) {
   // Create a Space for every folder
-  app.nudgepad.site.set(folder, new Space())
+  app.nudgepad.project.set(folder, new Space())
   // Grab all spaces in a folder
-  var files = fs.readdirSync(app.nudgepad.paths.site + folder)
+  var files = fs.readdirSync(app.nudgepad.paths.project + folder)
   for (var j in files) {
     // Dont read non space files
     if (!files[j].match(/\.space/))
       continue
     // Load every file into memory
-    var filePath = app.nudgepad.paths.site + folder + '/' + files[j]
-    app.nudgepad.site.set(folder + ' ' + files[j].replace(/\.space$/,''), new File(filePath).loadSync())
+    var filePath = app.nudgepad.paths.project + folder + '/' + files[j]
+    app.nudgepad.project.set(folder + ' ' + files[j].replace(/\.space$/,''), new File(filePath).loadSync())
   }
 }
 
@@ -125,18 +125,18 @@ app.nudgepad.loadFolder = function (folder) {
 app.nudgepad.loadSite = function () {
   
   // Load settings
-  app.nudgepad.site.set('settings', new Space())
+  app.nudgepad.project.set('settings', new Space())
   var files = fs.readdirSync(app.nudgepad.paths.settings)
   for (var j in files) {
     // Space files
     if (files[j].match(/\.space/)) {
       var filename = files[j].replace(/\.space$/, '')
-      app.nudgepad.site.set('settings ' + filename, new Space(fs.readFileSync(app.nudgepad.paths.settings + files[j], 'utf8')))
+      app.nudgepad.project.set('settings ' + filename, new Space(fs.readFileSync(app.nudgepad.paths.settings + files[j], 'utf8')))
     }
     // Text files
     else if (files[j].match(/\.txt/)) {
       var filename = files[j].replace(/\.txt$/, '')
-      app.nudgepad.site.set('settings ' + filename, fs.readFileSync(app.nudgepad.paths.settings + files[j], 'utf8'))
+      app.nudgepad.project.set('settings ' + filename, fs.readFileSync(app.nudgepad.paths.settings + files[j], 'utf8'))
     }
   }
   
@@ -182,8 +182,8 @@ speedcoach('spaces loaded into memory')
 
 
 app.nudgepad.patchFile = function (path, patch, email) {
-  var filepath = app.nudgepad.paths.site + path.replace(/ /g, '/') + '.space'
-  var file = app.nudgepad.site.get(path)
+  var filepath = app.nudgepad.paths.project + path.replace(/ /g, '/') + '.space'
+  var file = app.nudgepad.project.get(path)
   var patchFile = patch.get(path)
   
    // Create File
@@ -196,7 +196,7 @@ app.nudgepad.patchFile = function (path, patch, email) {
          return error
        }
      })
-     app.nudgepad.site.set(path, file)
+     app.nudgepad.project.set(path, file)
    }
 
    // Delete File
@@ -208,7 +208,7 @@ app.nudgepad.patchFile = function (path, patch, email) {
          return error
        }
      })
-     app.nudgepad.site.delete(path)
+     app.nudgepad.project.delete(path)
    }
 
    // Update File
@@ -376,10 +376,10 @@ app.pageOptions = {
 
 app.sendPage = function(req, res, name) {
   
-  var scraps = app.nudgepad.site.get('pages ' + name)
+  var scraps = app.nudgepad.project.get('pages ' + name)
   var page = new Page(scraps)
   var context = {}
-  context.site = app.nudgepad.site
+  context.project = app.nudgepad.project
   context.request = req
   return res.send(page.toHtml(context, app.pageOptions))
 }
@@ -387,8 +387,8 @@ app.sendPage = function(req, res, name) {
 /*********** patch methods ************/
 require('./patch.js')(app)
 
-/*********** nudgepad.site ************/
-require('./site.js')(app)
+/*********** nudgepad.project ************/
+require('./project.js')(app)
 
 
 /*********** nudgepad.backup ***********/
@@ -438,14 +438,14 @@ fs.watch(app.nudgepad.paths.public, function (event, filename) {
 
 /*
 todo: experiment with watching this folder for all updates.
-fs.watch(app.nudgepad.paths.site + 'pages/', function (event, filename) {
+fs.watch(app.nudgepad.paths.project + 'pages/', function (event, filename) {
   
   // Trigger public changed event
   app.nudgepad.loadFolder('pages')
 })
 */
 
-/*********** export site ***********/
+/*********** export project ***********/
 require('./export.js')(app)
 
 /*********** nudgepad.login ***********/
@@ -504,7 +504,7 @@ try {
 app.use('/', function (req, res, next) {
   
 
-  var page = app.nudgepad.site.get('pages').get('notFound')
+  var page = app.nudgepad.project.get('pages').get('notFound')
   if (!page)
     return res.send('Not found', 404)
   
@@ -553,7 +553,7 @@ io.set('authorization', function (data, accept) {
   
   var cookie = parseCookie(data.headers.cookie)
 
-  var worker = app.nudgepad.site.get('workers ' + cookie.email)
+  var worker = app.nudgepad.project.get('workers ' + cookie.email)
   if (!worker)
     return accept('Invalid worker "' + cookie.email + '" transmitted. Headers:' + data.headers.cookie, false)
 
@@ -575,19 +575,19 @@ io.sockets.on('connection', function (socket) {
     var id = patch.get('id')
     var fullPatch = new Space().set(id, patch)
     // new tab
-    if (!app.nudgepad.site.get('collage ' + id)) {
+    if (!app.nudgepad.project.get('collage ' + id)) {
       app.nudgepad.emit('collage.create', fullPatch, socket)
       socket.handshake.tabId = id
     }
     else
       app.nudgepad.emit('collage.update', fullPatch, socket)
     
-    app.nudgepad.site.get('collage').patch(fullPatch)
+    app.nudgepad.project.get('collage').patch(fullPatch)
   })
   
   socket.on('disconnect', function () {
     if (socket.handshake.tabId) {
-      app.nudgepad.site.values.collage.delete(socket.handshake.tabId)
+      app.nudgepad.project.values.collage.delete(socket.handshake.tabId)
       app.nudgepad.emit('collage.delete', socket.handshake.tabId, socket)
     }
   })
@@ -607,7 +607,7 @@ io.sockets.on('connection', function (socket) {
     app.nudgepad.patchSite(patch, socket.handshake.cookie.email)
     // Also patch the page
     var pageName = patch.values.timelines.keys[0]
-    var page = app.nudgepad.site.get('pages ' + pageName)
+    var page = app.nudgepad.project.get('pages ' + pageName)
     var commitTime = patch.get('timelines ' + pageName).keys[0]
     patch = new Space(patch.get('timelines ' + pageName + ' ' + commitTime).toString())
     if (patch.get('values')) {
