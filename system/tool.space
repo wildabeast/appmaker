@@ -1,8 +1,9 @@
 tool.js var Draw = new Tool('Draw')
+ Draw.description = 'Draw and edit illustrations for your project.'
+ Draw.color = 'blue'
 tool.css 
 tool.html 
 tool.space name Draw
- description Draw and edit illustrations for your project.
  html tool.html
  js tool.js
  css tool.css

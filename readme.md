@@ -132,10 +132,11 @@ like this:
 
 ```
 tool.js var Draw = new Tool('Draw')
+ Draw.description = 'Draw and edit illustrations for your project.'
+ Draw.color = 'blue'
 tool.css 
 tool.html 
 tool.space name Draw
- description Draw and edit illustrations for your project.
  html tool.html
  js tool.js
  css tool.css
@@ -224,6 +225,13 @@ Draw.onclose = function () {}
 
 ```
 Draw.onopen = function () {}
+```
+
+Your tool can have some basic properties to control how it appears on the home screen:
+
+```
+Draw.description = 'Draw and edit illustrations for your project.'
+Draw.color = 'blue'
 ```
 
 Your tool can have its own events like this:
