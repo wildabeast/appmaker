@@ -1,89 +1,87 @@
-NudgePad
-========
+NudgePad BETA
+=============
 
-NudgePad let's you make websites, apps and webpages in your browser.
-
-NudgePad is currently in BETA and still changing rapidly. We welcome you to use it
-but documentation is very limited and the code is still largely in flux.
-
-A stable version 1.0 will be released at some point in late 2013.
+Make websites, apps and more in your browser.
 
 Try it
-======
+------
 
 Try it now at http://nudgepad.com
 
-Who is NudgePad for?
-====================
+When can I use it?
+------------------
 
-Anyone who wants to make things on the web!
+NudgePad will launch for the general public at some point in late 2013.
 
-What can I make with NudgePad?
-===============================
+If you're a developer, now is a great time to get involved and help
+make tools that can help you and the world reach our creative potential.
 
-A lot of things! NudgePad gives you a whole operating system of tools for making right
-in your browser. Not only do you have full control of the frontend, but each NudgePad site is a Node.js
-Express App on the backend, so you can add any server side code you'd like.
-
-Early users are making clickable prototypes, mobile apps, FirefoxOS apps, websites, blogs, CMS sites, single pagers,
-personal homepages, forms, surveys, small business sites, mobile sites, presentations, infographics, landing pages, ab tests
-mindmaps, memes, ecards, ecommerce stores and more.
-
-Early Examples of NudgePad Powered Sites
-========================================
-
-Here are some of the first sites powered by NudgePad. Want to add yours to the list? Email breck@nudgepad.com
+Examples of things made with NudgePad
+-------------------------------------
 
 - Blog: http://breckyunits.com/
 - Small Business Site: http://octaviachambliss.com/
 - Book Site: http://generationatheistbook.com/
 - Personal Homepage: http://benzulauf.com/
 
-Making a Site with NudgePad
-===========================
+How can I help?
+---------------
 
-Documentation for how to make your site using NudgePad is coming soon.
+At the center of the NudgePad are Tools like "Design" and "Develop" that
+the community can use to create their projects.
+
+If you're a developer, the best way to help is by building a great tool
+that allows people to make something in their browsers.
+
+Unlike apps built for consuming content, on NudgePad all tools are built
+for making content. You could build a blogging tool, a drawing tool, an
+image editing tool, a vector tool, or something completely new.
+
+Once you're tool is working and useful, you can submit it to the core
+of NudgePad as a pull request. You could go from idea to tool to having
+your pull request accepted and deployed to all NudgePad servers in less
+than 24 hours! There is no "Tool Store" in NudgePad. The entire NudgePad community
+has access to all tools pulled into core at all times. Our goal is
+quality Tools, not quantity, and a very fast and consistent experience for
+our community.
+
+Creating a Tool
+---------------
+
+To go from "Idea" to "wow my tool is in all NudgePad sites", the workflow looks like this:
+
+1. Fork NudgePad & clone to localhost
+2. Create the folder and required files for your tool
+3. Edit, test and refine your tool.
+4. Commit and push to your fork then submit a pull request
+
+Before creating an tool, have our contact info handy if you run into any problems:
+
+Email: breck@nudgepad.com
+Phone: 1-415-937-1984
 
 
-Self Hosting NudgePad (for advanced users)
-==========================================
+Installing on Localhost
+-----------------------
 
-All the information below is for advanced users and developers.
+The best way to develop NudgePad is to install a copy on localhost.
 
-If you just want to make something, head over to http://nudgepad.com.
+NudgePad currently works best on Mac OS X and Ubuntu.
 
+NudgePad requires node v0.8.*. NudgePad does NOT currently work reliably with
+node v0.10.x due to a proxy/websocket (issue #1).
 
-Requirements
-============
+NudgePad also requires a few programs: git, imagemagick, sendmail, and mon.
 
-NudgePad currently works (with some difficulty) on Mac OS X and Ubuntu.
+To install for development on Mac OS X:
 
-NudgePad requires node v0.8.* (does NOT currently work reliably with
-node v0.10.x due to some proxy/websocket issues).
-
-NudgePad also requires a few apps: git, imagemagick, sendmail, and mon.
-
-Installing Production Version
-=============================
-
-The NPM version of NudgePad is not stable yet, please install the development
-version from this git repo.
-
-Installing Development Version
-==============================
-
-If you'd like to contribute to NudgePad development, follow these steps:
-
-    cd ~
-    git clone https://github.com/nudgepad/nudgepad.git
-    cd nudgepad/install
-    # Run the install script for your platform, eg:
-    # ./mac.sh
-    # Now reload your bash_profile to get the npm command
-    source ~/.bash_profile
-    npd start
-    # Go to http://localhost
-
+    $ cd ~
+    $ git clone https://YOURFORK
+    $ cd nudgepad/install
+    $ ./mac.sh
+    $ source ~/.bash_profile
+    $ npd start
+    $ # Go to http://localhost
 
 Occasionally you'll need to update your environment's PATH variable to make
 sure that the node_modules/.bin folder is included. For example, you may need
@@ -91,104 +89,120 @@ to add this to your .bash_profile or .bashrc:
 
     PATH=$PATH:~/node_modules/.bin
 
-Uninstalling
-============
+Naming Your Tool
+---------------
 
-To remove the development version (and ALL user data) run:
+Getting the name right for your tool is very important. The fastest way to
+choose a great name for your tool is to choose a bad name for your tool, and
+then build your tool in a way that it is easy to find/replace the name later on.
 
-    # Warning: this deletes ALL user data!
-    npd uninstall
+Your tool name should be: unique, alphabet only, and a verb. Tools in NudgePad
+are always centered around "Making" and not "Consuming", so the name should
+convey what the user is going to be doing with that tool. For example, "Draw"
+instead of "Pictures".
 
-To delete just the code but keep user data, run:
+It's also important to know that your Tool Name will reserve a single word in the
+NudgePad namespace. So if you name your tool "Draw", the variable Draw
+will be made a global in the NudgePad client and so it shouldn't interfere with
+other tools.
 
-    npd stop
-    rm -rf ~/nudgepad
+We consciously chose to name tools this way, "polluting" the global namespace,
+because we value design, increased collaboration, and simplicity over the ugly
+module systems presented by other platforms.
 
-Contributing
-============
+We also value updates. We want to ensure our community that tools are constantly
+being improved, refined, and tested.
 
-Want to get involved? Email breck@nudgepad.com
 
-We encourage you to use NudgePad, create issues for bugs or ideas, contribute templates, and
-of course contribute code!
+Creating Your Tool
+-----------------
 
-Architecture Overview
-=====================
+Tools in NudgePad are meant to be modular and sandboxed and contained in one
+folder.
 
-NudgePad consists of a control panel Express app running on port 3000, user
-sites which run on ports 3001 - 8000, and an http-proxy app which sits in front
-of all of those on port 80. You can access the control panel app by going to
-http://localhost/, or if it's running on a production server by going to
-http://YOURHOSTNAME/. The panel app let's you instantly create more sites
-that have a domain name like *.localhost on localhost, or *.YOURHOSTNAME on a
-production server. If you are not running on localhost, be sure to update the
-hostname of your machine to match the machine's DNS name, and you'll want
-to create a CNAME or A Record in your DNS to point *.YOURHOSTNAME to the
-machine's IP or DNS.
+You can create a new tool at the command line like this:
 
-Writing Code for NudgePad
-=========================
+    $ npd tool draw
 
-Our development strategy is to make things as modular as possible.
+This will create a folder ~/nudgepad/client/tools/draw that stores all the
+files for your tool.
 
-Ideally, every component is a git repo that we don't maintain.
+You'd then want to update the files tool.js and tool.space with the name
+you chose.
 
-However, user experience is paramount and so if there isn't something that fits our needs
-well enough, we write code.
+You could also create an tool manually by replicating the basic skeleton
+like this:
 
-Oftentimes we write code and then find a package that solves the problem we were writing
-code to solve. When that happens, we delete our code as fast as we can and switch to
-someone else's module.
+```
+tool.js var Draw = new Tool('Draw')
+tool.css 
+tool.html 
+tool.space name Draw
+ description Draw and edit illustrations for your project.
+ html tool.html
+ js tool.js
+ css tool.css
+```
 
-If you are developing a component for NudgePad, this approach is usually best:
+Once your tool is created, visit http://localhost and create a new site
+to see it in action.
 
-- Independent repo. Create a new repo with an MIT license (or better)
-- NudgePad first. Design your code toward the NudgePad API first. Don't worry about
-packaging it as a plugin for other repos. At some point if your code is used in external
-products, great, but make it work well for NudgePad first!
-- demo.html. Create a demo.html file so you can play with your code outside of NudgePad. If
-it's an npm module, create a similar feature so there is some tiny instant way to play
-with it outside of NudgePad.
-- Unit tests. Add unit tests for your code.
-- Continuous integration. Ideally your test suite will be run by Travis or some other system
-when you push it.
+The Launch tool should allow you to launch your tool.
+
+As you make changes to your tool, simply refreshing your browser should
+be enough to see them.
+
+NudgePad has a build system that takes all the tools and compiles them into
+a single page webpage for the user. This keeps NudgePad fast.
+While developing, NudgePad will watch the tools folder for changes and will
+run the build system each time.
+
+
+Editing Your Tool
+----------------
+
+At this point you have created your tool and can open it in your browser. Now
+you can start adding functionality to your tool.
+
+NudgePad exposes an API that your tool can use to read and write files to the user's
+project. Here are some quick examples to give you some ideas of the APIs and
+how to use them:
+
+```
+```
+
+(todo: Copy API docs here)
+
+
+Appendix
+========
+
+Core Architecture Concepts
+--------------------------
+
+The first core concept in NudgePad is the Project. A user is always working on a single
+project. A project is always just a single folder on the computer. There is no
+database used, everything is stored on disk. Each project can have unlimited users,
+and each user record is simple a file in the workers/ folder.
+
+Projects can be tiny or huge. All projects are stored in /nudgepad/sites/.
+Each Project has a name, which is also the domain name and folder name for the project.
+Each project is a website, and a node.js Express app as well. Projects can
+evolve into anything.
+
+The second core concept in NudgePad is the tool. Makers work on their project in
+the browser by using Tools. Each tool is just HTML, CSS, and Javascript, that interacts
+with the user's projects files via some core APIs.
+
+The third core concept in NudgePad is the Space language. As much as possible, we rely
+on Space to encode and store data. Over the long term this will create a lot of
+benefits for collaboration and creation.
+
 
 Overview of the Codebase
-========================
+------------------------
 
-NudgePad makes extensive use of the Space language (https://github.com/nudgepad/space) and
-the Scraps HTML language built on top of Space (https://github.com/nudgepad/scraps).
-
-NudgePad also makes extensive use of Node.js, jQuery, and the Express ecosystems.
-
-Beyond that, there are three main parts of NudgePad to familiarize yourself with.
-
-client
-------
-
-The frontend to NudgePad. This code does pretty much one thing: creates the /nudgepad single
-page app which contains the whole user interface of NudgePad.
-
-(Note: We have a lot of cleanup to do here!)
-(Note: We are switching this to an app model! There is a branch under development with the
-switch)
-
-We use libraries here such as jQuery, underscore, scraps, and Space, and a whole lot of
-specific packages for UI and other components. If you think we could benefit from using
-an open source package you wrote or know of, please let us know so we can add it (and
-even better delete something from our codebase!).
-
-To create something new for client from scratch, your code should:
-
-- Be its own standalone repo
-- Be usable outside of NudgePad
-- Have a live website (a NudgePad site works great) where someone can play with it
-- Have unit tests
-- Be 1 JS file
-- Be CamelCased
-- Be Concise
-- Be MIT licensed or better
-- Expose 1 global object that begins with a Capital Letter.
+Besides the Tool and Client parts of NudgePad, there are two other core components.
 
 server
 ------
@@ -196,49 +210,41 @@ server
 Each NudgePad site is a Node.js process powered by Express.
 
 The API here is still being simplified a bit, but the basic pattern is to create a module that
-extends the user's app like this:
+extends the user's site like this:
 
-    function MyModuleName (app, nudgepad) {
+    function MyModuleName (app) {
       app.get('/helloWorld', function (req, res, next) {
         // do something
       })
     }
     module.exports = MyModuleName
 
-And then require that in the app.js file like this:
+And then require that in the tool.js file like this:
 
-    require('./mymodulename.js')(app, nudgepad)
-
-We'll probably ditch that second param, and probably move most of these server side modules
-to user land.
-
-To create something new for server from scratch, your code should:
-
-- Be its own standalone repo
-- Have a live website (a NudgePad site works great) where someone can play with it
-- Have unit tests
-- Be 1 JS file
-- Be CamelCased
-- Be Concise
-- Be MIT licensed or better
-- Extend the NudgePad site in a conventional way
+    require('./mymodulename.js')(app)
 
 system
 ------
 
-The code in system is responsible for creating new sites on the machine, load
+The code in system is responsible for creating new projects on the machine, load
 balancing, proxying requests to sites, and offering tools to sysadmins for
 managing a NudgePad server.
 
 It's currently written mostly in BASH, but node scripts are welcome as well.
 
+A fully running NudgePad server consists of:
+
+- A control panel Express app running on port 3000
+- user sites which run on ports 3001 - 8000
+- An http-proxy app which sits in front of all of those on port 80.
+
 Overview of data storage
-========================
+------------------------
 
 All user data is stored in /nudgepad/
 
-NudgePad does NOT use a database. Our thoughts are a database is premature optimization for
-almost all sites. There are orders of magnitude more tools and ways to work with files
+NudgePad does not use a database. Our thoughts are a database is premature optimization for
+almost all projects. There are orders of magnitude more tools and ways to work with files
 in the file system than on databases. This design decision makes it easy for sites to be
 a git repo, to be moved from one server to another, to be modified not only by NudgePad
 but by other tools, etc.
@@ -259,17 +265,17 @@ The data for a site "foo.com" is stored in /nudgepad/sites/foo.com/ and looks li
 
 packages/ - Contains Node.js packages to include onstart. Each package extends the app object. So your package should export one function which takes an express app object as a param and extends it.
 logs/ - Contains site log files.
-pages/ - Contains the pages that are edited by the pages app. Encoded in Space/Scraps
+pages/ - Contains the pages that are edited by the Design Tool. Encoded in Space/Scraps
 posts/ - Contains blog posts for blog module. Encoded in Space.
 public/ - Serves any assets. Can add any html/images/css/js etc. Normal public web folder.
 settings/ - Stores site settings. Each setting is either a Space object or a one liner text file. API in flux.
 surveys/ - Stores form posts encoded in Space.
 temp/ - Stores temporary site data.
-timelines/ - Stores diffs of pages generated by Pages app. Encoded in Space.
+timelines/ - Stores diffs of pages generated by Design tool. Encoded in Space.
 workers/ - Stores user records. Each user is a file encoded in Space.
 
 
 Build Status
-============
+------------
 
 [![Build Status](https://travis-ci.org/nudgepad/nudgepad.png?branch=master)](https://travis-ci.org/nudgepad/nudgepad)

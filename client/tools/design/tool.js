@@ -1,4 +1,4 @@
-var Design = new App('Design')
+var Design = new Tool('Design')
 
 // What spot the worker is on the timeline for the current page
 Design.page = new Page()

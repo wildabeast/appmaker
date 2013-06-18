@@ -10,7 +10,7 @@ var fs = require("fs"),
 
 var publicPath = __dirname + '/public/'
 var productionPath = __dirname + '/production/'
-var appsPath = __dirname + '/apps/'
+var toolsPath = __dirname + '/tools/'
 var corePath = __dirname + '/core/'
 var code = {}
 code.css = ''
@@ -35,9 +35,9 @@ _.each(externalLibs, function (filename) {
 
 var jsFiles = _.without(fs.readdirSync(corePath + 'js'), '.DS_Store')
 // Do some reordering
-jsFiles = _.without(jsFiles, 'Nudgepad.js', 'App.js')
+jsFiles = _.without(jsFiles, 'Nudgepad.js', 'Tool.js')
 jsFiles.unshift('Nudgepad.js')
-jsFiles.unshift('App.js')
+jsFiles.unshift('Tool.js')
 _.each(jsFiles, function (filename) {
   includes.js += '    <script type="text/javascript" src="/nudgepad/core/js/' + filename + '"></script>\n'
   code.js += fs.readFileSync(corePath + 'js/' + filename, 'utf8') + ';'
@@ -55,13 +55,13 @@ _.each(htmlFiles, function (filename) {
 })
 
 
-/*** APPS ***/
+/*** TOOLS ***/
 
-var apps = _.without(fs.readdirSync(appsPath), '.DS_Store')
-_.each(apps, function (appName) {
-  var appDir = appsPath + appName + '/'
+var tools = _.without(fs.readdirSync(toolsPath), '.DS_Store')
+_.each(tools, function (toolName) {
+  var toolDir = toolsPath + toolName + '/'
   
-  var settings = new Space(fs.readFileSync(appDir + 'app.space', 'utf8'))
+  var settings = new Space(fs.readFileSync(toolDir + 'tool.space', 'utf8'))
   var files
   
 
@@ -69,15 +69,15 @@ _.each(apps, function (appName) {
   _.each(files, function (filename) {
     
     if (filename.match('.css')) {
-      code.css += fs.readFileSync(appDir + filename, 'utf8')
-      includes.css += '    <link rel="stylesheet" href="/nudgepad/apps/' + appName + '/' + filename + '" type="text/css"/>\n'
+      code.css += fs.readFileSync(toolDir + filename, 'utf8')
+      includes.css += '    <link rel="stylesheet" href="/nudgepad/tools/' + toolName + '/' + filename + '" type="text/css"/>\n'
     }
     // directory
     else {
-      var subfiles = _.without(fs.readdirSync(appDir + filename), '.DS_Store')
+      var subfiles = _.without(fs.readdirSync(toolDir + filename), '.DS_Store')
       _.each(subfiles, function (subfile) {
-        code.css += fs.readFileSync(appDir + filename + '/' + subfile, 'utf8')
-        includes.css += '    <link rel="stylesheet" href="/nudgepad/apps/' + appName + '/' + filename + '/' + subfile + '" type="text/css"/>\n'
+        code.css += fs.readFileSync(toolDir + filename + '/' + subfile, 'utf8')
+        includes.css += '    <link rel="stylesheet" href="/nudgepad/tools/' + toolName + '/' + filename + '/' + subfile + '" type="text/css"/>\n'
       })
     }
     
@@ -87,15 +87,15 @@ _.each(apps, function (appName) {
   _.each(files, function (filename) {
     
     if (filename.match('.js')) {
-      code.js += fs.readFileSync(appDir + filename, 'utf8')
-      includes.js += '    <script type="text/javascript" src="/nudgepad/apps/' + appName + '/' + filename + '"></script>\n'
+      code.js += fs.readFileSync(toolDir + filename, 'utf8')
+      includes.js += '    <script type="text/javascript" src="/nudgepad/tools/' + toolName + '/' + filename + '"></script>\n'
     }
     // directory
     else {
-      var subfiles = _.without(fs.readdirSync(appDir + filename), '.DS_Store')
+      var subfiles = _.without(fs.readdirSync(toolDir + filename), '.DS_Store')
       _.each(subfiles, function (subfile) {
-        code.js += fs.readFileSync(appDir + filename + '/' + subfile, 'utf8')
-        includes.js += '    <script type="text/javascript" src="/nudgepad/apps/' + appName + '/' + filename + '/' + subfile + '"></script>\n'
+        code.js += fs.readFileSync(toolDir + filename + '/' + subfile, 'utf8')
+        includes.js += '    <script type="text/javascript" src="/nudgepad/tools/' + toolName + '/' + filename + '/' + subfile + '"></script>\n'
       })
     }
     
@@ -105,13 +105,13 @@ _.each(apps, function (appName) {
   _.each(files, function (filename) {
     
     if (filename.match('.html')) {
-      code.html += fs.readFileSync(appDir + filename, 'utf8')
+      code.html += fs.readFileSync(toolDir + filename, 'utf8')
     }
     // directory
     else {
-      var subfiles = _.without(fs.readdirSync(appDir + filename), '.DS_Store')
+      var subfiles = _.without(fs.readdirSync(toolDir + filename), '.DS_Store')
       _.each(subfiles, function (subfile) {
-        code.html += fs.readFileSync(appDir + filename + '/' + subfile, 'utf8')
+        code.html += fs.readFileSync(toolDir + filename + '/' + subfile, 'utf8')
       })
     }
   })

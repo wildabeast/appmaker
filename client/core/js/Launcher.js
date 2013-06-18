@@ -1,4 +1,4 @@
-// Nudgepad App navigation
+// Nudgepad Tool navigation
 var Launcher = {}
 
 Launcher.open = function (name, dontRecord) {
@@ -15,17 +15,17 @@ Launcher.open = function (name, dontRecord) {
   if (nudgepad.isTesting)
     return null
 
-  history.pushState(name, 'Nudgepad - ' + name, '/nudgepad?app=' + name)
+  history.pushState(name, 'Nudgepad - ' + name, '/nudgepad?tool=' + name)
 }
 
-Launcher.openAppFromQueryString = function () {
+Launcher.openToolFromQueryString = function () {
   
-  // Get query string. If nothing, set default to Launch app
-  var name = ParseQueryString().app || 'Launch'
+  // Get query string. If nothing, set default to Launch tool
+  var name = ParseQueryString().tool || 'Launch'
   Launcher.open(name, true)
 }
 
 // Revert to a previously saved state
 window.addEventListener('popstate', function (event) {
-  Launcher.openAppFromQueryString()
+  Launcher.openToolFromQueryString()
 })

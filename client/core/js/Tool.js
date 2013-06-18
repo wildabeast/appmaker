@@ -1,22 +1,15 @@
-/**
- * An app is just a page. should be contained in 1 file.
- * it has an id and a view.
- * head
- *  title title
- *
- */
-function App(name) {
+function Tool(name) {
   this.name = name
   this._open = false
   this.events = {}
-  App.apps.push(name)
+  Tool.tools.push(name)
 }
 
-App.apps = []
+Tool.tools = []
 
-App.openApp = null
+Tool.openTool = null
 
-App.prototype.close = function (name) {
+Tool.prototype.close = function (name) {
 
   // Return false if already closed
   if (!this._open)
@@ -47,9 +40,9 @@ App.prototype.close = function (name) {
     this.onclose()
 
   this._open = false
-  App.openApp = false
+  Tool.openTool = false
   
-  $('.App').hide()
+  $('.Tool').hide()
   
   if (name)
     window[name].open()
@@ -59,27 +52,26 @@ App.prototype.close = function (name) {
 /**
  * @return {bool}
  */
-App.prototype.isOpen = function () {
+Tool.prototype.isOpen = function () {
   return this._open
 }
 
-App.prototype.open = function () {
+Tool.prototype.open = function () {
 
   // Return false if already open
   if (this._open)
     return false
   
-  // Close Any open app bar app
-  if (App.openApp)
-    return App.openApp.close(this.name)
+  if (Tool.openTool)
+    return Tool.openTool.close(this.name)
   
   // On open event
   if (this.onopen)
     this.onopen()
   
-  $('.App#' + this.name).show()
+  $('.Tool#' + this.name).show()
   
-  App.openApp = this
+  Tool.openTool = this
   this._open = true
   
   // todo: i think we can remove selection
@@ -111,11 +103,11 @@ App.prototype.open = function () {
   if (this.onready)
     this.onready()
 
-  mixpanel.track('I opened the ' + this.name + ' app')
+  mixpanel.track('I opened the ' + this.name + ' tool')
 
 }
 
-App.prototype.off = function (eventName, fn) {
+Tool.prototype.off = function (eventName, fn) {
   if (!this.events[eventName])
     return true
   for (var i in this.events[eventName]) {
@@ -124,25 +116,25 @@ App.prototype.off = function (eventName, fn) {
   }
 }
 
-App.prototype.on = function (eventName, fn) {
+Tool.prototype.on = function (eventName, fn) {
   if (!this.events[eventName])
     this.events[eventName] = []
   this.events[eventName].push(fn)
 }
 
-App.prototype.restart = function () {
+Tool.prototype.restart = function () {
   this.close()
   this.open()
 }
 
-App.prototype.toggle = function () {
+Tool.prototype.toggle = function () {
   if (this._open)
     this.close()
   else
     this.open()
 }
 
-App.prototype.trigger = function (eventName, space) {
+Tool.prototype.trigger = function (eventName, space) {
   for (var i in this.events[eventName]) {
     this.events[eventName][i](space)
   }

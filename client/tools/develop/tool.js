@@ -1,4 +1,4 @@
-var Develop = new App('Develop')
+var Develop = new Tool('Develop')
 
 Develop.files = ''
 Develop.log = ''

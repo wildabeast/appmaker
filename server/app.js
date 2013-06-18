@@ -344,7 +344,7 @@ app.get(/^\/nudgepad$/, app.checkId, function(req, res, next) {
 
 // If development, watch client folder and trigger rebuilds.
 // NudgePad app developer should never have to manually run build.js
-// Watch core and apps folder recursively.
+// Watch core and tools folder recursively.
 app.rebuild = function () {
   exec('node ' + clientPath + 'build.js')
   console.log('Rebuilding...')
@@ -365,7 +365,7 @@ app.watchDir = function (dir) {
 }
 
 if (app.nudgepad.development) {
-  app.watchDir(clientPath + 'apps')
+  app.watchDir(clientPath + 'tools')
   app.watchDir(clientPath + 'core')
 }
 

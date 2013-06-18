@@ -1,6 +1,6 @@
 name Develop
 description Edit the backend and files of your site.
-html app.html
-js app.js
-css app.css
+html tool.html
+js tool.js
+css tool.css
 color rgba(36, 65, 112, 1)

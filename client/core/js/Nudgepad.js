@@ -128,7 +128,7 @@ nudgepad.main = function (callback) {
     $('body').scrollTop(0)
     $('body').scrollLeft(0)
 
-    Launcher.openAppFromQueryString()
+    Launcher.openToolFromQueryString()
     
     $('#LoadingScreen').hide()
     

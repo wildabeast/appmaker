@@ -1,6 +1,6 @@
 name Manage
 description Manage user accounts, update your email address, and logout.
-html app.html
-js app.js
-css app.css
+html tool.html
+js tool.js
+css tool.css
 color rgba(171, 193, 199, 1)

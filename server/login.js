@@ -23,8 +23,8 @@ var Login = function (app) {
 
       // temp fix
       var appString = '?login=true'
-      if (req.query.app)
-        appString += '&app=' + req.query.app
+      if (req.query.tool)
+        appString += '&tool=' + req.query.tool
       if (req.query.newSite)
         appString += '&newSite=' + req.query.newSite
       if (req.query.timestamp)

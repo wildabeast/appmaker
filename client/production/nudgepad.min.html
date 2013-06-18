@@ -16,7 +16,7 @@
     b._i.push([a,e,d])};b.__SV=1.2}})(document,window.mixpanel||[]);
     mixpanel.init("cddd496663c58cf984f006dba0ec67bc");</script><!-- end Mixpanel -->
   </head>
-  <!-- We inline styles so for Designing apps that import CSS, they wont affect the body #221-->
+  <!-- We inline styles so for Designing tools that import CSS, they wont affect the body #221-->
   <body style="margin: 0; line-height: 1; overflow: hidden; position: relative; width: 100%; height: 100%; font-family: 'Titillium Web'; padding-left: 0; padding-top: 0;">
 <div id="ConnectionStatus">Connecting to server...</div>
 <div id="JavascriptError"></div>
@@ -38,7 +38,7 @@
 		</div>
 	</div>
 </div>
-<div class="App" id="Design">
+<div class="Tool" id="Design">
 </div>
   
 <div id="DesignStage">
@@ -104,10 +104,10 @@
 </div>
 
 <div id="DesignDimensions"></div>
-<div class="App" id="Develop">
-	<div class="AppNav">
-		<div class="AppNavContainer">
-  		<div class="AppSquareButton AppBackButton" onclick="Launcher.open('Launch')">
+<div class="Tool" id="Develop">
+	<div class="ToolNav">
+		<div class="ToolNavContainer">
+  		<div class="ToolSquareButton ToolBackButton" onclick="Launcher.open('Launch')">
 		  	Back
 		  </div>
 			<a class="DevelopButton" onclick="Develop.console()" title="Console">
@@ -128,7 +128,7 @@
 		<div class="clear"></div>
 		</div>
 	</div>
-  <div class="AppContainer">
+  <div class="ToolContainer">
 	  <div id="DevelopToggle">
 	  	<div class="DevelopToggleOption DevelopSelect" value="DevelopFilesContent">Files</div>
 			<div class="DevelopToggleOption" value="DevelopLogsContent">Logs</div>
@@ -149,8 +149,8 @@
 		</div>
 	</div>
 </div>
-<div class="App" id="Launch">
-  <div class="AppContainer">
+<div class="Tool" id="Launch">
+  <div class="ToolContainer">
     
 	  <div class="LaunchColumn LaunchMargin">
 	    
@@ -199,20 +199,20 @@
 	  <div class="clear"></div>
   </div>
 </div>
-<div class="App" id="Manage">
-	<div class="AppNav">
-		<div class="AppNavContainer">
-  		<div class="AppSquareButton AppBackButton" onclick="Launcher.open('Launch')">
+<div class="Tool" id="Manage">
+	<div class="ToolNav">
+		<div class="ToolNavContainer">
+  		<div class="ToolSquareButton ToolBackButton" onclick="Launcher.open('Launch')">
 		  	Back
 		  </div>
-		  <a id="ManageLogoutButton" class="AppSquareButton" href="/nudgepad.logout" title="Logout">
+		  <a id="ManageLogoutButton" class="ToolSquareButton" href="/nudgepad.logout" title="Logout">
 		  	Logout
 		  </a>
 		<div class="clear"></div>
 		</div>
 	</div>
-  <div class="AppContainer">
-	  <div class="AppSectionLabel">
+  <div class="ToolContainer">
+	  <div class="ToolSectionLabel">
 		  Account Info
 		</div>
 	  <div id="ManageFormLabel">
@@ -224,29 +224,29 @@
 		</div>
 	</div>
 </div>
-<div class="App" id="Package">
-	<div class="AppNav">
-		<div class="AppNavContainer">
-  		<div class="AppSquareButton AppBackButton" onclick="Launcher.open('Launch')">
+<div class="Tool" id="Package">
+	<div class="ToolNav">
+		<div class="ToolNavContainer">
+  		<div class="ToolSquareButton ToolBackButton" onclick="Launcher.open('Launch')">
 		  	Back
 		  </div>
 		<div class="clear"></div>
 		</div>
 	</div>
-  <div class="AppContainer">
-	  <div class="AppSectionLabel">
+  <div class="ToolContainer">
+	  <div class="ToolSectionLabel">
 		  Manifest Url
 		</div>
 	  <div id="PackageManifestUrl"><span id="PackageManifestUrlLink" onclick="Package.selectText('PackageManifestUrlLink')">http://</span>&nbsp;&nbsp;&nbsp;<a onclick="Explorer.edit('public/manifest.webapp');">Edit File</a></div>
 	</div>
 </div>
-<div class="App" id="Write">
-	<div class="AppNav">
-		<div class="AppNavContainer">
-  		<div class="AppSquareButton AppBackButton" onclick="Launcher.open('Launch')">
+<div class="Tool" id="Write">
+	<div class="ToolNav">
+		<div class="ToolNavContainer">
+  		<div class="ToolSquareButton ToolBackButton" onclick="Launcher.open('Launch')">
 		  	Back
 		  </div>
-			<div id="WriteAdvancedToggle" class="AppSquareButton" onclick="$('#WriteAdvanced').toggle()">
+			<div id="WriteAdvancedToggle" class="ToolSquareButton" onclick="$('#WriteAdvanced').toggle()">
 				<img src="nudgepad/public/images/bulb.png">
 			</div>
 			<textarea id="WriteAdvanced" placeholder="Advanced" tabindex="3"></textarea>
@@ -256,7 +256,7 @@
 		<div class="clear"></div>
 		</div>
 	</div>
-  <div class="AppContainer">
+  <div class="ToolContainer">
 		<div id="WritePostColumn">
 			<div id="WritePostContent">
 	  	  <div id="WritePostTitle">Old Posts</div>

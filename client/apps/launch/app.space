@@ -1,5 +1,0 @@
-name Launch
-description The NudgePad home screen. Launches apps.
-html app.html
-js app.js
-css app.css

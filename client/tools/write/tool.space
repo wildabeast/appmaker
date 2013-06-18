@@ -1,6 +1,6 @@
 name Write
 description Write and edit blog posts.
-html app.html
-js app.js
-css app.css
+html tool.html
+js tool.js
+css tool.css
 color rgba(237, 200, 17, 1)

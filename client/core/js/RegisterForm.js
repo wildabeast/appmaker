@@ -30,7 +30,7 @@ RegisterForm.open = function () {
     mixpanel.track('I added my email')
     $.post('/nudgepad.updateEmail', {email : email, sendWelcomeEmail: 'true'}, function () {
       nudgepad.warnBeforeReload = false
-      document.location = '/nudgepad?app=pages'
+      document.location = '/nudgepad?tool=Design'
     })
     
   })

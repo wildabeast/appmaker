@@ -1,4 +1,4 @@
-.App {
+.Tool {
   position: absolute;
   left: 0px;
   top: 0px;
@@ -12,19 +12,19 @@
   font-family: 'Titillium Web';
 }
 
-.AppContainer {
+.ToolContainer {
   width : 94%;
   max-width: 1000px;
   position : relative;
   margin : 0 auto;  
 }
 
-.AppNav {
+.ToolNav {
   width: 100%;
   background-color: #222;
 }
 
-.AppSectionLabel {
+.ToolSectionLabel {
   font-size: 36px;
   margin-top: 60px;
   border-bottom: 3px solid #ccc;
@@ -32,7 +32,7 @@
   margin-bottom: 20px;
 }
 
-.AppSquareButton { 
+.ToolSquareButton { 
   width: 40px;
   height: 40px;
   text-align: center;
@@ -40,7 +40,7 @@
   background-color: #444;
 }
 
-.AppBackButton {
+.ToolBackButton {
   font-size: 15px;
   float: left;
   background-repeat: no-repeat;
@@ -50,19 +50,19 @@
   color: #fff;
 }
 
-.AppSquareButton img {
+.ToolSquareButton img {
   padding-top: 12px;
 }
 
-.AppSquareButton:hover { 
+.ToolSquareButton:hover { 
   background-color: #333;
 }
 
-.AppSquareButton:active { 
+.ToolSquareButton:active { 
   background-color: #2a2a2a;
 }
 
-.AppNavContainer {
+.ToolNavContainer {
   padding: 10px;
 }
 
@@ -510,7 +510,7 @@ body {
   background-color: #2a2a2a;
 }
 
-/*----------------App Bar-------------------*/
+/*----------------Tool Bar-------------------*/
 
 #DesignBar {
   position: fixed;

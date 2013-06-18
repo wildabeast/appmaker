@@ -1,4 +1,4 @@
-var Manage = new App('Manage')
+var Manage = new Tool('Manage')
 
 Manage.onopen = function () {
   $('#ManageEmail').val(nudgepad.cookie.email)
@@ -15,7 +15,7 @@ Manage.save = function () {
   
   $.post('/nudgepad.updateEmail', {email : email}, function () {
     nudgepad.warnBeforeReload = false
-    document.location = '/nudgepad?app=Launch'
+    document.location = '/nudgepad?tool=Launch'
   })
 }
 

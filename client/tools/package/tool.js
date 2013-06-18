@@ -1,4 +1,4 @@
-var Package = new App('Package')
+var Package = new Tool('Package')
 
 Package.onopen = function () {
   $('#PackageManifestUrlLink').html('http://' + nudgepad.domain + '/manifest.webapp')

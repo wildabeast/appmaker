@@ -1,4 +1,4 @@
-var Write = new App('Write')
+var Write = new Tool('Write')
 
 // Default theme
 Write.blankTheme = new Space({

@@ -1,6 +1,6 @@
 name Package
 description Turn your site into a mobile app.
-html app.html
-js app.js
-css app.css
+html tool.html
+js tool.js
+css tool.css
 color rgba(237, 200, 17, 1)

@@ -58,8 +58,6 @@ Design.shortcuts['shift+space'] = function () {
   }
 }
 
-Design.shortcuts['meta+shift+m'] = function () {Explorer.edit('/public/manifest.webapp')}
-
 Design.shortcuts['meta+backspace'] = Design.trash
 
 Design.shortcuts['meta+o'] = Design.spotlight
