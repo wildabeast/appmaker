@@ -475,6 +475,9 @@ require('./home.js')(app)
 /*********** stats ***********/
 require('./stats.js')(app)
 
+/*********** fs ***********/
+require('./ExpressFs.js')(app)
+
 /*********** import ***********/
 require('./import.js')(app)
 
