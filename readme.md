@@ -165,13 +165,90 @@ At this point you have created your tool and can open it in your browser. Now
 you can start adding functionality to your tool.
 
 NudgePad exposes an API that your tool can use to read and write files to the user's
-project. Here are some quick examples to give you some ideas of the APIs and
-how to use them:
+project.
+
+Currently, the NudgePad API consists of 3 core objects:
+
+1. Project
+2. Tool
+3. NudgePad
+
+Project
+-------
+
+The Project object is an instance of Space that stores all the data in the project.
+
+To dump the Project instance from console and see what it contains:
 
 ```
+Project.toString()
 ```
 
-(todo: Copy API docs here)
+To get all the pages in a project:
+
+```
+var pages = Project.get('pages')
+````
+
+To create a new page:
+
+```
+Project.set('pages newPageName', 'h1\n content Hello World')
+````
+
+To get all the files in the public folder in a project:
+
+```
+var files = Project.get('public')
+````
+
+To create a new file in the public folder in a project:
+
+```
+Project.set('public foo.html', '<h1>Hello world</h1>')
+````
+
+Tool
+-------
+
+Each Tool is an instance of the Tool Object.
+
+You create your tool like this:
+
+```
+var Draw = new Tool('Draw')
+```
+
+Your tool can implement a number of methods including:
+
+```
+Draw.onclose = function () {}
+```
+
+```
+Draw.onopen = function () {}
+```
+
+Your tool can have its own events like this:
+
+```
+Draw.on('foobar', doSomething)
+Draw.trigger('foobar')
+Draw.off('foobar', doSomething)
+```
+
+
+
+
+
+NudgePad
+--------
+
+The NudgePad object exposes events that you can subscribe to:
+
+```
+nudgepad.on('arrive', function (who) {console.log(who + ' arrived')})
+````
 
 
 Appendix
