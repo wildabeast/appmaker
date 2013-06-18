@@ -7,7 +7,6 @@ if (!window.console)
  *
  * @special Singleton
  */
-var Project = new Space()
 var nudgepad = {}
 nudgepad.id = new Date().getTime()
 nudgepad.isTesting = false
