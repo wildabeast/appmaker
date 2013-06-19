@@ -604,28 +604,6 @@ io.sockets.on('connection', function (socket) {
     // Broadcast to everyone else
     app.nudgepad.emit('patch', space, socket)
   })
-  
-  socket.on('commit', function (space, fn) {
-    var patch = new Space(space)
-    app.nudgepad.patchSite(patch, socket.handshake.cookie.email)
-    // Also patch the page
-    var pageName = patch.values.timelines.keys[0]
-    var page = app.nudgepad.project.get('pages ' + pageName)
-    var commitTime = patch.get('timelines ' + pageName).keys[0]
-    patch = new Space(patch.get('timelines ' + pageName + ' ' + commitTime).toString())
-    if (patch.get('values')) {
-      page.patch(patch.get('values'))
-      console.log('pathcing values')
-    }
-    if (patch.get('order')) {
-      page.patchOrder(patch.get('order'))
-      console.log('pathcing order')
-    }
-    fn('commit received')
-    page.save()
-    // Broadcast to everyone else
-    app.nudgepad.emit('patch', space, socket)
-  })
 
 })
 
