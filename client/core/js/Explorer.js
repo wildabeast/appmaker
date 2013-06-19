@@ -28,8 +28,10 @@ Explorer.downloadTimelines = function () {
 Explorer.getProject = function (callback) {
   var activePage = store.get('activePage') || 'home'
   $.get('/nudgepad.project', { activePage : activePage, id : nudgepad.id }, function (space) {
-    Project = new Space(space)
-    var online = Project.get('collage').keys.length + 1
+    Project._patch(new Space(space))
+    var online = Project.get('collage')
+    if (online)
+      online = online.keys.length + 1
     var title = nudgepad.domain + '. ' + online + ' user' + (online > 1 ? 's' : '') + ' online.'
     Blinker.default = title
     document.title = title

@@ -18,9 +18,12 @@ function Space(properties) {
     return this
   }
   
+  
+  
   // Load from object
   for (var key in properties) {
-    if (!properties.hasOwnProperty(key))
+    if (!Object.prototype.hasOwnProperty.call(properties, key))
+//    if (!properties.hasOwnProperty(key))
       continue
     var value = properties[key]
     if (typeof value === 'object')
@@ -355,7 +358,7 @@ Space.prototype.loadFromString = function (string) {
   string = string.replace(/\n\r/g, '\n').replace(/\r\n/g, '\n')
   
   /** Eliminate newlines at end of string.*/
-  string = string.replace(/[\n ]*$/, '')
+  string = string.replace(/\n[\n ]*$/, '')
   
   /** Space doesn't have useless lines*/
   string = string.replace(/\n\n+/, '\n')
@@ -460,7 +463,7 @@ Space.prototype._patch = function (patch) {
 Space.prototype.patch = function (patch) {
   // todo, don't trigger patch if no change
   this._patch(patch)
-  this.trigger('patch')
+  this.trigger('patch', patch)
   return this
 }
 
@@ -499,7 +502,7 @@ Space.prototype._patchOrder = function (space) {
 Space.prototype.patchOrder = function (space) {
   // todo: don't trigger event if no change
   this._patchOrder(space)
-  this.trigger('patchOrder')
+  this.trigger('patchOrder', space)
   return this
 }
 
@@ -525,7 +528,7 @@ Space.prototype._rename = function (oldName, newName) {
 Space.prototype.rename = function (oldName, newName) {
   this._rename(oldName, newName)
   if (oldName !== newName)
-    this.trigger('rename')
+    this.trigger('rename', oldName, newName)
   return this
 }
 
@@ -563,10 +566,11 @@ Space.prototype._set = function (key, value, index) {
 Space.prototype.set = function (key, value, index) {
   var isUpdate = !!this.get(key)
   this._set(key, value, index)
+  this.trigger('set', key, value, index)
   if (isUpdate)
-    this.trigger('update')
+    this.trigger('update', key, value, index)
   else
-    this.trigger('create')
+    this.trigger('create', key, value, index)
   return this
 }
 
@@ -634,7 +638,7 @@ Space.prototype.toString =  function (spaces) {
     
     // dont put a blank string on blank values.
     else if (value.toString() === '')
-      string += '\n'
+      string += ' \n'
     
     // multiline string
     else if (value.toString().match(/\n/))
@@ -650,8 +654,9 @@ Space.prototype.toString =  function (spaces) {
 Space.prototype.trigger = function (eventName) {
   if (!this.events[eventName])
     return true
+  var args = Array.prototype.slice.call(arguments)
   for (var i in this.events[eventName]) {
-    this.events[eventName][i].apply(this, arguments)
+    this.events[eventName][i].apply(this, args.slice(1))
   }
 }
 

@@ -108,7 +108,6 @@ Write.onopen = function () {
   if (!Project.get('posts'))
     return true
   _.each(Project.get('posts').keys, function (name) {
-    console.log(name)
     var value = Project.get('posts').get(name)
     var div = $('<div >' + value.get('title') + '</div>')
       .css({

@@ -113,7 +113,7 @@ nudgepad.main = function (callback) {
     })
 
     nudgepad.socket.on('connect', function (message) {
-      console.log('connected to server %s', message)
+      console.log('connected to server: %s', nudgepad.domain)
       $('#ConnectionStatus').html('Connected!').fadeOut()
       nudgepad.restartCheck()
     })
@@ -167,7 +167,7 @@ nudgepad.emit = function (event, space) {
     return null
   
   nudgepad.socket.emit(event, space.toString(), function (data) {
-    console.log(data)
+    console.log('%s responded to emission: %s', nudgepad.domain, data)
   })
 }
 

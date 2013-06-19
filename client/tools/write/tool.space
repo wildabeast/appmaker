@@ -1,4 +1,4 @@
 name Write
 html tool.html
-js tool.js
+js write.js
 css tool.css
