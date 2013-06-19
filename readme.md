@@ -37,13 +37,14 @@ Unlike apps built for consuming content, on NudgePad all tools are built
 for making content. You could build a blogging tool, a drawing tool, an
 image editing tool, a vector tool, or something completely new.
 
-Once you're tool is working and useful, you can submit it to the core
+Once your tool is working and useful, you can submit it to the core
 of NudgePad as a pull request. You could go from idea to tool to having
 your pull request accepted and deployed to all NudgePad servers in less
-than 24 hours! There is no "Tool Store" in NudgePad. The entire NudgePad community
+than 24 hours. There is no "Tool Store" in NudgePad. The entire NudgePad community
 has access to all tools pulled into core at all times. Our goal is
 quality Tools, not quantity, and a very fast and consistent experience for
-our community.
+our community. We also want to enable collaboration, and have developers and
+designers work together to build better tools for the community.
 
 Creating a Tool
 ---------------
@@ -55,7 +56,7 @@ To go from "Idea" to "wow my tool is in all NudgePad sites", the workflow looks 
 3. Edit, test and refine your tool.
 4. Commit and push to your fork then submit a pull request
 
-Before creating an tool, have our contact info handy if you run into any problems:
+Before creating an tool, you may want to have our contact info handy if you run into any problems:
 
 Email: breck@nudgepad.com
 Phone: 1-415-937-1984
@@ -77,6 +78,7 @@ To install for development on Mac OS X:
 
     $ cd ~
     $ git clone https://YOURFORK
+    $ # see the tasks in the install folder to install required stuff
     $ npd start
     $ # Go to http://localhost
 
@@ -101,7 +103,7 @@ instead of "Pictures".
 It's also important to know that your Tool Name will reserve a single word in the
 NudgePad namespace. So if you name your tool "Draw", the variable Draw
 will be made a global in the NudgePad client and so it shouldn't interfere with
-other tools.
+other words.
 
 We consciously chose to name tools this way, "polluting" the global namespace,
 because we value design, increased collaboration, and simplicity over the ugly
@@ -127,7 +129,7 @@ files for your tool.
 You'd then want to update the files tool.js and tool.space with the name
 you chose.
 
-You could also create an tool manually by replicating the basic skeleton
+You could also create a tool manually by replicating the basic skeleton
 like this:
 
 ```
@@ -147,11 +149,10 @@ to see it in action.
 
 The Launch tool should allow you to launch your tool.
 
-As you make changes to your tool, simply refreshing your browser should
-be enough to see them.
+As you make changes to your tool, refresh your browser to see them.
 
 NudgePad has a build system that takes all the tools and compiles them into
-a single page webpage for the user. This keeps NudgePad fast.
+a single page webappfor the user. This keeps NudgePad fast.
 While developing, NudgePad will watch the tools folder for changes and will
 run the build system each time.
 
@@ -205,7 +206,25 @@ You create your tool like this:
 var Draw = new Tool('Draw')
 ```
 
-Your tool can implement a number of methods including:
+Your tool should have a few standard properties including:
+
+```
+// The background color of your Tool's button on the Launch screen
+Draw.color = 'blue'
+// The description of your Tool on the Launch screen
+Draw.description = 'Draw something'
+```
+
+Your tool will have a few methods from the Tool prototype including:
+
+```
+// Open/Close your tool
+Draw.open()
+Draw.close()
+Draw.restart()
+```
+
+Your tool can implement a number of standard handlers including:
 
 ```
 Draw.onclose = function () {}
@@ -215,26 +234,13 @@ Draw.onclose = function () {}
 Draw.onopen = function () {}
 ```
 
-```
-// Open/Close your tool
-Draw.restart()
-```
-
-Your tool can have some basic properties to control how it appears on the home screen:
-
-```
-Draw.description = 'Draw and edit illustrations for your project.'
-Draw.color = 'blue'
-```
-
-Your tool can have its own events like this:
+Your tool can define and fire its own events like this:
 
 ```
 Draw.on('foobar', doSomething)
 Draw.trigger('foobar')
 Draw.off('foobar', doSomething)
 ```
-
 
 
 NudgePad
@@ -251,6 +257,9 @@ Other Objects
 -------------
 
 #### fs
+
+fs is an experimental idea to provide a Node.js fs like object in the browser,
+which then executes the equivalent commands on the server via ajax.
 
 To write to a file:
 
@@ -375,9 +384,9 @@ Each Project has a name, which is also the domain name and folder name for the p
 Each project is a website, and a node.js Express app as well. Projects can
 evolve into anything.
 
-The second core concept in NudgePad is the tool. Makers work on their project in
+The second core concept in NudgePad is the Tool. Makers work on their project in
 the browser by using Tools. Each tool is just HTML, CSS, and Javascript, that interacts
-with the user's projects files via some core APIs.
+with the user's project files via some core APIs.
 
 The third core concept in NudgePad is the Space language. As much as possible, we rely
 on Space to encode and store data. Over the long term this will create a lot of
@@ -392,7 +401,7 @@ Besides the Tool and Client parts of NudgePad, there are two other core componen
 server
 ------
 
-Each NudgePad site is a Node.js process powered by Express.
+Each NudgePad Project is a website--specifically an Express app running as its own process.
 
 The API here is still being simplified a bit, but the basic pattern is to create a module that
 extends the user's site like this:
@@ -404,7 +413,8 @@ extends the user's site like this:
     }
     module.exports = MyModuleName
 
-And then require that in the tool.js file like this:
+Any file in a Project's packages folder is expected to follow that convention and will
+be included when the site starts like this:
 
     require('./mymodulename.js')(app)
 
@@ -423,6 +433,8 @@ A fully running NudgePad server consists of:
 - user sites which run on ports 3001 - 8000
 - An http-proxy app which sits in front of all of those on port 80.
 
+Those ports are also configurable.
+
 Overview of data storage
 ------------------------
 
@@ -434,30 +446,31 @@ in the file system than on databases. This design decision makes it easy for sit
 a git repo, to be moved from one server to another, to be modified not only by NudgePad
 but by other tools, etc.
 
-We write user data at the root level as opposed to some nested library on your machine because c'mon, NudgePad is awesome and deserves to be up top!
+We write user data at the root level as opposed to some nested library on your machine because we
+believe it greatly simplifies sysadmin and debugging.
 
 The folders in /nudgepad are:
 
-/nudgepad/active - Contains simple text files where filename is the domain and content is the port. As sites start and stop, files are created and removed.
-/nudgepad/backup - Contains a backup copy of /nudgepad/sites that eschews some operational data for faster backups.
-/nudgepad/logs - Contains log files for the panel server and proxy server (not individual sites!).
-/nudgepad/panel - Allows you to skin the NudgePad panel look and feel.
-/nudgepad/ports - Contains simple text files where filename is the port and content is the domain. As sites start and stop, files are created and removed.
-/nudgepad/sites - Contains all the data for every site.
-/nudgepad/temp - Contains temp files for panel and proxy.
+- /nudgepad/active Contains simple text files where filename is the domain and content is the port. As sites start and stop, files are created and removed.
+- /nudgepad/backup Contains a backup copy of /nudgepad/sites that eschews some operational data for faster backups.
+- /nudgepad/logs Contains log files for the panel server and proxy server (not individual sites!).
+- /nudgepad/panel Allows you to skin the NudgePad panel look and feel.
+- /nudgepad/ports Contains simple text files where filename is the port and content is the domain. As sites start and stop, files are created and removed.
+- /nudgepad/sites Contains all the data for every site.
+- /nudgepad/temp Contains temp files for panel and proxy.
 
 The data for a site "foo.com" is stored in /nudgepad/sites/foo.com/ and looks like this:
 
-packages/ - Contains Node.js packages to include onstart. Each package extends the app object. So your package should export one function which takes an express app object as a param and extends it.
-logs/ - Contains site log files.
-pages/ - Contains the pages that are edited by the Design Tool. Encoded in Space/Scraps
-posts/ - Contains blog posts for blog module. Encoded in Space.
-public/ - Serves any assets. Can add any html/images/css/js etc. Normal public web folder.
-settings/ - Stores site settings. Each setting is either a Space object or a one liner text file. API in flux.
-surveys/ - Stores form posts encoded in Space.
-temp/ - Stores temporary site data.
-timelines/ - Stores diffs of pages generated by Design tool. Encoded in Space.
-workers/ - Stores user records. Each user is a file encoded in Space.
+- packages/ Contains Node.js packages to include onstart. Each package extends the app object. So your package should export one function which takes an express app object as a param and extends it.
+- logs/ Contains site log files.
+- pages/ Contains the pages that are edited by the Design Tool. Encoded in Space/Scraps
+- posts/ Contains blog posts for blog module. Encoded in Space.
+- public/ Serves any assets. Can add any html/images/css/js etc. Normal public web folder.
+- settings/ Stores site settings. Each setting is either a Space object or a one liner text file. API in flux.
+- surveys/ Stores form posts encoded in Space.
+- temp/ Stores temporary site data.
+- timelines/ Stores diffs of pages generated by Design tool. Encoded in Space.
+- workers/ Stores user records. Each user is a file encoded in Space.
 
 
 Target Users
@@ -466,7 +479,7 @@ Target Users
 Long term NudgePad is targeted at creative people who like making things. That's
 5% of the general population.
 
-Short term NudgePad is targeted to web savvy, early adopters who have a lot
+Short term NudgePad is targeted at web savvy, early adopters who have a lot
 of project idea and want faster and better ways to make them real. That's
 5% of the creatives.
 
@@ -484,11 +497,12 @@ The features these people need are:
 - Easy export 100%
 - Easy import 100%
 - Reliability and backups 100%
+- Easy updating of content 100%
 - Multiple users per project 50%
 - Fast changing of domains 40%
 - Custom domains 40%
 - Real time multi user env 10%
-- Visual design tools 10%
+- Visual design tools 20%
 - Blog post writing tool 5%
 - Mobile app packaging tool 5%
 - Image editing tool 5%
@@ -496,15 +510,15 @@ The features these people need are:
 - Code editing tool 2%
 - Self hosted NudgePad 1%
 
-Our goal is to deliver all of this in a product with a simple conceptual model.
+Our goal is to deliver all of this in a product with a simple and cohesive conceptual model.
 
 
 Team
 ----
 
 #### Leadership
-Architect - Breck Yunits @breck7 breck@nudgepad.com
-Senior Engineer - Ben Zulauf @bczulauf ben@nudgepad.com
+- Architect: Breck Yunits github.com/breck7 breck@nudgepad.com
+- Senior Engineer: Ben Zulauf github.com/bczulauf ben@nudgepad.com
 
 #### Toolmakers
 (add)
