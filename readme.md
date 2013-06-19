@@ -62,8 +62,7 @@ Email: breck@nudgepad.com
 Phone: 1-415-937-1984
 
 
-Installing on Localhost
------------------------
+#### Installing on Localhost
 
 The best way to develop NudgePad is to install a copy on localhost.
 
@@ -88,8 +87,7 @@ to add this to your .bash_profile or .bashrc:
 
     PATH=$PATH:~/node_modules/.bin
 
-Naming Your Tool
----------------
+#### Naming Your Tool
 
 Getting the name right for your tool is very important. The fastest way to
 choose a great name for your tool is to choose a bad name for your tool, and
@@ -112,9 +110,7 @@ module systems presented by other platforms.
 We also value updates. We want to ensure our community that tools are constantly
 being improved, refined, and tested.
 
-
-Creating Your Tool
------------------
+#### Creating Your Tool
 
 Tools in NudgePad are meant to be modular and sandboxed and contained in one
 folder.
@@ -157,8 +153,8 @@ While developing, NudgePad will watch the tools folder for changes and will
 run the build system each time.
 
 
-Editing Your Tool
-----------------
+Core Objects
+------------
 
 At this point you have created your tool and can open it in your browser. Now
 you can start adding functionality to your tool.
