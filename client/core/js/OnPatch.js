@@ -12,7 +12,7 @@ nudgepad.on('patch', function (patch) {
   if (patch.get('pages ' + Design.stage.activePage) === '')
     Design.stage.back()
   
-  Project.patch(patch)
+  Project._patch(patch)
   Design.updateTabs()
   
   // If the active page isnt touched, we are all done
@@ -27,7 +27,7 @@ nudgepad.on('patch', function (patch) {
 
   // Todo: this breaks if you are in content editable
   Design.stage.redo()
-  Flasher.flash('Change received', 1000)
+  Flasher.activity('Change received', 1000)
 })
 
 

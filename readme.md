@@ -163,7 +163,7 @@ At this point you have created your tool and can open it in your browser. Now
 you can start adding functionality to your tool.
 
 NudgePad exposes an API that your tool can use to read and write files to the user's
-project.
+project. You also have access to the latest jQuery($), and some other libraries.
 
 Currently, the NudgePad API consists of 3 core objects:
 
@@ -227,6 +227,11 @@ Draw.onclose = function () {}
 Draw.onopen = function () {}
 ```
 
+```
+// Open/Close your tool
+Draw.restart()
+```
+
 Your tool can have some basic properties to control how it appears on the home screen:
 
 ```
@@ -254,6 +259,110 @@ The NudgePad object exposes events that you can subscribe to:
 ```
 nudgepad.on('arrive', function (who) {console.log(who + ' arrived')})
 ````
+
+
+Other Objects
+-------------
+
+#### Launcher
+
+Open an app
+
+```
+Launcher.open('Design')
+```
+
+#### Explorer
+
+A simple and dumb text editor.
+
+```
+// Pop the editor
+Explorer.edit('public/foobar.html')
+// Create a file
+Explorer.create('public/foobar.html', callback)
+// Rename a file
+Explorer.rename('public/foobar.html', 'public/foobar2.html', callback)
+// Delete a file
+Explorer.remove('public/foobar.html', callback)
+
+```
+
+#### TextPrompt
+
+Like the browser's built in prompt method, but gives the user a bigger textarea for writing.
+
+```
+TextPrompt('Some textarea like thing', 'Default value', callback)
+```
+
+#### Flasher
+
+Growl like notifications
+
+```
+Flasher.success('Your action finished')
+Flasher.error('Something went wrong')
+```
+
+#### mixpanel
+
+Track aggregate user actions to help improve the tools.
+
+```
+mixpanel.track('I did something')
+
+// Add additional info to the stats
+mixpanel.track({
+  'time' : howLongItTookToCreateThisProject
+})
+
+// Note: don't add any user data. We don't want someone to be sending their data,
+// just usage data so we can improve the tools.
+//
+// For now, to see the data, Breck needs to add you to our MixPanel account--
+// just send me an email.
+```
+
+
+Server Side Routes
+------------------
+
+#### GET
+
+```
+// Logged in user
+http://domain/nudgepad.whoami
+```
+
+```
+// The domain
+http://domain/nudgepad.domain
+```
+
+```
+// Status info
+http://domain/nudgepad.status
+```
+
+```
+// Logs
+http://domain/nudgepad.logs
+```
+
+```
+// Restart the site
+http://domain/nudgepad.restart
+```
+
+```
+// Dump all the Project Data encoded as Space
+http://domain/nudgepad.export
+```
+
+#### POST
+
+(fill this in)
 
 
 Appendix

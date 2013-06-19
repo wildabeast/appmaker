@@ -54,7 +54,7 @@ Explorer.rename = function (oldPath, newPath, callback) {
   req.oldPath = oldPath
   req.newPath = newPath
   if (!newPath)
-    return nudgepad.error('No name provided')
+    return Flasher.error('No name provided')
   $.post('/nudgepad.explorer.rename', req, function (err) {
     callback()
   })

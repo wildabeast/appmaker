@@ -82,7 +82,7 @@ Develop.home = function () {
 Develop.import = function () {
   TextPrompt('Import a Project ', '', function (val) {
     $.post('/nudgepad.import', {space : val}, function (err) {
-      Flasher.flash('Imported files.')
+      Flasher.success('Imported files.')
       Develop.refresh()
     })
   })

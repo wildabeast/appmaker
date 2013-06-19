@@ -75,7 +75,7 @@ Design.create = function (name, template) {
   
   // page already exists
   if (Project.get('pages ' + name))
-    return nudgepad.error('A page named ' + name + ' already exists.')
+    return Flasher.error('A page named ' + name + ' already exists.')
   
   var page = new Space()
   var timeline = new Space()
@@ -89,12 +89,6 @@ Design.create = function (name, template) {
   
   Project.set('pages ' + name, page)
   Project.set('timelines ' + name, timeline)
-  
-  var patch = new Space()
-  patch.set('pages ' + name, page)
-  patch.set('timelines ' + name, timeline)
-  
-  nudgepad.emit('patch', patch.toString())
   
   Design.stage.open(name)
   mixpanel.track("I created a new webpage")
@@ -122,7 +116,7 @@ Design.duplicate = function (source, destination, skipPrompt) {
   }
   
   if (!Project.get('pages').get(source))
-    return nudgepad.error('Page ' + source + ' not found')
+    return Flasher.error('Page ' + source + ' not found')
   
   mixpanel.track('I duplicated a page')
   
@@ -357,6 +351,8 @@ Design.onopen = function () {
   $(document).on("touchstart", Design.stopPropagation)
   // Allow someone to drag
   $(document).on("touchmove", Design.preventDefault)
+  
+  Design.updateTabs()
 }
 
 Design.onready = function () {
@@ -382,14 +378,14 @@ Design.rename = function (new_name) {
   var old_name = Design.stage.activePage
   
   if (!new_name.length)
-    return nudgepad.error('Name cannot be blank')
+    return Flasher.error('Name cannot be blank')
   
   if (old_name == 'home')
-    return nudgepad.error('You cannot rename the home page.')
+    return Flasher.error('You cannot rename the home page.')
   
   // page already exists
   if (Project.get('pages ' + new_name))
-    return nudgepad.error('A page named ' + new_name + ' already exists.')  
+    return Flasher.error('A page named ' + new_name + ' already exists.')  
 
   Project.set('pages ' + new_name, Project.get('pages ' + old_name))
   Project.set('timelines ' + new_name, Project.get('timelines ' + old_name))
@@ -397,15 +393,6 @@ Design.rename = function (new_name) {
   Project.delete('timelines ' + old_name)
   
   Design.updateTabs()
-  
-  // Todo, push this to server side?
-  var patch = new Space()
-  patch.set('pages ' + old_name, '')
-  patch.set('timelines ' + old_name, '')
-  patch.set('pages ' + new_name, Project.get('pages ' + new_name))
-  patch.set('timelines ' + new_name, Project.get('timelines ' + new_name))
-
-  nudgepad.emit('patch', patch.toString())
   
   Design.stage.open(new_name)
   
@@ -441,7 +428,7 @@ Design.spotlight = function () {
 Design.trash = function (name) {
   name = name || Design.stage.activePage
   if (name === 'home')
-    return nudgepad.error('You cannot delete the home page')
+    return Flasher.error('You cannot delete the home page')
   // If its the currently open page, open the previous page first
   if (Design.stage.activePage === name)
     Design.stage.back()
@@ -456,7 +443,7 @@ Design.trash = function (name) {
   
   // Delete page from open pages
   Design.updateTabs()
-  Flasher.flash('Deleted ' + name, 1000)
+  Flasher.success('Deleted ' + name, 1000)
   mixpanel.track('I deleted a page')
   return ''
 }

@@ -179,7 +179,7 @@ Design.stage.selection.distributeHorizontal = function () {
   })
   $('.handle').trigger('update')
   Design.stage.commit()
-  Flasher.flash('Distributed', 1000)
+  Flasher.success('Distributed', 1000)
 }
 
 /**

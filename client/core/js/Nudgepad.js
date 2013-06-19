@@ -96,7 +96,7 @@ nudgepad.main = function (callback) {
     
     nudgepad.socket.on('collage.delete', function (id) {
       var tabName = Project.get('collage ' + id)
-      Flasher.flash(tabName.get('name') + ' closed a tab')
+      Flasher.activity(tabName.get('name') + ' closed a tab')
       Project.values.collage.delete(id)
       nudgepad.trigger('collage.update')
     })
@@ -105,7 +105,7 @@ nudgepad.main = function (callback) {
       patch = new Space(patch)
       Project.values.collage.patch(patch)
       var id = patch.keys[0]
-      Flasher.flash(patch.get(id + ' name') + ' opened a tab')
+      Flasher.activity(patch.get(id + ' name') + ' opened a tab')
     })
 
     nudgepad.socket.on('ack', function (message) {

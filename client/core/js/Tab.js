@@ -18,7 +18,7 @@ nudgepad.setTabColor = function () {
 }
 
 Tab.on('patch', function () {
-  Project.set('collage ' + nudgepad.id, this)
-  nudgepad.emit('collage.update', this)
+//  Project.set('collage ' + nudgepad.id, this)
+//  nudgepad.emit('collage.update', this)
 })
 

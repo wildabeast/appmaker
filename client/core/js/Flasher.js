@@ -2,7 +2,13 @@ var Flasher = {}
 
 Flasher.timeout = false
 
-Flasher.flash = function (message, time) {
+Flasher.error = function (message) {
+  $('#FlasherError').html(message)
+  Popup.open('#FlasherError')
+  return false
+}
+
+Flasher.success = function (message, time) {
   Blinker.change(message)
   clearTimeout(Flasher.timeout)
   $('#Flasher').html(message)
@@ -11,3 +17,4 @@ Flasher.flash = function (message, time) {
   if (time)
     Flasher.timeout = setTimeout("$('#Flasher').hide()", time)
 }
+

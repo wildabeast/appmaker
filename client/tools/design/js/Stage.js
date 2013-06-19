@@ -55,13 +55,8 @@ Design.stage.commit = function () {
   nudgepad.trigger('selection')
   nudgepad.trigger('commit')
   
-  // Send Commit to Server
-  var patch = new Space()
-  patch.set('timelines ' + Design.stage.activePage + ' ' + timestamp, commit)
   Project.set('pages ' + Design.stage.activePage, new Space(Design.page.toString()))
-
-//  Flasher.flash('Saved')
-  nudgepad.emit('commit', patch.toString())
+  Project.set('timelines ' + Design.stage.activePage + ' ' + timestamp, commit)
   return diff
 }
 
@@ -306,7 +301,7 @@ Design.stage.open = function (name) {
   
   var page = Project.get('pages ' + name)
   if (!page)
-    return nudgepad.error('Page ' + name + ' not found')
+    return Flasher.error('Page ' + name + ' not found')
 
   Design.stage.selection.clear()
   
@@ -421,7 +416,7 @@ Design.stage.setTimeline = function (name) {
     var patch = new Space()
     patch.set('timelines ' + name, timeline)
     nudgepad.emit('patch', patch.toString())
-    Flasher.flash('Timeline created')
+    Flasher.success('Timeline created')
     
     
   })
@@ -469,7 +464,7 @@ Design.stage.toggleView = function () {
   Design.stage.currentView = stageViews.next(Design.stage.currentView)
   stageViews.get(Design.stage.currentView)()
   $('#DesignStageBody').width()
-  Flasher.flash(Design.stage.currentView + ' view')
+  Flasher.success(Design.stage.currentView + ' view')
 }
 
 Design.stage.undo = function () {

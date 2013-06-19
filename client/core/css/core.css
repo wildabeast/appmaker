@@ -136,7 +136,7 @@ html {
 }
 
 
-#nudgepadError, #JavascriptError, #WorkerError  {
+#nudgepadError, #JavascriptError, #FlasherError  {
   left: 0;
   top: 0;
   width: 100%;
@@ -158,7 +158,7 @@ html {
   font-size: 12px;
 }
 
-#WorkerError {
+#FlasherError {
   z-index: 2000;
 }
 

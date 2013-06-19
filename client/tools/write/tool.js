@@ -63,19 +63,15 @@ Write.createPost = function () {
 
 Write.deletePost = function () {
   Write.activePost = null
-  var name = Permalink($('#WritePermalink').attr('value'))
+  var name = Write.permalink($('#WritePermalink').attr('value'))
   if (!name)
-    return nudgepad.error('No post to delete')
+    return Flasher.error('No post to delete')
   
   if (!Project.get('posts ' + name))
-    return nudgepad.error('Post does not exist')
+    return Flasher.error('Post does not exist')
 
   Project.delete('posts ' + name)
   
-  // Send Commit to Server
-  var patch = new Space()
-  patch.set('posts ' + name, '')
-  nudgepad.emit('patch', patch.toString())
   Write.restart()
 }
 
@@ -99,15 +95,9 @@ Write.editPost = function (name) {
 
 // Ensures site has a blog theme before posting
 Write.initialize = function () {
-  
   if (Project.get('pages blog'))
     return true
-  var patch = new Space()
-  patch.set('pages blog', Write.blankTheme.clone())
-  nudgepad.emit('patch', patch.toString())
-  Project.set('pages blog', Write.blankTheme)
-  
-  Design.updateTabs()// todo: delete this
+  Project.set('pages blog', Write.blankTheme.clone())
 }
 
 Write.activePost = null
@@ -145,12 +135,24 @@ Write.onready = function () {
     Write.createPost()
 }
 
+/**
+ * Make a string URL friendly. Turns "$foo Bar%!@$" into "foo-bar"
+ *
+ * @param {string}
+ * @return {object}
+ */
+Write.permalink = function (string) {
+  if (!string) return ''
+  // strip non alphanumeric characters from string and lowercase it.
+  return string.toLowerCase().replace(/[^a-z0-9- _\.]/gi, '').replace(/ /g, '-')
+}
+
 Write.savePost = function () {
 
-  var name = Permalink($('#WritePermalink').attr('value'))
+  var name = Write.permalink($('#WritePermalink').attr('value'))
   
   if (!name)
-    return nudgepad.error('Title cannot be blank')
+    return Flasher.error('Title cannot be blank')
 
   mixpanel.track('I saved a blog post')
   var post = Project.get('posts ' + name)
@@ -163,21 +165,15 @@ Write.savePost = function () {
   
   Project.set('posts ' + name, post)
   
-  // Send Commit to Server
-  var patch = new Space()
-  patch.set('posts ' + name, post)
-  
   // If they are editing a post and the name has changed,
   // make sure to delete old post
-  if (Write.activePost && Write.activePost !== name) {
-    patch.set('posts ' + Write.activePost, '')
+  if (Write.activePost && Write.activePost !== name)
     Project.delete('posts ' + Write.activePost)
-  }
   
-  nudgepad.emit('patch', patch.toString())
   Write.activePost = name
 //  Write.updateLinks()
   Write.restart()
+  // Open post in new tab
   window.open(name, 'published')
 }
 
@@ -191,6 +187,6 @@ Write.updateLinks = function () {
 }
 
 Write.updatePermalink = function () {
-  var permalink = Permalink($('#WriteTitle').val())
+  var permalink = Write.permalink($('#WriteTitle').val())
   $('#WritePermalink').text('http://' + nudgepad.domain + '/' + permalink).attr('value', permalink)
 }
