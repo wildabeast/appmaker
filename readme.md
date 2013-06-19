@@ -168,8 +168,7 @@ Currently, the NudgePad API consists of 3 core objects:
 2. Tool
 3. NudgePad
 
-Project
--------
+#### Project
 
 The Project object is an instance of Space that stores all the data in the project.
 
@@ -191,8 +190,7 @@ To create a new page:
 Project.set('pages newPageName', 'h1\n content Hello World')
 ````
 
-Tool
-----
+#### Tool
 
 Each Tool is an instance of the Tool Object.
 
@@ -238,9 +236,7 @@ Draw.trigger('foobar')
 Draw.off('foobar', doSomething)
 ```
 
-
-NudgePad
---------
+#### NudgePad
 
 The NudgePad object exposes events that you can subscribe to:
 
