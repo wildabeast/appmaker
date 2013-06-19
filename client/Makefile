@@ -24,3 +24,6 @@ track:
 space:
 	cp ~/space/space.js public/js/space.js
 	cp ~/space/space.min.js public/js/space.min.js
+
+mate:
+	mate build.js core Makefile tools
