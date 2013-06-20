@@ -162,11 +162,10 @@ you can start adding functionality to your tool.
 NudgePad exposes an API that your tool can use to read and write files to the user's
 project. You also have access to the latest jQuery($), and some other libraries.
 
-Currently, the NudgePad API consists of 3 core objects:
+Currently, the NudgePad API consists of 2 core objects:
 
 1. Project
 2. Tool
-3. NudgePad
 
 #### Project
 
@@ -236,17 +235,29 @@ Draw.trigger('foobar')
 Draw.off('foobar', doSomething)
 ```
 
-#### NudgePad
-
-The NudgePad object exposes events that you can subscribe to:
-
-```
-nudgepad.on('arrive', function (who) {console.log(who + ' arrived')})
-````
-
-
 Other Objects
 -------------
+
+#### Screen
+
+Screen is an instance of Space that contains information about the current tab.
+
+```
+// Get device info:
+Screen.get('device')
+// Get user name:
+Screen.get('name')
+```
+
+#### Room
+
+Room is an instance of Space that is composed of all the Screen instances.
+
+
+```
+// How many people are currently working on the project:
+Room.length()
+```
 
 #### fs
 

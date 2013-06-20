@@ -10,12 +10,12 @@ Design.updateTabs = function () {
       
     var title = ''
     
-    Project.values.collage.each(function (key, value) {
+    Room.each(function (key, value) {
       if (value.get('page') !== name)
         return true
       title += value.get('name') + '(' + value.get('device') + ')' + ' '
-      if (key != nudgepad.id)
-        div.addClass('DesignOpenPage')
+      // if (thisScreen)
+      // div.addClass('DesignOpenPage')
     })
     
     div.attr('title', title)
@@ -31,7 +31,5 @@ Design.updateTabs = function () {
   })
   
 }
-
-nudgepad.on('collage.update', Design.updateTabs)
 
 

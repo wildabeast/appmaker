@@ -3,7 +3,7 @@ Package.color = 'rgba(71, 41, 54, 1)'
 Package.description = 'Turn your project into a mobile app.'
 
 Package.onopen = function () {
-  $('#PackageManifestUrlLink').html('http://' + nudgepad.domain + '/manifest.webapp')
+  $('#PackageManifestUrlLink').html('http://' + document.location.host + '/manifest.webapp')
 }
 
 // http://stackoverflow.com/questions/1173194/select-all-div-text-with-single-mouse-click

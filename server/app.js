@@ -87,7 +87,7 @@ require('./paths.js')(app, projectsPath, clientPath)
 require('./install.js')(app)
 
 app.nudgepad.project = new Space()
-app.nudgepad.project.set('collage', new Space())
+var Room = new Space()
 
 // Load the HTML file and add mtimes as query string so the
 // worker always get the latest version of the nudgepad.js and nudgepad.css
@@ -565,6 +565,8 @@ io.set('authorization', function (data, accept) {
     return accept('Invalid key transmitted.', false)
   
   data.cookie = cookie
+  data.screenId = new Date().getTime()
+  Room.set(data.screenId, new Space())
     
   // todo: broadcast worker
   return accept(null, true)  
@@ -573,25 +575,17 @@ io.set('authorization', function (data, accept) {
 
 io.sockets.on('connection', function (socket) {
   
-  socket.on('collage.update', function (patch) {
-    patch = new Space(patch)
-    var id = patch.get('id')
-    var fullPatch = new Space().set(id, patch)
-    // new tab
-    if (!app.nudgepad.project.get('collage ' + id)) {
-      app.nudgepad.emit('collage.create', fullPatch, socket)
-      socket.handshake.tabId = id
+  socket.on('room.change', function (space) {
+    if (socket.handshake.screenId) {
+      Room.set(socket.handshake.screenId, space)
+      app.nudgepad.emit('room.change', Room.toString(), socket)
     }
-    else
-      app.nudgepad.emit('collage.update', fullPatch, socket)
-    
-    app.nudgepad.project.get('collage').patch(fullPatch)
   })
   
   socket.on('disconnect', function () {
-    if (socket.handshake.tabId) {
-      app.nudgepad.project.values.collage.delete(socket.handshake.tabId)
-      app.nudgepad.emit('collage.delete', socket.handshake.tabId, socket)
+    if (socket.handshake.screenId) {
+      Room.delete(socket.handshake.screenId)
+      app.nudgepad.emit('room.change', Room.toString(), socket)
     }
   })
   

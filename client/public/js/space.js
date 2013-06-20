@@ -86,6 +86,15 @@ Space.unionSingle = function(spaceA, spaceB) {
 Space.prototype.keys = []
 Space.prototype.values = {}
 
+/**
+ * Deletes all keys and values.
+ * @return this
+ */
+Space.prototype._clear = function () {
+  this.keys = []
+  this.values = {}
+  return this
+}
 
 /**
  * Deletes all keys and values.
@@ -94,9 +103,9 @@ Space.prototype.values = {}
 Space.prototype.clear = function () {
   if (this.isEmpty())
     return this
-  this.keys = []
-  this.values = {}
+  this._clear()
   this.trigger('clear')
+  this.trigger('change')
   return this
 }
 
@@ -109,7 +118,7 @@ Space.prototype.clone = function () {
 }
 
 Space.prototype._delete = function (key) {
-  if (!key.match(/ /)) {
+  if (!key.toString().match(/ /)) {
     var index = this.keys.indexOf(key)
     if (index === -1)
       return 0
@@ -129,6 +138,7 @@ Space.prototype._delete = function (key) {
 Space.prototype['delete'] = function (key) {
   if (this._delete(key))
     this.trigger('delete', key)
+  this.trigger('change')
   return this
 }
 
@@ -464,6 +474,7 @@ Space.prototype.patch = function (patch) {
   // todo, don't trigger patch if no change
   this._patch(patch)
   this.trigger('patch', patch)
+  this.trigger('change')
   return this
 }
 
@@ -503,6 +514,7 @@ Space.prototype.patchOrder = function (space) {
   // todo: don't trigger event if no change
   this._patchOrder(space)
   this.trigger('patchOrder', space)
+  this.trigger('change')
   return this
 }
 
@@ -529,6 +541,7 @@ Space.prototype.rename = function (oldName, newName) {
   this._rename(oldName, newName)
   if (oldName !== newName)
     this.trigger('rename', oldName, newName)
+  this.trigger('change')
   return this
 }
 
@@ -571,6 +584,7 @@ Space.prototype.set = function (key, value, index) {
     this.trigger('update', key, value, index)
   else
     this.trigger('create', key, value, index)
+  this.trigger('change')
   return this
 }
 

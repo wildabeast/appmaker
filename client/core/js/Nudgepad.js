@@ -8,9 +8,9 @@ if (!window.console)
  * @special Singleton
  */
 var nudgepad = {}
-nudgepad.id = new Date().getTime()
 nudgepad.isTesting = false
-
+// In case we open multiple tabs
+window.name = 'nudgepad'
 // Nudgepad Events
 nudgepad.events = {
   'selection' : [],
@@ -18,7 +18,6 @@ nudgepad.events = {
   'commit' : [],
   'page' : [],
   'disconnect' : [],
-  'collage.update' : [],
   'ping' : [],
   'main' : [],
   'patch' : [],
@@ -26,23 +25,13 @@ nudgepad.events = {
   'public' : [],
   'uploadComplete' : []
 }
+var Query = ParseQueryString()
+var Cookie = parseCookie(document.cookie)
 
 /**
  * Requests the data from the server and loads the editor.
  */
 nudgepad.main = function (callback) {
-  
-  nudgepad.domain = document.location.host
-  
-  // Load plugins
-  nudgepad.cookie = parseCookie(document.cookie)
-  nudgepad.name = ParseName(nudgepad.cookie.email)
-  Tab.set('email', nudgepad.cookie.email)
-  Tab.set('name', nudgepad.name)
-  
-  
-  // In case we open multiple tabs
-  window.name = 'nudgepad'
   
   // TODO: on capture phase, capture block clicks, check if shiftkey is held,
   // if shiftkey is not held, prevent any events from firing on click?
@@ -52,11 +41,8 @@ nudgepad.main = function (callback) {
     mixpanel.track('I used the keyboard shortcut ' +  key)
   }
   
-  
-  nudgepad.query = ParseQueryString()
   // Fetch all files in the background.
   Explorer.getProject(function () {
-    
     
     // Open socket
     nudgepad.socket = io.connect('/')
@@ -88,24 +74,9 @@ nudgepad.main = function (callback) {
       nudgepad.trigger('disconnect', message)
     })
     
-    nudgepad.socket.on('collage.update', function (patch) {
-      Project.values.collage.patch(patch)
-      nudgepad.trigger('collage.update')
-      
-    })
-    
-    nudgepad.socket.on('collage.delete', function (id) {
-      var tabName = Project.get('collage ' + id)
-      Flasher.activity(tabName.get('name') + ' closed a tab')
-      Project.values.collage.delete(id)
-      nudgepad.trigger('collage.update')
-    })
-    
-    nudgepad.socket.on('collage.create', function (patch) {
-      patch = new Space(patch)
-      Project.values.collage.patch(patch)
-      var id = patch.keys[0]
-      Flasher.activity(patch.get(id + ' name') + ' opened a tab')
+    nudgepad.socket.on('room.change', function (newRoom) {
+      Room._clear()
+      Room.patch(newRoom)
     })
 
     nudgepad.socket.on('ack', function (message) {
@@ -113,7 +84,7 @@ nudgepad.main = function (callback) {
     })
 
     nudgepad.socket.on('connect', function (message) {
-      console.log('connected to server: %s', nudgepad.domain)
+      console.log('connected to server: %s', document.location.host)
       $('#ConnectionStatus').html('Connected!').fadeOut()
       nudgepad.restartCheck()
     })
@@ -140,9 +111,9 @@ nudgepad.main = function (callback) {
     
     mixpanel.track('I opened NudgePad')
     
-    if (nudgepad.query.newProject && !store.get('opens')) {
+    if (Query.newProject && !store.get('opens')) {
       store.set('opens', 1)
-      var howLongItTookToCreateThisProject = new Date().getTime() - nudgepad.query.timestamp
+      var howLongItTookToCreateThisProject = new Date().getTime() - Query.timestamp
       mixpanel.track('I created a new project', {
         'time' : howLongItTookToCreateThisProject
       })
@@ -167,7 +138,7 @@ nudgepad.emit = function (event, space) {
     return null
   
   nudgepad.socket.emit(event, space.toString(), function (data) {
-    console.log('%s responded to emission: %s', nudgepad.domain, data)
+    console.log('%s responded to emission: %s', document.location.host, data)
   })
 }
 
@@ -192,13 +163,6 @@ nudgepad.off = function (eventName, fn) {
  */
 nudgepad.on = function (eventName, fn) {
   nudgepad.events[eventName].push(fn)
-}
-
-/**
- * Removes all dom elements.
- */
-nudgepad.quit = function () {
-  $('.scrap,.nudgepad').remove()
 }
 
 nudgepad.reloadMessageOneTime = ''

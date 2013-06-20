@@ -9,14 +9,14 @@ Develop.pathPretty = ''
 Develop.status = ''
 
 Develop.clone = function () {
-  var domain = prompt('Enter a domain name', 'copyof' + nudgepad.domain)
+  var domain = prompt('Enter a domain name', 'copyof' + document.location.host)
   if (!domain)
     return false
   // TODO: make tld come from server and dont compute it here, which
   // is incorrect
-  // tld equals the part that domain and nudgepad.domain have in common
+  // tld equals the part that domain and document.location.host have in common
   var newDomainReversed = domain.split("").reverse().join("")
-  var currentDomainReversed = nudgepad.domain.split("").reverse().join("")
+  var currentDomainReversed = document.location.host.split("").reverse().join("")
   var tld = ''
   for (var i = 0 ; i < currentDomainReversed.length ; i++) {
     if (newDomainReversed.substr(i, 1) === currentDomainReversed.substr(i, 1))
@@ -42,7 +42,7 @@ Develop.clone = function () {
     }))
     .append($('<input>', {
         'name': 'email',
-        'value': nudgepad.cookie.email,
+        'value': Cookie.email,
         'type': 'hidden'
     }))
     .append($('<input>', {
@@ -89,7 +89,7 @@ Develop.import = function () {
 }
 
 Develop.onopen = function () {
-//  $('.nudgepad#zip').attr('href', '/nudgepad.backup/' + nudgepad.domain + '.zip')
+//  $('.nudgepad#zip').attr('href', '/nudgepad.backup/' + document.location.host + '.zip')
   if (!Develop.log)
     Develop.refresh()
 }
@@ -125,7 +125,7 @@ Develop.renderExplorer = function () {
   }
   explorer += '</table>'
   Develop.explorer = explorer
-  $('#DevelopExplorerPath').text(nudgepad.domain + '/' + Develop.pathPretty)
+  $('#DevelopExplorerPath').text(document.location.host + '/' + Develop.pathPretty)
   $('#DevelopExplorerHolder').html(Develop.explorer)
 }
 

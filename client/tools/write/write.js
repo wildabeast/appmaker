@@ -84,8 +84,8 @@ Write.editPost = function (name) {
   postSettings.delete('title')
   postSettings.delete('content')
   $('#WriteAdvanced').val(postSettings.toString())
-  // http://{{nudgepad.domain}}/<a id="permalink" target="_blog"></a>
-  $('#WritePermalink').text('http://' + nudgepad.domain + '/' + name).attr('value', name)
+  // http://{{document.location.host}}/<a id="permalink" target="_blog"></a>
+  $('#WritePermalink').text('http://' + document.location.host + '/' + name).attr('value', name)
   
   Write.updateLinks()
   
@@ -187,5 +187,5 @@ Write.updateLinks = function () {
 
 Write.updatePermalink = function () {
   var permalink = Write.permalink($('#WriteTitle').val())
-  $('#WritePermalink').text('http://' + nudgepad.domain + '/' + permalink).attr('value', permalink)
+  $('#WritePermalink').text('http://' + document.location.host + '/' + permalink).attr('value', permalink)
 }

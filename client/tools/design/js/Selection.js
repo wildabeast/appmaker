@@ -431,7 +431,7 @@ Design.stage.selection.toSpace = function () {
 }
 
 Design.broadcastSelection = function (extra) {
-  nudgepad.setTabColor()
+  nudgepad.setScreenColor()
   var selection = extra || ''
   var first = ''
   $('.selection').each(function () {
@@ -441,16 +441,17 @@ Design.broadcastSelection = function (extra) {
     }
   })
 
-  selection += '{box-shadow: 0 0 4px ' + Tab.get('color') + ';cursor: not-allowed;}'
-  Tab.patch('selection ' + selection)
+  selection += '{box-shadow: 0 0 4px ' + Screen.get('color') + ';cursor: not-allowed;}'
+  Screen.patch('selection ' + selection)
   
 }
 
 Design.updateSelections = function () {
   $('#DesignRemoteSelections').html('')
-  Project.values.collage.each(function (key, value) {
-    if (key == nudgepad.id)
-      return true
+  Room.each(function (key, value) {
+    // check if its this screen. todo.
+    // if this screen
+    // return true
     if (value.get('page') !== Design.stage.activePage)
       return true
     var style = value.get('selection')

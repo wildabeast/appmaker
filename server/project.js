@@ -34,7 +34,6 @@ var Site = function (app) {
   app.get('/nudgepad\.project', app.checkId, function (req, res, next) {
 
     var activePage = req.query.activePage || "home"
-    var id = req.query.id
 
     if (!nudgepad.project.get('timelines ' + activePage))
       activePage = "home"
@@ -48,7 +47,6 @@ var Site = function (app) {
     if (nudgepad.development)
       hostname = 'localhost'
     copy.set('hostname', hostname)
-    copy.set('collage', nudgepad.project.get('collage'))
     res.set('Content-Type', 'text/plain')
     res.send(copy.toString())
   })

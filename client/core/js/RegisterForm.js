@@ -1,7 +1,7 @@
 var RegisterForm = {}
 
 RegisterForm.open = function () {
-  $('#RegisterFormDomain').text(nudgepad.domain).attr('href', 'http://' + nudgepad.domain)
+  $('#RegisterFormDomain').text(document.location.host).attr('href', 'http://' + document.location.host)
   // Hack because I was too lazy to do this in HTML so just used the code from the
   // nudgepad prototype. Recursion would be nice :)
   var leftMargin = Math.round(($(window).width() - 725)/2)
@@ -41,7 +41,7 @@ RegisterForm.open = function () {
 
 nudgepad.on('main', function () {
   
-  if (nudgepad.cookie.email !== ('owner@' + nudgepad.domain))
+  if (Cookie.email !== ('owner@' + document.location.host))
     return true
   
   RegisterForm.open()

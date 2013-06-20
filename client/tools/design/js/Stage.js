@@ -38,7 +38,7 @@ Design.stage.commit = function () {
     return false
   }
   var commit = new Space()
-  commit.set('author', nudgepad.cookie.email)
+  commit.set('author', Cookie.email)
   if (!diff.isEmpty())
     commit.set('values', new Space(diff.toString()))
   if (!diffOrder.isEmpty())
@@ -123,7 +123,7 @@ Design.stage.expand = function () {
     if (bottom > max)
       max = bottom
   })
-  console.log(max)
+
   $('#DesignStageBody').css({
     'height' : max + 'px'
   })
@@ -308,7 +308,7 @@ Design.stage.open = function (name) {
   // Page change stuff
   Design.stage.activePage = name
   store.set('activePage', Design.stage.activePage)
-  Tab.patch('page ' + Design.stage.activePage)
+  Screen.patch('page ' + Design.stage.activePage)
   Design.updateTabs()
   
   Design.stage.reload()
@@ -407,7 +407,7 @@ Design.stage.setTimeline = function (name) {
     if (edge && !edge.isEmpty()) {
       
       var commit = new Space()
-      commit.set('author', nudgepad.cookie.email)
+      commit.set('author', Cookie.email)
       commit.set('values', new Space(edge.toString()))
     }
     

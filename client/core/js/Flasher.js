@@ -9,7 +9,6 @@ Flasher.error = function (message) {
 }
 
 Flasher.success = function (message, time) {
-  Blinker.change(message)
   clearTimeout(Flasher.timeout)
   $('#Flasher').html(message)
   Popup.open('#Flasher')

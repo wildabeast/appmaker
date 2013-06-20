@@ -3,7 +3,7 @@ Manage.color = 'rgba(171, 193, 199, 1)'
 Manage.description = 'Update your email address and logout.'
 
 Manage.onopen = function () {
-  $('#ManageEmail').val(nudgepad.cookie.email)
+  $('#ManageEmail').val(Cookie.email)
 }
 
 Manage.save = function () {
@@ -12,7 +12,7 @@ Manage.save = function () {
   if (!Manage.validateEmail(email))
     return Flasher.error('Invalid Email')
   
-  if (email === nudgepad.cookie.email)
+  if (email === Cookie.email)
     return Launcher.open('Launch')
   
   $.post('/nudgepad.updateEmail', {email : email}, function () {
