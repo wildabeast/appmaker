@@ -22,7 +22,10 @@ createProjectNix ()
       # echo NO cloneFile provided. Creating blank project from blank.
       sudo cp -R blank $projectsPath/$domain
       sudo chown -R $domain:$domain $projectsPath/$domain
-      sudo -u $domain "mkdir $projectsPath/$domain/settings; mkdir $projectsPath/$domain/workers; mkdir $projectsPath/$domain/logs; mkdir $projectsPath/$domain/temp"
+      sudo -u $domain mkdir $projectsPath/$domain/settings
+      sudo -u $domain mkdir $projectsPath/$domain/workers
+      sudo -u $domain mkdir $projectsPath/$domain/logs
+      sudo -u $domain mkdir $projectsPath/$domain/temp
       speedcoach "$domain created from blank template"
   fi
   createOwnerFile $domain $ownerEmail
