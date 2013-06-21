@@ -3,7 +3,7 @@ if [ ! -d "$dataPath" ]
     sudo mkdir $dataPath
     sudo chown $USER $dataPath
     mkdir $projectsPath
-    mkdir $activePath
+    mkdir $runningPath
     mkdir $portsPath
     mkdir $tempPath
     mkdir $logsPath

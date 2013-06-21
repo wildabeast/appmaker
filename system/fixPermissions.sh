@@ -1,7 +1,7 @@
 fixPermissions ()
 {
   chmod 710 $dataPath
-  chmod 730 $activePath
+  chmod 730 $runningPath
   chmod 730 $portsPath
   chmod 710 $projectsPath
   chmod 700 $logsPath
@@ -15,7 +15,7 @@ fixPermissions ()
       echo Nothing to do on Mac
     else
       sudo chown $USER:projects $dataPath
-      sudo chown $USER:projects $activePath
+      sudo chown $USER:projects $runningPath
       sudo chown $USER:projects $portsPath
       sudo chown $USER:projects $projectsPath
   fi  

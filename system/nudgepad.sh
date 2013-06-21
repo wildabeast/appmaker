@@ -26,8 +26,8 @@ fi
 projects="$(ls $projectsPath)"
 
 # get all projects 1 per line filter out hidden dirs
-activeProjects="$(ls $activePath)"
-activePorts="$(ls $portsPath)"
+runningProjects="$(ls $runningPath)"
+runningPorts="$(ls $portsPath)"
 
 # Include our BASH functions
 source speedcoach.sh
@@ -50,8 +50,8 @@ source createProject.sh
 
 case "$1" in
 
-'active')
-  echo $activeProjects
+'running')
+  echo $runningProjects
 ;;
 
 'backup')
@@ -59,11 +59,11 @@ case "$1" in
 ;;
 
 'clear')
-  for d in $activeProjects
+  for d in $runningProjects
   do
-    sudo rm -f $activePath/$d
+    sudo rm -f $runningPath/$d
   done
-  for d in $activePorts
+  for d in $runningPorts
   do
     sudo rm -f $portsPath/$d
   done
@@ -147,7 +147,7 @@ case "$1" in
 'kill')
   # todo: kill all running mon instances and node instances
   rm -f /nudgepad/ports/*
-  rm -rf /nudgepad/active/*
+  rm -rf /nudgepad/running/*
 ;;
 
 # Tool for SysAdmins to get link for someone who hasn't registered project
@@ -191,7 +191,7 @@ case "$1" in
 ;;
 
 'restartAll')
-  for domain in $activeProjects
+  for domain in $runningProjects
   do
     stopProject $domain
     startProject $domain
@@ -227,7 +227,7 @@ case "$1" in
     else
       stopProxy
       stopPanel
-      for domain in $activeProjects
+      for domain in $runningProjects
       do
         stopProject $domain
       done

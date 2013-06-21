@@ -1,8 +1,8 @@
 /nudgepad/ exists
 /nudgepad/ cannot be traversed by others
 /nudgepad/ can be traversed by group
-/nudgepad/active exists
-/nudgepad/active cannot be examined by others
+/nudgepad/running exists
+/nudgepad/running cannot be examined by others
 /nudgepad/ports exists
 /nudgepad/ports cannot be examined by others
 /nudgepad/projects exists

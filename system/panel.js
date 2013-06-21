@@ -16,7 +16,7 @@ var dataPath = '/nudgepad/'
 var panelPath = __dirname + '/panel/'
 var logsPath = dataPath + 'logs/'
 var projectsPath = dataPath + 'projects/'
-var activePath = dataPath + 'active/'
+var runningPath = dataPath + 'running/'
 var portsPath = dataPath + 'ports/'
 var tempPath = dataPath + 'temp/'
 var systemPath = __dirname
@@ -145,12 +145,12 @@ app.post('/create', app.checkId, app.validateDomain, app.isDomainAvailable, func
 })
 
 app.listen(port)
-fs.writeFileSync(activePath + hostname, port, 'utf8')
+fs.writeFileSync(runningPath + hostname, port, 'utf8')
 fs.writeFileSync(portsPath + port, hostname, 'utf8')
 
 // Write session stats to disk before process closes
 process.on('SIGTERM', function () {
-  fs.unlinkSync(activePath + hostname)
+  fs.unlinkSync(runningPath + hostname)
   fs.unlinkSync(portsPath + port)
   process.exit(0)
 })

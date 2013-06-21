@@ -11,7 +11,7 @@ var starting = {}
 var dataPath = '/nudgepad/'
 var logsPath = dataPath + 'logs/'
 var projectsPath = dataPath + 'projects/'
-var activePath = dataPath + 'active/'
+var runningPath = dataPath + 'running/'
 var portsPath = dataPath + 'ports/'
 var port = process.argv[2] || 80
 
@@ -81,12 +81,12 @@ server.listen(port)
 
 var updatePorts = function () {
   var projects = server.proxy.proxyTable.router
-  var files = fs.readdirSync(activePath)
+  var files = fs.readdirSync(runningPath)
   for (var i in files) {
     var domain = files[i]
     if (domain.match(/^\./))
       continue
-    var port = fs.readFileSync(activePath + domain, 'utf8')
+    var port = fs.readFileSync(runningPath + domain, 'utf8')
     projects[domain] = '127.0.0.1:' + port
     console.log('%s on port %s', domain, port)
   }
@@ -94,7 +94,7 @@ var updatePorts = function () {
 
 updatePorts()
 
-fs.watch(activePath, function (event, domain) {
+fs.watch(runningPath, function (event, domain) {
   
   // Mac os x
   if (!domain)
@@ -106,8 +106,8 @@ fs.watch(activePath, function (event, domain) {
   var domain = domain.toLowerCase()
   if (domain.match(/^\./))
     return null
-  if (fs.existsSync(activePath + domain)) {
-    var port = fs.readFileSync(activePath + domain, 'utf8')
+  if (fs.existsSync(runningPath + domain)) {
+    var port = fs.readFileSync(runningPath + domain, 'utf8')
     projects[domain] = '127.0.0.1:' + port
     console.log('%s on port %s', domain, port)
   } else {

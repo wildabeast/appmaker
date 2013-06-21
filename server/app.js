@@ -53,7 +53,7 @@ if (!String.prototype.format) {
 var dataPath = '/nudgepad/'
 var projectsPath = dataPath + 'projects/'
 var clientPath = __dirname + '/../client/'
-var activePath = dataPath + 'active/'
+var runningPath = dataPath + 'running/'
 var portsPath = dataPath + 'ports/'
 
 /********* CREATE MAIN NUDGE NAMESPACE SINGLETON OBJECT *********/
@@ -527,14 +527,14 @@ console.log('Starting %s on port %s', app.nudgepad.domain, app.nudgepad.port)
 http_server = http.createServer(app).listen(app.nudgepad.port)
 
 
-fs.writeFileSync(activePath + app.nudgepad.domain, app.nudgepad.port, 'utf8')
-fs.chmodSync(activePath + app.nudgepad.domain, '600')
+fs.writeFileSync(runningPath + app.nudgepad.domain, app.nudgepad.port, 'utf8')
+fs.chmodSync(runningPath + app.nudgepad.domain, '600')
 fs.writeFileSync(portsPath + app.nudgepad.port, app.nudgepad.domain, 'utf8')
 fs.chmodSync(portsPath + app.nudgepad.port, '600')
 
 // Write session stats to disk before process closes
 process.on('SIGTERM', function () {
-  fs.unlinkSync(activePath + app.nudgepad.domain)
+  fs.unlinkSync(runningPath + app.nudgepad.domain)
   fs.unlinkSync(portsPath + app.nudgepad.port)
   process.exit(0)
 })
