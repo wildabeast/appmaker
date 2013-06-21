@@ -14,27 +14,6 @@ Tool.prototype.close = function (name) {
   // Return false if already closed
   if (!this._open)
     return false
-    
-  
-  if (this.oncopy)
-    window.removeEventListener('copy', this.oncopy, false)
-    
-  if (this.oncut)
-    window.removeEventListener('cut', this.oncut, false)
-  
-  if (this.onpaste)
-    window.removeEventListener('paste', this.onpaste, false)
-
-  if (this.ondrop)
-    window.removeEventListener('drop', this.ondrop, false)
-
-  if (this.onresize)
-    window.removeEventListener('resize', this.onresize, false)
-
-  if (this.onkeydown)
-    $("body").off("keydown", this.onkeydown)
-
-  Events.shortcut.shortcuts = {}
   
   this.trigger('close')
 
@@ -61,41 +40,19 @@ Tool.prototype.open = function () {
   if (this._open)
     return false
   
+  // Close any open Tool
   if (Tool.openTool)
     return Tool.openTool.close(this.name)
   
   // On open event
   this.trigger('open')
   
+  // We could probably remove this.
   $('.Tool#' + this.name).show()
+  
   
   Tool.openTool = this
   this._open = true
-  
-  // todo: i think we can remove selection
-  nudgepad.trigger('selection')
-  
-  if (this.oncopy)
-    window.addEventListener('copy', this.oncopy, false)
-  
-  if (this.oncut)
-    window.addEventListener('cut', this.oncut, false)
-
-  if (this.onpaste)
-    window.addEventListener('paste', this.onpaste, false)
-
-  if (this.ondrop)
-    window.addEventListener('drop', this.ondrop, false)
-
-  if (this.onresize)
-    window.addEventListener('resize', this.onresize, false)
-    
-  if (this.onkeydown)
-    $("body").on("keydown", this.onkeydown)  
-  
-  if (this.shortcuts)
-    Events.shortcut.shortcuts = this.shortcuts
-  
 
   // On ready event
   this.trigger('ready')

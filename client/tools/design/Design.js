@@ -260,27 +260,6 @@ Design.ondrop = function(e) {
   e.preventDefault()
 }
 
-Design.on('close', function () {
-  
-  $(document).off("slidestart", Design.pen.draw)
-  
-  
-  nudgepad.off('selection', Design.broadcastSelection)
-  Room.off('change', Design.updateSelections)
-  Room.off('change', Design.updateTabs)
-  $('#DesignStage').off('click', Design.pen.insertTextBlock)
-  
-  Design.stage.close()
-
-  if (!navigator.userAgent.match(/iPad|iPhone|iPod/i))
-    return null
-  
-  // iPad fixeds
-  $(document).off("touchstart", Design.stopPropagation)
-  // Allow someone to drag
-  $(document).off("touchmove", Design.preventDefault)
-})
-
 Design.stopPropagation = function(event) {
   if (event.originalEvent.touches.length > 1) {
     event.stopPropagation()
@@ -318,49 +297,6 @@ Design.onkeydown = function (event) {
   // trigger edit event on the scrap
   $('.selection').scrap().edit()
 }
-
-Design.on('open', function () {
-  Design.grid = new Grid()
-  
-  $('#DesignStage,#DesignBar').show()
-  
-  nudgepad.on('selection', Design.broadcastSelection)
-  Room.on('change', Design.updateSelections)
-  Room.on('change', Design.updateTabs)
-  
-  Lasso.selector = '#DesignStageBody .scrap:visible'
-  $(document).on('lasso', '.scrap', function () {
-    $(this).selectMe()
-    return false
-  })
-  Lasso.enable()
-  
-  $(document).on("slidestart", Design.pen.draw)
-  
-  $('#DesignStage').on('click', Design.pen.insertTextBlock)
-
-  // Prevent Images from dragging on Firefox
-  $(document).on('dragstart', 'img', function(event) { event.preventDefault()})
-  
-  var page = store.get('activePage') || 'home'
-  if (!Project.get('pages ' + page))
-    page = 'home'
-  Design.stage.open(page)
-  
-  if (!navigator.userAgent.match(/iPad|iPhone|iPod/i))
-    return null
-  
-  // iPad fixeds
-  $(document).on("touchstart", Design.stopPropagation)
-  // Allow someone to drag
-  $(document).on("touchmove", Design.preventDefault)
-  
-  Design.updateTabs()
-})
-
-Design.on('ready', function () {
-  $('#Design').hide()
-})
 
 Design.onresize = function () {
   // Update all handles on resize

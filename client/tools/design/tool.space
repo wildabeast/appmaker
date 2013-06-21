@@ -1,4 +1,4 @@
 name Design
 html tool.html
-js tool.js js Shortcuts.js
+js Design.js events.js js Shortcuts.js
 css tool.css css
