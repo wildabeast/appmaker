@@ -4,7 +4,7 @@
 sudo groupadd projects
 sudo usermod -a -G projects ubuntu
 sudo mv /nudgepad/sites /nudgepad/projects
-sudo mv /nudgepa/active /nudgepad/running
+sudo mv /nudgepad/active /nudgepad/running
 projects="$(ls /nudgepad/projects/)"
 for domain in $projects
 do
