@@ -1,6 +1,6 @@
-createProjectUbuntu ()
+createProjectNix ()
 {
-  speedcoach "start of createProjectUbuntu"
+  speedcoach "start of createProjectNix"
   
   domain=$1
   ownerEmail=$2
@@ -11,8 +11,8 @@ createProjectUbuntu ()
   speedcoach "user created"
   sudo usermod -a -G sites $domain
   speedcoach "user added to sites group"
-  sudo usermod -a -G $domain ubuntu
-  speedcoach "ubuntu added to $domain group"
+  sudo usermod -a -G $domain $USER
+  speedcoach "$USER added to $domain group"
   
   speedcoach "user created"
   
@@ -94,10 +94,10 @@ createProject ()
       echo $domain already exists
       return 1
   fi
-  # this isnt really ubuntu, but maybe someday someone can improve all this!
-  if isUbuntu
+  # this could be better
+  if isNix
     then
-      createProjectUbuntu $1 $2 $3
+      createProjectNix $1 $2 $3
     else
       createProjectMac $1 $2 $3
   fi

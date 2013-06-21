@@ -8,7 +8,7 @@ isMac ()
   fi
 }
 
-isUbuntu ()
+isNix ()
 {
   if isMac
     then

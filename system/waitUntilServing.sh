@@ -8,8 +8,8 @@ waitUntilServing ()
         return 0
     fi
     x=$(( $x + 1 ))
-    # ubuntu supports floating point in sleep
-    if isUbuntu
+    # nix supports floating point in sleep
+    if isNix
       then
         sleep 0.25
       else
