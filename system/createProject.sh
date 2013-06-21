@@ -75,12 +75,12 @@ createProject ()
   cloneFile=$3
   if [ -z $domain ]
     then
-      echo ERROR. No domain entered. What project do you want to create?
+      echo ERROR. No domain entered. Your project needs a name. Usage: create domain owner@owner.com template.space
       return 1
   fi
   if [ -z $ownerEmail ]
     then
-      echo ERROR. No email entered. Who owns this new project?
+      echo ERROR. No email entered. Your project needs an owner. Usage: create domain owner@owner.com template.space
       return 1
   fi
   if isProject $domain
