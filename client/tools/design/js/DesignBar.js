@@ -1,4 +1,4 @@
-nudgepad.on('main', function () {
+Design.on('firstOpen', function () {
   
   $('.DesignBarDroppable').on('click', function () {
     $('.DesignImageDroppableOptions').hide()
@@ -19,8 +19,6 @@ nudgepad.on('main', function () {
     var dropBlock = $(this).attr('title').toLowerCase()
     Design.stage.dragAndDrop(Design.droppables.get('blocks ' + dropBlock))
   })
-
-
 
   $('#DesignImageDroppable').on('click', function () {
     $('.DesignImageDroppableOptions').show()

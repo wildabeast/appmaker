@@ -1,4 +1,8 @@
+
+Design.isFirstOpen = true
+
 Design.on('open', function () {
+  
   Design.grid = new Grid()
   
   $('#DesignStage,#DesignBar').show()
@@ -47,6 +51,12 @@ Design.on('open', function () {
   Events.shortcut.shortcuts = this.shortcuts
   
   
+  // temporary fix until we clean this up.
+  if (Design.isFirstOpen) {
+    Design.isFirstOpen = false
+    Design.trigger('firstOpen')
+  }
+  
 })
 
 Design.on('close', function () {
@@ -85,3 +95,62 @@ Design.on('close', function () {
 Design.on('ready', function () {
   $('#Design').hide()
 })
+
+
+Design.returnFalse = function (){
+  return false
+}
+
+Design.blurThis = function (){
+  $(this).blur()
+}
+
+Design.on('open', function () {
+  $(document).on('click', 'a.scrap, .scrap a, .scrap div', Scrap.disableLinks)
+  $('#DesignStage').on("tap", ".scrap", Scrap.selectOnTap)
+  
+  $('body').on("hold", ".scrap", Scrap.unlock)
+  
+  // When editing input blocks, prevent them from taking focus
+  $(document).on('mousedown click','input.scrap,textarea.scrap', Design.returnFalse)
+  $(document).on('focus', 'input.scrap,textarea.scrap', Design.blurThis)
+  
+})
+
+Design.on('close', function () {
+  $(document).off('click', 'a.scrap, .scrap a, .scrap div', Scrap.disableLinks)
+  $('#DesignStage').off("tap", ".scrap", Scrap.selectOnTap)
+  
+  $('body').off("hold", ".scrap", Scrap.unlock)
+  
+  // When editing input blocks, prevent them from taking focus
+  $(document).off('mousedown click','input.scrap,textarea.scrap', Design.returnFalse)
+  $(document).off('focus', 'input.scrap,textarea.scrap', Design.blurThis)
+
+})
+
+
+/*
+onpatch
+var behind = Design.stage.isBehind()
+
+// If the page has been deleted, change page
+if (patch.get('pages ' + Design.stage.activePage) === '')
+  Design.stage.back()
+  
+  Design.updateTabs()
+
+  // If the active page isnt touched, we are all done
+  if (!patch.get('timelines ' + Design.stage.activePage))
+    return true    
+
+  if (behind)
+    return Design.stage.updateTimeline()
+
+  if ($('input:focus, div:focus, textarea:focus, a:focus').length)
+    return Design.stage.updateTimeline()
+
+  // Todo: this breaks if you are in content editable
+  Design.stage.redo()
+
+*/

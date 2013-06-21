@@ -266,19 +266,5 @@ Scrap.unlock = function () {
 }
 
 
-nudgepad.on('main', function () {
-  $(document).on('click', 'a.scrap, .scrap a, .scrap div', Scrap.disableLinks)
-  $('#DesignStage').on("tap", ".scrap", Scrap.selectOnTap)
-  
-  $('body').on("hold", ".scrap", Scrap.unlock)
-  
-  // When editing input blocks, prevent them from taking focus
-  $(document).on('mousedown click','input.scrap,textarea.scrap', function (){
-    return false
-  })
-  $(document).on('focus', 'input.scrap,textarea.scrap', function (e) {$(this).blur()})
-  
-})
-
 
 

@@ -88,10 +88,16 @@ Design.images.updateList = function () {
   })
 }
 
-// When an image is uploaded
-nudgepad.on('uploadComplete', Design.images.updateList)
-nudgepad.on('uploadComplete', function () {
-  mixpanel.track('I uploaded something')
+
+Design.on('open', function () {
+  // When an image is uploaded
+  nudgepad.on('uploadComplete', Design.images.updateList)
+  nudgepad.on('public', Design.images.updateList)
 })
-nudgepad.on('public', Design.images.updateList)
-nudgepad.on('main', Design.images.updateList)
+Design.on('close', function () {
+  // When an image is uploaded
+  nudgepad.off('uploadComplete', Design.images.updateList)
+  nudgepad.off('public', Design.images.updateList)
+})
+
+Design.on('firstOpen', Design.images.updateList)
