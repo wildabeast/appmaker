@@ -2,7 +2,7 @@
 Design.isFirstOpen = true
 
 Design.on('open', function () {
-  
+
   Design.grid = new Grid()
   
   $('#DesignStage,#DesignBar').show()
@@ -30,26 +30,24 @@ Design.on('open', function () {
     page = 'home'
   Design.stage.open(page)
   
-  if (!navigator.userAgent.match(/iPad|iPhone|iPod/i))
-    return null
-  
-  // iPad fixeds
-  $(document).on("touchstart", Design.stopPropagation)
-  // Allow someone to drag
-  $(document).on("touchmove", Design.preventDefault)
+  if (!navigator.userAgent.match(/iPad|iPhone|iPod/i)) {
+    // iPad fixeds
+    $(document).on("touchstart", Design.stopPropagation)
+    // Allow someone to drag
+    $(document).on("touchmove", Design.preventDefault) 
+  }
   
   Design.updateTabs()
   
   
-  window.addEventListener('copy', this.oncopy, false)
-  window.addEventListener('cut', this.oncut, false)
-  window.addEventListener('paste', this.onpaste, false)
-  window.addEventListener('resize', this.onresize, false)
+  window.addEventListener('copy', Design.oncopy, false)
+  window.addEventListener('cut', Design.oncut, false)
+  window.addEventListener('paste', Design.onpaste, false)
+  window.addEventListener('resize', Design.onresize, false)
   
-  $("body").on("keydown", this.onkeydown)
-  
-  Events.shortcut.shortcuts = this.shortcuts
-  
+  $("body").on("keydown", Design.onkeydown)
+
+  Events.shortcut.shortcuts = Design.shortcuts
   
   // temporary fix until we clean this up.
   if (Design.isFirstOpen) {
@@ -79,11 +77,11 @@ Design.on('close', function () {
   // Allow someone to drag
   $(document).off("touchmove", Design.preventDefault)
   
-  window.removeEventListener('copy', this.oncopy, false)
-  window.removeEventListener('cut', this.oncut, false)
-  window.removeEventListener('paste', this.onpaste, false)
-  window.removeEventListener('resize', this.onresize, false)
-  $("body").off("keydown", this.onkeydown)
+  window.removeEventListener('copy', Design.oncopy, false)
+  window.removeEventListener('cut', Design.oncut, false)
+  window.removeEventListener('paste', Design.onpaste, false)
+  window.removeEventListener('resize', Design.onresize, false)
+  $("body").off("keydown", Design.onkeydown)
   
   // todo: i think we can remove selection
   nudgepad.trigger('selection')
