@@ -16,26 +16,26 @@ createProjectNix ()
   
   if [ -n "$cloneFile" ]
     then
-      space $cloneFile $projectsPath$domain
+      space $cloneFile $projectsPath/$domain
       speedcoach "$domain created from $cloneFile template"
     else
       # echo NO cloneFile provided. Creating blank project from blank.
-      sudo cp -R blank $projectsPath$domain
-      sudo chown -R $domain:$domain $projectsPath$domain
-      sudo -u $domain mkdir $projectsPath$domain/settings
-      sudo -u $domain mkdir $projectsPath$domain/workers
-      sudo -u $domain mkdir $projectsPath$domain/logs
-      sudo -u $domain mkdir $projectsPath$domain/temp
+      sudo cp -R blank $projectsPath/$domain
+      sudo chown -R $domain:$domain $projectsPath/$domain
+      sudo -u $domain mkdir $projectsPath/$domain/settings
+      sudo -u $domain mkdir $projectsPath/$domain/workers
+      sudo -u $domain mkdir $projectsPath/$domain/logs
+      sudo -u $domain mkdir $projectsPath/$domain/temp
       speedcoach "$domain created from blank template"
   fi
   createOwnerFile $domain $ownerEmail
   speedcoach "$domain owner file for $ownerEmail created"
-  sudo chown -R $domain:$domain $projectsPath$domain
+  sudo chown -R $domain:$domain $projectsPath/$domain
   speedcoach "$domain project dir chowned"
-  sudo -u $domain chmod -R 770 $projectsPath$domain/
+  sudo -u $domain chmod -R 770 $projectsPath/$domain/
   speedcoach "$domain project dir chmodded"
   
-#  cd $projectsPath$domain/
+#  cd $projectsPath/$domain/
 #  sudo -u $domain git init >/dev/null
 #  sudo -u $domain git add . >/dev/null
 #  sudo -u $domain git commit -am "Initial commit" >/dev/null
@@ -52,18 +52,18 @@ createProjectMac ()
   
   if [ -n "$cloneFile" ]
     then
-      space $cloneFile $projectsPath$domain
+      space $cloneFile $projectsPath/$domain
     else
       # echo NO cloneFile provided. Creating blank project from blank.
-      cp -R blank $projectsPath$domain
-      mkdir $projectsPath$domain/settings
-      mkdir $projectsPath$domain/workers
-      mkdir $projectsPath$domain/logs
-      mkdir $projectsPath$domain/temp
+      cp -R blank $projectsPath/$domain
+      mkdir $projectsPath/$domain/settings
+      mkdir $projectsPath/$domain/workers
+      mkdir $projectsPath/$domain/logs
+      mkdir $projectsPath/$domain/temp
   fi
   
   createOwnerFile $domain $ownerEmail
-  cd $projectsPath$domain
+  cd $projectsPath/$domain
 #  git init >/dev/null
   echo "temp/" > .gitignore
 #  git add . >/dev/null

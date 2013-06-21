@@ -158,7 +158,7 @@ case "$1" in
 'log')
   if [ -n "$2" ]
     then
-      sudo cat $projectsPath$2/logs/mon.txt
+      sudo cat $projectsPath/$2/logs/mon.txt
     else
       # Proxy log
       sudo cat $logsPath/proxy.txt
@@ -166,7 +166,7 @@ case "$1" in
 ;;
 
 'logs')
-  sudo cat $projectsPath$2/logs/mon.txt
+  sudo cat $projectsPath/$2/logs/mon.txt
 ;;
 
 'permit')
