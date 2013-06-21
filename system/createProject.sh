@@ -23,7 +23,7 @@ createProjectNix ()
   createOwnerFile $domain $ownerEmail
   chmod -R 770 $projectsPath/$domain/
   
-  
+  # todo: how can we do this without sudo? sudo cause a 400ms delay
   sudo $systemPath/createUser.sh $domain $USER
   speedcoach "$domain project dir chowned"
   

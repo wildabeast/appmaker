@@ -11,7 +11,7 @@ waitUntilServing ()
     # nix supports floating point in sleep
     if isNix
       then
-        sleep 0.25
+        sleep 0.15
       else
         sleep 1
     fi
