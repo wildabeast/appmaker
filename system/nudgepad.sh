@@ -93,6 +93,7 @@ case "$1" in
           echo $OWNERLINK
           # exit 0
           speedcoach "link sent"
+          speedcoach_total
       else
         echo Failed starting $2
         exit 1
