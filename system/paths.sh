@@ -2,7 +2,7 @@ serverPath=$systemPath/../server/
 clientPath=$systemPath/../client
 
 # Where to store operational and user data
-dataPath=/nudgepad/
+dataPath=/nudgepad
 projectsPath=$dataPath/projects/
 runningPath=$dataPath/running/
 portsPath=$dataPath/ports/
