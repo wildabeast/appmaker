@@ -9,7 +9,6 @@ createProjectNix ()
   if [ -n "$cloneFile" ]
     then
       space $cloneFile $projectsPath/$domain
-      speedcoach "$domain created from $cloneFile template"
     else
       # echo NO cloneFile provided. Creating blank project from blank.
       cp -R blank $projectsPath/$domain
@@ -17,15 +16,14 @@ createProjectNix ()
       mkdir $projectsPath/$domain/workers
       mkdir $projectsPath/$domain/logs
       mkdir $projectsPath/$domain/temp
-      speedcoach "$domain created from blank template"
+      
   fi
+  speedcoach "$domain created from template"
   createOwnerFile $domain $ownerEmail
   chmod -R 770 $projectsPath/$domain/
   
-  PW=`echo $RANDOM$RANDOM`
-  sudo useradd -m -p "$PW" -G projects $domain
-  sudo usermod -a -G $domain $USER
-  sudo chown -R $domain:$domain $projectsPath/$domain
+  
+  sudo ./createUser.sh $domain $USER
   speedcoach "$domain project dir chowned"
   
 #  cd $projectsPath/$domain/
