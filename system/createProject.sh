@@ -14,13 +14,10 @@ createProjectNix ()
   sudo usermod -a -G $domain $USER
   speedcoach "$USER user added to $domain group"
   
-  speedcoach "user created"
-  
-  
   if [ -n "$cloneFile" ]
     then
       space $cloneFile $projectsPath$domain
-      speedcoach "project created from space"
+      speedcoach "$domain created from $cloneFile template"
     else
       # echo NO cloneFile provided. Creating blank project from blank.
       sudo cp -R blank $projectsPath$domain
@@ -29,14 +26,14 @@ createProjectNix ()
       sudo -u $domain mkdir $projectsPath$domain/workers
       sudo -u $domain mkdir $projectsPath$domain/logs
       sudo -u $domain mkdir $projectsPath$domain/temp
-      speedcoach "project created from blank"
+      speedcoach "$domain created from blank template"
   fi
   createOwnerFile $domain $ownerEmail
-  speedcoach "owner file created"
+  speedcoach "$domain owner file for $ownerEmail created"
   sudo chown -R $domain:$domain $projectsPath$domain
-  speedcoach "project dir chowned"
+  speedcoach "$domain project dir chowned"
   sudo -u $domain chmod -R 770 $projectsPath$domain/
-  speedcoach "project dir chmodded"
+  speedcoach "$domain project dir chmodded"
   
 #  cd $projectsPath$domain/
 #  sudo -u $domain git init >/dev/null
