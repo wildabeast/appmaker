@@ -1,7 +1,7 @@
-isSite ()
+isProject ()
 {
   domain=$1
-  if [ -d "$sitesPath/$domain" ]
+  if [ -d "$projectsPath/$domain" ]
     then
       return 0
     else
@@ -9,9 +9,9 @@ isSite ()
   fi
 }
 
-isNoteSite ()
+isNotProject ()
 {
-  if isSite $1
+  if isProject $1
     then
       return 1
     else

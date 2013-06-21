@@ -22,36 +22,36 @@ if [ -f $tempPath/config.sh ]
     cp $systemPath/config.sh $tempPath/config.sh
 fi
 
-# get all sites 1 per line filter out hidden dirs
-sites="$(ls $sitesPath)"
+# get all projects 1 per line filter out hidden dirs
+projects="$(ls $projectsPath)"
 
-# get all sites 1 per line filter out hidden dirs
-activeSites="$(ls $activePath)"
+# get all projects 1 per line filter out hidden dirs
+activeProjects="$(ls $activePath)"
 activePorts="$(ls $portsPath)"
 
 # Include our BASH functions
 source speedcoach.sh
 source fixPermissions.sh
-source isSite.sh
+source isProject.sh
 source isActive.sh
 source isProxyUp.sh
-source startSite.sh
-source stopSite.sh
+source startProject.sh
+source stopProject.sh
 source stopProxy.sh
 source startProxy.sh
 source startPanel.sh
 source stopPanel.sh
 source isChanged.sh
 source commit.sh
-source deleteSite.sh
+source deleteProject.sh
 source waitUntilServing.sh
 source createOwnerFile.sh
-source createSite.sh
+source createProject.sh
 
 case "$1" in
 
 'active')
-  echo $activeSites
+  echo $activeProjects
 ;;
 
 'backup')
@@ -59,7 +59,7 @@ case "$1" in
 ;;
 
 'clear')
-  for d in $activeSites
+  for d in $activeProjects
   do
     sudo rm -f $activePath/$d
   done
@@ -74,7 +74,7 @@ case "$1" in
 ;;
 
 'commitAll')
-  for domain in $sites
+  for domain in $projects
   do
     commit $domain
   done
@@ -82,10 +82,10 @@ case "$1" in
 
 'create')
   speedcoach "start of create"
-  if createSite $2 $3 $4
+  if createProject $2 $3 $4
     then
-      speedcoach "before start site"
-      if startSite $2
+      speedcoach "before start project"
+      if startProject $2
         then
           speedcoach "wait until serving"
           # Get owner link
@@ -104,13 +104,13 @@ case "$1" in
 ;;
 
 'delete')
-  deleteSite $2
+  deleteProject $2
 ;;
 
 'deleteAll')
-  for D in $sites
+  for D in $projects
   do
-    deleteSite $D
+    deleteProject $D
   done
 ;;
 
@@ -131,8 +131,8 @@ case "$1" in
   fi
 ;;
 
-'isSite')
-  isSite $2
+'isProject')
+  isProject $2
 ;;
 
 'isActive')
@@ -150,7 +150,7 @@ case "$1" in
   rm -rf /nudgepad/active/*
 ;;
 
-# Tool for SysAdmins to get link for someone who hasn't registered site
+# Tool for SysAdmins to get link for someone who hasn't registered project
 'link')
   node getOwnerLink.js $2
 ;;
@@ -158,7 +158,7 @@ case "$1" in
 'log')
   if [ -n "$2" ]
     then
-      sudo cat $sitesPath$2/logs/mon.txt
+      sudo cat $projectsPath$2/logs/mon.txt
     else
       # Proxy log
       sudo cat $logsPath/proxy.txt
@@ -166,14 +166,14 @@ case "$1" in
 ;;
 
 'logs')
-  sudo cat $sitesPath$2/logs/mon.txt
+  sudo cat $projectsPath$2/logs/mon.txt
 ;;
 
 'permit')
   # i hate you file permissions
   if isMac
     then
-      sudo chmod -R 777 $sitesPath
+      sudo chmod -R 777 $projectsPath
   fi
 ;;
 
@@ -186,20 +186,20 @@ case "$1" in
       startProxy
       exit 0
   fi
-  stopSite $2
-  startSite $2
+  stopProject $2
+  startProject $2
 ;;
 
 'restartAll')
-  for domain in $activeSites
+  for domain in $activeProjects
   do
-    stopSite $domain
-    startSite $domain
+    stopProject $domain
+    startProject $domain
   done
 ;;
 
-'sites')
-  for domain in $sites
+'projects')
+  for domain in $projects
   do
     echo $domain
   done
@@ -212,7 +212,7 @@ case "$1" in
       startPanel
       exit 2
   fi
-  if startSite $2
+  if startProject $2
     then
       exit 0
     else
@@ -223,13 +223,13 @@ case "$1" in
 'stop')
   if [ -n "$2" ]
     then
-      stopSite $2
+      stopProject $2
     else
       stopProxy
       stopPanel
-      for domain in $activeSites
+      for domain in $activeProjects
       do
-        stopSite $domain
+        stopProject $domain
       done
   fi
 ;;
@@ -237,7 +237,7 @@ case "$1" in
 'tail')
   if [ -n "$2" ]
     then
-      sudo tail -n 30 -f $sitesPath/$2/logs/mon.txt
+      sudo tail -n 30 -f $projectsPath/$2/logs/mon.txt
     else
       # Proxy log
       sudo tail -n 30 -f $logsPath/proxy.txt
@@ -255,7 +255,7 @@ case "$1" in
 'traffic')
   if [ -n "$2" ]
     then
-      sudo tail -n 30 -f $sitesPath/$2/logs/requests.txt
+      sudo tail -n 30 -f $projectsPath/$2/logs/requests.txt
     else
       # Proxy log
       echo No domain provided
@@ -275,8 +275,8 @@ case "$1" in
 ;;
 
 'zip')
-  cd $sitesPath
-  zip -r ~/sites.zip .
+  cd $projectsPath
+  zip -r ~/projects.zip .
 ;;
 
 *)

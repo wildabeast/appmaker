@@ -3,7 +3,7 @@ clientPath=$systemPath/../client
 
 # Where to store operational and user data
 dataPath=/nudgepad/
-sitesPath=$dataPath/sites/
+projectsPath=$dataPath/sites/
 activePath=$dataPath/active/
 portsPath=$dataPath/ports/
 tempPath=$dataPath/temp/

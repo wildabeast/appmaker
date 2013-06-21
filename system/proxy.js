@@ -1,5 +1,5 @@
 /**
- * Allows hosting of multiple sites on one server.
+ * Allows hosting of multiple projects on one server.
  */
 var httpProxy = require('http-proxy'),
     exec = require('child_process').exec,
@@ -10,17 +10,17 @@ var errorPage = fs.readFileSync(__dirname + '/error.html', 'utf8')
 var starting = {}
 var dataPath = '/nudgepad/'
 var logsPath = dataPath + 'logs/'
-var sitesPath = dataPath + 'sites/'
+var projectsPath = dataPath + 'sites/'
 var activePath = dataPath + 'active/'
 var portsPath = dataPath + 'ports/'
 var port = process.argv[2] || 80
 
-var startSite = function (domain) {
+var startProject = function (domain) {
   starting[domain] = true
-  console.log('starting sleeping site: %s', domain)
+  console.log('starting sleeping project: %s', domain)
   exec(__dirname + '/nudgepad.sh start ' + domain, function (err){
     if (err)
-      console.log('Start site error %s', err)
+      console.log('Start project error %s', err)
   })
 }
 
@@ -33,18 +33,18 @@ var notFoundHandler = function (req, res) {
     res.end()
   } else {
     // todo: this may cause some bad edge cases.
-    fs.exists(sitesPath + domain, function (exists) {
+    fs.exists(projectsPath + domain, function (exists) {
       if (!exists) {
         console.log('unknown_host: %s', domain)
         res.writeHead(404)
         return res.end()
       } else {
-        // Only start a site once
+        // Only start a project once
         if (starting[domain]) {
           res.writeHead(500)
           return res.end(errorPage)
         }
-        startSite(domain)
+        startProject(domain)
         res.writeHead(500)
         return res.end(errorPage)
         
@@ -80,14 +80,14 @@ server.listen(port)
 
 
 var updatePorts = function () {
-  var sites = server.proxy.proxyTable.router
+  var projects = server.proxy.proxyTable.router
   var files = fs.readdirSync(activePath)
   for (var i in files) {
     var domain = files[i]
     if (domain.match(/^\./))
       continue
     var port = fs.readFileSync(activePath + domain, 'utf8')
-    sites[domain] = '127.0.0.1:' + port
+    projects[domain] = '127.0.0.1:' + port
     console.log('%s on port %s', domain, port)
   }
 }
@@ -100,7 +100,7 @@ fs.watch(activePath, function (event, domain) {
   if (!domain)
     return updatePorts()
   
-  var sites = server.proxy.proxyTable.router
+  var projects = server.proxy.proxyTable.router
   // Trigger public changed event
   console.log('event on %s', domain)
   var domain = domain.toLowerCase()
@@ -108,11 +108,11 @@ fs.watch(activePath, function (event, domain) {
     return null
   if (fs.existsSync(activePath + domain)) {
     var port = fs.readFileSync(activePath + domain, 'utf8')
-    sites[domain] = '127.0.0.1:' + port
+    projects[domain] = '127.0.0.1:' + port
     console.log('%s on port %s', domain, port)
   } else {
-    console.log('deleting %s', sites[domain])
-    delete sites[domain]
+    console.log('deleting %s', projects[domain])
+    delete projects[domain]
   }
 })
 

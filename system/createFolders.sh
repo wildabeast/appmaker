@@ -2,7 +2,7 @@ if [ ! -d "$dataPath" ]
   then
     sudo mkdir $dataPath
     sudo chown $USER $dataPath
-    mkdir $sitesPath
+    mkdir $projectsPath
     mkdir $activePath
     mkdir $portsPath
     mkdir $tempPath

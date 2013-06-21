@@ -1,6 +1,6 @@
-createSiteUbuntu ()
+createProjectUbuntu ()
 {
-  speedcoach "start of createSiteUbuntu"
+  speedcoach "start of createProjectUbuntu"
   
   domain=$1
   ownerEmail=$2
@@ -15,24 +15,24 @@ createSiteUbuntu ()
   
   if [ -n "$cloneFile" ]
     then
-      space $cloneFile $sitesPath$domain
+      space $cloneFile $projectsPath$domain
     else
       # echo NO cloneFile provided. Creating blank project from blank.
-      sudo cp -R blank $sitesPath$domain
-      sudo chown -R $domain:$domain $sitesPath$domain
-      sudo -u $domain mkdir $sitesPath$domain/settings
-      sudo -u $domain mkdir $sitesPath$domain/workers
-      sudo -u $domain mkdir $sitesPath$domain/logs
-      sudo -u $domain mkdir $sitesPath$domain/temp
+      sudo cp -R blank $projectsPath$domain
+      sudo chown -R $domain:$domain $projectsPath$domain
+      sudo -u $domain mkdir $projectsPath$domain/settings
+      sudo -u $domain mkdir $projectsPath$domain/workers
+      sudo -u $domain mkdir $projectsPath$domain/logs
+      sudo -u $domain mkdir $projectsPath$domain/temp
   fi
   speedcoach "before createOwnerFile"
   createOwnerFile $domain $ownerEmail
-  sudo chown -R $domain:$domain $sitesPath$domain
-  sudo -u $domain chmod -R 770 $sitesPath$domain/
+  sudo chown -R $domain:$domain $projectsPath$domain
+  sudo -u $domain chmod -R 770 $projectsPath$domain/
   
-  speedcoach "end of createSiteUbuntu"
+  speedcoach "end of createProjectUbuntu"
   
-#  cd $sitesPath$domain/
+#  cd $projectsPath$domain/
 #  sudo -u $domain git init >/dev/null
 #  sudo -u $domain git add . >/dev/null
 #  sudo -u $domain git commit -am "Initial commit" >/dev/null
@@ -40,7 +40,7 @@ createSiteUbuntu ()
   
 }
 
-createSiteMac ()
+createProjectMac ()
 {
   
   domain=$1
@@ -49,18 +49,18 @@ createSiteMac ()
   
   if [ -n "$cloneFile" ]
     then
-      space $cloneFile $sitesPath$domain
+      space $cloneFile $projectsPath$domain
     else
       # echo NO cloneFile provided. Creating blank project from blank.
-      cp -R blank $sitesPath$domain
-      mkdir $sitesPath$domain/settings
-      mkdir $sitesPath$domain/workers
-      mkdir $sitesPath$domain/logs
-      mkdir $sitesPath$domain/temp
+      cp -R blank $projectsPath$domain
+      mkdir $projectsPath$domain/settings
+      mkdir $projectsPath$domain/workers
+      mkdir $projectsPath$domain/logs
+      mkdir $projectsPath$domain/temp
   fi
   
   createOwnerFile $domain $ownerEmail
-  cd $sitesPath$domain
+  cd $projectsPath$domain
 #  git init >/dev/null
   echo "temp/" > .gitignore
 #  git add . >/dev/null
@@ -68,7 +68,7 @@ createSiteMac ()
 
 }
 
-createSite ()
+createProject ()
 {
   domain=$1
   ownerEmail=$2
@@ -83,16 +83,16 @@ createSite ()
       echo ERROR. No email entered. Who owns this new project?
       return 1
   fi
-  if isSite $domain
+  if isProject $domain
     then
       echo $domain already exists
       return 1
   fi
   if isUbuntu
     then
-      createSiteUbuntu $1 $2 $3
+      createProjectUbuntu $1 $2 $3
     else
-      createSiteMac $1 $2 $3
+      createProjectMac $1 $2 $3
   fi
   
   speedcoach "before tee"

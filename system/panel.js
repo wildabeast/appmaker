@@ -15,7 +15,7 @@ var hostname = process.argv[2]
 var dataPath = '/nudgepad/'
 var panelPath = __dirname + '/panel/'
 var logsPath = dataPath + 'logs/'
-var sitesPath = dataPath + 'sites/'
+var projectsPath = dataPath + 'sites/'
 var activePath = dataPath + 'active/'
 var portsPath = dataPath + 'ports/'
 var tempPath = dataPath + 'temp/'
@@ -62,7 +62,7 @@ app.validateDomain = function (req, res, next) {
 app.isDomainAvailable = function (req, res, next) {
   
   var domain = req.body.domain
-  fs.exists(sitesPath + domain, function (exists) {
+  fs.exists(projectsPath + domain, function (exists) {
     if (!exists)
       return next()
 //    res.set('Content-Type', 'text/plain')
@@ -91,7 +91,7 @@ app.checkId = function (req, res, next) {
   next()
 }
 
-// Create a site
+// Create a project
 // On success, message is the login link 
 app.post('/create', app.checkId, app.validateDomain, app.isDomainAvailable, function(req, res, next){
   

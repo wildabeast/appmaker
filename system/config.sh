@@ -1,4 +1,4 @@
 proxyPort=80
 panelPort=3000
-minSitePort=3002
-maxSitePort=8000
+minProjectPort=3002
+maxProjectPort=8000

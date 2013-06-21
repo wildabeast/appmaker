@@ -3,7 +3,7 @@ fixPermissions ()
   chmod 710 $dataPath
   chmod 730 $activePath
   chmod 730 $portsPath
-  chmod 710 $sitesPath
+  chmod 710 $projectsPath
   chmod 700 $logsPath
   chmod 700 $tempPath
   chmod 700 $panelPath
@@ -17,7 +17,7 @@ fixPermissions ()
       sudo chown $USER:sites $dataPath
       sudo chown $USER:sites $activePath
       sudo chown $USER:sites $portsPath
-      sudo chown $USER:sites $sitesPath
+      sudo chown $USER:sites $projectsPath
   fi  
 }
 
