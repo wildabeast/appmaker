@@ -23,7 +23,7 @@ createProjectNix ()
   chmod -R 770 $projectsPath/$domain/
   
   
-  sudo ./createUser.sh $domain $USER
+  sudo $systemPath/createUser.sh $domain $USER
   speedcoach "$domain project dir chowned"
   
 #  cd $projectsPath/$domain/
