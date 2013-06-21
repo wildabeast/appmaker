@@ -7,11 +7,10 @@ createProjectNix ()
   cloneFile=$3
   PW=`echo $RANDOM$RANDOM`
   speedcoach "password generated"
-  sudo useradd -m -p "$PW" $domain
-  # -G projects 
+  sudo useradd -m -p "$PW" -G projects $domain
   speedcoach "$domain user created"
-  sudo usermod -a -G projects $domain
-  speedcoach "$domain user added to projects group"
+  # sudo usermod -a -G projects $domain
+  # speedcoach "$domain user added to projects group"
   sudo usermod -a -G $domain $USER
   speedcoach "$USER user added to $domain group"
   
