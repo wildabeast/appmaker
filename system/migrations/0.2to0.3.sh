@@ -10,3 +10,9 @@ for domain in $projects
 do
   sudo usermod -a -G projects $domain
 done
+sudo chown $USER:projects /nudgepad/projects
+sudo chown $USER:projects /nudgepad/running
+chmod 730 /nudgepad/running
+chmod 710 /nudgepad/projects
+# This is not really working for some reason.
+# could be that dumb nix group thing
