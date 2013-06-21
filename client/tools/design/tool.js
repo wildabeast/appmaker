@@ -260,7 +260,7 @@ Design.ondrop = function(e) {
   e.preventDefault()
 }
 
-Design.onclose = function () {
+Design.on('close', function () {
   
   $(document).off("slidestart", Design.pen.draw)
   
@@ -279,7 +279,7 @@ Design.onclose = function () {
   $(document).off("touchstart", Design.stopPropagation)
   // Allow someone to drag
   $(document).off("touchmove", Design.preventDefault)
-}
+})
 
 Design.stopPropagation = function(event) {
   if (event.originalEvent.touches.length > 1) {
@@ -319,7 +319,7 @@ Design.onkeydown = function (event) {
   $('.selection').scrap().edit()
 }
 
-Design.onopen = function () {
+Design.on('open', function () {
   Design.grid = new Grid()
   
   $('#DesignStage,#DesignBar').show()
@@ -356,11 +356,11 @@ Design.onopen = function () {
   $(document).on("touchmove", Design.preventDefault)
   
   Design.updateTabs()
-}
+})
 
-Design.onready = function () {
+Design.on('ready', function () {
   $('#Design').hide()
-}
+})
 
 Design.onresize = function () {
   // Update all handles on resize

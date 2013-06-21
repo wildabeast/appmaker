@@ -88,11 +88,11 @@ Develop.import = function () {
   })
 }
 
-Develop.onopen = function () {
+Develop.on('open', function () {
 //  $('.nudgepad#zip').attr('href', '/nudgepad.backup/' + document.location.host + '.zip')
   if (!Develop.log)
     Develop.refresh()
-}
+})
 
 Develop.renderExplorer = function () {
   

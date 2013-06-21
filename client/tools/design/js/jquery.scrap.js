@@ -55,11 +55,11 @@ $.fn.selectMe = function () {
   $(this).addClass('selection')
   
 
-  nudgepad.MoveHandle.create(scrap)
+  Design.MoveHandle.create(scrap)
   
   nudgepad.trigger('selection')
 
-  EditHandle.create(scrap)
+  Design.EditHandle.create(scrap)
   
   var style = scrap.get('style')
   // If no width, return
@@ -70,20 +70,20 @@ $.fn.selectMe = function () {
   var fixed = (style.get('background-image') && style.get('background-size') === 'contain')
   
   if (fixed) {
-    nudgepad.StretchHandle.create(scrap, "middle", "left", fixed)
-    nudgepad.StretchHandle.create(scrap, "middle", "right", fixed)
+    Design.StretchHandle.create(scrap, "middle", "left", fixed)
+    Design.StretchHandle.create(scrap, "middle", "right", fixed)
     return this
   }
   
   // Everything can be resized
-  nudgepad.StretchHandle.create(scrap, "top", "left")
-  nudgepad.StretchHandle.create(scrap, "top", "center")
-  nudgepad.StretchHandle.create(scrap, "top", "right")
-  nudgepad.StretchHandle.create(scrap, "middle", "left")
-  nudgepad.StretchHandle.create(scrap, "middle", "right")
-  nudgepad.StretchHandle.create(scrap, "bottom", "left")
-  nudgepad.StretchHandle.create(scrap, "bottom", "center")
-  nudgepad.StretchHandle.create(scrap, "bottom", "right")
+  Design.StretchHandle.create(scrap, "top", "left")
+  Design.StretchHandle.create(scrap, "top", "center")
+  Design.StretchHandle.create(scrap, "top", "right")
+  Design.StretchHandle.create(scrap, "middle", "left")
+  Design.StretchHandle.create(scrap, "middle", "right")
+  Design.StretchHandle.create(scrap, "bottom", "left")
+  Design.StretchHandle.create(scrap, "bottom", "center")
+  Design.StretchHandle.create(scrap, "bottom", "right")
   
   return $(this)
 }

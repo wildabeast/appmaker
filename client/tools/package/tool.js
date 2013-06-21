@@ -2,9 +2,9 @@ var Package = new Tool('Package')
 Package.color = 'rgba(71, 41, 54, 1)'
 Package.description = 'Turn your project into a mobile app.'
 
-Package.onopen = function () {
+Package.on('open', function () {
   $('#PackageManifestUrlLink').html('http://' + document.location.host + '/manifest.webapp')
-}
+})
 
 // http://stackoverflow.com/questions/1173194/select-all-div-text-with-single-mouse-click
 Package.selectText = function (containerid) {

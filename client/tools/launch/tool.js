@@ -27,6 +27,6 @@ return '<div class="LaunchSquare" style="background-color : ' + color + '" oncli
 </div>'
 }
 
-Launch.onopen = function () {
+Launch.on('open', function () {
   Launch.renderMenu()
-}
+})

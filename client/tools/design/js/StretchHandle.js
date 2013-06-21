@@ -1,7 +1,7 @@
 /**
  * Stretch handles can change the width/height and x/y of the scraps.
  */
-nudgepad.StretchHandle = function () {
+Design.StretchHandle = function () {
 }
 
 /**
@@ -9,7 +9,7 @@ nudgepad.StretchHandle = function () {
  * @param {string}
  * @param {string}
  */
-nudgepad.StretchHandle.create = function (scrap, row, column, fixed) {
+Design.StretchHandle.create = function (scrap, row, column, fixed) {
   
   var element = scrap.element()
   var position = (element.css('position') == 'fixed' ? 'fixed' : 'absolute')
@@ -34,29 +34,29 @@ nudgepad.StretchHandle.create = function (scrap, row, column, fixed) {
   if (fixed)
     div.data("fixed", true)
   element.parent().append(div)
-  div.on("mousedown", nudgepad.StretchHandle.mousedown)
-  div.on("slide", nudgepad.StretchHandle.slide)
-  div.on("slidestart", nudgepad.StretchHandle.slidestart)
-  div.on("slideend", nudgepad.StretchHandle.slideend)
-  div.on("tap", nudgepad.StretchHandle.tap)
-  div.on("update", nudgepad.StretchHandle.update)
-  div.on("dblclick", nudgepad.StretchHandle.dblclick)
+  div.on("mousedown", Design.StretchHandle.mousedown)
+  div.on("slide", Design.StretchHandle.slide)
+  div.on("slidestart", Design.StretchHandle.slidestart)
+  div.on("slideend", Design.StretchHandle.slideend)
+  div.on("tap", Design.StretchHandle.tap)
+  div.on("update", Design.StretchHandle.update)
+  div.on("dblclick", Design.StretchHandle.dblclick)
   div.trigger("update")
 }
 
 /**
  * We cache the start dimensions
  */
-nudgepad.StretchHandle.dimensions = {}
+Design.StretchHandle.dimensions = {}
 
 /**
  * If small scrap is on top of (higher z-index) a bigger scrap, selects small scrap
  */
-nudgepad.StretchHandle.mousedown = function () {
-  nudgepad.StretchHandle.dimensions = $(this).owner().dimensions()
+Design.StretchHandle.mousedown = function () {
+  Design.StretchHandle.dimensions = $(this).owner().dimensions()
   var scrap = $(this).owner().scrap()
-  nudgepad.StretchHandle.originalWidth = parseFloat(scrap.get('style width'))
-  nudgepad.StretchHandle.originalHeight = parseFloat(scrap.get('style height'))
+  Design.StretchHandle.originalWidth = parseFloat(scrap.get('style width'))
+  Design.StretchHandle.originalHeight = parseFloat(scrap.get('style height'))
   Design.grid.create()
 }
 
@@ -66,7 +66,7 @@ nudgepad.StretchHandle.mousedown = function () {
  * @return false. Don't propagate.
  * todo: rotate vector if fixed.
  */
-nudgepad.StretchHandle.slide = function () {
+Design.StretchHandle.slide = function () {
 
   var owner = $(this).owner(),
       row = $(this).data().row,
@@ -76,18 +76,18 @@ nudgepad.StretchHandle.slide = function () {
       y0  // y origin
   
   if (column === 'left')
-    x0 = nudgepad.StretchHandle.dimensions.right
+    x0 = Design.StretchHandle.dimensions.right
   else if (column === 'right')
-    x0 = nudgepad.StretchHandle.dimensions.left
+    x0 = Design.StretchHandle.dimensions.left
   else
-    x0 = nudgepad.StretchHandle.dimensions.center
+    x0 = Design.StretchHandle.dimensions.center
   
   if (row === 'top')
-    y0 = nudgepad.StretchHandle.dimensions.bottom
+    y0 = Design.StretchHandle.dimensions.bottom
   else if (row === 'bottom')
-    y0 = nudgepad.StretchHandle.dimensions.top
+    y0 = Design.StretchHandle.dimensions.top
   else
-    y0 = nudgepad.StretchHandle.dimensions.middle
+    y0 = Design.StretchHandle.dimensions.middle
   
   var x1 = Mouse.move.pageX - $(this).parent().offset().left // + scroll left
   var y1 = Mouse.move.pageY - $(this).parent().offset().top// Design.stage.scrollTop()// + scroll top
@@ -95,7 +95,7 @@ nudgepad.StretchHandle.slide = function () {
   
   // todo: fix bug where offset changes
   
-  var length = nudgepad.StretchHandle.getLength(x0, y0, x1, y1,
+  var length = Design.StretchHandle.getLength(x0, y0, x1, y1,
     // Dont snap Y if we are only changing X, and vice versa
     column != 'center', row != 'middle')
   
@@ -115,8 +115,8 @@ nudgepad.StretchHandle.slide = function () {
   
   // If fixed, we take the change from the left to right for now.
   if (fixed) {
-    var change = parseFloat(scrap.get('style width')) / nudgepad.StretchHandle.originalWidth
-    scrap.set('style height', Math.round(nudgepad.StretchHandle.originalHeight * change) + 'px')
+    var change = parseFloat(scrap.get('style width')) / Design.StretchHandle.originalWidth
+    scrap.set('style height', Math.round(Design.StretchHandle.originalHeight * change) + 'px')
   }
   
   
@@ -151,7 +151,7 @@ nudgepad.StretchHandle.slide = function () {
 /**
  * Hide all other handles on this scrap on slidestart.
  */
-nudgepad.StretchHandle.slidestart = function (event) {
+Design.StretchHandle.slidestart = function (event) {
   var owner = $(this).owner()
   var scrap = owner.scrap()
   $('.' + scrap.id + '_handle').not('.stretch_handle_' + scrap.id).hide()
@@ -167,7 +167,7 @@ nudgepad.StretchHandle.slidestart = function (event) {
 }
 
 
-nudgepad.StretchHandle.dblclick = function () {
+Design.StretchHandle.dblclick = function () {
   
   var owner = $(this).owner(),
       row = $(this).data().row,
@@ -194,7 +194,7 @@ nudgepad.StretchHandle.dblclick = function () {
 /**
  * Show all handles that were hidden. Update the grid and commit the change.
  */
-nudgepad.StretchHandle.slideend = function () {
+Design.StretchHandle.slideend = function () {
   var element = $(this).owner()
   var scrap = element.scrap()
   $('.' + scrap.id + '_handle').trigger('update').show()
@@ -214,7 +214,7 @@ nudgepad.StretchHandle.slideend = function () {
  * @param {string} Whether this is a vertical or horizontal change.
  * @returns {object} Such as length.x, length.y
  */
-nudgepad.StretchHandle.getLength = function (x0, y0, x1, y1, x_snap, y_snap) {
+Design.StretchHandle.getLength = function (x0, y0, x1, y1, x_snap, y_snap) {
   var length = { x : x1 - x0, y: y1 - y0}
   
   var grid_change = Design.grid.getDelta([
@@ -231,14 +231,14 @@ nudgepad.StretchHandle.getLength = function (x0, y0, x1, y1, x_snap, y_snap) {
 /**
  * Don't propagate tap events on these sliders.
  */
-nudgepad.StretchHandle.tap = function () {
+Design.StretchHandle.tap = function () {
   return false
 }
 
 /**
  * Reposition the sliders.
  */
-nudgepad.StretchHandle.update = function () {
+Design.StretchHandle.update = function () {
   var element = $(this).owner()
   var left,
       _top,

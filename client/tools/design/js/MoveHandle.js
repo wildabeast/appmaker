@@ -1,10 +1,10 @@
 /**
  * MoveHandle changes the (x, y) coordinates of selected Scraps 
  */
-nudgepad.MoveHandle = function () {
+Design.MoveHandle = function () {
 }
 
-nudgepad.MoveHandle.create = function (scrap) {
+Design.MoveHandle.create = function (scrap) {
   
   var element = scrap.element()
   
@@ -17,10 +17,10 @@ nudgepad.MoveHandle.create = function (scrap) {
   
   var position = element.css('position')
   if (position === 'fixed' || position === 'absolute') {
-    div.on("mousedown", nudgepad.MoveHandle.mousedown)
-    div.on("slide", nudgepad.MoveHandle.slide)
-    div.on("slidestart", nudgepad.MoveHandle.slidestart)
-    div.on("slideend", nudgepad.MoveHandle.slideend)
+    div.on("mousedown", Design.MoveHandle.mousedown)
+    div.on("slide", Design.MoveHandle.slide)
+    div.on("slidestart", Design.MoveHandle.slidestart)
+    div.on("slideend", Design.MoveHandle.slideend)
     div.css('cursor', 'move')
   }
   div.css({
@@ -28,8 +28,8 @@ nudgepad.MoveHandle.create = function (scrap) {
     "z-index" : "50"
   })
   element.parent().append(div)
-  div.on("tap", nudgepad.MoveHandle.tap)
-  div.on("update", nudgepad.MoveHandle.update)
+  div.on("tap", Design.MoveHandle.tap)
+  div.on("update", Design.MoveHandle.update)
   div.on("dblclick", function (event) {
     if (event.metaKey) {
       element.togglePosition()
@@ -43,17 +43,17 @@ nudgepad.MoveHandle.create = function (scrap) {
 }
 
 // We cache the start dimensions
-nudgepad.MoveHandle.dimensions = {}
+Design.MoveHandle.dimensions = {}
 
 //If small block is on top of (higher z-index) a bigger block, selects small block
-nudgepad.MoveHandle.mousedown = function () {
-//  nudgepad.MoveHandle.selectTopScrap()
-  nudgepad.MoveHandle.dimensions = $(this).owner().dimensions()
+Design.MoveHandle.mousedown = function () {
+//  Design.MoveHandle.selectTopScrap()
+  Design.MoveHandle.dimensions = $(this).owner().dimensions()
   Design.grid.create()
-  nudgepad.MoveHandle.last_x_change = 0
-  nudgepad.MoveHandle.last_y_change = 0
+  Design.MoveHandle.last_x_change = 0
+  Design.MoveHandle.last_y_change = 0
   
-  nudgepad.MoveHandle.scrollTop = Design.stage.scrollTop()
+  Design.MoveHandle.scrollTop = Design.stage.scrollTop()
   return true
 }
 
@@ -62,7 +62,7 @@ nudgepad.MoveHandle.mousedown = function () {
  *
  * @param true. Allow propogation
  */
-nudgepad.MoveHandle.selectTopScrap = function () {
+Design.MoveHandle.selectTopScrap = function () {
 
   // get element at point
   var offsetLeft = $('#DesignStageBody').offset().left
@@ -86,13 +86,13 @@ nudgepad.MoveHandle.selectTopScrap = function () {
 /**
  * Changes top and/or left and/or bottom and/or right and/or margin
  */
-nudgepad.MoveHandle.slide = function (event, mouseEvent) {
+Design.MoveHandle.slide = function (event, mouseEvent) {
 
   var owner = $(this).owner()
   var scrap = owner.scrap()
-  var dimensions = nudgepad.MoveHandle.dimensions
+  var dimensions = Design.MoveHandle.dimensions
   
-  var scrollChange = Design.stage.scrollTop() - nudgepad.MoveHandle.scrollTop
+  var scrollChange = Design.stage.scrollTop() - Design.MoveHandle.scrollTop
 
   var grid_change = {y : 0, x : 0}
 
@@ -108,7 +108,7 @@ nudgepad.MoveHandle.slide = function (event, mouseEvent) {
   
 
   $('.selection').each(function (){
-    $(this).scrap().move(x_change - nudgepad.MoveHandle.last_x_change, y_change - nudgepad.MoveHandle.last_y_change)
+    $(this).scrap().move(x_change - Design.MoveHandle.last_x_change, y_change - Design.MoveHandle.last_y_change)
   })
   
   var position = 'X ' + parseFloat(owner.css('left')) + '<br>Y ' + parseFloat(owner.css('top'))
@@ -117,14 +117,14 @@ nudgepad.MoveHandle.slide = function (event, mouseEvent) {
     top : -10 + owner.offset().top + Math.round(owner.outerHeight(true)/2)
     }).html(position)
   
-  nudgepad.MoveHandle.last_x_change = x_change
-  nudgepad.MoveHandle.last_y_change = y_change
+  Design.MoveHandle.last_x_change = x_change
+  Design.MoveHandle.last_y_change = y_change
   
   return false
   
 }
 
-nudgepad.MoveHandle.slideend = function () {
+Design.MoveHandle.slideend = function () {
   
   $('.handle').trigger('update').show()
   Design.grid.removeSnaplines()
@@ -132,7 +132,7 @@ nudgepad.MoveHandle.slideend = function () {
   Design.stage.commit()
 }
 
-nudgepad.MoveHandle.slidestart = function () {
+Design.MoveHandle.slidestart = function () {
   
   $('.handle').not(this).hide()
   var owner = $(this).owner()
@@ -145,14 +145,14 @@ nudgepad.MoveHandle.slidestart = function () {
 }
 
 // Dont propogate tap events
-nudgepad.MoveHandle.tap = function () {
+Design.MoveHandle.tap = function () {
   // If shift key is down, remove from selection
   if (Mouse.down && Mouse.down.shiftKey)
     $(this).owner().deselect()
   return false
 }
 
-nudgepad.MoveHandle.update = function () {
+Design.MoveHandle.update = function () {
   var owner = $(this).owner()
   if (!owner.position())
     debugger

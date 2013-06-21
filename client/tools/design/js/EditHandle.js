@@ -1,9 +1,6 @@
-/**
- */
-function EditHandle() {  
-}
+Design.EditHandle = {}
 
-EditHandle.create = function (scrap) {
+Design.EditHandle.create = function (scrap) {
   var element = scrap.element()
   var div = $('<div class="DesignEditHandle"></div>')
   div.attr('value', scrap.getPath())
@@ -18,11 +15,11 @@ EditHandle.create = function (scrap) {
   div.append(edit)
   
   element.parent().append(div)
-  div.on("update", EditHandle.update)
+  div.on("update", Design.EditHandle.update)
   div.trigger("update")
 }
 
-EditHandle.update = function () {
+Design.EditHandle.update = function () {
   var owner = $(this).owner()
   $(this).css({
   "left" : owner.position().left + 2 + "px",

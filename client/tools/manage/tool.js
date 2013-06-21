@@ -2,9 +2,9 @@ var Manage = new Tool('Manage')
 Manage.color = 'rgba(171, 193, 199, 1)'
 Manage.description = 'Update your email address and logout.'
 
-Manage.onopen = function () {
+Manage.on('open', function () {
   $('#ManageEmail').val(Cookie.email)
-}
+})
 
 Manage.save = function () {
   var email = $('#ManageEmail').val()

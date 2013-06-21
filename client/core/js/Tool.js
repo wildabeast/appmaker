@@ -36,8 +36,7 @@ Tool.prototype.close = function (name) {
 
   Events.shortcut.shortcuts = {}
   
-  if (this.onclose)
-    this.onclose()
+  this.trigger('close')
 
   this._open = false
   Tool.openTool = false
@@ -66,8 +65,7 @@ Tool.prototype.open = function () {
     return Tool.openTool.close(this.name)
   
   // On open event
-  if (this.onopen)
-    this.onopen()
+  this.trigger('open')
   
   $('.Tool#' + this.name).show()
   
@@ -100,8 +98,7 @@ Tool.prototype.open = function () {
   
 
   // On ready event
-  if (this.onready)
-    this.onready()
+  this.trigger('ready')
 
   mixpanel.track('I opened the ' + this.name + ' tool')
 

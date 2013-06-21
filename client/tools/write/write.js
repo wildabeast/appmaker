@@ -102,7 +102,7 @@ Write.initialize = function () {
 
 Write.activePost = null
 
-Write.onopen = function () {
+Write.on('open', function () {
   Write.initialize()
   $('#WritePosts').html('')
   if (!Project.get('posts'))
@@ -123,7 +123,7 @@ Write.onopen = function () {
     $('#WritePosts').append(div)
   })
   
-}
+})
 
 Write.onready = function () {
   

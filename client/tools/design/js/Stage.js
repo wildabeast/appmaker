@@ -6,6 +6,7 @@
  */
 Design.stage.version = 0 // how many steps in we are
 Design.stage.percentElapsed = 100
+Design.stage.currentView = 'ipad'
 
 /**
  * Open the previous page
@@ -129,10 +130,6 @@ Design.stage.expand = function () {
   })
 
 }
-// We should bind this method to any event that could potentially
-// change the bottom edge of the page on the stage
-nudgepad.on('commit', Design.stage.expand)
-Design.on('ready', Design.stage.expand)
 
 /**
  * Open the next page
@@ -425,7 +422,7 @@ Design.stage.setTimeline = function (name) {
   
 }
 
-var stageViews = new Space({
+Design.stage.views = new Space({
   'full' : function () {
     $('#DesignStage').css({
       width : '100%',
@@ -457,12 +454,10 @@ var stageViews = new Space({
   }
 })
 
-Design.stage.currentView = 'ipad'
-
 Design.stage.toggleView = function () {
   
-  Design.stage.currentView = stageViews.next(Design.stage.currentView)
-  stageViews.get(Design.stage.currentView)()
+  Design.stage.currentView = Design.stage.views.next(Design.stage.currentView)
+  Design.stage.views.get(Design.stage.currentView)()
   $('#DesignStageBody').width()
   Flasher.success(Design.stage.currentView + ' view')
 }
@@ -478,35 +473,34 @@ Design.stage.updateTimeline = function () {
   $('#DesignTimelinePosition').text(Design.stage.version + '/' + Design.stage.timeline.keys.length)
 }
 
-nudgepad.on('main', function () {
-  
-  stageViews.get('ipad')()
+Design.stage.clearOnTap = function (event) {
+  Design.stage.selection.clear()
+  return true
+}
+
+Design.stage.onresize = function (event) {
+  Design.stage.views.get(Design.stage.currentView)()
   $('#DesignStageBody').width()
-  
-  
-  
-  
-  /*
-  $("#DesignStage").on('rendered', function (event, id) {
-    if (Design.page[id].locked)
-      $('.scrap#' + id).addClass('lockedScrap')
-  })
-  */
+  if ($('#DesignRibbon:visible').length)
+    $('#DesignStage').height($(window).height() - 122)
+  else 
+    $('#DesignStage').height($(window).height() - 40)
+}
 
-  $("#DesignStage").on("tap", function (event) {
-    Design.stage.selection.clear()
-    return true
-  })
 
-  $(window).on('resize', function () {
-    stageViews.get(Design.stage.currentView)()
-    $('#DesignStageBody').width()
-    if ($('#DesignRibbon:visible').length)
-      $('#DesignStage').height($(window).height() - 122)
-    else 
-      $('#DesignStage').height($(window).height() - 40)
-  })
+Design.on('close', function () {
+  $("#DesignStage").off("tap", Design.stage.clearOnTap)
+  $(window).off('resize', Design.stage.onresize)
+  nudgepad.off('commit', Design.stage.expand)
+})
 
+Design.on('ready', function () {
+  nudgepad.on('commit', Design.stage.expand)
+  Design.stage.expand()
+  Design.stage.views.get('ipad')()
+  $('#DesignStageBody').width() // Force repaint
+  $("#DesignStage").on("tap", Design.stage.clearOnTap)
+  $(window).on('resize', Design.stage.onresize)
   Design.stage.reset()
 
 })
