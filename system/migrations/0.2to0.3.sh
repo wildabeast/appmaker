@@ -12,7 +12,8 @@ do
 done
 sudo chown $USER:projects /nudgepad/projects
 sudo chown $USER:projects /nudgepad/running
+sudo chown $USER:projects /nudgepad/ports
+sudo chown $USER:projects /nudgepad/
 chmod 730 /nudgepad/running
 chmod 710 /nudgepad/projects
-# This is not really working for some reason.
-# could be that dumb nix group thing
+
