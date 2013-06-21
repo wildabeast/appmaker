@@ -122,7 +122,7 @@ app.post('/create', app.checkId, app.validateDomain, app.isDomainAvailable, func
         if (req.body.ajax)
           res.send(stdout)
         else
-          res.redirect(stdout + '&newSite=true&timestamp=' + timestamp)
+          res.redirect(stdout + '&newProject=true&timestamp=' + timestamp)
       })
       
     })
@@ -137,7 +137,7 @@ app.post('/create', app.checkId, app.validateDomain, app.isDomainAvailable, func
       if (req.body.ajax)
         res.send(stdout)
       else
-        res.redirect(stdout + '&newSite=true&timestamp=' + timestamp)
+        res.redirect(stdout + '&newProject=true&timestamp=' + timestamp)
     })
   }
   

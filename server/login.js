@@ -25,8 +25,8 @@ var Login = function (app) {
       var appString = '?login=true'
       if (req.query.tool)
         appString += '&tool=' + req.query.tool
-      if (req.query.newSite)
-        appString += '&newSite=' + req.query.newSite
+      if (req.query.newProject)
+        appString += '&newProject=' + req.query.newProject
       if (req.query.timestamp)
         appString += '&timestamp=' + req.query.timestamp
 
