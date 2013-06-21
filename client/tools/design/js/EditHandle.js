@@ -1,3 +1,4 @@
+
 Design.EditHandle = {}
 
 Design.EditHandle.create = function (scrap) {
