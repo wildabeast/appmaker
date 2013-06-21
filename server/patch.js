@@ -22,7 +22,7 @@ var Patch = function (app) {
   // Patch
   app.post(/^\/nudgepad\.project\.patch$/, app.checkId, parseSpace, function(req, res, next) {
     
-    nudgepad.patchSite(req.space, req.email)
+    nudgepad.patchProject(req.space, req.email)
     nudgepad.emit('patch', req.space)
     
     if (req.body.redirect)

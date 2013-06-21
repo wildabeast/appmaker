@@ -70,7 +70,7 @@ app.nudgepad.default_types = ['pages', 'posts', 'workers', 'timelines']
 process.title = app.nudgepad.domain
 
 if (!fs.existsSync(projectsPath + app.nudgepad.domain + '/')) {
-  console.log('Site does not exist...')
+  console.log('Project does not exist...')
   process.exit()
 }
 
@@ -122,7 +122,7 @@ app.nudgepad.loadFolder = function (folder) {
 /**
  * Load all Spaces into memory.
  */
-app.nudgepad.loadSite = function () {
+app.nudgepad.loadProject = function () {
   
   // Load settings
   app.nudgepad.project.set('settings', new Space())
@@ -177,7 +177,7 @@ app.nudgepad.emit = function (event, string, socket) {
     io.sockets.emit(event, string.toString())
 }
 
-app.nudgepad.loadSite()
+app.nudgepad.loadProject()
 speedcoach('spaces loaded into memory')
 
 
@@ -225,7 +225,7 @@ app.nudgepad.patchFile = function (path, patch, email) {
   
 }
 
-app.nudgepad.patchSite = function (patch, email) {
+app.nudgepad.patchProject = function (patch, email) {
   
   console.log('receiving patch')
   
@@ -591,7 +591,7 @@ io.sockets.on('connection', function (socket) {
   
   socket.on('patch', function (space, fn) {
     var patch = new Space(space)
-    app.nudgepad.patchSite(patch, socket.handshake.cookie.email)
+    app.nudgepad.patchProject(patch, socket.handshake.cookie.email)
     
     fn('patch received')
     

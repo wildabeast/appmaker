@@ -1,7 +1,7 @@
 var Space = require('space'),
     os = require("os")
 
-var Site = function (app) {
+var ProjectRoute = function (app) {
   
   var nudgepad = app.nudgepad
   
@@ -53,4 +53,4 @@ var Site = function (app) {
   
 }
 
-module.exports = Site
+module.exports = ProjectRoute
