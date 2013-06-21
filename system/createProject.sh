@@ -5,14 +5,6 @@ createProjectNix ()
   domain=$1
   ownerEmail=$2
   cloneFile=$3
-  PW=`echo $RANDOM$RANDOM`
-  speedcoach "password generated"
-  sudo useradd -m -p "$PW" -G projects $domain
-  speedcoach "$domain user created"
-  # sudo usermod -a -G projects $domain
-  # speedcoach "$domain user added to projects group"
-  sudo usermod -a -G $domain $USER
-  speedcoach "$USER user added to $domain group"
   
   if [ -n "$cloneFile" ]
     then
@@ -28,8 +20,11 @@ createProjectNix ()
       speedcoach "$domain created from blank template"
   fi
   createOwnerFile $domain $ownerEmail
-  speedcoach "$domain owner file for $ownerEmail created"
   chmod -R 770 $projectsPath/$domain/
+  
+  PW=`echo $RANDOM$RANDOM`
+  sudo useradd -m -p "$PW" -G projects $domain
+  sudo usermod -a -G $domain $USER
   sudo chown -R $domain:$domain $projectsPath/$domain
   speedcoach "$domain project dir chowned"
   
