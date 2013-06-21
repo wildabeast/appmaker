@@ -29,10 +29,9 @@ createProjectNix ()
   fi
   createOwnerFile $domain $ownerEmail
   speedcoach "$domain owner file for $ownerEmail created"
+  chmod -R 770 $projectsPath/$domain/
   sudo chown -R $domain:$domain $projectsPath/$domain
   speedcoach "$domain project dir chowned"
-  sudo -u $domain chmod -R 770 $projectsPath/$domain/
-  speedcoach "$domain project dir chmodded"
   
 #  cd $projectsPath/$domain/
 #  sudo -u $domain git init >/dev/null
