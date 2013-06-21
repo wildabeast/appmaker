@@ -44,6 +44,7 @@
   color : #3D86D1;
   width : 1px;
   text-overflow : ellipsis;
+  white-space: nowrap;
 }
 
 #WriteContent {
