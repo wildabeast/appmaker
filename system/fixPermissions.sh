@@ -14,10 +14,10 @@ fixPermissions ()
     then
       echo Nothing to do on Mac
     else
-      sudo chown $USER:sites $dataPath
-      sudo chown $USER:sites $activePath
-      sudo chown $USER:sites $portsPath
-      sudo chown $USER:sites $projectsPath
+      sudo chown $USER:projects $dataPath
+      sudo chown $USER:projects $activePath
+      sudo chown $USER:projects $portsPath
+      sudo chown $USER:projects $projectsPath
   fi  
 }
 

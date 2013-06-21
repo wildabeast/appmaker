@@ -1,3 +1,3 @@
-# Create sites group
-sudo groupadd sites
-sudo usermod -a -G sites ubuntu
+# Create projects group
+sudo groupadd projects
+sudo usermod -a -G projects ubuntu

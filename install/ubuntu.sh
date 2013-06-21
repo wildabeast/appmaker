@@ -19,9 +19,9 @@ git clone https://github.com/visionmedia/mon.git
 cd mon
 sudo make install
 
-# Create sites group
-sudo groupadd sites
-sudo usermod -a -G sites ubuntu
+# Create projects group
+sudo groupadd projects
+sudo usermod -a -G projects ubuntu
 
 # Update system hostname
 echo Enter a hostname for this machine:

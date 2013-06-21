@@ -9,8 +9,8 @@ createProjectNix ()
   speedcoach "password generated"
   sudo useradd -m -p "$PW" $domain
   speedcoach "user created"
-  sudo usermod -a -G sites $domain
-  speedcoach "user added to sites group"
+  sudo usermod -a -G projects $domain
+  speedcoach "user added to projects group"
   sudo usermod -a -G $domain $USER
   speedcoach "$USER added to $domain group"
   

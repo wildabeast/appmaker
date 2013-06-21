@@ -49,7 +49,7 @@ designers work together to build better tools for the community.
 Creating a Tool
 ---------------
 
-To go from "Idea" to "wow my tool is in all NudgePad sites", the workflow looks like this:
+To go from "Idea" to "wow my tool is available to all NudgePad Projects", the workflow looks like this:
 
 1. Fork NudgePad & clone to localhost
 2. Create the folder and required files for your tool
@@ -140,7 +140,7 @@ tool.space name Draw
  css tool.css
 ```
 
-Once your tool is created, visit http://localhost and create a new site
+Once your tool is created, visit http://localhost and create a new project
 to see it in action.
 
 The Launch tool should allow you to launch your tool.
@@ -357,7 +357,7 @@ http://domain/nudgepad.logs
 ```
 
 ```
-// Restart the site
+// Restart the project
 http://domain/nudgepad.restart
 ```
 
@@ -382,7 +382,7 @@ project. A project is always just a single folder on the computer. There is no
 database used, everything is stored on disk. Each project can have unlimited users,
 and each user record is simple a file in the workers/ folder.
 
-Projects can be tiny or huge. All projects are stored in /nudgepad/sites/.
+Projects can be tiny or huge. All projects are stored in /nudgepad/projects/.
 Each Project has a name, which is also the domain name and folder name for the project.
 Each project is a website, and a node.js Express app as well. Projects can
 evolve into anything.
@@ -407,7 +407,7 @@ server
 Each NudgePad Project is a website--specifically an Express app running as its own process.
 
 The API here is still being simplified a bit, but the basic pattern is to create a module that
-extends the user's site like this:
+extends the user's project like this:
 
     function MyModuleName (app) {
       app.get('/helloWorld', function (req, res, next) {
@@ -417,7 +417,7 @@ extends the user's site like this:
     module.exports = MyModuleName
 
 Any file in a Project's packages folder is expected to follow that convention and will
-be included when the site starts like this:
+be included when the project starts like this:
 
     require('./mymodulename.js')(app)
 
@@ -425,7 +425,7 @@ system
 ------
 
 The code in system is responsible for creating new projects on the machine, load
-balancing, proxying requests to sites, and offering tools to sysadmins for
+balancing, proxying requests to projects, and offering tools to sysadmins for
 managing a NudgePad server.
 
 It's currently written mostly in BASH, but node scripts are welcome as well.
@@ -433,7 +433,7 @@ It's currently written mostly in BASH, but node scripts are welcome as well.
 A fully running NudgePad server consists of:
 
 - A control panel Express app running on port 3000
-- user sites which run on ports 3001 - 8000
+- user projects which run on ports 3001 - 8000
 - An http-proxy app which sits in front of all of those on port 80.
 
 Those ports are also configurable.
@@ -445,7 +445,7 @@ All user data is stored in /nudgepad/
 
 NudgePad does not use a database. Our thoughts are a database is premature optimization for
 almost all projects. There are orders of magnitude more tools and ways to work with files
-in the file system than on databases. This design decision makes it easy for sites to be
+in the file system than on databases. This design decision makes it easy for projects to be
 a git repo, to be moved from one server to another, to be modified not only by NudgePad
 but by other tools, etc.
 
@@ -454,24 +454,24 @@ believe it greatly simplifies sysadmin and debugging.
 
 The folders in /nudgepad are:
 
-- /nudgepad/active Contains simple text files where filename is the domain and content is the port. As sites start and stop, files are created and removed.
-- /nudgepad/backup Contains a backup copy of /nudgepad/sites that eschews some operational data for faster backups.
-- /nudgepad/logs Contains log files for the panel server and proxy server (not individual sites!).
+- /nudgepad/active Contains simple text files where filename is the domain and content is the port. As projects start and stop, files are created and removed.
+- /nudgepad/backup Contains a backup copy of /nudgepad/projects that eschews some operational data for faster backups.
+- /nudgepad/logs Contains log files for the panel server and proxy server (not individual projects!).
 - /nudgepad/panel Allows you to skin the NudgePad panel look and feel.
-- /nudgepad/ports Contains simple text files where filename is the port and content is the domain. As sites start and stop, files are created and removed.
-- /nudgepad/sites Contains all the data for every site.
+- /nudgepad/ports Contains simple text files where filename is the port and content is the domain. As projects start and stop, files are created and removed.
+- /nudgepad/projects Contains all the data for every project.
 - /nudgepad/temp Contains temp files for panel and proxy.
 
-The data for a site "foo.com" is stored in /nudgepad/sites/foo.com/ and looks like this:
+The data for a project "foo.com" is stored in /nudgepad/projects/foo.com/ and looks like this:
 
 - packages/ Contains Node.js packages to include onstart. Each package extends the app object. So your package should export one function which takes an express app object as a param and extends it.
-- logs/ Contains site log files.
+- logs/ Contains project log files.
 - pages/ Contains the pages that are edited by the Design Tool. Encoded in Space/Scraps
 - posts/ Contains blog posts for blog module. Encoded in Space.
 - public/ Serves any assets. Can add any html/images/css/js etc. Normal public web folder.
-- settings/ Stores site settings. Each setting is either a Space object or a one liner text file. API in flux.
+- settings/ Stores project settings. Each setting is either a Space object or a one liner text file. API in flux.
 - surveys/ Stores form posts encoded in Space.
-- temp/ Stores temporary site data.
+- temp/ Stores temporary project data.
 - timelines/ Stores diffs of pages generated by Design tool. Encoded in Space.
 - workers/ Stores user records. Each user is a file encoded in Space.
 
@@ -486,7 +486,7 @@ Short term NudgePad is targeted at web savvy, early adopters who have a lot
 of project idea and want faster and better ways to make them real. That's
 5% of the creatives.
 
-The things creatives want to make are:
+The projects creatives want to make are:
 - Clickable websites 20%
 - Single page sites 20%
 - Mobile apps 20%

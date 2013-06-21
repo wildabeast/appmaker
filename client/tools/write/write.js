@@ -93,7 +93,7 @@ Write.editPost = function (name) {
   
 }
 
-// Ensures site has a blog theme before posting
+// Ensures project has a blog theme before posting
 Write.initialize = function () {
   if (Project.get('pages blog'))
     return true

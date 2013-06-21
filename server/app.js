@@ -51,7 +51,7 @@ if (!String.prototype.format) {
 /*** PATHS ****/
 
 var dataPath = '/nudgepad/'
-var projectsPath = dataPath + 'sites/'
+var projectsPath = dataPath + 'projects/'
 var clientPath = __dirname + '/../client/'
 var activePath = dataPath + 'active/'
 var portsPath = dataPath + 'ports/'

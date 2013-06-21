@@ -1,8 +1,8 @@
 #!/bin/bash
-projects="$(ls /nudgepad/sites/)"
+projects="$(ls /nudgepad/projects/)"
 for domain in $projects
 do
-  domainPath=/nudgepad/sites/$domain
+  domainPath=/nudgepad/projects/$domain
   pages="$(ls $domainPath/pages/)"
   for page in $pages
   do

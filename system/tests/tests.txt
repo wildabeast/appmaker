@@ -5,8 +5,8 @@
 /nudgepad/active cannot be examined by others
 /nudgepad/ports exists
 /nudgepad/ports cannot be examined by others
-/nudgepad/sites exists
-/nudgepad/sites cannot be examined by others
+/nudgepad/projects exists
+/nudgepad/projects cannot be examined by others
 /nudgepad/temp exists
 /nudgepad/logs exists
 /nudgepad/logs can be read by owner
