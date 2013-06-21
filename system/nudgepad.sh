@@ -89,6 +89,7 @@ case "$1" in
         then
           speedcoach "wait until serving"
           # Get owner link
+          # this takes about 400ms. 
           waitUntilServing $2
           echo $OWNERLINK
           # exit 0
