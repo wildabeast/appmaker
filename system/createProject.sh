@@ -8,11 +8,11 @@ createProjectNix ()
   PW=`echo $RANDOM$RANDOM`
   speedcoach "password generated"
   sudo useradd -m -p "$PW" $domain
-  speedcoach "user created"
+  speedcoach "$domain user created"
   sudo usermod -a -G projects $domain
-  speedcoach "user added to projects group"
+  speedcoach "$domain user added to projects group"
   sudo usermod -a -G $domain $USER
-  speedcoach "$USER added to $domain group"
+  speedcoach "$USER user added to $domain group"
   
   speedcoach "user created"
   
