@@ -5,7 +5,7 @@ if isMac
     _start_time=`date +%s%N | cut -b1-13`
 fi
 markStart="script start"
-_script_start=_start_time
+_script_start=$_start_time
 speedcoach ()
 {
   if isMac
