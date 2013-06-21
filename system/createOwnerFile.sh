@@ -10,7 +10,7 @@ createOwnerFile ()
     then
       printf "name $OWNERNAME\nkey $OWNERKEY\nrole owner\n" | tee -a $projectsPath/$domain/workers/$ownerEmail.space >/dev/null
     else
-      printf "name $OWNERNAME\nkey $OWNERKEY\nrole owner\n" | sudo tee -a $projectsPath/$domain/workers/$ownerEmail.space >/dev/null
+      printf "name $OWNERNAME\nkey $OWNERKEY\nrole owner\n" > $projectsPath/$domain/workers/$ownerEmail.space
   fi
   
 }
