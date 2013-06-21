@@ -125,14 +125,14 @@ Write.on('open', function () {
   
 })
 
-Write.onready = function () {
+Write.on('ready', function () {
   
   // Open the last edited post if there is one
   if (Write.activePost)
     Write.editPost(Write.activePost)
   else
     Write.createPost()
-}
+})
 
 /**
  * Make a string URL friendly. Turns "$foo Bar%!@$" into "foo-bar"
