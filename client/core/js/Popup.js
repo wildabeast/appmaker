@@ -7,9 +7,7 @@ Popup.hide = function (event) {
 
   if (event.which !== 1)
     return true
-  console.log('hide')
   $('.nudgepadPopup').hide()
-  console.log(event)
   $('body').off('mouseup touchend', Popup.hide)
   Popup.isOpen = false
   return true
