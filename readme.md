@@ -220,11 +220,11 @@ Draw.restart()
 Your tool can implement a number of standard handlers including:
 
 ```
-Draw.onclose = function () {}
+Draw.on('close', function () {})
 ```
 
 ```
-Draw.onopen = function () {}
+Draw.on('open', function () {})
 ```
 
 Your tool can define and fire its own events like this:
