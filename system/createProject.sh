@@ -97,9 +97,12 @@ createProject ()
       createProjectMac $1 $2 $3
   fi
   
-  speedcoach "before tee"
-  echo "127.0.0.1 $domain" | sudo tee -a /etc/hosts >/dev/null
-  speedcoach "end of tee"
+  # if on localhost, append to the hosts file to add the domain
+  if isMac
+    then
+      echo "127.0.0.1 $domain" | sudo tee -a /etc/hosts >/dev/null
+  fi
+
   return 0
 }
 
