@@ -6,9 +6,13 @@ createProjectUbuntu ()
   ownerEmail=$2
   cloneFile=$3
   PW=`echo $RANDOM$RANDOM`
+  speedcoach "password generated"
   sudo useradd -m -p "$PW" $domain
+  speedcoach "user created"
   sudo usermod -a -G sites $domain
+  speedcoach "user added to sites group"
   sudo usermod -a -G $domain ubuntu
+  speedcoach "ubuntu added to $domain group"
   
   speedcoach "user created"
   
@@ -16,6 +20,7 @@ createProjectUbuntu ()
   if [ -n "$cloneFile" ]
     then
       space $cloneFile $projectsPath$domain
+      speedcoach "project created from space"
     else
       # echo NO cloneFile provided. Creating blank project from blank.
       sudo cp -R blank $projectsPath$domain
@@ -24,13 +29,14 @@ createProjectUbuntu ()
       sudo -u $domain mkdir $projectsPath$domain/workers
       sudo -u $domain mkdir $projectsPath$domain/logs
       sudo -u $domain mkdir $projectsPath$domain/temp
+      speedcoach "project created from blank"
   fi
-  speedcoach "before createOwnerFile"
   createOwnerFile $domain $ownerEmail
+  speedcoach "owner file created"
   sudo chown -R $domain:$domain $projectsPath$domain
+  speedcoach "project dir chowned"
   sudo -u $domain chmod -R 770 $projectsPath$domain/
-  
-  speedcoach "end of createProjectUbuntu"
+  speedcoach "project dir chmodded"
   
 #  cd $projectsPath$domain/
 #  sudo -u $domain git init >/dev/null
@@ -88,6 +94,7 @@ createProject ()
       echo $domain already exists
       return 1
   fi
+  # this isnt really ubuntu, but maybe someday someone can improve all this!
   if isUbuntu
     then
       createProjectUbuntu $1 $2 $3
