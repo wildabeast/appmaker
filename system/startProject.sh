@@ -33,7 +33,7 @@ startProject () {
       mon -d -l $projectsPath/$domain/logs/mon.txt -p $projectsPath/$domain/temp/projectPid -m $projectsPath/$domain/temp/monPid "node app.js $domain $PORT"
     else
       # todo: fix this so mon isnt launching 2 processes.
-      sudo -u $domain touch $projectsPath/$domain/logs/mon.txt
+#      sudo -u $domain touch $projectsPath/$domain/logs/mon.txt
       sudo -u $domain mon -d -l $projectsPath/$domain/logs/mon.txt -p $projectsPath/$domain/temp/projectPid -m $projectsPath/$domain/temp/monPid "node app.js $domain $PORT"
   fi
   return 0

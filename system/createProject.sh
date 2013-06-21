@@ -15,6 +15,7 @@ createProjectNix ()
       mkdir $projectsPath/$domain/settings
       mkdir $projectsPath/$domain/workers
       mkdir $projectsPath/$domain/logs
+      touch $projectsPath/$domain/logs/mon.txt
       mkdir $projectsPath/$domain/temp
       
   fi
