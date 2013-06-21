@@ -11,7 +11,7 @@ EditHandle.create = function (scrap) {
   
   var edit = $('<div class="DesignEditStyleHandle"></div>')
   edit.on('tap', function () {
-    nudgepad.styleEditor(scrap)
+    Design.styleEditor.edit(scrap)
     div.remove()
     return false
   })

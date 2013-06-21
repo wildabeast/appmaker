@@ -1,20 +1,18 @@
-nudgepad.livePreviewScrap = false
-nudgepad.livePreviewTimeout = false
-nudgepad.livePreviewStart = function () {
-  clearTimeout(nudgepad.livePreviewTimeout)
-  nudgepad.livePreviewTimeout = setTimeout('nudgepad.livePreview()', 500)
+Design.styleEditor = {}
+Design.styleEditor.livePreviewScrap = false
+Design.styleEditor.livePreviewTimeout = false
+Design.styleEditor.livePreviewStart = function () {
+  clearTimeout(Design.styleEditor.livePreviewTimeout)
+  Design.styleEditor.livePreviewTimeout = setTimeout('Design.styleEditor.livePreview()', 500)
 }
-nudgepad.livePreview = function () {
+Design.styleEditor.livePreview = function () {
   var text_area = $('#DesignStyleEditorCssEditor')
-  var scrap = nudgepad.livePreviewScrap
+  var scrap = Design.styleEditor.livePreviewScrap
   scrap.set('style', new Space(text_area.val()))
   scrap.element().attr('style', '').css(scrap.get('style').values)
 }
 
-/**
- * Prompt the worker for input. Pops a modal.
- */
-nudgepad.styleEditor = function (scrap) {
+Design.styleEditor.edit = function (scrap) {
   
   $('.handle').remove()
   
@@ -674,8 +672,8 @@ nudgepad.styleEditor = function (scrap) {
   text_area.on('tap mousedown click slide slidestart slideend mouseup', function (event) {
     event.stopPropagation()
   })
-  nudgepad.livePreviewScrap = scrap
-  text_area.on('keyup', nudgepad.livePreviewStart)
+  Design.styleEditor.livePreviewScrap = scrap
+  text_area.on('keyup', Design.styleEditor.livePreviewStart)
   
   styleEditor.append(text_area)
   
