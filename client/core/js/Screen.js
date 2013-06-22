@@ -3,7 +3,7 @@ Screen.set('device', platform.name + (platform.product ? '/' + platform.product 
 Screen.set('email', Cookie.email)
 Screen.set('name', ParseName(Cookie.email))
 
-nudgepad.setScreenColor = function () {
+Screen.setColor = function () {
   if (Screen.get('color'))
     return true
   var colors = ['red', 'green', 'violet', 'yellow', 'blue', 'orange', 'indigo']
@@ -17,6 +17,7 @@ nudgepad.setScreenColor = function () {
     freeColors.push('black')
   Screen.set('color', freeColors[0])
 }
+//   Screen.setColor()
 
 Screen.on('change', function () {
   nudgepad.emit('room.change', this)

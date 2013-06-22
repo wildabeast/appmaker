@@ -431,7 +431,6 @@ Design.stage.selection.toSpace = function () {
 }
 
 Design.broadcastSelection = function (extra) {
-  nudgepad.setScreenColor()
   var selection = extra || ''
   var first = ''
   $('.selection').each(function () {
@@ -440,10 +439,8 @@ Design.broadcastSelection = function (extra) {
       first = ','
     }
   })
-
   selection += '{box-shadow: 0 0 4px ' + Screen.get('color') + ';cursor: not-allowed;}'
   Screen.patch('selection ' + selection)
-  
 }
 
 Design.updateSelections = function () {

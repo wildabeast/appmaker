@@ -42,17 +42,17 @@ nudgepad.main = function () {
 
 }
 
-nudgepad.beforeUnload = function(e) {
-  if (nudgepad.warnBeforeReload)
-    return nudgepad.reloadMessage()
-}
-
 nudgepad.askToRegister = function () {
   // Ask them to register the project if they haven't
   // We assume owner@projectname is the default name for now.
   // In the future we'll want to update that
   if (Cookie.email === ('owner@' + document.location.host))
     RegisterForm.open()
+}
+
+nudgepad.beforeUnload = function(e) {
+  if (nudgepad.warnBeforeReload)
+    return nudgepad.reloadMessage()
 }
 
 nudgepad.benchmarkCreationTime = function () {
