@@ -53,7 +53,7 @@ Design.stage.commit = function () {
   
   Design.stage.updateTimeline()
   
-  nudgepad.trigger('selection')
+  Design.trigger('selection')
   Design.trigger('commit')
   
   Project.set('pages ' + Design.stage.activePage, new Space(Design.page.toString()))
@@ -312,7 +312,7 @@ Design.stage.open = function (name) {
   Design.stage.render()
   Design.stage.updateTimeline()
   
-  nudgepad.trigger('selection')
+  Design.trigger('selection')
   Design.trigger('ready')
   return ''
   

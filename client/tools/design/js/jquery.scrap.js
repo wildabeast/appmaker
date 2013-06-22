@@ -2,7 +2,7 @@ $.fn.deselect = function () {
   var id = $(this).attr('id')
   $(this).removeClass('selection')
   $('.' + id + '_handle').remove()
-  nudgepad.trigger('selection')
+  Design.trigger('selection')
   return $(this)
 }
 
@@ -57,7 +57,7 @@ $.fn.selectMe = function () {
 
   Design.MoveHandle.create(scrap)
   
-  nudgepad.trigger('selection')
+  Design.trigger('selection')
 
   Design.EditHandle.create(scrap)
   

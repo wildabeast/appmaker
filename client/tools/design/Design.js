@@ -58,7 +58,7 @@ Design.clearTimeline = function () {
 
   Design.stage.version = Design.stage.timeline.keys.length
   nudgepad.emit('patch', patch.toString())
-  nudgepad.trigger('selection')
+  Design.trigger('selection')
   return true
 }
 
