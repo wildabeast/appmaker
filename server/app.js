@@ -106,13 +106,13 @@ app.Project.loadFolder = function (folder) {
   // Create a Space for every folder
   app.Project.set(folder, new Space())
   // Grab all spaces in a folder
-  var files = fs.readdirSync(app.app.paths.project + folder)
+  var files = fs.readdirSync(app.paths.project + folder)
   for (var j in files) {
     // Dont read non space files
     if (!files[j].match(/\.space/))
       continue
     // Load every file into memory
-    var filePath = app.app.paths.project + folder + '/' + files[j]
+    var filePath = app.paths.project + folder + '/' + files[j]
     app.Project.set(folder + ' ' + files[j].replace(/\.space$/,''), new File(filePath).loadSync())
   }
 }
@@ -124,17 +124,17 @@ app.Project.loadFromDisk = function () {
   
   // Load settings
   app.Project.set('settings', new Space())
-  var files = fs.readdirSync(app.app.paths.settings)
+  var files = fs.readdirSync(app.paths.settings)
   for (var j in files) {
     // Space files
     if (files[j].match(/\.space/)) {
       var filename = files[j].replace(/\.space$/, '')
-      app.Project.set('settings ' + filename, new Space(fs.readFileSync(app.app.paths.settings + files[j], 'utf8')))
+      app.Project.set('settings ' + filename, new Space(fs.readFileSync(app.paths.settings + files[j], 'utf8')))
     }
     // Text files
     else if (files[j].match(/\.txt/)) {
       var filename = files[j].replace(/\.txt$/, '')
-      app.Project.set('settings ' + filename, fs.readFileSync(app.app.paths.settings + files[j], 'utf8'))
+      app.Project.set('settings ' + filename, fs.readFileSync(app.paths.settings + files[j], 'utf8'))
     }
   }
   
@@ -168,7 +168,7 @@ speedcoach('spaces loaded into memory')
 
 
 app.patchFile = function (path, patch, email) {
-  var filepath = app.app.paths.project + path.replace(/ /g, '/') + '.space'
+  var filepath = app.paths.project + path.replace(/ /g, '/') + '.space'
   var file = app.Project.get(path)
   var patchFile = patch.get(path)
   
@@ -266,7 +266,7 @@ express.logger.token("ip", function(request) {
  
 });
 
-var logFile = fs.createWriteStream(app.app.paths.requests_log, {flags: 'a'})
+var logFile = fs.createWriteStream(app.paths.requests_log, {flags: 'a'})
 app.use(express.logger({
   stream : logFile,
   format : ':ip :url :method :status :response-time :res[content-length] ":date" :remote-addr ":referrer" ":user-agent"'
@@ -279,7 +279,7 @@ app.use('/nudgepad/', express.static(clientPath.replace(/\/$/,''), { maxAge: 315
 
 
 /*********** public ***********/
-app.use('/', express.static(app.app.paths.public, { maxAge: 31557600000 }))
+app.use('/', express.static(app.paths.public, { maxAge: 31557600000 }))
 
 /********** blog *************/
 require('./blog.js')(app)
@@ -392,7 +392,7 @@ app.get(app.pathPrefix + 'started', app.checkId, function (req, res, next) {
 })
 
 require('./console.js')(app)
-fs.watch(app.app.paths.public, function (event, filename) {
+fs.watch(app.paths.public, function (event, filename) {
   
   // Trigger public changed event
   // mac on old node wont emit filename
@@ -404,7 +404,7 @@ fs.watch(app.app.paths.public, function (event, filename) {
 
 /*
 todo: experiment with watching this folder for all updates.
-fs.watch(app.app.paths.project + 'pages/', function (event, filename) {
+fs.watch(app.paths.project + 'pages/', function (event, filename) {
   
   // Trigger public changed event
   app.Project.loadFolder('pages')
@@ -429,9 +429,9 @@ require('./pages.js')(app)
 /*********** Eval any custom code ***********/
 try {
   
-  var files = fs.readdirSync(app.app.paths.packages)
+  var files = fs.readdirSync(app.paths.packages)
   for (var j in files) {
-    require(app.app.paths.packages + files[j])(app)
+    require(app.paths.packages + files[j])(app)
   }
 } catch (e) {
   if (e instanceof SyntaxError) {
