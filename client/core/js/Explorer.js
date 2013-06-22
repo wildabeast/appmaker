@@ -20,19 +20,6 @@ Explorer.downloadTimelines = function () {
   })
 }
 
-/**
- * Sync the clients project with the server.
- *
- * @param {function}
- */
-Explorer.getProject = function (callback) {
-  var activePage = store.get('activePage') || 'home'
-  $.get('/nudgepad.project', { activePage : activePage}, function (space) {
-    Project._patch(new Space(space))
-    callback()
-  })
-}
-
 Explorer.quickEdit = function () {
   Explorer.edit(prompt('Enter path to file you want to edit', 'public/project.css'))
 }

@@ -17,17 +17,14 @@ var Cookie = parseCookie(document.cookie)
 /**
  * Requests the data from the server and loads the editor.
  */
-nudgepad.main = function (callback) {
+nudgepad.main = function () {
   
-  // Fetch all files in the background.
-  Explorer.getProject(function () {
+  var activePage = store.get('activePage') || 'home'
+  $.get('/nudgepad.project', { activePage : activePage}, function (space) {
+    Project._patch(new Space(space))
     
     nudgepad.warnBeforeReload = true
     window.onbeforeunload = nudgepad.beforeUnload
-    
-    // why do we do this?
-    $('body').scrollTop(0)
-    $('body').scrollLeft(0)
 
     Launcher.openToolFromQueryString()
     
@@ -40,11 +37,9 @@ nudgepad.main = function (callback) {
     nudgepad.askToRegister()
     nudgepad.benchmarkCreationTime()
     mixpanel.track('I opened NudgePad')
-      
-    if (callback)
-      callback()
     
   })
+
 }
 
 nudgepad.beforeUnload = function(e) {
