@@ -515,6 +515,16 @@ The features these people need are:
 
 Our goal is to deliver all of this in a product with a simple and cohesive conceptual model.
 
+The features developers need:
+- Develop NudgePad entirely on localhost 100%
+- Fast time to create a new project 100%
+- Easy access to data 100%
+- Easy to setup automatic backups 100%
+- Simple API 90%
+- Great API documentation 90%
+- Simple to install NudgePad on many machines 50%
+- Easy install from git clone 50%
+- Easy install from npm 50%
 
 Team
 ----
