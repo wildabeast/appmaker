@@ -15,14 +15,5 @@ Project.on('set', function (key, value) {
 })
 
 
-nudgepad.on('patch', function (patch) {
-  
-  patch = new Space(patch)
-  Project._patch(patch)
-  Flasher.activity('Change received', 1000)
-})
-
-
-
 
 

@@ -22,8 +22,8 @@ Design.codePanel.livePreview = function () {
 Design.codePanel.close = function () {
   $('#DesignCodePanel').hide()
   $('#DesignStage').css('padding-left', Design.codePanel.currentPadding)
-  nudgepad.off('selection', Design.codePanel.load)
-  nudgepad.off('stage', Design.codePanel.load)
+  Design.off('selection', Design.codePanel.load)
+  Design.off('stage', Design.codePanel.load)
 }
 
 Design.codePanel.isOpen = function () {
@@ -53,8 +53,8 @@ Design.codePanel.open = function () {
   textarea.on('tap mousedown click slide slidestart slideend mouseup', function (event) {
     event.stopPropagation()
   })
-  nudgepad.on('selection', Design.codePanel.load)
-  nudgepad.on('stage', Design.codePanel.load)
+  Design.on('selection', Design.codePanel.load)
+  Design.on('stage', Design.codePanel.load)
 }
 
 Design.codePanel.toggle = function () {

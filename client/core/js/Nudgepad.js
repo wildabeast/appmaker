@@ -11,22 +11,8 @@ var nudgepad = {}
 nudgepad.isTesting = false
 // In case we open multiple tabs
 window.name = 'nudgepad'
-// Nudgepad Events
-nudgepad.events = {
-  'selection' : [],
-  'stage' : [],
-  'commit' : [],
-  'page' : [],
-  'disconnect' : [],
-  'ping' : [],
-  'patch' : [],
-  'ready' : [],
-  'public' : [],
-  'uploadComplete' : []
-}
 var Query = ParseQueryString()
 var Cookie = parseCookie(document.cookie)
-var Socket = null
 
 /**
  * Requests the data from the server and loads the editor.
@@ -44,51 +30,6 @@ nudgepad.main = function (callback) {
   // Fetch all files in the background.
   Explorer.getProject(function () {
     
-    // Open socket
-    Socket = io.connect('/')
-
-    Socket.on('public', function (space) {
-      nudgepad.trigger('public', space)
-    })
-
-    Socket.on('uploadComplete', function (file) {
-      nudgepad.trigger('uploadComplete', file)
-    })
-
-    Socket.on('patch', function (space) {
-      nudgepad.trigger('patch', space)
-    })
-
-    Socket.on('connect_failed', function (error) {
-      console.log('Connect failed')
-      console.log(error)
-      $('#ConnectionStatus').html('Connection to server failed...').show()
-    })
-
-    Socket.on('error', function (error) {
-      console.log(error)
-      $('#ConnectionStatus').html('Connecting to server...').show()
-    })
-
-    Socket.on('disconnect', function (message) {
-      nudgepad.trigger('disconnect', message)
-    })
-    
-    Socket.on('room.change', function (newRoom) {
-      Room._clear()
-      Room.patch(newRoom)
-    })
-
-    Socket.on('ack', function (message) {
-      nudgepad.trigger('ping', message)
-    })
-
-    Socket.on('connect', function (message) {
-      console.log('connected to server: %s', document.location.host)
-      $('#ConnectionStatus').html('Connected!').fadeOut()
-      nudgepad.restartCheck()
-    })
-    
     nudgepad.warnBeforeReload = true
     
     window.onbeforeunload = function(e) {
@@ -96,6 +37,7 @@ nudgepad.main = function (callback) {
         return nudgepad.reloadMessage()
     }
     
+    // why do we do this?
     $('body').scrollTop(0)
     $('body').scrollLeft(0)
 
@@ -146,29 +88,6 @@ nudgepad.emit = function (event, space) {
   })
 }
 
-/**
- * Remove an event listener
- *
- * @param {string} Name of the event.
- * @param {function} fn to unbind
- */
-nudgepad.off = function (eventName, fn) {
-  if (!nudgepad.events[eventName])
-    return true
-  for (var i in nudgepad.events[eventName]) {
-    if (nudgepad.events[eventName][i] === fn)
-      nudgepad.events[eventName].splice(i, 1)
-  }
-}
-
-/**
- * @param {string} Name of the event. Need to make some docs for these
- * @param {function}
- */
-nudgepad.on = function (eventName, fn) {
-  nudgepad.events[eventName].push(fn)
-}
-
 nudgepad.reloadMessageOneTime = ''
 nudgepad.reloadMessage = function () {
   var message
@@ -188,22 +107,6 @@ nudgepad.restartCheck = function () {
   })
 }
 
-/**
- * Fire a Nudgepad event.
- *
- * @param {string} Name of the event.
- * @param {space} Object
- */
-nudgepad.trigger = function (eventName, space) {
-  for (var i in nudgepad.events[eventName]) {
-    nudgepad.events[eventName][i](space)
-  }
-}
-
-nudgepad.on('ping', function (data) {
-  $('#ConnectionStatus').hide()
-})
-
 window.onerror = function(message, url, lineNumber) {
   mixpanel.track('I got a javascript error')
   $('.nudgepad#JavascriptError').prepend('<div>Javascript Error: '+message+'</div>').show()
@@ -211,8 +114,5 @@ window.onerror = function(message, url, lineNumber) {
   return false
 }
 
-nudgepad.on('disconnect', function () {
-  $('#ConnectionStatus').html('Disconnected from server. Attempting to reconnect...').show()
-})
 
 

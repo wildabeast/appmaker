@@ -54,7 +54,7 @@ Design.stage.commit = function () {
   Design.stage.updateTimeline()
   
   nudgepad.trigger('selection')
-  nudgepad.trigger('commit')
+  Design.trigger('commit')
   
   Project.set('pages ' + Design.stage.activePage, new Space(Design.page.toString()))
   Project.set('timelines ' + Design.stage.activePage + ' ' + timestamp, commit)
@@ -165,7 +165,7 @@ Design.stage.goto = function (version) {
   Design.stage.updateTimeline()
   Design.stage.render()
   Design.stage.selection.restore()
-  nudgepad.trigger('stage')
+  Design.trigger('stage')
 }
 
 Design.stage.height = function () {
@@ -487,15 +487,15 @@ Design.stage.onresize = function (event) {
     $('#DesignStage').height($(window).height() - 40)
 }
 
+Design.on('commit', Design.stage.expand)
 
 Design.on('close', function () {
   $("#DesignStage").off("tap", Design.stage.clearOnTap)
   $(window).off('resize', Design.stage.onresize)
-  nudgepad.off('commit', Design.stage.expand)
+  
 })
 
 Design.on('ready', function () {
-  nudgepad.on('commit', Design.stage.expand)
   Design.stage.expand()
   Design.stage.views.get('ipad')()
   $('#DesignStageBody').width() // Force repaint

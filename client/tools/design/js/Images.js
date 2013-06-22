@@ -91,13 +91,13 @@ Design.images.updateList = function () {
 
 Design.on('open', function () {
   // When an image is uploaded
-  nudgepad.on('uploadComplete', Design.images.updateList)
-  nudgepad.on('public', Design.images.updateList)
+  Project.on('uploadComplete', Design.images.updateList)
+  Project.on('public', Design.images.updateList)
 })
 Design.on('close', function () {
   // When an image is uploaded
-  nudgepad.off('uploadComplete', Design.images.updateList)
-  nudgepad.off('public', Design.images.updateList)
+  Project.off('uploadComplete', Design.images.updateList)
+  Project.off('public', Design.images.updateList)
 })
 
 Design.on('firstOpen', Design.images.updateList)

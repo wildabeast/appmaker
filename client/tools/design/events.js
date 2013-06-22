@@ -7,7 +7,6 @@ Design.on('open', function () {
   
   $('#DesignStage,#DesignBar').show()
   
-  nudgepad.on('selection', Design.broadcastSelection)
   Room.on('change', Design.updateSelections)
   Room.on('change', Design.updateTabs)
   
@@ -77,7 +76,7 @@ Design.on('close', function () {
   $(document).off("slidestart", Design.pen.draw)
   
   
-  nudgepad.off('selection', Design.broadcastSelection)
+  Design.off('selection', Design.broadcastSelection)
   Room.off('change', Design.updateSelections)
   Room.off('change', Design.updateTabs)
   $('#DesignStage').off('click', Design.pen.insertTextBlock)
@@ -98,8 +97,6 @@ Design.on('close', function () {
   window.removeEventListener('resize', Design.onresize, false)
   $("body").off("keydown", Design.onkeydown)
   
-  // todo: i think we can remove selection
-  nudgepad.trigger('selection')
   Events.shortcut.shortcuts = {}
   
   if ( navigator.userAgent.match(/(iPad|iPhone|iPod)/i) ) {
@@ -139,6 +136,8 @@ Design.on('open', function () {
   $(document).on('focus', 'input.scrap,textarea.scrap', Design.blurThis)
   
 })
+
+Design.on('selection', Design.broadcastSelection)
 
 Design.on('close', function () {
   $(document).off('click', 'a.scrap, .scrap a, .scrap div', Scrap.disableLinks)
