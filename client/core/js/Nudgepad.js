@@ -19,7 +19,6 @@ nudgepad.events = {
   'page' : [],
   'disconnect' : [],
   'ping' : [],
-  'main' : [],
   'patch' : [],
   'ready' : [],
   'public' : [],
@@ -108,7 +107,11 @@ nudgepad.main = function (callback) {
     // SLOW
     Explorer.downloadTimelines()
     
-    nudgepad.trigger('main')
+    // Ask them to register the project if they haven't
+    // We assume owner@projectname is the default name for now.
+    // In the future we'll want to update that
+    if (Cookie.email === ('owner@' + document.location.host))
+      RegisterForm.open()
     
     mixpanel.track('I opened NudgePad')
     

@@ -39,11 +39,3 @@ RegisterForm.open = function () {
   
 }
 
-nudgepad.on('main', function () {
-  
-  if (Cookie.email !== ('owner@' + document.location.host))
-    return true
-  
-  RegisterForm.open()
-  
-})
