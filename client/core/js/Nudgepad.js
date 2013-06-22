@@ -27,6 +27,7 @@ nudgepad.events = {
 }
 var Query = ParseQueryString()
 var Cookie = parseCookie(document.cookie)
+var Socket = null
 
 /**
  * Requests the data from the server and loads the editor.
@@ -45,45 +46,45 @@ nudgepad.main = function (callback) {
   Explorer.getProject(function () {
     
     // Open socket
-    nudgepad.socket = io.connect('/')
+    Socket = io.connect('/')
 
-    nudgepad.socket.on('public', function (space) {
+    Socket.on('public', function (space) {
       nudgepad.trigger('public', space)
     })
 
-    nudgepad.socket.on('uploadComplete', function (file) {
+    Socket.on('uploadComplete', function (file) {
       nudgepad.trigger('uploadComplete', file)
     })
 
-    nudgepad.socket.on('patch', function (space) {
+    Socket.on('patch', function (space) {
       nudgepad.trigger('patch', space)
     })
 
-    nudgepad.socket.on('connect_failed', function (error) {
+    Socket.on('connect_failed', function (error) {
       console.log('Connect failed')
       console.log(error)
       $('#ConnectionStatus').html('Connection to server failed...').show()
     })
 
-    nudgepad.socket.on('error', function (error) {
+    Socket.on('error', function (error) {
       console.log(error)
       $('#ConnectionStatus').html('Connecting to server...').show()
     })
 
-    nudgepad.socket.on('disconnect', function (message) {
+    Socket.on('disconnect', function (message) {
       nudgepad.trigger('disconnect', message)
     })
     
-    nudgepad.socket.on('room.change', function (newRoom) {
+    Socket.on('room.change', function (newRoom) {
       Room._clear()
       Room.patch(newRoom)
     })
 
-    nudgepad.socket.on('ack', function (message) {
+    Socket.on('ack', function (message) {
       nudgepad.trigger('ping', message)
     })
 
-    nudgepad.socket.on('connect', function (message) {
+    Socket.on('connect', function (message) {
       console.log('connected to server: %s', document.location.host)
       $('#ConnectionStatus').html('Connected!').fadeOut()
       nudgepad.restartCheck()
@@ -137,7 +138,7 @@ nudgepad.emit = function (event, space) {
   if (nudgepad.isTesting)
     return null
   
-  nudgepad.socket.emit(event, space.toString(), function (data) {
+  Socket.emit(event, space.toString(), function (data) {
     console.log('%s responded to emission: %s', document.location.host, data)
   })
 }

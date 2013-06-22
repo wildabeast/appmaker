@@ -94,7 +94,7 @@ Design.contentEditor.focus = function (selector, selectAll) {
  */
 Design.contentEditor.killEvent = function (event) {
   // 
-  Mouse.down.stopPropagation()
+  Design.Mouse.down.stopPropagation()
   return false
 }
 

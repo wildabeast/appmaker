@@ -88,8 +88,8 @@ Design.stage.dragAndDrop = function (scrap) {
   var pageLeft = $('#DesignStageBody').offset().left
   var bodyScroll = $('#DesignStage').scrollTop()
   
-  var left = Mouse.move.pageX - pageLeft - halfWidth
-  var y = Mouse.move.pageY - halfHeight + bodyScroll
+  var left = Design.Mouse.move.pageX - pageLeft - halfWidth
+  var y = Design.Mouse.move.pageY - halfHeight + bodyScroll
 
   Design.stage.insert(scrap, true, left, y)
 }

@@ -67,7 +67,7 @@ Design.MoveHandle.selectTopScrap = function () {
   // get element at point
   var offsetLeft = $('#DesignStageBody').offset().left
   var offsetTop = $('#DesignStageBody').offset().top
-  var element = $.topDiv('.scrap:visible', Mouse.down.pageX - offsetLeft, Mouse.down.pageY - offsetTop + Design.stage.scrollTop())
+  var element = $.topDiv('.scrap:visible', Design.Mouse.down.pageX - offsetLeft, Design.Mouse.down.pageY - offsetTop + Design.stage.scrollTop())
   // if a narrow div and no element underneath, return
   if (!element)
     return true
@@ -98,13 +98,13 @@ Design.MoveHandle.slide = function (event, mouseEvent) {
 
   if (!mouseEvent.shiftKey) {
     grid_change = Design.grid.getDelta([
-      {x : dimensions.left + Mouse.xChange, y : dimensions.top + Mouse.yChange + scrollChange},
-      {x : dimensions.right + Mouse.xChange, y : dimensions.bottom + Mouse.yChange + scrollChange},
-      {x :  dimensions.center + Mouse.xChange, y : dimensions.middle + Mouse.yChange + scrollChange}
+      {x : dimensions.left + Design.Mouse.xChange, y : dimensions.top + Design.Mouse.yChange + scrollChange},
+      {x : dimensions.right + Design.Mouse.xChange, y : dimensions.bottom + Design.Mouse.yChange + scrollChange},
+      {x :  dimensions.center + Design.Mouse.xChange, y : dimensions.middle + Design.Mouse.yChange + scrollChange}
     ])
   }
-  var y_change = Mouse.yChange + scrollChange + grid_change.y
-  var x_change = Mouse.xChange + grid_change.x
+  var y_change = Design.Mouse.yChange + scrollChange + grid_change.y
+  var x_change = Design.Mouse.xChange + grid_change.x
   
 
   $('.selection').each(function (){
@@ -147,7 +147,7 @@ Design.MoveHandle.slidestart = function () {
 // Dont propogate tap events
 Design.MoveHandle.tap = function () {
   // If shift key is down, remove from selection
-  if (Mouse.down && Mouse.down.shiftKey)
+  if (Design.Mouse.down && Design.Mouse.down.shiftKey)
     $(this).owner().deselect()
   return false
 }

@@ -49,11 +49,26 @@ Design.on('open', function () {
 
   Events.shortcut.shortcuts = Design.shortcuts
   
+  
+
+
+  if ( navigator.userAgent.match(/(iPad|iPhone|iPod)/i) ) {
+    document.addEventListener('touchstart', Design.Mouse.onTouchStart, true)
+    document.addEventListener('touchend', Design.Mouse.onTouchEnd, true)
+    document.addEventListener('touchmove', Design.Mouse.onTouchMove, true)
+  } else {
+    document.addEventListener('mousedown', Design.Mouse.onmousedown, true)
+    document.addEventListener('mousemove', Design.Mouse.onmousemove, true)
+    document.addEventListener('mouseup', Design.Mouse.onmouseup, true)
+  }
+  
   // temporary fix until we clean this up.
   if (Design.isFirstOpen) {
     Design.isFirstOpen = false
     Design.trigger('firstOpen')
   }
+  
+  
   
 })
 
@@ -86,6 +101,16 @@ Design.on('close', function () {
   // todo: i think we can remove selection
   nudgepad.trigger('selection')
   Events.shortcut.shortcuts = {}
+  
+  if ( navigator.userAgent.match(/(iPad|iPhone|iPod)/i) ) {
+    document.removeEventListener('touchstart', Design.Mouse.onTouchStart, true)
+    document.removeEventListener('touchend', Design.Mouse.onTouchEnd, true)
+    document.removeEventListener('touchmove', Design.Mouse.onTouchMove, true)
+  } else {
+    document.removeEventListener('mousedown', Design.Mouse.onmousedown, true)
+    document.removeEventListener('mousemove', Design.Mouse.onmousemove, true)
+    document.removeEventListener('mouseup', Design.Mouse.onmouseup, true)
+  }
 
   
 })

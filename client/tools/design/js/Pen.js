@@ -9,8 +9,8 @@ Design.pen.insertTextBlock = function (event) {
   
   var offsetLeft = $('#DesignStageBody').offset().left
   var offsetTop = $('#DesignStageBody').offset().top
-  var x = Mouse.down.pageX - offsetLeft
-  var y = Mouse.down.pageY - offsetTop
+  var x = Design.Mouse.down.pageX - offsetLeft
+  var y = Design.Mouse.down.pageY - offsetTop
   var scraps = new Space().set('text', new Space("tag h2\nstyle\n position absolute\n left " + x + "px\n top " + y + "px\n"))
   var selector = Design.stage.insert(scraps)[0]
   $(selector).scrap().edit()
@@ -19,19 +19,19 @@ Design.pen.insertTextBlock = function (event) {
 
 Design.pen.draw = function (event) {
   
-  if (!Design.pen.on && !Mouse.down.metaKey)
+  if (!Design.pen.on && !Design.Mouse.down.metaKey)
     return true
   
-  if (!Mouse.isDown)
+  if (!Design.Mouse.isDown)
     return true
   
-  if ($.isOnScrollbar(Mouse.down.clientX, Mouse.down.clientY))
+  if ($.isOnScrollbar(Design.Mouse.down.clientX, Design.Mouse.down.clientY))
     return true
   
   var offsetLeft = $('#DesignStageBody').offset().left
   var offsetTop = $('#DesignStageBody').offset().top
-  var x = Mouse.down.pageX - offsetLeft
-  var y = Mouse.down.pageY - offsetTop
+  var x = Design.Mouse.down.pageX - offsetLeft
+  var y = Design.Mouse.down.pageY - offsetTop
   var scraps = new Space().set('container', new Space("style\n position absolute\n left " + x + "px\n top " + y + "px\n width 1px\n height 1px\n"))
   var selector = Design.stage.insert(scraps)[0]
   var id = $(selector).scrap().id
