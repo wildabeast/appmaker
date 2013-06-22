@@ -195,3 +195,20 @@ nudgepad.trigger = function (eventName, space) {
     nudgepad.events[eventName][i](space)
   }
 }
+
+nudgepad.on('ping', function (data) {
+  $('#ConnectionStatus').hide()
+})
+
+window.onerror = function(message, url, lineNumber) {
+  mixpanel.track('I got a javascript error')
+  $('.nudgepad#JavascriptError').prepend('<div>Javascript Error: '+message+'</div>').show()
+  //save error and send to server for example.
+  return false
+}
+
+nudgepad.on('disconnect', function () {
+  $('#ConnectionStatus').html('Disconnected from server. Attempting to reconnect...').show()
+})
+
+
