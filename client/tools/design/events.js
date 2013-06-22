@@ -126,6 +126,10 @@ Design.blurThis = function (){
 }
 
 Design.on('open', function () {
+  
+  // Todo: refactor
+  Events.shortcut.onfire = Design.trackShortcuts
+  
   $(document).on('click', 'a.scrap, .scrap a, .scrap div', Scrap.disableLinks)
   $('#DesignStage').on("tap", ".scrap", Scrap.selectOnTap)
   
@@ -150,6 +154,10 @@ Design.on('close', function () {
   $(document).off('focus', 'input.scrap,textarea.scrap', Design.blurThis)
 
 })
+
+Design.trackShortcuts  = function (key) {
+  mixpanel.track('I used the Design keyboard shortcut ' +  key)
+}
 
 
 /*

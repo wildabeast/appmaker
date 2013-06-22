@@ -19,23 +19,11 @@ var Cookie = parseCookie(document.cookie)
  */
 nudgepad.main = function (callback) {
   
-  // TODO: on capture phase, capture block clicks, check if shiftkey is held,
-  // if shiftkey is not held, prevent any events from firing on click?
-  // document.body.addEventListener('mouseup', PopupHider.hide, true)
-  
-  Events.shortcut.onfire = function (key) {
-    mixpanel.track('I used the keyboard shortcut ' +  key)
-  }
-  
   // Fetch all files in the background.
   Explorer.getProject(function () {
     
     nudgepad.warnBeforeReload = true
-    
-    window.onbeforeunload = function(e) {
-      if (nudgepad.warnBeforeReload)
-        return nudgepad.reloadMessage()
-    }
+    window.onbeforeunload = nudgepad.beforeUnload
     
     // why do we do this?
     $('body').scrollTop(0)
@@ -49,28 +37,40 @@ nudgepad.main = function (callback) {
     // SLOW
     Explorer.downloadTimelines()
     
-    // Ask them to register the project if they haven't
-    // We assume owner@projectname is the default name for now.
-    // In the future we'll want to update that
-    if (Cookie.email === ('owner@' + document.location.host))
-      RegisterForm.open()
-    
+    nudgepad.askToRegister()
+    nudgepad.benchmarkCreationTime()
     mixpanel.track('I opened NudgePad')
-    
-    if (Query.newProject && !store.get('opens')) {
-      store.set('opens', 1)
-      var howLongItTookToCreateThisProject = new Date().getTime() - Query.timestamp
-      mixpanel.track('I created a new project', {
-        'time' : howLongItTookToCreateThisProject
-      })
-      console.log('It took %sms to create this project', howLongItTookToCreateThisProject)
-      
-    }
       
     if (callback)
       callback()
     
   })
+}
+
+nudgepad.beforeUnload = function(e) {
+  if (nudgepad.warnBeforeReload)
+    return nudgepad.reloadMessage()
+}
+
+nudgepad.askToRegister = function () {
+  // Ask them to register the project if they haven't
+  // We assume owner@projectname is the default name for now.
+  // In the future we'll want to update that
+  if (Cookie.email === ('owner@' + document.location.host))
+    RegisterForm.open()
+}
+
+nudgepad.benchmarkCreationTime = function () {
+  // Only do this once per project
+  if (!Query.newProject && store.get('opens'))
+    return true
+
+  store.set('opens', 1)
+  var howLongItTookToCreateThisProject = new Date().getTime() - Query.timestamp
+  mixpanel.track('I created a new project', {
+    'time' : howLongItTookToCreateThisProject
+  })
+  console.log('It took %sms to create this project', howLongItTookToCreateThisProject) 
 }
 
 /**
