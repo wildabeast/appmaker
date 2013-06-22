@@ -2,13 +2,13 @@ var exec = require('child_process').exec
 
 var Clear = function (app) {
   
-  var nudgepad = app.nudgepad
   
-  app.get('/nudgepad.clear', app.checkId, function(req, res, next) {
+  
+  app.get(app.pathPrefix + 'clear', app.checkId, function(req, res, next) {
 
     res.set('Content-Type', 'text/plain')
     // We clear timelines
-    exec('rm -f ' + nudgepad.paths.project + 'timelines/*.space',
+    exec('rm -f ' + app.paths.project + 'timelines/*.space',
       function (error, stdout, stderr) {
 
         if (stderr)

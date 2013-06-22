@@ -43,7 +43,7 @@ resizeImage = function (name, filename, callback) {
 
 var Images = function (app) {
   
-  var nudgepad = app.nudgepad
+  
     
   /**
    * Saves a file and then resizes it
@@ -53,13 +53,13 @@ var Images = function (app) {
    * @param {function}
    */
   saveImage = function (filepath, filename, callback) {
-    var new_path = nudgepad.paths.public + filename
+    var new_path = app.paths.public + filename
     
     fs.rename(filepath, new_path, function () {
       
       // Dont resize images on development. Hack fix for mac imagemagick bug.
       // Only resize jpegs (hack to fix imagemagick npm mod bug)
-      if (!nudgepad.development && filename.match(/\.(jpeg|jpg)^/i))
+      if (!app.development && filename.match(/\.(jpeg|jpg)^/i))
         resizeImage(filename, new_path, function (err) {
           if (err)
             return callback(err)
@@ -72,7 +72,7 @@ var Images = function (app) {
   }
   
   // Uploads
-  app.get('/nudgepad.images.upload', app.checkId, function(req, res, next) {
+  app.get(app.pathPrefix + 'images.upload', app.checkId, function(req, res, next) {
     // todo: top.editor.uploads.add(this.private); (to show the progress bar)
     return res.send('<style>body, form, div, input { margin: 0;padding: 0; cursor: pointer;}</style>'+
     '<script type="text/javascript">top.focus();</script>'+
@@ -84,7 +84,7 @@ var Images = function (app) {
   
   
   // Receive any uploads
-  app.post('/nudgepad.images.upload', app.checkId, function(req, res, next) {    
+  app.post(app.pathPrefix + 'images.upload', app.checkId, function(req, res, next) {    
   
     console.log('Receiving image upload...')
   
@@ -106,9 +106,9 @@ var Images = function (app) {
       
       // Non image files
       else
-        fs.rename(uploaded[i].path, nudgepad.paths.public + name, function (name) {})
+        fs.rename(uploaded[i].path, app.paths.public + name, function (name) {})
     }
-    res.redirect('/nudgepad.images.upload')
+    res.redirect(app.pathPrefix + 'images.upload')
   
   })
 

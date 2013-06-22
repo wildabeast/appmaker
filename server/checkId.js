@@ -1,6 +1,6 @@
 function CheckID (app) {
   
-  var nudgepad = app.nudgepad
+  
   
   /**
    * Checks the worker is authorized and loads the worker info.
@@ -23,7 +23,7 @@ function CheckID (app) {
     }
 
     // Invalid email addresss
-    if (!nudgepad.project.get('workers ' + email)) {
+    if (!app.Project.get('workers ' + email)) {
       // If use has invalid cookies set, clear them.
       if (req.cookies.email)
         res.clearCookie('email')
@@ -33,8 +33,8 @@ function CheckID (app) {
     }
 
     // Invalid key
-    if (nudgepad.project.get('workers ' + email + ' key') !== key) {
-      console.log(nudgepad.project.get('workers ' + email + ' key'))
+    if (app.Project.get('workers ' + email + ' key') !== key) {
+      console.log(app.Project.get('workers ' + email + ' key'))
       // If use has invalid cookies set, clear them.
       if (req.cookies.email)
         res.clearCookie('email')
@@ -44,7 +44,7 @@ function CheckID (app) {
     }
 
     // Invalid role
-    var role = nudgepad.project.get('workers ' + email + ' role')
+    var role = app.Project.get('workers ' + email + ' role')
     if (role !== 'owner' && role !== 'worker')
       return res.send('Not authorized')
 
@@ -55,7 +55,7 @@ function CheckID (app) {
   }
 
   app.privateCheck = function (req, res, next) {
-    if (nudgepad.project.get('settings is_private') !== 'true')
+    if (app.Project.get('settings is_private') !== 'true')
       return next()
     app.checkId(req, res, next)
   }

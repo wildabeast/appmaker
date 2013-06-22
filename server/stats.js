@@ -24,10 +24,10 @@ parseLine = function (line) {
 
 function Stats (app) {
   
-  var nudgepad = app.nudgepad
+  
   
   parseStats = function (callback) {
-    fs.readFile(nudgepad.paths.requests_log, 'utf8', function (error, data) {
+    fs.readFile(app.paths.requests_log, 'utf8', function (error, data) {
       var requests = data.split(/\n/g)
       var days = {}
       _.each(requests, function (line) {
@@ -48,7 +48,7 @@ function Stats (app) {
     })
   }
 
-  app.get('/nudgepad.stats', app.checkId, function(req, res, next) {
+  app.get(app.pathPrefix + 'stats', app.checkId, function(req, res, next) {
     res.set('Content-Type', 'text/plain')
     parseStats(function (days) {
       return res.send(new Space(days).toString())  

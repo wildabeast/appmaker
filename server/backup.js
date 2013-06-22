@@ -1,15 +1,12 @@
 var spawn = require('child_process').spawn
 
 var Backup = function (app) {
-  
-  var nudgepad = app.nudgepad
-  
-  
-  // http://stackoverflow.com/questions/5754153/zip-archives-in-node-js
-  app.get('/nudgepad.backup/' + nudgepad.domain + '.zip', app.checkId, function(req, res) {
-    var path = nudgepad.paths.project
     
-    //find ' + nudgepad.paths.project + ' -name '*.DS_Store' -type f -delete
+  // http://stackoverflow.com/questions/5754153/zip-archives-in-node-js
+  app.get(app.pathPrefix + 'backup/' + app.domain + '.zip', app.checkId, function(req, res) {
+    var path = app.paths.project
+    
+    //find ' + app.paths.project + ' -name '*.DS_Store' -type f -delete
 
     // Options -r recursive - redirect to stdout
     var zip = spawn('zip', ['-r', '-', '.'], {cwd : path})

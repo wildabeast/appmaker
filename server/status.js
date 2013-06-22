@@ -3,15 +3,15 @@ var Space = require('space'),
 
 var Status = function (app, speedcoach) {
   
-  var nudgepad = app.nudgepad
   
-  app.get('/nudgepad.status', app.checkId, function(req, res, next) {
+  
+  app.get(app.pathPrefix + 'status', app.checkId, function(req, res, next) {
 
     var mem = process.memoryUsage()
     var load = os.loadavg()
     space = new Space()
-    space.set('domain', nudgepad.domain)
-    space.set('ip', nudgepad.ip)
+    space.set('domain', app.domain)
+    space.set('ip', app.ip)
     space.set('uptime', (process.uptime()) + 's')
     space.set('os_release', os.release())
     space.set('platform', os.platform())

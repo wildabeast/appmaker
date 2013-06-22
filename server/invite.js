@@ -7,10 +7,10 @@ var ParseName = require('./ParseName.js'),
 
 var Invite = function (app) {
   
-  var nudgepad = app.nudgepad
+  
   
   var createUser = function (email) {
-    var worker = new File(nudgepad.paths.project + 'workers/' + email + '.space')
+    var worker = new File(app.paths.project + 'workers/' + email + '.space')
     worker.set('name', ParseName(email))
     worker.set('role', 'worker')
     worker.set('key', app.hashString(email + RandomString(8)))
@@ -18,13 +18,13 @@ var Invite = function (app) {
       if (error)
         return console.log(error)
 
-      nudgepad.project.set('workers ' + email, new Space(worker))
+      app.Project.set('workers ' + email, new Space(worker))
 
       Email.send(
         email,
-        'nudgepad@' + nudgepad.domain,
-        'Your login link to ' + nudgepad.domain,
-        'http://' + nudgepad.domain + '/nudgepad.login?email=' + email + '&key=' + worker.get('key'),
+        'nudgepad@' + app.domain,
+        'Your login link to ' + app.domain,
+        'http://' + app.domain + app.pathPrefix + 'login?email=' + email + '&key=' + worker.get('key'),
         null,
         function (error) {
           if (error)
@@ -34,7 +34,7 @@ var Invite = function (app) {
     })
   }
   
-  app.post('/nudgepad.invite', app.checkId, function (req, res, next) {
+  app.post(app.pathPrefix + 'invite', app.checkId, function (req, res, next) {
     var newUsers = req.body.emails.split(/ /)
     _.each(newUsers, createUser)  
     res.send('Sent')

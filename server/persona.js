@@ -2,16 +2,16 @@ var superagent = require('superagent')
 
 var Persona = function (app) {
   
-  var nudgepad = app.nudgepad
+  
   
   // Persona Login
-  app.post('/nudgepad.persona', function(req, res, next) {
+  app.post(app.pathPrefix + 'persona', function(req, res, next) {
 
     var assertion = req.body.assertion
 
     superagent
       .post('https://verifier.login.persona.org/verify')
-      .send({ assertion: assertion, audience: 'http://' + nudgepad.domain })
+      .send({ assertion: assertion, audience: 'http://' + app.domain })
       .end(function(error, result){
 
         if (error)
@@ -19,7 +19,7 @@ var Persona = function (app) {
 
         var email = result.body.email
 
-        var worker = nudgepad.project.get('workers ' + email)
+        var worker = app.Project.get('workers ' + email)
 
         if (!worker)
           return res.send('No user with email ' + email)

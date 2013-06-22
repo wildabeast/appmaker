@@ -1,6 +1,6 @@
 var Pages = function (app) {
   
-  var nudgepad = app.nudgepad
+  
   
   app.get('*', app.privateCheck, function (req, res, next) {
 
@@ -9,7 +9,7 @@ var Pages = function (app) {
     if (name === 'home')
       return res.redirect('/')
 
-    if (!nudgepad.project.get('pages ' + name))
+    if (!app.Project.get('pages ' + name))
       return next()
 
     app.sendPage(req, res, name)

@@ -57,15 +57,15 @@ function folderStats (path, callback) {
 
 var Explorer = function (app) {
   
-  var nudgepad = app.nudgepad
+  
   
   
   /**
    * Get a file API.
    * path
    */
-  app.get('/nudgepad.explorer.list', app.checkId, function(req, res, next) {
-    folderStats(nudgepad.paths.project, function (err, space) {
+  app.get(app.pathPrefix + 'explorer.list', app.checkId, function(req, res, next) {
+    folderStats(app.paths.project, function (err, space) {
       res.set('Content-Type', 'text/plain')
       return res.send(space.toString())    
     })
@@ -75,8 +75,8 @@ var Explorer = function (app) {
    * Get a file API.
    * path
    */
-  app.get('/nudgepad.explorer.public', app.checkId, function(req, res, next) {
-    folderStats(nudgepad.paths.public, function (err, space) {
+  app.get(app.pathPrefix + 'explorer.public', app.checkId, function(req, res, next) {
+    folderStats(app.paths.public, function (err, space) {
       res.set('Content-Type', 'text/plain')
       return res.send(space.toString())    
     })
@@ -86,8 +86,8 @@ var Explorer = function (app) {
    * Get a file API.
    * path
    */
-  app.post('/nudgepad.explorer.get', app.checkId, function(req, res, next) {
-    fs.readFile(nudgepad.paths.project + req.body.path, 'utf8', function (err, contents) {
+  app.post(app.pathPrefix + 'explorer.get', app.checkId, function(req, res, next) {
+    fs.readFile(app.paths.project + req.body.path, 'utf8', function (err, contents) {
       res.send(contents)
     })
   })
@@ -96,9 +96,9 @@ var Explorer = function (app) {
    * Remove a file API.
    * path
    */
-  app.post('/nudgepad.explorer.remove', app.checkId, function(req, res, next) {
+  app.post(app.pathPrefix + 'explorer.remove', app.checkId, function(req, res, next) {
 
-    fs.unlink(nudgepad.paths.project + req.body.path, function (err) {
+    fs.unlink(app.paths.project + req.body.path, function (err) {
       if (err) return res.send(err)
       res.send('')
     })
@@ -109,9 +109,9 @@ var Explorer = function (app) {
    * Rename a file API.
    * path
    */
-  app.post('/nudgepad.explorer.rename', app.checkId, function(req, res, next) {
+  app.post(app.pathPrefix + 'explorer.rename', app.checkId, function(req, res, next) {
 
-    fs.rename(nudgepad.paths.project + req.body.oldPath, nudgepad.paths.project + req.body.newPath, function (err) {
+    fs.rename(app.paths.project + req.body.oldPath, app.paths.project + req.body.newPath, function (err) {
       if (err) return res.send(err)
       res.send('')
     })
@@ -124,9 +124,9 @@ var Explorer = function (app) {
    * path
    * content
    */
-  app.post('/nudgepad.explorer.save', app.checkId, function(req, res, next) {
+  app.post(app.pathPrefix + 'explorer.save', app.checkId, function(req, res, next) {
 
-    fs.writeFile(nudgepad.paths.project + req.body.path, req.body.content, 'utf8', function (err) {
+    fs.writeFile(app.paths.project + req.body.path, req.body.content, 'utf8', function (err) {
       if (err) return res.send(err)
       res.send('')
     })

@@ -1,7 +1,6 @@
 // Extends an object by adding a paths property containing all paths
 function Paths (app, projectsPath, clientPath) {
-  var obj = app.nudgepad
-  domain = obj.domain
+  domain = app.domain
   var paths = {}
   paths.server = __dirname + '/'
   // Where to store project specific files
@@ -23,7 +22,7 @@ function Paths (app, projectsPath, clientPath) {
   paths.surveys = paths.project + 'surveys/'
   //paths.certificates = paths.project + 'certificates/'
   paths.client = clientPath
-  obj.paths = paths
+  app.paths = paths
 }
 
 module.exports = Paths

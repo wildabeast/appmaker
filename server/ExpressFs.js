@@ -1,10 +1,10 @@
 var fs = require('fs')
 
 function ExpressFs (app) {
-  app.post('/nudgepad.fs', app.checkId, function(req, res, next) {
+  app.post(app.pathPrefix + 'fs', app.checkId, function(req, res, next) {
     
     var method = req.body.method
-    var filename = app.nudgepad.paths.project + req.body.filename
+    var filename = app.app.paths.project + req.body.filename
     var data = req.body.data
     
     fs[method](filename, data, function (err) {
