@@ -17,3 +17,4 @@ Flasher.success = function (message, time) {
     Flasher.timeout = setTimeout("$('#Flasher').hide()", time)
 }
 
+Flasher.activity = Flasher.success

@@ -1,6 +1,7 @@
 var Write = new Tool('Write')
 Write.color = 'rgba(237, 200, 17, 1)'
 Write.description = 'Write and edit blog posts.'
+Write.activePost = null
 
 // Default theme
 Write.blankTheme = new Space({
@@ -71,8 +72,6 @@ Write.deletePost = function () {
     return Flasher.error('Post does not exist')
 
   Project.delete('posts ' + name)
-  
-  Write.restart()
 }
 
 Write.editPost = function (name) {
@@ -87,7 +86,13 @@ Write.editPost = function (name) {
   // http://{{document.location.host}}/<a id="permalink" target="_blog"></a>
   $('#WritePermalink').text('http://' + document.location.host + '/' + name).attr('value', name)
   
-  Write.updateLinks()
+  
+  $('#WritePosts div').css('color', '#777')
+  // todo: improve this
+  $('#WritePosts div').each(function () {
+    if ($(this).attr('value') == Write.activePost)
+      $(this).css('color', '#333')  
+  })
   
   $('#WriteContent').focus()
   
@@ -100,10 +105,19 @@ Write.initialize = function () {
   Project.set('pages blog', Write.blankTheme.clone())
 }
 
-Write.activePost = null
+/**
+ * Make a string URL friendly. Turns "$foo Bar%!@$" into "foo-bar"
+ *
+ * @param {string}
+ * @return {object}
+ */
+Write.permalink = function (string) {
+  if (!string) return ''
+  // strip non alphanumeric characters from string and lowercase it.
+  return string.toLowerCase().replace(/[^a-z0-9- _\.]/gi, '').replace(/ /g, '-')
+}
 
-Write.on('open', function () {
-  Write.initialize()
+Write.refresh = function () {
   $('#WritePosts').html('')
   if (!Project.get('posts'))
     return true
@@ -122,28 +136,6 @@ Write.on('open', function () {
       .attr('title', name)
     $('#WritePosts').append(div)
   })
-  
-})
-
-Write.on('ready', function () {
-  
-  // Open the last edited post if there is one
-  if (Write.activePost)
-    Write.editPost(Write.activePost)
-  else
-    Write.createPost()
-})
-
-/**
- * Make a string URL friendly. Turns "$foo Bar%!@$" into "foo-bar"
- *
- * @param {string}
- * @return {object}
- */
-Write.permalink = function (string) {
-  if (!string) return ''
-  // strip non alphanumeric characters from string and lowercase it.
-  return string.toLowerCase().replace(/[^a-z0-9- _\.]/gi, '').replace(/ /g, '-')
 }
 
 Write.savePost = function () {
@@ -170,22 +162,14 @@ Write.savePost = function () {
     Project.delete('posts ' + Write.activePost)
   
   Write.activePost = name
-//  Write.updateLinks()
-  Write.restart()
+  
   // Open post in new tab
   window.open(name, 'published')
-}
-
-Write.updateLinks = function () {
-  $('#WritePosts div').css('color', '#777')
-  // todo: improve this
-  $('#WritePosts div').each(function () {
-    if ($(this).attr('value') == Write.activePost)
-      $(this).css('color', '#333')  
-  })
 }
 
 Write.updatePermalink = function () {
   var permalink = Write.permalink($('#WriteTitle').val())
   $('#WritePermalink').text('http://' + document.location.host + '/' + permalink).attr('value', permalink)
 }
+
+
