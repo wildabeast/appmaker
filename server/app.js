@@ -538,6 +538,21 @@ io.sockets.on('connection', function (socket) {
     // Broadcast to everyone else
     socket.broadcast.emit('patch', space.toString())
   })
+  
+  socket.on('delete', function (key, fn) {
+    // Delete File
+    var file = app.Project.get(key)
+    file.trash(function (error) {
+      if (error) {
+        console.log('Error: %s', error)
+        return fn('error')
+      }
+      fn('patch received')
+      // Broadcast to everyone else
+      socket.broadcast.emit('delete', key)
+    })
+
+  })
 
 })
 
