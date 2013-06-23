@@ -398,7 +398,7 @@ fs.watch(app.paths.public, function (event, filename) {
   // mac on old node wont emit filename
   if (!filename)
     filename = ''
-  io.sockets.emit('public', filename.toString())
+  app.SocketIO.sockets.emit('public', filename.toString())
   
 })
 
@@ -483,13 +483,13 @@ process.on('SIGTERM', function () {
 speedcoach('server started')
 
 /********* SOCKET IO STUFF **********/ 
-io = socketio.listen(http_server)
+app.SocketIO = socketio.listen(http_server)
 
-//io.set('log level', 3)
+//app.SocketIO.set('log level', 3)
 
 /********* SOCKET EVENTS **********/ 
 
-io.set('authorization', function (data, accept) {
+app.SocketIO.set('authorization', function (data, accept) {
 
   if (!data.headers.cookie)
     return accept('No cookie transmitted.', false)
@@ -513,7 +513,7 @@ io.set('authorization', function (data, accept) {
   
 })
 
-io.sockets.on('connection', function (socket) {
+app.SocketIO.sockets.on('connection', function (socket) {
   
   socket.on('room.change', function (space) {
     if (socket.handshake.screenId) {

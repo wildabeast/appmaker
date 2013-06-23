@@ -101,7 +101,7 @@ var Images = function (app) {
         saveImage(uploaded[i].path, name, function (err, name) {
           if (err)
             return console.log('save image error: ' + err)
-          nudgepad.emit('uploadComplete', name)
+          app.SocketIO.sockets.emit('uploadComplete', name)
         })
       
       // Non image files

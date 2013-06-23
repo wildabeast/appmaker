@@ -57,7 +57,7 @@ var ProjectRoute = function (app) {
     copy.set('pages', app.Project.get('pages'))
     copy.set('posts', app.Project.get('posts'))
     copy.set('timelines ' + activePage, app.Project.get('timelines ' + activePage))
-    copy.set('started', nudgepad.started)
+    copy.set('started', app.started)
     var hostname = os.hostname()
     if (app.development)
       hostname = 'localhost'
@@ -69,8 +69,8 @@ var ProjectRoute = function (app) {
   // Patch
   app.post(/^\/nudgepad\.project\.patch$/, app.checkId, parseSpace, function(req, res, next) {
 
-    nudgepad.patchProject(req.space, req.email)
-    nudgepad.emit('patch', req.space)
+    app.patchProject(req.space, req.email)
+    app.SocketIO.sockets.emit('patch', req.space)
 
     if (req.body.redirect)
       return res.redirect(req.body.redirect)
