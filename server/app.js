@@ -279,6 +279,9 @@ app.use('/nudgepad/', express.static(clientPath.replace(/\/$/,''), { maxAge: 315
 
 
 /*********** public ***********/
+app.use('/private/', function (req, res) {
+  return res.send('Sorry, it\'s private here.', 404)
+})
 // Make sure this is first so an index.html will take precedence
 // over a private/pages/home
 app.use('/', express.static(app.paths.project, { maxAge: 31557600000 }))
