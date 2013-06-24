@@ -8,7 +8,7 @@ var Clear = function (app) {
 
     res.set('Content-Type', 'text/plain')
     // We clear timelines
-    exec('rm -f ' + app.paths.project + 'timelines/*.space',
+    exec('rm -f ' + app.paths.timelines + '*.space',
       function (error, stdout, stderr) {
 
         if (stderr)

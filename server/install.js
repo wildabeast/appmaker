@@ -10,6 +10,9 @@ function Install (app) {
   // a makers project data.
   if (!fs.existsSync(app.paths.project))
     fs.mkdirSync(app.paths.project)
+
+  if (!fs.existsSync(app.paths['private']))
+    fs.mkdirSync(app.paths['private'])
   
   // Create the settings folder for storing settings files.
   if (!fs.existsSync(app.paths.settings))
@@ -44,8 +47,8 @@ function Install (app) {
     fs.mkdirSync(app.paths.surveys)
   
   for (var i in app.defaultTypes) {
-    if (!fs.existsSync(app.paths.project + app.defaultTypes[i]))
-      fs.mkdirSync(app.paths.project + app.defaultTypes[i])
+    if (!fs.existsSync(app.paths['private'] + app.defaultTypes[i]))
+      fs.mkdirSync(app.paths['private'] + app.defaultTypes[i])
   }
   
   if (!fs.existsSync(app.paths.settings + 'is_open_source.txt'))

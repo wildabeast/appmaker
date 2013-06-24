@@ -10,7 +10,7 @@ var Invite = function (app) {
   
   
   var createUser = function (email) {
-    var maker = new File(app.paths.project + 'makers/' + email + '.space')
+    var maker = new File(app.paths.makers + email + '.space')
     maker.set('name', ParseName(email))
     maker.set('role', 'maker')
     maker.set('key', app.hashString(email + RandomString(8)))

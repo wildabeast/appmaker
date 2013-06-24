@@ -106,13 +106,13 @@ app.Project.loadFolder = function (folder) {
   // Create a Space for every folder
   app.Project.set(folder, new Space())
   // Grab all spaces in a folder
-  var files = fs.readdirSync(app.paths.project + folder)
+  var files = fs.readdirSync(app.paths['private'] + folder)
   for (var j in files) {
     // Dont read non space files
     if (!files[j].match(/\.space/))
       continue
     // Load every file into memory
-    var filePath = app.paths.project + folder + '/' + files[j]
+    var filePath = app.paths['private'] + folder + '/' + files[j]
     app.Project.set(folder + ' ' + files[j].replace(/\.space$/,''), new File(filePath).loadSync())
   }
 }
@@ -168,7 +168,7 @@ speedcoach('spaces loaded into memory')
 
 
 app.patchFile = function (path, patch, email) {
-  var filepath = app.paths.project + path.replace(/ /g, '/') + '.space'
+  var filepath = app.paths['private'] + path.replace(/ /g, '/') + '.space'
   var file = app.Project.get(path)
   var patchFile = patch.get(path)
   
