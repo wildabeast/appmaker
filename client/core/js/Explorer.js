@@ -21,7 +21,7 @@ Explorer.downloadTimelines = function () {
 }
 
 Explorer.quickEdit = function () {
-  Explorer.edit(prompt('Enter path to file you want to edit', 'public/project.css'))
+  Explorer.edit(prompt('Enter path to file you want to edit', 'project.css'))
 }
 
 Explorer.remove = function (path, callback) {

@@ -9,10 +9,10 @@ do
   sudo mv /nudgepad/projects/$domain/public/*.* /nudgepad/projects/$domain/
   # remove .gitignore
   sudo rm /nudgepad/projects/$domain/.gitignore
-  # move all folders to nudgepad sub folder
+  # move all folders to private sub folder
   folders="includes logs pages posts settings surveys temp timelines workers"
   for folder in $folders
   do
-    sudo mv /nudgepad/projects/$domain/$folder /nudgepad/projects/$domain/nudgepad/$folder
+    sudo mv /nudgepad/projects/$domain/$folder /nudgepad/projects/$domain/private/$folder
   done
 done
