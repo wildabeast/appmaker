@@ -14,7 +14,7 @@ do
   # move all folders to private sub folder
   mkdir /nudgepad/projects/$domain/private/
   chown $domain:$domain /nudgepad/projects/$domain/private/
-  folders="logs packages pages posts settings surveys temp timelines workers"
+  folders="logs packages pages posts settings surveys temp timelines makers"
   for folder in $folders
   do
     mv /nudgepad/projects/$domain/$folder /nudgepad/projects/$domain/private/$folder
