@@ -1,6 +1,8 @@
 #!/bin/bash
 
 projects="$(ls /nudgepad/projects/)"
+sudo mkdir /nudgepad/backup/0.3/
+sudo cp -R /nudgepad/projects/ /nudgepad/backup/0.3/
 for domain in $projects
 do
   # rename workers folder to makers folder
@@ -10,7 +12,8 @@ do
   # remove .gitignore
   sudo rm /nudgepad/projects/$domain/.gitignore
   # move all folders to private sub folder
-  sudo -u $domain mkdir /nudgepad/projects/$domain/private/
+  sudo mkdir /nudgepad/projects/$domain/private/
+  sudo chown $domain:$domain /nudgepad/projects/$domain/private/
   folders="includes logs pages posts settings surveys temp timelines workers"
   for folder in $folders
   do
