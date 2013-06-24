@@ -7,19 +7,19 @@ var Login = function (app) {
   app.get(app.pathPrefix + 'login', function(req, res, next) {
 
     if (req.query.email && req.query.key) {
-      var worker = app.Project.get('workers ' + req.query.email)
+      var maker = app.Project.get('makers ' + req.query.email)
 
-      if (!worker)
+      if (!maker)
         return res.redirect('/nudgepad/public/login.html')
 
       // Wrong key
-      if (worker.get('key') !== req.query.key)
+      if (maker.get('key') !== req.query.key)
         return res.send('Invalid key')
 
       // Login successful!
       res.cookie('email', req.query.email, { expires: new Date(Date.now() + 5184000000)})
       res.cookie('key', req.query.key, { expires: new Date(Date.now() + 5184000000)})
-      res.cookie('name', worker.name, { expires: new Date(Date.now() + 5184000000)})
+      res.cookie('name', maker.name, { expires: new Date(Date.now() + 5184000000)})
 
       // temp fix
       var appString = '?login=true'
@@ -39,19 +39,19 @@ var Login = function (app) {
   // Login Post
   app.post(app.pathPrefix + 'login', function(req, res, next) {
     // Invalid email addresss
-    if (!app.Project.get('workers ' + req.body.email))
+    if (!app.Project.get('makers ' + req.body.email))
       return res.redirect('/nudgepad/public/login.html?error=User_not_found')
 
-    var worker = app.Project.get('workers ' + req.body.email)
+    var maker = app.Project.get('makers ' + req.body.email)
 
     // Wrong key
-    if (worker.get('key') != req.body.key)
+    if (maker.get('key') != req.body.key)
         return res.redirect('/nudgepad/public/login.html?error=Wrong_key')
 
     // Login successful!
     res.cookie('email', req.body.email, { expires: new Date(Date.now() + 5184000000)})
-    res.cookie('key', worker.get('key'), { expires: new Date(Date.now() + 5184000000)})
-    res.cookie('name', worker.name, { expires: new Date(Date.now() + 5184000000)})
+    res.cookie('key', maker.get('key'), { expires: new Date(Date.now() + 5184000000)})
+    res.cookie('name', maker.name, { expires: new Date(Date.now() + 5184000000)})
 
 
 

@@ -186,7 +186,7 @@ $(document).on('click', '.DevelopToggleOption', function () {
 // todo: add console history
 
 /**
- * Prompt the worker for input. Pops a modal.
+ * Prompt the maker for input. Pops a modal.
  */
 Develop.console = function () {
   mixpanel.track('I opened the console')

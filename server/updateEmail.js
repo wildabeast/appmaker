@@ -25,13 +25,13 @@ var UpdateEmail = function (app) {
     if (email == req.email)
       return res.send('Same email', 400)
 
-    var role = app.Project.get('workers').get(req.email + ' role')  
+    var role = app.Project.get('makers').get(req.email + ' role')  
     // Generate new password
-    var worker = new File(app.paths.project + 'workers/' + email + '.space')
-    worker.set('name', ParseName(email))
-    worker.set('role', role)
-    worker.set('key', app.hashString(email + RandomString(8)))
-    worker.create(function (error) {
+    var maker = new File(app.paths.project + 'makers/' + email + '.space')
+    maker.set('name', ParseName(email))
+    maker.set('role', role)
+    maker.set('key', app.hashString(email + RandomString(8)))
+    maker.create(function (error) {
       if (error) {
         console.log(error)
         return res.send('Error updating account', 500)
@@ -39,13 +39,13 @@ var UpdateEmail = function (app) {
 
       // change cookies
       res.cookie('email', email, { expires: new Date(Date.now() + 5184000000)})
-      res.cookie('key', worker.get('key'), { expires: new Date(Date.now() + 5184000000)})
-      res.cookie('name', worker.get('name'), { expires: new Date(Date.now() + 5184000000)})
-      app.Project.set('workers ' + email, new Space(worker))
+      res.cookie('key', maker.get('key'), { expires: new Date(Date.now() + 5184000000)})
+      res.cookie('name', maker.get('name'), { expires: new Date(Date.now() + 5184000000)})
+      app.Project.set('makers ' + email, new Space(maker))
 
       // Delete old account
-      app.Project.delete('workers ' + req.email)
-      new File(app.paths.project + 'workers/' + req.email + '.space').trash()
+      app.Project.delete('makers ' + req.email)
+      new File(app.paths.project + 'makers/' + req.email + '.space').trash()
       if (req.body.sendWelcomeEmail === 'true') {
 
         var message = 'Thanks for using NudgePad to build your project!' + '\n\n' +

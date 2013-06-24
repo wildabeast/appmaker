@@ -5,15 +5,11 @@ function Install (app) {
   console.log('Installing necessary files and objects...')
   
   // Main project path
-  // Create the project folder. All worker data and apps go here.
+  // Create the project folder. All maker data and apps go here.
   // It is a good idea to make this folder a git repo to version all
-  // a workers project data.
+  // a makers project data.
   if (!fs.existsSync(app.paths.project))
     fs.mkdirSync(app.paths.project)
-    
-  // Create the public folder for storing uploads and other static assets.
-  if (!fs.existsSync(app.paths.public))
-    fs.mkdirSync(app.paths.public)
   
   // Create the settings folder for storing settings files.
   if (!fs.existsSync(app.paths.settings))
@@ -69,12 +65,12 @@ module.exports = Example\n", 'utf8')
   }
   
   // Create default home page
-  if (!fs.existsSync(app.paths.project + 'pages/home.space'))
-    fs.writeFileSync(app.paths.project + 'pages/home.space', '', 'utf8')
+  if (!fs.existsSync(app.paths.pages + 'home.space'))
+    fs.writeFileSync(app.paths.pages + 'home.space', '', 'utf8')
   
   // Create default home timeline
-  if (!fs.existsSync(app.paths.project + 'timelines/home.space'))
-    fs.writeFileSync(app.paths.project + 'timelines/home.space', '', 'utf8')
+  if (!fs.existsSync(app.paths.timelines + 'home.space'))
+    fs.writeFileSync(app.paths.timelines + 'home.space', '', 'utf8')
   
 
 }

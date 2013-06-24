@@ -12,11 +12,11 @@ createProjectNix ()
     else
       # echo NO cloneFile provided. Creating blank project from blank.
       cp -R blank $projectsPath/$domain
-      mkdir $projectsPath/$domain/settings
-      mkdir $projectsPath/$domain/workers
-      mkdir $projectsPath/$domain/logs
-      touch $projectsPath/$domain/logs/mon.txt
-      mkdir $projectsPath/$domain/temp
+      mkdir $projectsPath/$domain/nudgepad/settings
+      mkdir $projectsPath/$domain/nudgepad/makers
+      mkdir $projectsPath/$domain/nudgepad/logs
+      touch $projectsPath/$domain/nudgepad/logs/mon.txt
+      mkdir $projectsPath/$domain/nudgepad/temp
       
   fi
   speedcoach "$domain created from template"
@@ -48,10 +48,10 @@ createProjectMac ()
     else
       # echo NO cloneFile provided. Creating blank project from blank.
       cp -R blank $projectsPath/$domain
-      mkdir $projectsPath/$domain/settings
-      mkdir $projectsPath/$domain/workers
-      mkdir $projectsPath/$domain/logs
-      mkdir $projectsPath/$domain/temp
+      mkdir $projectsPath/$domain/nudgepad/settings
+      mkdir $projectsPath/$domain/nudgepad/makers
+      mkdir $projectsPath/$domain/nudgepad/logs
+      mkdir $projectsPath/$domain/nudgepad/temp
   fi
   
   createOwnerFile $domain $ownerEmail

@@ -1,9 +1,9 @@
 /**
- * Prompt the worker for input. Pops a modal.
+ * Prompt the maker for input. Pops a modal.
  *
  * @param {string} Name of any instructional message.
  * @param {string} Default value to prefill the prompt with.
- * @param {function} Function to run with whatever the worker entered.
+ * @param {function} Function to run with whatever the maker entered.
  */
 var TextPrompt = function (message, default_value, onsubmit, onkeypress, submitLabel) {
   var text_area = $('<textarea id="TextPrompt"></textarea>')

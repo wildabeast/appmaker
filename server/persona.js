@@ -19,15 +19,15 @@ var Persona = function (app) {
 
         var email = result.body.email
 
-        var worker = app.Project.get('workers ' + email)
+        var maker = app.Project.get('makers ' + email)
 
-        if (!worker)
+        if (!maker)
           return res.send('No user with email ' + email)
 
         // Login successful!
         res.cookie('email', email, { expires: new Date(Date.now() + 5184000000)})
-        res.cookie('key', worker.get('key'), { expires: new Date(Date.now() + 5184000000)})
-        res.cookie('name', worker.get('name'), { expires: new Date(Date.now() + 5184000000)})
+        res.cookie('key', maker.get('key'), { expires: new Date(Date.now() + 5184000000)})
+        res.cookie('name', maker.get('name'), { expires: new Date(Date.now() + 5184000000)})
         res.redirect('/nudgepad')
 
       })

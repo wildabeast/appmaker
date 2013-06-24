@@ -53,7 +53,7 @@ var Images = function (app) {
    * @param {function}
    */
   saveImage = function (filepath, filename, callback) {
-    var new_path = app.paths.public + filename
+    var new_path = app.paths.project + filename
     
     fs.rename(filepath, new_path, function () {
       
@@ -106,7 +106,7 @@ var Images = function (app) {
       
       // Non image files
       else
-        fs.rename(uploaded[i].path, app.paths.public + name, function (name) {})
+        fs.rename(uploaded[i].path, app.paths.project + name, function (name) {})
     }
     res.redirect(app.pathPrefix + 'images.upload')
   

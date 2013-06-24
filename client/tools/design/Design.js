@@ -2,7 +2,7 @@ var Design = new Tool('Design')
 Design.color = 'rgba(26, 134, 214, 1)'
 Design.description = 'Design pages in NudgePad.'
 
-// What spot the worker is on the timeline for the current page
+// What spot the maker is on the timeline for the current page
 Design.page = new Page()
 Design.edge = new Space()
 Design.stage = {}
@@ -212,7 +212,7 @@ Design.nextName = function (prefix) {
  */
 Design.oncut = function(e) {
   
-  // Return true if worker is editing an input
+  // Return true if maker is editing an input
   if ($('input:focus, div:focus, textarea:focus, a:focus').length)
     return true
   
@@ -273,13 +273,13 @@ Design.preventDefault = function(event) {
 }
 
 /**
- * Start editing text when worker enters a character key.
+ * Start editing text when maker enters a character key.
  *
  * @param {object} keydown event.
  * @return {bool} Allow propagation unless we start editing.
  */
 Design.onkeydown = function (event) {
-  // if worker is typing in a div or input already dont do anything
+  // if maker is typing in a div or input already dont do anything
   if ($('input:focus, div:focus, textarea:focus, a:focus').length != 0)
     return true
   // allow control key combos to pass through

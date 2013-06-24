@@ -2,7 +2,7 @@
  */
 Design.onpaste = function(event) {
 
-  // Return true if worker is editing an input
+  // Return true if maker is editing an input
   if ($('input:focus, div:focus, textarea:focus, a:focus').length)
     return true
   
