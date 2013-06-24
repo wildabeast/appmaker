@@ -160,7 +160,7 @@ case "$1" in
 'log')
   if [ -n "$2" ]
     then
-      sudo cat $projectsPath/$2/logs/mon.txt
+      sudo cat $projectsPath/$2/private/logs/mon.txt
     else
       # Proxy log
       sudo cat $logsPath/proxy.txt
@@ -168,7 +168,7 @@ case "$1" in
 ;;
 
 'logs')
-  sudo cat $projectsPath/$2/logs/mon.txt
+  sudo cat $projectsPath/$2/private/logs/mon.txt
 ;;
 
 'permit')
@@ -239,7 +239,7 @@ case "$1" in
 'tail')
   if [ -n "$2" ]
     then
-      sudo tail -n 30 -f $projectsPath/$2/logs/mon.txt
+      sudo tail -n 30 -f $projectsPath/$2/private/logs/mon.txt
     else
       # Proxy log
       sudo tail -n 30 -f $logsPath/proxy.txt
@@ -257,7 +257,7 @@ case "$1" in
 'traffic')
   if [ -n "$2" ]
     then
-      sudo tail -n 30 -f $projectsPath/$2/logs/requests.txt
+      sudo tail -n 30 -f $projectsPath/$2/private/logs/requests.txt
     else
       # Proxy log
       echo No domain provided

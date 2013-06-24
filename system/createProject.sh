@@ -12,11 +12,11 @@ createProjectNix ()
     else
       # echo NO cloneFile provided. Creating blank project from blank.
       cp -R blank $projectsPath/$domain
-      mkdir $projectsPath/$domain/settings
-      mkdir $projectsPath/$domain/workers
-      mkdir $projectsPath/$domain/logs
-      touch $projectsPath/$domain/logs/mon.txt
-      mkdir $projectsPath/$domain/temp
+      mkdir $projectsPath/$domain/private/settings
+      mkdir $projectsPath/$domain/private/makers
+      mkdir $projectsPath/$domain/private/logs
+      touch $projectsPath/$domain/private/logs/mon.txt
+      mkdir $projectsPath/$domain/private/temp
       
   fi
   speedcoach "$domain created from template"
@@ -48,16 +48,16 @@ createProjectMac ()
     else
       # echo NO cloneFile provided. Creating blank project from blank.
       cp -R blank $projectsPath/$domain
-      mkdir $projectsPath/$domain/settings
-      mkdir $projectsPath/$domain/workers
-      mkdir $projectsPath/$domain/logs
-      mkdir $projectsPath/$domain/temp
+      mkdir $projectsPath/$domain/private/settings
+      mkdir $projectsPath/$domain/private/makers
+      mkdir $projectsPath/$domain/private/logs
+      mkdir $projectsPath/$domain/private/temp
   fi
   
   createOwnerFile $domain $ownerEmail
   cd $projectsPath/$domain
 #  git init >/dev/null
-  echo "temp/" > .gitignore
+#  echo "temp/" > .gitignore
 #  git add . >/dev/null
 #  git commit -am "Initial commit" >/dev/null
 

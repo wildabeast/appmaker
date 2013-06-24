@@ -5,15 +5,14 @@ function Install (app) {
   console.log('Installing necessary files and objects...')
   
   // Main project path
-  // Create the project folder. All worker data and apps go here.
+  // Create the project folder. All maker data and apps go here.
   // It is a good idea to make this folder a git repo to version all
-  // a workers project data.
+  // a makers project data.
   if (!fs.existsSync(app.paths.project))
     fs.mkdirSync(app.paths.project)
-    
-  // Create the public folder for storing uploads and other static assets.
-  if (!fs.existsSync(app.paths.public))
-    fs.mkdirSync(app.paths.public)
+
+  if (!fs.existsSync(app.paths['private']))
+    fs.mkdirSync(app.paths['private'])
   
   // Create the settings folder for storing settings files.
   if (!fs.existsSync(app.paths.settings))
@@ -26,14 +25,6 @@ function Install (app) {
   // Create the logs folder for storing log data, other ops data.
   if (!fs.existsSync(app.paths.logs))
     fs.mkdirSync(app.paths.logs)
-  
-  // Create the logs folder for storing log data, other ops data.
-  if (!fs.existsSync(app.paths.session_logs))
-    fs.mkdirSync(app.paths.session_logs)
-  
-  // Create the logs folder for storing log data, other ops data.
-  if (!fs.existsSync(app.paths.session_logs + 'archive/'))
-    fs.mkdirSync(app.paths.session_logs + 'archive/')
   
   // Create the temp folder for storing temporary stuff
   if (!fs.existsSync(app.paths.temp))
@@ -48,8 +39,8 @@ function Install (app) {
     fs.mkdirSync(app.paths.surveys)
   
   for (var i in app.defaultTypes) {
-    if (!fs.existsSync(app.paths.project + app.defaultTypes[i]))
-      fs.mkdirSync(app.paths.project + app.defaultTypes[i])
+    if (!fs.existsSync(app.paths['private'] + app.defaultTypes[i]))
+      fs.mkdirSync(app.paths['private'] + app.defaultTypes[i])
   }
   
   if (!fs.existsSync(app.paths.settings + 'is_open_source.txt'))
@@ -69,12 +60,12 @@ module.exports = Example\n", 'utf8')
   }
   
   // Create default home page
-  if (!fs.existsSync(app.paths.project + 'pages/home.space'))
-    fs.writeFileSync(app.paths.project + 'pages/home.space', '', 'utf8')
+  if (!fs.existsSync(app.paths.pages + 'home.space'))
+    fs.writeFileSync(app.paths.pages + 'home.space', '', 'utf8')
   
   // Create default home timeline
-  if (!fs.existsSync(app.paths.project + 'timelines/home.space'))
-    fs.writeFileSync(app.paths.project + 'timelines/home.space', '', 'utf8')
+  if (!fs.existsSync(app.paths.timelines + 'home.space'))
+    fs.writeFileSync(app.paths.timelines + 'home.space', '', 'utf8')
   
 
 }

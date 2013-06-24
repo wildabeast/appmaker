@@ -64,7 +64,7 @@ var portsPath = dataPath + 'ports/'
 
 app.domain = process.argv[2]
 app.port = process.argv[3]
-app.defaultTypes = ['pages', 'posts', 'workers', 'timelines']
+app.defaultTypes = ['pages', 'posts', 'makers', 'timelines']
 
 // Change the process title for easier debugging & monitoring
 process.title = app.domain
@@ -89,7 +89,7 @@ app.Project = new Space()
 var Room = new Space()
 
 // Load the HTML file and add mtimes as query string so the
-// worker always get the latest version of the nudgepad.js and nudgepad.css
+// maker always get the latest version of the nudgepad.js and nudgepad.css
 // todo: remove this?
 app.nudgepadCssVersion = fs.statSync(clientPath + 'production/nudgepad.min.css').mtime.getTime()
 app.nudgepadJsVersion = fs.statSync(clientPath + 'production/nudgepad.min.js').mtime.getTime()
@@ -106,13 +106,13 @@ app.Project.loadFolder = function (folder) {
   // Create a Space for every folder
   app.Project.set(folder, new Space())
   // Grab all spaces in a folder
-  var files = fs.readdirSync(app.paths.project + folder)
+  var files = fs.readdirSync(app.paths['private'] + folder)
   for (var j in files) {
     // Dont read non space files
     if (!files[j].match(/\.space/))
       continue
     // Load every file into memory
-    var filePath = app.paths.project + folder + '/' + files[j]
+    var filePath = app.paths['private'] + folder + '/' + files[j]
     app.Project.set(folder + ' ' + files[j].replace(/\.space$/,''), new File(filePath).loadSync())
   }
 }
@@ -168,7 +168,7 @@ speedcoach('spaces loaded into memory')
 
 
 app.patchFile = function (path, patch, email) {
-  var filepath = app.paths.project + path.replace(/ /g, '/') + '.space'
+  var filepath = app.paths['private'] + path.replace(/ /g, '/') + '.space'
   var file = app.Project.get(path)
   var patchFile = patch.get(path)
   
@@ -279,7 +279,9 @@ app.use('/nudgepad/', express.static(clientPath.replace(/\/$/,''), { maxAge: 315
 
 
 /*********** public ***********/
-app.use('/', express.static(app.paths.public, { maxAge: 31557600000 }))
+// Make sure this is first so an index.html will take precedence
+// over a private/pages/home
+app.use('/', express.static(app.paths.project, { maxAge: 31557600000 }))
 
 /********** blog *************/
 require('./blog.js')(app)
@@ -392,13 +394,13 @@ app.get(app.pathPrefix + 'started', app.checkId, function (req, res, next) {
 })
 
 require('./console.js')(app)
-fs.watch(app.paths.public, function (event, filename) {
+fs.watch(app.paths.project, function (event, filename) {
   
   // Trigger public changed event
   // mac on old node wont emit filename
   if (!filename)
     filename = ''
-  app.SocketIO.sockets.emit('public', filename.toString())
+  app.SocketIO.sockets.emit('file', filename.toString())
   
 })
 
@@ -496,19 +498,19 @@ app.SocketIO.set('authorization', function (data, accept) {
   
   var cookie = parseCookie(data.headers.cookie)
 
-  var worker = app.Project.get('workers ' + cookie.email)
-  if (!worker)
-    return accept('Invalid worker "' + cookie.email + '" transmitted. Headers:' + data.headers.cookie, false)
+  var maker = app.Project.get('makers ' + cookie.email)
+  if (!maker)
+    return accept('Invalid maker "' + cookie.email + '" transmitted. Headers:' + data.headers.cookie, false)
 
   // Wrong key
-  if (worker.get('key') !== cookie.key)
+  if (maker.get('key') !== cookie.key)
     return accept('Invalid key transmitted.', false)
   
   data.cookie = cookie
   data.screenId = new Date().getTime()
   Room.set(data.screenId, new Space())
     
-  // todo: broadcast worker
+  // todo: broadcast maker
   return accept(null, true)  
   
 })

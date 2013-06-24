@@ -29,13 +29,13 @@ startProject () {
   
   if isMac
     then
-      touch $projectsPath/$domain/logs/mon.txt
-      mon -d -l $projectsPath/$domain/logs/mon.txt -p $projectsPath/$domain/temp/projectPid -m $projectsPath/$domain/temp/monPid "node app.js $domain $PORT"
+      touch $projectsPath/$domain/private/logs/mon.txt
+      mon -d -l $projectsPath/$domain/private/logs/mon.txt -p $projectsPath/$domain/private/temp/projectPid -m $projectsPath/$domain/private/temp/monPid "node app.js $domain $PORT"
     else
       # todo: fix this so mon isnt launching 2 processes.
-#      sudo -u $domain touch $projectsPath/$domain/logs/mon.txt
+#      sudo -u $domain touch $projectsPath/$domain/private/logs/mon.txt
       # todo: how can we start this without sudo? sudo cause a 400ms delay
-      sudo -u $domain mon -d -l $projectsPath/$domain/logs/mon.txt -p $projectsPath/$domain/temp/projectPid -m $projectsPath/$domain/temp/monPid "node app.js $domain $PORT"
+      sudo -u $domain mon -d -l $projectsPath/$domain/private/logs/mon.txt -p $projectsPath/$domain/private/temp/projectPid -m $projectsPath/$domain/private/temp/monPid "node app.js $domain $PORT"
   fi
   return 0
 }

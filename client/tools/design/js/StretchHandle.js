@@ -210,7 +210,7 @@ Design.StretchHandle.slideend = function () {
  *
  *      O--------X-----H
  *
- * @param {number} The top or left position of the handle OPPOSITE the one the worker grabbed
+ * @param {number} The top or left position of the handle OPPOSITE the one the maker grabbed
  * @param {string} Whether this is a vertical or horizontal change.
  * @returns {object} Such as length.x, length.y
  */

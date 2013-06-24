@@ -2,7 +2,7 @@ stopProject () {
   # check if project is already running
   if isActive $1
     then
-      PID=$(sudo cat $projectsPath/$1/temp/monPid)
+      PID=$(sudo cat $projectsPath/$1/private/temp/monPid)
       sudo kill $PID
       echo stopped $1
       return 0

@@ -76,7 +76,7 @@ var Explorer = function (app) {
    * path
    */
   app.get(app.pathPrefix + 'explorer.public', app.checkId, function(req, res, next) {
-    folderStats(app.paths.public, function (err, space) {
+    folderStats(app.paths.project, function (err, space) {
       res.set('Content-Type', 'text/plain')
       return res.send(space.toString())    
     })
