@@ -12,7 +12,7 @@
      "test": "make test"
    },
   "dependencies": {
-    "space": ">=0.1.17",
+    "space": ">=0.1.18",
     "scraps": ">=0.2.7",
     "speedcoach": ">=0.1.1",
     "socket.io": "*",

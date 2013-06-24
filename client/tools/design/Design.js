@@ -371,14 +371,9 @@ Design.trash = function (name) {
   // If its the currently open page, open the previous page first
   if (Design.stage.activePage === name)
     Design.stage.back()
-  
-  var patch = new Space()
-  patch.set('pages ' + name, '')
-  patch.set('timelines ' + name, '')
-  nudgepad.emit('patch', patch.toString())
 
-  Project.get('pages').delete(name)
-  Project.get('timelines').delete(name)
+  Project.delete('pages ' + name)
+  Project.delete('timelines ' + name)
   
   // Delete page from open pages
   Design.updateTabs()
