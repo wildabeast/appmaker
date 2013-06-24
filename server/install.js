@@ -26,14 +26,6 @@ function Install (app) {
   if (!fs.existsSync(app.paths.logs))
     fs.mkdirSync(app.paths.logs)
   
-  // Create the logs folder for storing log data, other ops data.
-  if (!fs.existsSync(app.paths.session_logs))
-    fs.mkdirSync(app.paths.session_logs)
-  
-  // Create the logs folder for storing log data, other ops data.
-  if (!fs.existsSync(app.paths.session_logs + 'archive/'))
-    fs.mkdirSync(app.paths.session_logs + 'archive/')
-  
   // Create the temp folder for storing temporary stuff
   if (!fs.existsSync(app.paths.temp))
     fs.mkdirSync(app.paths.temp)
