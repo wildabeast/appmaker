@@ -1,8 +1,8 @@
 // Open socket
 var Socket = io.connect('/')
 
-Socket.on('public', function (space) {
-  Socket.trigger('public', space)
+Socket.on('file', function (space) {
+  Socket.trigger('file', space)
 })
 
 Socket.on('uploadComplete', function (file) {

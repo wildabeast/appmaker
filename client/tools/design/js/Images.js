@@ -92,12 +92,12 @@ Design.images.updateList = function () {
 Design.on('open', function () {
   // When an image is uploaded
   Project.on('uploadComplete', Design.images.updateList)
-  Project.on('public', Design.images.updateList)
+  Project.on('file', Design.images.updateList)
 })
 Design.on('close', function () {
   // When an image is uploaded
   Project.off('uploadComplete', Design.images.updateList)
-  Project.off('public', Design.images.updateList)
+  Project.off('file', Design.images.updateList)
 })
 
 Design.on('firstOpen', Design.images.updateList)
