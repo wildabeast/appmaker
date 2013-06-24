@@ -57,7 +57,7 @@ createProjectMac ()
   createOwnerFile $domain $ownerEmail
   cd $projectsPath/$domain
 #  git init >/dev/null
-  echo "temp/" > .gitignore
+#  echo "temp/" > .gitignore
 #  git add . >/dev/null
 #  git commit -am "Initial commit" >/dev/null
 
