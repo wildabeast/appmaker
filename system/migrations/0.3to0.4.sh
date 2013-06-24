@@ -10,6 +10,7 @@ do
   # remove .gitignore
   sudo rm /nudgepad/projects/$domain/.gitignore
   # move all folders to private sub folder
+  sudo -u $domain mkdir /nudgepad/projects/$domain/private/
   folders="includes logs pages posts settings surveys temp timelines workers"
   for folder in $folders
   do
