@@ -6,17 +6,19 @@ projects="$(ls /nudgepad/projects/)"
 for domain in $projects
 do
   # rename workers folder to makers folder
-  sudo mv /nudgepad/projects/$domain/workers /nudgepad/projects/$domain/makers
+  mv /nudgepad/projects/$domain/workers /nudgepad/projects/$domain/makers
   # move all public files to root level
-  sudo mv /nudgepad/projects/$domain/public/*.* /nudgepad/projects/$domain/
+  mv /nudgepad/projects/$domain/public/*.* /nudgepad/projects/$domain/
   # remove .gitignore
-  sudo rm /nudgepad/projects/$domain/.gitignore
+  rm /nudgepad/projects/$domain/.gitignore
   # move all folders to private sub folder
-  sudo mkdir /nudgepad/projects/$domain/private/
-  sudo chown $domain:$domain /nudgepad/projects/$domain/private/
-  folders="includes logs pages posts settings surveys temp timelines workers"
+  mkdir /nudgepad/projects/$domain/private/
+  chown $domain:$domain /nudgepad/projects/$domain/private/
+  folders="logs packages pages posts settings surveys temp timelines workers"
   for folder in $folders
   do
-    sudo mv /nudgepad/projects/$domain/$folder /nudgepad/projects/$domain/private/$folder
+    mv /nudgepad/projects/$domain/$folder /nudgepad/projects/$domain/private/$folder
   done
+  # remove public folder
+  rm -rf /nudgepad/projects/$domain/public
 done
