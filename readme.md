@@ -1,7 +1,7 @@
 NudgePad BETA
 =============
 
-Make websites, apps and more in your browser.
+NudgePad is an open source tool for making websites, apps and more in your browser.
 
 Try it
 ------
@@ -13,27 +13,81 @@ When can I use it?
 
 NudgePad will launch for the general public at some point in late 2013.
 
-If you're a developer, now is a great time to get involved and help
-make tools that can help you and the world reach our creative potential.
+If you are a developer, now is a great time to get involved early in the NudgePad
+community and make contributions that can make a big difference in the potential
+of NudgePad to change the world.
 
-Examples of things made with NudgePad
--------------------------------------
 
-- Blog: http://breckyunits.com/
-- Small Business Site: http://octaviachambliss.com/
-- Book Site: http://generationatheistbook.com/
-- Personal Homepage: http://benzulauf.com/
+Table of Contents
+-----------------
+
+This ReadMe contains 4 sections:
+
+1. "How to Build Your Project with NudgePad 1.0" - for makers who want to use NudgePad to build things.
+2. "How to Build a Community Tool for NudgePad 1.0" - for developers who want to build tools for NudgePad.
+3. "How to Host NudgePad 1.0" - for sysadmins who want to setup a server to host NudgePad projects.
+4. "How to Contribute to NudgePad 1.0 core" - for developers who want to become part of the core NudgePad development team.
+
+How to Build Your Project with NudgePad 1.0
+===========================================
+
+CAUTION: NudgePad 1.0 comes out later this year, right now we are in BETA, so things are still broken and subject to change. You've been warned!
+
+1. Go to NudgePad.com.
+2. Enter a name for your project (don't worry you can change this in seconds later!)
+3. Click "Make"
+
+Your project is now live on the web!
+
+There are two ways to build your project:
+
+1. Use the NudgePad Community Tools.
+
+2. Ignore the NudgePad Community Tools and just use simple HTML, CSS, Javascript, images, et cetera.
+
+There is no wrong way to build your project. Sometimes you may want to use the NudgePad Community Tools,
+sometimes you may want to just use NudgePad as a simple web server to serve static files.
+
+
+Method 1 - Using NudgePad Community Tools.
+------------------------------------------
+
+Each NudgePad project contains a Home Tool which shows you the various Community Tools you can use to build your project.
+
+For example, you might use the Designer Tool to visually design your site, or the Blog Tool to create blog posts.
+
+Method 2
+--------
+
+Under the hood, NudgePad projects are simply a folder with a bunch of files in it. Although the Community Tools give you easy methods of modifying those files, you are always free to edit and modify those folders and files directly.
+
+Each project is a single directory on the server like this:
+
+yourprojectname.nudgepad.com/
+
+If you upload a file like "index.html" to this folder, so your project looks like this:
+
+yourprojectname.nudgepad.com/index.html
+
+Then that page will server as the homepage of your project.
+
+There is a folder called "private/" in your project directory, which follows certain conventions required by the NudgePad core and the NudgePad Community Tools, but you are free to completely ignore this folder and just use NudgePad as a simple vanilla web server.
+
+
+How to Build a Community Tool for NudgePad 1.0
+==============================================
+
+CAUTION: NudgePad 1.0 comes out later this year, right now we are in BETA, so things are still broken and subject to change. However, we are here to help you build your tool, so don't be shy about contacting us via email or IRC.
 
 How can I help?
 ---------------
 
-At the center of the NudgePad are Tools like "Design" and "Develop" that
-the community can use to create their projects.
+The core idea of NudgePad is the concept of Community Tools.
 
-If you're a developer, the best way to help is by building a great tool
-that allows people to make something in their browsers.
+These are open source web apps built by the NudgePad Community to enable people to make things
+in their browser.
 
-Unlike apps built for consuming content, on NudgePad all tools are built
+Unlike apps built for consuming content, NudgePad Community Tools are built
 for making content. You could build a blogging tool, a drawing tool, an
 image editing tool, a vector tool, or something completely new.
 
@@ -41,13 +95,10 @@ Once your tool is working and useful, you can submit it to the core
 of NudgePad as a pull request. You could go from idea to tool to having
 your pull request accepted and deployed to all NudgePad servers in less
 than 24 hours. There is no "Tool Store" in NudgePad. The entire NudgePad community
-has access to all tools pulled into core at all times. Our goal is
-quality Tools, not quantity, and a very fast and consistent experience for
-our community. We also want to enable collaboration, and have developers and
-designers work together to build better tools for the community.
+has access to all Community Tools that are accepted into core at all times.
 
-Creating a Tool
----------------
+Creating a Community Tool
+-------------------------
 
 To go from "Idea" to "wow my tool is available to all NudgePad Projects", the workflow looks like this:
 
@@ -56,7 +107,7 @@ To go from "Idea" to "wow my tool is available to all NudgePad Projects", the wo
 3. Edit, test and refine your tool.
 4. Commit and push to your fork then submit a pull request
 
-Before creating an tool, you may want to have our contact info handy if you run into any problems:
+Before creating a tool, you may want to have our contact info handy if you run into any problems:
 
 Email: breck@nudgepad.com
 Phone: 1-415-937-1984
@@ -64,7 +115,7 @@ Phone: 1-415-937-1984
 
 #### Installing on Localhost
 
-The best way to develop NudgePad is to install a copy on localhost.
+The best way to develop a NudgePad Community tool is to install a copy of NudgePad on localhost.
 
 NudgePad currently works best on Mac OS X and Ubuntu.
 
@@ -87,32 +138,28 @@ to add this to your .bash_profile or .bashrc:
 
     PATH=$PATH:~/node_modules/.bin
 
-#### Naming Your Tool
+#### Naming Your Community Tool
 
 Getting the name right for your tool is very important. The fastest way to
 choose a great name for your tool is to choose a bad name for your tool, and
 then build your tool in a way that it is easy to find/replace the name later on.
 
-Your tool name should be: unique, alphabet only, and a verb. Tools in NudgePad
+Your tool name should be: unique and alphabet only. Tools in NudgePad
 are always centered around "Making" and not "Consuming", so the name should
-convey what the user is going to be doing with that tool. For example, "Draw"
-instead of "Pictures".
+convey what the user is going to be doing with that tool.
 
-It's also important to know that your Tool Name will reserve a single word in the
+It's also important to know that your Tool will reserve a single word in the
 NudgePad namespace. So if you name your tool "Draw", the variable Draw
 will be made a global in the NudgePad client and so it shouldn't interfere with
-other words.
+other community tools or Javascript/DOM reserved words.
 
-We consciously chose to name tools this way, "polluting" the global namespace,
-because we value design, increased collaboration, and simplicity over the ugly
-module systems presented by other platforms.
+There are no ugly closures required here. NudgePad is a controlled ecosystem, and
+so we can ensure that there are no namespace conflicts and developers don't have
+to create ugly nested hacks to avoid conflicts.
 
-We also value updates. We want to ensure our community that tools are constantly
-being improved, refined, and tested.
+#### Creating Your Community Tool
 
-#### Creating Your Tool
-
-Tools in NudgePad are meant to be modular and sandboxed and contained in one
+Community Tools in NudgePad are meant to be modular and sandboxed and contained in one
 folder.
 
 You can create a new tool at the command line like this:
@@ -143,21 +190,24 @@ tool.space name Draw
 Once your tool is created, visit http://localhost and create a new project
 to see it in action.
 
-The Launch tool should allow you to launch your tool.
+The Home Tool should allow you to launch your tool.
 
 As you make changes to your tool, refresh your browser to see them.
 
-NudgePad has a build system that takes all the tools and compiles them into
-a single page webappfor the user. This keeps NudgePad fast.
+NudgePad has a build system that compiles all tools into
+a single page webapp for the user. This keeps NudgePad fast.
 While developing, NudgePad will watch the tools folder for changes and will
 run the build system each time.
 
 
-Core Objects
-------------
+Core Objects Available to Your Community Tool
+---------------------------------------------
 
 At this point you have created your tool and can open it in your browser. Now
 you can start adding functionality to your tool.
+
+Your tool does not actually have to interact with any core API, and in fact,
+probably will only make a few method calls to the core to write and read files.
 
 NudgePad exposes an API that your tool can use to read and write files to the user's
 project. You also have access to the latest jQuery($), and some other libraries.
@@ -334,6 +384,9 @@ mixpanel.track({
 Server Side Routes
 ------------------
 
+Your tool can access some server side routes that provide read and write access
+to a maker's project.
+
 #### GET
 
 ```
@@ -371,35 +424,119 @@ http://domain/nudgepad.export
 (fill this in)
 
 
-Appendix
-========
+How to Host NudgePad 1.0
+========================
+
+CAUTION: NudgePad 1.0 comes out later this year, right now we are in BETA, so things are still broken and subject to change. These steps ALMOST work. However, they definitely do not work flawlessly. Eventually installing NudgePad will be as simple as "npm install nudgepad". Until then, we are here to help you setup hosting, so don't be shy about contacting us via email or IRC.
+
+The steps for setting up a server:
+
+1. Install the requirements:
+- Node 0.8.*
+- git
+- imagemagick
+- sendmail
+- mon
+
+2. Clone NudgePad to your homefolder:
+
+    $ cd ~
+    $ git clone https://github.com/nudgepad/nudgepad.git
+
+3. For Linux, add the "projects" group to your machine. Add your user to that group.
+
+4. Install the required npm modules.
+
+5. Install the "npd" command:
+
+    $ echo "alias npd='~/nudgepad/system/nudgepad.sh'" >> ~/.bash_profile
+    $ source ~/.bash_profile
+
+6. Start NudgePad:
+
+    $ npd start
+
+7. Go to http://yourserverdomain
+
+How to Contribute to NudgePad 1.0 core
+======================================
+
+CAUTION: NudgePad 1.0 comes out later this year, right now we are in BETA, so things are still broken and subject to change. In other words, we always are on the lookout for talented developers to help us on the core of NudgePad!
+
+To get involved with core, play around with NudgePad, read about our design philosophy, and get in touch!
+
+You could also create issues or comment on existing issues.
+
+Design Goals
+------------
+
+Ultimately our goal is to build a tool that not only expert users will use because it's the fastest, best
+tool out there, but to build a tool that everyone will use because it's also the simplest, most user
+friendly tool out there.
+
+We want to not only enable the 5 million people who can currently create websites and software to create
+more projects better and fast than before, but we want to enable the other few billion Internet users
+to be able to make things. We want to enable people to **work together** on projects better than they ever
+have before.
+
+Some somewhat more specific goals:
+- 100 milliseconds to create a new blank project or project from template
+- 100 milliseconds to move a project to a new domain
+- 100,000 projects per server
+- Copy/pasting of components and entire projects
+- Instant updating of a website from any device
+- Add server side code to any project
+- Runs great in the cloud or on localhost
+- Community Tools work seamlessly together
+- High quality Community Tools that are **better** than their closed source/proprietary alternatives
+- Enable self hosting
+- Simple conceptual models throughout
+- Lead way not only on improving and simplifying NudgePad, but also work hard on contributing improvements
+to underlying Internet and web technologies
+
 
 Core Architecture Concepts
 --------------------------
 
-The first core concept in NudgePad is the Project. A user is always working on a single
-project. A project is always just a single folder on the computer. There is no
-database used, everything is stored on disk. Each project can have unlimited users,
-and each user record is simple a file in the makers/ folder.
+The first core concept in NudgePad is the Project. A maker is always working on a single
+project. A project is always just a single folder on the server. There is no
+database used, everything is stored on disk. Each project can have multiple makers who
+can work together at the same time, and each maker record is simple a file in the makers/ folder.
 
 Projects can be tiny or huge. All projects are stored in /nudgepad/projects/.
 Each Project has a name, which is also the domain name and folder name for the project.
 Each project is a website, and a node.js Express app as well. Projects can
 evolve into anything.
 
-The second core concept in NudgePad is the Tool. Makers work on their project in
-the browser by using Tools. Each tool is just HTML, CSS, and Javascript, that interacts
+The second core concept in NudgePad is the Community Tool. Makers work on their project in
+the browser by using Community Tools. Each tool is just HTML, CSS, and Javascript, that interacts
 with the user's project files via some core APIs.
 
 The third core concept in NudgePad is the Space language. As much as possible, we rely
-on Space to encode and store data. Over the long term this will create a lot of
-benefits for collaboration and creation.
+on Space to encode and store data. We believe it is critical to not only simplify and
+improve the UX of making things, but also to simplify and improve the underlying
+technologies of the web and Internet.
 
 
 Overview of the Codebase
 ------------------------
 
-Besides the Tool and Client parts of NudgePad, there are two other core components.
+client
+------
+
+This code contains all of the front end code of the NudgePad user interface.
+
+It also contains all the Community Tools.
+
+client/
+client/build.js - The build script that compiles core and all Community Tools into 1 html, css, and
+javascript file.
+client/core - A tiny bit of core code that provides some basics to the Community Tools
+client/tools - This is where all the action is. These Community Tools are apps that make it easy for makers
+to work on their projects.
+client/public - Some additional pages, external libraries, and some css and images used by core.
+client/production - Contains compiled nudgepad files. These are auto generated.
+client/Makefile - some convenience commands for working on the client.
 
 server
 ------
@@ -462,13 +599,16 @@ The folders in /nudgepad are:
 - /nudgepad/projects Contains all the data for every project.
 - /nudgepad/temp Contains temp files for panel and proxy.
 
-The data for a project "foo.com" is stored in /nudgepad/projects/foo.com/ and looks like this:
+The data for a project "foo.com" is stored in /nudgepad/projects/foo.com/ and is all served publicly by Express.
+
+So a file /nudgepad/projects/foo.com/foo.html would be available at foo.com/foo.html
+
+There is also a private folder where all NudgePad conventions are stored and that looks like this:
 
 - packages/ Contains Node.js packages to include onstart. Each package extends the app object. So your package should export one function which takes an express app object as a param and extends it.
 - logs/ Contains project log files.
 - pages/ Contains the pages that are edited by the Design Tool. Encoded in Space/Scraps
 - posts/ Contains blog posts for blog module. Encoded in Space.
-- public/ Serves any assets. Can add any html/images/css/js etc. Normal public web folder.
 - settings/ Stores project settings. Each setting is either a Space object or a one liner text file. API in flux.
 - surveys/ Stores form posts encoded in Space.
 - temp/ Stores temporary project data.
@@ -483,7 +623,7 @@ Long term NudgePad is targeted at creative people who like making things. That's
 5% of the general population.
 
 Short term NudgePad is targeted at web savvy, early adopters who have a lot
-of project idea and want faster and better ways to make them real. That's
+of project ideas and want faster and better ways to make them real. That's
 5% of the creatives.
 
 The projects creatives want to make are:
