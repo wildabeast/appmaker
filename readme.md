@@ -45,9 +45,9 @@ For developers who want to become part of the core NudgePad development team.
 How to Build Your Project with NudgePad 1.0
 ===========================================
 
-CAUTION: NudgePad 1.0 comes out later this year, right now we are in BETA, so things are still broken and subject to change. You've been warned!
+__CAUTION: NudgePad 1.0 comes out later this year, right now we are in BETA, so things are still broken and subject to change. You've been warned!__
 
-1. Go to NudgePad.com.
+1. Go to http://nudgepad.com
 2. Enter a name for your project (don't worry you can change this in seconds later!)
 3. Click "Make"
 
@@ -63,35 +63,32 @@ There is no wrong way to build your project. Sometimes you may want to use the N
 sometimes you may want to just use NudgePad as a simple web server to serve static files.
 
 
-Method 1 - Using NudgePad Community Tools.
-------------------------------------------
+#### Method 1 - Using NudgePad Community Tools.
 
 Each NudgePad project contains a Home Tool which shows you the various Community Tools you can use to build your project.
 
 For example, you might use the Designer Tool to visually design your site, or the Blog Tool to create blog posts.
 
-Method 2
---------
+#### Method 2 - Using NudgePad as a simple web server
 
-Under the hood, NudgePad projects are simply a folder with a bunch of files in it. Although the Community Tools give you easy methods of modifying those files, you are always free to edit and modify those folders and files directly.
+
+Under the hood, NudgePad projects are simply a folder with simple files in it. Although the Community Tools give you easy methods of modifying those files, you are always free to edit and modify those folders and files directly.
 
 Each project is a single directory on the server like this:
 
 yourprojectname.nudgepad.com/
 
-If you upload a file like "index.html" to this folder, so your project looks like this:
+If you upload a file like "index.html" to this folder, then http://yourprojectname.nudgepad.com/index.html will be the homepage of your project.
 
-yourprojectname.nudgepad.com/index.html
+If you don't upload an index.html file, then yourprojectname.nudgepad.com/private/pages/home.space will be the homepage of your project, and you can edit that visually with the Designer tool.
 
-Then that page will server as the homepage of your project.
-
-There is a folder called "private/" in your project directory, which follows certain conventions required by the NudgePad core and the NudgePad Community Tools, but you are free to completely ignore this folder and just use NudgePad as a simple vanilla web server.
-
+That folder called "private/" in your project directory, contains all the NudgePad specific data if you
+are using the NudgePad tools to build your project. However, you are free to completely ignore this folder and just use NudgePad as a simple web server.
 
 How to Build a Community Tool for NudgePad 1.0
 ==============================================
 
-CAUTION: NudgePad 1.0 comes out later this year, right now we are in BETA, so things are still broken and subject to change. However, we are here to help you build your tool, so don't be shy about contacting us via email or IRC.
+__CAUTION: NudgePad 1.0 comes out later this year, right now we are in BETA, so things are still broken and subject to change. However, we are here to help you build your tool, so don't be shy about contacting us via email or IRC.__
 
 How can I help?
 ---------------
@@ -167,9 +164,11 @@ NudgePad namespace. So if you name your tool "Draw", the variable Draw
 will be made a global in the NudgePad client and so it shouldn't interfere with
 other community tools or Javascript/DOM reserved words.
 
-There are no ugly closures required here. NudgePad is a controlled ecosystem, and
+There are no ugly closures required here. NudgePad is an open but controlled ecosystem
 so we can ensure that there are no namespace conflicts and developers don't have
-to create ugly nested hacks to avoid conflicts.
+to create ugly nested hacks to avoid conflicts. Keeping things in core also ensures we can guarantee
+to our users a strong, consistent experience, and that there's always one person to blame
+if they have a bad experience--Breck!
 
 #### Creating Your Community Tool
 
@@ -348,13 +347,13 @@ A simple and dumb text editor.
 
 ```
 // Pop the editor
-Explorer.edit('public/foobar.html')
+Explorer.edit('foobar.html')
 // Create a file
-Explorer.create('public/foobar.html', callback)
+Explorer.create('foobar.html', callback)
 // Rename a file
-Explorer.rename('public/foobar.html', 'public/foobar2.html', callback)
+Explorer.rename('foobar.html', 'foobar2.html', callback)
 // Delete a file
-Explorer.remove('public/foobar.html', callback)
+Explorer.remove('foobar.html', callback)
 
 ```
 
@@ -388,7 +387,7 @@ mixpanel.track({
 })
 
 // Note: don't add any user data. We don't want someone to be sending their data,
-// just usage data so we can improve the tools.
+// just usage data so we can improve the core and Community Tools.
 //
 // For now, to see the data, Breck needs to add you to our MixPanel account--
 // just send me an email.
@@ -441,16 +440,11 @@ http://domain/nudgepad.export
 How to Host NudgePad 1.0
 ========================
 
-CAUTION: NudgePad 1.0 comes out later this year, right now we are in BETA, so things are still broken and subject to change. These steps ALMOST work. However, they definitely do not work flawlessly. Eventually installing NudgePad will be as simple as "npm install nudgepad". Until then, we are here to help you setup hosting, so don't be shy about contacting us via email or IRC.
+__CAUTION: NudgePad 1.0 comes out later this year, right now we are in BETA, so things are still broken and subject to change. These steps ALMOST work. However, they definitely do not work flawlessly. Eventually installing NudgePad will be as simple as "npm install nudgepad". Until then, we are here to help you setup hosting, so don't be shy about contacting us via email or IRC.__
 
 The steps for setting up a server:
 
-1. Install the requirements:
-- Node 0.8.*
-- git
-- imagemagick
-- sendmail
-- mon
+1. Install the requirements: Node 0.8.* git imagemagick sendmail mon
 
 2. Clone NudgePad to your homefolder:
 
@@ -475,7 +469,7 @@ The steps for setting up a server:
 How to Contribute to NudgePad 1.0 core
 ======================================
 
-CAUTION: NudgePad 1.0 comes out later this year, right now we are in BETA, so things are still broken and subject to change. In other words, we always are on the lookout for talented developers to help us on the core of NudgePad!
+__CAUTION: NudgePad 1.0 comes out later this year, right now we are in BETA, so things are still broken and subject to change. In other words, we always are on the lookout for talented developers to help us on the core of NudgePad!__
 
 To get involved with core, play around with NudgePad, read about our design philosophy, and get in touch!
 
