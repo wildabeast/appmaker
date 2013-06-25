@@ -14,8 +14,7 @@ When can I use it?
 NudgePad will launch for the general public at some point in late 2013.
 
 If you are a developer, now is a great time to get involved early in the NudgePad
-community and make contributions that can make a big difference in the potential
-of NudgePad to change the world.
+community and make contributions that can make a big impact.
 
 
 Table of Contents
@@ -23,10 +22,21 @@ Table of Contents
 
 This ReadMe contains 4 sections:
 
-1. "How to Build Your Project with NudgePad 1.0" - for makers who want to use NudgePad to build things.
-2. "How to Build a Community Tool for NudgePad 1.0" - for developers who want to build tools for NudgePad.
-3. "How to Host NudgePad 1.0" - for sysadmins who want to setup a server to host NudgePad projects.
-4. "How to Contribute to NudgePad 1.0 core" - for developers who want to become part of the core NudgePad development team.
+**How to Build Your Project with NudgePad 1.0**
+
+For users who want to use NudgePad to build things.
+
+**How to Build a Community Tool for NudgePad 1.0** 
+
+For developers who want to build tools for NudgePad.
+
+**How to Host NudgePad 1.0** 
+
+For sysadmins who want to setup a server to host NudgePad projects.
+
+**How to Contribute to NudgePad 1.0 core**
+
+For developers who want to become part of the core NudgePad development team.
 
 How to Build Your Project with NudgePad 1.0
 ===========================================
