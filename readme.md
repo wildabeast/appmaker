@@ -11,12 +11,14 @@ Try it now at http://nudgepad.com
 When can I use it?
 ------------------
 
-NudgePad will launch for the general public at some point in late 2013.
+NudgePad 1.0 will launch to the general public at some point in late 2013.
 
 If you are a developer, now is a great time to get involved in the NudgePad
 community. Your contributions can have a big impact. You also can have
-a leg up on building things! People have already used NudgePad to win
-hackathons, amongst other successes.
+a head start on learning to use NudgePad to build projects faster.
+
+At least one team has already used NudgePad to win a hackathon, amongst other
+early successes.
 
 
 Table of Contents
