@@ -231,7 +231,7 @@ Develop.console = function () {
     $.post(endpoint, {command : command}, function (result) {
       output.append('>' + command.replace(/\n/g, '> \n') + '\n')
       output.append(result + '\n')
-      output.scrollTop($('pre')[0].scrollHeight + '')
+      output.scrollTop($('#DevelopConsole')[0].scrollHeight + '')
       input.val('')
       input.focus()
     }).error(function (error, message) {
@@ -239,7 +239,7 @@ Develop.console = function () {
       output.append('>' + command.replace(/\n/g, '> \n') + '\n')
       output.append('ERROR\n')
       output.append(error.responseText + '\n')
-      output.scrollTop($('pre')[0].scrollHeight + '')
+      output.scrollTop($('#DevelopConsole')[0].scrollHeight + '')
       input.val('')
       input.focus()
     })
