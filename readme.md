@@ -190,8 +190,8 @@ like this:
 
 ```
 tool.js var Draw = new Tool('Draw')
- Draw.description = 'Draw and edit illustrations for your project.'
- Draw.color = 'blue'
+ Draw.set('description', 'Draw and edit illustrations for your project.')
+ Draw.set('color', 'blue')
 tool.css 
 tool.html 
 tool.space name Draw
@@ -266,9 +266,9 @@ Your tool should have a few standard properties including:
 
 ```
 // The background color of your Tool's button on the Launch screen
-Draw.color = 'blue'
+Draw.set('color', 'blue')
 // The description of your Tool on the Launch screen
-Draw.description = 'Draw something'
+Draw.set('description', 'Draw something')
 ```
 
 Your tool will have a few methods from the Tool prototype including:
