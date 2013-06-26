@@ -87,7 +87,8 @@ var Explorer = function (app) {
    * path
    */
   app.post(app.pathPrefix + 'explorer.get', app.checkId, function(req, res, next) {
-    fs.readFile(app.paths.project + req.body.path, 'utf8', function (err, contents) {
+    var path = req.body.path.trim().replace(/ /g, '/')
+    fs.readFile(app.paths.project + path, 'utf8', function (err, contents) {
       res.send(contents)
     })
   })
@@ -97,8 +98,8 @@ var Explorer = function (app) {
    * path
    */
   app.post(app.pathPrefix + 'explorer.remove', app.checkId, function(req, res, next) {
-
-    fs.unlink(app.paths.project + req.body.path, function (err) {
+    var path = req.body.path.replace(/ /g, '/')
+    fs.unlink(app.paths.project + path, function (err) {
       if (err) return res.send(err)
       res.send('')
     })
@@ -110,8 +111,9 @@ var Explorer = function (app) {
    * path
    */
   app.post(app.pathPrefix + 'explorer.rename', app.checkId, function(req, res, next) {
-
-    fs.rename(app.paths.project + req.body.oldPath, app.paths.project + req.body.newPath, function (err) {
+    var oldPath = req.body.oldPath.replace(/ /g, '/')
+    var newPath = req.body.newPath.replace(/ /g, '/')
+    fs.rename(app.paths.project + oldPath, app.paths.project + newPath, function (err) {
       if (err) return res.send(err)
       res.send('')
     })
@@ -125,8 +127,8 @@ var Explorer = function (app) {
    * content
    */
   app.post(app.pathPrefix + 'explorer.save', app.checkId, function(req, res, next) {
-
-    fs.writeFile(app.paths.project + req.body.path, req.body.content, 'utf8', function (err) {
+    var path = req.body.path.replace(/ /g, '/')
+    fs.writeFile(app.paths.project + path, req.body.content, 'utf8', function (err) {
       if (err) return res.send(err)
       res.send('')
     })

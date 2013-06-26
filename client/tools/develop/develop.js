@@ -1,5 +1,6 @@
 var Develop = new Tool('Develop')
 Develop.set('color', 'rgba(36, 65, 112, 1)')
+Develop.set('path', '')
 Develop.set('description', 'Edit the backend and files of your project.')
 
 Develop.cloneProject = function () {
@@ -67,10 +68,6 @@ Develop.createFile = function () {
   Explorer.create(Develop.get('path') + ' ' + name, Develop.refresh)
 }
 
-Develop.home = function () {
-  Develop.set('path', '')
-}
-
 Develop.import = function () {
   TextPrompt('Import a Project ', '', function (val) {
     $.post('/nudgepad.import', {space : val}, function (err) {
@@ -88,6 +85,11 @@ Develop.on('open', function () {
     Develop.refresh()
 })
 
+Develop.on('set', function (key) {
+  if (key === 'path')
+    Develop.renderExplorer()
+})
+
 Develop.renderExplorer = function () {
   
   var files = Develop.get('files')
@@ -97,28 +99,35 @@ Develop.renderExplorer = function () {
   var explorer = '<table id="DevelopExplorer">'
   explorer += '<tr class="DevelopExplorerHeader"><td>Filename</td><td></td><td></td><td>Size</td><td>Age</td></tr>'
   
-  var filenames = files.keys
-  for (var i in filenames) {
-    // its a folder
-    var name = filenames[i]
-    var item = files.values[name]
+  var path = (Develop.get('path') ? Develop.get('path') + ' ' : '')
+  files.each(function (filename, file) {
     var row = '<tr'
-    if (item.get('timeSinceLastChange')) {
-      row += ' class="DevelopExplorerFile" value="' + name + '" path="' + Develop.path + ' ' + name + '">'
-      row += '<td class="DevelopExplorerEdit">' + name + '</td>'
+    // if is file
+    if (file.get('timeSinceLastChange')) {
+      row += ' class="DevelopExplorerFile" value="' + filename + '" path="' + path + filename + '">'
+      row += '<td class="DevelopExplorerEdit">' + filename + '</td>'
       row += '<td class="DevelopExplorerRename">Rename</td>'
       row += '<td class="DevelopExplorerRemove">Delete</td>'
-      row += '<td>' + (item.get('size')) + 'KB</td>'
-      row += '<td>' + moment(item.get('mtime')).fromNow() + '</td>'
+      row += '<td>' + (file.get('size')) + 'KB</td>'
+      row += '<td>' + moment(file.get('mtime')).fromNow() + '</td>'
     } else {
-      row += ' class="DevelopExplorerFolder" value="' + name + '" path="' + Develop.path + ' ' + name + '">'
-      row += '<td class="DevelopExplorerFolderName" colspan=5>' + name + '</td>'
+      row += ' class="DevelopExplorerFolder" value="' + filename + '" path="' + path + filename + '">'
+      row += '<td class="DevelopExplorerFolderName" colspan=5>' + filename + '</td>'
     }
     row += '</tr>'
     explorer += row
-  }
+  })
   explorer += '</table>'
-  $('#DevelopExplorerPath').text(document.location.host + ' ' + Develop.get('path'))
+  var breadcrumb = '<span onclick="Develop.set(\'path\', \'\')">' + document.location.host + '</span>'
+  if (path) {
+    var parent = ''
+    path.split(/ /g).forEach(function (v, i) {
+      breadcrumb += ' <span onclick="Develop.set(\'path\', \'' + parent + v + '\')">' + v + '</span>'
+      parent += v + ' '
+    })
+    
+  }
+  $('#DevelopExplorerPath').html(breadcrumb)
   $('#DevelopExplorerHolder').html(explorer)
 }
 
@@ -139,15 +148,16 @@ Develop.refresh = function () {
 }
 
 $(document).on('click', 'td.DevelopExplorerEdit', function () {
-  Explorer.edit($(this).parent().attr('path'))
+  var filepath = $(this).parent().attr('path')
+  Explorer.edit(filepath)
 })
 
 $(document).on('click', 'td.DevelopExplorerRename', function () {
   var newName = prompt('Rename this file', $(this).parent().attr('value'))
   if (!newName)
     return false
-  Explorer.rename($(this).parent().attr('path'),
-    Develop.get('path') + ' ' + newName, Develop.refresh)
+  var path = (Develop.get('path') ? Develop.get('path') + ' ' : '')
+  Explorer.rename($(this).parent().attr('path'), path + newName, Develop.refresh)
 })
 
 $(document).on('click', 'td.DevelopExplorerRemove', function () {

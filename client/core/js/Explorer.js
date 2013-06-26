@@ -19,6 +19,26 @@ Explorer.downloadTimelines = function () {
   })
 }
 
+/**
+ * Edit a text file
+ *
+ * @param {string} File you want to edit
+ */
+Explorer.edit = function (path) {
+  var req = {}
+  req.path = path
+  $.post( '/nudgepad.explorer.get', req, function (data) {
+    TextPrompt('Editing ' + path, data, function (val) {
+      var req = {}
+      req.path = path
+      req.content = val + ''
+      $.post('/nudgepad.explorer.save', req, function (err) {
+        console.log(err)
+      })
+    })
+  })
+}
+
 Explorer.quickEdit = function () {
   Explorer.edit(prompt('Enter path to file you want to edit', 'project.css'))
 }
@@ -41,26 +61,5 @@ Explorer.rename = function (oldPath, newPath, callback) {
     callback()
   })
 }
-
-/**
- * Edit a text file
- *
- * @param {string} File you want to edit
- */
-Explorer.edit = function (path) {
-  var req = {}
-  req.path = path
-  $.post( '/nudgepad.explorer.get', req, function (data) {
-    TextPrompt('Editing ' + path, data, function (val) {
-      var req = {}
-      req.path = path
-      req.content = val + ''
-      $.post('/nudgepad.explorer.save', req, function (err) {
-        console.log(err)
-      })
-    })
-  })
-}
-
 
 
