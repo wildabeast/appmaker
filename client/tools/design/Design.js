@@ -227,7 +227,7 @@ Design.oncut = function(e) {
       'Text', Design.stage.selection.toSpace().toString())
     console.log('setData: ' + setStatus)
   }
-  Design.stage.selection.remove()
+  Design.stage.selection.delete()
   Design.stage.commit()
   mixpanel.track('I cut something')
 }

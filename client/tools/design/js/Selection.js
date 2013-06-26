@@ -117,6 +117,20 @@ Design.stage.selection.cssPrompt = function () {
     Design.stage.selection.css(val)
 }
 
+/**
+ * Delete the selected blocks
+ */
+Design.stage.selection.delete = function () {
+  $('.selection').each(function () {
+    // order probably matters here
+    // should we move deselect and select to jquery level? i think we probably should
+    var scrap = $(this).scrap()
+    $(this).deselect().remove()
+    if (scrap)
+      Design.page.delete(scrap.getPath())
+  })
+}
+
 Design.stage.selection.distributeVertical = function () {
   
   var elements = _.sortBy($('.selection'), function(element){ return $(element).position().top })
@@ -305,7 +319,7 @@ Design.stage.selection.nest = function (path) {
     parent.set('scraps', new Space())
   parent = parent.get('scraps')
   var patch = Design.stage.selection.toSpace()
-  Design.stage.selection.remove()
+  Design.stage.selection.delete()
   
   // update the patch so there is no overwriting
   patch.each(function (key, value) {
@@ -343,20 +357,6 @@ Design.stage.selection.patchPrompt = function () {
   var val = prompt('Enter a patch like content hi', '')
   if (val)
     Design.stage.selection.patch(val)
-}
-
-/**
- * Delete the selected blocks
- */
-Design.stage.selection.remove = function () {
-  $('.selection').each(function () {
-    // order probably matters here
-    // should we move deselect and select to jquery level? i think we probably should
-    var scrap = $(this).scrap()
-    $(this).deselect().remove()
-    if (scrap)
-      Design.page.delete(scrap.getPath())
-  })
 }
 
 Design.stage.selection.renameScraps = function () {

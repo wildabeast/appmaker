@@ -110,7 +110,7 @@ Design.stage.editSource = function () {
  */
 Design.stage.erase = function () {
   Design.stage.selectAll()
-  Design.stage.selection.remove()
+  Design.stage.selection.delete()
   Design.stage.commit()
 }
 

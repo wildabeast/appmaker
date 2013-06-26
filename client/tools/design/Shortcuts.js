@@ -25,7 +25,7 @@ Design.shortcuts['alt+o'] = Explorer.quickEdit
 
 Design.shortcuts['meta+shift+s'] = nudgepad.edit_settings
 
-Design.deleteShortcut = function () { Design.stage.selection.remove(); Design.stage.commit() }
+Design.deleteShortcut = function () { Design.stage.selection.delete(); Design.stage.commit() }
 Design.shortcuts['delete'] = Design.deleteShortcut
 Design.shortcuts['backspace'] = Design.deleteShortcut
 
