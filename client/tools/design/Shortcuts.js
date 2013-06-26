@@ -58,7 +58,7 @@ Design.shortcuts['shift+space'] = function () {
   }
 }
 
-Design.shortcuts['meta+backspace'] = Design.trash
+Design.shortcuts['meta+backspace'] = Design.deletePage
 
 Design.shortcuts['meta+o'] = Design.spotlight
 Design.shortcuts['ctrl+o'] = Design.spotlight
@@ -69,7 +69,7 @@ Design.shortcuts['meta+n'] = Design.blank
 
 Design.shortcuts['esc'] = Design.stage.selection.clear
 
-Design.shortcuts['shift+n'] = Design.duplicate
+Design.shortcuts['shift+n'] = Design.duplicatePage
 
 Design.shortcuts['up'] = function (){Design.stage.selection.move(0, -1)}
 Design.shortcuts['left'] = function (){Design.stage.selection.move(-1, 0)}

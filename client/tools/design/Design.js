@@ -1,6 +1,6 @@
 var Design = new Tool('Design')
-Design.color = 'rgba(26, 134, 214, 1)'
-Design.description = 'Design pages in NudgePad.'
+Design.set('color', 'rgba(26, 134, 214, 1)')
+Design.set('description', 'Design pages in NudgePad.')
 
 // What spot the maker is on the timeline for the current page
 Design.page = new Page()
@@ -89,6 +89,30 @@ Design.create = function (name, template) {
 }
 
 /**
+ * Deletes a page.
+ *
+ * @param {string} Name of the file
+ * @return {string} todo: why return a string?
+ */
+Design.deletePage = function (name) {
+  name = name || Design.stage.activePage
+  if (name === 'home')
+    return Flasher.error('You cannot delete the home page')
+  // If its the currently open page, open the previous page first
+  if (Design.stage.activePage === name)
+    Design.stage.back()
+
+  Project.delete('pages ' + name)
+  Project.delete('timelines ' + name)
+  
+  // Delete page from open pages
+  Design.updateTabs()
+  Flasher.success('Deleted ' + name, 1000)
+  mixpanel.track('I deleted a page')
+  return ''
+}
+
+/**
  * Duplicates the current open page.
  *
  * @param {string} name of page to duplicate. Defaults to current page.
@@ -96,7 +120,7 @@ Design.create = function (name, template) {
  * @param {bool} We need to skip prompting for unit testing.
  * @return {string} Name of new page
  */
-Design.duplicate = function (source, destination, skipPrompt) {
+Design.duplicatePage = function (source, destination, skipPrompt) {
   
   source = source || Design.stage.activePage
   
@@ -302,7 +326,7 @@ Design.onresize = function () {
  * @param {string} New name
  * @return {string} todo: why return a string?
  */
-Design.rename = function (new_name) {
+Design.renamePage = function (new_name) {
   
   mixpanel.track('I renamed a page')
   
@@ -337,7 +361,7 @@ Design.rename = function (new_name) {
 Design.renamePrompt = function () {
   var name = prompt('Enter a new name', Design.stage.activePage)
   if (name)
-    Design.rename(name)
+    Design.renamePage(name)
 }
 
 /**
@@ -350,28 +374,4 @@ Design.spotlight = function () {
     Design.stage.open(name)
 }
 
-
-/**
- * Deletes a page.
- *
- * @param {string} Name of the file
- * @return {string} todo: why return a string?
- */
-Design.trash = function (name) {
-  name = name || Design.stage.activePage
-  if (name === 'home')
-    return Flasher.error('You cannot delete the home page')
-  // If its the currently open page, open the previous page first
-  if (Design.stage.activePage === name)
-    Design.stage.back()
-
-  Project.delete('pages ' + name)
-  Project.delete('timelines ' + name)
-  
-  // Delete page from open pages
-  Design.updateTabs()
-  Flasher.success('Deleted ' + name, 1000)
-  mixpanel.track('I deleted a page')
-  return ''
-}
 

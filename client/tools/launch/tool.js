@@ -16,7 +16,7 @@ Launch.renderMenu = function () {
   var tools = _.without(Tool.tools, 'Launch')
   for (var i in tools) {
     var tool = window[tools[i]]
-    $('#LaunchColumn' + Launch.colNumber(i)).append(Launch.toButton(tool.name, tool.description, tool.color))
+    $('#LaunchColumn' + Launch.colNumber(i)).append(Launch.toButton(tool.get('name'), tool.get('description'), tool.get('color')))
   }
 }
 

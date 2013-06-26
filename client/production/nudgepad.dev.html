@@ -177,9 +177,9 @@
 <div id="DesignMenu">
 	<div onclick="window.open(Design.stage.activePage,'published')">View</div>
   <div onclick="Design.blank()">New</div>
-  <div onclick="Design.duplicate()">Duplicate</div>
+  <div onclick="Design.duplicatePage()">Duplicate</div>
   <div onclick="Design.renamePrompt()">Rename</div>
-  <div onclick="Design.trash()">Delete</div>
+  <div onclick="Design.deletePage()">Delete</div>
   <div onclick="Inviter.prompt()">Invite</div>
   <div onclick="Launcher.open('Launch')">Dashboard</div>
 </div>
@@ -206,7 +206,7 @@
 		  <a onclick="Develop.import()" class="DevelopButton">
 		  	Import
 		  </a>
-		  <a onclick="Develop.clone()" class="DevelopButton">
+		  <a onclick="Develop.cloneProject()" class="DevelopButton">
 		  	Clone
 		  </a>
 		  <a id="DevelopRestart" class="DevelopButton" onclick="$.get('/nudgepad.restart')">

@@ -140,7 +140,7 @@ Design.styleEditor.edit = function (scrap) {
        Design.stage.selection.patch('tag a\nhref ' + linkUrl)
        save_button.trigger('click')
        var currentPage = Design.stage.activePage
-       Design.duplicate(null, linkUrl, true)
+       Design.duplicatePage(null, linkUrl, true)
        Design.stage.open(currentPage)
      }
    })

@@ -1,6 +1,6 @@
 var Write = new Tool('Write')
-Write.color = 'rgba(237, 200, 17, 1)'
-Write.description = 'Write and edit blog posts.'
+Write.set('color', 'rgba(237, 200, 17, 1)')
+Write.set('description', 'Write and edit blog posts.')
 Write.activePost = null
 
 // Default theme

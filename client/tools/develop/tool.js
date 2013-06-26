@@ -1,14 +1,8 @@
 var Develop = new Tool('Develop')
-Develop.color = 'rgba(36, 65, 112, 1)'
-Develop.description = 'Edit the backend and files of your project.'
+Develop.set('color', 'rgba(36, 65, 112, 1)')
+Develop.set('description', 'Edit the backend and files of your project.')
 
-Develop.files = ''
-Develop.log = ''
-Develop.path = ''
-Develop.pathPretty = ''
-Develop.status = ''
-
-Develop.clone = function () {
+Develop.cloneProject = function () {
   var domain = prompt('Enter a domain name', 'copyof' + document.location.host)
   if (!domain)
     return false
@@ -70,13 +64,11 @@ Develop.createFile = function () {
   var name = prompt('Name your file')
   if (!name)
     return false
-  Explorer.create(Develop.pathPretty + name, Develop.refresh)
+  Explorer.create(Develop.get('path') + ' ' + name, Develop.refresh)
 }
 
 Develop.home = function () {
-  Develop.path = ''
-  Develop.pathPretty = ''
-  Develop.renderExplorer()
+  Develop.set('path', '')
 }
 
 Develop.import = function () {
@@ -88,17 +80,19 @@ Develop.import = function () {
   })
 }
 
+// Develop.on('change', 'path', Develop.RenderExplorer())
+
 Develop.on('open', function () {
 //  $('.nudgepad#zip').attr('href', '/nudgepad.backup/' + document.location.host + '.zip')
-  if (!Develop.log)
+  if (!Develop.get('log'))
     Develop.refresh()
 })
 
 Develop.renderExplorer = function () {
   
-  var files = Develop.files
-  if (Develop.path)
-    files = files.get(Develop.path)
+  var files = Develop.get('files')
+  if (Develop.get('path'))
+    files = files.get(Develop.get('path'))
   
   var explorer = '<table id="DevelopExplorer">'
   explorer += '<tr class="DevelopExplorerHeader"><td>Filename</td><td></td><td></td><td>Size</td><td>Age</td></tr>'
@@ -110,68 +104,61 @@ Develop.renderExplorer = function () {
     var item = files.values[name]
     var row = '<tr'
     if (item.get('timeSinceLastChange')) {
-      row += ' class="DevelopExplorerFile" value="' + name + '">'
+      row += ' class="DevelopExplorerFile" value="' + name + '" path="' + Develop.path + ' ' + name + '">'
       row += '<td class="DevelopExplorerEdit">' + name + '</td>'
       row += '<td class="DevelopExplorerRename">Rename</td>'
       row += '<td class="DevelopExplorerRemove">Delete</td>'
       row += '<td>' + (item.get('size')) + 'KB</td>'
       row += '<td>' + moment(item.get('mtime')).fromNow() + '</td>'
     } else {
-      row += ' class="DevelopExplorerFolder" value="' + name + '">'
+      row += ' class="DevelopExplorerFolder" value="' + name + '" path="' + Develop.path + ' ' + name + '">'
       row += '<td class="DevelopExplorerFolderName" colspan=5>' + name + '</td>'
     }
     row += '</tr>'
     explorer += row
   }
   explorer += '</table>'
-  Develop.explorer = explorer
-  $('#DevelopExplorerPath').text(document.location.host + '/' + Develop.pathPretty)
-  $('#DevelopExplorerHolder').html(Develop.explorer)
+  $('#DevelopExplorerPath').text(document.location.host + ' ' + Develop.get('path'))
+  $('#DevelopExplorerHolder').html(explorer)
 }
 
 Develop.refresh = function () {
   $.get('/nudgepad.status', {}, function (data) {
-    Develop.status = data
-    $('#DevelopStatusArea').text(Develop.status)
+    Develop.set('status', data)
+    $('#DevelopStatusArea').text(data)
   })
   $.get('/nudgepad.logs', {}, function (data) {
-    Develop.log = data
+    Develop.set('log', data)
     $('#DevelopLogHolder').html(data)
     $('#DevelopLogHolder').scrollTop($('#DevelopLogHolder').height())
   })
   $.get('/nudgepad.explorer.list', {}, function (data) {
-    Develop.files = new Space(data)
+    Develop.set('files', new Space(data))
     Develop.renderExplorer()
-    
   })
 }
 
 $(document).on('click', 'td.DevelopExplorerEdit', function () {
-  Explorer.edit(Develop.pathPretty + $(this).parent().attr('value'))
+  Explorer.edit($(this).parent().attr('path'))
 })
 
 $(document).on('click', 'td.DevelopExplorerRename', function () {
   var newName = prompt('Rename this file', $(this).parent().attr('value'))
   if (!newName)
     return false
-  Explorer.rename(Develop.pathPretty + $(this).parent().attr('value'),
-    Develop.pathPretty + newName, Develop.refresh)
+  Explorer.rename($(this).parent().attr('path'),
+    Develop.get('path') + ' ' + newName, Develop.refresh)
 })
 
 $(document).on('click', 'td.DevelopExplorerRemove', function () {
   var name = $(this).parent().attr('value')
   if (!confirm('Are you sure you want to delete ' + name + '?'))
     return false
-  Explorer.remove(Develop.pathPretty + name, Develop.refresh)
+  Explorer.remove($(this).parent().attr('path'), Develop.refresh)
 })
 
 $(document).on('click', 'td.DevelopExplorerFolderName', function () {
-  if (Develop.path)
-    Develop.path += ' ' + $(this).parent().attr('value')
-  else
-    Develop.path = $(this).parent().attr('value')
-  Develop.pathPretty = Develop.path.replace(' ', '/') + '/'
-  Develop.renderExplorer()
+  Develop.set('path', $(this).parent().attr('path'))
 })
 
 $(document).on('click', '.DevelopToggleOption', function () {

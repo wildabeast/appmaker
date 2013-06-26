@@ -1,6 +1,6 @@
 var Package = new Tool('Package')
-Package.color = 'rgba(71, 41, 54, 1)'
-Package.description = 'Turn your project into a mobile app.'
+Package.set('color', 'rgba(71, 41, 54, 1)')
+Package.set('description', 'Turn your project into a mobile app.')
 
 Package.on('open', function () {
   $('#PackageManifestUrlLink').html('http://' + document.location.host + '/manifest.webapp')

@@ -1,7 +1,10 @@
 function Tool(name) {
-  this.name = name
+  console.log(this.toString())
+  this._set('name', name)
   this._open = false
   Tool.tools.push(name)
+  console.log('creating %s', name)
+  return this
 }
 
 Tool.tools = []
@@ -43,13 +46,13 @@ Tool.prototype.open = function () {
   
   // Close any open Tool
   if (Tool.openTool)
-    return Tool.openTool.close(this.name)
+    return Tool.openTool.close(this.get('name'))
   
   // On open event
   this.trigger('open')
   
   // We could probably remove this.
-  $('.Tool#' + this.name).show()
+  $('.Tool#' + this.get('name')).show()
   
   
   Tool.openTool = this
@@ -58,7 +61,7 @@ Tool.prototype.open = function () {
   // On ready event
   this.trigger('ready')
 
-  mixpanel.track('I opened the ' + this.name + ' tool')
+  mixpanel.track('I opened the ' + this.get('name') + ' tool')
 
 }
 
