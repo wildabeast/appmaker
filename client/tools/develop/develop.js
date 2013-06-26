@@ -234,7 +234,7 @@ Develop.console = function () {
       output.scrollTop($('pre')[0].scrollHeight + '')
       input.val('')
       input.focus()
-    }, null, function (error, message) {
+    }).error(function (error, message) {
       mixpanel.track('I used the console and got an error')
       output.append('>' + command.replace(/\n/g, '> \n') + '\n')
       output.append('ERROR\n')
