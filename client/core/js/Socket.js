@@ -2,7 +2,7 @@
 var Socket = io.connect('/')
 
 Socket.on('file', function (space) {
-  Socket.trigger('file', space)
+  Project.trigger('file', space)
 })
 
 Socket.on('uploadComplete', function (file) {
