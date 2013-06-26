@@ -33,7 +33,10 @@ Explorer.edit = function (path) {
       req.path = path
       req.content = val + ''
       $.post('/nudgepad.explorer.save', req, function (err) {
-        console.log(err)
+        if (err)
+          console.log(err)
+        else
+          Flasher.success(path + ' saved')
       })
     })
   })
