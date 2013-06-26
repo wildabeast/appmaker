@@ -1,9 +1,10 @@
 function Tool(name) {
-  console.log(this.toString())
+  this.keys = []
+  this.values = {}
+  this.events = {}
   this._set('name', name)
   this._open = false
   Tool.tools.push(name)
-  console.log('creating %s', name)
   return this
 }
 
