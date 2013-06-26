@@ -1579,6 +1579,10 @@ License: MIT
   cursor: pointer;
 }
 
+#DevelopExplorerPath span:hover {
+  color: #1a86d6;
+}
+
 .DevelopExplorerHeader {
   font-size : 24px;
 }
