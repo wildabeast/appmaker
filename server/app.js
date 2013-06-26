@@ -520,10 +520,10 @@ app.SocketIO.set('authorization', function (data, accept) {
 
 app.SocketIO.sockets.on('connection', function (socket) {
   
-  socket.on('room.change', function (space) {
+  socket.on('room', function (space) {
     if (socket.handshake.screenId) {
       Room.set(socket.handshake.screenId, space)
-      socket.broadcast.emit('room.change', Room.toString())
+      socket.broadcast.emit('room', Room.toString())
     }
   })
   

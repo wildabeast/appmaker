@@ -410,9 +410,6 @@ Design.stage.setTimeline = function (name) {
     
 
     Project.set('timelines ' + name, timeline  )
-    var patch = new Space()
-    patch.set('timelines ' + name, timeline)
-    nudgepad.emit('patch', patch.toString())
     Flasher.success('Timeline created')
     
     

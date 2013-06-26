@@ -41,23 +41,16 @@ Design.clearTimeline = function () {
   if (!confirm("Are you sure you want to erase the history of this page?"))
     return false
   
-  var timestamp = new Date().getTime()
+  
   
   // Send Commit to Server
-  var patch = new Space()
-  patch.set('timelines ' + Design.stage.activePage, new Space())
-  for (var i in Design.stage.timeline.keys) {
-    var key = Design.stage.timeline.keys[i]
-    patch.set('timelines ' + Design.stage.activePage + ' ' + key, '')
-    Design.stage.timeline.delete(key)
-  }
-  
-  patch.set('timelines ' + Design.stage.activePage + ' ' + timestamp, Design.edge)
+  Project.delete('timelines ' + Design.stage.activePage)
+  var timestamp = new Date().getTime()
+  Project.set('timelines ' + Design.stage.activePage + ' ' + timestamp, Design.edge.toString())
   // collapse at edge
-  Design.stage.timeline.set(timestamp, Design.edge)
+  Design.stage.timeline = Project.get('timelines ' + Design.stage.activePage)
 
-  Design.stage.version = Design.stage.timeline.keys.length
-  nudgepad.emit('patch', patch.toString())
+  Design.stage.version = Design.stage.timeline.length()
   Design.trigger('selection')
   return true
 }

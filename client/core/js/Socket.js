@@ -31,7 +31,7 @@ Socket.on('disconnect', function (message) {
   $('#ConnectionStatus').html('Disconnected from server. Attempting to reconnect...').show()
 })
 
-Socket.on('room.change', function (newRoom) {
+Socket.on('room', function (newRoom) {
   Room._clear()
   Room.patch(newRoom)
 })

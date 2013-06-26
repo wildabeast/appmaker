@@ -68,21 +68,6 @@ nudgepad.benchmarkCreationTime = function () {
   console.log('It took %sms to create this project', howLongItTookToCreateThisProject) 
 }
 
-/**
- * Sends an patch to the server via websockets/scoketio.
- *
- * @param {string} Event name
- * @param {Space}
- */
-nudgepad.emit = function (event, space) {
-  if (nudgepad.isTesting)
-    return null
-  
-  Socket.emit(event, space.toString(), function (data) {
-    console.log('%s responded to emission: %s', document.location.host, data)
-  })
-}
-
 nudgepad.reloadMessageOneTime = ''
 nudgepad.reloadMessage = function () {
   var message

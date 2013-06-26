@@ -6,7 +6,7 @@ Project.on('delete', function (key) {
     return null
   
   Socket.emit('delete', key, function (data) {
-    console.log('%s responded to emission: %s', document.location.host, data)
+    console.log('%s responded to Socket.emit delete: %s', document.location.host, data)
   })
   
 })
@@ -19,7 +19,7 @@ Project.on('set', function (key, value) {
     return null
   
   Socket.emit('patch', patch.toString(), function (data) {
-    console.log('%s responded to emission: %s', document.location.host, data)
+    console.log('%s responded to Socket.emit patch: %s', document.location.host, data)
   })
 })
 
