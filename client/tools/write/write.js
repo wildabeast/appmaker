@@ -4,55 +4,7 @@ Write.set('description', 'Write and edit blog posts.')
 Write.activePost = null
 
 // Default theme
-Write.blankTheme = new Space({
- "title": {
-  "tag": "title",
-  "content": "{{post.title Post Title}}"
- },
- "stylesheet": {
-  "tag": "link",
-  "rel": "stylesheet",
-  "href": "project.css"
- },
- "container": {
-  "style": {
-   "width": "90%",
-   "max-width": "800px",
-   "height": "100%",
-   "margin": "0 auto"
-  },
-  "scraps": {
-   "block1": {
-    "style": {
-     "height": "auto",
-     "font-family": "Open Sans",
-     "width": "auto",
-     "font-size": "48px",
-     "font-weight": "normal",
-     "color": "#333",
-     "text-decoration": "none",
-     "font-style": "normal",
-     "padding" : "10px"
-    },
-    "content": "{{post.title Post Title}}"
-   },
-   "block14": {
-    "style": {
-     "height": "auto",
-     "font-family": "Open Sans",
-     "width": "auto",
-     "font-size": "18px",
-     "font-weight": "normal",
-     "color": "#333",
-     "text-decoration": "none",
-     "font-style": "normal",
-     "padding": "10px"
-    },
-    "content": "{{post.content Lorem ipsum foobar }}"
-   }
-  }
- }
-})
+Write.blankTheme = new Space('title\n tag title\n content {{post.title Post Title}}\nstylesheet\n tag link\n rel stylesheet\n href project.css\ncontainer\n style\n  width 90%\n  max-width 800px\n  height 100%\n  margin 0 auto\n scraps\n  block1\n   style\n    height auto\n    font-family Open Sans\n    width auto\n    font-size 48px\n    font-weight normal\n    color #333\n    text-decoration none\n    font-style normal\n    padding 10px\n   content {{post.title Post Title}}\n  block14\n   style\n    height auto\n    font-family Open Sans\n    width auto\n    font-size 18px\n    font-weight normal\n    color #333\n    text-decoration none\n    font-style normal\n    padding 10px\n   content {{post.content Lorem ipsum foobar }}\n')
 
 Write.createPost = function () {
   $('#WriteContent,#WriteTitle').val('')
