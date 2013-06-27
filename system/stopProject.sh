@@ -3,7 +3,7 @@ stopProject () {
   if isActive $1
     then
       PID=$(sudo cat $projectsPath/$1/private/temp/monPid)
-      sudo kill $PID
+      kill $PID
       echo stopped $1
       return 0
     else
