@@ -61,6 +61,85 @@ Develop.cloneProject = function () {
   
 }
 
+/**
+ * Prompt the maker for input. Pops a modal.
+ */
+Develop.console = function () {
+  mixpanel.track('I opened the console')
+  var output = $('<pre id="DevelopConsole"></pre>')
+  var input = $('<input id="DevelopConsoleInput" type="text"/>')
+  var checkbox = $('<input type="checkbox" id="DevelopConsoleCheckbox"/>')
+  var label = $('<label for="DevelopConsoleCheckbox" id="DevelopConsoleLabel">Eval in Node Process</label>')
+  var modal_screen = $('<div id="ModalScreen"/>')
+  modal_screen.on('tap mousedown click slide slidestart slideend mouseup', function (event) {
+    event.stopPropagation()
+  })
+  output.on('tap mousedown click slide slidestart slideend mouseup', function (event) {
+    event.stopPropagation()
+  })
+
+//  if (onkeypress)
+//    output.on('keypress', onkeypress)
+    
+  var send_button = $('<div id="SaveButton">Send</div>')
+  var cancel_button = $('<div id="CancelButton">Close</div>')
+  
+  var button_container = $('<div id="ButtonContainer"></div>')
+  modal_screen.on('click', function () {
+    cancel_button.trigger('click')
+  })
+  
+  cancel_button.on('click', function () {
+    send_button.remove()
+    output.remove()
+    modal_screen.remove()
+    button_container.remove()
+    cancel_button.remove()
+    label.remove()
+    checkbox.remove()
+    input.remove()
+  })
+  
+  send_button.on('click', function () {
+    
+    var command = input.val()
+    var endpoint = 'nudgepad.exec'
+    if (checkbox.is(':checked'))
+      endpoint = 'nudgepad.console'
+    
+    $.post(endpoint, {command : command}, function (result) {
+      output.append('>' + command.replace(/\n/g, '> \n') + '\n')
+      output.append(result + '\n')
+      output.scrollTop($('#DevelopConsole')[0].scrollHeight + '')
+      input.val('')
+      input.focus()
+    }).error(function (error, message) {
+      mixpanel.track('I used the console and got an error')
+      output.append('>' + command.replace(/\n/g, '> \n') + '\n')
+      output.append('ERROR\n')
+      output.append(error.responseText + '\n')
+      output.scrollTop($('#DevelopConsole')[0].scrollHeight + '')
+      input.val('')
+      input.focus()
+    })
+    
+  })
+  
+  input.on('enterkey', function () {
+    send_button.click()
+  })
+  
+  $('body').append(modal_screen)
+  $('body').append(checkbox)
+  $('body').append(label)
+  $('body').append(output)
+  $('body').append(input)
+  $('body').append(send_button)
+  $('body').append(cancel_button)
+  $('body').append(button_container)
+  input.focus()
+}
+
 Develop.createFile = function () {
   var name = prompt('Name your file')
   if (!name)
@@ -180,84 +259,4 @@ $(document).on('click', '.DevelopToggleOption', function () {
   }
 })
 
-// todo: add console history
-
-/**
- * Prompt the maker for input. Pops a modal.
- */
-Develop.console = function () {
-  mixpanel.track('I opened the console')
-  var output = $('<pre id="DevelopConsole"></pre>')
-  var input = $('<input id="DevelopConsoleInput" type="text"/>')
-  var checkbox = $('<input type="checkbox" id="DevelopConsoleCheckbox"/>')
-  var label = $('<label for="DevelopConsoleCheckbox" id="DevelopConsoleLabel">Shell</label>')
-  var modal_screen = $('<div id="ModalScreen"/>')
-  modal_screen.on('tap mousedown click slide slidestart slideend mouseup', function (event) {
-    event.stopPropagation()
-  })
-  output.on('tap mousedown click slide slidestart slideend mouseup', function (event) {
-    event.stopPropagation()
-  })
-
-//  if (onkeypress)
-//    output.on('keypress', onkeypress)
-    
-  var send_button = $('<div id="SaveButton">Send</div>')
-  var cancel_button = $('<div id="CancelButton">Close</div>')
-  
-  var button_container = $('<div id="ButtonContainer"></div>')
-  modal_screen.on('click', function () {
-    cancel_button.trigger('click')
-  })
-  
-  cancel_button.on('click', function () {
-    send_button.remove()
-    output.remove()
-    modal_screen.remove()
-    button_container.remove()
-    cancel_button.remove()
-    label.remove()
-    checkbox.remove()
-    input.remove()
-  })
-  
-  send_button.on('click', function () {
-    
-    var command = input.val()
-    var endpoint = 'nudgepad.console'
-    if (checkbox.is(':checked'))
-      endpoint = 'nudgepad.exec'
-    
-    $.post(endpoint, {command : command}, function (result) {
-      output.append('>' + command.replace(/\n/g, '> \n') + '\n')
-      output.append(result + '\n')
-      output.scrollTop($('#DevelopConsole')[0].scrollHeight + '')
-      input.val('')
-      input.focus()
-    }).error(function (error, message) {
-      mixpanel.track('I used the console and got an error')
-      output.append('>' + command.replace(/\n/g, '> \n') + '\n')
-      output.append('ERROR\n')
-      output.append(error.responseText + '\n')
-      output.scrollTop($('#DevelopConsole')[0].scrollHeight + '')
-      input.val('')
-      input.focus()
-    })
-    
-  })
-  
-  input.on('enterkey', function () {
-    send_button.click()
-  })
-  
-  $('body').append(modal_screen)
-  $('body').append(checkbox)
-  $('body').append(label)
-  $('body').append(output)
-  $('body').append(input)
-  $('body').append(send_button)
-  $('body').append(cancel_button)
-  $('body').append(button_container)
-  input.focus()
-}
 
