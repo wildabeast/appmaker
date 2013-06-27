@@ -2,7 +2,7 @@ var ParseName = require('./ParseName.js'),
     RandomString = require('./RandomString.js'),
     _ = require('underscore'),
     Email = require('./email.js'),
-    File = require('./File.js'),
+    Marking = require('marking'),
     Space = require('space')
 
 var Invite = function (app) {
@@ -10,7 +10,7 @@ var Invite = function (app) {
   
   
   var createUser = function (email) {
-    var maker = new File(app.paths.makers + email + '.space')
+    var maker = new Marking(app.paths.makers + email + '.space')
     maker.set('name', ParseName(email))
     maker.set('role', 'maker')
     maker.set('key', app.hashString(email + RandomString(8)))

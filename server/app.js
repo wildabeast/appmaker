@@ -27,7 +27,7 @@ var fs = require('fs'),
     parseCookie = require('cookie').parse,
     async = require('async'),
     Space = require('space'),
-    File = require('./File'),
+    Marking = require('markings'),
     Page = require('scraps'),
     Email = require('./email.js')
 
@@ -113,7 +113,7 @@ app.Project.loadFolder = function (folder) {
       continue
     // Load every file into memory
     var filePath = app.paths['private'] + folder + '/' + files[j]
-    app.Project.set(folder + ' ' + files[j].replace(/\.space$/,''), new File(filePath).loadSync())
+    app.Project.set(folder + ' ' + files[j].replace(/\.space$/,''), new Marking(filePath).loadSync())
   }
 }
 
@@ -175,7 +175,7 @@ app.patchFile = function (path, patch, email) {
    // Create File
    if (typeof file === 'undefined') {
      console.log('creating %s', path)
-     file = new File(filepath, patchFile)
+     file = new Marking(filepath, patchFile)
      file.create(function (error) {
        if (error) {
          console.log('Error: %s', error)

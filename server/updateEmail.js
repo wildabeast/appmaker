@@ -1,7 +1,7 @@
 var ParseName = require('./ParseName.js'),
     RandomString = require('./RandomString.js'),
     Email = require('./email.js'),
-    File = require('./File.js'),
+    Marking = require('marking'),
     Space = require('space')
 
 // http://stackoverflow.com/questions/46155/validate-email-address-in-javascript
@@ -27,7 +27,7 @@ var UpdateEmail = function (app) {
 
     var role = app.Project.get('makers').get(req.email + ' role')  
     // Generate new password
-    var maker = new File(app.paths.makers + email + '.space')
+    var maker = new Marking(app.paths.makers + email + '.space')
     maker.set('name', ParseName(email))
     maker.set('role', role)
     maker.set('key', app.hashString(email + RandomString(8)))
@@ -45,7 +45,7 @@ var UpdateEmail = function (app) {
 
       // Delete old account
       app.Project.delete('makers ' + req.email)
-      new File(app.paths.makers + req.email + '.space').trash()
+      new Marking(app.paths.makers + req.email + '.space').trash()
       if (req.body.sendWelcomeEmail === 'true') {
 
         var message = 'Thanks for using NudgePad to build your project!' + '\n\n' +
