@@ -1,4 +1,4 @@
-var Pages = function (app) {
+module.exports = function (app) {
   
   
   
@@ -16,5 +16,3 @@ var Pages = function (app) {
 
   }) 
 }
-
-module.exports = Pages

@@ -1,0 +1,66 @@
+<div class="Tool" id="Pages">
+</div>
+  
+<div id="PagesStage">
+  <div id="PagesStageHead"></div>
+  <div id="PagesStageBody"></div>
+  <div id="PagesStageBottomPadding"></div>
+  <style type="text/css" id="PagesRemoteSelections"></style>
+</div>
+
+<div id="PagesBar">
+
+  <div title="menu" id="PagesBarMenuButton"></div>
+
+  <div title="Block" id="PagesBlockDroppable" class="PagesBarDroppable"><img src="/nudgepad/public/images/block.png"></div>
+
+  <div title="Text" id="PagesTextDroppable" class="PagesBarDroppable"><img src="/nudgepad/public/images/text.png"></div>
+
+  <div title="Image" id="PagesImageDroppable" class="PagesBarDroppable"><img src="/nudgepad/public/images/image.png"></div>
+
+  <div title="Sticky" id="stickyDroppable" class="PagesBarDroppable"><img src="/nudgepad/public/images/sticky.png"></div>
+  
+  <input class="PagesTimeline" id="PagesTimeline" type="range" min="0" max="100" step="1" onclick="Pages.stage.goto($(this).val())" value="100">
+  <script type="text/javascript">
+    $('#PagesTimeline').on('slide', function () {
+      Pages.stage.goto($(this).val())
+  })</script>
+  <span class="PagesTimeline" id="PagesTimelinePosition"></span>
+  <span class="PagesTimeline" id="PagesTimelineClear" onclick="Pages.clearTimeline()">Erase</span>
+  
+  <div id="PagesTabs"><span>Index</span></div>
+  
+</div>
+
+<textarea id="PagesCodePanel"></textarea>
+
+<div id="PagesContextMenu">
+  <a onclick="$('#PagesContextMenu').hide()">Close</a>
+  <div class="PagesContextMenuSeparator">&nbsp</div>
+  <a onclick="$('.PagesTimeline').toggle()">Toggle Timeline</a>
+  <a onclick="Pages.stage.toggleView()">Toggle View</a>
+  <div class="PagesContextMenuSeparator">&nbsp</div>
+  <a onclick="Pages.stage.editSource()">Edit Page Source</a>
+  <div class="PagesContextMenuSeparator">&nbsp</div>
+  <a onclick="Pages.stage.selection.renameScraps()">Rename Selected</a>
+  <div class="PagesContextMenuSeparator">&nbsp</div>
+  <a onclick="Pages.importPrompt()">Import Url</a>
+</div>
+
+<div id="PagesMenu">
+	<div onclick="window.open(Pages.stage.activePage,'published')">View</div>
+  <div onclick="Pages.blank()">New</div>
+  <div onclick="Pages.duplicatePage()">Duplicate</div>
+  <div onclick="Pages.renamePrompt()">Rename</div>
+  <div onclick="Pages.deletePage()">Delete</div>
+  <div onclick="Inviter.prompt()">Invite</div>
+  <div onclick="Launcher.open('Launch')">Dashboard</div>
+</div>
+
+<div id="PagesRibbon">
+	<div id="PagesRibbonUploadButton" class="PagesImageDroppableOptions"><span>Upload</span><iframe src="/nudgepad.images.upload" allowtransparency="true" frameborder="0px" width="100%" height="100%" scrolling="no" style="position: absolute; bottom: 0px; left: 0px;"></iframe></div>
+  <div id="PagesDroppablesList"></div>
+  <div id="PagesImageDroppablesList" class="PagesImageDroppableOptions"></div>
+</div>
+
+<div id="PagesDimensions"></div>

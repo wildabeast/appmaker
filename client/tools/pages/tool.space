@@ -1,0 +1,4 @@
+name Pages
+html tool.html
+js Pages.js js events.js Shortcuts.js
+css tool.css css
