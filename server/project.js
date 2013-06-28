@@ -17,22 +17,8 @@ parseSpace = function(req, res, next) {
 }
 
 var ProjectRoute = function (app) {
-  
-  
-  
-  // Get file
-  app.get(/^\/nudgepad\.project\.([a-z0-9_]+)\.([a-z0-9_]+)$/, app.checkId, function(req, res, next) {
 
-    var folder = req.params[0],
-        file = req.params[1]
-
-    if (!app.Project.get(folder + ' ' + file))
-      return res.send('No file named ' + folder + ' ' + file, 400)
-
-    res.set('Content-Type', 'text/plain')  
-    return res.send(app.Project.get(folder + ' ' + file).toString())
-  })
-
+  // Todo: remove
   // Get folder
   app.get(/^\/nudgepad\.project\.([a-z0-9_]+)$/, app.checkId, function(req, res, next) {
 
@@ -65,19 +51,6 @@ var ProjectRoute = function (app) {
     res.set('Content-Type', 'text/plain')
     res.send(copy.toString())
   })
-  
-  // Patch
-  app.post(/^\/nudgepad\.project\.patch$/, app.checkId, parseSpace, function(req, res, next) {
-
-    app.patchProject(req.space, req.email)
-    app.SocketIO.sockets.emit('patch', req.space)
-
-    if (req.body.redirect)
-      return res.redirect(req.body.redirect)
-
-    return res.send('')
-  })
-
   
 }
 

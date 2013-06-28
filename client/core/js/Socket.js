@@ -9,10 +9,10 @@ Socket.on('uploadComplete', function (file) {
   Project.trigger('uploadComplete', file)
 })
 
-Socket.on('patch', function (space) {
+Socket.on('project.set', function (space) {
   
   patch = new Space(patch)
-  Project._patch(patch)
+  Project._set(patch.get('key'), patch.get('value'))
   Flasher.activity('Change received', 1000)
 })
 

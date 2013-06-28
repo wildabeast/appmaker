@@ -57,7 +57,7 @@ Pages.stage.commit = function () {
   Pages.trigger('commit')
   
   Project.set('pages ' + Pages.stage.activePage, new Space(Pages.page.toString()))
-  Project.set('timelines ' + Pages.stage.activePage + ' ' + timestamp, commit)
+  Project.append('timelines ' + Pages.stage.activePage + ' ' + timestamp, 'timelines ' + Pages.stage.activePage, commit)
   return diff
 }
 
@@ -387,8 +387,9 @@ Pages.stage.setTimeline = function (name) {
   }
   
   var request = $.ajax({
-    type: "GET",
-    url: '/nudgepad.project.timelines.' + name,
+    type: "POST",
+    url: '/nudgepad.explorer.get',
+    data : {path : 'private timelines ' + name},
     async: false,
   })
   

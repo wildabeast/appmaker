@@ -649,6 +649,7 @@ The features these people need are:
 - Easy import 100%
 - Reliability and backups 100%
 - Easy updating of content 100%
+- Works great on localhost 10% need it 100%
 - Multiple users per project 50%
 - Fast changing of domains 40%
 - Custom domains 40%

@@ -20,11 +20,9 @@ var fs = require('fs'),
     https = require('https'),
     http = require('http'),
     request = require('request'),
-    socketio = require('socket.io'),
     crypto = require('crypto'),
     exec = require('child_process').exec,
     _ = require('underscore'),
-    parseCookie = require('cookie').parse,
     async = require('async'),
     Space = require('space'),
     Marking = require('markings'),
@@ -86,7 +84,7 @@ require('./paths.js')(app, projectsPath, clientPath)
 require('./install.js')(app)
 
 app.Project = new Space()
-var Room = new Space()
+app.Room = new Space()
 
 // Load the HTML file and add mtimes as query string so the
 // maker always get the latest version of the nudgepad.js and nudgepad.css
@@ -165,66 +163,6 @@ else
 
 app.Project.loadFromDisk()
 speedcoach('spaces loaded into memory')
-
-
-app.patchFile = function (path, patch, email) {
-  var filepath = app.paths['private'] + path.replace(/ /g, '/') + '.space'
-  var file = app.Project.get(path)
-  var patchFile = patch.get(path)
-  
-   // Create File
-   if (typeof file === 'undefined') {
-     console.log('creating %s', path)
-     file = new Marking(filepath, patchFile)
-     file.create(function (error) {
-       if (error) {
-         console.log('Error: %s', error)
-         return error
-       }
-     })
-     app.Project.set(path, file)
-   }
-
-   // Delete File
-   else if (typeof file !== 'undefined' && patchFile.toString() === '') {
-     console.log('deleting %s', path)
-     file.trash(function (error) {
-       if (error) {
-         console.log('Error: %s', error)
-         return error
-       }
-     })
-     app.Project.delete(path)
-   }
-
-   // Update File
-   else {
-     console.log('updating %s', path)
-     file.patch(patchFile).save(function (error) {
-       if (error) {
-         console.log('Error: %s', error)
-         return error
-       }
-     })
-
-   }
-  
-}
-
-app.patchProject = function (patch, email) {
-  
-  console.log('receiving patch')
-  
-  // now, modify file system.
-   for (var i in patch.keys) {
-     var folder = patch.keys[i]
-     // For every file in folder
-     for (var j in patch.values[folder].keys) {
-       var name =  patch.values[folder].keys[j]
-       app.patchFile(folder + ' ' + name, patch, email)
-     }
-   }
-}
 
 
 app.use(express.bodyParser())
@@ -484,85 +422,7 @@ process.on('SIGTERM', function () {
   process.exit(0)
 })
 
-
-speedcoach('server started')
-
-/********* SOCKET IO STUFF **********/ 
-app.SocketIO = socketio.listen(http_server)
-
-//app.SocketIO.set('log level', 3)
-
-/********* SOCKET EVENTS **********/ 
-
-app.SocketIO.set('authorization', function (data, accept) {
-
-  if (!data.headers.cookie)
-    return accept('No cookie transmitted.', false)
-  
-  var cookie = parseCookie(data.headers.cookie)
-
-  var maker = app.Project.get('makers ' + cookie.email)
-  if (!maker)
-    return accept('Invalid maker "' + cookie.email + '" transmitted. Headers:' + data.headers.cookie, false)
-
-  // Wrong key
-  if (maker.get('key') !== cookie.key)
-    return accept('Invalid key transmitted.', false)
-  
-  data.cookie = cookie
-  data.screenId = new Date().getTime()
-  Room.set(data.screenId, new Space())
-    
-  // todo: broadcast maker
-  return accept(null, true)  
-  
-})
-
-app.SocketIO.sockets.on('connection', function (socket) {
-  
-  socket.on('room', function (space) {
-    if (socket.handshake.screenId) {
-      Room.set(socket.handshake.screenId, space)
-      socket.broadcast.emit('room', Room.toString())
-    }
-  })
-  
-  socket.on('disconnect', function () {
-    if (socket.handshake.screenId) {
-      Room.delete(socket.handshake.screenId)
-      socket.broadcast.emit('room.change', Room.toString())
-    }
-  })
-  
-  socket.on('patch', function (space, fn) {
-    var patch = new Space(space)
-    app.patchProject(patch, socket.handshake.cookie.email)
-    
-    fn('patch received')
-    
-    // Broadcast to everyone else
-    socket.broadcast.emit('patch', space.toString())
-  })
-  
-  socket.on('delete', function (key, fn) {
-    // Delete File
-    var file = app.Project.get(key)
-    file.trash(function (error) {
-      if (error) {
-        console.log('Error: %s', error)
-        return fn('error')
-      }
-      fn('patch received')
-      // Broadcast to everyone else
-      socket.broadcast.emit('delete', key)
-    })
-
-  })
-
-})
-
-
-speedcoach('socket loaded')
+require('./socket.js')(app, http_server)
 
 console.log('Server started...')
-speedcoach('end of nudgepad.js')
+speedcoach('end of app.js')
