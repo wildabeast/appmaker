@@ -12,7 +12,7 @@
      "test": "make test"
    },
   "dependencies": {
-    "space": ">=0.2.0",
+    "space": ">=0.2.1",
     "scraps": ">=0.2.7",
     "markings" : ">=0.0.3",
     "speedcoach": ">=0.1.1",
