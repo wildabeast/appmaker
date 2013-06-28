@@ -24,8 +24,3 @@ Launcher.openToolFromQueryString = function () {
   var name = ParseQueryString().tool || 'Launch'
   Launcher.open(name, true)
 }
-
-// Revert to a previously saved state
-window.addEventListener('popstate', function (event) {
-  Launcher.openToolFromQueryString()
-})

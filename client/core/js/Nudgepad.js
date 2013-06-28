@@ -23,6 +23,13 @@ nudgepad.main = function () {
   $.get('/nudgepad.project', { activePage : activePage}, function (space) {
     Project._patch(new Space(space))
     
+    
+    // We do this here because chrome is weird
+    // Revert to a previously saved state
+    window.addEventListener('popstate', function (event) {
+      Launcher.openToolFromQueryString()
+    })
+    
     nudgepad.warnBeforeReload = true
     window.onbeforeunload = nudgepad.beforeUnload
 
