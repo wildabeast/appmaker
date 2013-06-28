@@ -1,25 +1,12 @@
 var Project = new Space()
 
-Project.append = function (key, filename, value) {
-  this._set(key, value)
-  this.trigger('append', key, filename, value)
-  return this
-}
-
-Project.create = function (key, value) {
-  this._set(key, value)
-  this.trigger('create', key, value)
-  return this
-}
-
-Project.on('append', function (key, filename, value) {
+Project.on('append', function (key, value) {
   
   if (nudgepad.isTesting)
     return null
   
   var change = new Space()
   change.set('key', key)
-  change.set('filename', filename)
   change.set('value', value.toString())
   
   Socket.emit('project.append', change.toString(), function (data) {

@@ -57,7 +57,7 @@ module.exports = function (app, http_server) {
       
       var key = change.get('key')
       var value = new Space(change.get('value'))
-      var filename = change.get('filename')
+      var filename = key.split(/ /g)[0] + ' ' + key.split(/ /g)[1]
       
       app.Project.set(key, value)
       var file = app.Project.get(filename)
