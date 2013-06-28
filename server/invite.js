@@ -2,7 +2,7 @@ var ParseName = require('./ParseName.js'),
     RandomString = require('./RandomString.js'),
     _ = require('underscore'),
     Email = require('./email.js'),
-    Marking = require('marking'),
+    Marking = require('markings'),
     Space = require('space')
 
 var Invite = function (app) {

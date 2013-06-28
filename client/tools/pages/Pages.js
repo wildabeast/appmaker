@@ -1,6 +1,6 @@
 var Pages = new Tool('Pages')
 Pages.set('color', 'rgba(26, 134, 214, 1)')
-Pages.set('description', 'Pages pages in NudgePad.')
+Pages.set('description', 'Design pages in NudgePad.')
 
 // What spot the maker is on the timeline for the current page
 Pages.page = new Page()
