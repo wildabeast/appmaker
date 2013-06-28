@@ -1,9 +1,9 @@
 Write.on('close', function () {
-  Project.off('set', Write.refresh)
+  Project.off('create', Write.refresh)
 })
 
 Write.on('open', function () {
-  Project.on('set', Write.refresh)
+  Project.on('create', Write.refresh)
   Write.refresh()
   Write.initialize()
 })
