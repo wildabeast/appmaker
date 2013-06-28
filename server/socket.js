@@ -137,6 +137,7 @@ module.exports = function (app, http_server) {
         // Broadcast to everyone else
         socket.broadcast.emit('project.delete', key)
       })
+      app.Project.delete(key)
   
     })
   

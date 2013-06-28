@@ -51,7 +51,7 @@ Write.editPost = function (name) {
 }
 
 // Ensures project has a blog theme before posting
-Write.initialize = function () {
+Write.createTheme = function () {
   if (Project.get('pages blog'))
     return true
   Project.create('pages blog', Write.blankTheme.clone())
@@ -88,6 +88,11 @@ Write.refresh = function () {
       .attr('title', name)
     $('#WritePosts').append(div)
   })
+  // Open the last edited post if there is one
+  if (Write.activePost)
+    Write.editPost(Write.activePost)
+  else
+    Write.createPost()
 }
 
 Write.savePost = function () {
