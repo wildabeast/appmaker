@@ -9,11 +9,48 @@ Socket.on('uploadComplete', function (file) {
   Project.trigger('uploadComplete', file)
 })
 
+Socket.on('project.append', function (space) {
+  
+  space = new Space(space)
+  var key = space.get('key')
+  console.log('project.append received on %s', key)
+  ProjectReceiving = true
+  Project.append(key, new Space(space.get('value')))
+  ProjectReceiving = false
+  Flasher.activity('File ' + key + ' appended', 1000)
+})
+
+Socket.on('project.create', function (space) {
+  
+  space = new Space(space)
+  var key = space.get('key')
+  console.log('project.create received on %s', key)
+  ProjectReceiving = true
+  Project.create(key, new Space(space.get('value')))
+  ProjectReceiving = false
+  Flasher.activity('New file ' + key + ' received', 1000)
+})
+
+Socket.on('project.delete', function (space) {
+  
+  space = new Space(space)
+  var key = space.get('key')
+  console.log('project.delete received on %s', key)
+  ProjectReceiving = true
+  Project.delete(key)
+  ProjectReceiving = false
+  Flasher.activity('File ' + key + ' deleted', 1000)
+})
+
 Socket.on('project.set', function (space) {
   
-  patch = new Space(patch)
-  Project._set(patch.get('key'), patch.get('value'))
-  Flasher.activity('Change received', 1000)
+  space = new Space(space)
+  var key = space.get('key')
+  console.log('project.set received on %s', key)
+  ProjectReceiving = true
+  Project.set(key, new Space(space.get('value')))
+  ProjectReceiving = false
+  Flasher.activity('File ' + key + ' updated', 1000)
 })
 
 Socket.on('connect_failed', function (error) {

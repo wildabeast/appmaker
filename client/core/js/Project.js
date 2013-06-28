@@ -1,9 +1,14 @@
 var Project = new Space()
 
-Project.on('append', function (key, value) {
+var ProjectReceiving = false
+
+var ProjectAppend = function (key, value) {
+  
+  if (ProjectReceiving)
+    return true
   
   if (nudgepad.isTesting)
-    return null
+    return true
   
   var change = new Space()
   change.set('key', key)
@@ -13,9 +18,13 @@ Project.on('append', function (key, value) {
     console.log('%s responded to Socket.emit project.append: %s', document.location.host, data)
   })
   
-})
+}
 
-Project.on('create', function (key, value) {
+var ProjectCreate = function (key, value) {
+  
+  if (ProjectReceiving)
+    return true
+  
   var change = new Space()
   change.set('key', key)
   change.set('value', value.toString())
@@ -26,9 +35,12 @@ Project.on('create', function (key, value) {
   Socket.emit('project.create', change.toString(), function (data) {
     console.log('%s responded to Socket.emit project.create: %s', document.location.host, data)
   })
-})
+}
 
-Project.on('delete', function (key) {
+var ProjectDelete = function (key) {
+  
+  if (ProjectReceiving)
+    return true
   
   if (nudgepad.isTesting)
     return null
@@ -37,9 +49,13 @@ Project.on('delete', function (key) {
     console.log('%s responded to Socket.emit project.delete: %s', document.location.host, data)
   })
   
-})
+}
 
-Project.on('set', function (key, value) {
+var ProjectSet = function (key, value) {
+  
+  if (ProjectReceiving)
+    return true
+  
   var change = new Space()
   change.set('key', key)
   change.set('value', value.toString())
@@ -50,7 +66,12 @@ Project.on('set', function (key, value) {
   Socket.emit('project.set', change.toString(), function (data) {
     console.log('%s responded to Socket.emit project.set: %s', document.location.host, data)
   })
-})
+}
+
+Project.on('append', ProjectAppend)
+Project.on('create', ProjectCreate)
+Project.on('delete', ProjectDelete)
+Project.on('set', ProjectSet)
 
 
 
