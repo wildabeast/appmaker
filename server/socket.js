@@ -96,11 +96,27 @@ module.exports = function (app, http_server) {
       socket.broadcast.emit('project.create', space)      
     })
     
+    socket.on('project.delete', function (key, fn) {
+      // Delete File
+      var file = app.Project.get(key)
+      file.trash(function (error) {
+        if (error) {
+          console.log('Error: %s', error)
+          return fn('error')
+        }
+        fn('patch received')
+        // Broadcast to everyone else
+        socket.broadcast.emit('project.delete', key)
+      })
+      app.Project.delete(key)
+  
+    })
+    
     socket.on('project.set', function (space, fn) {
       var change = new Space(space)
       
       var key = change.get('key')
-      var value = change.get('value')
+      var value = new Space(change.get('value'))
       
       // we know this will be like pages filename
       var levels = key.split(/ /g)
@@ -122,23 +138,7 @@ module.exports = function (app, http_server) {
       
       fn('patch received')
       // Broadcast to everyone else
-      socket.broadcast.emit('project.set', space.toString())      
-    })
-    
-    socket.on('project.delete', function (key, fn) {
-      // Delete File
-      var file = app.Project.get(key)
-      file.trash(function (error) {
-        if (error) {
-          console.log('Error: %s', error)
-          return fn('error')
-        }
-        fn('patch received')
-        // Broadcast to everyone else
-        socket.broadcast.emit('project.delete', key)
-      })
-      app.Project.delete(key)
-  
+      socket.broadcast.emit('project.set', space)      
     })
   
   })

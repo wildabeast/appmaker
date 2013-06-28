@@ -31,10 +31,8 @@ Socket.on('project.create', function (space) {
   Flasher.activity('New file ' + key + ' received', 1000)
 })
 
-Socket.on('project.delete', function (space) {
+Socket.on('project.delete', function (key) {
   
-  space = new Space(space)
-  var key = space.get('key')
   console.log('project.delete received on %s', key)
   ProjectReceiving = true
   Project.delete(key)
