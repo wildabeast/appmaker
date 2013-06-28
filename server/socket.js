@@ -127,7 +127,8 @@ module.exports = function (app, http_server) {
       
   
       console.log('updating %s', path)
-      app.Project.set(key, value)
+      file.clear()
+      file.patch(value)
       file.save(function (error) {
         if (error) {
           console.log('Error: %s', error)
