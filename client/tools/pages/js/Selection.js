@@ -324,7 +324,7 @@ Pages.stage.selection.nest = function (path) {
   // update the patch so there is no overwriting
   patch.each(function (key, value) {
     if (parent.get(key)) {
-      this.rename(key, parent.autokey(key))
+      this.rename(key, Pages.autokey(parent, key))
     }
   })
   

@@ -205,7 +205,7 @@ Pages.stage.insert = function (space, drag, xMove, yMove, center) {
   // update the patch so there is no overwriting
   patch.each(function (key, value) {
     if (level.get(key)) {
-      this.rename(key, level.autokey(key))
+      this.rename(key, Pages.autokey(level, key))
     }
   })
   // now merge stage

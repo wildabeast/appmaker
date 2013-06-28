@@ -16,7 +16,7 @@ $.fn.duplicate = function () {
     parent = Pages.page.get(path)
     path = path.replace(/ scraps/g,'') + ' '
   }
-  var key = parent.autokey(id)
+  var key = Pages.autokey(parent, id)
   var newScrap = new Scrap(path + key, scrap.toString())
   var index = parent.keys.indexOf(id) + 1
   parent.set(key, newScrap, index)
