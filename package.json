@@ -14,7 +14,7 @@
   "dependencies": {
     "space": ">=0.2.0",
     "scraps": ">=0.2.7",
-    "markings" : ">=0.1.1",
+    "markings" : ">=0.0.3",
     "speedcoach": ">=0.1.1",
     "socket.io": "*",
     "express": "*",

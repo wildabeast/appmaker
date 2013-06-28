@@ -319,30 +319,27 @@ Pages.onresize = function () {
  * @param {string} New name
  * @return {string} todo: why return a string?
  */
-Pages.renamePage = function (new_name) {
+Pages.renamePage = function (newName) {
   
   mixpanel.track('I renamed a page')
   
-  new_name = Permalink(new_name)
-  var old_name = Pages.stage.activePage
+  newName = Permalink(newName)
+  var oldName = Pages.stage.activePage
   
-  if (!new_name.length)
+  if (!newName.length)
     return Flasher.error('Name cannot be blank')
   
-  if (old_name == 'home')
+  if (oldName == 'home')
     return Flasher.error('You cannot rename the home page.')
   
   // page already exists
-  if (Project.get('pages ' + new_name))
-    return Flasher.error('A page named ' + new_name + ' already exists.')  
+  if (Project.get('pages ' + newName))
+    return Flasher.error('A page named ' + newName + ' already exists.')  
 
-  Project.create('pages ' + new_name, Project.get('pages ' + old_name))
-  Project.create('timelines ' + new_name, Project.get('timelines ' + old_name))
+  Project.rename('pages ' + oldName, 'pages ' + newName)
+  Project.rename('timelines ' + oldName, 'pages ' + newName)
   
-  Pages.stage.open(new_name)
-  
-  Project.delete('pages ' + old_name)
-  Project.delete('timelines ' + old_name)
+  Pages.stage.open(newName)
   
   mixpanel.track('I renamed a page')
   

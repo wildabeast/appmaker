@@ -51,6 +51,18 @@ Socket.on('project.set', function (space) {
   Flasher.activity('File ' + key + ' updated', 1000)
 })
 
+Socket.on('project.rename', function (space) {
+  
+  space = new Space(space)
+  var oldName = space.get('oldName')
+  var newName = space.get('newName')
+  console.log('project.rename received on %s', oldName)
+  ProjectReceiving = true
+  Project.rename(oldName, newName)
+  ProjectReceiving = false
+  Flasher.activity('File ' + oldName + ' renamed to ' + newName, 1000)
+})
+
 Socket.on('connect_failed', function (error) {
   console.log('Connect failed')
   console.log(error)

@@ -51,6 +51,23 @@ var ProjectDelete = function (key) {
   
 }
 
+var ProjectRename = function (oldName, newName) {
+  
+  if (ProjectReceiving)
+    return true
+  
+  if (nudgepad.isTesting)
+    return null
+  
+  var change = new Space()
+  change.set('oldName', oldName)
+  change.set('newName', newName)
+
+  Socket.emit('project.rename', change.toString(), function (data) {
+    console.log('%s responded to Socket.emit project.rename: %s', document.location.host, data)
+  })
+}
+
 var ProjectSet = function (key, value) {
   
   if (ProjectReceiving)
@@ -71,6 +88,7 @@ var ProjectSet = function (key, value) {
 Project.on('append', ProjectAppend)
 Project.on('create', ProjectCreate)
 Project.on('delete', ProjectDelete)
+Project.on('rename', ProjectRename)
 Project.on('set', ProjectSet)
 
 

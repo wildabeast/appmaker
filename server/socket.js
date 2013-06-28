@@ -112,6 +112,26 @@ module.exports = function (app, http_server) {
   
     })
     
+    socket.on('project.rename', function (space, fn) {
+      var change = new Space(space)
+      
+      var oldName = change.get('oldName')
+      var newName = change.get('newName')
+      
+      var file = app.Project.get(oldName)
+      file.rename(newName, function (error) {
+        if (error) {
+          console.log('Error: %s', error)
+          return error
+        }
+      })
+      app.Project.rename(oldName, newName)
+      
+      fn('rename received')
+      // Broadcast to everyone else
+      socket.broadcast.emit('project.rename', space)      
+    })
+    
     socket.on('project.set', function (space, fn) {
       var change = new Space(space)
       
