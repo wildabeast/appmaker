@@ -119,7 +119,8 @@ module.exports = function (app, http_server) {
       var newName = change.get('newName')
       
       var file = app.Project.get(oldName)
-      file.rename(newName, function (error) {
+      var filepath = app.paths['private'] + newName.replace(' ', '/') + '.space'
+      file.rename(filepath, function (error) {
         if (error) {
           console.log('Error: %s', error)
           return error
