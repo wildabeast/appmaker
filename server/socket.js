@@ -8,7 +8,7 @@ module.exports = function (app, http_server) {
   /********* SOCKET IO STUFF **********/ 
   app.SocketIO = socketio.listen(http_server)
   
-  //app.SocketIO.set('log level', 3)
+  app.SocketIO.set('log level', 3)
   
   /********* SOCKET EVENTS **********/ 
   

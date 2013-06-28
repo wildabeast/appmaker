@@ -19,7 +19,7 @@ Project.on('append', function (key, filename, value) {
   
   var change = new Space()
   change.set('key', key)
-  change.set('key', filename)
+  change.set('filename', filename)
   change.set('value', value.toString())
   
   Socket.emit('project.append', change.toString(), function (data) {
