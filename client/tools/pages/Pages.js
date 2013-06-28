@@ -337,7 +337,7 @@ Pages.renamePage = function (newName) {
     return Flasher.error('A page named ' + newName + ' already exists.')  
 
   Project.rename('pages ' + oldName, 'pages ' + newName)
-  Project.rename('timelines ' + oldName, 'pages ' + newName)
+  Project.rename('timelines ' + oldName, 'timelines ' + newName)
   
   Pages.stage.open(newName)
   

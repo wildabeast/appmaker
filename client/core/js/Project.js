@@ -52,7 +52,6 @@ var ProjectDelete = function (key) {
 }
 
 var ProjectRename = function (oldName, newName) {
-  
   if (ProjectReceiving)
     return true
   

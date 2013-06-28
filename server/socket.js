@@ -8,7 +8,8 @@ module.exports = function (app, http_server) {
   /********* SOCKET IO STUFF **********/ 
   app.SocketIO = socketio.listen(http_server)
   
-  app.SocketIO.set('log level', 3)
+  // 3 is max
+  app.SocketIO.set('log level', 0)
   
   /********* SOCKET EVENTS **********/ 
   
@@ -68,7 +69,7 @@ module.exports = function (app, http_server) {
         }
       })
       
-      fn('append received')
+      fn('project.append to ' + key)
       // Broadcast to everyone else
       socket.broadcast.emit('project.append', space)      
     })
@@ -91,7 +92,7 @@ module.exports = function (app, http_server) {
       app.Project.set(key, file)
       
       
-      fn('create received')
+      fn('project.create ' + key)
       // Broadcast to everyone else
       socket.broadcast.emit('project.create', space)      
     })
@@ -104,7 +105,7 @@ module.exports = function (app, http_server) {
           console.log('Error: %s', error)
           return fn('error')
         }
-        fn('patch received')
+        fn('project.delete ' + key)
         // Broadcast to everyone else
         socket.broadcast.emit('project.delete', key)
       })
@@ -128,7 +129,7 @@ module.exports = function (app, http_server) {
       })
       app.Project.rename(oldName, newName)
       
-      fn('rename received')
+      fn('project.rename ' + oldName + ' => ' + newName)
       // Broadcast to everyone else
       socket.broadcast.emit('project.rename', space)      
     })
@@ -158,7 +159,7 @@ module.exports = function (app, http_server) {
       })
       
       
-      fn('patch received')
+      fn('project.set ' + key)
       // Broadcast to everyone else
       socket.broadcast.emit('project.set', space)      
     })
