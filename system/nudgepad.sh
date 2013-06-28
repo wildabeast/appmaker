@@ -276,6 +276,20 @@ case "$1" in
   fi
 ;;
 
+'watch')
+  while [ 1 ]
+  do
+    echo "***Watching $domain.***"
+    echo "Type the domain you want to watch, followed by enter:"
+    read input
+    if [ -n "$input" ]
+      then
+        domain=$input
+    fi
+    cat $projectsPath/$domain/private/logs/mon.txt
+  done
+;;
+
 'zip')
   cd $projectsPath
   zip -r ~/projects.zip .
