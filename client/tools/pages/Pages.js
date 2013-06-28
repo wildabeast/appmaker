@@ -100,8 +100,6 @@ Pages.deletePage = function (name) {
   Project.delete('pages ' + name)
   Project.delete('timelines ' + name)
   
-  // Delete page from open pages
-  Pages.updateTabs()
   Flasher.success('Deleted ' + name, 1000)
   mixpanel.track('I deleted a page')
   return ''
@@ -340,12 +338,11 @@ Pages.renamePage = function (new_name) {
 
   Project.create('pages ' + new_name, Project.get('pages ' + old_name))
   Project.create('timelines ' + new_name, Project.get('timelines ' + old_name))
-  Project.delete('pages ' + old_name)
-  Project.delete('timelines ' + old_name)
-  
-  Pages.updateTabs()
   
   Pages.stage.open(new_name)
+  
+  Project.delete('pages ' + old_name)
+  Project.delete('timelines ' + old_name)
   
   mixpanel.track('I renamed a page')
   

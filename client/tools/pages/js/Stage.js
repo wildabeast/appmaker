@@ -306,12 +306,12 @@ Pages.stage.open = function (name) {
   Pages.stage.activePage = name
   store.set('activePage', Pages.stage.activePage)
   Screen.patch('page ' + Pages.stage.activePage)
-  Pages.updateTabs()
   
   Pages.stage.reload()
   Pages.stage.render()
   Pages.stage.updateTimeline()
   
+  Pages.trigger('page')
   Pages.trigger('selection')
   Pages.trigger('ready')
   return ''

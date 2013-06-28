@@ -1,6 +1,8 @@
 
 Pages.isFirstOpen = true
 
+Pages.on('page', Pages.updateTabs)
+
 Pages.on('open', function () {
 
   Pages.grid = new Grid()
@@ -35,8 +37,6 @@ Pages.on('open', function () {
     // Allow someone to drag
     $(document).on("touchmove", Pages.preventDefault) 
   }
-  
-  Pages.updateTabs()
   
   
   window.addEventListener('copy', Pages.oncopy, false)
