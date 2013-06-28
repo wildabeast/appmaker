@@ -1,8 +1,8 @@
 var Project = new Space()
 
-Project.append = function (key, value) {
+Project.append = function (key, filename, value) {
   this._set(key, value)
-  this.trigger('append', key, value)
+  this.trigger('append', key, filename, value)
   return this
 }
 

@@ -386,6 +386,7 @@ Pages.stage.setTimeline = function (name) {
     return true
   }
   
+  // Do we need to do this?
   var request = $.ajax({
     type: "POST",
     url: '/nudgepad.explorer.get',
@@ -394,7 +395,7 @@ Pages.stage.setTimeline = function (name) {
   })
   
   request.done(function (msg) {
-    Project.set('timelines ' + name, new Space(msg))
+    Project.create('timelines ' + name, new Space(msg))
   })
   
   request.fail(function () {
@@ -410,7 +411,7 @@ Pages.stage.setTimeline = function (name) {
     }
     
 
-    Project.set('timelines ' + name, timeline  )
+    Project.create('timelines ' + name, timeline  )
     Flasher.success('Timeline created')
     
     

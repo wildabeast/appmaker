@@ -54,7 +54,7 @@ Write.editPost = function (name) {
 Write.initialize = function () {
   if (Project.get('pages blog'))
     return true
-  Project.set('pages blog', Write.blankTheme.clone())
+  Project.create('pages blog', Write.blankTheme.clone())
 }
 
 /**
@@ -106,10 +106,14 @@ Write.savePost = function () {
   post.set('title', $('#WriteTitle').val())
   post.patch($('#WriteAdvanced').val())
   
-  Project.set('posts ' + name, post)
+  if (Project.get('posts ' + name))
+    Project.set('posts ' + name, post)
+  else
+    Project.create('posts ' + name, post)
   
   // If they are editing a post and the name has changed,
   // make sure to delete old post
+  // Todo: change this! Just make permalink editable.
   if (Write.activePost && Write.activePost !== name)
     Project.delete('posts ' + Write.activePost)
   

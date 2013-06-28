@@ -45,12 +45,7 @@ Pages.clearTimeline = function () {
   
   // Send Commit to Server
   Project.delete('timelines ' + Pages.stage.activePage)
-  var timestamp = new Date().getTime()
-  Project.set('timelines ' + Pages.stage.activePage + ' ' + timestamp, Pages.edge.toString())
-  // collapse at edge
-  Pages.stage.timeline = Project.get('timelines ' + Pages.stage.activePage)
-
-  Pages.stage.version = Pages.stage.timeline.length()
+  Project.stage.setTimeline()
   Pages.trigger('selection')
   return true
 }
@@ -80,8 +75,8 @@ Pages.create = function (name, template) {
     timeline.set(new Date().getTime(), commit)
   }
   
-  Project.set('pages ' + name, page)
-  Project.set('timelines ' + name, timeline)
+  Project.create('pages ' + name, page)
+  Project.create('timelines ' + name, timeline)
   
   Pages.stage.open(name)
   mixpanel.track("I created a new webpage")
@@ -343,8 +338,8 @@ Pages.renamePage = function (new_name) {
   if (Project.get('pages ' + new_name))
     return Flasher.error('A page named ' + new_name + ' already exists.')  
 
-  Project.set('pages ' + new_name, Project.get('pages ' + old_name))
-  Project.set('timelines ' + new_name, Project.get('timelines ' + old_name))
+  Project.create('pages ' + new_name, Project.get('pages ' + old_name))
+  Project.create('timelines ' + new_name, Project.get('timelines ' + old_name))
   Project.delete('pages ' + old_name)
   Project.delete('timelines ' + old_name)
   

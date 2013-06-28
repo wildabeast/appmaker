@@ -1,5 +1,6 @@
 var socketio = require('socket.io'),
     Space = require('space'),
+    Marking = require('markings'),
     parseCookie = require('cookie').parse
 
 module.exports = function (app, http_server) {
