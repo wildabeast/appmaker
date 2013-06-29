@@ -1,7 +1,8 @@
 var socketio = require('socket.io'),
     Space = require('space'),
     Marking = require('markings'),
-    parseCookie = require('cookie').parse
+    parseCookie = require('cookie').parse,
+    ParseName = require('./ParseName.js')
 
 module.exports = function (app, http_server) {
   
@@ -29,29 +30,14 @@ module.exports = function (app, http_server) {
       return accept('Invalid key transmitted.', false)
     
     data.cookie = cookie
-    data.screenId = new Date().getTime()
-    app.Room.set(data.screenId, new Space())
-      
-    // todo: broadcast maker
-    return accept(null, true)  
+    var space = new Space(data.query)
+    data.screenId = space.get('id')
+    app.Screens.set(data.screenId, space)
+    return accept(null, true)
     
   })
   
   app.SocketIO.sockets.on('connection', function (socket) {
-    
-    socket.on('screen', function (space) {
-      if (socket.handshake.screenId) {
-        app.Room.set(socket.handshake.screenId, new Space(space))
-        socket.broadcast.emit('room', app.Room.toString())
-      }
-    })
-    
-    socket.on('disconnect', function () {
-      if (socket.handshake.screenId) {
-        app.Room.delete(socket.handshake.screenId)
-        socket.broadcast.emit('room', app.Room.toString())
-      }
-    })
     
     socket.on('project.append', function (space, fn) {
       var change = new Space(space)
@@ -163,6 +149,16 @@ module.exports = function (app, http_server) {
       // Broadcast to everyone else
       socket.broadcast.emit('project.set', space)      
     })
+    
+    socket.on('disconnect', function () {
+      if (socket.handshake.screenId) {
+        app.Screens.delete(socket.handshake.screenId)
+        socket.broadcast.emit('screens.delete', socket.handshake.screenId)
+      }
+    })
+    
+    socket.broadcast.emit('screens.create', app.Screens.get(socket.handshake.screenId).toString())
+
   
   })
 }

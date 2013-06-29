@@ -84,7 +84,7 @@ require('./paths.js')(app, projectsPath, clientPath)
 require('./install.js')(app)
 
 app.Project = new Space()
-app.Room = new Space()
+app.Screens = new Space()
 
 // Load the HTML file and add mtimes as query string so the
 // maker always get the latest version of the nudgepad.js and nudgepad.css

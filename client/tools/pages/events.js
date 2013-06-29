@@ -9,8 +9,8 @@ Pages.on('open', function () {
   
   $('#PagesStage,#PagesBar').show()
   
-  Room.on('change', Pages.updateSelections)
-  Room.on('change', Pages.updateTabs)
+//  Room.on('change', Pages.updateSelections)
+//  Room.on('change', Pages.updateTabs)
   
   Lasso.selector = '#PagesStageBody .scrap:visible'
   $(document).on('lasso', '.scrap', function () {
@@ -77,8 +77,8 @@ Pages.on('close', function () {
   
   
   Pages.off('selection', Pages.broadcastSelection)
-  Room.off('change', Pages.updateSelections)
-  Room.off('change', Pages.updateTabs)
+//  Room.off('change', Pages.updateSelections)
+//  Room.off('change', Pages.updateTabs)
   $('#PagesStage').off('click', Pages.pen.insertTextBlock)
   
   Pages.stage.close()

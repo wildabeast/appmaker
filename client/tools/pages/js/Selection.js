@@ -439,13 +439,14 @@ Pages.broadcastSelection = function (extra) {
       first = ','
     }
   })
-  selection += '{box-shadow: 0 0 4px ' + Screen.get('color') + ';cursor: not-allowed;}'
-  Screen.patch('selection ' + selection)
+//  selection += '{box-shadow: 0 0 4px ' + Screen.get('color') + ';cursor: not-allowed;}'
+//  Screen.set('selection', selection)
 }
 
 Pages.updateSelections = function () {
   $('#PagesRemoteSelections').html('')
-  Room.each(function (key, value) {
+  
+  /* Room.each(function (key, value) {
     // check if its this screen. todo.
     // if this screen
     // return true
@@ -455,6 +456,7 @@ Pages.updateSelections = function () {
     if (style)
       $('#PagesRemoteSelections').append(style)
   })
+  */
 }
 
 

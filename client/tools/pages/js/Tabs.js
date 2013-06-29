@@ -10,6 +10,7 @@ Pages.updateTabs = function () {
       
     var title = ''
     
+    /*
     Room.each(function (key, value) {
       if (value.get('page') !== name)
         return true
@@ -17,6 +18,7 @@ Pages.updateTabs = function () {
       // if (thisScreen)
       // div.addClass('PagesOpenPage')
     })
+    */
     
     div.attr('title', title)
     

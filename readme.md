@@ -312,14 +312,14 @@ Screen.get('device')
 Screen.get('name')
 ```
 
-#### Room
+#### Screens
 
-Room is an instance of Space that is composed of all the Screen instances.
+Screens is an instance of Space that is composed of all the Screen instances.
 
 
 ```
-// How many people are currently working on the project:
-Room.length()
+// How many screens are currently open across the entire project:
+Screens.length()
 ```
 
 #### fs
