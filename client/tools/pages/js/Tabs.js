@@ -10,15 +10,17 @@ Pages.updateTabs = function () {
       
     var title = ''
     
-    /*
     Screens.each(function (key, value) {
+      if (value.get('id') === Screen.get('id'))
+        return true
+      if (value.get('tool') !== 'Pages')
+        return true
       if (value.get('page') !== name)
         return true
       title += value.get('name') + '(' + value.get('device') + ')' + ' '
       // if (thisScreen)
-      // div.addClass('PagesOpenPage')
+      div.addClass('PagesOpenPage')
     })
-    */
     
     div.attr('title', title)
     
