@@ -24,7 +24,7 @@ Screen.on('change', function () {
   if (nudgepad.isTesting)
     return null
   
-  Socket.emit('room', this.toString(), function (data) {
+  Socket.emit('screen', this.toString(), function (data) {
     console.log('%s responded to Socket.emit room: %s', document.location.host, data)
   })
 

@@ -39,9 +39,9 @@ module.exports = function (app, http_server) {
   
   app.SocketIO.sockets.on('connection', function (socket) {
     
-    socket.on('room', function (space) {
+    socket.on('screen', function (space) {
       if (socket.handshake.screenId) {
-        app.Room.set(socket.handshake.screenId, space)
+        app.Room.set(socket.handshake.screenId, new Space(space))
         socket.broadcast.emit('room', app.Room.toString())
       }
     })
