@@ -13,11 +13,11 @@ Manage.save = function () {
     return Flasher.error('Invalid Email')
   
   if (email === Cookie.email)
-    return Launcher.open('Launch')
+    return Launcher.open('Home')
   
   $.post('/nudgepad.updateEmail', {email : email}, function () {
     nudgepad.warnBeforeReload = false
-    document.location = '/nudgepad?tool=Launch'
+    document.location = '/nudgepad?tool=Home'
   })
 }
 

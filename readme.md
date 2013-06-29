@@ -265,9 +265,9 @@ var Draw = new Tool('Draw')
 Your tool should have a few standard properties including:
 
 ```
-// The background color of your Tool's button on the Launch screen
+// The background color of your Tool's button on the Home screen
 Draw.set('color', 'blue')
-// The description of your Tool on the Launch screen
+// The description of your Tool on the Home screen
 Draw.set('description', 'Draw something')
 ```
 

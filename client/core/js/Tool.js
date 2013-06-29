@@ -63,7 +63,7 @@ Tool.prototype.open = function () {
   this.trigger('ready')
 
   mixpanel.track('I opened the ' + this.get('name') + ' tool')
-
+  Screen.set('tool', this.get('name'))
 }
 
 Tool.prototype.restart = function () {

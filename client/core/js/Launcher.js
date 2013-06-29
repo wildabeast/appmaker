@@ -20,7 +20,7 @@ Launcher.open = function (name, dontRecord) {
 
 Launcher.openToolFromQueryString = function () {
   
-  // Get query string. If nothing, set default to Launch tool
-  var name = ParseQueryString().tool || 'Launch'
+  // Get query string. If nothing, set default to Home tool
+  var name = ParseQueryString().tool || 'Home'
   Launcher.open(name, true)
 }

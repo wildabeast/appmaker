@@ -11,7 +11,7 @@ Pages.updateTabs = function () {
     var title = ''
     
     /*
-    Room.each(function (key, value) {
+    Screens.each(function (key, value) {
       if (value.get('page') !== name)
         return true
       title += value.get('name') + '(' + value.get('device') + ')' + ' '

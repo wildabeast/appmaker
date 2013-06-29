@@ -157,6 +157,20 @@ module.exports = function (app, http_server) {
       }
     })
     
+    socket.on('screens.set', function (space, fn) {
+      var change = new Space(space)
+      var key = change.get('key')
+      var value = change.get('value')
+      
+      app.Screens.set(key, value)
+      
+      fn('screens.set ' + key)
+      // Broadcast to everyone else
+      socket.broadcast.emit('screens.set', space)      
+    })
+    
+    // send the person all the other screens
+    socket.emit('screens.get', app.Screens.toString())
     socket.broadcast.emit('screens.create', app.Screens.get(socket.handshake.screenId).toString())
 
   

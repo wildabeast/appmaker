@@ -305,7 +305,7 @@ Pages.stage.open = function (name) {
   // Page change stuff
   Pages.stage.activePage = name
   store.set('activePage', Pages.stage.activePage)
-//  Screens.set('page', Pages.stage.activePage)
+  Screen.set('page', Pages.stage.activePage)
   
   Pages.stage.reload()
   Pages.stage.render()

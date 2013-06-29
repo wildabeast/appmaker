@@ -66,8 +66,21 @@ Socket.on('screens.create', function (space) {
 Socket.on('screens.delete', function (id) {
   
   var space = Screens.get(id)
+  if (!space)
+    return true
   Flasher.activity(space.get('name') + ' closed a screen', 1000)
   Screens.delete(id)
+})
+
+Socket.on('screens.get', function (space) {
+  Screens._patch(space)
+})
+
+Socket.on('screens.set', function (space) {
+  space = new Space(space)
+  var key = space.get('key')
+  var value = space.get('value')
+  Screens.set(key, value)
 })
 
 Socket.on('ack', function (message) {

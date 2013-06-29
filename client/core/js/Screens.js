@@ -12,6 +12,7 @@ Screen.set('device', platform.name + (platform.product ? '/' + platform.product 
 Screen.set('email', Cookie.email)
 Screen.set('name', ParseName(Cookie.email))
 Screen.set('color', randomColor())
+Screen.set('tool', 'Home')
 
 Screen.on('set', function (key, value) {
   
@@ -23,9 +24,10 @@ Screen.on('set', function (key, value) {
   change.set('value', value)
   
   Socket.emit('screens.set', change.toString(), function (data) {
-    console.log('%s responded to Screens.set: %s', document.location.host, data)
+    console.log('%s responded to screens.set: %s', document.location.host, data)
   })
 
 })
+
 
 var Screens = new Space()

@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="/nudgepad/core/css/registerForm.css" type="text/css"/>
     <link rel="stylesheet" href="/nudgepad/core/css/userSelectFix.css" type="text/css"/>
     <link rel="stylesheet" href="/nudgepad/tools/develop/tool.css" type="text/css"/>
-    <link rel="stylesheet" href="/nudgepad/tools/launch/tool.css" type="text/css"/>
+    <link rel="stylesheet" href="/nudgepad/tools/home/home.css" type="text/css"/>
     <link rel="stylesheet" href="/nudgepad/tools/manage/tool.css" type="text/css"/>
     <link rel="stylesheet" href="/nudgepad/tools/package/tool.css" type="text/css"/>
     <link rel="stylesheet" href="/nudgepad/tools/pages/tool.css" type="text/css"/>
@@ -59,7 +59,7 @@
     <script type="text/javascript" src="/nudgepad/core/js/Socket.js"></script>
     <script type="text/javascript" src="/nudgepad/core/js/TextPrompt.js"></script>
     <script type="text/javascript" src="/nudgepad/tools/develop/develop.js"></script>
-    <script type="text/javascript" src="/nudgepad/tools/launch/tool.js"></script>
+    <script type="text/javascript" src="/nudgepad/tools/home/home.js"></script>
     <script type="text/javascript" src="/nudgepad/tools/manage/tool.js"></script>
     <script type="text/javascript" src="/nudgepad/tools/package/tool.js"></script>
     <script type="text/javascript" src="/nudgepad/tools/pages/Pages.js"></script>
@@ -125,7 +125,7 @@
 <div class="Tool" id="Develop">
 	<div class="ToolNav">
 		<div class="ToolNavContainer">
-  		<div class="ToolSquareButton ToolBackButton" onclick="Launcher.open('Launch')">
+  		<div class="ToolSquareButton ToolBackButton" onclick="Launcher.open('Home')">
 		  	Back
 		  </div>
 			<a class="DevelopButton" onclick="Develop.console()" title="Console">
@@ -167,24 +167,24 @@
 		</div>
 	</div>
 </div>
-<div class="Tool" id="Launch">
+<div class="Tool" id="Home">
   <div class="ToolContainer">
     
-	  <div class="LaunchColumn LaunchMargin" id="LaunchColumn1">
+	  <div class="HomeColumn HomeMargin" id="HomeColumn1">
 	    
 	  
 		  
 		  
 		</div>
 		
-		<div class="LaunchColumn LaunchMargin" id="LaunchColumn2">
+		<div class="HomeColumn HomeMargin" id="HomeColumn2">
 		  
 		  
 		  
 		  
 		</div>
 		
-    <div class="LaunchColumn" id="LaunchColumn3">
+    <div class="HomeColumn" id="HomeColumn3">
       
       
 		  
@@ -197,7 +197,7 @@
 <div class="Tool" id="Manage">
 	<div class="ToolNav">
 		<div class="ToolNavContainer">
-  		<div class="ToolSquareButton ToolBackButton" onclick="Launcher.open('Launch')">
+  		<div class="ToolSquareButton ToolBackButton" onclick="Launcher.open('Home')">
 		  	Back
 		  </div>
 		  <a id="ManageLogoutButton" class="ToolSquareButton" href="/nudgepad.logout" title="Logout">
@@ -222,7 +222,7 @@
 <div class="Tool" id="Package">
 	<div class="ToolNav">
 		<div class="ToolNavContainer">
-  		<div class="ToolSquareButton ToolBackButton" onclick="Launcher.open('Launch')">
+  		<div class="ToolSquareButton ToolBackButton" onclick="Launcher.open('Home')">
 		  	Back
 		  </div>
 		<div class="clear"></div>
@@ -291,7 +291,7 @@
   <div onclick="Pages.renamePrompt()">Rename</div>
   <div onclick="Pages.deletePage()">Delete</div>
   <div onclick="Inviter.prompt()">Invite</div>
-  <div onclick="Launcher.open('Launch')">Dashboard</div>
+  <div onclick="Launcher.open('Home')">Dashboard</div>
 </div>
 
 <div id="PagesRibbon">
@@ -304,7 +304,7 @@
 <div class="Tool" id="Write">
 	<div class="ToolNav">
 		<div class="ToolNavContainer">
-  		<div class="ToolSquareButton ToolBackButton" onclick="Launcher.open('Launch')">
+  		<div class="ToolSquareButton ToolBackButton" onclick="Launcher.open('Home')">
 		  	Back
 		  </div>
 			<div id="WriteAdvancedToggle" class="ToolSquareButton" onclick="$('#WriteAdvanced').toggle()">
