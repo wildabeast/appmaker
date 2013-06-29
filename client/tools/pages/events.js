@@ -9,7 +9,7 @@ Pages.on('open', function () {
   
   $('#PagesStage,#PagesBar').show()
   
-  // Screens.on('change', Pages.updateSelections)
+  Screens.on('change', Pages.updateSelections)
   Screens.on('change', Pages.updateTabs)
   
   Lasso.selector = '#PagesStageBody .scrap:visible'
@@ -77,7 +77,7 @@ Pages.on('close', function () {
   
   
   Pages.off('selection', Pages.broadcastSelection)
-//  Room.off('change', Pages.updateSelections)
+  Screens.off('change', Pages.updateSelections)
   Screens.off('change', Pages.updateTabs)
   $('#PagesStage').off('click', Pages.pen.insertTextBlock)
   
