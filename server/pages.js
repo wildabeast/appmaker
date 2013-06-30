@@ -2,7 +2,7 @@ module.exports = function (app) {
   
   
   
-  app.get('*', app.privateCheck, function (req, res, next) {
+  app.get('*', function (req, res, next) {
 
     var name = req.params[0].substr(1)
 
