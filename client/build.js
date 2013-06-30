@@ -129,6 +129,9 @@ var buildHtml = function (destination, source) {
   fs.writeFileSync(destination, file, 'utf8')  
 }
 
+if (!fs.existsSync(productionPath))
+  fs.mkdirSync(productionPath)
+
 buildHtml(productionPath + 'nudgepad.dev.html', corePath + '/nudgepad.dev.html')
 
 
