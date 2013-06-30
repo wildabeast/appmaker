@@ -221,6 +221,7 @@ app.use('/private/', function (req, res) {
   return res.send('Sorry, it\'s private here.', 404)
 })
 
+// Do this after /nudgepad/, so the login scripts get through fine.
 app.use('/', app.privateCheck)
 
 // Make sure this is first so an index.html will take precedence
