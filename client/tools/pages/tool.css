@@ -253,7 +253,7 @@
   display: none;
 }
 
-#PagesDroppablesList {
+#PagescomponentsList {
   float: left;
 }
 
@@ -292,7 +292,7 @@
   background-color: #3a3a3a;
 }
 
-#PagesImageDroppablesList {
+#PagesImagecomponentsList {
   float: left;
 }
 

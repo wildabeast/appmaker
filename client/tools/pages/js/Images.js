@@ -71,7 +71,7 @@ Pages.images.parseBackgroundUrl = function (url) {
 
 /**
  * Downloads the latest list of images from server and stores
- * it in a property which is used to render the droppables.
+ * it in a property which is used to render the components.
  */
 Pages.images.images = new Space()
 Pages.images.updateList = function () {
@@ -83,7 +83,7 @@ Pages.images.updateList = function () {
         dropImageDiv += '<div class="PagesImageThumbDrop">&nbsp;<img src="/'+ key +'">&nbsp;</div>'
     })
 
-    $('#PagesImageDroppablesList').html(dropImageDiv)
+    $('#PagesImagecomponentsList').html(dropImageDiv)
     
   })
 }

@@ -1,23 +1,23 @@
-Pages.insertDroppables = function (droppables) {
-  var droppablesInsert = ''
-    for (var i in droppables) {
-      droppablesInsert += '<div class="PagesDroppableImg"><img src="/nudgepad/public/images/droppables/'+ droppables[i] +'.png" title="'+ droppables[i] +'"></div>'
+Pages.insertcomponents = function (components) {
+  var componentsInsert = ''
+    for (var i in components) {
+      componentsInsert += '<div class="PagesDroppableImg"><img src="/nudgepad/tools/pages/images/'+ components[i] +'.png" title="'+ components[i] +'"></div>'
     }
 
-    var droppablesListItems = $('<div class="PagesDroppablesList">'+ droppablesInsert +'</div>')
+    var componentsListItems = $('<div class="PagescomponentsList">'+ componentsInsert +'</div>')
 
-    $('#PagesDroppablesList').html(droppablesListItems)
+    $('#PagescomponentsList').html(componentsListItems)
 
-    $('#PagesDroppablesList div img').on('slidestart', function() {
+    $('#PagescomponentsList div img').on('slidestart', function() {
       var dropBlock = $(this).attr('title')
-      Pages.stage.dragAndDrop(Pages.droppables.get('blocks ' + dropBlock))
+      Pages.stage.dragAndDrop(Pages.components.get('blocks ' + dropBlock))
       mixpanel.track('I dropped a droppable')
     })
 
-    $('.PagesDroppablesList div img').on('tap', function() {
+    $('.PagescomponentsList div img').on('tap', function() {
       
       var dropBlock = $(this).attr('title')
-      Pages.stage.insert(Pages.droppables.get('blocks ' + dropBlock), false, 0, 0, true)
+      Pages.stage.insert(Pages.components.get('blocks ' + dropBlock), false, 0, 0, true)
       mixpanel.track('I tapped a droppable')
     })
 }
@@ -50,7 +50,7 @@ Pages.pickArray = function (menuType) {
       result = [];
   }
 
-  Pages.insertDroppables(result);
+  Pages.insertcomponents(result);
 }
 
 Pages.on('firstOpen', function () {

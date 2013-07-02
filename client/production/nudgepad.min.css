@@ -1041,7 +1041,7 @@ body {
   display: none;
 }
 
-#PagesDroppablesList {
+#PagescomponentsList {
   float: left;
 }
 
@@ -1080,7 +1080,7 @@ body {
   background-color: #3a3a3a;
 }
 
-#PagesImageDroppablesList {
+#PagesImagecomponentsList {
   float: left;
 }
 

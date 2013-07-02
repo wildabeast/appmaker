@@ -17,7 +17,7 @@ Pages.on('firstOpen', function () {
   })
   $('.PagesBarDroppable').on('slidestart', function() {
     var dropBlock = $(this).attr('title').toLowerCase()
-    Pages.stage.dragAndDrop(Pages.droppables.get('blocks ' + dropBlock))
+    Pages.stage.dragAndDrop(Pages.components.get('blocks ' + dropBlock))
   })
 
   $('#PagesImageDroppable').on('click', function () {
