@@ -18,10 +18,8 @@ var Console = function (app) {
           return res.send('stderr: ' + stderr)
         if (error)
           return res.send('error: ' + error)
-        if (stdout)
-          return res.send(stdout + '')
-        }
-    )
+        return res.send(stdout + '')
+    })
 
   })
   
