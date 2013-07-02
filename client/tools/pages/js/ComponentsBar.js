@@ -8,13 +8,13 @@ Pages.loadComponents = function (components) {
 
   $('#PagesComponentsList div img').on('slidestart', function() {
     var componentId = $(this).attr('title')
-    Pages.stage.dragAndDrop(Pages.components.get('blocks ' + componentId))
+    Pages.stage.dragAndDrop(Pages.components.get(componentId))
     mixpanel.track('I dropped a component')
   })
 
   $('.PagesComponentsList div img').on('tap', function() {
     var componentId = $(this).attr('title')
-    Pages.stage.insert(Pages.components.get('blocks ' + componentId), false, 0, 0, true)
+    Pages.stage.insert(Pages.components.get(componentId), false, 0, 0, true)
     mixpanel.track('I tapped a component')
   })
 }
@@ -22,7 +22,7 @@ Pages.loadComponents = function (components) {
 Pages.on('firstOpen', function () {
   
   $('#PagesBlockComponent').on('click', function () {
-    Pages.loadComponents(['block', 'rounded'])
+    Pages.loadComponents(['block', 'rounded', 'button2'])
   })
   
   $('#PagesTextComponent').on('click', function () {
