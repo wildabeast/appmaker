@@ -404,8 +404,9 @@ Pages.stage.selection.restore = function () {
   for (var i in Pages.stage.selection.saved) {
     var selector = Pages.stage.selection.saved[i]
     if ($(selector).length)
-      $(selector).selectMe()
+      $(selector).selectMe(true)
   }
+  Pages.trigger('selection')
 }
 
 /**
