@@ -377,7 +377,10 @@ try {
   
   var files = fs.readdirSync(app.paths.packages)
   for (var j in files) {
-    require(app.paths.packages + files[j])(app)
+    var file = files[j]
+    if (!file.match(/\.js$/))
+      continue
+    require(app.paths.packages + file)(app)
   }
 } catch (e) {
   if (e instanceof SyntaxError) {
