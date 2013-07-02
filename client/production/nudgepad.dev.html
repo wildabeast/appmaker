@@ -6,11 +6,11 @@
     <link rel="stylesheet" href="/nudgepad/core/css/core.css" type="text/css"/>
     <link rel="stylesheet" href="/nudgepad/core/css/registerForm.css" type="text/css"/>
     <link rel="stylesheet" href="/nudgepad/core/css/userSelectFix.css" type="text/css"/>
+    <link rel="stylesheet" href="/nudgepad/tools/appmaker/tool.css" type="text/css"/>
     <link rel="stylesheet" href="/nudgepad/tools/blog/tool.css" type="text/css"/>
     <link rel="stylesheet" href="/nudgepad/tools/develop/tool.css" type="text/css"/>
     <link rel="stylesheet" href="/nudgepad/tools/home/home.css" type="text/css"/>
     <link rel="stylesheet" href="/nudgepad/tools/manage/tool.css" type="text/css"/>
-    <link rel="stylesheet" href="/nudgepad/tools/package/tool.css" type="text/css"/>
     <link rel="stylesheet" href="/nudgepad/tools/pages/tool.css" type="text/css"/>
     <link rel="stylesheet" href="/nudgepad/tools/pages/css/spectrum.css" type="text/css"/>
     <link rel="stylesheet" href="/nudgepad/tools/pages/css/styleEditor.css" type="text/css"/>
@@ -57,12 +57,12 @@
     <script type="text/javascript" src="/nudgepad/core/js/Screens.js"></script>
     <script type="text/javascript" src="/nudgepad/core/js/Socket.js"></script>
     <script type="text/javascript" src="/nudgepad/core/js/TextPrompt.js"></script>
+    <script type="text/javascript" src="/nudgepad/tools/appmaker/tool.js"></script>
     <script type="text/javascript" src="/nudgepad/tools/blog/blog.js"></script>
     <script type="text/javascript" src="/nudgepad/tools/blog/events.js"></script>
     <script type="text/javascript" src="/nudgepad/tools/develop/develop.js"></script>
     <script type="text/javascript" src="/nudgepad/tools/home/home.js"></script>
     <script type="text/javascript" src="/nudgepad/tools/manage/tool.js"></script>
-    <script type="text/javascript" src="/nudgepad/tools/package/tool.js"></script>
     <script type="text/javascript" src="/nudgepad/tools/pages/Pages.js"></script>
     <script type="text/javascript" src="/nudgepad/tools/pages/js/Autokey.js"></script>
     <script type="text/javascript" src="/nudgepad/tools/pages/js/CodePanel.js"></script>
@@ -119,6 +119,22 @@
 			<div class="clear"></div>
 			<div id="RegisterFormSkip" onclick="$('#RegisterFormModal').remove()">Skip this step</div>
 		</div>
+	</div>
+</div>
+<div class="Tool" id="AppMaker">
+	<div class="ToolNav">
+		<div class="ToolNavContainer">
+  		<div class="ToolSquareButton ToolBackButton" onclick="Launcher.open('Home')">
+		  	Back
+		  </div>
+		<div class="clear"></div>
+		</div>
+	</div>
+  <div class="ToolContainer">
+	  <div class="ToolSectionLabel">
+		  Manifest Url
+		</div>
+	  <div id="AppMakerManifestUrl"><span id="AppMakerManifestUrlLink" onclick="AppMaker.selectText('AppMakerManifestUrlLink')">http://</span>&nbsp;&nbsp;&nbsp;<a onclick="Explorer.edit('manifest.webapp');">Edit File</a></div>
 	</div>
 </div>
 <div class="Tool" id="Blog">
@@ -249,22 +265,6 @@
 	  <div id="ManageUpdateButton" onclick="Manage.save()">
 		  Update
 		</div>
-	</div>
-</div>
-<div class="Tool" id="Package">
-	<div class="ToolNav">
-		<div class="ToolNavContainer">
-  		<div class="ToolSquareButton ToolBackButton" onclick="Launcher.open('Home')">
-		  	Back
-		  </div>
-		<div class="clear"></div>
-		</div>
-	</div>
-  <div class="ToolContainer">
-	  <div class="ToolSectionLabel">
-		  Manifest Url
-		</div>
-	  <div id="PackageManifestUrl"><span id="PackageManifestUrlLink" onclick="Package.selectText('PackageManifestUrlLink')">http://</span>&nbsp;&nbsp;&nbsp;<a onclick="Explorer.edit('manifest.webapp');">Edit File</a></div>
 	</div>
 </div>
 <div class="Tool" id="Pages">

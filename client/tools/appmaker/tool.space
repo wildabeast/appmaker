@@ -1,4 +1,4 @@
-name Package
+name AppMaker
 html tool.html
 js tool.js
 css tool.css

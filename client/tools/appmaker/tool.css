@@ -1,12 +1,12 @@
-#PackageManifestUrl {
+#AppMakerManifestUrl {
   user-select: auto;
   -webkit-user-select: auto;
   -moz-user-select: text;
 }
-#PackageManifestUrl a{
+#AppMakerManifestUrl a{
   cursor: pointer;
   color: blue;
 }
-#PackageManifestUrl a:hover {
+#AppMakerManifestUrl a:hover {
   text-decoration: underline;
 }
