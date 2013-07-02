@@ -481,7 +481,7 @@ Pages.stage.clearOnTap = function (event) {
 Pages.stage.onresize = function (event) {
   Pages.stage.views.get(Pages.stage.currentView)()
   $('#PagesStageBody').width()
-  if ($('#PagesRibbon:visible').length)
+  if ($('#PagesComponentsBar:visible').length)
     $('#PagesStage').height($(window).height() - 122)
   else 
     $('#PagesStage').height($(window).height() - 40)

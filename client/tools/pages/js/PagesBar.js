@@ -1,27 +1,27 @@
 Pages.on('firstOpen', function () {
   
-  $('.PagesBarDroppable').on('click', function () {
-    $('.PagesImageDroppableOptions').hide()
-    if ($(this).hasClass('selectedDroppable')) {
-      $(this).removeClass('selectedDroppable')
-      $('.PagesBarDroppable').removeClass('PagesLowlight');
-      $('#PagesRibbon').slideUp('fast')
+  $('.PagesBarComponent').on('click', function () {
+    $('.PagesImageComponentOptions').hide()
+    if ($(this).hasClass('selectedComponent')) {
+      $(this).removeClass('selectedComponent')
+      $('.PagesBarComponent').removeClass('PagesLowlight');
+      $('#PagesComponentsBar').slideUp('fast')
     }
     else {
-      $('.PagesBarDroppable').removeClass('selectedDroppable')
-      $(this).addClass('selectedDroppable');
+      $('.PagesBarComponent').removeClass('selectedComponent')
+      $(this).addClass('selectedComponent');
       $(this).removeClass('PagesLowlight')
-      $('.PagesBarDroppable').not('.selectedDroppable').addClass('PagesLowlight');
-      $('#PagesRibbon').slideDown('fast')
+      $('.PagesBarComponent').not('.selectedComponent').addClass('PagesLowlight');
+      $('#PagesComponentsBar').slideDown('fast')
     }
   })
-  $('.PagesBarDroppable').on('slidestart', function() {
+  $('.PagesBarComponent').on('slidestart', function() {
     var dropBlock = $(this).attr('title').toLowerCase()
     Pages.stage.dragAndDrop(Pages.components.get('blocks ' + dropBlock))
   })
 
-  $('#PagesImageDroppable').on('click', function () {
-    $('.PagesImageDroppableOptions').show()
+  $('#PagesImageComponent').on('click', function () {
+    $('.PagesImageComponentOptions').show()
   })
   
   $('#PagesBarMenuButton').on('mousedown', function (event) {

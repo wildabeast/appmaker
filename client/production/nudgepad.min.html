@@ -198,13 +198,13 @@
 
   <div title="menu" id="PagesBarMenuButton"></div>
 
-  <div title="Block" id="PagesBlockDroppable" class="PagesBarDroppable"><img src="/nudgepad/public/images/block.png"></div>
+  <div title="Block" id="PagesBlockComponent" class="PagesBarComponent"><img src="/nudgepad/public/images/block.png"></div>
 
-  <div title="Text" id="PagesTextDroppable" class="PagesBarDroppable"><img src="/nudgepad/public/images/text.png"></div>
+  <div title="Text" id="PagesTextComponent" class="PagesBarComponent"><img src="/nudgepad/public/images/text.png"></div>
 
-  <div title="Image" id="PagesImageDroppable" class="PagesBarDroppable"><img src="/nudgepad/public/images/image.png"></div>
+  <div title="Image" id="PagesImageComponent" class="PagesBarComponent"><img src="/nudgepad/public/images/image.png"></div>
 
-  <div title="Sticky" id="stickyDroppable" class="PagesBarDroppable"><img src="/nudgepad/public/images/sticky.png"></div>
+  <div title="Sticky" id="stickyComponent" class="PagesBarComponent"><img src="/nudgepad/public/images/sticky.png"></div>
   
   <input class="PagesTimeline" id="PagesTimeline" type="range" min="0" max="100" step="1" onclick="Pages.stage.goto($(this).val())" value="100">
   <script type="text/javascript">
@@ -243,10 +243,10 @@
   <div onclick="Launcher.open('Home')">Dashboard</div>
 </div>
 
-<div id="PagesRibbon">
-	<div id="PagesRibbonUploadButton" class="PagesImageDroppableOptions"><span>Upload</span><iframe src="/nudgepad.images.upload" allowtransparency="true" frameborder="0px" width="100%" height="100%" scrolling="no" style="position: absolute; bottom: 0px; left: 0px;"></iframe></div>
-  <div id="PagescomponentsList"></div>
-  <div id="PagesImagecomponentsList" class="PagesImageDroppableOptions"></div>
+<div id="PagesComponentsBar">
+	<div id="PagesComponentsBarUploadButton" class="PagesImageComponentOptions"><span>Upload</span><iframe src="/nudgepad.images.upload" allowtransparency="true" frameborder="0px" width="100%" height="100%" scrolling="no" style="position: absolute; bottom: 0px; left: 0px;"></iframe></div>
+  <div id="PagesComponentsList"></div>
+  <div id="PagesImagecomponentsList" class="PagesImageComponentOptions"></div>
 </div>
 
 <div id="PagesDimensions"></div>

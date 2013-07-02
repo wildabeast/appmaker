@@ -141,7 +141,7 @@
   font-family: 'Titillium Web';
 }
 
-.PagesBarDroppable {
+.PagesBarComponent {
   float: left;
   margin-left: 10px;
   margin-top: 10px;
@@ -242,7 +242,7 @@
    opacity: .2;
 }
 
-#PagesRibbon {
+#PagesComponentsBar {
   position: fixed;
   left: 0px;
   width: 100%;
@@ -253,21 +253,21 @@
   display: none;
 }
 
-#PagescomponentsList {
+#PagesComponentsList {
   float: left;
 }
 
-.PagesDroppableImg {
+.PagesComponentImg {
   float: left;
   margin-left: 10px;
   margin-top: 10px;
 }
 
-.PagesImageDroppableOptions {
+.PagesImageComponentOptions {
   display: none;
 }
 
-#PagesRibbonUploadButton {
+#PagesComponentsBarUploadButton {
   float: left;
   width: 70px;
   background-color: #555;
@@ -284,11 +284,11 @@
   position: relative;
 }
 
-#PagesRibbonUploadButton:hover {
+#PagesComponentsBarUploadButton:hover {
   background-color: #444;
 }
 
-#PagesRibbonUploadButton:active {
+#PagesComponentsBarUploadButton:active {
   background-color: #3a3a3a;
 }
 
