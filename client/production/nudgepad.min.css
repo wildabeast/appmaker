@@ -380,7 +380,18 @@ body {
   -moz-user-select: -moz-none;
   user-select: none;
 }
-#BlogPostColumn {
+#AppMakerManifestUrl {
+  user-select: auto;
+  -webkit-user-select: auto;
+  -moz-user-select: text;
+}
+#AppMakerManifestUrl a{
+  cursor: pointer;
+  color: blue;
+}
+#AppMakerManifestUrl a:hover {
+  text-decoration: underline;
+}#BlogPostColumn {
   float: left;
   width: 25%;
 }
@@ -775,18 +786,7 @@ body {
   cursor : pointer;
   line-height: 40px;
 }
-#PackageManifestUrl {
-  user-select: auto;
-  -webkit-user-select: auto;
-  -moz-user-select: text;
-}
-#PackageManifestUrl a{
-  cursor: pointer;
-  color: blue;
-}
-#PackageManifestUrl a:hover {
-  text-decoration: underline;
-}#PagesDimensions {
+#PagesDimensions {
   display: none;
   position: absolute;
   top: 0;
