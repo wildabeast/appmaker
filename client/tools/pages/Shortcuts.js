@@ -23,8 +23,6 @@ Pages.shortcuts['shift+d'] = Pages.stage.selection.distributeHorizontal
 
 Pages.shortcuts['alt+o'] = Explorer.quickEdit
 
-Pages.shortcuts['meta+shift+s'] = nudgepad.edit_settings
-
 Pages.deleteShortcut = function () { Pages.stage.selection.delete(); Pages.stage.commit() }
 Pages.shortcuts['delete'] = Pages.deleteShortcut
 Pages.shortcuts['backspace'] = Pages.deleteShortcut

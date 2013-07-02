@@ -14,7 +14,7 @@ Pages.on('open', function () {
   
   Lasso.selector = '#PagesStageBody .scrap:visible'
   $(document).on('lasso', '.scrap', function () {
-    $(this).selectMe()
+    $(this).selectMe(true)
     return false
   })
   Lasso.enable()

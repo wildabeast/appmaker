@@ -372,8 +372,9 @@ Pages.stage.scrollTop = function () {
  */
 Pages.stage.selectAll = function () {
   $('.scrap').each(function () {
-    $(this).selectMe()
+    $(this).selectMe(true)
   })
+  Pages.trigger('selection')
 }
 
 /**

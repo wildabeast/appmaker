@@ -68,10 +68,12 @@ Pages.stage.selection.capture = function () {
  * Deselect all blocks
  */
 Pages.stage.selection.clear = function () {
+  if (!$('.selection').length)
+    return true
   $('.selection').each(function () {
-    $(this).deselect()
+    $(this).deselect(true)
   })
-  
+  Pages.trigger('selection')
 }
 
 /**
@@ -125,7 +127,7 @@ Pages.stage.selection.delete = function () {
     // order probably matters here
     // should we move deselect and select to jquery level? i think we probably should
     var scrap = $(this).scrap()
-    $(this).deselect().remove()
+    $(this).deselect(true).remove()
     if (scrap)
       Pages.page.delete(scrap.getPath())
   })

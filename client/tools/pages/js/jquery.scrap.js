@@ -1,8 +1,9 @@
-$.fn.deselect = function () {
+$.fn.deselect = function (quiet) {
   var id = $(this).attr('id')
   $(this).removeClass('selection')
   $('.' + id + '_handle').remove()
-  Pages.trigger('selection')
+  if (!quiet)
+    Pages.trigger('selection')
   return $(this)
 }
 
@@ -20,11 +21,11 @@ $.fn.duplicate = function () {
   var newScrap = new Scrap(path + key, scrap.toString())
   var index = parent.keys.indexOf(id) + 1
   parent.set(key, newScrap, index)
-  $(this).deselect()
+  $(this).deselect(true)
   var element = newScrap.render(null, index).element()
   if (element.css('position') === 'absolute')
     newScrap.move(10,10)
-  element.selectMe()
+  element.selectMe(true)
 }
 
 $.fn.parentPath = function () {
@@ -42,7 +43,7 @@ $.fn.scrap = function () {
  * @param {string}
  * @return {Scrap} this
  */
-$.fn.selectMe = function () {
+$.fn.selectMe = function (quiet) {
   
   var scrap = $(this).scrap()
   
@@ -57,7 +58,8 @@ $.fn.selectMe = function () {
 
   Pages.MoveHandle.create(scrap)
   
-  Pages.trigger('selection')
+  if (!quiet)
+    Pages.trigger('selection')
 
   Pages.EditHandle.create(scrap)
   
