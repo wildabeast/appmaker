@@ -75,6 +75,7 @@ Pages.on('close', function () {
   
   $(document).off("slidestart", Pages.pen.draw)
   
+  $('#PagesStage,#PagesBar').hide()
   
   Pages.off('selection', Pages.broadcastSelection)
   Screens.off('change', Pages.updateSelections)
