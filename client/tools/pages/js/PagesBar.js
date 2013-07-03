@@ -16,8 +16,8 @@ Pages.on('firstOpen', function () {
     }
   })
   $('.PagesBarComponent').on('slidestart', function() {
-    var dropBlock = $(this).attr('title').toLowerCase()
-    Pages.stage.dragAndDrop(Pages.components.get('blocks ' + dropBlock))
+    var componentId = $(this).attr('title').toLowerCase()
+    Pages.stage.dragAndDrop(Pages.components.get(componentId))
   })
 
   $('#PagesImageComponent').on('click', function () {

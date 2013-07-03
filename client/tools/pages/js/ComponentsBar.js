@@ -12,7 +12,7 @@ Pages.loadComponents = function (components) {
     mixpanel.track('I dropped a component')
   })
 
-  $('.PagesComponentsList div img').on('tap', function() {
+  $('#PagesComponentsList div img').on('tap', function() {
     var componentId = $(this).attr('title')
     Pages.stage.insert(Pages.components.get(componentId), false, 0, 0, true)
     mixpanel.track('I tapped a component')

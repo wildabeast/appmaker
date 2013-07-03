@@ -57,7 +57,7 @@ Pages.stage.commit = function () {
   Pages.trigger('commit')
   
   Project.set('pages ' + Pages.stage.activePage, new Space(Pages.page.toString()))
-  Project.append('timelines ' + Pages.stage.activePage + ' ' + timestamp, 'timelines ' + Pages.stage.activePage, commit)
+  Project.append('timelines ' + Pages.stage.activePage + ' ' + timestamp, commit)
   return diff
 }
 
