@@ -179,6 +179,38 @@ case "$1" in
   fi
 ;;
 
+'pids')
+  # display all NudgePad related pids
+  echo Panel PID
+  cat $tempPath/panelPid
+  echo 
+  echo Panel Mon PID
+  cat $tempPath/panelMonPid
+  echo 
+  echo Proxy PID
+  cat $tempPath/proxyPid
+  echo 
+  echo Proxy Mon PID
+  cat $tempPath/proxyMonPid
+  echo 
+  for domain in $runningProjects
+  do
+    echo $domain PID
+    cat $projectsPath/$domain/private/temp/projectPid
+    echo 
+    echo $domain Mon PID
+    cat $projectsPath/$domain/private/temp/monPid
+    echo 
+  done
+;;
+
+'projects')
+  for domain in $projects
+  do
+    echo $domain
+  done
+;;
+
 'restart')
   if [ -z $2 ]
     then    
@@ -197,13 +229,6 @@ case "$1" in
   do
     stopProject $domain
     startProject $domain
-  done
-;;
-
-'projects')
-  for domain in $projects
-  do
-    echo $domain
   done
 ;;
 

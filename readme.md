@@ -447,6 +447,8 @@ The steps for setting up a server:
 5. Install the "npd" command:
 
     $ echo "alias npd='~/nudgepad/system/nudgepad.sh'" >> ~/.bash_profile
+    $ # The next line is to allow you to run npd as sudo if you need to for some things.
+    $ echo "alias sudo='sudo '" >> ~/.bash_profile
     $ source ~/.bash_profile
 
 6. Start NudgePad:
