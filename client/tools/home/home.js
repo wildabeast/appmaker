@@ -13,8 +13,8 @@ Home.colNumber = function (i) {
 
 Home.renderMenu = function () {
   $('.HomeColumn').html('')
-  var tools = _.without(Tool.tools, 'Home', 'Pages', 'Develop', 'Blog', 'AppMaker', 'WebMaker')
-  tools.unshift('Pages', 'Develop', 'Blog', 'AppMaker')
+  var tools = _.without(Tool.tools, 'Home', 'Prototype', 'Develop', 'Blog', 'AppMaker', 'WebMaker')
+  tools.unshift('Prototype', 'Develop', 'Blog', 'AppMaker')
   for (var i in tools) {
     var tool = window[tools[i]]
     $('#HomeColumn' + Home.colNumber(i)).append(Home.toButton(tool.get('name'), tool.get('description'), tool.get('color')))

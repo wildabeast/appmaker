@@ -786,7 +786,7 @@ body {
   cursor : pointer;
   line-height: 40px;
 }
-#PagesDimensions {
+#PrototypeDimensions {
   display: none;
   position: absolute;
   top: 0;
@@ -802,7 +802,7 @@ body {
   z-index: 200;
 }
 
-#PagesCodePanel {
+#PrototypeCodePanel {
   position: fixed;
   z-index: 5000;
   left: 0;
@@ -829,13 +829,13 @@ body {
   outline: 1px solid #5555ff;
 }
 
-.PagesEditHandle {
+.PrototypeEditHandle {
   height: 16px;
   position: absolute;
   z-index: 200;
 }
 
-.PagesEditStyleHandle, .PagesLinkHandle {
+.PrototypeEditStyleHandle, .PrototypeLinkHandle {
   background-image : url(/nudgepad/public/images/pencil_lt.png);
   background-size: 14px;
   background-position : center;
@@ -853,7 +853,7 @@ body {
 }
 
 
-#PagesStage {
+#PrototypeStage {
   position: relative;
   height: 637px;
   overflow-y: scroll;
@@ -864,14 +864,14 @@ body {
   width: 100%;
 }
 
-#PagesStageHead {
+#PrototypeStageHead {
   height: 0;
   position: absolute;
   top: 0;
   left: 0;
 }
 
-#PagesStageBody {
+#PrototypeStageBody {
   height: 1000px;
   position: relative;
   background-color: white;
@@ -881,14 +881,14 @@ body {
 }
 
 /**
- * We add this as kind of a hack, because adding bottom padding to PagesStage has no effect.
+ * We add this as kind of a hack, because adding bottom padding to PrototypeStage has no effect.
  */
-#PagesStageBottomPadding {
+#PrototypeStageBottomPadding {
   height: 200px;
   background-color: rgb(233, 233, 233);
 }
 
-#PagesContextMenu {
+#PrototypeContextMenu {
   position: fixed;
   top: 0;
   left: 0;
@@ -901,24 +901,24 @@ body {
   box-shadow: 0px 1px 3px rgba(0,0,0,.6);
 }
 
-#PagesContextMenu a {
+#PrototypeContextMenu a {
   padding: 6px;
   border-bottom: 1px solid #333;
   display: block;
 }
 
-.PagesContextMenuSeparator {
+.PrototypeContextMenuSeparator {
   height: 10px;
   border-bottom: 1px solid #aaa;
 }
 
-#PagesContextMenu a:hover {
+#PrototypeContextMenu a:hover {
   background-color: #2a2a2a;
 }
 
 /*----------------Tool Bar-------------------*/
 
-#PagesBar {
+#PrototypeBar {
   position: fixed;
   bottom: 0px;
   height: 50px;
@@ -929,27 +929,27 @@ body {
   font-family: 'Titillium Web';
 }
 
-.PagesBarComponent {
+.PrototypeBarComponent {
   float: left;
   margin-left: 10px;
   margin-top: 10px;
   cursor: pointer;
 }
 
-.PagesBarButton img {
+.PrototypeBarButton img {
   padding-top: 12px;
   opacity: .4;
 }
 
-.PagesBarButton:hover img{
+.PrototypeBarButton:hover img{
   opacity: .7;
 }
 
-.PagesBarButton:active img{
+.PrototypeBarButton:active img{
   opacity: 1;
 }
 
-#PagesTabs {
+#PrototypeTabs {
   float: right;
   max-width: 600px;
   overflow: hidden;
@@ -959,7 +959,7 @@ body {
   color: #777;
 }
 
-#PagesMenu {
+#PrototypeMenu {
   background-color: #333;
   border-radius: 3px 0px 0px 0px;
   width: 200px;
@@ -973,41 +973,41 @@ body {
   bottom: 50;
 }
 
-#PagesMenu div{
+#PrototypeMenu div{
   padding: 6px 30px;
   cursor: pointer;
 }
 
-#PagesMenu div:hover {
+#PrototypeMenu div:hover {
   background-color: #2a2a2a;
 }
 
-#PagesMenu div:active {
+#PrototypeMenu div:active {
   background-color: #1a1a1a;
 }
 
-#PagesTabs span {
+#PrototypeTabs span {
   margin-right: 20px;
 }
 
-#PagesTabs span {
+#PrototypeTabs span {
   cursor: pointer;
 }
 
-#PagesTabs span.PagesOpenPage {
+#PrototypeTabs span.PrototypeOpenPage {
   text-decoration: underline;
 }
 
-.PagesTimeline {
+.PrototypeTimeline {
   line-height: 40px;
   display: none;
 }
 
-#PagesTimelinePosition, #PagesTimelineClear {
+#PrototypeTimelinePosition, #PrototypeTimelineClear {
   color: grey;
 }
 
-#PagesBarMenuButton {
+#PrototypeBarMenuButton {
   height: 50px;
   width: 50px;
   background-color: #1a86d6;
@@ -1018,19 +1018,19 @@ body {
   cursor: pointer;
 }
 
-#PagesBarMenuButton:hover {
+#PrototypeBarMenuButton:hover {
   background-color: #3575b5;
 }
 
-#PagesBarMenuButton:active {
+#PrototypeBarMenuButton:active {
   background-color: #2c659e;
 }
 
-.PagesLowlight {
+.PrototypeLowlight {
    opacity: .2;
 }
 
-#PagesComponentsBar {
+#PrototypeComponentsBar {
   position: fixed;
   left: 0px;
   width: 100%;
@@ -1041,21 +1041,21 @@ body {
   display: none;
 }
 
-#PagesComponentsList {
+#PrototypeComponentsList {
   float: left;
 }
 
-.PagesComponentImg {
+.PrototypeComponentImg {
   float: left;
   margin-left: 10px;
   margin-top: 10px;
 }
 
-.PagesImageComponentOptions {
+.PrototypeImageComponentOptions {
   display: none;
 }
 
-#PagesComponentsBarUploadButton {
+#PrototypeComponentsBarUploadButton {
   float: left;
   width: 70px;
   background-color: #555;
@@ -1072,19 +1072,19 @@ body {
   position: relative;
 }
 
-#PagesComponentsBarUploadButton:hover {
+#PrototypeComponentsBarUploadButton:hover {
   background-color: #444;
 }
 
-#PagesComponentsBarUploadButton:active {
+#PrototypeComponentsBarUploadButton:active {
   background-color: #3a3a3a;
 }
 
-#PagesImagecomponentsList {
+#PrototypeImagecomponentsList {
   float: left;
 }
 
-.PagesImageThumbDrop {
+.PrototypeImageThumbDrop {
   float: left;
   height: 60px;
   width: 60px;
@@ -1097,7 +1097,7 @@ body {
   padding: 0;
 }
 
-.PagesImageThumbDrop img {
+.PrototypeImageThumbDrop img {
   padding: 0;
   max-height: 50px;
   max-width: 50px;
@@ -1105,7 +1105,7 @@ body {
   line-height: 60px;
 }
 
-/** Todo: put these under #PagesStage namespace? **/
+/** Todo: put these under #PrototypeStage namespace? **/
 .scrap {
   z-index: 1;
   word-wrap: break-word;
@@ -1128,7 +1128,7 @@ body {
   outline: 1px solid #5555ff;
 }
 
-.selection.PagesHighlightedScrap {
+.selection.PrototypeHighlightedScrap {
   outline: 2px solid blue;
   box-shadow: 1px 1px 8px 8px blue;
   z-index: 100;
@@ -1606,7 +1606,7 @@ License: MIT
 .sp-palette .sp-thumb-dark.sp-thumb-active .sp-thumb-inner
 {
     background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAASCAYAAABWzo5XAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAAadEVYdFNvZnR3YXJlAFBhaW50Lk5FVCB2My41LjEwMPRyoQAAAMdJREFUOE+tkgsNwzAMRMugEAahEAahEAZhEAqlEAZhEAohEAYh81X2dIm8fKpEspLGvudPOsUYpxE2BIJCroJmEW9qJ+MKaBFhEMNabSy9oIcIPwrB+afvAUFoK4H0tMaQ3XtlrggDhOVVMuT4E5MMG0FBbCEYzjYT7OxLEvIHQLY2zWwQ3D+9luyOQTfKDiFD3iUIfPk8VqrKjgAiSfGFPecrg6HN6m/iBcwiDAo7WiBeawa+Kwh7tZoSCGLMqwlSAzVDhoK+6vH4G0P5wdkAAAAASUVORK5CYII=);
-}#PagesStyleEditor {
+}#PrototypeStyleEditor {
   position: absolute;
   width: auto;
   height: auto;
@@ -1654,12 +1654,12 @@ License: MIT
   left: 7px;
 }
 
-#PagesStyleEditor #blockContainer {
+#PrototypeStyleEditor #blockContainer {
   padding: 10px;
   width: 290px;
 }
 
-#PagesStyleEditor .editorButton {
+#PrototypeStyleEditor .editorButton {
   float: left;
   height: 40px;
   width: 40px;
@@ -1670,20 +1670,20 @@ License: MIT
   text-align: center;
 }
 
-#PagesStyleEditor .editorButton img{
+#PrototypeStyleEditor .editorButton img{
   padding-top: 12px;
   opacity: .6;
 }
 
-#PagesStyleEditor .editorButton:hover{
+#PrototypeStyleEditor .editorButton:hover{
   background-color: #555;
 }
 
-#PagesStyleEditor .editorButton:active{
+#PrototypeStyleEditor .editorButton:active{
   background-color: #323232;
 }
 
-#PagesStyleEditor .editorOption{
+#PrototypeStyleEditor .editorOption{
   cursor: pointer;
   margin: 0px 10px;
   display : inline-block;
@@ -1693,15 +1693,15 @@ License: MIT
   float: left;
 }
 
-#PagesStyleEditor .selectedEditorOption{
+#PrototypeStyleEditor .selectedEditorOption{
   color: #FFF;
 }
 
-#PagesStyleEditor textarea {
+#PrototypeStyleEditor textarea {
   resize: none;
 }
 
-#PagesStyleEditorModal {
+#PrototypeStyleEditorModal {
   width : 100%;
   height : 100%;
   top : 0;
@@ -1711,7 +1711,7 @@ License: MIT
   background: transparent;
 }
 
-#PagesStyleEditorCssEditor {
+#PrototypeStyleEditorCssEditor {
   position: relative;
   padding : 6px 3px;
   font-family : monospace;
@@ -1727,7 +1727,7 @@ License: MIT
   color: #CCC;
 }
 
-#PagesStyleEditorTextEditor{
+#PrototypeStyleEditorTextEditor{
   display: none;
   padding: 10px;
 }
@@ -1741,29 +1741,29 @@ License: MIT
   background-color : #333;
 }
 
-#PagesStyleEditor .editorHeader{
+#PrototypeStyleEditor .editorHeader{
   color: #888;
   font-size: 13px;
   margin-bottom: 5px;
   padding-top: 15px;
 }
 
-#PagesStyleEditor .columnLeft{
+#PrototypeStyleEditor .columnLeft{
   width: 140px;
   float: left;
   margin-right: 10px;
 }
 
-#PagesStyleEditor .clear{
+#PrototypeStyleEditor .clear{
   clear: both;
 }
 
-#PagesStyleEditor .columnRight{
+#PrototypeStyleEditor .columnRight{
   float: left;
   width: 140px;
 }
 
-#PagesStyleEditor .toolButton {
+#PrototypeStyleEditor .toolButton {
   height: 34px;
   font-size: 13px;
   line-height: 34px;
@@ -1778,43 +1778,43 @@ License: MIT
   margin-right: 1px;
 }
 
-#PagesStyleEditor .toolButton img {
+#PrototypeStyleEditor .toolButton img {
   opacity: .6;
   padding-top: 9px;
 }
 
-#PagesStyleEditor .toolButton:hover {
+#PrototypeStyleEditor .toolButton:hover {
   background-color: #555;
 }
 
-#PagesStyleEditor .toolButton:active {
+#PrototypeStyleEditor .toolButton:active {
   background-color: #323232;
 }
 
-#PagesStyleEditor .toolButtonOne{
+#PrototypeStyleEditor .toolButtonOne{
   border-radius: 3px 0px 0px 3px;
 }
 
-#PagesStyleEditor .toolButtonTwo{
+#PrototypeStyleEditor .toolButtonTwo{
 }
 
-#PagesStyleEditor .toolButtonThree{
+#PrototypeStyleEditor .toolButtonThree{
   border-radius: 0px 3px 3px 0px;
 }
 
-#PagesStyleEditor #alignmentOne{
+#PrototypeStyleEditor #alignmentOne{
   background-image : url(/nudgepad/public/images/left_lt.png);
 }
 
-#PagesStyleEditor #alignmentTwo{
+#PrototypeStyleEditor #alignmentTwo{
   background-image : url(/nudgepad/public/images/center_lt.png);
 }
 
-#PagesStyleEditor #alignmentThree{
+#PrototypeStyleEditor #alignmentThree{
   background-image : url(/nudgepad/public/images/right_lt.png);
 }
 
-#PagesStyleEditor #fontFamily {
+#PrototypeStyleEditor #fontFamily {
   width: 140px;
   overflow: hidden;
   text-align: left;
@@ -1852,42 +1852,42 @@ License: MIT
   border-radius: 3px;
 }
 
-#PagesStyleEditor #fontFamilyOne{
+#PrototypeStyleEditor #fontFamilyOne{
   font-family: 'Arial';
 }
 
-#PagesStyleEditor #fontFamilyTwo{
+#PrototypeStyleEditor #fontFamilyTwo{
   font-family: 'Georgia';
 }
 
-#PagesStyleEditor #fontFamilyThree{
+#PrototypeStyleEditor #fontFamilyThree{
   font-family: 'Times';
 }
 
-#PagesStyleEditor #fontColorOne{
+#PrototypeStyleEditor #fontColorOne{
   color: #333;
 }
 
-#PagesStyleEditor #fontColorTwo{
+#PrototypeStyleEditor #fontColorTwo{
   color: #888;
 }
 
-#PagesStyleEditor #fontColorThree{
+#PrototypeStyleEditor #fontColorThree{
   color: #fff;
   background-color: #555;
 }
 
-#PagesStyleEditor #textStyleTwo{
+#PrototypeStyleEditor #textStyleTwo{
   text-decoration: underline;
 }
 
-#PagesStyleEditor .transparentButton{
+#PrototypeStyleEditor .transparentButton{
   background-image : url(/nudgepad/public/images/invisible.png);
   background-position: center;
   background-repeat: no-repeat;
 }
 
-#PagesStyleEditorTopBar {
+#PrototypeStyleEditorTopBar {
   height : 40px;
   background-color: #2a2a2a;
   position : relative;
@@ -1895,14 +1895,14 @@ License: MIT
 }
 
 
-#PagesStyleEditorBottomBar {
+#PrototypeStyleEditorBottomBar {
   height : 40px;
   position : relative;
   background : #777;
   
 }
 
-#PagesStyleEditorSaveButton {
+#PrototypeStyleEditorSaveButton {
   width : 60px;
   height : 40px;
   float: right;
@@ -1917,22 +1917,22 @@ License: MIT
   cursor: pointer;
 }
 
-#PagesStyleEditorSaveButton {
+#PrototypeStyleEditorSaveButton {
   background-color: #11a4ed;
 }
 
-#PagesStyleEditorSaveButton:hover{
+#PrototypeStyleEditorSaveButton:hover{
   background-color: #0c8ecf;
 }
 
-#PagesStyleEditorSaveButton:active{
+#PrototypeStyleEditorSaveButton:active{
     background-color: #055780;
 }
 
-#PagesStyleEditorMoveUp:hover, #PagesStyleEditorMoveDown:hover, #PagesStyleEditorLock:hover, #PagesStyleEditorLink:hover{
+#PrototypeStyleEditorMoveUp:hover, #PrototypeStyleEditorMoveDown:hover, #PrototypeStyleEditorLock:hover, #PrototypeStyleEditorLink:hover{
   opacity: .7;
 }
 
-#PagesStyleEditorMoveUp:active, #PagesStyleEditorMoveDown:active, #PagesStyleEditorLock:active, #PagesStyleEditorLink:active{
+#PrototypeStyleEditorMoveUp:active, #PrototypeStyleEditorMoveDown:active, #PrototypeStyleEditorLock:active, #PrototypeStyleEditorLink:active{
   opacity: 1;
 }
