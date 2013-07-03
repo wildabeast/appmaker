@@ -41,11 +41,6 @@ Pages.shortcuts['meta+e'] = Pages.stage.selection.editProperty
 
 Pages.shortcuts['meta+l'] = Pages.stage.selection.editLoop
 
-Pages.contextMenuToggle = function () {$('#PagesContextMenu').toggle()}
-Pages.shortcuts['ctrl+i'] = Pages.contextMenuToggle
-Pages.shortcuts['meta+i'] = Pages.contextMenuToggle
-
-
 Pages.shortcuts['shift+space'] = function () {
   var command = prompt('Enter a command')
   if (!command)

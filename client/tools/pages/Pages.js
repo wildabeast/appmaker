@@ -192,7 +192,7 @@ Pages.import = function (url) {
 
 Pages.importPrompt = function () {
   
-  var url = prompt('Enter a url to import')
+  var url = prompt('Enter a url to import', 'http://')
   if (!url)
     return false
   

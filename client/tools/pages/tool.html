@@ -34,25 +34,13 @@
 
 <textarea id="PagesCodePanel"></textarea>
 
-<div id="PagesContextMenu">
-  <a onclick="$('#PagesContextMenu').hide()">Close</a>
-  <div class="PagesContextMenuSeparator">&nbsp</div>
-  <a onclick="$('.PagesTimeline').toggle()">Toggle Timeline</a>
-  <a onclick="Pages.stage.toggleView()">Toggle View</a>
-  <div class="PagesContextMenuSeparator">&nbsp</div>
-  <a onclick="Pages.stage.editSource()">Edit Page Source</a>
-  <div class="PagesContextMenuSeparator">&nbsp</div>
-  <a onclick="Pages.stage.selection.renameScraps()">Rename Selected</a>
-  <div class="PagesContextMenuSeparator">&nbsp</div>
-  <a onclick="Pages.importPrompt()">Import Url</a>
-</div>
-
 <div id="PagesMenu">
 	<div onclick="window.open(Pages.stage.activePage,'published')">View</div>
   <div onclick="Pages.blank()">New</div>
   <div onclick="Pages.duplicatePage()">Duplicate</div>
   <div onclick="Pages.renamePrompt()">Rename</div>
   <div onclick="Pages.deletePage()">Delete</div>
+  <div onclick="Pages.importPrompt()">Import</div>
   <div onclick="Inviter.prompt()">Invite</div>
   <div onclick="Launcher.open('Home')">Dashboard</div>
 </div>
