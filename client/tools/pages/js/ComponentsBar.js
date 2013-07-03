@@ -22,11 +22,13 @@ Pages.loadComponents = function (components) {
 Pages.on('firstOpen', function () {
   
   $('#PagesBlockComponent').on('click', function () {
-    Pages.loadComponents(['block', 'rounded', 'button2'])
+    Pages.loadComponents(['fancyButton', 'input', 'textarea', 'horizontal'])
   })
   
+  // 'email_signup', 'meme',
+  
   $('#PagesTextComponent').on('click', function () {
-    Pages.loadComponents(['text', 'nav', 'paragraph'])
+    Pages.loadComponents(['text', 'nav', 'paragraph', 'h1', 'h3'])
   })
   
   $('#PagesImageComponent').on('click', function () {

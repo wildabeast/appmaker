@@ -13,17 +13,17 @@ nav
    style
     margin-bottom 30px
     font-size 52px
-   content Born Good
+   content Header
   subHeader
    style
     margin-bottom 30px
     font-size 18px
     font-weight bold
-   content About Me
+   content Subheader
   nav3
    style
     margin-right 40px
     font-size 16px
     line-height 140%
     color #555
-   content When I was a lad I ate four dozen eggs ev'ry morning to help me get large. And now that I'm grown I eat five dozen eggs, so I'm roughly the size of a barge!
+   content Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.

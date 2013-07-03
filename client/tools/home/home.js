@@ -13,7 +13,7 @@ Home.colNumber = function (i) {
 
 Home.renderMenu = function () {
   $('.HomeColumn').html('')
-  var tools = _.without(Tool.tools, 'Home', 'Pages', 'Develop', 'Blog', 'AppMaker')
+  var tools = _.without(Tool.tools, 'Home', 'Pages', 'Develop', 'Blog', 'AppMaker', 'WebMaker')
   tools.unshift('Pages', 'Develop', 'Blog', 'AppMaker')
   for (var i in tools) {
     var tool = window[tools[i]]

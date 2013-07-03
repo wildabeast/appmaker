@@ -55,7 +55,6 @@ _.each(htmlFiles, function (filename) {
   code.html += fs.readFileSync(corePath + 'html/' + filename, 'utf8')
 })
 
-
 /*** TOOLS ***/
 
 var tools = _.without(fs.readdirSync(toolsPath), '.DS_Store')
