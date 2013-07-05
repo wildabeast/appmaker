@@ -52,13 +52,12 @@ Prototype.contentEditor.focus = function (selector, selectAll) {
       attr = 'placeholder'
     
     TextPrompt('Editing content for this block', scrap.values[attr], function (val) {
-      scrap.values[attr] = val
+      scrap.set(attr, val)
       Prototype.stage.commit()
       element.remove()
-      $('#PrototypeStageBody').append(scrap.toHtml(null, true))
-      element.selectMe()
+      scrap.render().element().selectMe()
     })
-    return
+    return null
   }
   
   Prototype.broadcastSelection(scrap.selector())
