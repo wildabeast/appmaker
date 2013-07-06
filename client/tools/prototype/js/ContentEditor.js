@@ -51,7 +51,7 @@ Prototype.contentEditor.focus = function (selector, selectAll) {
     if (tag && tag.match(/^(textarea|input|password)$/))
       attr = 'placeholder'
     
-    TextPrompt('Editing content for this block', scrap.values[attr], function (val) {
+    TextPrompt('Editing content for this block', scrap.get(attr), function (val) {
       scrap.set(attr, val)
       Prototype.stage.commit()
       element.remove()

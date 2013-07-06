@@ -1,5 +1,6 @@
 googleAnalytics
  tag script
+ type text/javascript
  content var _gaq = _gaq || [];
   _gaq.push(['_setAccount', '{{site.googleAnalyticsId}}']);
   _gaq.push(['_trackPageview']);

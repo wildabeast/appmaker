@@ -39,6 +39,10 @@ Prototype.on('firstOpen', function () {
     Prototype.loadComponents(['sticky', 'stickyOrange', 'stickyBlue'])
   })
   
+  $('#AdvancedComponent').on('click', function () {
+    Prototype.loadComponents(['jquery', 'googleAnalytics', 'momentjs'])
+  })
+  
   $(document).on('tap', '.PrototypeImageThumbDrop img', function() {
     var imageY = ($('#PrototypeStage').height() / 2) - 130
     var imageX = 100
