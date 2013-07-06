@@ -2,9 +2,9 @@
 <html style="padding-top: 0;">
   <head>
     <title>Loading Nudgepad...</title>
-    <link rel="stylesheet" href="/nudgepad/core/css/app.css" type="text/css"/>
     <link rel="stylesheet" href="/nudgepad/core/css/core.css" type="text/css"/>
     <link rel="stylesheet" href="/nudgepad/core/css/registerForm.css" type="text/css"/>
+    <link rel="stylesheet" href="/nudgepad/core/css/tool.css" type="text/css"/>
     <link rel="stylesheet" href="/nudgepad/core/css/userSelectFix.css" type="text/css"/>
     <link rel="stylesheet" href="/nudgepad/tools/appmaker/tool.css" type="text/css"/>
     <link rel="stylesheet" href="/nudgepad/tools/blog/tool.css" type="text/css"/>
@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="/nudgepad/tools/prototype/tool.css" type="text/css"/>
     <link rel="stylesheet" href="/nudgepad/tools/prototype/css/spectrum.css" type="text/css"/>
     <link rel="stylesheet" href="/nudgepad/tools/prototype/css/styleEditor.css" type="text/css"/>
+    <link rel="stylesheet" href="/nudgepad/tools/sketch/tool.css" type="text/css"/>
     <link rel="stylesheet" href="/nudgepad/tools/webmaker/tool.css" type="text/css"/>
 
     <link rel="shortcut icon" href="/nudgepad/public/images/favicon.ico" type="image/x-icon">
@@ -92,6 +93,8 @@
     <script type="text/javascript" src="/nudgepad/tools/prototype/components.js"></script>
     <script type="text/javascript" src="/nudgepad/tools/prototype/events.js"></script>
     <script type="text/javascript" src="/nudgepad/tools/prototype/Shortcuts.js"></script>
+    <script type="text/javascript" src="/nudgepad/tools/sketch/sketch.js"></script>
+    <script type="text/javascript" src="/nudgepad/tools/sketch/tool.js"></script>
     <script type="text/javascript" src="/nudgepad/tools/webmaker/tool.js"></script>
 
     <script type="text/javascript">
@@ -220,26 +223,10 @@
 <div class="Tool" id="Home">
   <div class="ToolContainer">
     
-	  <div class="HomeColumn HomeMargin" id="HomeColumn1">
+	  <div id="HomeColumn">
 	    
-	  
-		  
 		  
 		</div>
-		
-		<div class="HomeColumn HomeMargin" id="HomeColumn2">
-		  
-		  
-		  
-		  
-		</div>
-		
-    <div class="HomeColumn" id="HomeColumn3">
-      
-      
-		  
-		</div>
-		
 		
 	  <div class="clear"></div>
   </div>
@@ -325,6 +312,23 @@
 </div>
 
 <div id="PrototypeDimensions"></div>
+<div class="Tool" id="Sketch">
+	<div class="ToolNav">
+		<div class="ToolNavContainer">
+  		<div class="ToolSquareButton ToolBackButton" onclick="Launcher.open('Home')">
+		  	Back
+		  </div>
+		  <a class="ToolRightButton" data-download="png" href="#SketchCanvas">
+		  	Download
+		  </a>
+		<div class="clear"></div>
+		</div>
+	</div>
+  <div class="ToolContainer">
+    <canvas id="SketchCanvas"></canvas>
+	</div>
+</div>
+
 
   </body>
 </html>
