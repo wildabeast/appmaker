@@ -7,20 +7,16 @@ Develop.cloneProject = function () {
   var domain = prompt('Enter a domain name', 'copyof' + document.location.host)
   if (!domain)
     return false
-  // TODO: make tld come from server and dont compute it here, which
-  // is incorrect
-  // tld equals the part that domain and document.location.host have in common
-  var newDomainReversed = domain.split("").reverse().join("")
-  var currentDomainReversed = document.location.host.split("").reverse().join("")
-  var tld = ''
-  for (var i = 0 ; i < currentDomainReversed.length ; i++) {
-    if (newDomainReversed.substr(i, 1) === currentDomainReversed.substr(i, 1))
-      tld = newDomainReversed.substr(i, 1) + tld
+  
+  // Allow for moving of domains
+  if (domain.match(/ /)) {
+    var parts = domain.split(/ /)
+    domain = parts[0]
+    var panel = parts[1]
   }
-  // chop common domain part
-  tld = tld.replace(/^[^\.]*\./, '')
   // Panel is the domain running the nudgepad panel server
-  var panel = Project.get('hostname')
+  else
+    var panel = Project.get('hostname')
   
   $.get('/nudgepad.export', {}, function (data) {
     
