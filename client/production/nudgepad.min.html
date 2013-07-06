@@ -135,26 +135,10 @@
 <div class="Tool" id="Home">
   <div class="ToolContainer">
     
-	  <div class="HomeColumn HomeMargin" id="HomeColumn1">
+	  <div id="HomeColumn">
 	    
-	  
-		  
 		  
 		</div>
-		
-		<div class="HomeColumn HomeMargin" id="HomeColumn2">
-		  
-		  
-		  
-		  
-		</div>
-		
-    <div class="HomeColumn" id="HomeColumn3">
-      
-      
-		  
-		</div>
-		
 		
 	  <div class="clear"></div>
   </div>
@@ -187,14 +171,14 @@
 <div class="Tool" id="Prototype">
 </div>
   
-<div id="PrototypeStage">
+<div id="PrototypeStage" style="display: none;">
   <div id="PrototypeStageHead"></div>
   <div id="PrototypeStageBody"></div>
   <div id="PrototypeStageBottomPadding"></div>
   <style type="text/css" id="PrototypeRemoteSelections"></style>
 </div>
 
-<div id="PrototypeBar">
+<div id="PrototypeBar" style="display: none;">
 
   <div title="menu" id="PrototypeBarMenuButton"></div>
   
@@ -240,6 +224,23 @@
 </div>
 
 <div id="PrototypeDimensions"></div>
+<div class="Tool" id="Sketch">
+	<div class="ToolNav">
+		<div class="ToolNavContainer">
+  		<div class="ToolSquareButton ToolBackButton" onclick="Launcher.open('Home')">
+		  	Back
+		  </div>
+		  <a class="ToolRightButton" data-download="png" href="#SketchCanvas">
+		  	Download
+		  </a>
+		<div class="clear"></div>
+		</div>
+	</div>
+  <div class="ToolContainer">
+    <canvas id="SketchCanvas"></canvas>
+	</div>
+</div>
+
 
   </body>
 </html>
