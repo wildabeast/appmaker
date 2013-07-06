@@ -741,6 +741,10 @@ body {
   color: #fff;
 }
 
+.HomeSquare.beta {
+  display: none;
+}
+
 .HomeTopBlock {
   padding: 80px 20px;
   font-size: 3.375em;
