@@ -1,6 +1,26 @@
-var Page = require('scraps')
+var Page = require('scraps'),
+    _ = require('underscore')
 
 var Blog = function (app) {
+  
+  
+  var sortBlog = function () {
+    var posts = app.Project.get('posts')
+    if (!posts)
+      return null
+
+    posts.each(function (key, value) {
+      value.set('permalink', key)
+    })
+
+    app.Project.sorted = _.sortBy(posts.values, function(value){ return -parseFloat(value.get('timestamp')) })
+  }
+  sortBlog()
+  
+  app.post('/nudgepad.blog.sort', function (req,res,next) {
+    sortBlog()
+    res.send('')
+  })
   
   app.get('/feed.space', function (req, res, next) {
     res.set('Content-Type', 'text/plain')

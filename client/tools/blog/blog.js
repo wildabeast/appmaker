@@ -24,6 +24,7 @@ Blog.deletePost = function () {
     return Flasher.error('Post does not exist')
 
   Project.delete('posts ' + name)
+  $.post('/nudgepad.blog.sort')
 }
 
 Blog.editPost = function (name) {
@@ -126,6 +127,7 @@ Blog.savePost = function () {
   
   // Open post in new tab
   window.open(name, 'published')
+  $.post('/nudgepad.blog.sort')
 }
 
 Blog.updatePermalink = function () {
