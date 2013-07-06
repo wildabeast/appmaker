@@ -1,23 +1,12 @@
 var Home = new Tool('Home')
 
-
-Home.colNumber = function (i) {
-  // 1, 2 or 3
-  var menuItems = Tool.tools.length - 1
-  if (i < menuItems/3)
-    return 1
-  else if (i > menuItems * .66)
-    return 3
-  return 2
-}
-
 Home.renderMenu = function () {
-  $('.HomeColumn').html('')
+  $('#HomeColumn').html('')
   var tools = _.without(Tool.tools, 'Home', 'Prototype', 'Develop', 'Blog', 'AppMaker')
   tools.unshift('Prototype', 'Develop', 'Blog', 'AppMaker')
   for (var i in tools) {
     var tool = window[tools[i]]
-    $('#HomeColumn' + Home.colNumber(i)).append(
+    $('#HomeColumn').append(
       Home.toButton(
         tool.get('name'),
         tool.get('description'),

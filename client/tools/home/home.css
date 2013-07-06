@@ -1,17 +1,12 @@
-.HomeColumn {
-  width: 32%;
-  float: left;
-}
-
-.HomeMargin {
-  margin-right: 2%;
-}
-
 .HomeSquare {
   cursor : pointer;
   font-weight : 300;
   margin-top: 20px;
   color: #fff;
+  width: 31%;
+  min-width: 300px;
+  float: left;
+  margin-right: 20px;
 }
 
 .HomeSquare.beta {
