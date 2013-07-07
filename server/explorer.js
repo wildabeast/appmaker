@@ -135,6 +135,15 @@ var Explorer = function (app) {
 
   })
   
+  // Receive any uploads
+  app.post(app.pathPrefix + 'explorer.upload', app.checkId, function(req, res, next) {
+    console.log('Receiving upload...')
+    var path = req.query.path || ''
+    var filename = req.body.filename
+    fs.rename(req.files.myFile.path, app.paths.project + path + filename, function (name) {})
+    res.send(req.body.filename + ' uploaded')
+  })
+  
 }
 
 module.exports = Explorer
