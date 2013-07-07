@@ -26,7 +26,7 @@ startProject () {
   set_port
 
   cd $serverPath
-  
+  echo About to start $domain 1>&2
   if isMac
     then
       touch $projectsPath/$domain/private/logs/mon.txt
