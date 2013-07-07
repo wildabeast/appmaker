@@ -80,6 +80,22 @@ case "$1" in
   done
 ;;
 
+'copy')
+  sourceDomain=$2
+  destinationDomain=$3
+  sudo cp -R $projectsPath/$sourceDomain $projectsPath/$destinationDomain
+  if isNix
+    then
+      sudo $systemPath/createUser.sh $destinationDomain $USER
+  fi
+  # if on localhost, append to the hosts file to add the domain
+  if isMac
+    then
+      echo "127.0.0.1 $destinationDomain" | sudo tee -a /etc/hosts >/dev/null
+  fi
+  startProject $destinationDomain
+;;
+
 'create')
   speedcoach "start of create"
   if createProject $2 $3 $4
