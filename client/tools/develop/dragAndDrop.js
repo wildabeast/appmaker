@@ -26,7 +26,7 @@ Develop.drop.sendFile = function (path, file) {
   
   var uri = "/nudgepad.explorer.upload"
   if (path)
-    url += '?path=' + path
+    uri += '?path=' + path
   var xhr = new XMLHttpRequest()
   var fd = new FormData()
   
@@ -36,6 +36,10 @@ Develop.drop.sendFile = function (path, file) {
           // Handle response.
           Flasher.success(xhr.responseText)
 //          alert(xhr.responseText) // handle response.
+          Develop.refreshFiles()
+      }
+      else if (xhr.status == 500) {
+        Flasher.error(xhr.responseText)
       }
   }
   fd.append('filename', file.name)

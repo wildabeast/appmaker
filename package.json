@@ -22,6 +22,7 @@
     "imagemagick": "*",
     "underscore": "*",
     "cookie": "*",
+    "mkdirp" : "*",
     "moment": "*",
     "nodemailer": "*",
     "request": "*",

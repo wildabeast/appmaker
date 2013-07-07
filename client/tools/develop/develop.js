@@ -216,6 +216,10 @@ Develop.refresh = function () {
     $('#DevelopLogHolder').html(data)
     $('#DevelopLogHolder').scrollTop($('#DevelopLogHolder').height())
   })
+  Develop.refreshFiles()
+}
+
+Develop.refreshFiles = function () {
   $.get('/nudgepad.explorer.list', {}, function (data) {
     Develop.set('files', new Space(data))
     Develop.renderExplorer()

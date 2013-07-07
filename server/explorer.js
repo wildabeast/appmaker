@@ -1,6 +1,7 @@
 var fs = require('fs'),
     Space = require('space'),
-    async = require('async')
+    async = require('async'),
+    mkdirp = require('mkdirp'),
     _ = require('underscore')
 
 function fileStats (path, callback) {
@@ -137,11 +138,24 @@ var Explorer = function (app) {
   
   // Receive any uploads
   app.post(app.pathPrefix + 'explorer.upload', app.checkId, function(req, res, next) {
-    console.log('Receiving upload...')
-    var path = req.query.path || ''
     var filename = req.body.filename
-    fs.rename(req.files.myFile.path, app.paths.project + path + filename, function (name) {})
-    res.send(req.body.filename + ' uploaded')
+    console.log('Receiving upload: %s', filename)
+    var path = req.query.path || ''
+    if (path) {
+      mkdirp(app.paths.project + path, function (err) {
+        if (err)
+          return res.send(err)
+        fs.rename(req.files.myFile.path, app.paths.project + path + filename, function (err) {
+          res.send(req.body.filename + ' uploaded')  
+        })
+      })
+    }
+    else {
+      fs.rename(req.files.myFile.path, app.paths.project + path + filename, function (err) {
+        res.send(req.body.filename + ' uploaded')  
+      })
+    }
+
   })
   
 }
