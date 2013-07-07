@@ -183,7 +183,7 @@ Develop.renderExplorer = function () {
       row += '<td class="DevelopExplorerEdit">' + filename + '</td>'
       row += '<td class="DevelopExplorerRename">Rename</td>'
       row += '<td class="DevelopExplorerRemove">Delete</td>'
-      row += '<td>' + (file.get('size')) + 'KB</td>'
+      row += '<td>' + (file.get('size')) + '</td>'
       row += '<td>' + moment(file.get('mtime')).fromNow() + '</td>'
     } else {
       row += ' class="DevelopExplorerFolder" value="' + filename + '" path="' + path + filename + '">'
