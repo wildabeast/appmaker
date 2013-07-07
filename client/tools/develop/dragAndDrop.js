@@ -25,8 +25,7 @@ Develop.drop.traverseFileTree = function (item, path) {
 Develop.drop.sendFile = function (path, file) {
   
   var uri = "/nudgepad.explorer.upload"
-  if (path)
-    uri += '?path=' + path
+  uri += '?path=' + Develop.get('path').replace(' ','/') + '/' + (path ? path : '')
   var xhr = new XMLHttpRequest()
   var fd = new FormData()
   
