@@ -1,4 +1,4 @@
-#ManageEmail {
+#TeamEmail {
   width: 300px;
   font-size: 15px;
   padding: 10px;
@@ -6,12 +6,12 @@
   border: 1px solid #ccc;
 }
 
-#ManageFormLabel {
+#TeamFormLabel {
   font-size: 18px;
   margin-top: 20px;
 }
 
-#ManageLogoutButton {
+#TeamLogoutButton {
   line-height: 40px;
   color: #fff;
   text-decoration: none;
@@ -20,7 +20,7 @@
   margin-left: 10px;
 }
 
-#ManageUpdateButton {
+#TeamUpdateButton {
   background-color: #1a86d6;
   height: 40px;
   width: 100px;

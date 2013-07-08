@@ -10,11 +10,11 @@
     <link rel="stylesheet" href="/nudgepad/tools/blog/tool.css" type="text/css"/>
     <link rel="stylesheet" href="/nudgepad/tools/develop/tool.css" type="text/css"/>
     <link rel="stylesheet" href="/nudgepad/tools/home/home.css" type="text/css"/>
-    <link rel="stylesheet" href="/nudgepad/tools/manage/tool.css" type="text/css"/>
     <link rel="stylesheet" href="/nudgepad/tools/prototype/tool.css" type="text/css"/>
     <link rel="stylesheet" href="/nudgepad/tools/prototype/css/spectrum.css" type="text/css"/>
     <link rel="stylesheet" href="/nudgepad/tools/prototype/css/styleEditor.css" type="text/css"/>
     <link rel="stylesheet" href="/nudgepad/tools/sketch/tool.css" type="text/css"/>
+    <link rel="stylesheet" href="/nudgepad/tools/team/tool.css" type="text/css"/>
     <link rel="stylesheet" href="/nudgepad/tools/webmaker/tool.css" type="text/css"/>
 
     <link rel="shortcut icon" href="/nudgepad/public/images/favicon.ico" type="image/x-icon">
@@ -65,7 +65,6 @@
     <script type="text/javascript" src="/nudgepad/tools/develop/develop.js"></script>
     <script type="text/javascript" src="/nudgepad/tools/develop/dragAndDrop.js"></script>
     <script type="text/javascript" src="/nudgepad/tools/home/home.js"></script>
-    <script type="text/javascript" src="/nudgepad/tools/manage/tool.js"></script>
     <script type="text/javascript" src="/nudgepad/tools/prototype/Prototype.js"></script>
     <script type="text/javascript" src="/nudgepad/tools/prototype/js/Autokey.js"></script>
     <script type="text/javascript" src="/nudgepad/tools/prototype/js/CodePanel.js"></script>
@@ -96,6 +95,7 @@
     <script type="text/javascript" src="/nudgepad/tools/prototype/Shortcuts.js"></script>
     <script type="text/javascript" src="/nudgepad/tools/sketch/sketch.js"></script>
     <script type="text/javascript" src="/nudgepad/tools/sketch/tool.js"></script>
+    <script type="text/javascript" src="/nudgepad/tools/team/tool.js"></script>
     <script type="text/javascript" src="/nudgepad/tools/webmaker/tool.js"></script>
 
     <script type="text/javascript">
@@ -235,31 +235,6 @@
 	  <div class="clear"></div>
   </div>
 </div>
-<div class="Tool" id="Manage">
-	<div class="ToolNav">
-		<div class="ToolNavContainer">
-  		<div class="ToolSquareButton ToolBackButton" onclick="Launcher.open('Home')">
-		  	Back
-		  </div>
-		  <a id="ManageLogoutButton" class="ToolSquareButton" href="/nudgepad.logout" title="Logout">
-		  	Logout
-		  </a>
-		<div class="clear"></div>
-		</div>
-	</div>
-  <div class="ToolContainer">
-	  <div class="ToolSectionLabel">
-		  Account Info
-		</div>
-	  <div id="ManageFormLabel">
-	  	Email
-	  </div>
-	  <input type="email" id="ManageEmail" tabindex="2" value=""></input>
-	  <div id="ManageUpdateButton" onclick="Manage.save()">
-		  Update
-		</div>
-	</div>
-</div>
 <div class="Tool" id="Prototype">
 </div>
   
@@ -333,6 +308,34 @@
 	</div>
 </div>
 
+<div class="Tool" id="Team">
+	<div class="ToolNav">
+		<div class="ToolNavContainer">
+  		<div class="ToolSquareButton ToolBackButton" onclick="Launcher.open('Home')">
+		  	Back
+		  </div>
+		  <a class="ToolRightButton" href="/nudgepad.logout" title="Logout">
+		  	Logout
+		  </a>
+		  <a class="ToolRightButton" onclick="Inviter.prompt()" title="Logout">
+		  	Invite
+		  </a>
+		<div class="clear"></div>
+		</div>
+	</div>
+  <div class="ToolContainer">
+	  <div class="ToolSectionLabel">
+		  Account Info
+		</div>
+	  <div id="TeamFormLabel">
+	  	Email
+	  </div>
+	  <input type="email" id="TeamEmail" tabindex="2" value=""></input>
+	  <div id="TeamUpdateButton" onclick="Team.save()">
+		  Update
+		</div>
+	</div>
+</div>
 <div class="Tool" id="WebMaker">
 	<div class="ToolNav">
 		<div class="ToolNavContainer">

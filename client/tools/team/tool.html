@@ -1,11 +1,14 @@
-<div class="Tool" id="Manage">
+<div class="Tool" id="Team">
 	<div class="ToolNav">
 		<div class="ToolNavContainer">
   		<div class="ToolSquareButton ToolBackButton" onclick="Launcher.open('Home')">
 		  	Back
 		  </div>
-		  <a id="ManageLogoutButton" class="ToolSquareButton" href="/nudgepad.logout" title="Logout">
+		  <a class="ToolRightButton" href="/nudgepad.logout" title="Logout">
 		  	Logout
+		  </a>
+		  <a class="ToolRightButton" onclick="Inviter.prompt()" title="Logout">
+		  	Invite
 		  </a>
 		<div class="clear"></div>
 		</div>
@@ -14,11 +17,11 @@
 	  <div class="ToolSectionLabel">
 		  Account Info
 		</div>
-	  <div id="ManageFormLabel">
+	  <div id="TeamFormLabel">
 	  	Email
 	  </div>
-	  <input type="email" id="ManageEmail" tabindex="2" value=""></input>
-	  <div id="ManageUpdateButton" onclick="Manage.save()">
+	  <input type="email" id="TeamEmail" tabindex="2" value=""></input>
+	  <div id="TeamUpdateButton" onclick="Team.save()">
 		  Update
 		</div>
 	</div>
