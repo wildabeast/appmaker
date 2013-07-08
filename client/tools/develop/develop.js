@@ -155,9 +155,12 @@ Develop.import = function () {
 // Develop.on('change', 'path', Develop.RenderExplorer())
 
 Develop.on('open', function () {
-//  $('.nudgepad#zip').attr('href', '/nudgepad.backup/' + document.location.host + '.zip')
+  
+  $('#DevelopDownload').attr('href', '/nudgepad.backup/' + document.location.host + '.zip')
   if (!Develop.get('log'))
     Develop.refresh()
+    
+    
 })
 
 Develop.on('set', function (key) {
