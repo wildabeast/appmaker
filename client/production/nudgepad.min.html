@@ -93,19 +93,22 @@
   		<div class="ToolSquareButton ToolBackButton" onclick="Launcher.open('Home')">
 		  	Back
 		  </div>
-			<a class="DevelopButton" onclick="Develop.console()" title="Console">
+			<a class="DevelopButton" onclick="Develop.console()" title="Run Shell Commands">
 		  	Console
 		  </a>
-			<a href="/nudgepad.export" target="blank" class="DevelopButton">
+		  <a id="DevelopDownload" href="" target="blank" class="DevelopButton" title="Download Project as Zip File">
+		  	Download
+		  </a>
+			<a href="/nudgepad.export" target="blank" class="DevelopButton" title="Download Project as Space File">
 		  	Export
 		  </a>
-		  <a onclick="Develop.import()" class="DevelopButton">
+		  <a onclick="Develop.import()" class="DevelopButton" title="Import a Space File">
 		  	Import
 		  </a>
-		  <a onclick="Develop.cloneProject()" class="DevelopButton">
+		  <a onclick="Develop.cloneProject()" class="DevelopButton" title="Copy Project to new Domain">
 		  	Clone
 		  </a>
-		  <a id="DevelopRestart" class="DevelopButton" onclick="$.get('/nudgepad.restart')">
+		  <a id="DevelopRestart" class="DevelopButton" onclick="$.get('/nudgepad.restart')" title="Restart Server">
 		  	Restart
 		  </a>
 		<div class="clear"></div>
