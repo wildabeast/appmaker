@@ -146,31 +146,6 @@
 	  <div class="clear"></div>
   </div>
 </div>
-<div class="Tool" id="Manage">
-	<div class="ToolNav">
-		<div class="ToolNavContainer">
-  		<div class="ToolSquareButton ToolBackButton" onclick="Launcher.open('Home')">
-		  	Back
-		  </div>
-		  <a id="ManageLogoutButton" class="ToolSquareButton" href="/nudgepad.logout" title="Logout">
-		  	Logout
-		  </a>
-		<div class="clear"></div>
-		</div>
-	</div>
-  <div class="ToolContainer">
-	  <div class="ToolSectionLabel">
-		  Account Info
-		</div>
-	  <div id="ManageFormLabel">
-	  	Email
-	  </div>
-	  <input type="email" id="ManageEmail" tabindex="2" value=""></input>
-	  <div id="ManageUpdateButton" onclick="Manage.save()">
-		  Update
-		</div>
-	</div>
-</div>
 <div class="Tool" id="Prototype">
 </div>
   
@@ -244,6 +219,34 @@
 	</div>
 </div>
 
+<div class="Tool" id="Team">
+	<div class="ToolNav">
+		<div class="ToolNavContainer">
+  		<div class="ToolSquareButton ToolBackButton" onclick="Launcher.open('Home')">
+		  	Back
+		  </div>
+		  <a class="ToolRightButton" href="/nudgepad.logout" title="Logout">
+		  	Logout
+		  </a>
+		  <a class="ToolRightButton" onclick="Inviter.prompt()" title="Logout">
+		  	Invite
+		  </a>
+		<div class="clear"></div>
+		</div>
+	</div>
+  <div class="ToolContainer">
+	  <div class="ToolSectionLabel">
+		  Account Info
+		</div>
+	  <div id="TeamFormLabel">
+	  	Email
+	  </div>
+	  <input type="email" id="TeamEmail" tabindex="2" value=""></input>
+	  <div id="TeamUpdateButton" onclick="Team.save()">
+		  Update
+		</div>
+	</div>
+</div>
 <div class="Tool" id="WebMaker">
 	<div class="ToolNav">
 		<div class="ToolNavContainer">
