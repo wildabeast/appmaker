@@ -1,6 +1,7 @@
 var Blog = new Tool('Blog')
 Blog.set('color', 'rgba(237, 200, 17, 1)')
 Blog.set('description', 'Write and edit blog posts.')
+Blog.set('beta', 'true')
 Blog.activePost = null
 
 // Default theme
