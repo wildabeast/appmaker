@@ -318,7 +318,8 @@ html {
   width : 94%;
   max-width: 1000px;
   position : relative;
-  margin : 0 auto;  
+  margin : 0 auto;
+  padding-bottom: 100px;
 }
 
 .ToolNav {
@@ -386,6 +387,30 @@ html {
   padding: 10px;
 }
 
+.ToolPrimaryButton {
+  background-color: #1a86d6;
+  height: 40px;
+  width: 100px;
+  color: #fff;
+  font-size : 15px;
+  margin-top: 10px;
+  text-align: center;
+  cursor : pointer;
+  line-height: 40px;
+}
+
+.ToolInput {
+  width: 300px;
+  font-size: 15px;
+  padding: 10px;
+  margin-top: 10px;
+  border: 1px solid #ccc;
+}
+
+.ToolInputLabel {
+  font-size: 18px;
+  margin-top: 20px;
+}
 
 body {
   -webkit-user-select: none;
@@ -743,7 +768,12 @@ body {
   margin-bottom: 20px;
 }
 
-.HomeSquare {
+#GitHubStatus {
+  white-space: pre;
+  -webkit-user-select: auto;
+  -moz-user-select: text;
+  user-select: auto;
+}.HomeSquare {
   cursor : pointer;
   font-weight : 300;
   margin-top: 20px;
@@ -1922,39 +1952,6 @@ License: MIT
 }
 #Sketch {
 
-}
-#TeamEmail {
-  width: 300px;
-  font-size: 15px;
-  padding: 10px;
-  margin-top: 10px;
-  border: 1px solid #ccc;
-}
-
-#TeamFormLabel {
-  font-size: 18px;
-  margin-top: 20px;
-}
-
-#TeamLogoutButton {
-  line-height: 40px;
-  color: #fff;
-  text-decoration: none;
-  width: 100px;
-  float: right;
-  margin-left: 10px;
-}
-
-#TeamUpdateButton {
-  background-color: #1a86d6;
-  height: 40px;
-  width: 100px;
-  color: #fff;
-  font-size : 15px;
-  margin-top: 10px;
-  text-align: center;
-  cursor : pointer;
-  line-height: 40px;
 }
 .MakeTemplate {
   border: 1px;
