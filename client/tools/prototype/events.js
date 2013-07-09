@@ -161,27 +161,4 @@ Prototype.trackShortcuts  = function (key) {
 }
 
 
-/*
-onpatch
-var behind = Prototype.stage.isBehind()
 
-// If the page has been deleted, change page
-if (patch.get('pages ' + Prototype.stage.activePage) === '')
-  Prototype.stage.back()
-  
-  Prototype.updateTabs()
-
-  // If the active page isnt touched, we are all done
-  if (!patch.get('timelines ' + Prototype.stage.activePage))
-    return true    
-
-  if (behind)
-    return Prototype.stage.updateTimeline()
-
-  if ($('input:focus, div:focus, textarea:focus, a:focus').length)
-    return Prototype.stage.updateTimeline()
-
-  // Todo: this breaks if you are in content editable
-  Prototype.stage.redo()
-
-*/

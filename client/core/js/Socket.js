@@ -9,8 +9,9 @@ Socket.on('project.append', function (space) {
   console.log('project.append received on %s', key)
   ProjectReceiving = true
   Project.append(key, new Space(space.get('value')))
+  Project.trigger('incoming-append', key, new Space(space.get('value')))
   ProjectReceiving = false
-  Flasher.activity('File ' + key + ' appended', 1000)
+  Flasher.activity('File ' + Space.pathBranch(key) + ' appended', 1000)
 })
 
 Socket.on('project.create', function (space) {
