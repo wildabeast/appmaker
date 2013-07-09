@@ -87,6 +87,8 @@ nudgepad.reloadMessage = function () {
 
 nudgepad.restartCheck = function () {
   $.get('/nudgepad.started', {}, function (data) {
+    if (!Project.get('started'))
+      return true
     if (data !== Project.get('started')) {
       nudgepad.reloadMessageOneTime = 'Your project restarted. Please refresh the page.'
       location.reload()
