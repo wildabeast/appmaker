@@ -61,7 +61,7 @@ var tools = _.without(fs.readdirSync(toolsPath), '.DS_Store')
 _.each(tools, function (toolName) {
   var toolDir = toolsPath + toolName + '/'
   
-  var settings = new Space(fs.readFileSync(toolDir + 'tool.space', 'utf8'))
+  var settings = new Space(fs.readFileSync(toolDir + 'make.space', 'utf8'))
   var files
   
 

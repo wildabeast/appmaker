@@ -182,7 +182,7 @@ You can create a new tool at the command line like this:
 This will create a folder ~/nudgepad/client/tools/draw that stores all the
 files for your tool.
 
-You'd then want to update the files tool.js and tool.space with the name
+You'd then want to update the files tool.js and make.space with the name
 you chose.
 
 You could also create a tool manually by replicating the basic skeleton
@@ -194,7 +194,7 @@ tool.js var Draw = new Tool('Draw')
  Draw.set('color', 'blue')
 tool.css 
 tool.html 
-tool.space name Draw
+make.space name Draw
  html tool.html
  js tool.js
  css tool.css

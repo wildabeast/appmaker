@@ -3,7 +3,7 @@ tool.js var Draw = new Tool('Draw')
  Draw.set('color', 'blue')
 tool.css 
 tool.html 
-tool.space name Draw
+make.space name Draw
  html tool.html
  js tool.js
  css tool.css
