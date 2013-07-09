@@ -1,0 +1,53 @@
+<div class="Tool" id="GitHub">
+	<div class="ToolNav">
+		<div class="ToolNavContainer">
+  		<div class="ToolSquareButton ToolBackButton" onclick="Launcher.open('Home')">
+		  	Back
+		  </div>
+		  <a class="ToolRightButton" onclick="GitHub.pull()">
+		  	Pull
+		  </a>
+		  <a class="ToolRightButton" onclick="GitHub.push()">
+		  	Push
+		  </a>
+		  <!--
+		  <a class="ToolRightButton" onclick="GitHub.addAll()">
+		  	Add All
+		  </a>
+		  <a class="ToolRightButton" onclick="GitHub.init()">
+		  	Init
+		  </a>
+		  <a class="ToolRightButton" onclick="GitHub.setOrigin()">
+		  	Update Origin
+		  </a>
+		  <a class="ToolRightButton" onclick="GitHub.addOrigin()">
+		  	Add Origin
+		  </a>
+		  -->
+		  <a class="ToolRightButton" onclick="GitHub.cloneRepo()">
+		  	Clone
+		  </a>
+		<div class="clear"></div>
+		</div>
+	</div>
+  <div class="ToolContainer">
+		<div class="ToolSectionLabel">
+		  Status
+		</div>
+		<div id="GitHubStatus"></div>
+		<div class="ToolSectionLabel">
+		  Add Files to be Tracked
+		</div>
+		<input id="GitHubFilepath" class="ToolInput" placeholder="Filepath"></input>
+	  <div class="ToolPrimaryButton" onclick="GitHub.add()">
+		  Add
+		</div>
+		<div class="ToolSectionLabel">
+		  Commit
+		</div>
+		<input id="GitHubCommitMessage" class="ToolInput" placeholder="Commit Message"></input>
+	  <div class="ToolPrimaryButton" onclick="GitHub.commit()">
+		  Commit
+		</div>
+	</div>
+</div>

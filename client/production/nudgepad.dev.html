@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="/nudgepad/tools/appmaker/tool.css" type="text/css"/>
     <link rel="stylesheet" href="/nudgepad/tools/blog/tool.css" type="text/css"/>
     <link rel="stylesheet" href="/nudgepad/tools/develop/tool.css" type="text/css"/>
+    <link rel="stylesheet" href="/nudgepad/tools/github/tool.css" type="text/css"/>
     <link rel="stylesheet" href="/nudgepad/tools/home/home.css" type="text/css"/>
     <link rel="stylesheet" href="/nudgepad/tools/prototype/tool.css" type="text/css"/>
     <link rel="stylesheet" href="/nudgepad/tools/prototype/css/spectrum.css" type="text/css"/>
@@ -64,6 +65,7 @@
     <script type="text/javascript" src="/nudgepad/tools/blog/events.js"></script>
     <script type="text/javascript" src="/nudgepad/tools/develop/develop.js"></script>
     <script type="text/javascript" src="/nudgepad/tools/develop/dragAndDrop.js"></script>
+    <script type="text/javascript" src="/nudgepad/tools/github/tool.js"></script>
     <script type="text/javascript" src="/nudgepad/tools/home/home.js"></script>
     <script type="text/javascript" src="/nudgepad/tools/prototype/Prototype.js"></script>
     <script type="text/javascript" src="/nudgepad/tools/prototype/js/Autokey.js"></script>
@@ -225,6 +227,59 @@
 		</div>
 	</div>
 </div>
+<div class="Tool" id="GitHub">
+	<div class="ToolNav">
+		<div class="ToolNavContainer">
+  		<div class="ToolSquareButton ToolBackButton" onclick="Launcher.open('Home')">
+		  	Back
+		  </div>
+		  <a class="ToolRightButton" onclick="GitHub.pull()">
+		  	Pull
+		  </a>
+		  <a class="ToolRightButton" onclick="GitHub.push()">
+		  	Push
+		  </a>
+		  <!--
+		  <a class="ToolRightButton" onclick="GitHub.addAll()">
+		  	Add All
+		  </a>
+		  <a class="ToolRightButton" onclick="GitHub.init()">
+		  	Init
+		  </a>
+		  <a class="ToolRightButton" onclick="GitHub.setOrigin()">
+		  	Update Origin
+		  </a>
+		  <a class="ToolRightButton" onclick="GitHub.addOrigin()">
+		  	Add Origin
+		  </a>
+		  -->
+		  <a class="ToolRightButton" onclick="GitHub.cloneRepo()">
+		  	Clone
+		  </a>
+		<div class="clear"></div>
+		</div>
+	</div>
+  <div class="ToolContainer">
+		<div class="ToolSectionLabel">
+		  Status
+		</div>
+		<div id="GitHubStatus"></div>
+		<div class="ToolSectionLabel">
+		  Add Files to be Tracked
+		</div>
+		<input id="GitHubFilepath" class="ToolInput" placeholder="Filepath"></input>
+	  <div class="ToolPrimaryButton" onclick="GitHub.add()">
+		  Add
+		</div>
+		<div class="ToolSectionLabel">
+		  Commit
+		</div>
+		<input id="GitHubCommitMessage" class="ToolInput" placeholder="Commit Message"></input>
+	  <div class="ToolPrimaryButton" onclick="GitHub.commit()">
+		  Commit
+		</div>
+	</div>
+</div>
 <div class="Tool" id="Home">
   <div class="ToolContainer">
     
@@ -328,11 +383,11 @@
 	  <div class="ToolSectionLabel">
 		  Account Info
 		</div>
-	  <div id="TeamFormLabel">
+	  <div class="ToolInputLabel">
 	  	Email
 	  </div>
-	  <input type="email" id="TeamEmail" tabindex="2" value=""></input>
-	  <div id="TeamUpdateButton" onclick="Team.save()">
+	  <input type="email" class="ToolInput" id="TeamEmail" tabindex="2" value=""></input>
+	  <div class="ToolPrimaryButton" onclick="Team.save()">
 		  Update
 		</div>
 	</div>
