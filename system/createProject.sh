@@ -56,6 +56,7 @@ createProjectMac ()
   
   createOwnerFile $domain $ownerEmail
   cd $projectsPath/$domain
+  chown -R $USER:staff $projectsPath/$domain
 #  git init >/dev/null
 #  echo "temp/" > .gitignore
 #  git add . >/dev/null
