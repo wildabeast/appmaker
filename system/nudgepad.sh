@@ -187,6 +187,16 @@ case "$1" in
   sudo cat $projectsPath/$2/private/logs/mon.txt
 ;;
 
+# Mac only. Open a project in textmate
+'mate')
+  mate $projectsPath/$2/
+;;
+
+# Mac only. Open a project in finder
+'open')
+  open $projectsPath/$2/
+;;
+
 'permit')
   # i hate you file permissions
   if isMac
