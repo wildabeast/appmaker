@@ -62,7 +62,6 @@ var portsPath = dataPath + 'ports/'
 
 app.domain = process.argv[2]
 app.port = process.argv[3]
-app.defaultTypes = ['pages', 'posts', 'makers', 'timelines']
 
 // Change the process title for easier debugging & monitoring
 process.title = app.domain
@@ -115,6 +114,8 @@ app.Project.loadFolder = function (folder) {
   // Create a Space for every folder
   app.Project.set(folder, new Space())
   // Grab all spaces in a folder
+  if (!fs.existsSync(app.paths['private'] + folder))
+    return false
   var files = fs.readdirSync(app.paths['private'] + folder)
   for (var j in files) {
     // Dont read non space files
@@ -126,17 +127,6 @@ app.Project.loadFolder = function (folder) {
   }
 }
 
-/**
- * Load all Spaces into memory.
- */
-app.Project.loadFromDisk = function () {
-  
-  // Iterate on each folder in default types
-  for (var i in app.defaultTypes) {
-    app.Project.loadFolder(app.defaultTypes[i])
-  }
-  
-}
 
 /**
  * @param {string}
@@ -156,7 +146,10 @@ if (app.development)
 else
   console.log('Production mode started...')
 
-app.Project.loadFromDisk()
+app.Project.loadFolder('makers')
+app.Project.loadFolder('pages')
+app.Project.loadFolder('timelines')
+
 speedcoach('spaces loaded into memory')
 
 

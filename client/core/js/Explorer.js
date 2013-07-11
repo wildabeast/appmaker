@@ -42,6 +42,15 @@ Explorer.edit = function (path) {
   })
 }
 
+Explorer.mkdir = function (path, callback) {
+  var req = {}
+  req.path = path
+  $.post('/nudgepad.explorer.mkdir', req, function (err) {
+    if (callback)
+      callback()
+  })
+}
+
 Explorer.quickEdit = function () {
   Explorer.edit(prompt('Enter path to file you want to edit', 'project.css'))
 }

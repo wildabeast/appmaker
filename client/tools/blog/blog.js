@@ -15,6 +15,13 @@ Blog.createPost = function () {
   Blog.activePost = null
 }
 
+// Ensures project has a blog theme before posting
+Blog.createTheme = function () {
+  if (Project.get('pages blog'))
+    return true
+  Project.create('pages blog', Blog.blankTheme.clone())
+}
+
 Blog.deletePost = function () {
   Blog.activePost = null
   var name = Blog.permalink($('#BlogPermalink').attr('value'))
@@ -52,11 +59,9 @@ Blog.editPost = function (name) {
   
 }
 
-// Ensures project has a blog theme before posting
-Blog.createTheme = function () {
-  if (Project.get('pages blog'))
-    return true
-  Project.create('pages blog', Blog.blankTheme.clone())
+Blog.install = function () {
+  if (!Project.get('posts'))
+    Explorer.mkdir('private posts')
 }
 
 /**

@@ -41,7 +41,6 @@ var ProjectRoute = function (app) {
 
     var copy = new Space()
     copy.set('pages', app.Project.get('pages'))
-    copy.set('posts', app.Project.get('posts'))
     copy.set('timelines ' + activePage, app.Project.get('timelines ' + activePage))
     copy.set('started', app.started)
     var hostname = os.hostname()

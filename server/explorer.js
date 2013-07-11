@@ -136,6 +136,18 @@ var Explorer = function (app) {
 
   })
   
+  /**
+   * path
+   */
+  app.post(app.pathPrefix + 'explorer.mkdir', app.checkId, function(req, res, next) {
+    var path = req.body.path.replace(/ /g, '/')
+    fs.mkdir(app.paths.project + path, function (err) {
+      if (err) return res.send(err)
+      res.send('')
+    })
+
+  })
+  
   // Receive any uploads
   app.post(app.pathPrefix + 'explorer.upload', app.checkId, function(req, res, next) {
     var filename = req.body.filename

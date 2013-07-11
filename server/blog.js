@@ -3,6 +3,7 @@ var Page = require('scraps'),
 
 var Blog = function (app) {
   
+  app.Project.loadFolder('posts')
   
   var sortBlog = function () {
     var posts = app.Project.get('posts')

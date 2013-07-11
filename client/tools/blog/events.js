@@ -3,6 +3,7 @@ Blog.on('close', function () {
 })
 
 Blog.on('open', function () {
+  Blog.install()
   Project.on('change', Blog.refresh)
   Blog.createTheme()
   Blog.refresh()

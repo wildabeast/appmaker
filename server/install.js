@@ -29,11 +29,18 @@ function Install (app) {
   // Create db folder
   if (!fs.existsSync(app.paths.surveys))
     fs.mkdirSync(app.paths.surveys)
-  
-  for (var i in app.defaultTypes) {
-    if (!fs.existsSync(app.paths['private'] + app.defaultTypes[i]))
-      fs.mkdirSync(app.paths['private'] + app.defaultTypes[i])
-  }
+
+  // Create makers folder
+  if (!fs.existsSync(app.paths.makers))
+    fs.mkdirSync(app.paths.makers)
+
+  // Create timeliens folder
+  if (!fs.existsSync(app.paths.timelines))
+    fs.mkdirSync(app.paths.timelines)
+
+  // Create pages folder
+  if (!fs.existsSync(app.paths.pages))
+    fs.mkdirSync(app.paths.pages)  
   
   // Create default home page
   if (!fs.existsSync(app.paths.pages + 'home.space'))
