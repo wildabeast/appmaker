@@ -7,5 +7,5 @@ for domain in $projects
 do
   # rename makers folder to team folder
 #  mv /nudgepad/projects/$domain/private/team/team/*.* /nudgepad/projects/$domain/private/team/
-  rm -rf /nudgepad/projects/$domain/private/team/team
+#  mv /nudgepad/projects/$domain/private/team/team/*.* /nudgepad/projects/$domain/private/team/
 done
