@@ -21,7 +21,7 @@ module.exports = function (app, httpServer) {
     
     var cookie = parseCookie(data.headers.cookie)
   
-    var maker = app.Project.get('makers ' + cookie.email)
+    var maker = app.Project.get('team ' + cookie.email)
     if (!maker)
       return accept('Invalid maker "' + cookie.email + '" transmitted. Headers:' + data.headers.cookie, false)
   

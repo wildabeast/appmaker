@@ -7,7 +7,7 @@ var Login = function (app) {
   app.get(app.pathPrefix + 'login', function(req, res, next) {
 
     if (req.query.email && req.query.key) {
-      var maker = app.Project.get('makers ' + req.query.email)
+      var maker = app.Project.get('team ' + req.query.email)
 
       if (!maker)
         return res.redirect('/nudgepad/public/login.html')
@@ -39,10 +39,10 @@ var Login = function (app) {
   // Login Post
   app.post(app.pathPrefix + 'login', function(req, res, next) {
     // Invalid email addresss
-    if (!app.Project.get('makers ' + req.body.email))
+    if (!app.Project.get('team ' + req.body.email))
       return res.redirect('/nudgepad/public/login.html?error=User_not_found')
 
-    var maker = app.Project.get('makers ' + req.body.email)
+    var maker = app.Project.get('team ' + req.body.email)
 
     // Wrong key
     if (maker.get('key') != req.body.key)

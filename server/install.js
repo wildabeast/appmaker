@@ -7,16 +7,16 @@ function Install (app) {
   // Main project path
   // Create the project folder. All maker data and apps go here.
   // It is a good idea to make this folder a git repo to version all
-  // a makers project data.
+  // a team project data.
   if (!fs.existsSync(app.paths.project))
     fs.mkdirSync(app.paths.project)
 
   if (!fs.existsSync(app.paths['private']))
     fs.mkdirSync(app.paths['private'])
 
-  // Create makers folder
-  if (!fs.existsSync(app.paths.makers))
-    fs.mkdirSync(app.paths.makers)
+  // Create team folder
+  if (!fs.existsSync(app.paths.team))
+    fs.mkdirSync(app.paths.team)
 
   // Create timeliens folder
   if (!fs.existsSync(app.paths.timelines))

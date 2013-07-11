@@ -101,7 +101,7 @@ app.started = new Date().getTime()
 
 app.getOwner = function () {
   var owner
-  var makers = app.Project.get('makers').each(function (key, value) {
+  var team = app.Project.get('team').each(function (key, value) {
     if (value.get('role') === 'owner') {
       owner = key
       return false
@@ -146,7 +146,7 @@ if (app.development)
 else
   console.log('Production mode started...')
 
-app.Project.loadFolder('makers')
+app.Project.loadFolder('team')
 app.Project.loadFolder('pages')
 app.Project.loadFolder('timelines')
 

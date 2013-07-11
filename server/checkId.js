@@ -23,7 +23,7 @@ function CheckID (app) {
     }
 
     // Invalid email addresss
-    if (!app.Project.get('makers ' + email)) {
+    if (!app.Project.get('team ' + email)) {
       // If use has invalid cookies set, clear them.
       if (req.cookies.email)
         res.clearCookie('email')
@@ -33,8 +33,8 @@ function CheckID (app) {
     }
 
     // Invalid key
-    if (app.Project.get('makers ' + email + ' key') !== key) {
-      console.log(app.Project.get('makers ' + email + ' key'))
+    if (app.Project.get('team ' + email + ' key') !== key) {
+      console.log(app.Project.get('team ' + email + ' key'))
       // If use has invalid cookies set, clear them.
       if (req.cookies.email)
         res.clearCookie('email')
@@ -44,7 +44,7 @@ function CheckID (app) {
     }
 
     // Invalid role
-    var role = app.Project.get('makers ' + email + ' role')
+    var role = app.Project.get('team ' + email + ' role')
     if (role !== 'owner' && role !== 'maker')
       return res.send('Not authorized')
 

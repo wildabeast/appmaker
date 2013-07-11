@@ -19,7 +19,7 @@ var Persona = function (app) {
 
         var email = result.body.email
 
-        var maker = app.Project.get('makers ' + email)
+        var maker = app.Project.get('team ' + email)
 
         if (!maker)
           return res.send('No user with email ' + email)

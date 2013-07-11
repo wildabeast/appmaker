@@ -10,7 +10,7 @@ var Invite = function (app) {
   
   
   var createUser = function (email) {
-    var maker = new Marking(app.paths.makers + email + '.space')
+    var maker = new Marking(app.paths.team + email + '.space')
     maker.set('name', ParseName(email))
     maker.set('role', 'maker')
     maker.set('key', app.hashString(email + RandomString(8)))
@@ -18,7 +18,7 @@ var Invite = function (app) {
       if (error)
         return console.log(error)
 
-      app.Project.set('makers ' + email, new Space(maker))
+      app.Project.set('team ' + email, new Space(maker))
 
       Email.send(
         email,
