@@ -55,7 +55,7 @@ function CheckID (app) {
   }
 
   app.privateCheck = function (req, res, next) {
-    if (app.Project.get('settings is_private') !== 'true')
+    if (!app.isPrivate)
       return next()
     app.checkId(req, res, next)
   }

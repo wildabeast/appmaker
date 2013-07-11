@@ -39,9 +39,6 @@ function Install (app) {
       fs.mkdirSync(app.paths['private'] + app.defaultTypes[i])
   }
   
-  if (!fs.existsSync(app.paths.settings + 'is_private.txt'))
-    fs.writeFileSync(app.paths.settings + 'is_private.txt', 'false', 'utf8')
-  
   // Create default home page
   if (!fs.existsSync(app.paths.pages + 'home.space'))
     fs.writeFileSync(app.paths.pages + 'home.space', '', 'utf8')
