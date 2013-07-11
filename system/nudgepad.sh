@@ -47,15 +47,17 @@ source deleteProject.sh
 source waitUntilServing.sh
 source createOwnerFile.sh
 source createProject.sh
+source macUser.sh
 
 case "$1" in
 
-'running')
-  echo $runningProjects
-;;
-
 'backup')
   source cron/backup.sh
+;;
+
+# Mac only. Open a project in browser
+'browse')
+  open http://$2.localhost/
 ;;
 
 'clear')
@@ -258,6 +260,14 @@ case "$1" in
   done
 ;;
 
+'running')
+  echo $runningProjects
+;;
+
+'r')
+  echo $macUser
+;;
+
 'start')
   if [ -z $2 ]
     then
@@ -285,6 +295,11 @@ case "$1" in
         stopProject $domain
       done
   fi
+;;
+
+# Mac only. Open a project in sublime
+'sub')
+  /Applications/Sublime\ Text\ 2.app/Contents/SharedSupport/bin/subl $projectsPath/$2/
 ;;
 
 'tail')

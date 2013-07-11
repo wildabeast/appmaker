@@ -37,7 +37,7 @@ createProjectNix ()
 
 createProjectMac ()
 {
-  
+
   domain=$1
   ownerEmail=$2
   cloneFile=$3
@@ -56,7 +56,7 @@ createProjectMac ()
   
   createOwnerFile $domain $ownerEmail
   cd $projectsPath/$domain
-  chown -R $USER:staff $projectsPath/$domain
+  sudo chown -R $macUser:staff $projectsPath/$domain
 #  git init >/dev/null
 #  echo "temp/" > .gitignore
 #  git add . >/dev/null
