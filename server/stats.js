@@ -27,7 +27,7 @@ function Stats (app) {
   
   
   parseStats = function (callback) {
-    fs.readFile(app.paths.requests_log, 'utf8', function (error, data) {
+    fs.readFile(app.paths.requestsLog, 'utf8', function (error, data) {
       var requests = data.split(/\n/g)
       var days = {}
       _.each(requests, function (line) {

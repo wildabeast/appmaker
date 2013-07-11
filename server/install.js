@@ -14,10 +14,6 @@ function Install (app) {
   if (!fs.existsSync(app.paths['private']))
     fs.mkdirSync(app.paths['private'])
   
-  // Create the logs folder for storing log data, other ops data.
-  if (!fs.existsSync(app.paths.logs))
-    fs.mkdirSync(app.paths.logs)
-  
   // Create the temp folder for storing temporary stuff
   if (!fs.existsSync(app.paths.temp))
     fs.mkdirSync(app.paths.temp)

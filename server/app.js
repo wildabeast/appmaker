@@ -192,7 +192,7 @@ express.logger.token("ip", function(request) {
  
 });
 
-var logFile = fs.createWriteStream(app.paths.requests_log, {flags: 'a'})
+var logFile = fs.createWriteStream(app.paths.requestsLog, {flags: 'a'})
 app.use(express.logger({
   stream : logFile,
   format : ':ip :url :method :status :response-time :res[content-length] ":date" :remote-addr ":referrer" ":user-agent"'
