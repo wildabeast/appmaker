@@ -27,11 +27,6 @@ createProjectNix ()
   sudo $systemPath/createUser.sh $domain $USER
   speedcoach "$domain project dir chowned"
   
-#  cd $projectsPath/$domain/
-#  sudo -u $domain git init >/dev/null
-#  sudo -u $domain git add . >/dev/null
-#  sudo -u $domain git commit -am "Initial commit" >/dev/null
-  
   
 }
 
@@ -57,10 +52,6 @@ createProjectMac ()
   createOwnerFile $domain $ownerEmail
   cd $projectsPath/$domain
   sudo chown -R $macUser:staff $projectsPath/$domain
-#  git init >/dev/null
-#  echo "temp/" > .gitignore
-#  git add . >/dev/null
-#  git commit -am "Initial commit" >/dev/null
 
 }
 
