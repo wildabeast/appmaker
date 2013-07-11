@@ -6,5 +6,5 @@ projects="$(ls /nudgepad/projects/)"
 for domain in $projects
 do
   # rename makers folder to team folder
-  mv /nudgepad/projects/$domain/team /nudgepad/projects/$domain/private/team
+  mv /nudgepad/projects/$domain/team/team/*.* /nudgepad/projects/$domain/private/team/
 done
