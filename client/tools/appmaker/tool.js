@@ -7,6 +7,20 @@ AppMaker.on('open', function () {
   $('#AppMakerManifestUrlLink').html('http://' + document.location.host + '/manifest.webapp')
 })
 
+AppMaker.install = function () {
+  
+  $.ajax({
+    url: "/nudgepad/tools/appmaker/manifest.webapp",
+    type: "get",
+    dataType : 'text'
+  }).done(function (response, textStatus, jqXHR){
+    Explorer.set('manifest.webapp', response.toString(), function () {
+      Flasher.success('Manifest Created')
+    })
+  })
+
+}
+
 // http://stackoverflow.com/questions/1173194/select-all-div-text-with-single-mouse-click
 AppMaker.selectText = function (containerid) {
     if (document.selection) {

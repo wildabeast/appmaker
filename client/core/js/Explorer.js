@@ -65,4 +65,13 @@ Explorer.rename = function (oldPath, newPath, callback) {
   })
 }
 
+// Create utf8 files
+Explorer.set = function (path, content, callback) {
+  var req = {}
+  req.path = path
+  req.content = content
+  $.post('/nudgepad.explorer.save', req, function (err) {
+    callback()
+  })
+}
 
