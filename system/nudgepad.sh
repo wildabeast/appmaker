@@ -224,10 +224,10 @@ case "$1" in
   for domain in $runningProjects
   do
     echo $domain PID
-    cat $projectsPath/$domain/private/temp/projectPid
+    cat $projectsPath/$domain/private/projectPid.txt
     echo 
     echo $domain Mon PID
-    cat $projectsPath/$domain/private/temp/monPid
+    cat $projectsPath/$domain/private/monPid.txt
     echo 
   done
 ;;

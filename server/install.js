@@ -13,10 +13,6 @@ function Install (app) {
 
   if (!fs.existsSync(app.paths['private']))
     fs.mkdirSync(app.paths['private'])
-  
-  // Create the temp folder for storing temporary stuff
-  if (!fs.existsSync(app.paths.temp))
-    fs.mkdirSync(app.paths.temp)
 
   // Create makers folder
   if (!fs.existsSync(app.paths.makers))

@@ -17,8 +17,6 @@ function Paths (app, projectsPath, clientPath) {
   paths.makers = paths['private'] + 'makers/'
   // where to store requests log
   paths.requestsLog = paths['private'] + 'requests.log.txt'
-  // where to store temporary data
-  paths.temp = paths['private'] + 'temp/'
   paths.client = clientPath
   app.paths = paths
 }

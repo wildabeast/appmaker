@@ -14,7 +14,6 @@ createProjectNix ()
       cp -R blank $projectsPath/$domain
       mkdir $projectsPath/$domain/private/makers
       touch $projectsPath/$domain/private/app.log.txt
-      mkdir $projectsPath/$domain/private/temp
       
   fi
   speedcoach "$domain created from template"
@@ -42,7 +41,6 @@ createProjectMac ()
       # echo NO cloneFile provided. Creating blank project from blank.
       cp -R blank $projectsPath/$domain
       mkdir $projectsPath/$domain/private/makers
-      mkdir $projectsPath/$domain/private/temp
   fi
   
   createOwnerFile $domain $ownerEmail

@@ -18,10 +18,12 @@ var Survey = function (app) {
   
   app.get(app.pathPrefix + 'surveys', app.checkId, function (req, res, next) {
 
-    var output = app.paths.temp + 'surveys.space'
+    var output = app.paths['private'] + 'surveys.space'
     exec('space ' + surveyPath + ' ' + output, function () {
       res.set('Content-Type', 'text/plain')
-      res.sendfile(output)
+      res.sendfile(output, function () {
+        fs.unlink(output)  
+      })    
     })
 
   })
