@@ -7,8 +7,6 @@ function Paths (app, projectsPath, clientPath) {
   paths.project = projectsPath + domain + '/'
   // Where to store private files
   paths['private'] = paths.project + 'private/'
-  // where to store settings
-  paths.settings = paths['private'] + 'settings/'
   // where to store server side packages
   paths.packages = paths['private'] + 'packages/'
   // where to store pages

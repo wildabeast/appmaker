@@ -100,6 +100,17 @@ app.nudgepadHtmlVersion = fs.readFileSync(clientPath + 'production/nudgepad.min.
 app.started = new Date().getTime()
 
 
+app.getOwner = function () {
+  var owner
+  var makers = app.Project.get('makers').each(function (key, value) {
+    if (value.get('role') === 'owner') {
+      owner = key
+      return false
+    }
+  })
+  return owner
+}
+
 app.Project.loadFolder = function (folder) {
   // Create a Space for every folder
   app.Project.set(folder, new Space())
@@ -119,22 +130,6 @@ app.Project.loadFolder = function (folder) {
  * Load all Spaces into memory.
  */
 app.Project.loadFromDisk = function () {
-  
-  // Load settings
-  app.Project.set('settings', new Space())
-  var files = fs.readdirSync(app.paths.settings)
-  for (var j in files) {
-    // Space files
-    if (files[j].match(/\.space/)) {
-      var filename = files[j].replace(/\.space$/, '')
-      app.Project.set('settings ' + filename, new Space(fs.readFileSync(app.paths.settings + files[j], 'utf8')))
-    }
-    // Text files
-    else if (files[j].match(/\.txt/)) {
-      var filename = files[j].replace(/\.txt$/, '')
-      app.Project.set('settings ' + filename, fs.readFileSync(app.paths.settings + files[j], 'utf8'))
-    }
-  }
   
   // Iterate on each folder in default types
   for (var i in app.defaultTypes) {

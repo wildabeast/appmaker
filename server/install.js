@@ -14,10 +14,6 @@ function Install (app) {
   if (!fs.existsSync(app.paths['private']))
     fs.mkdirSync(app.paths['private'])
   
-  // Create the settings folder for storing settings files.
-  if (!fs.existsSync(app.paths.settings))
-    fs.mkdirSync(app.paths.settings)
-  
   // Create the logs folder for storing log data, other ops data.
   if (!fs.existsSync(app.paths.logs))
     fs.mkdirSync(app.paths.logs)

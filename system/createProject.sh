@@ -12,7 +12,6 @@ createProjectNix ()
     else
       # echo NO cloneFile provided. Creating blank project from blank.
       cp -R blank $projectsPath/$domain
-      mkdir $projectsPath/$domain/private/settings
       mkdir $projectsPath/$domain/private/makers
       mkdir $projectsPath/$domain/private/logs
       touch $projectsPath/$domain/private/logs/mon.txt
@@ -43,7 +42,6 @@ createProjectMac ()
     else
       # echo NO cloneFile provided. Creating blank project from blank.
       cp -R blank $projectsPath/$domain
-      mkdir $projectsPath/$domain/private/settings
       mkdir $projectsPath/$domain/private/makers
       mkdir $projectsPath/$domain/private/logs
       mkdir $projectsPath/$domain/private/temp

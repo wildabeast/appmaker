@@ -29,8 +29,11 @@ var Survey = function (app) {
 
       // The following will send the submission to an email address on file for the project
       // if one exists.
-      if (app.Project.get('settings email'))
-        Email.send(app.Project.get('settings email'), 'surveys@' + app.domain, app.domain + ': New Message', space.toString())
+      var email = app.getOwner()
+      if (email) {
+        Email.send(email, 'surveys@' + app.domain, app.domain + ': New Message', space.toString())
+        console.log('Emailing survey submission to %s', email)
+      }
 
       res.send('')
     })
