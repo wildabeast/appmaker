@@ -1,31 +1,31 @@
-Develop.drop = {}
+Files.drop = {}
 
 // http://stackoverflow.com/questions/3590058/does-html5-allow-drag-drop-upload-of-folders-or-a-folder-tree
 // http://stackoverflow.com/questions/6756583/prevent-browser-from-loading-a-drag-and-dropped-file
-Develop.drop.traverseFileTree = function (item, path) {
+Files.drop.traverseFileTree = function (item, path) {
   path = path || ""
   if (item.isFile) {
     // Get file
     item.file(function(file) {
       console.log("File:", path + file.name)
-      Develop.drop.sendFile(path, file)
+      Files.drop.sendFile(path, file)
     })
   } else if (item.isDirectory) {
     // Get folder contents
     var dirReader = item.createReader()
     dirReader.readEntries(function(entries) {
       for (var i=0; i<entries.length; i++) {
-        Develop.drop.traverseFileTree(entries[i], path + item.name + "/")
+        Files.drop.traverseFileTree(entries[i], path + item.name + "/")
       }
     })
   }
 }
 
 // https://developer.mozilla.org/en-US/docs/Using_files_from_web_applications
-Develop.drop.sendFile = function (path, file) {
+Files.drop.sendFile = function (path, file) {
   
   var uri = "/nudgepad.explorer.upload"
-  uri += '?path=' + Develop.get('path').replace(' ','/') + '/' + (path ? path : '')
+  uri += '?path=' + Files.get('path').replace(' ','/') + '/' + (path ? path : '')
   var xhr = new XMLHttpRequest()
   var fd = new FormData()
   
@@ -35,7 +35,7 @@ Develop.drop.sendFile = function (path, file) {
           // Handle response.
           Flasher.success(xhr.responseText)
 //          alert(xhr.responseText) // handle response.
-          Develop.refreshFiles()
+          Files.refreshFiles()
       }
       else if (xhr.status == 500) {
         Flasher.error(xhr.responseText)
@@ -47,7 +47,7 @@ Develop.drop.sendFile = function (path, file) {
   xhr.send(fd)
 }
 
-Develop.drop.ondrop = function(event) {
+Files.drop.ondrop = function(event) {
   console.log('yo')
   event.preventDefault()
 
@@ -56,24 +56,24 @@ Develop.drop.ondrop = function(event) {
     // webkitGetAsEntry is where the magic happens
     var item = items[i].webkitGetAsEntry()
     if (item) {
-      Develop.drop.traverseFileTree(item)
+      Files.drop.traverseFileTree(item)
     }
   }
 }
 
-Develop.drop.ondragover = function(event){
+Files.drop.ondragover = function(event){
   event.preventDefault()
 }
 
-Develop.on('close', function () {
-  window.removeEventListener("dragover", Develop.drop.ondragover)
-  window.removeEventListener("drop" , Develop.drop.ondrop)
+Files.on('close', function () {
+  window.removeEventListener("dragover", Files.drop.ondragover)
+  window.removeEventListener("drop" , Files.drop.ondrop)
 })
 
-Develop.on('open', function () {
+Files.on('open', function () {
   
-  window.addEventListener("dragover", Develop.drop.ondragover, false)
-  window.addEventListener("drop" , Develop.drop.ondrop, false)
+  window.addEventListener("dragover", Files.drop.ondragover, false)
+  window.addEventListener("drop" , Files.drop.ondrop, false)
   
 })
 

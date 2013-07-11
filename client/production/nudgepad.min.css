@@ -561,47 +561,11 @@ body {
   background-color: #427a14;
 }
 
-.DevelopButton {
-  background-color: #333;
-  height: 40px;
-  margin-left: 10px;
-  width: 100px;
-  text-decoration: none;
-  text-align: center;
-  float: right;
-  line-height: 40px;
-  color: #fff;
-  font-size: 15px;
+#FilesExplorerHolder {
   cursor: pointer;
 }
 
-.DevelopButton:hover {
-  background-color: #000;
-}
-
-#DevelopToggle {
-  margin-top: 40px;
-}
-
-.DevelopToggleOption {
-  float: left;
-  width: 80px;
-  text-align: center;
-  background-color: #f8f8f8;
-  height: 40px;
-  line-height: 40px;
-}
-
-.DevelopSelect {
-  background-color: #555;
-  color: #fff;
-}
-
-#DevelopExplorerHolder {
-  cursor: pointer;
-}
-
-#DevelopExplorerPath {
+#FilesExplorerPath {
   font-size : 15px;
   color : #333;
   text-align : left;
@@ -610,15 +574,15 @@ body {
   cursor: pointer;
 }
 
-#DevelopExplorerPath span:hover {
+#FilesExplorerPath span:hover {
   color: #1a86d6;
 }
 
-.DevelopExplorerHeader {
+.FilesExplorerHeader {
   font-size : 24px;
 }
 
-.DevelopExplorerEdit {
+.FilesExplorerEdit {
   color: #555;
   height: 40px;
   line-height: 40px;
@@ -628,7 +592,7 @@ body {
   background-repeat: no-repeat;
 }
 
-.DevelopExplorerFolderName {
+.FilesExplorerFolderName {
   height: 40px;
   line-height: 40px;
   color: #1a86d6;
@@ -638,136 +602,50 @@ body {
   background-repeat: no-repeat;
 }
 
-.DevelopToggleOption {
-  cursor: pointer;
-}
-
-#DevelopLogHolder {
-  border: none;
-  font-size: 15px;
-}
-
-#DevelopInfoContent {
-  display: none;
-}
-
-#DevelopLogsContent {
-  display: none;
-}
-
-.DevelopSelectable {
-  -webkit-user-select: auto;
-  -moz-user-select: text;
-  user-select: auto;
-}
-
-
-#DevelopExplorer {
+#FilesExplorer {
   border-collapse: collapse;
 }
 
-#DevelopExplorer tr td {
+#FilesExplorer tr td {
   width: 300px;
 }
    
-.DevelopExplorerFolderName {
+.FilesExplorerFolderName {
   width: 300px;
 }
 
-.DevelopExplorerRename, .DevelopExplorerRemove {
+.FilesExplorerRename, .FilesExplorerRemove {
   color: #eee;
 }
 
-#DevelopExplorer tr td.DevelopExplorerEdit:hover,
-#DevelopExplorer tr td.DevelopExplorerFolderName:hover,
-#DevelopExplorer tr td.DevelopExplorerRename:hover,
-#DevelopExplorer tr td.DevelopExplorerRemove:hover {
+#FilesExplorer tr td.FilesExplorerEdit:hover,
+#FilesExplorer tr td.FilesExplorerFolderName:hover,
+#FilesExplorer tr td.FilesExplorerRename:hover,
+#FilesExplorer tr td.FilesExplorerRemove:hover {
   text-decoration: underline;
   cursor: pointer;
   color: #1a86d6;
 }
 
-#DevelopExplorer tr:hover td.DevelopExplorerRename, #DevelopExplorer tr:hover td.DevelopExplorerRemove {
+#FilesExplorer tr:hover td.FilesExplorerRename, #FilesExplorer tr:hover td.FilesExplorerRemove {
   color: #1a86d6;
 }
 
-#DevelopExplorer tr th {
+#FilesExplorer tr th {
   color: #888888;
 }
 
-#DevelopExplorer tr.DevelopExplorerHeader {
+#FilesExplorer tr.FilesExplorerHeader {
   border-bottom: 3px solid #555;
 }
 
-#DevelopExplorer tr.DevelopExplorerFolder {
+#FilesExplorer tr.FilesExplorerFolder {
   border-bottom: 1px solid #ccc;
 }
 
-#DevelopExplorer tr.DevelopExplorerFile {
+#FilesExplorer tr.FilesExplorerFile {
   border-bottom: 1px solid #ccc;
 }
-
-#DevelopConsole {
-  padding : 3px;
-  font-family : monospace;
-  font-size : 16px;
-  outline : 0;
-  top : 50px;
-  margin: 0;
-  bottom : 150px;
-  position : fixed;
-  left : 50px;
-  right : 50px;
-  z-index : 1009;
-  background-color : rgba(255,255,255,0.9);
-  box-shadow : 0px 1px 3px rgba(0,0,0,.5);
-  -webkit-user-select: auto;
-  -moz-user-select: text;
-  user-select: auto;
-}
-
-#DevelopConsole {
-  overflow-y: scroll;
-}
-
-#DevelopConsoleCheckbox {
-  left : 675px;
-  bottom : 101px;
-  position : fixed;
-  z-index : 1010;
-  line-height: 40px;
-}
-
-#DevelopConsoleLabel {
-  left : 700px;
-  height : 40px;
-  bottom : 90px;
-  line-height : 40px;
-  font-size : 20px;
-  position : fixed;
-  z-index : 1010;
-}
-
-#DevelopConsoleInput {
-  width : 560px;
-  height : 40px;
-  bottom : 90px;
-  left : 90px;
-  line-height : 40px;
-  font-size : 20px;
-  position : fixed;
-  border: 1px solid #ddd;
-  z-index : 1010;
-}
-
-.DevelopSectionLabel {
-  font-size: 36px;
-  margin-top: 60px;
-  border-bottom: 3px solid #ccc;
-  padding-bottom: 5px;
-  margin-bottom: 20px;
-}
-
 #GitHubStatus {
   white-space: pre;
   -webkit-user-select: auto;
@@ -1949,6 +1827,65 @@ License: MIT
 
 #PrototypeStyleEditorMoveUp:active, #PrototypeStyleEditorMoveDown:active, #PrototypeStyleEditorLock:active, #PrototypeStyleEditorLink:active{
   opacity: 1;
+}
+
+#ServerLogHolder {
+  border: none;
+  font-size: 15px;
+}
+
+
+#ServerConsole {
+  padding : 3px;
+  font-family : monospace;
+  font-size : 16px;
+  outline : 0;
+  top : 50px;
+  margin: 0;
+  bottom : 150px;
+  position : fixed;
+  left : 50px;
+  right : 50px;
+  z-index : 1009;
+  background-color : rgba(255,255,255,0.9);
+  box-shadow : 0px 1px 3px rgba(0,0,0,.5);
+  -webkit-user-select: auto;
+  -moz-user-select: text;
+  user-select: auto;
+}
+
+#ServerConsole {
+  overflow-y: scroll;
+}
+
+#ServerConsoleCheckbox {
+  left : 675px;
+  bottom : 101px;
+  position : fixed;
+  z-index : 1010;
+  line-height: 40px;
+}
+
+#ServerConsoleLabel {
+  left : 700px;
+  height : 40px;
+  bottom : 90px;
+  line-height : 40px;
+  font-size : 20px;
+  position : fixed;
+  z-index : 1010;
+}
+
+#ServerConsoleInput {
+  width : 560px;
+  height : 40px;
+  bottom : 90px;
+  left : 90px;
+  line-height : 40px;
+  font-size : 20px;
+  position : fixed;
+  border: 1px solid #ddd;
+  z-index : 1010;
 }
 #Sketch {
 

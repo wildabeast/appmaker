@@ -87,51 +87,31 @@
 	  </div>
   </div>
 </div>
-<div class="Tool" id="Develop">
+<div class="Tool" id="Files">
 	<div class="ToolNav">
 		<div class="ToolNavContainer">
   		<div class="ToolSquareButton ToolBackButton" onclick="Launcher.open('Home')">
 		  	Back
 		  </div>
-			<a class="DevelopButton" onclick="Develop.console()" title="Run Shell Commands">
-		  	Console
-		  </a>
-		  <a id="DevelopDownload" href="" target="blank" class="DevelopButton" title="Download Project as Zip File">
+		  <a id="FilesDownload" href="" target="blank" class="ToolRightButton" title="Download Project as Zip File">
 		  	Download
 		  </a>
-			<a href="/nudgepad.export" target="blank" class="DevelopButton" title="Download Project as Space File">
+			<a href="/nudgepad.export" target="blank" class="ToolRightButton" title="Download Project as Space File">
 		  	Export
 		  </a>
-		  <a onclick="Develop.import()" class="DevelopButton" title="Import a Space File">
+		  <a onclick="Files.import()" class="ToolRightButton" title="Import a Space File">
 		  	Import
 		  </a>
-		  <a onclick="Develop.cloneProject()" class="DevelopButton" title="Copy Project to new Domain">
+		  <a onclick="nudgepad.cloneProject()" class="ToolRightButton" title="Copy Project to new Domain">
 		  	Clone
-		  </a>
-		  <a id="DevelopRestart" class="DevelopButton" onclick="$.get('/nudgepad.restart')" title="Restart Server">
-		  	Restart
 		  </a>
 		<div class="clear"></div>
 		</div>
 	</div>
   <div class="ToolContainer">
-	  <div id="DevelopToggle">
-	  	<div class="DevelopToggleOption DevelopSelect" value="DevelopFilesContent">Files</div>
-			<div class="DevelopToggleOption" value="DevelopLogsContent">Logs</div>
-			<div class="DevelopToggleOption" value="DevelopInfoContent">Info</div>
-	    <div class="clear"></div>
-	  </div>
-	  <div id="DevelopFilesContent" class="DevelopContent">
-	  	<div id="DevelopExplorerPath"></div>
-		  <div id="DevelopExplorerHolder"></div>
-		</div>
-		<div id="DevelopLogsContent" class="DevelopContent">
-	  	<div class="DevelopSectionLabel">Logs</div>
-		  <pre id="DevelopLogHolder" readonly="readonly" class="DevelopSelectable"></pre>
-		</div>
-		<div id="DevelopInfoContent" class="DevelopContent">
-	  	<div class="DevelopSectionLabel">Info</div>
-		  <pre id="DevelopStatusArea" readonly="readonly" class="DevelopSelectable"></pre>
+	  <div id="FilesFilesContent" class="FilesContent">
+	  	<div id="FilesExplorerPath"></div>
+		  <div id="FilesExplorerHolder"></div>
 		</div>
 	</div>
 </div>
@@ -255,6 +235,32 @@
 </div>
 
 <div id="PrototypeDimensions"></div>
+<div class="Tool" id="Server">
+	<div class="ToolNav">
+		<div class="ToolNavContainer">
+  		<div class="ToolSquareButton ToolBackButton" onclick="Launcher.open('Home')">
+		  	Back
+		  </div>
+			<a class="ToolRightButton" onclick="Server.console()" title="Run Shell Commands">
+		  	Console
+		  </a>
+		  <a class="ToolRightButton" onclick="$.get('/nudgepad.restart')" title="Restart Server">
+		  	Restart
+		  </a>
+		<div class="clear"></div>
+		</div>
+	</div>
+  <div class="ToolContainer">
+    <div class="ToolSectionLabel">
+		  Logs
+		</div>
+		<pre id="ServerLogHolder" readonly="readonly"></pre>
+		<div class="ToolSectionLabel">
+		  Server Info
+		</div>
+		<pre id="ServerStatusArea" readonly="readonly"></pre>
+	</div>
+</div>
 <div class="Tool" id="Sketch">
 	<div class="ToolNav">
 		<div class="ToolNavContainer">

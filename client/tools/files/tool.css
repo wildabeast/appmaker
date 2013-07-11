@@ -1,0 +1,85 @@
+#FilesExplorerHolder {
+  cursor: pointer;
+}
+
+#FilesExplorerPath {
+  font-size : 15px;
+  color : #333;
+  text-align : left;
+  margin-top: 40px;
+  margin-bottom: 20px;
+  cursor: pointer;
+}
+
+#FilesExplorerPath span:hover {
+  color: #1a86d6;
+}
+
+.FilesExplorerHeader {
+  font-size : 24px;
+}
+
+.FilesExplorerEdit {
+  color: #555;
+  height: 40px;
+  line-height: 40px;
+  background-image: url(/nudgepad/public/images/document.png);
+  text-indent: 25px;
+  background-position: left center;
+  background-repeat: no-repeat;
+}
+
+.FilesExplorerFolderName {
+  height: 40px;
+  line-height: 40px;
+  color: #1a86d6;
+  background-image: url(/nudgepad/public/images/folder2.png);
+  text-indent: 25px;
+  background-position: left center;
+  background-repeat: no-repeat;
+}
+
+#FilesExplorer {
+  border-collapse: collapse;
+}
+
+#FilesExplorer tr td {
+  width: 300px;
+}
+   
+.FilesExplorerFolderName {
+  width: 300px;
+}
+
+.FilesExplorerRename, .FilesExplorerRemove {
+  color: #eee;
+}
+
+#FilesExplorer tr td.FilesExplorerEdit:hover,
+#FilesExplorer tr td.FilesExplorerFolderName:hover,
+#FilesExplorer tr td.FilesExplorerRename:hover,
+#FilesExplorer tr td.FilesExplorerRemove:hover {
+  text-decoration: underline;
+  cursor: pointer;
+  color: #1a86d6;
+}
+
+#FilesExplorer tr:hover td.FilesExplorerRename, #FilesExplorer tr:hover td.FilesExplorerRemove {
+  color: #1a86d6;
+}
+
+#FilesExplorer tr th {
+  color: #888888;
+}
+
+#FilesExplorer tr.FilesExplorerHeader {
+  border-bottom: 3px solid #555;
+}
+
+#FilesExplorer tr.FilesExplorerFolder {
+  border-bottom: 1px solid #ccc;
+}
+
+#FilesExplorer tr.FilesExplorerFile {
+  border-bottom: 1px solid #ccc;
+}

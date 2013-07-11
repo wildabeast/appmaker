@@ -1,7 +1,7 @@
-Develop Tool
+Files Tool
 ============
 
-A tool for doing common advanced tasks fast.
+A tool for editing files
 
 v 0.4 - Done
 ------------

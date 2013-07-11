@@ -1,0 +1,26 @@
+<div class="Tool" id="Server">
+	<div class="ToolNav">
+		<div class="ToolNavContainer">
+  		<div class="ToolSquareButton ToolBackButton" onclick="Launcher.open('Home')">
+		  	Back
+		  </div>
+			<a class="ToolRightButton" onclick="Server.console()" title="Run Shell Commands">
+		  	Console
+		  </a>
+		  <a class="ToolRightButton" onclick="$.get('/nudgepad.restart')" title="Restart Server">
+		  	Restart
+		  </a>
+		<div class="clear"></div>
+		</div>
+	</div>
+  <div class="ToolContainer">
+    <div class="ToolSectionLabel">
+		  Logs
+		</div>
+		<pre id="ServerLogHolder" readonly="readonly"></pre>
+		<div class="ToolSectionLabel">
+		  Server Info
+		</div>
+		<pre id="ServerStatusArea" readonly="readonly"></pre>
+	</div>
+</div>
