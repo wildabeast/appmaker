@@ -1,8 +1,13 @@
 // Nudgepad Tool navigation
 var Launcher = {}
 
+// Issue #291 Allow keeping of someone in 1 Tool for a project.
+Launcher.locked = null
+
 Launcher.open = function (name, dontRecord) {
 
+  if (Launcher.locked)
+    return window[Launcher.locked].open()
 
   if (window[name])
     window[name].open()
