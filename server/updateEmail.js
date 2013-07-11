@@ -27,7 +27,7 @@ var UpdateEmail = function (app) {
 
     var role = app.Project.get('team').get(req.email + ' role')  
     // Generate new password
-    var maker = new Marking(app.paths.projectPid.txt + email + '.space')
+    var maker = new Marking(app.paths.team + email + '.space')
     maker.set('name', ParseName(email))
     maker.set('role', role)
     maker.set('key', app.hashString(email + RandomString(8)))
@@ -41,11 +41,11 @@ var UpdateEmail = function (app) {
       res.cookie('email', email, { expires: new Date(Date.now() + 5184000000)})
       res.cookie('key', maker.get('key'), { expires: new Date(Date.now() + 5184000000)})
       res.cookie('name', maker.get('name'), { expires: new Date(Date.now() + 5184000000)})
-      app.Project.set('projectPid.txt ' + email, new Space(maker))
+      app.Project.set('team ' + email, new Space(maker))
 
       // Delete old account
-      app.Project.delete('projectPid.txt ' + req.email)
-      new Marking(app.paths.projectPid.txt + req.email + '.space').trash()
+      app.Project.delete('team ' + req.email)
+      new Marking(app.paths.team + req.email + '.space').trash()
       if (req.body.sendWelcomeEmail === 'true') {
 
         var message = 'Thanks for using NudgePad to build your project!' + '\n\n' +

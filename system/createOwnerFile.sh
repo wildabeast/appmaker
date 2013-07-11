@@ -8,9 +8,9 @@ createOwnerFile ()
   OWNERLINK=$(echo "http://$domain/nudgepad.login?email=$ownerEmail&key=$OWNERKEY")
   if isMac
     then
-      printf "name $OWNERNAME\nkey $OWNERKEY\nrole owner\n" | tee -a $projectsPath/$domain/private/projectPid.txt/$ownerEmail.space >/dev/null
+      printf "name $OWNERNAME\nkey $OWNERKEY\nrole owner\n" | tee -a $projectsPath/$domain/private/team/$ownerEmail.space >/dev/null
     else
-      printf "name $OWNERNAME\nkey $OWNERKEY\nrole owner\n" > $projectsPath/$domain/private/projectPid.txt/$ownerEmail.space
+      printf "name $OWNERNAME\nkey $OWNERKEY\nrole owner\n" > $projectsPath/$domain/private/team/$ownerEmail.space
   fi
   
 }

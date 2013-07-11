@@ -12,7 +12,7 @@ createProjectNix ()
     else
       # echo NO cloneFile provided. Creating blank project from blank.
       cp -R blank $projectsPath/$domain
-      mkdir $projectsPath/$domain/private/projectPid.txt
+      mkdir $projectsPath/$domain/private/team
       touch $projectsPath/$domain/private/app.log.txt
       
   fi
@@ -40,7 +40,7 @@ createProjectMac ()
     else
       # echo NO cloneFile provided. Creating blank project from blank.
       cp -R blank $projectsPath/$domain
-      mkdir $projectsPath/$domain/private/projectPid.txt
+      mkdir $projectsPath/$domain/private/team
   fi
   
   createOwnerFile $domain $ownerEmail
