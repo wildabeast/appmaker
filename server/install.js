@@ -39,9 +39,6 @@ function Install (app) {
       fs.mkdirSync(app.paths['private'] + app.defaultTypes[i])
   }
   
-  if (!fs.existsSync(app.paths.settings + 'is_open_source.txt'))
-    fs.writeFileSync(app.paths.settings + 'is_open_source.txt', 'true', 'utf8')
-  
   if (!fs.existsSync(app.paths.settings + 'is_private.txt'))
     fs.writeFileSync(app.paths.settings + 'is_private.txt', 'false', 'utf8')
   
