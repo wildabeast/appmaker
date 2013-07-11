@@ -18,10 +18,6 @@ function Install (app) {
   if (!fs.existsSync(app.paths.settings))
     fs.mkdirSync(app.paths.settings)
   
-  // Create the packages folder for storing server side packages.
-  if (!fs.existsSync(app.paths.packages))
-    fs.mkdirSync(app.paths.packages)
-  
   // Create the logs folder for storing log data, other ops data.
   if (!fs.existsSync(app.paths.logs))
     fs.mkdirSync(app.paths.logs)
@@ -48,16 +44,6 @@ function Install (app) {
   
   if (!fs.existsSync(app.paths.settings + 'is_private.txt'))
     fs.writeFileSync(app.paths.settings + 'is_private.txt', 'false', 'utf8')
-  
-  // Create the example.js file
-  if (!fs.existsSync(app.paths.packages + 'example.js')) {
-    fs.writeFileSync(app.paths.packages + 'example.js', "var Example = function (app) {\n\
-  app.get('/say_hello', function(req, res, next) {\n\
-    res.send('Hello world!')\n\
-  })\n\
-}\n\
-module.exports = Example\n", 'utf8')
-  }
   
   // Create default home page
   if (!fs.existsSync(app.paths.pages + 'home.space'))

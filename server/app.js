@@ -373,24 +373,28 @@ require('./pages.js')(app)
 
 
 /*********** Eval any custom code ***********/
-try {
-  
-  var files = fs.readdirSync(app.paths.packages)
-  for (var j in files) {
-    var file = files[j]
-    if (!file.match(/\.js$/))
-      continue
-    require(app.paths.packages + file)(app)
-  }
-} catch (e) {
-  if (e instanceof SyntaxError) {
-    console.log('Syntax error in ' + files[j] + ': ' + e.message)
-    console.log('Includes skipped')
-  } else {
-    console.log('Error in ' + files[j] + ': ' + e.message)
+var loadPackages = function () {
+  if (!fs.existsSync(app.paths.packages))
+    return false
+  try {
+
+    var files = fs.readdirSync(app.paths.packages)
+    for (var j in files) {
+      var file = files[j]
+      if (!file.match(/\.js$/))
+        continue
+      require(app.paths.packages + file)(app)
+    }
+  } catch (e) {
+    if (e instanceof SyntaxError) {
+      console.log('Syntax error in ' + files[j] + ': ' + e.message)
+      console.log('Includes skipped')
+    } else {
+      console.log('Error in ' + files[j] + ': ' + e.message)
+    }
   }
 }
-
+loadPackages()
 
 /*********** ! ***********/
 app.use('/', function (req, res, next) {
