@@ -3,14 +3,23 @@ var exec = require('child_process').exec,
     Space = require('space'),
     Email = require('./email.js')
 
+
 var Survey = function (app) {
   
+  app.paths.surveys = app.paths['private'] + 'surveys/'
   
+  var isSurveysInstalled = fs.existsSync(app.paths.surveys)
+  var installSurveys = function () {
+    if (isSurveysInstalled)
+      return true
+    fs.mkdirSync(app.paths.surveys)
+    isSurveysInstalled = true
+  }
   
   app.get(app.pathPrefix + 'surveys', app.checkId, function (req, res, next) {
 
     var output = app.paths.temp + 'surveys.space'
-    exec('space ' + app.paths.surveys + ' ' + output, function () {
+    exec('space ' + surveyPath + ' ' + output, function () {
       res.set('Content-Type', 'text/plain')
       res.sendfile(output)
     })
@@ -18,6 +27,8 @@ var Survey = function (app) {
   })
 
   app.post(app.pathPrefix + 'surveys', function (req, res, next) {
+
+    installSurveys()
 
     // Save submission
     var timestamp = new Date().getTime()

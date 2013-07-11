@@ -21,14 +21,6 @@ function Install (app) {
   // Create the temp folder for storing temporary stuff
   if (!fs.existsSync(app.paths.temp))
     fs.mkdirSync(app.paths.temp)
-  
-  // Create certificates folder
-  //if (!fs.existsSync(app.paths.certificates))
-  //  fs.mkdirSync(app.paths.certificates)
-  
-  // Create db folder
-  if (!fs.existsSync(app.paths.surveys))
-    fs.mkdirSync(app.paths.surveys)
 
   // Create makers folder
   if (!fs.existsSync(app.paths.makers))

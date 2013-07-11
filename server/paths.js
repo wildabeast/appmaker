@@ -21,7 +21,6 @@ function Paths (app, projectsPath, clientPath) {
   paths.requests_log = paths.logs + 'requests.txt'
   // where to store temporary data
   paths.temp = paths['private'] + 'temp/'
-  paths.surveys = paths['private'] + 'surveys/'
   paths.client = clientPath
   app.paths = paths
 }
