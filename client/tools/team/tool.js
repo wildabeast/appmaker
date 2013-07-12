@@ -3,17 +3,37 @@ Team.set('color', 'rgba(171, 193, 199, 1)')
 Team.set('description', 'Invite people to work on your project.')
 
 Team.on('open', function () {
-  $('#TeamEmail').val(Cookie.email)
+  $('#TeamMyEmail').text(Cookie.email)
+  Team.refresh()
 })
 
-Team.save = function () {
-  var email = $('#TeamEmail').val()
+Team.invite = function () {
+  var val = $('#TeamEmail').val()
+  var message = 'Invites Sent'
+  $.post('/nudgepad.invite', {emails : val}, function (result) {
+    Flasher.success(message)
+    Team.refresh()
+    mixpanel.track('I invited people')
+  })
+}
+
+Team.refresh = function () {
+  $('#TeamCurrent').html('')
+  $.get('/nudgepad.project.team', function (data) {
+    new Space(data).each(function (key, value) {
+      $('#TeamCurrent').append(key + '<br>')
+    })
+  })
+}
+
+Team.updateEmail = function () {
+  
+  var email = prompt('Update your new email address', Cookie.email)
+  if (!email || email === Cookie.email)
+    return true
   
   if (!Team.validateEmail(email))
     return Flasher.error('Invalid Email')
-  
-  if (email === Cookie.email)
-    return Launcher.open('Home')
   
   $.post('/nudgepad.updateEmail', {email : email}, function () {
     nudgepad.warnBeforeReload = false

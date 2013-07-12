@@ -55,7 +55,8 @@
   background-color: #333;
   height: 40px;
   margin-left: 10px;
-  width: 100px;
+  min-width: 90px;
+  padding: 0 5px;
   text-decoration: none;
   text-align: center;
   float: right;

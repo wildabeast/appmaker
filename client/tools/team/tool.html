@@ -7,22 +7,28 @@
 		  <a class="ToolRightButton" href="/nudgepad.logout" title="Logout">
 		  	Logout
 		  </a>
-		  <a class="ToolRightButton" onclick="Inviter.prompt()" title="Logout">
-		  	Invite
+		  <a class="ToolRightButton" id="TeamMyEmail" onclick="Team.updateEmail()" title="Update Your Email Address">
+		  	Email
 		  </a>
 		<div class="clear"></div>
 		</div>
 	</div>
   <div class="ToolContainer">
 	  <div class="ToolSectionLabel">
-		  Account Info
+		  Invite
 		</div>
 	  <div class="ToolInputLabel">
-	  	Email
+	  	Invite people to work on this project.
 	  </div>
-	  <input type="email" class="ToolInput" id="TeamEmail" tabindex="2" value=""></input>
-	  <div class="ToolPrimaryButton" onclick="Team.save()">
-		  Update
+	  <input type="email" class="ToolInput" id="TeamEmail" tabindex="2" placeholder="Add email(s) separated by spaces"></input>
+	  <div class="ToolPrimaryButton" onclick="Team.invite()">
+		  Invite
 		</div>
+		<div class="ToolSectionLabel">
+		  Team
+		</div>
+	  <div class="ToolInputLabel" id="TeamCurrent">
+	  	
+	  </div>
 	</div>
 </div>
