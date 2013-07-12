@@ -25,6 +25,15 @@
   background-color: #222;
 }
 
+.ToolNavFade {
+  opacity: 0;
+  -webkit-transition: 0.25s;
+}
+
+.ToolNavFade:hover {
+  opacity: 1;
+}
+
 .ToolSectionLabel {
   font-size: 36px;
   margin-top: 60px;
