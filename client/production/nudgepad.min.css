@@ -644,6 +644,7 @@ body {
 
 .FilesExplorerRename, .FilesExplorerRemove, .FilesExplorerVisit a {
   color: #eee;
+  text-decoration: none;
 }
 
 #FilesExplorer tr td.FilesExplorerEdit:hover,
@@ -676,6 +677,7 @@ body {
 
 #FilesExplorer tr.FilesExplorerFile {
   border-bottom: 1px solid #ccc;
+  white-space: nowrap;
 }
 #GitHubStatus {
   white-space: pre;
