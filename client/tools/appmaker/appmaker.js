@@ -4,6 +4,7 @@ AppMaker.set('description', 'Turn your project into a FirefoxOS app.')
 AppMaker.set('beta', 'true')
 
 AppMaker.on('open', function () {
+  AppMaker.install()
   $('#AppMakerManifestUrlLink').html('http://' + document.location.host + '/manifest.webapp')
 })
 
@@ -14,11 +15,14 @@ AppMaker.install = function () {
     type: "get",
     dataType : 'text'
   }).done(function (response, textStatus, jqXHR){
-    Explorer.set('manifest.webapp', response.toString(), function () {
-      Flasher.success('Manifest Created')
+    Explorer.create('manifest.webapp', response.toString(), function (data) {
+      console.log(data)
+      if (!data)
+        Flasher.success('Manifest Created')
+      else
+        console.log(data)
     })
   })
-
 }
 
 // http://stackoverflow.com/questions/1173194/select-all-div-text-with-single-mouse-click

@@ -1,4 +1,4 @@
 name AppMaker
 html tool.html
-js tool.js
+js appmaker.js
 css tool.css

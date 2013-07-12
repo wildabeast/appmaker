@@ -1,12 +1,18 @@
-#AppMakerManifestUrl {
+#AppMakerManifestUrlLink {
   user-select: auto;
   -webkit-user-select: auto;
   -moz-user-select: text;
-}
-#AppMakerManifestUrl a{
   cursor: pointer;
-  color: blue;
 }
-#AppMakerManifestUrl a:hover {
-  text-decoration: underline;
+
+#AppMakerManifestUrlLink, #AppMakerManifestUrlLink:hover {
+  background: transparent;
 }
+
+#AppMakerStage {
+  background-image: url(/nudgepad/tools/appmaker/phoneFrame.png);
+  width: 362px;
+  height: 671px;
+  margin: 40px auto;
+}
+

@@ -3,12 +3,15 @@
  */
 var Explorer = {}
 
-Explorer.create = function (path, callback) {
+/**
+ * Create file ONLY if it does not exist
+ */
+Explorer.create = function (path, content, callback) {
   var req = {}
   req.path = path
-  req.content = ''
-  $.post('/nudgepad.explorer.save', req, function (err) {
-    callback()
+  req.content = content
+  $.post('/nudgepad.explorer.create', req, function (data) {
+    callback(data)
   })
 }
 
