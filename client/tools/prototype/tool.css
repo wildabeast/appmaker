@@ -211,12 +211,37 @@
 }
 
 .PrototypeTimeline {
-  line-height: 40px;
-  display: none;
+  line-height: 50px;
+  font-size: 14px;
+/*  display: none; */
 }
 
+#PrototypeTimelineHolder {
+  margin-left: 20px;
+  opacity: 0.2;
+  -webkit-transition: .25s;
+  display: inline-block;
+}
+
+#PrototypeTimelineHolder #PrototypeTimeline {
+  opacity: 0;
+}
+
+#PrototypeTimelineHolder:hover, #PrototypeTimelineHolder:hover #PrototypeTimeline {
+  opacity: 1;
+}
+
+#PrototypeTimeline {
+  vertical-align: middle;
+}
+
+#PrototypeTimelinePosition {
+  cursor: default;
+}
+
+
 #PrototypeTimelinePosition, #PrototypeTimelineClear {
-  color: grey;
+  color: rgba(230, 230, 230, 1);
 }
 
 #PrototypeBarMenuButton {

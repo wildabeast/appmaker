@@ -69,7 +69,6 @@ Prototype.shortcuts['left'] = function (){Prototype.stage.selection.move(-1, 0)}
 Prototype.shortcuts['down'] = function (){Prototype.stage.selection.move(0, 1)}
 Prototype.shortcuts['right'] = function (){Prototype.stage.selection.move(1, 0)}
 
-Prototype.shortcuts['shift+t'] = function (){ $('.PrototypeTimeline').toggle()}
 
 Prototype.shortcuts['shift+v'] = Prototype.stage.toggleView
 

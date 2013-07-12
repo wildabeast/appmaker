@@ -36,7 +36,7 @@ body\n\
 /**
  *
  */
-Prototype.clearTimeline = function () {
+Prototype.clearTimelinePrompt = function () {
   
   if (!confirm("Are you sure you want to erase the history of this page?"))
     return false

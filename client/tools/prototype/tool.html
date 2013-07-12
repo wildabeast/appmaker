@@ -22,13 +22,15 @@
   
   <div title="Advanced" id="AdvancedComponent" style="display:none;" class="PrototypeBarComponent"><img src="/nudgepad/tools/prototype/images/categories/advanced.png"></div>
   
-  <input class="PrototypeTimeline" id="PrototypeTimeline" type="range" min="0" max="100" step="1" onclick="Prototype.stage.goto($(this).val())" value="100">
-  <script type="text/javascript">
-    $('#PrototypeTimeline').on('slide', function () {
-      Prototype.stage.goto($(this).val())
-  })</script>
-  <span class="PrototypeTimeline" id="PrototypeTimelinePosition"></span>
-  <span class="PrototypeTimeline" id="PrototypeTimelineClear" onclick="Prototype.clearTimeline()">Erase</span>
+  <div id="PrototypeTimelineHolder">
+    <span class="PrototypeTimeline" id="PrototypeTimelinePosition" ondblclick="Prototype.clearTimelinePrompt()"></span>
+    <input class="PrototypeTimeline" id="PrototypeTimeline" type="range" min="0" max="100" step="1" onclick="Prototype.stage.goto($(this).val())" value="100">
+    <script type="text/javascript">
+      $('#PrototypeTimeline').on('slide', function () {
+        Prototype.stage.goto($(this).val())
+    })</script>
+    
+  </div>
   
   <div id="PrototypeTabs"><span>Index</span></div>
   
@@ -37,14 +39,13 @@
 <textarea id="PrototypeCodePanel"></textarea>
 
 <div id="PrototypeMenu">
-	<div onclick="window.open(Prototype.stage.activePage,'published')">View</div>
+	<div onclick="window.open(Prototype.stage.activePage,'published')">Visit</div>
   <div onclick="Prototype.blank()">New</div>
   <div onclick="Prototype.duplicatePage()">Duplicate</div>
   <div onclick="Prototype.renamePrompt()">Rename</div>
   <div onclick="Prototype.deletePage()">Delete</div>
   <div onclick="Prototype.importPrompt()">Import</div>
-  <div onclick="Inviter.prompt()">Invite</div>
-  <div onclick="Launcher.open('Home')">Dashboard</div>
+  <div onclick="Launcher.open('Home')">Home</div>
 </div>
 
 <div id="PrototypeComponentsBar">
