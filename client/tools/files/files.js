@@ -45,7 +45,7 @@ Files.renderExplorer = function () {
       if (!path.match(/^private/))
         row += '<td class="FilesExplorerVisit"><a target="published" href="' + path.replace(/ /g, '/') + '/' + filename + '">Visit</a></td>'
       else
-        row += '<td></td><td>'
+        row += '<td></td>'
       row += '<td class="FilesExplorerRename">Rename</td>'
       row += '<td class="FilesExplorerRemove">Delete</td>'
       row += '<td>' + (file.get('size')) + '</td>'
