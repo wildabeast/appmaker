@@ -9,10 +9,21 @@
   background: transparent;
 }
 
-#AppMakerStage {
+#AppMakerFrame {
   background-image: url(/nudgepad/tools/appmaker/phoneFrame.png);
   width: 362px;
   height: 671px;
   margin: 40px auto;
+  position: relative;
 }
+
+#AppMakerStage {
+  background: white;
+  width: 320px;
+  height: 480px;
+  position: absolute;
+  left: 21px;
+  top: 47px;
+}
+
 
