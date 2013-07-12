@@ -1,6 +1,6 @@
 var AppMaker = new Tool('AppMaker')
-AppMaker.set('color', 'rgba(71, 41, 54, 1)')
-AppMaker.set('description', 'Turn your project into a FirefoxOS app.')
+AppMaker.set('color', 'rgba(26, 134, 214, 1)')
+AppMaker.set('description', 'Make your project a FirefoxOS app.')
 AppMaker.set('beta', 'true')
 
 AppMaker.on('open', function () {

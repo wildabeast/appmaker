@@ -1,6 +1,6 @@
 var Blog = new Tool('Blog')
-Blog.set('color', 'rgba(237, 200, 17, 1)')
-Blog.set('description', 'Write and edit blog posts.')
+Blog.set('color', 'rgba(224, 54, 52, 1)')
+Blog.set('description', 'Add a blog to your project.')
 Blog.set('beta', 'true')
 Blog.activePost = null
 

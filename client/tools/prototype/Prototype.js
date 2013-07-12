@@ -1,6 +1,6 @@
 var Prototype = new Tool('Prototype')
 Prototype.set('color', 'rgba(26, 134, 214, 1)')
-Prototype.set('description', 'Design pages in NudgePad.')
+Prototype.set('description', 'Design pages for your project.')
 
 // What spot the maker is on the timeline for the current page
 Prototype.page = new Page()

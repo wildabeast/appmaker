@@ -1,5 +1,5 @@
 var GitHub = new Tool('GitHub')
-GitHub.set('color', 'rgba(171, 193, 199, 1)')
+GitHub.set('color', 'rgba(36, 65, 112, 1)')
 GitHub.set('description', 'Sync your project with GitHub.')
 GitHub.set('beta', 'true')
 
