@@ -53,6 +53,7 @@
 
 .FilesExplorerRename, .FilesExplorerRemove, .FilesExplorerVisit a {
   color: #eee;
+  text-decoration: none;
 }
 
 #FilesExplorer tr td.FilesExplorerEdit:hover,
@@ -85,4 +86,5 @@
 
 #FilesExplorer tr.FilesExplorerFile {
   border-bottom: 1px solid #ccc;
+  white-space: nowrap;
 }

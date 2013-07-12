@@ -45,14 +45,14 @@ Files.renderExplorer = function () {
       if (!path.match(/^private/))
         row += '<td class="FilesExplorerVisit"><a target="published" href="' + path.replace(/ /g, '/') + '/' + filename + '">Visit</a></td>'
       else
-        row += '<td></td>'
+        row += '<td></td><td>'
       row += '<td class="FilesExplorerRename">Rename</td>'
       row += '<td class="FilesExplorerRemove">Delete</td>'
       row += '<td>' + (file.get('size')) + '</td>'
       row += '<td>' + moment(file.get('mtime')).fromNow() + '</td>'
     } else {
       row += ' class="FilesExplorerFolder" value="' + filename + '" path="' + path + filename + '">'
-      row += '<td class="FilesExplorerFolderName" colspan=5>' + filename + '</td>'
+      row += '<td class="FilesExplorerFolderName" colspan=6>' + filename + '</td>'
     }
     row += '</tr>'
     explorer += row
