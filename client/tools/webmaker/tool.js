@@ -1,5 +1,5 @@
 var WebMaker = new Tool('WebMaker')
-WebMaker.set('color', 'rgba(224, 54, 52, 1)')
+WebMaker.set('color', 'rgba(26, 134, 214, 1)')
 WebMaker.set('description', 'Remix WebMaker templates in your project.')
 WebMaker.set('beta', true)
 
