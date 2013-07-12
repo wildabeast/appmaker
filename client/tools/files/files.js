@@ -33,7 +33,7 @@ Files.renderExplorer = function () {
     files = files.get(Files.get('path'))
   
   var explorer = '<table id="FilesExplorer">'
-  explorer += '<tr class="FilesExplorerHeader"><td>Filename</td><td></td><td></td><td>Size</td><td>Age</td></tr>'
+  explorer += '<tr class="FilesExplorerHeader"><td>Filename</td><td></td><td></td><td></td><td>Size</td><td>Age</td></tr>'
   
   var path = (Files.get('path') ? Files.get('path') + ' ' : '')
   files.each(function (filename, file) {
@@ -42,6 +42,10 @@ Files.renderExplorer = function () {
     if (file.get('timeSinceLastChange')) {
       row += ' class="FilesExplorerFile" value="' + filename + '" path="' + path + filename + '">'
       row += '<td class="FilesExplorerEdit">' + filename + '</td>'
+      if (!path.match(/^private/))
+        row += '<td class="FilesExplorerVisit"><a target="published" href="' + path.replace(/ /g, '/') + '/' + filename + '">Visit</a></td>'
+      else
+        row += '<td></td>'
       row += '<td class="FilesExplorerRename">Rename</td>'
       row += '<td class="FilesExplorerRemove">Delete</td>'
       row += '<td>' + (file.get('size')) + '</td>'

@@ -51,20 +51,23 @@
   width: 300px;
 }
 
-.FilesExplorerRename, .FilesExplorerRemove {
+.FilesExplorerRename, .FilesExplorerRemove, .FilesExplorerVisit a {
   color: #eee;
 }
 
 #FilesExplorer tr td.FilesExplorerEdit:hover,
 #FilesExplorer tr td.FilesExplorerFolderName:hover,
 #FilesExplorer tr td.FilesExplorerRename:hover,
+#FilesExplorer tr td.FilesExplorerVisit:hover a,
 #FilesExplorer tr td.FilesExplorerRemove:hover {
   text-decoration: underline;
   cursor: pointer;
   color: #1a86d6;
 }
 
-#FilesExplorer tr:hover td.FilesExplorerRename, #FilesExplorer tr:hover td.FilesExplorerRemove {
+#FilesExplorer tr:hover td.FilesExplorerRename,
+#FilesExplorer tr:hover td.FilesExplorerRemove,
+#FilesExplorer tr:hover td.FilesExplorerVisit a{
   color: #1a86d6;
 }
 
