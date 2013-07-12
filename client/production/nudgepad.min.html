@@ -39,19 +39,24 @@
 	</div>
 </div>
 <div class="Tool" id="AppMaker">
-	<div class="ToolNav">
+	<div class="ToolNav ToolNavFade">
 		<div class="ToolNavContainer">
   		<div class="ToolSquareButton ToolBackButton" onclick="Launcher.open('Home')">
 		  	Back
 		  </div>
+		  <a class="ToolRightButton" onclick="Explorer.edit('manifest.webapp');">
+		  	Edit Manifest
+		  </a>
+		  
+		  <a class="ToolRightButton" id="AppMakerManifestUrlLink" onclick="AppMaker.selectText('AppMakerManifestUrlLink')">http://</a>
 		<div class="clear"></div>
 		</div>
 	</div>
   <div class="ToolContainer">
-	  <div class="ToolSectionLabel">
-		  Manifest Url
-		</div>
-	  <div id="AppMakerManifestUrl"><span id="AppMakerManifestUrlLink" onclick="AppMaker.selectText('AppMakerManifestUrlLink')">http://</span>&nbsp;&nbsp;&nbsp;<a onclick="Explorer.edit('manifest.webapp');">Edit File</a></div>
+	  <div id="AppMakerFrame">
+	    <div id="AppMakerStage">
+	    </div>
+	  </div>
 	</div>
 </div>
 <div class="Tool" id="Blog">
