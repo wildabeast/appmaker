@@ -27,7 +27,7 @@
 
 .ToolNavFade {
   opacity: 0;
-  -webkit-transition: 0.25s;
+  -webkit-transition: .5s;
 }
 
 .ToolNavFade:hover {
