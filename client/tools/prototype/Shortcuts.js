@@ -69,9 +69,6 @@ Prototype.shortcuts['left'] = function (){Prototype.stage.selection.move(-1, 0)}
 Prototype.shortcuts['down'] = function (){Prototype.stage.selection.move(0, 1)}
 Prototype.shortcuts['right'] = function (){Prototype.stage.selection.move(1, 0)}
 
-
-Prototype.shortcuts['shift+v'] = Prototype.stage.toggleView
-
 Prototype.shortcuts['shift+up'] = function (){Prototype.stage.selection.move(0, -10)}
 Prototype.shortcuts['shift+left'] = function (){Prototype.stage.selection.move(-10, 0)}
 Prototype.shortcuts['shift+down'] = function (){Prototype.stage.selection.move(0, 10)}

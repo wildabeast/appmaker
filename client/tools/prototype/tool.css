@@ -216,6 +216,19 @@
 /*  display: none; */
 }
 
+#PrototypeViewSwitcher {
+  display: inline-block;
+  line-height: 50px;
+  font-size: 14px;
+  margin-left: 20px;
+  cursor: pointer;
+  color: #777;
+}
+
+#PrototypeViewSwitcher:hover {
+  color: rgba(230, 230, 230, 1);
+}
+
 #PrototypeTimelineHolder {
   margin-left: 20px;
   opacity: 0.2;

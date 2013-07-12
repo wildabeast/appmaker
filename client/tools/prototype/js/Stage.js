@@ -432,7 +432,7 @@ Prototype.stage.views = new Space({
       'min-height' : '1000px'
     })
   },
-  'ipad' : function (){
+  'tablet' : function (){
     var padding = Math.round(($(window).width() - 1024)/2) + 'px'
     $('#PrototypeStage').css({
       width : '1024px',
@@ -442,7 +442,7 @@ Prototype.stage.views = new Space({
       'min-height' : '768px'
     })
   },
-  'ios' : function (){
+  'mobile' : function (){
     var padding = Math.round(($(window).width() - 320)/2) + 'px'
     $('#PrototypeStage').css({
       padding : '20px ' + padding + ' 20px ' + padding,
@@ -497,7 +497,7 @@ Prototype.on('close', function () {
 
 Prototype.on('ready', function () {
   Prototype.stage.expand()
-  Prototype.stage.views.get('ipad')()
+  Prototype.stage.views.get('mobile')()
   $('#PrototypeStageBody').width() // Force repaint
   $("#PrototypeStage").on("tap", Prototype.stage.clearOnTap)
   $(window).on('resize', Prototype.stage.onresize)
