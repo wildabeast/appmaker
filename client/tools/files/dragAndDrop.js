@@ -41,7 +41,8 @@ Files.drop.sendFile = function (path, file) {
         Flasher.error(xhr.responseText)
       }
   }
-  fd.append('filename', file.name)
+  var filename = file.name.replace(/ /g, '-')
+  fd.append('filename', filename)
   fd.append('myFile', file)
   // Initiate a multipart/form-data upload
   xhr.send(fd)
