@@ -113,18 +113,24 @@ $(document).on('click', '.FilesExplorerRename', function () {
   Explorer.rename($(this).parent().attr('path'), path + newName, Files.refresh)
 })
 
-$(document).on('click', '.FilesExplorerRemove', function () {
+$(document).on('click', '.FilesExplorerRemove', function (event) {
   var name = $(this).parent().attr('value')
-  if (!confirm('Are you sure you want to delete ' + name + '?'))
+  if (!event.metaKey && !confirm('Are you sure you want to delete ' + name + '?'))
     return false
-  Explorer.remove($(this).parent().attr('path'), Files.refresh)
+  Explorer.remove($(this).parent().attr('path'), function () {
+    Flasher.success(name + ' deleted')
+    Files.refresh()
+  })
 })
 
 $(document).on('click', '.FilesExplorerRemoveFolder', function () {
   var name = $(this).parent().attr('value')
-  if (!confirm('Are you sure you want to delete ' + name + '?'))
+  if (!event.metaKey && !confirm('Are you sure you want to delete ' + name + '?'))
     return false
-  Explorer.rmdir($(this).parent().attr('path'), Files.refresh)
+  Explorer.rmdir($(this).parent().attr('path'), function () {
+    Flasher.success(name + ' deleted')
+    Files.refresh()
+  })
 })
 
 $(document).on('click', '.FilesExplorerFolderName', function () {
