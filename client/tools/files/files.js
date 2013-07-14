@@ -26,6 +26,12 @@ Files.on('set', function (key) {
     Files.renderExplorer()
 })
 
+Files.isImage = function (filename) {
+  if (filename.match(/\.png|jpeg|jpg|gif$/i))
+    return true
+  return false
+}
+
 Files.newFile = function () {
   var newName = prompt('Enter the filename')
   if (!newName)
@@ -59,7 +65,12 @@ Files.renderExplorer = function () {
     // if is file
     if (file.get('timeSinceLastChange')) {
       row += ' class="FilesExplorerFile" value="' + filename + '" path="' + path + filename + '">'
-      row += '<td class="FilesExplorerEdit">' + filename + '</td>'
+      
+      if (Files.isImage(filename))
+        row += '<td class="FilesExplorerPreview">' + filename + '</td>'
+      else
+        row += '<td class="FilesExplorerEdit">' + filename + '</td>'
+      
       if (!path.match(/^private/))
         row += '<td class="FilesHiddenAction FilesExplorerVisit"><a target="published" href="/' + path.replace(/ /g, '/') + filename + '">Visit</a></td>'
       else
@@ -103,6 +114,11 @@ Files.refresh = function () {
 $(document).on('click', '.FilesExplorerEdit', function () {
   var filepath = $(this).parent().attr('path')
   Explorer.edit(filepath)
+})
+
+$(document).on('click', '.FilesExplorerPreview', function () {
+  var path = $(this).parent().attr('path').replace(/ /g, '/')
+  PreviewModal('<img src="' + path + '">')
 })
 
 $(document).on('click', '.FilesExplorerRename', function () {
