@@ -35,7 +35,7 @@ Files.drop.sendFile = function (path, file) {
           // Handle response.
           Flasher.success(xhr.responseText)
 //          alert(xhr.responseText) // handle response.
-          Files.refreshFiles()
+          Files.refresh()
       }
       else if (xhr.status == 500) {
         Flasher.error(xhr.responseText)
