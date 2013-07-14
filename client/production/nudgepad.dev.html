@@ -208,7 +208,13 @@
 	</div>
   <div class="ToolContainer">
 	  <div id="FilesFilesContent" class="FilesContent">
-	  	<div id="FilesExplorerPath"></div>
+	    <div id="FilesHeader">
+  	    <div id="FilesExplorerPath"></div>
+  	    <div id="FilesNew">
+    	  	<a onclick="Files.newFile()">New File</a> &nbsp; &nbsp; &nbsp;
+      		<a onclick="Files.newFolder()">New Folder</a>
+    		</div>
+  		</div>
 		  <div id="FilesExplorerHolder"></div>
 		</div>
 	</div>
@@ -347,6 +353,9 @@
 		  </a>
 		  <a class="ToolRightButton" onclick="$.get('/nudgepad.restart')" title="Restart Server">
 		  	Restart
+		  </a>
+		  <a class="ToolRightButton" onclick="Server.refresh()" title="Refresh Logs">
+		  	Refresh
 		  </a>
 		<div class="clear"></div>
 		</div>

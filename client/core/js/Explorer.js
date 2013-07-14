@@ -9,7 +9,7 @@ var Explorer = {}
 Explorer.create = function (path, content, callback) {
   var req = {}
   req.path = path
-  req.content = content
+  req.content = content || ''
   $.post('/nudgepad.explorer.create', req, function (data) {
     callback(data)
   })
@@ -74,6 +74,15 @@ Explorer.rename = function (oldPath, newPath, callback) {
     return Flasher.error('No name provided')
   $.post('/nudgepad.explorer.rename', req, function (err) {
     callback()
+  })
+}
+
+Explorer.rmdir = function (path, callback) {
+  var req = {}
+  req.path = path
+  $.post('/nudgepad.explorer.rmdir', req, function (err) {
+    if (callback)
+      callback()
   })
 }
 

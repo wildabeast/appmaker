@@ -26,6 +26,24 @@ Files.on('set', function (key) {
     Files.renderExplorer()
 })
 
+Files.newFile = function () {
+  var newName = prompt('Enter the filename')
+  if (!newName)
+    return false
+    
+  var path = (Files.get('path') ? Files.get('path') + ' ' : '')
+  Explorer.create(path + newName, '', Files.refresh)
+}
+
+Files.newFolder = function () {
+  var newName = prompt('Enter the folder name')
+  if (!newName)
+    return false
+    
+  var path = (Files.get('path') ? Files.get('path') + ' ' : '')
+  Explorer.mkdir(path + newName, Files.refresh)
+}
+
 Files.renderExplorer = function () {
   
   var files = Files.get('files')
@@ -43,16 +61,20 @@ Files.renderExplorer = function () {
       row += ' class="FilesExplorerFile" value="' + filename + '" path="' + path + filename + '">'
       row += '<td class="FilesExplorerEdit">' + filename + '</td>'
       if (!path.match(/^private/))
-        row += '<td class="FilesExplorerVisit"><a target="published" href="' + path.replace(/ /g, '/') + '/' + filename + '">Visit</a></td>'
+        row += '<td class="FilesHiddenAction FilesExplorerVisit"><a target="published" href="/' + path.replace(/ /g, '/') + filename + '">Visit</a></td>'
       else
         row += '<td></td>'
-      row += '<td class="FilesExplorerRename">Rename</td>'
-      row += '<td class="FilesExplorerRemove">Delete</td>'
+      row += '<td class="FilesHiddenAction FilesExplorerRename">Rename</td>'
+      row += '<td class="FilesHiddenAction FilesExplorerRemove">Delete</td>'
       row += '<td>' + (file.get('size')) + '</td>'
       row += '<td>' + moment(file.get('mtime')).fromNow() + '</td>'
     } else {
       row += ' class="FilesExplorerFolder" value="' + filename + '" path="' + path + filename + '">'
-      row += '<td class="FilesExplorerFolderName" colspan=6>' + filename + '</td>'
+      row += '<td class="FilesExplorerFolderName">' + filename + '</td>'
+      row += '<td></td>'
+      row += '<td class="FilesHiddenAction FilesExplorerRename">Rename</td>'
+      row += '<td class="FilesHiddenAction FilesExplorerRemoveFolder">Delete</td>'
+      row += '<td></td><td></td>'
     }
     row += '</tr>'
     explorer += row
@@ -78,12 +100,12 @@ Files.refresh = function () {
   })
 }
 
-$(document).on('click', 'td.FilesExplorerEdit', function () {
+$(document).on('click', '.FilesExplorerEdit', function () {
   var filepath = $(this).parent().attr('path')
   Explorer.edit(filepath)
 })
 
-$(document).on('click', 'td.FilesExplorerRename', function () {
+$(document).on('click', '.FilesExplorerRename', function () {
   var newName = prompt('Rename this file', $(this).parent().attr('value'))
   if (!newName)
     return false
@@ -91,14 +113,21 @@ $(document).on('click', 'td.FilesExplorerRename', function () {
   Explorer.rename($(this).parent().attr('path'), path + newName, Files.refresh)
 })
 
-$(document).on('click', 'td.FilesExplorerRemove', function () {
+$(document).on('click', '.FilesExplorerRemove', function () {
   var name = $(this).parent().attr('value')
   if (!confirm('Are you sure you want to delete ' + name + '?'))
     return false
   Explorer.remove($(this).parent().attr('path'), Files.refresh)
 })
 
-$(document).on('click', 'td.FilesExplorerFolderName', function () {
+$(document).on('click', '.FilesExplorerRemoveFolder', function () {
+  var name = $(this).parent().attr('value')
+  if (!confirm('Are you sure you want to delete ' + name + '?'))
+    return false
+  Explorer.rmdir($(this).parent().attr('path'), Files.refresh)
+})
+
+$(document).on('click', '.FilesExplorerFolderName', function () {
   Files.set('path', $(this).parent().attr('path'))
 })
 

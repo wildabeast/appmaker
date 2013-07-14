@@ -6,8 +6,6 @@
   font-size : 15px;
   color : #333;
   text-align : left;
-  margin-top: 40px;
-  margin-bottom: 20px;
   cursor: pointer;
 }
 
@@ -51,24 +49,22 @@
   width: 300px;
 }
 
-.FilesExplorerRename, .FilesExplorerRemove, .FilesExplorerVisit a {
+.FilesHiddenAction, .FilesHiddenAction a {
   color: #eee;
   text-decoration: none;
 }
 
 #FilesExplorer tr td.FilesExplorerEdit:hover,
 #FilesExplorer tr td.FilesExplorerFolderName:hover,
-#FilesExplorer tr td.FilesExplorerRename:hover,
-#FilesExplorer tr td.FilesExplorerVisit:hover a,
-#FilesExplorer tr td.FilesExplorerRemove:hover {
+#FilesExplorer tr td.FilesHiddenAction:hover,
+#FilesExplorer tr td.FilesHiddenAction:hover a {
   text-decoration: underline;
   cursor: pointer;
   color: #1a86d6;
 }
 
-#FilesExplorer tr:hover td.FilesExplorerRename,
-#FilesExplorer tr:hover td.FilesExplorerRemove,
-#FilesExplorer tr:hover td.FilesExplorerVisit a{
+#FilesExplorer tr:hover td.FilesHiddenAction,
+#FilesExplorer tr:hover td.FilesHiddenAction a{
   color: #1a86d6;
 }
 
@@ -87,4 +83,38 @@
 #FilesExplorer tr.FilesExplorerFile {
   border-bottom: 1px solid #ccc;
   white-space: nowrap;
+}
+
+#FilesNew {
+  color: #555;
+  text-align: right;
+}
+
+#FilesNew a {
+  cursor: pointer;
+}
+
+#FilesNew a:hover {
+  text-decoration: underline;
+}
+
+#FilesHeader {
+  margin-top: 40px;
+  margin-bottom: 20px;
+  
+  display: -webkit-flex;  /* NEW, Chrome 21+ */
+  display: flex;          /* NEW: Opera 12.1, Firefox 22+ */
+  -webkit-box-align: center; -moz-box-align: center; /* OLD… */
+  -ms-flex-align: center; /* You know the drill now… */
+  -webkit-align-items: center;
+  align-items: center;
+  
+  -webkit-box-pack: center; -moz-box-pack: center; 
+  -ms-flex-pack: center; 
+  -webkit-justify-content: center;
+  justify-content: center;
+}
+
+#FilesHeader > div {
+  width: 50%;
 }

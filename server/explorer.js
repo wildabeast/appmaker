@@ -2,6 +2,7 @@ var fs = require('fs'),
     Space = require('space'),
     async = require('async'),
     mkdirp = require('mkdirp'),
+    exec = require('child_process').exec,
     _ = require('underscore')
 
 function fileStats (path, callback) {
@@ -146,7 +147,7 @@ var Explorer = function (app) {
     fs.exists(path, function (exists) {
       if (exists)
         return res.send(path + ' already exists')
-      fs.writeFile(path, req.body.content, 'utf8', function (err) {
+      fs.writeFile(path, req.body.content || '', 'utf8', function (err) {
         if (err)
           return res.send(err)
         res.send('')
@@ -161,6 +162,20 @@ var Explorer = function (app) {
     var path = req.body.path.replace(/ /g, '/')
     fs.mkdir(app.paths.project + path, function (err) {
       if (err) return res.send(err)
+      res.send('')
+    })
+
+  })
+  
+  /**
+   * path
+   */
+  app.post(app.pathPrefix + 'explorer.rmdir', app.checkId, function(req, res, next) {
+    
+    var path = req.body.path.replace(/ /g, '/')
+    // todo: remove and .s
+    path = app.paths.project + path
+    exec('rm -rf ' + path, function () {
       res.send('')
     })
 
