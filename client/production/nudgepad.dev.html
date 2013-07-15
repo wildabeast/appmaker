@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="/nudgepad/core/css/userSelectFix.css" type="text/css"/>
     <link rel="stylesheet" href="/nudgepad/tools/appmaker/tool.css" type="text/css"/>
     <link rel="stylesheet" href="/nudgepad/tools/blog/tool.css" type="text/css"/>
+    <link rel="stylesheet" href="/nudgepad/tools/domain/tool.css" type="text/css"/>
     <link rel="stylesheet" href="/nudgepad/tools/files/tool.css" type="text/css"/>
     <link rel="stylesheet" href="/nudgepad/tools/github/tool.css" type="text/css"/>
     <link rel="stylesheet" href="/nudgepad/tools/home/home.css" type="text/css"/>
@@ -50,7 +51,6 @@
     <script type="text/javascript" src="/nudgepad/core/js/Project.js"></script>
     <script type="text/javascript" src="/nudgepad/core/js/Nudgepad.js"></script>
     <script type="text/javascript" src="/nudgepad/core/js/Blinker.js"></script>
-    <script type="text/javascript" src="/nudgepad/core/js/CloneProject.js"></script>
     <script type="text/javascript" src="/nudgepad/core/js/EmailSender.js"></script>
     <script type="text/javascript" src="/nudgepad/core/js/Explorer.js"></script>
     <script type="text/javascript" src="/nudgepad/core/js/Flasher.js"></script>
@@ -64,6 +64,7 @@
     <script type="text/javascript" src="/nudgepad/tools/appmaker/appmaker.js"></script>
     <script type="text/javascript" src="/nudgepad/tools/blog/blog.js"></script>
     <script type="text/javascript" src="/nudgepad/tools/blog/events.js"></script>
+    <script type="text/javascript" src="/nudgepad/tools/domain/tool.js"></script>
     <script type="text/javascript" src="/nudgepad/tools/files/files.js"></script>
     <script type="text/javascript" src="/nudgepad/tools/files/dragAndDrop.js"></script>
     <script type="text/javascript" src="/nudgepad/tools/github/tool.js"></script>
@@ -186,6 +187,34 @@
 	  </div>
   </div>
 </div>
+<div class="Tool" id="Domain">
+	<div class="ToolNav">
+		<div class="ToolNavContainer">
+  		<div class="ToolSquareButton ToolBackButton" onclick="Launcher.open('Home')">
+		  	Back
+		  </div>
+			<a href="/nudgepad.export" target="blank" class="ToolRightButton" title="Download Project as Space File">
+		  	Export
+		  </a>
+		  <a onclick="Files.import()" class="ToolRightButton" title="Import a Space File">
+		  	Import
+		  </a>
+		<div class="clear"></div>
+		</div>
+	</div>
+  <div class="ToolContainer">
+    
+    
+		<div class="ToolSectionLabel">
+		  Clone
+		</div>
+		<input id="DomainDomain" class="ToolInput" placeholder=""></input>
+	  <div class="ToolPrimaryButton" onclick="Domain.cloneProject()">
+		  Clone
+		</div>
+		
+	</div>
+</div>
 <div class="Tool" id="Files">
 	<div class="ToolNav">
 		<div class="ToolNavContainer">
@@ -194,15 +223,6 @@
 		  </div>
 		  <a id="FilesDownload" href="" target="blank" class="ToolRightButton" title="Download Project as Zip File">
 		  	Download
-		  </a>
-			<a href="/nudgepad.export" target="blank" class="ToolRightButton" title="Download Project as Space File">
-		  	Export
-		  </a>
-		  <a onclick="Files.import()" class="ToolRightButton" title="Import a Space File">
-		  	Import
-		  </a>
-		  <a onclick="nudgepad.cloneProject()" class="ToolRightButton" title="Copy Project to new Domain">
-		  	Clone
 		  </a>
 		<div class="clear"></div>
 		</div>

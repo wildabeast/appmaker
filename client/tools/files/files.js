@@ -3,15 +3,6 @@ Files.set('color', 'rgba(36, 65, 112, 1)')
 Files.set('path', '')
 Files.set('description', 'View and edit the files of your project.')
 
-Files.import = function () {
-  TextPrompt('Import a Project ', '', function (val) {
-    $.post('/nudgepad.import', {space : val}, function (err) {
-      Flasher.success('Imported files.')
-      Files.refresh()
-    })
-  })
-}
-
 // Files.on('change', 'path', Files.RenderExplorer())
 
 Files.on('open', function () {

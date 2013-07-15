@@ -1,7 +1,22 @@
-nudgepad.cloneProject = function () {
-  var domain = prompt('Enter a domain name', 'copyof' + document.location.host)
-  if (!domain)
-    return false
+var Domain = new Tool('Domain')
+Domain.set('color', 'rgba(36, 65, 112, 1)')
+Domain.set('path', '')
+Domain.set('description', 'Change your project\'s domain.')
+
+Domain.import = function () {
+  TextPrompt('Import a Project to this Domain', '', function (val) {
+    $.post('/nudgepad.import', {space : val}, function (err) {
+      Flasher.success('Imported files.')
+    })
+  })
+}
+
+Domain.on('open', function () {
+  var domain = $('#DomainDomain').val('copyof' + document.location.host)
+})
+
+Domain.cloneProject = function () {
+  var domain = $('#DomainDomain').val()
   
   // Allow for moving of domains
   if (domain.match(/ /)) {
