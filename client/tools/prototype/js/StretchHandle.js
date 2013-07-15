@@ -4,6 +4,11 @@
 Prototype.StretchHandle = function () {
 }
 
+// http://stackoverflow.com/questions/196972/convert-string-to-title-case-with-javascript
+var toProperCase = function (string) {
+  return string.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();})
+}
+
 /**
  * @param {string}
  * @param {string}
@@ -19,7 +24,7 @@ Prototype.StretchHandle.create = function (scrap, row, column, fixed) {
   var div = $('<div></div>')
   div.attr('value', scrap.getPath())
   div.addClass('handle stretchHandle stretchHandle' + scrap.id + ' ' + scrap.id + 'Handle')
-  div.attr('id', 'stretchHandle' + row + column + scrap.id)
+  div.attr('id', 'stretchHandle' + toProperCase(row) + toProperCase(column) + scrap.id)
   div.css({
     "cursor" : cursor + "-resize",
     "position" : position,
@@ -232,17 +237,17 @@ Prototype.StretchHandle.slideend = function () {
  * @param {string} Whether this is a vertical or horizontal change.
  * @returns {object} Such as length.x, length.y
  */
-Prototype.StretchHandle.getLength = function (x0, y0, x1, y1, x_snap, y_snap) {
+Prototype.StretchHandle.getLength = function (x0, y0, x1, y1, xSnap, ySnap) {
   var length = { x : x1 - x0, y: y1 - y0}
   
-  var grid_change = Prototype.grid.getDelta([
+  var gridChange = Prototype.grid.getDelta([
      {x : x1, y : y1}
   ])
   
-  if (x_snap)
-    length.x += grid_change.x
-  if (y_snap)
-    length.y += grid_change.y
+  if (xSnap)
+    length.x += gridChange.x
+  if (ySnap)
+    length.y += gridChange.y
   return length
 }
 
