@@ -31,7 +31,7 @@ Explorer.edit = function (path) {
   var req = {}
   req.path = path
   $.post( '/nudgepad.explorer.get', req, function (data) {
-    TextPrompt('Editing ' + path, data, function (val) {
+    TextPrompt.open('Editing ' + path, data, function (val) {
       var req = {}
       req.path = path
       req.content = val + ''

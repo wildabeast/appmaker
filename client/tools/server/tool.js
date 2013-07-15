@@ -4,83 +4,50 @@ Server.set('path', '')
 Server.set('description', 'Manage your project\'s web server.')
 Server.set('beta', 'true')
 
+
+Server.consoleSend = function () {
+  
+  var input = $('#ServerConsoleInput')
+  var checkbox = $('#ServerConsoleCheckbox')
+  var output = $('#TextPromptTextarea')
+  
+  var command = input.val()
+  var endpoint = 'nudgepad.exec'
+  if (checkbox.is(':checked'))
+    endpoint = 'nudgepad.console'
+  
+  $.post(endpoint, {command : command}, function (result) {
+    output.val(output.val() + ('>' + command.replace(/\n/g, '> \n') + '\n') + result + '\n')
+    output.scrollTop($(output)[0].scrollHeight + '')
+    input.val('')
+    input.focus()
+  }).error(function (error, message) {
+    mixpanel.track('I used the console and got an error')
+    output.val(output.val() + '>' + command.replace(/\n/g, '> \n') + '\n' + 'ERROR\n' + error.responseText + '\n')
+    output.scrollTop($('#ServerConsole')[0].scrollHeight + '')
+    input.val('')
+    input.focus()
+  })
+}
+
 /**
  * Prompt the maker for input. Pops a modal.
  */
 Server.console = function () {
   mixpanel.track('I opened the console')
-  var output = $('<pre id="ServerConsole"></pre>')
-  var input = $('<input id="ServerConsoleInput" type="text"/>')
-  var checkbox = $('<input type="checkbox" id="ServerConsoleCheckbox"/>')
-  var label = $('<label for="ServerConsoleCheckbox" id="ServerConsoleLabel">Eval in Node Process</label>')
-  var modal_screen = $('<div id="ModalScreen"/>')
-  modal_screen.on('tap mousedown click slide slidestart slideend mouseup', function (event) {
-    event.stopPropagation()
-  })
-  output.on('tap mousedown click slide slidestart slideend mouseup', function (event) {
-    event.stopPropagation()
-  })
-
-//  if (onkeypress)
-//    output.on('keypress', onkeypress)
-    
-  var send_button = $('<div id="SaveButton">Send</div>')
-  var cancel_button = $('<div id="CancelButton">Close</div>')
+  var console = $('#ServerConsoleContainer')
   
-  var button_container = $('<div id="ButtonContainer"></div>')
-  modal_screen.on('click', function () {
-    cancel_button.trigger('click')
+  TextPrompt.open('', '', function () {
+    Server.consoleSend()
+    return false
   })
-  
-  cancel_button.on('click', function () {
-    send_button.remove()
-    output.remove()
-    modal_screen.remove()
-    button_container.remove()
-    cancel_button.remove()
-    label.remove()
-    checkbox.remove()
-    input.remove()
-  })
-  
-  send_button.on('click', function () {
-    
-    var command = input.val()
-    var endpoint = 'nudgepad.exec'
-    if (checkbox.is(':checked'))
-      endpoint = 'nudgepad.console'
-    
-    $.post(endpoint, {command : command}, function (result) {
-      output.append('>' + command.replace(/\n/g, '> \n') + '\n')
-      output.append(result + '\n')
-      output.scrollTop($('#ServerConsole')[0].scrollHeight + '')
-      input.val('')
-      input.focus()
-    }).error(function (error, message) {
-      mixpanel.track('I used the console and got an error')
-      output.append('>' + command.replace(/\n/g, '> \n') + '\n')
-      output.append('ERROR\n')
-      output.append(error.responseText + '\n')
-      output.scrollTop($('#ServerConsole')[0].scrollHeight + '')
-      input.val('')
-      input.focus()
-    })
-    
-  })
-  
-  input.on('enterkey', function () {
-    send_button.click()
-  })
-  
-  $('body').append(modal_screen)
-  $('body').append(checkbox)
-  $('body').append(label)
-  $('body').append(output)
-  $('body').append(input)
-  $('body').append(send_button)
-  $('body').append(cancel_button)
-  $('body').append(button_container)
-  input.focus()
+  TextPrompt.onclose = function () {
+    console.appendTo('body')
+    console.hide()
+  }
+  console.appendTo('#TextPromptButtonHolder')
+  console.show()
+  $('#ServerConsoleInput').focus()
 }
 
 Server.refresh = function () {
@@ -96,6 +63,10 @@ Server.refresh = function () {
   })
   
 }
+
+$(document).on('ready', function () {
+  $('#ServerConsoleInput').on('enterkey', Server.consoleSend)
+})
 
 Server.on('open', function () {
   

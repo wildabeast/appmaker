@@ -4,7 +4,7 @@ Domain.set('path', '')
 Domain.set('description', 'Change your project\'s domain.')
 
 Domain.import = function () {
-  TextPrompt('Import a Project to this Domain', '', function (val) {
+  TextPrompt.open('Import a Project to this Domain', '', function (val) {
     $.post('/nudgepad.import', {space : val}, function (err) {
       Flasher.success('Imported files.')
     })

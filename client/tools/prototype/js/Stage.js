@@ -98,7 +98,7 @@ Prototype.stage.dragAndDrop = function (scrap) {
  * Advances position_index, advanced position.
  */
 Prototype.stage.editSource = function () {
-  TextPrompt('Enter code...', Prototype.page.toString(), function (val) {
+  TextPrompt.open('Enter code...', Prototype.page.toString(), function (val) {
     Prototype.page = new Space(val)
     Prototype.stage.commit()
     Prototype.stage.open(Prototype.stage.activePage)

@@ -254,7 +254,7 @@ Prototype.stage.selection.editProperty = function () {
     return false
   
   var value = scrap.get(prop)
-  TextPrompt('Enter new value...', value.toString(), function (val) {
+  TextPrompt.open('Enter new value...', value.toString(), function (val) {
       scrap.set(prop, val)
       Prototype.stage.commit()
       Prototype.stage.open(Prototype.stage.activePage)
@@ -267,7 +267,7 @@ Prototype.stage.selection.editProperty = function () {
 Prototype.stage.selection.editSource = function () {
   Prototype.stage.selection.capture()
   Prototype.stage.selection.save()
-  TextPrompt('Enter code...', Prototype.stage.selection.captured.toString(), Prototype.stage.selection.modify)
+  TextPrompt.open('Enter code...', Prototype.stage.selection.captured.toString(), Prototype.stage.selection.modify)
 }
 
 /**

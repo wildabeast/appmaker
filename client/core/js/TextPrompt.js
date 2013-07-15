@@ -1,63 +1,51 @@
-/**
- * Prompt the maker for input. Pops a modal.
- *
- * @param {string} Name of any instructional message.
- * @param {string} Default value to prefill the prompt with.
- * @param {function} Function to run with whatever the maker entered.
- */
-var TextPrompt = function (message, default_value, onsubmit, onkeypress, submitLabel) {
-  var text_area = $('<textarea id="TextPrompt"></textarea>')
-  text_area.val(default_value)
-  var modal_screen = $('<div id="ModalScreen"/>')
-  modal_screen.on('tap mousedown click slide slidestart slideend mouseup', function (event) {
+var TextPrompt = {}
+
+TextPrompt.callback = function () {}
+
+
+
+TextPrompt.load = function () {
+  var textArea = $('#TextPromptTextarea')
+  var saveButton = $('#TextPromptSaveButton')
+  var cancelButton = $('#TextPromptCancelButton')
+  var dimmer = $('#TextPromptDimmer')
+  
+  dimmer.on('tap mousedown click slide slidestart slideend mouseup', function (event) {
     event.stopPropagation()
   })
-  text_area.on('tap mousedown click slide slidestart slideend mouseup', function (event) {
+  
+  textArea.on('tap mousedown click slide slidestart slideend mouseup', function (event) {
     event.stopPropagation()
   })
-  if (onkeypress)
-    text_area.on('keypress', onkeypress)
-    
-  var save_button = $('<div id="SaveButton">' + (submitLabel || 'Save') + '</div>')
-  var cancel_button = $('<div id="CancelButton">Cancel</div>')
   
-  var button_container = $('<div id="ButtonContainer"></div>')
-  modal_screen.on('click', function () {
-    cancel_button.trigger('click')
+  dimmer.on('click', TextPrompt.close)
+  
+  cancelButton.on('click', TextPrompt.close)
+  
+  saveButton.on('click', function () {
+    // allow to save without closing
+    if (TextPrompt.callback(textArea.val()) === false)
+      return true
+    TextPrompt.close()
   })
   
-  cancel_button.on('click', function () {
-    save_button.remove()
-    text_area.remove()
-    modal_screen.remove()
-    button_container.remove()
-    cancel_button.remove()
-  })
-  
-  save_button.on('click', function () {
-    if (onsubmit)
-      onsubmit(text_area.val())
-    
-    save_button.remove()
-    text_area.remove()
-    modal_screen.remove()
-    button_container.remove()
-    cancel_button.remove()
-  })
-  
-  // Firefox fix
-  // replace false with isMozilla
-  if (false) {
-    text_area.css({
-      width: $(window).width() - 100,
-      height: $(window).height() - 200
-    })
-  }
-  
-  $('body').append(modal_screen)
-  $('body').append(text_area)
-  $('body').append(save_button)
-  $('body').append(cancel_button)
-  $('body').append(button_container)
-  text_area.focus()
 }
+
+TextPrompt.close = function () {
+  $('.TextPrompt').hide()
+  // temporary
+  if (!TextPrompt.onclose)
+    return null
+  
+  TextPrompt.onclose()
+  TextPrompt.onclose = null
+}
+
+TextPrompt.open = function (message, default_value, callback) {
+  
+  TextPrompt.callback = callback
+  $('.TextPrompt').show()
+  $('#TextPromptTextarea').val(default_value).focus()
+}
+
+$(document).on('ready', TextPrompt.load)
