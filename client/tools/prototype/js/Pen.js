@@ -37,9 +37,9 @@ Prototype.pen.draw = function (event) {
   var id = $(selector).scrap().id
   console.log(id)
   // Pretend the mousedown was on the stretch handle
-  Events.slide.target = $("#stretch_handle_bottomright" + id)
-  $("#stretch_handle_bottomright" + id).triggerHandler("mousedown")
-  $("#stretch_handle_bottomright" + id).triggerHandler("slidestart")
+  Events.slide.target = $("#stretchHandleBottomRight" + id)
+  $("#stretchHandleBottomRight" + id).triggerHandler("mousedown")
+  $("#stretchHandleBottomRight" + id).triggerHandler("slidestart")
   mixpanel.track('I used the pen tool')
 }
 

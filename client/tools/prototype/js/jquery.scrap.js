@@ -1,7 +1,7 @@
 $.fn.deselect = function (quiet) {
   var id = $(this).attr('id')
   $(this).removeClass('selection')
-  $('.' + id + '_handle').remove()
+  $('.' + id + 'Handle').remove()
   if (!quiet)
     Prototype.trigger('selection')
   return $(this)

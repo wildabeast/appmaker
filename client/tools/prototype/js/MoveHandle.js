@@ -11,8 +11,8 @@ Prototype.MoveHandle.create = function (scrap) {
   
   var div = $('<div></div>')
   div.attr('value', scrap.getPath())
-  div.addClass('handle ' + scrap.id + '_handle move_handle')
-  div.attr('id', 'move_handle_' + scrap.id)
+  div.addClass('handle ' + scrap.id + 'Handle moveHandle')
+  div.attr('id', 'moveHandle' + scrap.id)
   div.attr('title', scrap.id)
   
   var position = element.css('position')

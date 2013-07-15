@@ -5,7 +5,7 @@ Prototype.EditHandle.create = function (scrap) {
   var element = scrap.element()
   var div = $('<div class="PrototypeEditHandle"></div>')
   div.attr('value', scrap.getPath())
-  div.addClass('handle edit_handle ' + scrap.id + '_handle')
+  div.addClass('handle editHandle ' + scrap.id + 'Handle')
   
   var edit = $('<div class="PrototypeEditStyleHandle"></div>')
   edit.on('tap', function () {

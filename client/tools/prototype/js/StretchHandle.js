@@ -18,8 +18,8 @@ Prototype.StretchHandle.create = function (scrap, row, column, fixed) {
                (column == "left" ? "w" : (column == "right" ? 'e' : ''))
   var div = $('<div></div>')
   div.attr('value', scrap.getPath())
-  div.addClass('handle stretch_handle stretch_handle_' + scrap.id + ' ' + scrap.id + '_handle')
-  div.attr('id', 'stretch_handle_' + row + column + scrap.id)
+  div.addClass('handle stretchHandle stretchHandle' + scrap.id + ' ' + scrap.id + 'Handle')
+  div.attr('id', 'stretchHandle' + row + column + scrap.id)
   div.css({
     "cursor" : cursor + "-resize",
     "position" : position,
@@ -56,7 +56,9 @@ Prototype.StretchHandle.mousedown = function () {
   Prototype.StretchHandle.dimensions = $(this).owner().dimensions()
   var scrap = $(this).owner().scrap()
   Prototype.StretchHandle.originalWidth = parseFloat(scrap.get('style width'))
+  Prototype.StretchHandle.isWidthPercentage = scrap.get('style width').toString().match(/\%/)
   Prototype.StretchHandle.originalHeight = parseFloat(scrap.get('style height'))
+  Prototype.StretchHandle.isHeightPercentage = scrap.get('style height').toString().match(/\%/)
   Prototype.grid.create()
 }
 
@@ -104,13 +106,22 @@ Prototype.StretchHandle.slide = function () {
   
   /*----- Scrap changes ----*/
   
-  if (column != 'center') {
+  var newWidth = scrap.get('style width') || owner.css('width')
+  var newHeight = scrap.get('style height') || owner.css('height')
+  
+  if (column !== 'center') {
     // If the length is positive, keep the origin as the top/left value
     scrap.set('style left', (length.x >= 0 ? x0 : length.x + x0) + 'px')
-    // Compute and extra_width (padding, border width, etc)
-    var extra_width = owner.outerWidth() - owner.width()
+    // Compute and extraWidth (padding, border width, etc)
+    var extraWidth = owner.outerWidth() - owner.width()
     // Set the width & height to the abs value of the length
-    scrap.set('style width', Math.abs(length.x) - extra_width + "px")
+    newWidth = Math.abs(length.x) - extraWidth
+    // If % convert back
+    if (Prototype.StretchHandle.isWidthPercentage)
+      newWidth = Math.round(100*newWidth/owner.parent().width()) + '%'
+    else
+      newWidth += "px"
+    scrap.set('style width', newWidth)
   }
   
   // If fixed, we take the change from the left to right for now.
@@ -126,8 +137,15 @@ Prototype.StretchHandle.slide = function () {
     } else {
       scrap.set('style top', length.y + y0 +  'px')
     }
-    var extra_height = owner.outerHeight(true) - owner.height()
-    scrap.set('style height', Math.abs(length.y) - extra_height + "px")
+    var extraHeight = owner.outerHeight(true) - owner.height()
+    newHeight = Math.abs(length.y) - extraHeight
+    // If % convert back
+    var parentHeight = owner.parent().height() || $(window).height()
+    if (Prototype.StretchHandle.isHeightPercentage)
+      newHeight = Math.round(100*newHeight/parentHeight) + '%'
+    else
+      newHeight += "px"
+    scrap.set('style height', newHeight)
   }
   
   /*----- Dom changes ----*/
@@ -136,14 +154,14 @@ Prototype.StretchHandle.slide = function () {
   owner.css(scrap.values.style.values)
   
   // Draw the dimensions.
-  var position = 'W ' + parseFloat(owner.css('width')) + '<br> H ' + parseFloat(owner.css('height'))
+  var position = 'W ' + newWidth + '<br> H ' + newHeight
   $('#PrototypeDimensions').css({
     left : 10 + owner.offset().left + owner.outerWidth(),
     top : -10 + owner.offset().top + Math.round(owner.outerHeight(true)/2)
     }).html(position)
   
   // Reposition stretch handles
-  $('.stretch_handle_' + scrap.id).trigger('update')
+  $('.stretchHandle' + scrap.id).trigger('update')
   return false
   
 }
@@ -154,7 +172,7 @@ Prototype.StretchHandle.slide = function () {
 Prototype.StretchHandle.slidestart = function (event) {
   var owner = $(this).owner()
   var scrap = owner.scrap()
-  $('.' + scrap.id + '_handle').not('.stretch_handle_' + scrap.id).hide()
+  $('.' + scrap.id + 'Handle').not('.stretchHandle' + scrap.id).hide()
   
 
   var position = 'W ' + parseFloat(owner.css('width')) + '<br> H ' + parseFloat(owner.css('height'))
@@ -187,7 +205,7 @@ Prototype.StretchHandle.dblclick = function () {
 
   // Apply the style to the dom element
   owner.css(scrap.values.style.values)
-  $('.' + scrap.id + '_handle').trigger('update').show()
+  $('.' + scrap.id + 'Handle').trigger('update').show()
   Prototype.stage.commit()
 }
 
@@ -197,7 +215,7 @@ Prototype.StretchHandle.dblclick = function () {
 Prototype.StretchHandle.slideend = function () {
   var element = $(this).owner()
   var scrap = element.scrap()
-  $('.' + scrap.id + '_handle').trigger('update').show()
+  $('.' + scrap.id + 'Handle').trigger('update').show()
   Prototype.grid.removeSnaplines()
   $('#PrototypeDimensions').hide()
   Prototype.stage.commit()
