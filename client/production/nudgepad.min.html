@@ -38,6 +38,21 @@
 		</div>
 	</div>
 </div>
+
+
+<div id="ImagePreviewDimmer" class="Dimmer ImagePreview" ></div>
+<div id="ImagePreviewContainer" class="ImagePreview"></div>
+<div class="Dimmer TextPrompt" id="TextPromptDimmer"></div>
+
+<div id="TextPromptContainer" class="TextPrompt">
+  <div id="TextPromptHolder">
+    <textarea class="TextPrompt" id="TextPromptTextarea"></textarea>
+  </div>
+  <div id="TextPromptButtonHolder">
+    <div class="TextPrompt SaveButton" id="TextPromptSaveButton">Save</div>
+    <div class="TextPrompt CancelButton" id="TextPromptCancelButton">Cancel</div>
+  </div>
+</div>
 <div class="Tool" id="AppMaker">
 	<div class="ToolNav ToolNavFade">
 		<div class="ToolNavContainer">
@@ -297,6 +312,14 @@
 		<pre id="ServerStatusArea" readonly="readonly"></pre>
 	</div>
 </div>
+
+<div id="ServerConsoleContainer">
+  <input type="text" id="ServerConsoleInput">
+  <input type="checkbox" id="ServerConsoleCheckbox"/>
+  <label for="ServerConsoleCheckbox" id="ServerConsoleLabel">Eval in Node Process</label>
+</div>
+
+
 <div class="Tool" id="Sketch">
 	<div class="ToolNav">
 		<div class="ToolNavContainer">
