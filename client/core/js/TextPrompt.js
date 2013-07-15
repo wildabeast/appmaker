@@ -2,8 +2,6 @@ var TextPrompt = {}
 
 TextPrompt.callback = function () {}
 
-
-
 TextPrompt.load = function () {
   var textArea = $('#TextPromptTextarea')
   var saveButton = $('#TextPromptSaveButton')

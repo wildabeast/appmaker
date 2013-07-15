@@ -4,7 +4,6 @@ Server.set('path', '')
 Server.set('description', 'Manage your project\'s web server.')
 Server.set('beta', 'true')
 
-
 Server.consoleSend = function () {
   
   var input = $('#ServerConsoleInput')
@@ -72,6 +71,5 @@ Server.on('open', function () {
   
   if (!Server.get('log'))
     Server.refresh()
-    
     
 })
