@@ -462,9 +462,7 @@ var cssToObject = function(css, options){
 var cssToSpace = function (css) {
   
   var concise = new Space()
-  console.log(cssToObject(css))
   var verbose = new Space(cssToObject(css))
-  console.log(new Space(cssToObject(css)).toString())
   /*
   type stylesheet
   stylesheet

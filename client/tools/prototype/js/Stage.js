@@ -16,6 +16,7 @@ Prototype.stage.back = function () {
 }
 
 Prototype.stage.close = function () {
+  $('#PrototypeStageBody').attr('style', '')
   $('#PrototypeStageHead').html('')
   $('#PrototypeRemoteSelections').html('')
   $(".scrap,#body").remove()

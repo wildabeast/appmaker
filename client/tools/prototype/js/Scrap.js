@@ -147,11 +147,11 @@ Scrap.prototype.render = function (context, index) {
     
     
     // temporary fix until we turn CSS into pure Space.
-    /*
     if (this.values.tag === 'style') {
-      var css = $.cssToSpace(this.values.content)
+      var css = cssToSpace(this.values.content)
       var bodyProperties = [
         'background',
+        'background-color',
         'background-image',
         'background-repeat',
         'background-size',
@@ -165,7 +165,7 @@ Scrap.prototype.render = function (context, index) {
         $('#PrototypeStageBody').css(property, val)
       })
     }
-    */
+    
     
     
     return this
