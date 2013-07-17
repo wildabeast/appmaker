@@ -54,10 +54,16 @@
   </div>
 </div>
 <div class="Tool" id="AppMaker">
-	<div class="ToolNav ToolNavFade">
+	<div class="ToolNav">
 		<div class="ToolNavContainer">
   		<div class="ToolSquareButton ToolBackButton" onclick="Launcher.open('Home')">
 		  	Back
+		  </div>
+		  <div class="DraggableThumb" value="FireHeader">
+		    Header
+		  </div>
+		  <div class="DraggableThumb" value="FireButton">
+		    Button
 		  </div>
 		  <a class="ToolRightButton" onclick="Explorer.edit('manifest.webapp');">
 		  	Edit Manifest
@@ -67,13 +73,18 @@
 		<div class="clear"></div>
 		</div>
 	</div>
-  <div class="ToolContainer">
+	<div>
+	</div>
+  <div class="ToolContainer AppMakerContainer">
 	  <div id="AppMakerFrame">
 	    <div id="AppMakerStage">
 	    </div>
 	  </div>
 	</div>
 </div>
+
+<div class="DraggableElement fire-header" id="FireHeader">Header</div>
+<div class="DraggableElement fire-button" id="FireButton">Button</div>
 <div class="Tool" id="Blog">
 	<div class="ToolNav">
 		<div class="ToolNavContainer">
