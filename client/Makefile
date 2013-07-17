@@ -25,5 +25,9 @@ space:
 	cp ~/space/space.js public/js/space.js
 	cp ~/space/space.min.js public/js/space.min.js
 
+scraps:
+	cp ~/scraps/scraps.js public/js/scraps.js
+	cp ~/scraps/scraps.min.js public/js/scraps.min.js
+
 mate:
 	mate build.js core Makefile tools

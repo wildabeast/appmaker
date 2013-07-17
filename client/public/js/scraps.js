@@ -41,9 +41,16 @@ Element.prototype.toHtml = function () {
       continue
     string += ' ' + i + '="' + this.attrs[i] + '"' 
   }
-  string += '>' + this.content
   
-  string += '</' + this.tag + '>'
+  if (this.tag === 'meta') {
+    string += ' content="' + this.content + '">'
+  }
+  else {
+    string += '>' + this.content
+
+    string += '</' + this.tag + '>'    
+  }
+
   return string
 }
 
