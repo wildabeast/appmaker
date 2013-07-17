@@ -3,16 +3,24 @@ var htmlProperties = 'checked class disabled draggable dropzone end for height h
 $.fn.toSpace = function () {
   var space = new Space()
   var el = $(this)
+  var tag = $(this).get(0).tagName.toLowerCase()
+  space.set('tag', tag)
   for (var i in htmlProperties) {
     var name = htmlProperties[i]
     if (el.attr(name))
       space.set(name, el.attr(name))    
   }
   
-  space.set('tag', $(this).get(0).tagName.toLowerCase())
   // if leaf node
-  if (!$(this).children().length)
-    space.set('content', $(this).html())
+  if (!$(this).children().length) {
+    
+    // Meta is a special case. :(
+    if (tag !== 'meta')
+      space.set('content', $(this).html())
+    else
+      space.set('content', $(this).attr('content'))
+  
+  }
   else {
     var scraps = new Space()
     $(this).children().each(function () {

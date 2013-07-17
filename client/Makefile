@@ -29,5 +29,9 @@ scraps:
 	cp ~/scraps/scraps.js public/js/scraps.js
 	cp ~/scraps/scraps.min.js public/js/scraps.min.js
 
+htmltoscraps:
+	cp ~/htmltoscraps/jquery.htmltoscraps.js public/js/jquery.htmltoscraps.js
+
+
 mate:
 	mate build.js core Makefile tools
