@@ -524,10 +524,6 @@ body {
   cursor: pointer;
 }
 
-.DraggableElement {
-  display: none;
-}
-
 .ui-selected {
   box-shadow: inset 5px 0px 0px blue;
 }
