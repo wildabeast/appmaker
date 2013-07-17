@@ -1,6 +1,6 @@
 // Adapted from
 // https://raw.github.com/visionmedia/css-parse/master/index.js
-cssToObject = function(css, options){
+var cssToObject = function(css, options){
   options = options || {};
 
   /**
@@ -459,10 +459,12 @@ cssToObject = function(css, options){
   return stylesheet();
 };
 
-$.cssToSpace = function (css) {
+var cssToSpace = function (css) {
   
   var concise = new Space()
+  console.log(cssToObject(css))
   var verbose = new Space(cssToObject(css))
+  console.log(new Space(cssToObject(css)).toString())
   /*
   type stylesheet
   stylesheet
@@ -479,6 +481,8 @@ $.cssToSpace = function (css) {
   */
   var rules = verbose.get('stylesheet rules')
   rules.each(function (index, rule) {
+    if (rule.get('type') !== 'rule')
+      return true
     var selector = ''
     rule.get('selectors').each(function (selIndex, selValue) {
       selector += selValue

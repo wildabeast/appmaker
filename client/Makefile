@@ -33,7 +33,7 @@ htmltoscraps:
 	cp ~/htmltoscraps/jquery.htmltoscraps.js public/js/jquery.htmltoscraps.js
 
 csstospace:
-	cp ~/csstospace/jquery.csstospace.js public/js/jquery.csstospace.js
+	cp ~/csstospace/csstospace.js public/js/csstospace.js
 
 mate:
 	mate build.js core Makefile tools
