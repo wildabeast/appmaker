@@ -326,10 +326,12 @@ Scrap.prototype.setElementTag = function (context) {
   // Add the id
   this.div.attr('id', this.id)
   
-  var properties = 'checked class contenteditable disabled draggable dropzone end for height href max maxlength min name origin pattern placeholder readonly rel required selected spellcheck src tabindex target title type width value'.split(/ /)
-  for (var i in properties) {
-    this.setProperty(properties[i], context)
-  }
+  this.each(function (property, value) {
+    // Skip certain properties
+    if (property.match(/^(scraps|content|tag|loop|on.*|style|draft)$/))
+      return true
+    this.setProperty(property, context)
+  })
   
 }
 
