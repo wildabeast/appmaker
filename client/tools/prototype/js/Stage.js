@@ -6,7 +6,7 @@
  */
 Prototype.stage.version = 0 // how many steps in we are
 Prototype.stage.percentElapsed = 100
-Prototype.stage.currentView = 'ipad'
+Prototype.stage.currentView = store.get('PrototypeView') || 'mobile'
 
 /**
  * Open the previous page
@@ -460,6 +460,7 @@ Prototype.stage.toggleView = function () {
   Prototype.stage.views.get(Prototype.stage.currentView)()
   $('#PrototypeStageBody').width()
   Flasher.success(Prototype.stage.currentView + ' view')
+  store.set('PrototypeView', Prototype.stage.currentView)
 }
 
 Prototype.stage.undo = function () {
@@ -497,7 +498,7 @@ Prototype.on('close', function () {
 
 Prototype.on('ready', function () {
   Prototype.stage.expand()
-  Prototype.stage.views.get('mobile')()
+  Prototype.stage.views.get(Prototype.stage.currentView)()
   $('#PrototypeStageBody').width() // Force repaint
   $("#PrototypeStage").on("tap", Prototype.stage.clearOnTap)
   $(window).on('resize', Prototype.stage.onresize)
