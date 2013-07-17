@@ -209,6 +209,7 @@ app.use('/private/', function (req, res) {
   return res.send('Sorry, it\'s private here.', 404)
 })
 
+require('./login.js')(app)
 // Do this after /nudgepad/, so the login scripts get through fine.
 app.use('/', app.privateCheck)
 
@@ -347,7 +348,6 @@ fs.watch(app.paths.project + 'pages/', function (event, filename) {
 */
 
 require('./export.js')(app)
-require('./login.js')(app)
 require('./persona.js')(app)
 require('./forgotPassword.js')(app)
 require('./updateEmail.js')(app)
