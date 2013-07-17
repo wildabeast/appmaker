@@ -6,6 +6,25 @@ AppMaker.set('beta', 'true')
 AppMaker.on('open', function () {
   AppMaker.install()
   $('#AppMakerManifestUrlLink').html('http://' + document.location.host + '/manifest.webapp')
+  
+  var options = {}
+  options.drop = function( event, ui ) {
+    var element = $('#' + $(ui.draggable).attr('value')).clone()
+    $( this )
+      .append(element)
+    element.show()
+  }
+  $( "#AppMakerStage" ).droppable(options)
+  $( '#AppMakerStage' ).selectable()
+  $( ".DraggableThumb" ).draggable({ helper: "clone" })
+  Events.shortcut.shortcuts = AppMaker.shortcuts
+  $( '.AppMakerContainer' ).on('click', function () {
+    $('.ui-selected').removeClass('ui-selected')
+  })
+})
+
+AppMaker.on('close', function () {
+  Events.shortcut.shortcuts = {}
 })
 
 AppMaker.install = function () {
