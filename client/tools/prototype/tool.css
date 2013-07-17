@@ -139,6 +139,7 @@
   z-index: 502;
   min-width: 630px;
   font-family: 'Titillium Web';
+  text-align: left;
 }
 
 .PrototypeBarComponent {
@@ -181,6 +182,7 @@
   display: none;
   position: fixed;
   z-index: 1200;
+  text-align: left;
   left: 0;
   bottom: 50;
 }
@@ -289,6 +291,7 @@
   bottom: 50px;
   z-index: 501;
   display: none;
+  text-align: left;
 }
 
 #PrototypeComponentsList {
