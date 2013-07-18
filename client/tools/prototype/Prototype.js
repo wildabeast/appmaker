@@ -6,7 +6,7 @@ Prototype.set('description', 'Design pages for your project.')
 Prototype.page = new Page()
 Prototype.edge = new Space()
 Prototype.stage = {}
-Prototype.stage.activePage = 'home'
+Prototype.stage.activePage = 'index'
 // store.get('activePage')
 Prototype.stage.selection = {}
 
@@ -91,8 +91,6 @@ Prototype.create = function (name, template) {
  */
 Prototype.deletePage = function (name) {
   name = name || Prototype.stage.activePage
-  if (name === 'home')
-    return Flasher.error('You cannot delete the home page')
   // If its the currently open page, open the previous page first
   if (Prototype.stage.activePage === name)
     Prototype.stage.back()
@@ -328,9 +326,6 @@ Prototype.renamePage = function (newName) {
   
   if (!newName.length)
     return Flasher.error('Name cannot be blank')
-  
-  if (oldName == 'home')
-    return Flasher.error('You cannot rename the home page.')
   
   // page already exists
   if (Project.get('pages ' + newName))

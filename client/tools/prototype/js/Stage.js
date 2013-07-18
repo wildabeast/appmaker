@@ -59,6 +59,8 @@ Prototype.stage.commit = function () {
   
   Project.set('pages ' + Prototype.stage.activePage, new Space(Prototype.page.toString()))
   Project.append('timelines ' + Prototype.stage.activePage + ' ' + timestamp, commit)
+  Explorer.set(Prototype.stage.activePage + '.html', Prototype.page.toHtml())
+  
   return diff
 }
 

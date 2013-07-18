@@ -26,9 +26,12 @@ Prototype.on('open', function () {
   // Prevent Images from dragging on Firefox
   $(document).on('dragstart', 'img', function(event) { event.preventDefault()})
   
-  var page = store.get('activePage') || 'home'
+  var page = store.get('activePage') || 'index'
   if (!Project.get('pages ' + page))
-    page = 'home'
+    page = 'index'
+  // Create an index page.
+  if (!Project.get('pages ' + page))
+    Prototype.create('index')
   Prototype.stage.open(page)
   
   if (!navigator.userAgent.match(/iPad|iPhone|iPod/i)) {

@@ -19,7 +19,7 @@ var Cookie = parseCookie(document.cookie)
  */
 nudgepad.main = function () {
   
-  var activePage = store.get('activePage') || 'home'
+  var activePage = store.get('activePage') || 'index'
   $.get('/nudgepad.project', { activePage : activePage}, function (space) {
     Project._patch(new Space(space))
     

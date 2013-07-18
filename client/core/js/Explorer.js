@@ -86,7 +86,7 @@ Explorer.rmdir = function (path, callback) {
   })
 }
 
-// Create utf8 files
+// Write utf8 files
 Explorer.set = function (path, content, callback) {
   var req = {}
   req.path = path

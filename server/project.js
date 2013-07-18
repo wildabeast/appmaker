@@ -34,10 +34,10 @@ var ProjectRoute = function (app) {
   // Download all project for editing
   app.get('/nudgepad\.project', app.checkId, function (req, res, next) {
 
-    var activePage = req.query.activePage || "home"
+    var activePage = req.query.activePage || "index"
 
     if (!app.Project.get('timelines ' + activePage))
-      activePage = "home"
+      activePage = "index"
 
     var copy = new Space()
     copy.set('pages', app.Project.get('pages'))
