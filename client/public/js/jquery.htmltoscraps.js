@@ -1,15 +1,11 @@
-var htmlProperties = 'checked class disabled draggable dropzone end for height href max maxlength min name onblur onchange onclick oncontextmenu onenterkey onfocus onhold onkeydown onkeypress onkeyup onmousedown onmouseout onmouseover onmouseup onorientationchange onsubmit ontouchend ontouchmove ontouchstart origin pattern placeholder readonly rel required selected spellcheck src tabindex target title width value'.split(/ /)
-
 $.fn.toSpace = function () {
   var space = new Space()
   var el = $(this)
   var tag = $(this).get(0).tagName.toLowerCase()
   space.set('tag', tag)
-  for (var i in htmlProperties) {
-    var name = htmlProperties[i]
-    if (el.attr(name))
-      space.set(name, el.attr(name))    
-  }
+  $($(this).get(0).attributes).each(function() {
+    space.set(this.nodeName, this.nodeValue)
+  })
   
   // if leaf node
   if (!$(this).children().length) {
