@@ -1,7 +1,13 @@
-Prototype.on('firstOpen', function () {
-  
+Prototype.dragComponent = function() {
+  var path = $(this).attr('path')
+  Prototype.stage.dragAndDrop(Prototype.components.get(path))
+  mixpanel.track('I dragged a component')
+}
+
+Prototype.loadComponents = function () {
   Prototype.components = new Space()
   var list = $('#PrototypeComponentsList')
+  list.html('')
   $('.ComponentSet').each(function () {
     var path = $(this).attr('path')
     var component = new Space($(this).text())
@@ -12,22 +18,22 @@ Prototype.on('firstOpen', function () {
     Prototype.components.set(path, component)
     list.append(thumb)
   })
-  
-  $('#PrototypeComponentsList').on('tap', '.Component', function() {
-    var path = $(this).attr('path')
-    Prototype.stage.insert(Prototype.components.get(path), false, 0, 0, true)
-    mixpanel.track('I tapped a component')
-  })
-  
-  $('#PrototypeComponentsList').on('slidestart', '.Component', function() {
-    var path = $(this).attr('path')
-    Prototype.stage.dragAndDrop(Prototype.components.get(path))
-    mixpanel.track('I dragged a component')
-  })
+}
 
-  $('#PrototypeComponentsRibbon').on('mousedown slide slidestart', function (event) {
-    event.stopPropagation()
-  })
+Prototype.tapComponent = function() {
+  var path = $(this).attr('path')
+  Prototype.stage.insert(Prototype.components.get(path), false, 0, 0, true)
+  mixpanel.track('I tapped a component')
+}
+
+
+Prototype.on('ready', Prototype.loadComponents)
+
+Prototype.on('firstOpen', function () {
+  
+  $('#PrototypeComponentsList').on('tap', '.Component', Prototype.tapComponent)
+  $('#PrototypeComponentsList').on('slidestart', '.Component', Prototype.dragComponent)
+  $('#PrototypeComponentsRibbon').on('mousedown slide slidestart', Prototype.stopProp)
 
 })
 

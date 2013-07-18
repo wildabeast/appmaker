@@ -255,6 +255,10 @@ Prototype.ondrop = function(e) {
   e.preventDefault()
 }
 
+Prototype.stopProp = function(event) {
+  event.stopPropagation()
+}
+
 Prototype.stopPropagation = function(event) {
   if (event.originalEvent.touches.length > 1) {
     event.stopPropagation()
