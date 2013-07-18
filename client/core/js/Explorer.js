@@ -93,7 +93,8 @@ Explorer.set = function (path, content, callback) {
   req.path = path
   req.content = content
   $.post('/nudgepad.explorer.save', req, function (err) {
-    callback()
+    if (callback)
+      callback()
   })
 }
 
