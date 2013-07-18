@@ -18,7 +18,8 @@ Explorer.create = function (path, content, callback) {
 Explorer.downloadTimelines = function () {
   $.get('/nudgepad.project.timelines', {}, function (data) {
     var space = new Space(data)
-    Project.get('timelines').patch(space)
+    if (Project.get('timelines'))
+      Project.get('timelines').patch(space)
   })
 }
 
