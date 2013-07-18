@@ -225,6 +225,9 @@
   margin-left: 20px;
   cursor: pointer;
   color: #777;
+  -webkit-user-select: none;
+  -moz-user-select: -moz-none;
+  user-select: none;
 }
 
 #PrototypeDeviceSwitcher:hover {
@@ -244,6 +247,7 @@
 
 #PrototypeTimelineHolder:hover, #PrototypeTimelineHolder:hover #PrototypeTimeline {
   opacity: 1;
+  /* Broken on Firefox */
 }
 
 #PrototypeTimeline {
@@ -362,6 +366,9 @@
   line-height: 60px;
   padding: 0;
   cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: -moz-none;
+  user-select: none;
 }
 
 
