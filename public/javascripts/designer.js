@@ -207,7 +207,7 @@ define(
         },
         addClass: "clone"
       });
-      
+
       if (component && component.description) {
         var componentDescription = component.description.innerHTML;
         thumb.attr('description', componentDescription);
@@ -429,7 +429,7 @@ define(
                         "</select></div>"
                       );
                       $(definition.options).each(function(i,k){
-                        var option = document.createElement("option");                      
+                        var option = document.createElement("option");
                         $(option).attr("value",k);
                         $(option).text(k);
                         e.find("select").append(option);
@@ -795,7 +795,7 @@ define(
         $('.modal-wrapper').removeClass('flex');
         document.removeEventListener('keypress', escapeHandler);
       }
-    }
+    };
 
     $('.publish').click(function(){
 
@@ -853,7 +853,7 @@ define(
             }
           });
         });
-    
+
         html = appTreeClone.outerHTML;
       }
 
