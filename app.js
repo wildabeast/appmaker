@@ -99,6 +99,8 @@ app.get('/store/uuid', function (req, res) {
 
 app.post('/publish', routes.publish.publish);
 
+app.post('/login', persona.index);
+
 http.createServer(app).listen(app.get('port'), function(){
   console.log("Express server listening on port " + app.get('port'));
 });
