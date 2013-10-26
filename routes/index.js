@@ -6,10 +6,12 @@ var fs = require('fs');
 
 var verify = require('../lib/verify');
 var urls = require('../lib/urls');
+var twilio = require('twilio');
 
 module.exports = function (store, viewsPath, urlManager, remixMailer, makeAPIPublisher) {
 
   return {
+
     index: function(req, res) {
       res.render('index.ejs');
     },
@@ -55,6 +57,26 @@ module.exports = function (store, viewsPath, urlManager, remixMailer, makeAPIPub
       res.render('testapp');
     },
 
+    twilio: function (req, res) {
+       
+      var client = new twilio.RestClient(req.param('TWILIO_ACCOUNT_SID'), req.param('TWILIO_AUTH_TOKEN'));
+       
+      client.sms.messages.create({
+        to:'+'+req.param('to'),
+        from:'+'+req.param('from'),
+        body:req.param('body')
+      }, function(error, message) 
+      {
+        if (!error) {
+          res.json({status:true,sid:message.sid}, 200);
+        } else {
+          res.json({status:false,error: error}, 500);
+        }
+      });
+
+    },
+
     publish: require('./publish')(store, viewsPath, urlManager, makeAPIPublisher)
+
   }
 };
