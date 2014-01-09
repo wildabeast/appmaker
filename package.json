@@ -36,7 +36,9 @@
     "http-proxy": "~0.10.3",
     "cors": "~2.1.0",
     "mongoose": "~3.8.1",
-    "request": "~2.30.0"
+    "request": "~2.30.0",
+    "shelljs": "0.1.2",
+    "phonegap-build-api":"git://github.com/phonegap/node-phonegap-build-api.git"
   },
   "engines": {
     "node": "~0.10.21",

@@ -28,6 +28,7 @@
           <a class="saved" id="saveApp">Save</a>
           <a class="saved" id="renameApp">Rename</a>
           <a id="publishApp">Publish</a>
+          <a id="phonegapApp">PhoneGap</a>
           <a class="saved" id="deleteApp">Delete</a>
         </div>
       </div>
@@ -182,13 +183,12 @@
             }
           });
 
-          //Publish!
-          this.$.publishApp.addEventListener("click", function() {
+          function publish(phonegap) {
             var app = document.querySelector('ceci-app');
             var name = app.name;
             var html = app.outerHTML;
             if(name){
-              application.publishApp(name,html);
+              application.publishApp(name,html,phonegap);
               // gotta make sure it actually saves though!
               // add as a callback? or pass in callbacks?
               application.setCurrentApp(name);
@@ -197,6 +197,15 @@
             } else {
               console.log("Please name your app.");
             }
+          }
+
+          //Publish!
+          this.$.publishApp.addEventListener("click", function() {
+            publish(false);
+          });
+
+          this.$.phonegapApp.addEventListener("click", function() {
+            publish(true);
           });
 
           //Save App As

@@ -9,6 +9,7 @@ var fs = require('fs');
 var path = require('path');
 var lynx = require('lynx');
 var metrics = new lynx('localhost', 8125);
+var phonegapbuild = require('../lib/phonegap-build');
 
 module.exports = function (store, viewsPath, urlManager, makeAPIPublisher) {
   var templates = {
@@ -30,6 +31,14 @@ module.exports = function (store, viewsPath, urlManager, makeAPIPublisher) {
     });
   });
 
+  function buildPhoneGap() {
+
+    phonegapbuild.go(path.join(__dirname, '..', 'store', 'phonegap'), function(id, binpath) {
+      console.log('Build complete (' + binpath ')');
+    })
+    
+  }
+
   return {
     publish: function(req, res) {
       var folderName = moniker.choose() + '-' + Math.round(Math.random() * 1000);
@@ -47,6 +56,10 @@ module.exports = function (store, viewsPath, urlManager, makeAPIPublisher) {
 
       var inputData = req.body;
       var manifest = inputData.manifest || {};
+
+      if (inputData.phonegap == true || inputData.phonegap == 'true') {
+        buildPhoneGap(remoteURLs.app);
+      }
 
       function cleanString (str, removeQuotes) {
         str = str.replace(/>/g, '&gt;').replace(/</g, '&lt;');

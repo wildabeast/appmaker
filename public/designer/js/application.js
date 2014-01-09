@@ -37,11 +37,13 @@ define(["jquery"], function($) {
           }
         });
       },
-      publishApp: function(name, html){
+      publishApp: function(name, html, phonegap){
+        console.log(html);
         $.ajax('/api/publish', {
           data: {
             html: html,
-            name: name
+            name: name,
+            phonegap: phonegap
           },
           type: 'post',
           success: function (data) {
